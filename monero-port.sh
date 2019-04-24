@@ -1,0 +1,2 @@
+#!/bin/sh
+MONERO_PORT=18081

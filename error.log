@@ -1,0 +1,128 @@
+Your PiNode-XMR IP is: 192.168.1.209 
+xmr-new-ver.sh: Permission denied
+Version Info recieved:
+chmod: cannot access '/home/pinodexmr/xmr-new-ver.sh': No such file or directory
+/home/pinodexmr/init.sh: line 19: /home/pinodexmr/xmr-new-ver.sh: No such file or directory
+New Version
+01402 Current Version
+192.168.1.209 Device IP
+18081 Monero Port
+/home/pinodexmr/init.sh: line 26: [: 01402: unary operator expected
+Your node is up to date
+/home/pinodexmr/monerod-start.sh: 1: /home/pinodexmr/monero/monerod: Syntax error: word unexpected (expecting ")")
+Script complete - PiNode-XMR booted successfully
+Your PiNode-XMR IP is: 192.168.1.209 
+xmr-new-ver.sh: Permission denied
+Version Info recieved:
+01402 New Version
+01402 Current Version
+192.168.1.209 Device IP
+18081 Monero Port
+Your node is up to date
+/home/pinodexmr/monero/monerod: 1: /home/pinodexmr/monero/monerod: Syntax error: word unexpected (expecting ")")
+Script complete - PiNode-XMR booted successfully
+Your PiNode-XMR IP is: 192.168.1.209 
+xmr-new-ver.sh: Permission denied
+Version Info recieved:
+01402 New Version
+01402 Current Version
+192.168.1.209 Device IP
+18081 Monero Port
+Your node is up to date
+[36m2019-04-22 17:09:19.870	        76fd8310	INFO 	global	src/daemon/main.cpp:287	Monero 'Boron Butterfly' (v0.14.0.2-release)
+[0m[36m2019-04-22 17:09:19.871	        76fd8310	INFO 	daemon	src/daemon/main.cpp:289	Moving from main() into the daemonize now.
+[0mForking to background...
+Script complete - PiNode-XMR booted successfully
+Your PiNode-XMR IP is: 2a02:c7d:826a:9c00:a9d6:7c23:d26c:46c9 fd85:1294:7b51:0:45de:cb19:5613:7217 
+xmr-new-ver.sh: Permission denied
+Version Info recieved:
+01402 New Version
+01402 Current Version
+2a02:c7d:826a:9c00:a9d6:7c23:d26c:46c9 fd85:1294:7b51:0:45de:cb19:5613:7217 Device IP
+18081 Monero Port
+Your node is up to date
+Monero 'Boron Butterfly' (v0.14.0.2-release)
+Commands: 
+  alt_chain_info [blockhash]
+  ban <IP> [<seconds>]
+  bans
+  bc_dyn_stats <last_block_count>
+  diff
+  exit
+  flush_txpool [<txid>]
+  hard_fork_info
+  help [<command>]
+  hide_hr
+  in_peers <max_number>
+  is_key_image_spent <key_image>
+  limit [<kB/s>]
+  limit_down [<kB/s>]
+  limit_up [<kB/s>]
+  out_peers <max_number>
+  output_histogram [@<amount>] <min_count> [<max_count>]
+  print_bc <begin_height> [<end_height>]
+  print_block <block_hash> | <block_height>
+  print_cn
+  print_coinbase_tx_sum <start_height> [<block_count>]
+  print_height
+  print_pl
+  print_pl_stats
+  print_pool
+  print_pool_sh
+  print_pool_stats
+  print_status
+  print_tx <transaction_hash> [+hex] [+json]
+  relay_tx <txid>
+  save
+  set_log <level>|<{+,-,}categories>
+  show_hr
+  start_mining <addr> [<threads>] [do_background_mining] [ignore_battery]
+  start_save_graph
+  status
+  stop_daemon
+  stop_mining
+  stop_save_graph
+  sync_info
+  unban <IP>
+  update (check|download)
+  version
+  
+
+Unknown command: 2a02:c7d:826a:9c00:a9d6:7c23:d26c:46c9
+Script complete - PiNode-XMR booted successfully
+Your PiNode-XMR IP is: 192.168.0.10 
+xmr-new-ver.sh: Permission denied
+Version Info recieved:
+01402 New Version
+01402 Current Version
+192.168.0.10 Device IP
+18081 Monero Port
+Your node is up to date
+[36m2019-04-22 21:39:18.686	        76f67310	INFO 	global	src/daemon/main.cpp:287	Monero 'Boron Butterfly' (v0.14.0.2-release)
+[0m[36m2019-04-22 21:39:18.687	        76f67310	INFO 	daemon	src/daemon/main.cpp:289	Moving from main() into the daemonize now.
+[0mForking to background...
+Script complete - PiNode-XMR booted successfully
+Your PiNode-XMR IP is: 192.168.0.10 
+xmr-new-ver.sh: Permission denied
+Version Info recieved:
+01402 New Version
+01402 Current Version
+192.168.0.10 Device IP
+18081 Monero Port
+Your node is up to date
+[36m2019-04-22 21:47:19.221	        76f59310	INFO 	global	src/daemon/main.cpp:287	Monero 'Boron Butterfly' (v0.14.0.2-release)
+[0m[36m2019-04-22 21:47:19.222	        76f59310	INFO 	daemon	src/daemon/main.cpp:289	Moving from main() into the daemonize now.
+[0mForking to background...
+Script complete - PiNode-XMR booted successfully
+Your PiNode-XMR IP is: 192.168.0.10 
+xmr-new-ver.sh: Permission denied
+Version Info recieved:
+01402 New Version
+01402 Current Version
+192.168.0.10 Device IP
+18081 Monero Port
+Your node is up to date
+[36m2019-04-22 23:34:48.734	        76f77310	INFO 	global	src/daemon/main.cpp:287	Monero 'Boron Butterfly' (v0.14.0.2-release)
+[0m[36m2019-04-22 23:34:48.734	        76f77310	INFO 	daemon	src/daemon/main.cpp:289	Moving from main() into the daemonize now.
+[0mForking to background...
+Script complete - PiNode-XMR booted successfully

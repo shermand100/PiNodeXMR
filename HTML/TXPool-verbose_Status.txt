@@ -1,0 +1,1 @@
+Error: Couldn't connect to daemon: 192.168.0.10:18081
