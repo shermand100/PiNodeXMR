@@ -1,22 +1,22 @@
 # PiNode-XMR
 SBC Plug and Play Monero Node. Auto-boot, Auto-update and WebUI
 
-## To Use - Unzip and write Image to Micro SD (recommended 128GB Micro SD) insert into Pi and Power on.
-## The Pi will boot and adapt itself to your SD card size. During this process it will self restart allowing 20 seconds for partitions to settle to where they should be.
+#### To Use - Unzip and write Image to Micro SD (recommended 128GB Micro SD) insert into Pi and Power on.
+#### The Pi will boot and adapt itself to your SD card size. During this process it will self restart allowing 20 seconds for partitions to settle to where they should be.
 
-## After 2 mins from power on the node should have started.
+#### After 2 mins from power on the node should have started.
 
-## To interact with it you'll just need it's IP address and then navigate to it from your web browser (Chrome works well. And tips for how to find the IP address can be found on the Raspberry Pi website https://www.raspberrypi.org/documentation/remote-access/ip-address.md)
+#### To interact with it you'll just need it's IP address and then navigate to it from your web browser (Chrome works well. And tips for how to find the IP address can be found on the Raspberry Pi website https://www.raspberrypi.org/documentation/remote-access/ip-address.md)
 
-### To Login using the Web based terminal use:
+##### To Login using the Web based terminal use:
 User: pinodexmr
 Passwd: PiNodeXMR
 
 *Or SSH on port 22
 
-## That's it. PiNodeXMR up and running. Once synced connect your Monero GUI with IP and Port 18081. The Web-UI is available from any device on your network PC/smartphone/tablet.
+#### That's it. PiNodeXMR up and running. Once synced connect your Monero GUI with IP and Port 18081. The Web-UI is available from any device on your network PC/smartphone/tablet.
 
-# ____________________________________________________________________________________________________
+# _________________________________________________________
 
 
 # Below is for info on its build...
@@ -41,16 +41,27 @@ sudo apt-get install apache2 php7.0 libapache2-mod-php7.0 mysql-server mysql-cli
 crontab -e
 
 \* \* \* \* \* /home/pinodexmr/temp.sh				    #Output CPU temp to /var/www/html/
+
 \* 4 \* \* \* /home/pinodexmr/df-h.sh				    #Runs every 4 hours #Output SD card storage to /var/www/
+
 \* \* \* \* \* /home/pinodexmr/free-h.sh				    #Output RAM usage to /var/www/html/
+
 \* \* \* \* \* /home/pinodexmr/monero-status.sh		    #Output of ./monerod status to /var/www/html/
+
 \* \* \* \* \* /home/pinodexmr/node_version.sh		    #Output of ./monerod version to /var/www/html/
+
 \* \* \* \* \* /home/pinodexmr/print_cn.sh			    #Output of ./monerod print-cn to /var/www/html/
-\* \* \* \* \* /home/pinodexmr/print_pl.sh			
+
+\* \* \* \* \* /home/pinodexmr/print_pl.sh		
+
 \* \* \* \* \* /home/pinodexmr/print_pl_stats.sh
+
 \* \* \* \* \* /home/pinodexmr/TXPool-short-status.sh
+
 \* \* \* \* \* /home/pinodexmr/TXPool-status.sh
+
 \* \* \* \* \* /home/pinodexmr/TXPool-verbose-status.sh
+
 \* \* \* \* 0 /home/pinodexmr/Updater.sh			#Runs weekly #Explained below
 
 #UPDATER = Downloads https://raw.githubusercontent.com/shermand100/pinode-xmr/master/xmr-new-ver.sh which contains a file with the new arm7 monerod version number ONLY.
