@@ -20,7 +20,7 @@ sleep "3"
 if [ $CURRENT_VERSION -lt $NEW_VERSION ]
 then
 	echo "New Monero Version available...Updating"
-	. /home/pinodexmr/monerod-exit.sh
+	. /home/pinodexmr/monerod-stop.sh
 	echo "Monerod stop command sent, allowing 30 seconds for safe shutdown"
 	sleep "30"
 	rm -rf ./monero

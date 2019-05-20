@@ -7,10 +7,11 @@ then
 	sudo raspi-config --expand-rootfs
 	echo "#!/bin/sh
 BOOT_STATUS=2" > /home/pinodexmr/bootstatus.sh
-	sleep "20"
+	sleep "120"
 	sudo reboot
 	
 else
+. /home/pinodexmr/df-h.sh
 . /home/pinodexmr/init.sh	
 fi
 

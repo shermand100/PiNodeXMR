@@ -16,6 +16,9 @@ DEVICE_IP="$(hostname -I)"
 	. /home/pinodexmr/limit-rate-up.sh
 	#Import Data Limit Down
 	. /home/pinodexmr/limit-rate-down.sh
+	#Import RPC username
+	. /home/pinodexmr/RPCu.sh
+	#Import RPC password
+	. /home/pinodexmr/RPCp.sh
 #Start Monerod
-cd /home/pinodexmr/monero/
-./monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --confirm-external-bind --block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --log-file=/var/www/html/monerod.log --max-log-file-size=5485000  --log-level=1 --max-log-files=1 --detach
+./monero/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$RPCu:$RPCp --block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --log-file=/var/www/html/monerod.log --max-log-file-size=10485000  --log-level=1 --max-log-files=1 --detach
