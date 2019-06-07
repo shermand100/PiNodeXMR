@@ -1,1 +1,12 @@
-Error: Couldn't connect to daemon: 192.168.0.10:18081
+7 tx(es), 69101 bytes total (min 1770, max 55924, avg 9871, median 2603)
+fees 0.001503770000 (avg 0.000214824285 per tx, 0.000000021761 per byte)
+0 double spends, 0 not relayed, 0 failing, 0 older than 10 minutes (oldest 83 seconds ago), no backlog
+   Age      Txes       Bytes
+00:00:00       2        5208
+00:00:11       0           0
+00:00:23       1        1796
+00:00:35       1       55924
+00:00:47       0           0
+00:00:59       0           0
+00:01:11       3        6173
+

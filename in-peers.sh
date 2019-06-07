@@ -1,2 +1,2 @@
 #!/bin/bash
-IN_PEERS=8
+IN_PEERS=-1

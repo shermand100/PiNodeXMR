@@ -1,2 +1,2 @@
 #!/bin/bash
-DB_SYNC_MODE=safe
+DB_SYNC_MODE=fast

@@ -60,20 +60,57 @@
 	      		<span class="demo-text-note">PiNode-XMR <small>[CLEARNET]</small></span>
 	          <p><small>Manual Start/Stop</small></p>
       		</div>
-	
 
 
       <div class="row demo-row">
         <div class="col">
-		<a href="#script link" class="btn btn-block btn-lg btn-inverse">Start Monerod <span class="fui-power"></span></a>
-        </div>
-        <div class="col">
-          <a href="#script link" class="btn btn-block btn-lg btn-inverse">Reboot Monerod <span class="fui-power"></span></a>
+		<a onclick="startbutton()" href="#Start Monerod" class="btn btn-block btn-lg btn-inverse">Start Monerod <span class="fui-power"></span></a>
         </div>
 
+
+<script>
+ function startbutton () {
+      $.ajax({
+        url:"monerod-start.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script> 
+
         <div class="col">
-          <a href="#script link" class="btn btn-block btn-lg btn-inverse">Stop Monerod <span class="fui-power"></span></a>
+          <a onclick="rebootbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Monerod <span class="fui-power"></span></a>
         </div>
+		
+<script>
+ function rebootbutton () {
+      $.ajax({
+        url:"monerod-reboot.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+        <div class="col">
+          <a onclick="stopbutton()" href="#Stop Monerod" class="btn btn-block btn-lg btn-inverse">Stop Monerod <span class="fui-power"></span></a>
+        </div>
+		
+<script>
+ function stopbutton () {
+      $.ajax({
+        url:"monerod-stop.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
       </div> <!-- /row -->
 	  
 	  <div class="row">
@@ -190,15 +227,26 @@
 		
       		<div class="demo-type-example">
 	      		<span class="demo-text-note">Note:</span>
-	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible <br>
-			  This feature has been added for experimental/educational purposes and thought should be given to your devices CPU cooling before activating to prevent <br>
+	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible
+			  This feature has been added for experimental/educational purposes and thought should be given to your devices CPU cooling before activating to prevent
 			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.</small></p>
       		</div>
 			
 			      <div class="row demo-row">
         <div class="col">
-		<a href="#link" class="btn btn-block btn-lg btn-inverse">Start Solo Mining <span class="fui-lock"></span></a>
+		<a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-inverse">Start Solo Mining <span class="fui-lock"></span></a>
         </div>
+			   <script>
+ function startminingbutton () {
+      $.ajax({
+        url:"monerod-start-mining.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
         <div class="col">
           <a href="#link" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
         </div>
@@ -209,23 +257,45 @@
 		new version and the Raspberry Pi compatible version. You node will auto-attempt update every Sunday 00:00, or use this to update sooner if available.</small></p>
       <div class="row demo-row">
         <div class="col">
-          <a href="manual-start-monerod.php" class="btn btn-block btn-lg btn-inverse">Check for Update Now<span class="fui-triangle-up"></span></a>
+          <a onclick="updatebutton()" href="#Update" class="btn btn-block btn-lg btn-inverse">Check for Update Now<span class="fui-triangle-up"></span></a>
        </div>
+	   <script>
+ function updatebutton () {
+      $.ajax({
+        url:"monerod-update.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
 	  </div>		
 		
 	  <div class="container">
 		<h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
       <div class="row demo-row">
         <div class="col">
-          <a href="manual-start-monerod.php" class="btn btn-block btn-lg btn-inverse">Shutdown PiNode-XMR<span class="fui-power"></span></a>
+          <a onclick="shutdownbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-inverse">Shutdown PiNode-XMR<span class="fui-power"></span></a>
        </div>
+	   	   <script>
+ function shutdownbutton () {
+      $.ajax({
+        url:"monerod-shutdown.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
 	  </div>
 		
 	</div> <!-- /container -->
 	</div>
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Bootstrap 4 requires Popper.js -->
     <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="http://vjs.zencdn.net/6.6.3/video.js"></script>

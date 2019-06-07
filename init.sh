@@ -49,6 +49,8 @@ else
 	echo "Your node is up to date"
 #Start Node
 sh /home/pinodexmr/monerod-start.sh
+#Output onion address
+sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 fi
 
 

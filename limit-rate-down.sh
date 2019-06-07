@@ -1,2 +1,2 @@
 #!/bin/bash
-LIMIT_RATE_DOWN=2038
+LIMIT_RATE_DOWN=-1

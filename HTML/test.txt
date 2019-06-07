@@ -1,0 +1,1 @@
+Height: 1841799/1841799 (100.0%) on mainnet, not mining, net hash 327.93 MH/s, v11, up to date, 8(out)+0(in) connections, uptime 0d 15h 55m 10s
