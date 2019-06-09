@@ -1,4 +1,4 @@
 <?php 
-  exec("/home/pinodexmr/monerod-reboot.sh");
-  echo "Reboot Command Sent";
+  exec("sudo systemctl start monerod-reboot.service");
+  echo "Reboot Command Sent - allow 1m for process";
  ?>

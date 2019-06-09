@@ -1,12 +1,0 @@
-/home/pinodexmr/boot.sh: line 5: [: 2: integer expression expected
-Your PiNode-XMR IP is: 192.168.8.121 
-xmr-new-ver.sh: Permission denied
-Version Info recieved:
-01402 New Version
-01402 Current Version
-192.168.8.121 Device IP
-18081 Monero Port
-Your node is up to date
-[36m2019-06-01 18:50:49.280	        76c6f310	INFO 	global	src/daemon/main.cpp:287	Monero 'Boron Butterfly' (v0.14.0.2-release)
-[0mForking to background...
-Script complete - PiNode-XMR booted successfully

@@ -248,9 +248,19 @@
  }
 </script>
         <div class="col">
-          <a href="#link" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
+          <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
         </div>
-
+			   <script>
+ function stopminingbutton () {
+      $.ajax({
+        url:"monerod-stop-mining.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
 	  <div class="container">
 		<h3 class="demo-panel-title"> Update: <small>Manual trigger for Monero update check </small></h3>
 		<p><small>New Monero versions need to be compiled for the Raspberry Pi by the Monero dev team. There is usually a short delay between the main rollout of a 

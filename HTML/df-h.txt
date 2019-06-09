@@ -1,2 +1,2 @@
 Filesystem      Size  Used Avail Use% Mounted on
-/dev/root       118G   78G   36G  69% /
+/dev/root       118G   77G   36G  69% /

@@ -1,2 +1,2 @@
 White list size: 1000/1000 (100%)
-Gray list size: 2431/5000 (48.62%)
+Gray list size: 2282/5000 (45.64%)
