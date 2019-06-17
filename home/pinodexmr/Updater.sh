@@ -14,6 +14,7 @@
 #Load Variables
 . /home/pinodexmr/current-ver.sh
 . /home/pinodexmr/xmr-new-ver.sh
+. /home/pinodexmr/strip.sh
 echo $NEW_VERSION 'New Version'
 echo $CURRENT_VERSION 'Current Version'
 sleep "3"
@@ -21,14 +22,18 @@ if [ $CURRENT_VERSION -lt $NEW_VERSION ]
 then
 	echo "New Monero Version available...Updating"
 	sudo systemctl stop monerod-start.service
+	sudo systemctl stop monerod-start-mining.service
+	sudo systemctl stop monerod-start-tor.service
 	echo "Monerod stop command sent, allowing 30 seconds for safe shutdown"
 	sleep "30"
 	rm -rf /home/pinodexmr/monero
 	echo "Deleting Old Version"
 	sleep "2"
 	mkdir /home/pinodexmr/monero
+	sleep "2"
+	chmod 755 /home/pinodexmr/monero
 	wget https://downloads.getmonero.org/cli/linuxarm7
-	tar -xvf ./linuxarm7 -C /home/pinodexmr/monero --strip 2
+	tar -xvf ./linuxarm7 -C /home/pinodexmr/monero --strip $STRIP
 	echo "Software Update Complete - Resuming Node"
 	sleep "2"
 	sudo systemctl start monerod-start.service
