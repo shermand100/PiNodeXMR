@@ -9,4 +9,4 @@ DEVICE_IP="$(hostname -I)"
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
 #Node MemPool status
-./monero/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp print_pool > /var/www/html/TXPool-verbose_Status.txt
+./monero/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_pool > /var/www/html/TXPool-verbose_Status.txt
