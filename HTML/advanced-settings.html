@@ -256,17 +256,21 @@ function inpeers(value){
 </script>            
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
-		</div> <!-- /row -->
 
-		<h3 class="demo-panel-title">Tor</h3>
-		
-      		<div class="demo-type-example">
-	      		<span class="demo-text-note">Usage:</span>
+        
+			<div class="col" class="demo-type-example">
+			<h3 class="demo-panel-title">TOR: <small>Public Address</small></h3>
+			<p> <embed src="onion-address.txt"
+			width=250px
+			height=50px> 
+			<small><br>This address is unique to your PiNode-XMR. It was generated on it's first boot and will not change.</p>
+			</div>
+
 	          <p><small>To enable PiNode-XMR over Tor, stop the currently running session in the [CLEARNET] section above, then start the Tor session below. <br>
 			  To revert back to clearnet, stop the session running over Tor using the button below, the start a [CLEARNET] session using the button above.</small></p>
-      		</div>
-			
-      <div class="row demo-row">
+      		</div> <!-- /.col -->
+
+			      <div class="row demo-row">
         <div class="col">
           <a onclick="starttorbutton()" href="#start-monero-tor" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
         </div>
@@ -281,6 +285,7 @@ function inpeers(value){
      });
  }
 				</script>
+				
         <div class="col">
           <a onclick="stoptorbutton()" href="#stop-monero-tor" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
         </div>
@@ -295,15 +300,16 @@ function inpeers(value){
      });
  }
 				</script>
-      </div> <!-- /row -->
-	  
+		</div><!-- /btn-group -->
+        </div> <!-- /.col -->
+        <div class="col">
 	  		<h3 class="demo-panel-title">Mining</h3>
 		
       		<div class="demo-type-example">
 	      		<span class="demo-text-note">Note:</span>
-	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible
-			  This feature has been added for experimental/educational purposes and thought should be given to your devices CPU cooling before activating to prevent
-			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.</small></p>
+	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible.<br>
+			  This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent
+			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.<br> *Note: Mining currently over clearnet only.</small></p>
       		</div>
 			
 			      <div class="row demo-row">
@@ -338,7 +344,7 @@ function inpeers(value){
 	  <div class="container">
 		<h3 class="demo-panel-title"> Update: <small>Manual trigger for Monero update check </small></h3>
 		<p><small>New Monero versions need to be compiled for the Raspberry Pi by the Monero dev team. There is usually a short delay between the main rollout of a 
-		new version and the Raspberry Pi compatible version. You node will auto-attempt update every Sunday 00:00, or use this to update sooner if available.</small></p>
+		new version and the Raspberry Pi compatible version. Due to the collaboratiorive nature of Monero the "--strip" option may need to be used. Consult reddit.com/r/PiNode for instructions.</small></p>
       <div class="row demo-row">
         <div class="col">
           <a onclick="updatebutton()" href="#Update" class="btn btn-block btn-lg btn-inverse">Check for Update Now<span class="fui-triangle-up"></span></a>
@@ -354,9 +360,62 @@ function inpeers(value){
      });
  }
 </script>
-	  </div>		
+		</div><!-- /btn-group -->
+        </div> <!-- /.col -->
+	  </div>
+
+        <div class="col">
+          <h3 class="demo-panel-title">Update custom --"strip" setting <span class="fui-gear"></span></h3>
+
+          <div class="btn-group">
+<form method="post">
+    <select name='--strip' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { strip(this.value); }'>
+              <option value='0'>--strip</option>
+			  <option value='1'>1</option>
+			  <option value='2'>2</option>
+			  <option value='3'>3</option>
+			  <option value='4'>4</option>
+			  </select>
+</form>
+<script type="text/javascript">
+function strip(value){
+      $.ajax({
+        url:"strip.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>            
+          </div><!-- /btn-group -->
+        </div> <!-- /.col -->	  
+
+		<h3 class="demo-panel-title"> Pruning: <small>Reduce blockchain size on this device </small></h3>
+							<div class="demo-type-example">
+				<p> <embed src="prune-text.txt"
+					width=800px
+					height=100px> </p>
+					</div>
+      <div class="row demo-row">
+        <div class="col">
+          <a onclick="prunebutton()" href="#Prune" class="btn btn-block btn-lg btn-inverse">Prune Blockchain<span class="fui-folder"></span></a>
+       </div>
+	   	   <script>
+ function prunebutton () {
+      $.ajax({
+        url:"monerod-prune.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+	  </div>	  
 		
-	  <div class="container">
 		<h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
       <div class="row demo-row">
         <div class="col">
@@ -366,6 +425,26 @@ function inpeers(value){
  function shutdownbutton () {
       $.ajax({
         url:"monerod-shutdown.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+	  </div>
+	  	  <div class="container">
+	  		<h3 class="demo-panel-title"> Kill Switch: <small>unsafe shutdown of PiNode-XMR </small></h3>
+			<p><small>For those times when a stop command just isn't enough... <br>If you suspect monerod is stuck and cannot recover itself or be recovered this button will send command 'sudo killall -9 monerod'. <br>Corruption of stored blockchain could occur, not to be used lightly.</small></p>
+      <div class="row demo-row">
+        <div class="col">
+          <a onclick="killbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill Process - monerod<span class="fui-trash"></span></a>
+       </div>
+	   	   <script>
+ function killbutton () {
+      $.ajax({
+        url:"monerod-kill.php", //the page containing php script
         type: "POST", //request type
         success:function(result){
          alert(result);
