@@ -1,16 +1,15 @@
 [Unit]
-Description=Monero Node
+Description=Node Shutdown
 After=network.target
 
 [Service]
-ExecStart=/bin/bash monerod-start.sh
+ExecStart=/bin/bash kill.sh
 WorkingDirectory=/home/pinodexmr/
 StandardOutput=inherit
 StandardError=inherit
-Type=forking
-PIDFile=/home/pinodexmr/monero/monerod.pid
-Restart=always
-RestartSec=30
+Type=oneshot
+RemainAfterExit=true
+Restart=no
 User=pinodexmr
 
 [Install]
