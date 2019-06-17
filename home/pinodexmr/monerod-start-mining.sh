@@ -24,8 +24,14 @@ DEVICE_IP="$(hostname -I)"
 	. /home/pinodexmr/RPCu.sh
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
+#Omitted commands - for future versions, unstable for now.
+	#--block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE 
+#Output the currently running node mode
+echo "Clearnet Node - Mining [YES]" > /var/www/html/iamrunning_version.txt
+	echo "#!/bin/sh
+BOOT_STATUS=5" > /home/pinodexmr/bootstatus.sh
 #Allow time for previous service stop
 sleep "10"
 #Start Monerod
 cd /home/pinodexmr/monero/
-./monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$RPCu:$RPCp --block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --log-file=/var/www/html/monerod.log --max-log-file-size=10485000  --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/monerod.pid --start-mining=$MINING_ADDRESS --bg-mining-miner-target=$MINING_INTENSITY --detach
+./monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$RPCu:$RPCp --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --log-file=/var/www/html/monerod.log --max-log-file-size=10485000  --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/monerod.pid --start-mining=$MINING_ADDRESS --bg-mining-miner-target=$MINING_INTENSITY --detach
