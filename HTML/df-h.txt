@@ -1,2 +1,1 @@
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/root       118G   77G   36G  69% /
+System first boot - proceed to web-terminal, login, and enter ./setup.sh
