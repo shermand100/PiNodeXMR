@@ -1,15 +1,2 @@
-25 tx(es), 55946 bytes total (min 1769, max 3452, avg 2237, median 2535)
-fees 0.002404340000 (avg 0.000096173600 per tx, 0.000000042976 per byte)
-0 double spends, 0 not relayed, 0 failing, 0 older than 10 minutes (oldest 3 minutes ago), no backlog
-   Age      Txes       Bytes
-00:00:00       3        7007
-00:00:21       1        1774
-00:00:42       2        3550
-00:01:03       9       20870
-00:01:25       2        3548
-00:01:46       1        2605
-00:02:07       1        1772
-00:02:29       1        3452
-00:02:50       1        2624
-00:03:11       4        8744
-
+2019-06-17 14:13:01.753	I Monero 'Boron Butterfly' (v0.14.1.0-release)
+Error: Couldn't connect to daemon: 192.168.8.121:18081

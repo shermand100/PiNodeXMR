@@ -1,1 +1,2 @@
-Monero 'Boron Butterfly' (v0.14.0.2-release)
+2019-06-17 14:13:01.806	I Monero 'Boron Butterfly' (v0.14.1.0-release)
+Monero 'Boron Butterfly' (v0.14.1.0-release)

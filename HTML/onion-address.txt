@@ -1,1 +1,1 @@
-kxjwqx74ro5obh35.onion
+System first boot - proceed to web-terminal, login, and enter ./setup.sh

@@ -1,10 +1,2 @@
-Remote Host                   Peer id             Support Flags       Recv/Sent (inactive,sec)      State                    Livetime(sec)       Down (kB/s) Down(now)     Up (kB/s) Up(now)      
-
-OUT 101.174.34.166:18080      eb90d0aa910638fd    1                   224734(10)/200694(13)         normal                   303                 0           0             0         0            
-OUT 77.220.137.121:18080      b87bedf922208da1    1                   639686(10)/512162(10)         normal                   897                 0           0             0         3            
-OUT 80.195.243.45:18080       305ac19525c0ee5c    1                   485937(13)/303709(13)         normal                   663                 0           0             0         0            
-OUT 93.150.75.168:18080       d7ea990cb1fa3bde    1                   1179989(7)/689399(13)         normal                   1139                1           0             0         3            
-OUT 217.113.123.160:18080     0cd445bd958bcf18    1                   824515(12)/714093(13)         normal                   1233                0           0             0         0            
-OUT 47.110.239.19:18080       2d25062ee3b836cb    1                   1290066(13)/754212(13)        normal                   1388                0           0             0         0            
-OUT 85.212.80.176:18080       66792db5380451c6    1                   371298(12)/347258(13)         normal                   449                 0           0             0         0            
-OUT 76.189.207.15:18080       3dde3d75ca13b4f3    1                   1374772(11)/793341(13)        normal                   1444                0           0             0         0            
+2019-06-17 14:13:01.794	I Monero 'Boron Butterfly' (v0.14.1.0-release)
+Error: Couldn't connect to daemon: 192.168.8.121:18081

@@ -1,1 +1,2 @@
-Height: 1853194/1853194 (100.0%) on mainnet, not mining, net hash 282.75 MH/s, v11, up to date, 8(out)+0(in) connections, uptime 0d 0h 25m 21s
+2019-06-17 14:13:01.720	I Monero 'Boron Butterfly' (v0.14.1.0-release)
+Error: Couldn't connect to daemon: 192.168.8.121:18081
