@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Getting started &middot; Flat UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../dist/css/vendor/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="../dist/css/flat-ui.css" rel="stylesheet">
+
+    <link href="assets/css/docs.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <h1 class="demo-headline">Getting started</h1>
+    <div class="container">
+      <div class="demo-row">
+        <div class="demo-title">
+          <h3>What is Flat UI?</h3>
+        </div>
+
+        <div class="demo-content demo-content-article">
+          <p>
+            <a href="https://designmodo.com/flat" target="_blank">Flat UI</a>
+            is a beautiful theme for <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.
+            We have redesigned many of its components to look flat in every pixel.
+          </p>
+          <p>
+            For the most part, it is very simple to use. However, to be able
+            to make some form elements and others look exactly how we want,
+            we ended up using some JS plugins, which requires a bit more effort
+            to integrate within your project.
+          </p>
+        </div>
+      </div><!-- /.demo-row -->
+
+      <div class="demo-row">
+        <div class="demo-title">
+          <h3>How to Use It?</h3>
+        </div>
+
+        <div class="demo-content demo-content-article">
+          <p>
+            Since Flat UI is built on top of Bootstrap as a theme, you can use it in your <a href="http://getbootstrap.com/" target="_blank">Bootstrap 4</a> project.
+            We did not modify any line of Bootstrap, so you will be safe using Flat UI in your ongoing project
+            (unless you hacked it yourself!) :)
+          </p>
+          <p>
+            We provide you with the CSS and the <a href="https://sass-lang.com/" target="_blank">Sass</a> sources.
+          </p>
+          <ol>
+            <li>
+              Using CSS is as easy as dropping <code>dist/css/flat-ui.css</code> into your project folder and
+              including it in your template/html page:
+              <code>&lt;link href="dist/css/flat-ui.css" rel="stylesheet"&gt;</code>
+            </li>
+            <li>
+              Use Sass if you want to modify/extend Flat UI in your project. It is built just like Bootstrap, so
+              you won't find a big difference.
+            </li>
+          </ol>
+          <p>
+            The easiest way to start is to use our start-up template (from <code>/dist</code> folder) where all the files are already included
+            and ready to use (The JS plugins are included, but not initialized. You will have to initialize them as needed).
+          </p>
+        </div>
+      </div><!-- /.demo-row -->
+
+      <div class="demo-row">
+        <div class="demo-title">
+          <h3>File Structure</h3>
+        </div>
+
+        <div class="demo-content demo-content-article">
+          <p>
+            Once purchased, unzip the compressed archive to see the following structure:
+          </p>
+<pre class="prettyprint">
+  flat-ui-pro/
+  └── app/
+      ├── css/
+      ├── fonts/
+      ├── images/
+      ├── scripts/
+      └── styles/
+          ├── mixins/
+          ├── modules/
+          ├── flat-ui-pro.scss
+          ├── _mixins.scss
+          ├── _spaces.scss
+          └── _variables.scss
+  ├── dist/
+      ├── css/
+      ├── fonts/
+      ├── images/
+      ├── scripts/
+  ├── docs/
+      ├── examples/
+      ├── components.html
+      ├── getting-started.html
+      ├── index.html
+      └── template.html
+</pre>
+          <p>
+            Let's go through this list:
+          </p>
+
+          <p>
+            <strong>app/styles/</strong> &mdash; is where source SASS files are located.
+          </p>
+
+          <ul>
+            <li>
+              <code>modules/</code> is where the components themselves are.
+            </li>
+            <li>
+              <code>mixins/</code> useful utilities.
+            </li>
+            <li>
+              <code>flat-ui-pro.scss</code> links everything into one single bundle.
+            </li>
+            <li>
+              <code>_mixins.scss</code> helps automate things.
+            </li>
+            <li>
+              <code>_variables.scss</code> is where all the default variables are.
+            </li>
+          </ul>
+
+          <p>
+            <strong>dist/</strong> &mdash; the compiled Flat UI boilerplate template. If you like everything and you don't want
+            to change the look of our components, it is better to use version. This is the easiest
+            way to start using Flat UI.
+          </p>
+
+          <p>
+            <strong>dist/css/</strong> Flat UI CSS and minified version.
+          </p>
+
+          <p>
+            <strong>dist/fonts/</strong> &mdash; local version of Lato and icon font. When integrating this into your project, make sure you
+            copy all the font files correctly. You might want to change/add some glyphs. If so, open
+            <a href="http://icomoon.io/app">IcoMoon</a> and import <code>selection.json</code>(<code>/font/glyphicons/</code>)
+            there to make all glyphs editable.
+          </p>
+
+          <p>
+            <strong>dist/scripts/</strong> &mdash; we have tried hard to make all our components look truly "flat." In order to do
+            so we have used some JS plugins. Most of them are well known, while some of them are not. The most JS-ified
+            components are the form components (checkboxes, radios, switches, selects…), since it is not currently possible
+            to style them identically in all browsers. Look at <code>docs/assets/js/application.js</code> for integration
+            examples.
+          </p>
+
+          <p>
+            <strong>docs/</strong> &mdash; component examples and documentation.
+          </p>
+
+          <p>
+            <img src="assets/images/getting-started/icomoon_import.jpg" alt="" />
+          </p>
+
+        </div>
+      </div><!-- /.demo-row -->
+
+      <div class="demo-row">
+        <div class="demo-title">
+          <h3>Dependencies</h3>
+        </div>
+
+        <div class="demo-content demo-content-article">
+          <p>
+            External dependencies are managed quickly and easily with <a href="http://bower.io">Bower</a>. Simply:
+          </p>
+          <ol>
+            <li>
+              Add a dependency to <code>bower.json</code>.
+            </li>
+            <li>
+              Run <code>bower install</code>.
+            </li>
+            <li>
+              Add references within your HTML, and you are all set.
+            </li>
+          </ol>
+          <p>
+            <em>Note:</em> If required, run <code>npm install -g bower</code> first to install bower.
+          </p>
+          <p>
+            Development is quick and easy thanks to <a href="https://gulpjs.com/">Gulp</a>. Simply:
+          </p>
+          <ul>
+            <li>
+              Run <code>gulp</code> to build the project with your updates included, or
+            </li>
+            <li>
+              Run <code>grunt serve</code> to build the project, watch for changes, and provide a local server with source maps and live reload as you hack away.
+            </li>
+          </ul>
+          <p>
+            <em>Note:</em> Run <code>npm install</code> first to install gulp with gulp packages.
+          </p>
+        </div>
+      </div><!-- /.demo-row -->
+
+    </div><!-- /.container -->
+  </body>
+</html>

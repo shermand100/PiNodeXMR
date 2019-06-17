@@ -1,10 +1,12 @@
-Error: Couldn't connect to daemon: 192.168.0.10:18081
-Monero 'Boron Butterfly' (v0.14.0.2-release)
+2019-06-17 14:13:01.756	I Monero 'Boron Butterfly' (v0.14.1.0-release)
+Error: Couldn't connect to daemon: 192.168.8.121:18081
+Monero 'Boron Butterfly' (v0.14.1.0-release)
 Commands: 
   alt_chain_info [blockhash]
   ban <IP> [<seconds>]
   bans
   bc_dyn_stats <last_block_count>
+  check_blockchain_pruning
   diff
   exit
   flush_txpool [<txid>]
@@ -16,25 +18,29 @@ Commands:
   limit [<kB/s>]
   limit_down [<kB/s>]
   limit_up [<kB/s>]
+  mining_status
   out_peers <max_number>
   output_histogram [@<amount>] <min_count> [<max_count>]
+  pop_blocks <nblocks>
   print_bc <begin_height> [<end_height>]
   print_block <block_hash> | <block_height>
   print_cn
   print_coinbase_tx_sum <start_height> [<block_count>]
   print_height
-  print_pl
+  print_net_stats
+  print_pl [white] [gray] [<limit>]
   print_pl_stats
   print_pool
   print_pool_sh
   print_pool_stats
   print_status
   print_tx <transaction_hash> [+hex] [+json]
+  prune_blockchain
   relay_tx <txid>
   save
   set_log <level>|<{+,-,}categories>
   show_hr
-  start_mining <addr> [<threads>] [do_background_mining] [ignore_battery]
+  start_mining <addr> [<threads>|auto] [do_background_mining] [ignore_battery]
   start_save_graph
   status
   stop_daemon

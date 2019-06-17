@@ -60,20 +60,57 @@
 	      		<span class="demo-text-note">PiNode-XMR <small>[CLEARNET]</small></span>
 	          <p><small>Manual Start/Stop</small></p>
       		</div>
-	
 
 
       <div class="row demo-row">
         <div class="col">
-		<a href="#script link" class="btn btn-block btn-lg btn-inverse">Start Monerod <span class="fui-power"></span></a>
-        </div>
-        <div class="col">
-          <a href="#script link" class="btn btn-block btn-lg btn-inverse">Reboot Monerod <span class="fui-power"></span></a>
+		<a onclick="startbutton()" href="#Start Monerod" class="btn btn-block btn-lg btn-inverse">Start Monerod <span class="fui-power"></span></a>
         </div>
 
+
+<script>
+ function startbutton () {
+      $.ajax({
+        url:"monerod-start.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script> 
+
         <div class="col">
-          <a href="#script link" class="btn btn-block btn-lg btn-inverse">Stop Monerod <span class="fui-power"></span></a>
+          <a onclick="rebootbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Monerod <span class="fui-power"></span></a>
         </div>
+		
+<script>
+ function rebootbutton () {
+      $.ajax({
+        url:"monerod-reboot.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+        <div class="col">
+          <a onclick="stopbutton()" href="#Stop Monerod" class="btn btn-block btn-lg btn-inverse">Stop Monerod <span class="fui-power"></span></a>
+        </div>
+		
+<script>
+ function stopbutton () {
+      $.ajax({
+        url:"monerod-stop.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
       </div> <!-- /row -->
 	  
 	  <div class="row">
@@ -82,150 +119,346 @@
 
       		<div class="demo-type-example">
 	      		<span class="demo-text-note">Optimization</span>
-	          <p><small>By default the node can be bandwidth intensive in both upload and download.  Limits on this node can be imposed below if you think PiNode-XMR usage affects the speed of other devices on your network. Once changes to these parameters have been made, use "Reboot Monerod" above for changes to take effect.</small></p>
+	          <p><small>If you have a slow internet connection, by default the node can be bandwidth intensive in both upload and download.  Limits on this node can be imposed below. Once changes to these parameters have been made, use "Reboot Monerod" above for changes to take effect. <br>[Note: value -1 restores parameter to default]</small></p>
       		</div>
 		  
       <div class="row">
         <div class="col">
 			<h3 class="demo-panel-title">Upload <small> kB/s</small><span class="fui-triangle-up"></span></h3>
-
           <div class="btn-group">
-            <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle" type="button">Speed Up <span class="caret"></span></button>
-              <ul role="menu" class="dropdown-menu"> 
-			    <li><a href="#">256kB/s</a></li>
-			    <li><a href="#">512kB/s</a></li>
-                <li><a href="#">1024kB/s</a></li>
-			    <li><a href="#">1536kB/s</a></li>
-			    <li><a href="#">DEFAULT 2048kB/s</a></li>
-			    <li><a href="#">2560kB/s</a></li>
-			    <li><a href="#">3072kB/s</a></li>
-			    <li><a href="#">3548kB/s</a></li>
-                <li><a href="#">4096kB/s</a></li>
-			    <li><a href="#">4608kB/s</a></li>
-			    <li><a href="#">5120kB/s</a></li>
-			    <li><a href="#">5632kB/s</a></li>
-              </ul>
+<form method="post">
+    <select name='Speed Up' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { speedup(this.value); }'>
+         <option value='0'>Upload Speed</option>
+         <option value='256'>256</option>
+         <option value='512'>512</option>
+         <option value='1024'>1024</option>
+		 <option value='1536'>1536</option>
+		 <option value='-1'>2048 [DEFAULT]</option>
+		 <option value='2560'>2560</option>
+		 <option value='3072'>3072</option>
+		 <option value='3548'>3548</option>
+         <option value='4096'>4096</option>
+		 <option value='4608'>4608</option>
+		 <option value='5120'>5120</option>
+		 <option value='5632'>5632</option>
+    </select>
+</form>
+<script type="text/javascript">
+function speedup(value){
+      $.ajax({
+        url:"speed_up.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>
+
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
 		
         <div class="col">
           <h3 class="demo-panel-title">Download <small> kB/s</small><span class="fui-triangle-down-small"></span></h3>
           <div class="btn-group">
-		  <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle" type="button">Speed Down <span class="caret"></span></button>
-            <ul role="menu" class="dropdown-menu">
-			  <li><a href="#">1019kB/s</a></li>
-			  <li><a href="#">2038kB/s</a></li>
-              <li><a href="#">3057kB/s</a></li>
-			  <li><a href="#">4076B/s</a></li>
-			  <li><a href="#">6114kB/s</a></li>
-			  <li><a href="#">DEFAULT 8152kB/s</a></li>
-			  <li><a href="#">10190kB/s</a></li>
-			  <li><a href="#">12228kB/s</a></li>
-              <li><a href="#">14226kB/s</a></li>
-			  <li><a href="#">18342kB/s</a></li>
-			  <li><a href="#">22418kB/s</a></li>
-			  <li><a href="#">30570kB/s</a></li>
-            </ul>
+<form method="post">
+    <select name='Speed Down' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { speeddown(this.value); }'>
+			  <option value='0'>Download Speed</option>
+			  <option value='1024'>1024</option>
+			  <option value='2048'>2048</option>
+              <option value='3072'>3072</option>
+			  <option value='4096'>4096</option>
+			  <option value='6144'>6144</option>
+			  <option value='-1'>8192 [DEFAULT]</option>
+			  <option value='10240'>10240</option>
+			  <option value='12228'>12228</option>
+              <option value='15360'>15360</option>
+			  <option value='18432'>18432</option>
+			  <option value='22528'>22528</option>
+			  <option value='30720'>30720</option>
+			  </select>
+</form>
+<script type="text/javascript">
+function speeddown(value){
+      $.ajax({
+        url:"speed_down.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
         <div class="col">
           <h3 class="demo-panel-title">Out Peers<span class="fui-triangle-right-large"></span></h3>
 
           <div class="btn-group">
-            <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle" type="button">LIMIT # <span class="caret"></span></button>
-            <ul role="menu" class="dropdown-menu">
-			  <li><a href="#">DEFAULT UNLIMITED</a></li>
-              <li><a href="#">2</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">6</a></li>
-			  <li><a href="#">8</a></li>
-			  <li><a href="#">10</a></li>
-			  <li><a href="#">12</a></li>
-			  <li><a href="#">14</a></li>
-              <li><a href="#">16</a></li>
-              </ul>
+<form method="post">
+    <select name='Out Peers' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { outpeers(this.value); }'>
+			  <option value='0'>Out Peers</option>
+              <option value='2'>2</option>
+			  <option value='4'>4</option>
+			  <option value='6'>6</option>
+			  <option value='-1'>8 [DEFAULT]</option>
+			  <option value='10'>10</option>
+			  <option value='12'>12</option>
+			  <option value='14'>14</option>
+              <option value='16'>16</option>
+			  </select>
+</form>
+<script type="text/javascript">
+function outpeers(value){
+      $.ajax({
+        url:"out-peers.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
         <div class="col">
           <h3 class="demo-panel-title">In Peers<span class="fui-triangle-left-large"></span></h3>
 
           <div class="btn-group">
-            <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle" type="button">LIMIT # <span class="caret"></span></button>
-            <ul role="menu" class="dropdown-menu">
-              <li><a href="#">2</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">6</a></li>
-			  <li><a href="#">DEFAULT 8</a></li>
-			  <li><a href="#">10</a></li>
-			  <li><a href="#">12</a></li>
-			  <li><a href="#">14</a></li>
-              <li><a href="#">16</a></li>
-            </ul>
+<form method="post">
+    <select name='In Peers' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { inpeers(this.value); }'>
+              <option value='0'>In Peers</option>
+			  <option value='-1'>DEFAULT [UNLIMITED]</option>
+			  <option value='2'>2</option>
+			  <option value='4'>4</option>
+			  <option value='6'>6</option>
+			  <option value='8'>8</option>
+			  <option value='10'>10</option>
+			  <option value='12'>12</option>
+			  <option value='14'>14</option>
+              <option value='16'>16</option>
+			  </select>
+</form>
+<script type="text/javascript">
+function inpeers(value){
+      $.ajax({
+        url:"in-peers.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>            
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
-		</div> <!-- /row -->
 
-		<h3 class="demo-panel-title">Tor</h3>
-		
-      		<div class="demo-type-example">
-	      		<span class="demo-text-note">Usage:</span>
+        
+			<div class="col" class="demo-type-example">
+			<h3 class="demo-panel-title">TOR: <small>Public Address</small></h3>
+			<p> <embed src="onion-address.txt"
+			width=250px
+			height=50px> 
+			<small><br>This address is unique to your PiNode-XMR. It was generated on it's first boot and will not change.</p>
+			</div>
+
 	          <p><small>To enable PiNode-XMR over Tor, stop the currently running session in the [CLEARNET] section above, then start the Tor session below. <br>
 			  To revert back to clearnet, stop the session running over Tor using the button below, the start a [CLEARNET] session using the button above.</small></p>
-      		</div>
-			
-      <div class="row demo-row">
-        <div class="col">
-          <a href="manual-start-monerod.php" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
-        </div>
-        <div class="col">
-          <a href="#fakelink" class="btn btn-block btn-lg btn-inverse">Reboot Monerod - <span class="fui-eye"><br />[tor network]</span></a>
-        </div>
+      		</div> <!-- /.col -->
 
+			      <div class="row demo-row">
         <div class="col">
-          <a href="/stop-monerod.php" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
+          <a onclick="starttorbutton()" href="#start-monero-tor" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
         </div>
-      </div> <!-- /row -->
-	  
+			   <script>
+ function starttorbutton () {
+      $.ajax({
+        url:"monerod-start-tor.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+				
+        <div class="col">
+          <a onclick="stoptorbutton()" href="#stop-monero-tor" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
+        </div>
+				<script>
+ function stoptorbutton () {
+      $.ajax({
+        url:"monerod-stop-tor.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+		</div><!-- /btn-group -->
+        </div> <!-- /.col -->
+        <div class="col">
 	  		<h3 class="demo-panel-title">Mining</h3>
 		
       		<div class="demo-type-example">
 	      		<span class="demo-text-note">Note:</span>
-	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible <br>
-			  This feature has been added for experimental/educational purposes and thought should be given to your devices CPU cooling before activating to prevent <br>
-			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.</small></p>
+	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible.<br>
+			  This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent
+			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.<br> *Note: Mining currently over clearnet only.</small></p>
       		</div>
 			
 			      <div class="row demo-row">
         <div class="col">
-		<a href="#link" class="btn btn-block btn-lg btn-inverse">Start Solo Mining <span class="fui-lock"></span></a>
+		<a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-inverse">Start Solo Mining <span class="fui-lock"></span></a>
         </div>
+			   <script>
+ function startminingbutton () {
+      $.ajax({
+        url:"monerod-start-mining.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
         <div class="col">
-          <a href="#link" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
+          <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
         </div>
-
+			   <script>
+ function stopminingbutton () {
+      $.ajax({
+        url:"monerod-stop-mining.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
 	  <div class="container">
 		<h3 class="demo-panel-title"> Update: <small>Manual trigger for Monero update check </small></h3>
 		<p><small>New Monero versions need to be compiled for the Raspberry Pi by the Monero dev team. There is usually a short delay between the main rollout of a 
-		new version and the Raspberry Pi compatible version. You node will auto-attempt update every Sunday 00:00, or use this to update sooner if available.</small></p>
+		new version and the Raspberry Pi compatible version. Due to the collaboratiorive nature of Monero the "--strip" option may need to be used. Consult reddit.com/r/PiNode for instructions.</small></p>
       <div class="row demo-row">
         <div class="col">
-          <a href="manual-start-monerod.php" class="btn btn-block btn-lg btn-inverse">Check for Update Now<span class="fui-triangle-up"></span></a>
+          <a onclick="updatebutton()" href="#Update" class="btn btn-block btn-lg btn-inverse">Check for Update Now<span class="fui-triangle-up"></span></a>
        </div>
-	  </div>		
+	   <script>
+ function updatebutton () {
+      $.ajax({
+        url:"monerod-update.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+		</div><!-- /btn-group -->
+        </div> <!-- /.col -->
+	  </div>
+
+        <div class="col">
+          <h3 class="demo-panel-title">Update custom --"strip" setting <span class="fui-gear"></span></h3>
+
+          <div class="btn-group">
+<form method="post">
+    <select name='--strip' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { strip(this.value); }'>
+              <option value='0'>--strip</option>
+			  <option value='1'>1</option>
+			  <option value='2'>2</option>
+			  <option value='3'>3</option>
+			  <option value='4'>4</option>
+			  </select>
+</form>
+<script type="text/javascript">
+function strip(value){
+      $.ajax({
+        url:"strip.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>            
+          </div><!-- /btn-group -->
+        </div> <!-- /.col -->	  
+
+		<h3 class="demo-panel-title"> Pruning: <small>Reduce blockchain size on this device </small></h3>
+							<div class="demo-type-example">
+				<p> <embed src="prune-text.txt"
+					width=800px
+					height=100px> </p>
+					</div>
+      <div class="row demo-row">
+        <div class="col">
+          <a onclick="prunebutton()" href="#Prune" class="btn btn-block btn-lg btn-inverse">Prune Blockchain<span class="fui-folder"></span></a>
+       </div>
+	   	   <script>
+ function prunebutton () {
+      $.ajax({
+        url:"monerod-prune.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+	  </div>	  
 		
-	  <div class="container">
 		<h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
       <div class="row demo-row">
         <div class="col">
-          <a href="manual-start-monerod.php" class="btn btn-block btn-lg btn-inverse">Shutdown PiNode-XMR<span class="fui-power"></span></a>
+          <a onclick="shutdownbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-inverse">Shutdown PiNode-XMR<span class="fui-power"></span></a>
        </div>
+	   	   <script>
+ function shutdownbutton () {
+      $.ajax({
+        url:"monerod-shutdown.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+	  </div>
+	  	  <div class="container">
+	  		<h3 class="demo-panel-title"> Kill Switch: <small>unsafe shutdown of PiNode-XMR </small></h3>
+			<p><small>For those times when a stop command just isn't enough... <br>If you suspect monerod is stuck and cannot recover itself or be recovered this button will send command 'sudo killall -9 monerod'. <br>Corruption of stored blockchain could occur, not to be used lightly.</small></p>
+      <div class="row demo-row">
+        <div class="col">
+          <a onclick="killbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill Process - monerod<span class="fui-trash"></span></a>
+       </div>
+	   	   <script>
+ function killbutton () {
+      $.ajax({
+        url:"monerod-kill.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
 	  </div>
 		
 	</div> <!-- /container -->
 	</div>
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Bootstrap 4 requires Popper.js -->
     <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="http://vjs.zencdn.net/6.6.3/video.js"></script>

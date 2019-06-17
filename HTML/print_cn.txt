@@ -1,1 +1,2 @@
-Error: Couldn't connect to daemon: 192.168.0.10:18081
+2019-06-17 14:13:01.794	I Monero 'Boron Butterfly' (v0.14.1.0-release)
+Error: Couldn't connect to daemon: 192.168.8.121:18081

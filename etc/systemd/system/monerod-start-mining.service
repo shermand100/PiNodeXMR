@@ -1,0 +1,17 @@
+[Unit]
+Description=Monero Mining Node
+After=network.target
+
+[Service]
+ExecStart=/bin/bash monerod-start-mining.sh
+WorkingDirectory=/home/pinodexmr/
+StandardOutput=inherit
+StandardError=inherit
+Type=forking
+PIDFile=/home/pinodexmr/monero/monerod.pid
+Restart=always
+RestartSec=30
+User=pinodexmr
+
+[Install]
+WantedBy=multi-user.target
