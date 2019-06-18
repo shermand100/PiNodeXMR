@@ -9,9 +9,6 @@ then
 	echo "#!/bin/sh
 BOOT_STATUS=2" > /home/pinodexmr/bootstatus.sh
 	sleep "2"
-	#Output onion address
-sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
-	sleep "2"
 	sudo reboot
 	
 else
