@@ -8,6 +8,8 @@ sudo iptables -I OUTPUT -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT
 	DEVICE_IP="$(hostname -I)"
 	echo "Your PiNode-XMR IP is: ${DEVICE_IP}"
 	sleep "1"
+#Output onion address
+sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 #Download update file
 	sleep "1"
 	wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/xmr-new-ver.sh -O xmr-new-ver.sh
@@ -44,13 +46,7 @@ CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
 	rm /home/pinodexmr/linuxarm7
 else
 	echo "Your node is up to date"
-#Start Node
-sh /home/pinodexmr/monerod-start.sh
-#Output onion address
-sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
-=======
 
->>>>>>> V2:home/pinodexmr/init.sh
 fi
 
 if [ $BOOT_STATUS -eq 2 ]
