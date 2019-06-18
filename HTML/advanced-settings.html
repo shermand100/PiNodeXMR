@@ -311,7 +311,7 @@ function inpeers(value){
 			  This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent
 			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.<br> *Note: Mining currently over clearnet only.</small></p>
       		</div>
-			
+				  
 			      <div class="row demo-row">
         <div class="col">
 		<a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-inverse">Start Solo Mining <span class="fui-lock"></span></a>
@@ -341,6 +341,27 @@ function inpeers(value){
      });
  }
 </script>
+
+			<div class="form-group btn-inverse" >
+			<form method="post">
+			<input type="text" placeholder="Enter Mining Address" class="form-control" onchange='if(this.value != 0) { address(this.value); }'>
+			<span class="fui-check-inverted"></span>
+			</div>
+			</form>
+		  <script>
+ function address(value){
+      $.ajax({
+        url:"mining-address.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+		  
+		  
 	  <div class="container">
 		<h3 class="demo-panel-title"> Update: <small>Manual trigger for Monero update check </small></h3>
 		<p><small>New Monero versions need to be compiled for the Raspberry Pi by the Monero dev team. There is usually a short delay between the main rollout of a 
@@ -391,28 +412,6 @@ function strip(value){
 </script>            
           </div><!-- /btn-group -->
         </div> <!-- /.col -->	  
-
-		<h3 class="demo-panel-title"> Pruning: <small>Reduce blockchain size on this device </small></h3>
-							<div class="demo-type-example">
-				<p> <embed src="prune-text.txt"
-					width=800px
-					height=100px> </p>
-					</div>
-      <div class="row demo-row">
-        <div class="col">
-          <a onclick="prunebutton()" href="#Prune" class="btn btn-block btn-lg btn-inverse">Prune Blockchain<span class="fui-folder"></span></a>
-       </div>
-	   	   <script>
- function prunebutton () {
-      $.ajax({
-        url:"monerod-prune.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-</script>
 
 	  </div>	  
 		
