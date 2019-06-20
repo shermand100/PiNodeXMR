@@ -38,11 +38,11 @@ www-data ALL=(ALL) NOPASSWD: /bin/systemctl start monerod-start.service, /bin/sy
 passwordless permission for www-data to run those commands only. The systemd service file is configured to then run binaries and command as user "pinodexmr".
 
 
-*Dependencies - those in italics are for onion-blockexplorer which has not been included this release*
+**Dependencies** - *those in italics are for onion-blockexplorer which has not been included this release*
 
 apache2 php7.0 libapache2-mod-php7.0 mysql-server mysql-client php7.0-mysql git screen exfat-fuse exfat-utils tor tor-arm shellinabox fail2ban ufw exfat-fuse exfat-utils *git build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0*
 
-*crontab - all flock managed tasks are scripts to output monerod ~status~ > ###.txt in the html folder for apache to display in the Web-UI*
+**crontab** - *all flock managed tasks are scripts to output monerod ~status~ > ###.txt in the html folder for apache to display in the Web-UI*
 
 
 * * * * * /home/pinodexmr/temp.sh
@@ -59,24 +59,24 @@ apache2 php7.0 libapache2-mod-php7.0 mysql-server mysql-client php7.0-mysql git 
 
 This version Updater script has been removed from weekly cron. This is so as not to disturb node uptime if using node remotely. Update now via manual button in "advanced settings"
 
-#UPDATER = Downloads https://raw.githubusercontent.com/shermand100/pinode-xmr/master/xmr-new-ver.sh which contains a file with the new arm7 monerod version number ONLY.
+**UPDATER** = Downloads https://raw.githubusercontent.com/shermand100/pinode-xmr/master/xmr-new-ver.sh which contains a file with the new arm7 monerod version number ONLY.
 Updater script then compares this number with it's "current-version.sh" and only if the new version number is higher it:
 Stops node -> Deletes current version and directory /home/pinodexmr/monero/ -> Creates new monero directory -> downloads new Monerod from https://downloads.getmonero.org/cli/linuxarm7 -> unpacks to /monero/ (--strip $strip), dir and starts updated node -> updates new version number -> deletes downloaded files
 
 
-*disabled ipv6 ( IP address for monero node start (rpc bind) derived from command "hostname -I" ipv6 confuses the bind command and fails monerod )*
+**disabled ipv6** ( IP address for monero node start (rpc bind) derived from command "hostname -I" ipv6 confuses the bind command and fails monerod )*
 
 /boot/cmdline.txt appended with ipv6.disable=1
 
-*Swap file toggle*
+**Swap file toggle**
 
 sudo dphys-swapfile swapoff/swapoff
 
-*Auto boot running Monerod, edited  sudo nano /etc/rc.local*
+**Auto boot running Monerod**, *edited  sudo nano /etc/rc.local*
 
 su pinodexmr -c '/home/pinodexmr/boot.sh &'
 
-*UFW setup*
+**UFW setup**
 
 ufw allow 80
 ufw allow 443
@@ -86,6 +86,6 @@ ufw allow 4200
 ufw allow 22
 ufw enable
 
-*ssh*
+**ssh**
 Root ssh login disabled, only user 'pinodexmr' allowed.
 
