@@ -147,6 +147,15 @@ The Web-Terminal allows a more advanced user a huge amount of control over their
 
 - *Pruning:* I have tried to keep this as simple as possible for new users. For now it is enabled by entering one command in the web-terminal. It is necessary to stop your currently running Monerod using the buttons in the "advanced settings" page then in the web-terminal use `./monerod-prune.sh` to start the prune. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. The `./monerod-prune.sh` command can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
 
+- *tor-arm:* Detailed bandwidth stats are available when running as a tor node using the ARM utility. It is installed and running as default. To view these stats enter the command
+
+`arm`
+and when prompted for the controller password use: `PiNodeXMR`
+
+![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/a20080a60e69d095be5dac6382ad621f75d96c9c/Screenshots-v0.6.19/arm.png)
+
+Exit the utility by using `CTRL+c`
+
 
 
 
