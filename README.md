@@ -52,3 +52,20 @@ Username: pinodexmr
 Password: PiNodeXMR
 
 ![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/webterminal-first.png)
+
+From here enter as the screenshot shows to do the final setup phase which will allow you to set a new device password (for SSH, root and pinodexmr user), RPC username and password (this is the username and password you'll need to login to your device from an external monero wallet, using the PiNode-XMR as remote node) and finally as an optional step to configure a noip.com client to allow dynamic DNS updates. 
+For beginners this last optional step is because most internet connections and IP addresses provided by ISPs are dynamic and so change regulary. To keep the address of your PiNode-XMR static it is simplist to use hostnames instead. If you don't intend to use your node remotely and just for the benifit of a local desktop wallet for example then the Dynamic DNS step can be skipped.
+
+So once logged in enter: `./setup.sh` as shown in the screenshot
+
+This brings you to the landing page:
+![screenshot setup1](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/setup1.png)
+
+*A note here that this menu whilst functional does require some cosmetic tweaking and unfortunatly if you break a parameter when entering new passwords the menu cycles back to the start, not just the section that failed. A work in progress.*
+
+First of all you'll be asked to choose a new password for the device to replace the "PiNodeXMR" password you just used in this terminal. **It must not be left blank, at least 8 charcters long, standard AbC123 (Don't use uncommon special characters, spaces or quotes ' or " )**
+
+A re-entry check will be carried out and then proceed to setting the RPC username and password. The same rules apply for password charcter entry.
+Finally the option for Dynamic DNS client download via noip.com. If this is selected you will be promtped to make an account with noip.com first. Go to their website ansd create a free account. Once that has been verified continue with the PiNode-XMr menu and the client will download and configure itself, then asking for your Noip.com login. Keep the update interval as default (30), and when asked to 'run something at successful update' enter 'N'. That configures the .conf file. You will be asked to enter this information again for the client and that's it. Setup Complete.
+
+## This manual is a work in progress, more coming soon
