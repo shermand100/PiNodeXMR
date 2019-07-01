@@ -1,91 +1,54 @@
-# PiNode-XMR
-SBC Plug and Play Monero Node.
+![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/PiNode-XMR%20logo.jpg)
+# User Manual v0.6.19		
+### Associated disk image 'PiNodeXMR-v0.6.19-v0.14.1.0'		(version optimised for SD card use)
 
-#### To Use - Unzip and write Image to Micro SD (recommended 128GB Micro SD) insert into Pi and Power on.
-#### The Pi will boot and adapt itself to your SD card size. During this process it will self restart allowing 120 seconds for partitions to settle to where they should be.
+### Hardware requirements:
 
-#### After 5 mins from power on the node will have started and be ready for interaction.
+1. Raspberry Pi 3 B
+2. 128GB MicroSD Card (or larger)
+3. Ethernet connection
 
-#### To interact with it you'll just need it's IP address and then navigate to it from your web browser (Chrome works well. And tips for how to find the IP address can be found on the Raspberry Pi website https://www.raspberrypi.org/documentation/remote-access/ip-address.md)
+A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
 
-##### To Login using the Web based terminal use:
-User: pinodexmr
-Passwd: PiNodeXMR
+### Intro
 
-once logged in it is recommended to enter    ./setup.sh    and follow through the menu to configure custom passwords for ssh/root/user and RPC user&password. Optional setting at the end to configure Dynamic DNS client if you intend on connecting to your node remotely.
+Then let me start by saying I'm glad the internet has bought you to here. It's taken several months to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. This however is the first disk image I have ever produced for download, and I have no doubt in it's stability or ability to perform it's purpose, however it does mark a change in my direction. Throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that perhaps users don't want to make their own node step by step, they too have busy lifestyles, they want them fast. 
 
-*SSH on port 22
+To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync however will take some time, and for that reason I also supply this node pre-syn'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later in in this document.
 
-#### That's it. PiNodeXMR up and running. Once synced connect your Monero GUI with IP and Port 18081. The Web-UI is available from any device on your network PC/smartphone/tablet.
+Dan
 
-# _________________________________________________________
+*This Manual is still aimed at a low beginner level user including un-compressing, SD formatting, image writing etc. After these chapters and node usage you'll find detailed breakdowns of how this node works for those that are interested in contributing. Finally all suggested software used in the setup stages are free*
 
+### Setup:
 
-# Below is for info on its build...
+The PiNode-XMR image is available to download as-is. It is un-compressed and ready to write using th same method you would for any other image. For those that are new these free programs will get you started:
 
-visudo
-
-**This section is what I feel most need review. Can it be made more secure?**
-
-#User privilege specification
-
-root	ALL=(ALL:ALL) ALL
-
-pinodexmr ALL=NOPASSWD: ALL
-
-www-data ALL=(ALL) NOPASSWD: /bin/systemctl start monerod-start.service, /bin/systemctl stop monerod-start.service, /bin/systemctl start monerod-reboot.service, /bin/systemctl start monerod-update.service, /sbin/shutdown now, /bin/systemctl start shutdown.service, /bin/systemctl start monerod-start-mining.service, /bin/systemctl stop monerod-start-mining.service, /bin/systemctl start monerod-start-tor.service, /bin/systemctl stop monerod-start-tor.service, /bin/systemctl start kill.service, /bin/systemctl start monerod-prune.service, /bin/systemctl start enable.service, /bin/systemctl start disable-swap.service
-
-passwordless permission for www-data to run those commands only. The systemd service file is configured to then run binaries and command as user "pinodexmr".
+1. Format the micro-sd card. For all users I recommend [SDFormatter](https://www.sdcard.org/downloads/formatter/)
+2. Write the image file to the formatted card. 
+   - Windows users [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/)
+   - Mac users [Etcher](https://etcher.io/)
 
 
-**Dependencies** - *those in italics are for onion-blockexplorer which has not been included this release*
-
-apache2 php7.0 libapache2-mod-php7.0 mysql-server mysql-client php7.0-mysql git screen exfat-fuse exfat-utils tor tor-arm shellinabox fail2ban ufw exfat-fuse exfat-utils *git build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0*
-
-**crontab** - *all flock managed tasks are scripts to output monerod ~status~ > ###.txt in the html folder for apache to display in the Web-UI*
+Once complete insert the card into your device and power on.
 
 
-* * * * * /home/pinodexmr/temp.sh
-* 4 * * * /home/pinodexmr/df-h.sh
-* * * * * /home/pinodexmr/free-h.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/status.lock /home/pinodexmr/monero-status.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/version.lock /home/pinodexmr/node_version.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/print_cn.lock /home/pinodexmr/print_cn.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/print_pl.lock /home/pinodexmr/print_pl.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/print_pl_stats.lock /home/pinodexmr/print_pl_stats.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-short-status.lock /home/pinodexmr/TXPool-short-status.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-status.lock /home/pinodexmr/TXPool-status.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-verbose-status.lock /home/pinodexmr/TXPool-verbose-status.sh
+On first time power-on the software will check to see if it has booted before. On it's first usage it will resize it's rootfs partition automatically to make best use of whichever size MicroSD card you've purchased ready for the Monero Blockchain.
 
-This version Updater script has been removed from weekly cron. This is so as not to disturb node uptime if using node remotely. Update now via manual button in "advanced settings"
+During this process it will restart itself and will pause for 120 seconds. This is normal. I recommend that once plugged in simply leave the node for 5 mins, after this time it will have self configured and you will be safe to configure it as you wish (covered in a bit). 
 
-**UPDATER** = Downloads https://raw.githubusercontent.com/shermand100/pinode-xmr/master/xmr-new-ver.sh which contains a file with the new arm7 monerod version number ONLY.
-Updater script then compares this number with it's "current-version.sh" and only if the new version number is higher it:
-Stops node -> Deletes current version and directory /home/pinodexmr/monero/ -> Creates new monero directory -> downloads new Monerod from https://downloads.getmonero.org/cli/linuxarm7 -> unpacks to /monero/ (--strip $strip), dir and starts updated node -> updates new version number -> deletes downloaded files
+Every subsequent power-on event will skip this step and immediately run the Monero software without delay in the condition it was last run in, Clearnet/tor/Mining. Pruned or not.
+
+To continue with setup simply type the IP address of the Node into the web browser of a device . If you don't know how to find the IP address you can [read about some methods on the Raspberry Pi doc library.](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) 
+
+When you enter this IP address into the web browser of a device on the same network as your Node you'll be presented with the following screen...
 
 
-**disabled ipv6** ( IP address for monero node start (rpc bind) derived from command "hostname -I" ipv6 confuses the bind command and fails monerod )*
+![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/index.png)
 
-/boot/cmdline.txt appended with ipv6.disable=1
+From here click on "Web Terminal" from the top navigation bar. You will most probably get a warning that it isn't a secure site. I havn't yet configured SSL certificates yet so this is normal. Click proceed and login with the default Username (all lowercase despite screenshot) and password of:
 
-**Swap file toggle**
+Username: pinodexmr
+Password: PiNodeXMR
 
-sudo dphys-swapfile swapoff/swapoff
-
-**Auto boot running Monerod**, *edited  sudo nano /etc/rc.local*
-
-su pinodexmr -c '/home/pinodexmr/boot.sh &'
-
-**UFW setup**
-
-ufw allow 80
-ufw allow 443
-ufw allow 18080
-ufw allow 18081
-ufw allow 4200
-ufw allow 22
-ufw enable
-
-**ssh**
-Root ssh login disabled, only user 'pinodexmr' allowed.
-
+![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/webterminal-first.png)
