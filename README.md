@@ -1,6 +1,7 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/PiNode-XMR%20logo.jpg)
 # User Manual v0.6.19		
 ### Associated disk image 'PiNodeXMR-v0.6.19-v0.14.1.0'		(version optimised for SD card use)
+#### Downloads
 
 [PiNode-XMR-v0.6.19-v0.14.1.0.img  5.2GB  Block 0](http://bit.ly/PiNodeXMR_v0619_v01410_block0img)
 
@@ -18,7 +19,7 @@ A final point on the hardware. This node is designed to be used 'headless'. The 
 
 Then let me start by saying I'm glad the internet has bought you to here. It's taken several months to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. This however is the first disk image I have ever produced for download, and I have no doubt in it's stability or ability to perform it's purpose, however it does mark a change in my direction. Throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that perhaps users don't want to make their own node step by step, they too have busy lifestyles, they want them fast. 
 
-To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync however will take some time, and for that reason I also supply this node pre-syn'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later in in this document.
+To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync however will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later in in this document.
 
 Dan
 
@@ -26,7 +27,7 @@ Dan
 
 ### Setup:
 
-The PiNode-XMR image is available to download as-is. It is un-compressed and ready to write using th same method you would for any other image. For those that are new these free programs will get you started:
+The PiNode-XMR image is available to download as-is. It is un-compressed and ready to write using the same method you would for any other image. For those that are new these free programs will get you started:
 
 1. Format the micro-sd card. For all users I recommend [SDFormatter](https://www.sdcard.org/downloads/formatter/)
 2. Write the image file to the formatted card. 
@@ -50,15 +51,15 @@ When you enter this IP address into the web browser of a device on the same netw
 
 ![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/index.png)
 
-From here click on "Web Terminal" from the top navigation bar. You will most probably get a warning that it isn't a secure site. I havn't yet configured SSL certificates yet so this is normal. Click proceed and login with the default Username (all lowercase despite screenshot) and password of:
+From here click on "Web Terminal" from the top navigation bar. You will most probably get a warning that it isn't a secure site. I haven't yet configured SSL certificates yet so this is normal. Click proceed and login with the default Username (all lowercase despite screenshot) and password of:
 
 Username: pinodexmr
 Password: PiNodeXMR
 
 ![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/webterminal-first.png)
 
-From here enter as the screenshot shows to do the final setup phase which will allow you to set a new device password (for SSH, root and pinodexmr user), RPC username and password (this is the username and password you'll need to login to your device from an external monero wallet, using the PiNode-XMR as remote node) and finally as an optional step to configure a noip.com client to allow dynamic DNS updates. 
-For beginners this last optional step is because most internet connections and IP addresses provided by ISPs are dynamic and so change regulary. To keep the address of your PiNode-XMR static it is simplist to use hostnames instead. If you don't intend to use your node remotely and just for the benifit of a local desktop wallet for example then the Dynamic DNS step can be skipped.
+From here enter as the screenshot shows to do the final setup phase which will allow you to set a new device password (for SSH, root and pinodexmr user), RPC username and password (this is the username and password you'll need to login to your device from an external Monero wallet, using the PiNode-XMR as remote node) and finally as an optional step to configure a noip.com client to allow dynamic DNS updates. 
+For beginners this last optional step is because most internet connections and IP addresses provided by ISPs are dynamic and so change regularly. To keep the address of your PiNode-XMR static it is simplest to use hostnames instead. If you don't intend to use your node remotely and just for use with a local desktop wallet for example then the Dynamic DNS step can be skipped.
 
 So once logged in enter: `./setup.sh` as shown in the screenshot
 
@@ -67,19 +68,19 @@ This brings you to the landing page:
 
 ![screenshot setup1](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/setup1.png)
 
-*A note here that this menu whilst functional does require some cosmetic tweaking and unfortunatly if you break a parameter when entering new passwords the menu cycles back to the start, not just the section that failed. A work in progress.*
+*A note here that this menu whilst functional does require some cosmetic tweaking and unfortunately if you break a parameter when entering new passwords the menu cycles back to the start, not just the section that failed. A work in progress.*
 
 First of all you'll be asked to choose a new password for the device to replace the "PiNodeXMR" password you just used in this terminal.
 
-**It must not be left blank, at least 8 charcters long, standard AbC123 (Don't use uncommon special characters, spaces or quotes ' or " )**
+**It must not be left blank, at least 8 characters long, standard AbC123 (Don't use uncommon special characters, spaces or quotes ' or " )**
 
-A re-entry check will be carried out and then proceed to setting the RPC username and password. The same rules apply for password charcter entry.
-Finally the option for Dynamic DNS client download via noip.com. If this is selected you will be promtped to make an account with noip.com first. Go to their website ansd create a free account. Once that has been verified continue with the PiNode-XMr menu and the client will download and configure itself, then asking for your Noip.com login. Keep the update interval as default (30), and when asked to 'run something at successful update' enter 'N'. That configures the .conf file. You will be asked to enter this information again for the client and that's it. Setup Complete.
+A re-entry check will be carried out and then proceed to setting the RPC username and password. The same rules apply for password character entry.
+Finally the option for Dynamic DNS client download via noip.com. If this is selected you will be prompted to make an account with NoIp.com first. Go to their website and create a free account. Once that has been verified continue with the PiNode-XMr menu and the client will download and configure itself, then asking for your NoIp.com login. Keep the update interval as default (30), and when asked to 'run something at successful update' enter 'N'. That configures the .conf file. You will be asked to enter this information again for the client and that's it. Setup Complete.
 
 ## Web-UI: Starting your Node and General Usage
 
 ### Welcome page -
-I won't duplicate the homepage screenshot used above as there's not alot to say about it apart from the PiNode-XMR version number (presented version.MM.YY). However a shout out to the guys at https://designmodo.com/ for the template of the Web-UI. Their template has made this build much quicker. Check out their site if you're ever in the need of an interface for a project.
+I won't duplicate the homepage screenshot used above as there's not a lot to say about it apart from the PiNode-XMR version number (presented version.MM.YY). However a shout out to the guys at https://designmodo.com/ for the template of the Web-UI. Their template has made this build much quicker. Check out their site if you're ever in the need of an interface for a project.
 
 I'll also take this opportunity to mention that most of the displays of Node and Hardware data within all the UI are updated every 60 seconds (with the exception of the 'storage usage' section on the 'Node Status' page which updates every 4 hours), so in most cases hammering the refresh button won't provide new data until it is sourced and processed in the background.
 
@@ -99,9 +100,10 @@ Stop the current service before starting a new one.**
 - *Mining:* TBH it's a feature I expected people to ask for and it was simple enough to implement so it's included. The Raspberry Pi is absolutely unsuitable for this purpose, but there it is. 
 Enter your address on the right and the page will confirm submission with a read-back. Hit start (once all previous instances of the node have been stopped) and enjoy your sub 1H/s. Setting mining intensity (default 50%) can  be found in the build/developer notes at the end of this manual.
 
-- *Update:* This version has the auto-update removed. This is to prevent downtime at inconvenient times is you rely on this as a remote node. I will try new released monero versions on my test node before activating your update button and inform you which “--strip” setting to use for the update. This seems the safest way to avoid bricking nodes.
+- *Update:* This version has the auto-update removed. This is to prevent downtime at inconvenient times is you rely on this as a remote node. I will try new released Monero versions on my test node before activating your update button and inform you which “--strip” setting to use for the update. This seems the safest way to avoid bricking nodes.
 
-- *Shutdown:* To gently shutdown+power off the node use the stop buttons as  normal and then hit this “shutdown” button. It will complete it's shutdown process in 60 seconds.
+- *Shutdown:* To gently shutdown+power off the node use the stop buttons as  normal and then hit this “shutdown” button. It will complete it's shutdown
+ process in 60 seconds.
 
 - *Kill:* (Not power off) Try not to use this, but it's there. I guess it's in case you cant remember what mode your node is in and the “status” page isn't helping. Ideally use each stop button in turn for a safe shutdown then maybe you could hit this to be sure? Dunno, this'll probably disappear in a future release.
 
@@ -109,7 +111,7 @@ Enter your address on the right and the page will confirm submission with a read
 
 ![Node Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/nodestatus.png)
 
-This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or is you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disabe the swapfile to preserve the read/write health of your storage device.
+This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or is you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disable the swapfile to preserve the read/write health of your storage device.
 
 ### Transaction Status
 
@@ -141,9 +143,9 @@ The Web-Terminal allows a more advanced user a huge amount of control over their
 
 - *WiFi:* One of the most asked for features is wifi. This can easily be configured at a beginner level as the standard command `sudo raspi-config` will bring up the Raspberry Pi's hardware interface. This allows setting Wi-Fi SSID and password under 'network options' settings. Once configured the device will ask to reboot...
 
-**However if Wi-Fi is to be used then the ethernet cable must be unplugged. If you do not, the device will assign itself 2 IP addresses, one for each connection method, and Monerod will fail to boot**
+**However if Wi-Fi is to be used then the Ethernet cable must be unplugged. If you do not, the device will assign itself 2 IP addresses, one for each connection method, and Monerod will fail to boot**
 
-- *Pruning:* I have tried to keep this as simple as possible for new users. For now it is enabled by entering one command in the web-terminal. It is neseccary to stop your currently running Monerod using the buttons in the "advanced settings" page then in the web-terminal use `./monerod-prune.sh` to start the prune. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. The `./monerod-prune.sh` command can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signaled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
+- *Pruning:* I have tried to keep this as simple as possible for new users. For now it is enabled by entering one command in the web-terminal. It is necessary to stop your currently running Monerod using the buttons in the "advanced settings" page then in the web-terminal use `./monerod-prune.sh` to start the prune. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. The `./monerod-prune.sh` command can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
 
 
 
