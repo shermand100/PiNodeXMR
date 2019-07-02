@@ -1,27 +1,33 @@
 #!/bin/bash
 
-#Load boot status - has node run before?
-. /home/pinodexmr/bootstatus.sh
-# Insert here condition to run this script at set checkpoint
-##To be completed##
 
-#Page 1/?
-dialog \
-    --title "PiNode-XMR Setup" \
-    --msgbox "Welcome to your private node.\n\nThis menu will allow you to configure your passwords and other features allowing secure external conections." 12 45
-
-# tempfile 
+# use temp file 
 _temp="./dialog.$$"
 
-#Page 2/?
-dialog --insecure --title "Set New Device Password" --passwordbox "Choose your new root/pinodexmr/SSH password and choose Ok to continue.\n\nPassword must be at least 8 standard characters" 12 45 2>$_temp
+#Load menu status - to track setup progress - will be re-called throughout
+. /home/pinodexmr/setupstatus.sh
+
+
+if [ $SETUP_STATUS -eq 0 ]; then
+dialog --title "PiNode-XMR Setup 1/3" --msgbox "Welcome to your private node.\n\nThis menu will allow you to configure your passwords and user name for securing your device and allowing secure external connections." 12 45
+	echo "#!/bin/sh
+SETUP_STATUS=1" > /home/pinodexmr/setupstatus.sh
+fi
+
+dialog --clear
+
+#Load menu status - to track setup progress - will be re-called throughout
+. /home/pinodexmr/setupstatus.sh
+
+if [ $SETUP_STATUS -eq 1 ]; then
+dialog --insecure --title "PiNode-XMR Setup 1/3" --passwordbox "Choose your new root/pinodexmr/SSH password and choose Ok to continue.\n\nPassword must be at least 8 standard characters" 12 45 2>$_temp
 
     # get user input
     password1=$( cat $_temp )
     shred $_temp 
 
     # ask user for new password A (second time)
-		dialog --title 'PiNode-XMR - Set Device Password' --insecure --passwordbox "Re-Enter Password" 6 45 2>$_temp
+		dialog --title "PiNode-XMR Setup 1/3" --insecure --passwordbox "Re-Enter Password" 6 45 2>$_temp
 		
 	       # get user input
 			password2=$( cat $_temp )
@@ -29,29 +35,29 @@ dialog --insecure --title "Set New Device Password" --passwordbox "Choose your n
 
     # check if passwords match
     if [ "${password1}" != "${password2}" ]; then
-      dialog --title "PiNode-XMR - Set Device Password" --msgbox "FAIL -> Passwords don't Match\nPlease try again ..." 6 45
-	./setup.sh)
+      dialog --title "PiNode-XMR Setup 1/3" --msgbox "FAIL -> Passwords don't Match\nPlease try again ..." 6 45
+	./setup.sh
 	  exit 1
     fi
 
 	  
 	# password zero
     if [ ${#password1} -eq 0 ]; then
-      dialog --title "PiNode-XMR - Set Device Password" --msgbox "FAIL -> Password cannot be empty\nPlease try again ..." 6 45
+      dialog --title "PiNode-XMR Setup 1/3" --msgbox "FAIL -> Password cannot be empty\nPlease try again ..." 6 45
 	  ./setup.sh
       exit 1
     fi
 	# check that password does not contain bad characters
     clearedResult=$(echo "${password1}" | tr -dc '[:alnum:]-.' | tr -d ' ')
     if [ ${#clearedResult} != ${#password1} ] || [ ${#clearedResult} -eq 0 ]; then
-      dialog --title "PiNode-XMR - Set Device Password" --msgbox "FAIL -> Contains bad characters (spaces, special chars)\nPlease try again ..." 6 45
+      dialog --title "PiNode-XMR Setup 1/3" --msgbox "FAIL -> Contains bad characters (spaces, special chars)\nPlease try again ..." 6 45
     ./setup.sh
       exit 1
     fi
 	
 	# password longer than 8
     if [ ${#password1} -lt 8 ]; then
-      dialog --title "RaspiBlitz - Set Device Password" --msgbox "FAIL -> Password length under 8\nPlease try again ..." 6 45
+      dialog --title "PiNode-XMR Setup 1/3" --msgbox "FAIL -> Password length under 8\nPlease try again ..." 6 45
       ./setup.sh
       exit 1
     fi
@@ -65,43 +71,71 @@ dialog --insecure --title "Set New Device Password" --passwordbox "Choose your n
 	  echo "pinodexmr:$newPassword" | sudo chpasswd
 	  echo "root:$newPassword" | sudo chpasswd
 	#Set new boot status
-	dialog --infobox "New Password set for root/SSH & user: pinodexmr" 10 30 ; sleep 3
+	dialog --title "PiNode-XMR Setup 1/3" --infobox "New Password set for root/SSH & user:\n\npinodexmr" 6 45 ; sleep 3
 	else
 	./setup.sh
 	fi
+			
+	echo "#!/bin/sh
+SETUP_STATUS=2" > /home/pinodexmr/setupstatus.sh
 
+fi
 
+dialog --clear
+
+#Load menu status - to track setup progress - will be re-called throughout
+. /home/pinodexmr/setupstatus.sh
 
 #RPC Username:Password config - msg
 
-dialog \
-    --title "PiNode-XMR Setup" \
+#Page 3/?
+if [ $SETUP_STATUS -eq 2 ]; then
+
+	dialog \
+    --title "PiNode-XMR Setup 2/3" \
     --msgbox "Now set your Monero RPC Username and Password\n\nYou use these to connect to your node externally (for example as a remote node in the GUI or a mobile device) " 12 45 
-#RPC Username - set
-dialog --title "PiNode-XMR RPC Username" --inputbox "New Username:" 10 60 2>$_temp
+	
+	dialog --clear
+	
+	#RPC Username - set
+	dialog --title "PiNode-XMR Setup 2/3" --inputbox "New Username:" 10 60 2>$_temp
 		
 	       # get user input
 			NEWRPCu=$( cat $_temp )
 			shred $_temp
  
-exitstatus=$?
-if [ $exitstatus = 0 ]; then
+	exitstatus=$?
+	if [ $exitstatus = 0 ]; then
 	echo "#!/bin/sh
 RPCu=${NEWRPCu}" > /home/pinodexmr/RPCu.sh
-#echo "Uncomment commands to activate before release"
-dialog --infobox "New RPC Username set: ${NEWRPCu}" 10 30 ; sleep 3
-else
+	dialog --title "PiNode-XMR Setup 2/3" --infobox "New RPC Username set:\n\n ${NEWRPCu}" 10 30 ; sleep 3
+	else
     echo "You chose Cancel."
+	fi
+	
+	echo "#!/bin/sh
+SETUP_STATUS=3" > /home/pinodexmr/setupstatus.sh
 fi
+
+dialog --clear
+
+#Load menu status - to track setup progress - will be re-called throughout
+. /home/pinodexmr/setupstatus.sh
+
 #RPC Password - set
-dialog --insecure --title "PiNode-XMR RPC Password" --passwordbox "Choose your new external connection (RPC) password and choose Ok to continue.\n\nPassword must be at least 8 standard characters" 12 45 2>$_temp
+
+if [ $SETUP_STATUS -eq 3 ]; then
+
+	dialog --insecure --title "PiNode-XMR Setup 3/3" --passwordbox "Choose your new external connection (RPC) password and choose Ok to continue.\n\nPassword must be at least 8 standard characters" 12 45 2>$_temp
 
     # get user input
     NEWRPCp1=$( cat $_temp )
     shred $_temp 
+	
+dialog --clear
 
     # ask user for new RPCp (second time)
-		dialog --title 'PiNode-XMR - RPC Password' --insecure --passwordbox "Re-Enter Password" 6 45 2>$_temp
+		dialog --title "PiNode-XMR Setup 3/3" --insecure --passwordbox "Re-Enter Password" 6 45 2>$_temp
 		
 	       # get user input
 			NEWRPCp2=$( cat $_temp )
@@ -113,7 +147,8 @@ dialog --insecure --title "PiNode-XMR RPC Password" --passwordbox "Choose your n
 	  ./setup.sh
 	  exit 1
     fi
-
+	
+dialog --clear
 	  
 	# password zero
     if [ ${#NEWRPCp1} -eq 0 ]; then
@@ -136,24 +171,35 @@ dialog --insecure --title "PiNode-XMR RPC Password" --passwordbox "Choose your n
       exit 1
     fi
 	
+dialog --clear
+	exitstatus=$?
 	
-exitstatus=$?
-if [ $exitstatus = 0 ]; then
+	if [ $exitstatus = 0 ]; then
 # New verified password
-NEWRPCp="${NEWRPCp1}"
+	NEWRPCp="${NEWRPCp1}"
 #Set new RPC Password
 	echo "#!/bin/sh
 RPCp=${NEWRPCp}" > /home/pinodexmr/RPCp.sh
-echo "Uncomment commands to activate before release"
-dialog --infobox "New RPC Password set." 10 30 ; sleep 3
+
+	dialog --title "PiNode-XMR Setup 3/3" --infobox "New RPC Password set." 10 30 ; sleep 3
+	fi
+dialog --clear
+	echo "#!/bin/sh
+SETUP_STATUS=4" > /home/pinodexmr/setupstatus.sh
+
 fi
 
+#Load menu status - to track setup progress - will be re-called throughout
+. /home/pinodexmr/setupstatus.sh
+
 #Menu for configuration of Dynamic DNS service
+if [ $SETUP_STATUS -eq 4 ]; then
+dialog
 HEIGHT=15
 WIDTH=40
 CHOICE_HEIGHT=4
 BACKTITLE="Set up Dynamic DNS"
-TITLE="PiNode-XMR"
+TITLE="PiNode-XMR Setup (Optional)"
 MENU="If you have a dynamic external IP address you may use the service at NOIP.com to configure a static hostname:"
 
 OPTIONS=(1 "configure hostname with NOIP.com"
@@ -177,6 +223,11 @@ case $CHOICE in
             echo "Dynamic DNS configured - NO-IP.com"
             ;;
         2)
-            echo "Setup complete. Use the Web-UI navigation and select a node start button"
+            echo "Your PiNode-XMR setup is complete. Navigate to the \"Advanced Settings\" tab in the Web-UI and select a Start button to begin your Monero Node"
             ;;
 esac
+
+	echo "#!/bin/sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
+
+fi
