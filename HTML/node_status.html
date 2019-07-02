@@ -109,11 +109,64 @@
 			</div>
 			<div class="demo-type-example">
 	      	<span class="demo-text-note"></span>
-	        <p><small>*swap-file disabled to assist preserving data integrity on power loss.</small></p>
+	        <p><small>*The 2GB Swap File should be used if performing a large blockchain sync. Then for SD card performance it should be disabled.</small></p>
       		</div>
+			
+			<div class="col" class="demo-type-example">
+			<h3 class="demo-panel-title">Swap File: <small>Enable/Disable</small></h3>
+					</div>
+
+
+			      <div class="row demo-row">
+        <div class="col">
+          <a onclick="enableswap()" href="#swap-enable" class="btn btn-block btn-lg btn-inverse">Enable 2GB swap-file <span class="fui-plus"> <br /></span></a>
+        </div>
+			   <script>
+ function enableswap () {
+      $.ajax({
+        url:"enable-swap.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+				
+        <div class="col">
+          <a onclick="disableswap()" href="#swap-disable" class="btn btn-block btn-lg btn-inverse">Disable 2GB swap-file <span class="fui-plus"> <br /></span></a>
+        </div>
+				<script>
+ function disableswap () {
+      $.ajax({
+        url:"disable-swap.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+		</div><!-- /btn-group -->
+        </div> <!-- /.col -->
 		
 
-
 	</div>
+  </body>
+</html>
+
+  </div>
+		
+	</div> <!-- /container -->
+	</div>
+	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Bootstrap 4 requires Popper.js -->
+    <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
+    <script src="dist/scripts/flat-ui.js"></script>
+    <script src="docs/assets/js/application.js"></script>
+	
   </body>
 </html>
