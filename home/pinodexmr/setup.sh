@@ -29,8 +29,8 @@ dialog --insecure --title "Set New Device Password" --passwordbox "Choose your n
 
     # check if passwords match
     if [ "${password1}" != "${password2}" ]; then
-      dialog --title "PiNode-XMR - Set Device Password" --msgbox "FAIL -> Passwords dont Match\nPlease try again ..." 6 45
-	  ./dialog.sh
+      dialog --title "PiNode-XMR - Set Device Password" --msgbox "FAIL -> Passwords don't Match\nPlease try again ..." 6 45
+	./setup.sh)
 	  exit 1
     fi
 
@@ -38,21 +38,21 @@ dialog --insecure --title "Set New Device Password" --passwordbox "Choose your n
 	# password zero
     if [ ${#password1} -eq 0 ]; then
       dialog --title "PiNode-XMR - Set Device Password" --msgbox "FAIL -> Password cannot be empty\nPlease try again ..." 6 45
-	  ./dialog.sh
+	  ./setup.sh
       exit 1
     fi
 	# check that password does not contain bad characters
     clearedResult=$(echo "${password1}" | tr -dc '[:alnum:]-.' | tr -d ' ')
     if [ ${#clearedResult} != ${#password1} ] || [ ${#clearedResult} -eq 0 ]; then
       dialog --title "PiNode-XMR - Set Device Password" --msgbox "FAIL -> Contains bad characters (spaces, special chars)\nPlease try again ..." 6 45
-    ./dialog.sh
+    ./setup.sh
       exit 1
     fi
 	
 	# password longer than 8
     if [ ${#password1} -lt 8 ]; then
       dialog --title "RaspiBlitz - Set Device Password" --msgbox "FAIL -> Password length under 8\nPlease try again ..." 6 45
-      ./dialog.sh
+      ./setup.sh
       exit 1
     fi
 	
@@ -67,7 +67,7 @@ dialog --insecure --title "Set New Device Password" --passwordbox "Choose your n
 	#Set new boot status
 	dialog --infobox "New Password set for root/SSH & user: pinodexmr" 10 30 ; sleep 3
 	else
-	./dialog.sh
+	./setup.sh
 	fi
 
 
@@ -110,7 +110,7 @@ dialog --insecure --title "PiNode-XMR RPC Password" --passwordbox "Choose your n
     # check if passwords match
     if [ "${NEWRPCp1}" != "${NEWRPCp2}" ]; then
       dialog --title "PiNode-XMR - RPC Password" --msgbox "FAIL -> Passwords dont Match\nPlease try again ..." 6 45
-	  ./dialog.sh
+	  ./setup.sh
 	  exit 1
     fi
 
@@ -118,21 +118,21 @@ dialog --insecure --title "PiNode-XMR RPC Password" --passwordbox "Choose your n
 	# password zero
     if [ ${#NEWRPCp1} -eq 0 ]; then
       dialog --title "PiNode-XMR - RPC Password" --msgbox "FAIL -> Password cannot be empty\nPlease try again ..." 6 45
-	  ./dialog.sh
+	  ./setup.sh
       exit 1
     fi
 	# check that password does not contain bad characters
     clearedResult=$(echo "${NEWRPCp1}" | tr -dc '[:alnum:]-.' | tr -d ' ')
     if [ ${#clearedResult} != ${#NEWRPCp1} ] || [ ${#clearedResult} -eq 0 ]; then
       dialog --title "PiNode-XMR - RPC Password" --msgbox "FAIL -> Contains bad characters (spaces, special chars)\nPlease try again ..." 6 45
-    ./dialog.sh
+    ./setup.sh
       exit 1
     fi
 	
 	# password longer than 8
     if [ ${#NEWRPCp1} -lt 8 ]; then
       dialog --title "RaspiBlitz - RPC Password" --msgbox "FAIL -> Password length under 8\nPlease try again ..." 6 45
-      ./dialog.sh
+      ./setup.sh
       exit 1
     fi
 	
