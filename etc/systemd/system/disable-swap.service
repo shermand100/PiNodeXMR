@@ -1,0 +1,16 @@
+[Unit]
+Description=2GB system swap-file disable
+After=network.target
+
+[Service]
+ExecStart=/bin/bash disable-swap.sh
+WorkingDirectory=/home/pinodexmr/
+StandardOutput=inherit
+StandardError=inherit
+Type=oneshot
+RemainAfterExit=true
+Restart=no
+User=pinodexmr
+
+[Install]
+WantedBy=multi-user.target
