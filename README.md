@@ -141,7 +141,7 @@ A 5 MB rolling log is kept here. Should you suspect your node is not performing 
 
 The Web-Terminal allows a more advanced user a huge amount of control over their node. The PiNode-XMR is built upon the Raspbian image "2019-04-08-raspbian-stretch-lite" and has all of the standard features intact.
 
-- *WiFi:* One of the most asked for features is wifi. This can easily be configured at a beginner level as the standard command `sudo raspi-config` will bring up the Raspberry Pi's hardware interface. This allows setting Wi-Fi SSID and password under 'network options' settings. Once configured the device will ask to reboot...
+- *WiFi:* One of the most asked for features is wifi. This can easily be configured at a beginner level ~as the standard command `sudo raspi-config` will bring up the Raspberry Pi's hardware interface. This allows setting Wi-Fi SSID and password under 'network options' settings. Once configured the device will ask to reboot.~ This is a known bug, sorry, I mis-configured the file it relates to. Instead for Wifi enter `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf` Where you will find 2 fields to complete. Enter the SSID between the "" and password below. Leave the "" around what you enter. To leave the text editor save your changes with `ctrl+o` and exit with `ctrl+x` For the changes to take effect a reboot is required. `sudo reboot`
 
 **However if Wi-Fi is to be used then the Ethernet cable must be unplugged. If you do not, the device will assign itself 2 IP addresses, one for each connection method, and Monerod will fail to boot**
 
