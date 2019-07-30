@@ -2,16 +2,17 @@
 # User Manual v0.6.19		
 ### Associated disk image 'PiNodeXMR-v0.6.19-v0.14.1.0'		(version optimised for SD card use)
 #### Downloads
-
+##### For Raspberry Pi
 [PiNode-XMR-RPI2&3-v0.6.19-v0.14.1.0.img  5.2GB  Block 0](http://bit.ly/PiNodeXMR_v0619_v01410_block0img)
 
 [PiNode-XMR-RPI2&3-v0.6.19-v0.14.1.0.img  78.1GB  Block 1860473](http://bit.ly/PiNode_XMR_v0619_v01410_block1860473_img)
 
+##### For Odroid
 [PiNode-XMR-ODROID-XU4-HC1&2-v0.6.19-v0.14.1.0.img 5GB Block 0](http://bit.ly/PiNode-XMR_ODROID-XU4-HC1-2)
 
 ## Hardware requirements:
 
-1. Raspberry Pi 2/3 B
+1. Raspberry Pi 2/3 B or Odroid XU4/HC1/HC2
 2. 128GB MicroSD Card (or larger)
 3. Ethernet connection
 
@@ -149,7 +150,7 @@ The Web-Terminal allows a more advanced user a huge amount of control over their
 
 - *Pruning:* I have tried to keep this as simple as possible for new users. For now it is enabled by entering one command in the web-terminal. It is necessary to stop your currently running Monerod using the buttons in the "advanced settings" page then in the web-terminal use `./monerod-prune.sh` to start the prune. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. The `./monerod-prune.sh` command can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
 
-- *tor-arm:* Detailed bandwidth stats are available when running as a tor node using the ARM utility. It is installed and running as default. To view these stats enter the command
+- *tor-arm:* Detailed bandwidth stats are available when running as a tor node using the ARM utility. (Available for Raspbery Pi image only) It is installed and running as default. To view these stats enter the command
 
 `arm`
 and when prompted for the controller password use: `PiNodeXMR`
@@ -158,6 +159,27 @@ and when prompted for the controller password use: `PiNodeXMR`
 
 Exit the utility by using `CTRL+c`
 
+## tor
+
+Your PiNode-XMR utilises tor in Monero's default manner. To quote https://github.com/monero-project/monero#using-tor :
+
+' The feature allows connecting over IPv4 and Tor simulatenously - IPv4 is used for relaying blocks and relaying transactions received by peers whereas Tor is used solely for relaying transactions received over local RPC. This provides privacy and better protection against surrounding node (sybil) attacks. '
+
+and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#behavior :
+
+' If any anonymity network is enabled, transactions being broadcast that lack a valid "context" (i.e. the transaction did not come from a p2p connection), will only be sent to peers on anonymity networks. If an anonymity network is enabled but no peers over an anonymity network are available, an error is logged and the transaction is kept for future broadcasting over an anonymity network. The transaction will not be broadcast unless an anonymity connection is made or until monerod is shutdown and restarted with only public connections enabled. '
+
+## Connecting a Wallet - LAN
+### Monero GUI
+To use your Monero GUI on a device that is on the same local network as your node enter the IP address you have been using to view the interface into the remote node page of the GUI, port 18081 and the RPC username/password you set in the ./setup.sh menu. You may also select ' mark as trusted daemon ' as it's your trusted node.
+
+![GUI-screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/GUIremote.png)
+
+Your wallet will then scan the node's blockchain for any transaction outputs that belong to your wallet, this can take a few minutes the first time but subsequent connections will only scan for changes since the last connection being much faster.
+
+### Monerujo app
+Unfortunatly the app won't allow a screenshot, but it's very similar to the GUI method.
+With your mobile device connected by WiFi to the same network as your node simply enter the node IP in the 'hostname' field, port is 18081. 'Node name' is for your reference on your apps node list, call it what you want. Username and Password are required and are the RPC username and password you set in the ./setup.sh menu.
 
 
 
