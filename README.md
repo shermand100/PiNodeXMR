@@ -14,10 +14,28 @@
 
 1. Raspberry Pi 2/3 B or Odroid XU4/HC1/HC2
 2. 128GB MicroSD Card (or larger)
-3. Ethernet connection
+3. Ethernet connection (can be replaced by WiFi after config)
 
 A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
+With a little further configuration this node will allow wallet connections from your mobile app on the move.
 
+## Contents:
+
+* [Intro](https://github.com/shermand100/pinode-xmr#intro)
+* [Setup](https://github.com/shermand100/pinode-xmr#setup)
+* [Web-UI: Getting started & General Usage](https://github.com/shermand100/pinode-xmr#web-ui-starting-your-node-and-general-usage)
+   * [Welcome Page](https://github.com/shermand100/pinode-xmr#welcome-page--)
+   * [Advacned Settings & Starting Monero](https://github.com/shermand100/pinode-xmr#advanced-settings---starting-monero)
+   * [Node Status](https://github.com/shermand100/pinode-xmr#node-status--)
+   * [Transaction Status](https://github.com/shermand100/pinode-xmr#transaction-status)
+   * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
+   * [Log](https://github.com/shermand100/pinode-xmr#log)
+   * [Web Terminal: WiFi setup, Pruning & Advances Users](https://github.com/shermand100/pinode-xmr#web-terminal-advanced-users-wi-fi-pruning-and-more)
+* [A note on tor](https://github.com/shermand100/pinode-xmr#tor)
+* [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
+  * [Monero GUI](https://github.com/shermand100/pinode-xmr#monero-gui)
+  * [Monerujo app](https://github.com/shermand100/pinode-xmr#monerujo-app)
+  
 ## Intro
 
 Then let me start by saying I'm glad the internet has bought you to here. It's taken several months to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. This however is the first disk image I have ever produced for download, and I have no doubt in it's stability or ability to perform it's purpose, however it does mark a change in my direction. Throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that perhaps users don't want to make their own node step by step, they too have busy lifestyles, they want them fast. 
@@ -163,11 +181,11 @@ Exit the utility by using `CTRL+c`
 
 Your PiNode-XMR utilises tor in Monero's default manner. To quote https://github.com/monero-project/monero#using-tor :
 
-' The feature allows connecting over IPv4 and Tor simulatenously - IPv4 is used for relaying blocks and relaying transactions received by peers whereas Tor is used solely for relaying transactions received over local RPC. This provides privacy and better protection against surrounding node (sybil) attacks. '
+> ' The feature allows connecting over IPv4 and Tor simulatenously - IPv4 is used for relaying blocks and relaying transactions received by peers whereas Tor is used solely for relaying transactions received over local RPC. This provides privacy and better protection against surrounding node (sybil) attacks. '
 
 and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#behavior :
 
-' If any anonymity network is enabled, transactions being broadcast that lack a valid "context" (i.e. the transaction did not come from a p2p connection), will only be sent to peers on anonymity networks. If an anonymity network is enabled but no peers over an anonymity network are available, an error is logged and the transaction is kept for future broadcasting over an anonymity network. The transaction will not be broadcast unless an anonymity connection is made or until monerod is shutdown and restarted with only public connections enabled. '
+> ' If any anonymity network is enabled, transactions being broadcast that lack a valid "context" (i.e. the transaction did not come from a p2p connection), will only be sent to peers on anonymity networks. If an anonymity network is enabled but no peers over an anonymity network are available, an error is logged and the transaction is kept for future broadcasting over an anonymity network. The transaction will not be broadcast unless an anonymity connection is made or until monerod is shutdown and restarted with only public connections enabled. '
 
 ## Connecting a Wallet - LAN
 ### Monero GUI
