@@ -177,6 +177,13 @@ and when prompted for the controller password use: `PiNodeXMR`
 
 Exit the utility by using `CTRL+c`
 
+ *Mining_Intensity:* The default mining intensity is set to 50% and is configurable through the web terminal command
+ 
+     nano /home/pinodexmr/mining-intensity.sh
+     
+ Where the value '50' can be between 0-100. Save changes with > ctrl+O exit the editor with > ctrl+x.
+ Monerod will require a restart for mining intensity changes to take effect. Carefully monitor your CPU temp, the Pi will auto-throttle CPU voltage at ~82'C
+
 ## tor
 
 Your PiNode-XMR utilises tor in Monero's default manner. To quote https://github.com/monero-project/monero#using-tor :
