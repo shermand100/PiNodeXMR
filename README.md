@@ -25,7 +25,7 @@ With a little further configuration this node will allow wallet connections from
 * [Setup](https://github.com/shermand100/pinode-xmr#setup)
 * [Web-UI: Getting started & General Usage](https://github.com/shermand100/pinode-xmr#web-ui-starting-your-node-and-general-usage)
    * [Welcome Page](https://github.com/shermand100/pinode-xmr#welcome-page--)
-   * [Advacned Settings & Starting Monero](https://github.com/shermand100/pinode-xmr#advanced-settings---starting-monero)
+   * [Advanced Settings & Starting Monero](https://github.com/shermand100/pinode-xmr#advanced-settings---starting-monero)
    * [Node Status](https://github.com/shermand100/pinode-xmr#node-status--)
    * [Transaction Status](https://github.com/shermand100/pinode-xmr#transaction-status)
    * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
@@ -40,7 +40,7 @@ With a little further configuration this node will allow wallet connections from
 
 Then let me start by saying I'm glad the internet has bought you to here. It's taken several months to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. This however is the first disk image I have ever produced for download, and I have no doubt in it's stability or ability to perform it's purpose, however it does mark a change in my direction. Throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that perhaps users don't want to make their own node step by step, they too have busy lifestyles, they want them fast. 
 
-To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync however will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later in in this document.
+To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync however will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
 
 Dan
 
@@ -121,7 +121,7 @@ Stop the current service before starting a new one.**
 - *Mining:* TBH it's a feature I expected people to ask for and it was simple enough to implement so it's included. The Raspberry Pi is absolutely unsuitable for this purpose, but there it is. 
 Enter your address on the right and the page will confirm submission with a read-back. Hit start (once all previous instances of the node have been stopped) and enjoy your sub 1H/s. Setting mining intensity (default 50%) can  be found in the build/developer notes at the end of this manual.
 
-- *Update:* This version has the auto-update removed. This is to prevent downtime at inconvenient times is you rely on this as a remote node. I will try new released Monero versions on my test node before activating your update button and inform you which “--strip” setting to use for the update. This seems the safest way to avoid bricking nodes.
+- *Update:* This version has the auto-update removed. This is to prevent downtime at inconvenient times if you rely on this as a remote node. I will try new released Monero versions on my test node before activating your update button and inform you which “--strip” setting to use for the update. This seems the safest way to avoid bricking nodes.
 
 - *Shutdown:* To gently shutdown+power off the node use the stop buttons as  normal and then hit this “shutdown” button. It will complete it's shutdown
  process in 60 seconds.
@@ -132,7 +132,7 @@ Enter your address on the right and the page will confirm submission with a read
 
 ![Node Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/nodestatus.png)
 
-This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or is you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disable the swapfile to preserve the read/write health of your storage device.
+This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or if you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disable the swapfile to preserve the read/write health of your storage device.
 
 ## Transaction Status
 
