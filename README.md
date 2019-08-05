@@ -35,6 +35,9 @@ With a little further configuration this node will allow wallet connections from
 * [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
   * [Monero GUI](https://github.com/shermand100/pinode-xmr#monero-gui)
   * [Monerujo app](https://github.com/shermand100/pinode-xmr#monerujo-app)
+* [Connecting a wallet - External Connections](https://github.com/shermand100/pinode-xmr/blob/master/README.md#connecting-a-wallet---external-connections)
+  * [IP address considerations](https://github.com/shermand100/pinode-xmr/blob/master/README.md#ip-address-considerations)
+  * [Port Forwarding](https://github.com/shermand100/pinode-xmr/blob/master/README.md#port-forwarding)
   
 ## Intro
 
