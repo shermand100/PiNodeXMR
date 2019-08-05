@@ -206,6 +206,39 @@ Your wallet will then scan the node's blockchain for any transaction outputs tha
 Unfortunatly the app won't allow a screenshot, but it's very similar to the GUI method.
 With your mobile device connected by WiFi to the same network as your node simply enter the node IP in the 'hostname' field, port is 18081. 'Node name' is for your reference on your apps node list, call it what you want. Username and Password are required and are the RPC username and password you set in the ./setup.sh menu.
 
+## Connecting a Wallet - External Connections
 
+### IP address considerations
 
-## This manual is a work in progress, more coming soon
+*Some background on this section...*
+
+Most users of a PiNode-XMR node will be doing so from their domestic internet connection rather than through the internet connection of a large corporation. In almost all cases IP addresses are leased to you by your domestic internet provider, and that lease typically expires after a few days. When the lease expires on your IP address you may be given a new address or you may be re-assigned the same number for a few more days. This would happen without your knowledge and is completely normal.
+Where this causes a problem for us is that we're reading this chapter with the view to connect our mobile wallet for example to our PiNode-XMR at home so we can spend our funds whilst on the go and out of range of our home WiFi. However if whilst we're "on the go" our home IP address were to change because what is called the DHCP lease expired we would not know our new IP address that was assigned to us and connection wouldn't be possible. So we have some options and everyone's situation will be different:
+
+* Just hope it doesn't change
+  * As simple as it sounds it really may not change for several months, you could keep getting leased the same IP but every service provider policy is different. Some users have been known to be re-leased the same IP over and over and others change frequently between addresses assigned to your area. You never know. You could get lucky.
+* Ask your Internet Provider for a static IP.
+  * Providers may be able to offer what's known as a static IP - one that doesn't expire. These however can come with a fee or are only available on their top tier packages. You get the idea but it can't hurt to ask.
+* Dynamic DNS
+  * This is a solution that is included with your PiNode-XMR if you wish to download and enable it. It can be found at the end of the ./setup.sh process.  The idea behind this is that you make an account with a Dynamic DNS provider, in this case noip.com. The company noip.com instead of giving you an IP address let you choose a hostname (for example I chose whilst trialling was pinodexmr.hopto.org). This can also be easier to remember. A small program runs on the PiNode-XMR that monitors it's public IP address and if a change is detected it notifies noip.com of the new IP address. Noip.com then updates it's index so when I request my wallet connection to pinodexmr.hopto.org noip.com refers the traffic to whatever my new public IP address is from it's index and I never have a problem with my dynamic IP address. It's worth mentioning that your internet traffic is not routed through them, they are what's known as a DNS server, the same as when you type www.bbc.co.uk a DNS server turns those words into an IP address and you are referred to your destination. Like an address book for the internet pointing traffic to it's destination.
+  
+ *There are lots of online services that provide Dynamic DNS and I plan to add more so you as a user have more choice. I've no affiliation with noip.com. I just chose them because they're free and have a simple linux installer. I should also mention their software is not installed on the PiNode-XMR by default, it is only downloaded if selected from the ./setup.sh script*
+ 
+* VPN
+  * Using a VPN you may be able to connect your mobile device to your home network so your wallet connects as though you are still at home. I have not used this method, but it may be the preferable method for privacy as all traffic from the wallet to the node would be encrypted, masking that you are even using Monero at all. {Community input?}
+
+### Port forwarding
+
+So once you've got an IP address that consistently points to the network the PiNode-XMR is in we're ready for the last step, port forwarding.
+
+The IP address or hostname if you use Dynamic DNS points to your router. If you open your router settings you should see some options for port forwarding. The idea here is that you are going to tell the router that any external traffic it receives on port 18081 (Monero's RPC port) should be directed to the PiNode-XMR IP (usually 192.168.xx.xxx) and port 18081.
+
+Every router has a different configuration menu so you may have to refer to it's manual if you're unsure. Alternatively there are some nice examples for multiple brands here with pictures.
+
+https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/
+
+(I know noip.com again :) but they refer to how to check if your port is open using the hostname which may be of use if users take the Dynamic DNS route)
+
+This then opens an internet connection to the outside world, it is therefore essential you have changed your password from the default to something long and un-guessable. I've also installed a program called fail2ban which should offer some additional protection. If an external user makes 3 unsuccessful login attempts within 10 minutes, their IP address is banned for 10 minutes. This helps mitigate against brute force attacks.
+
+You can now connect your mobile wallet to your PiNode-XMR from anywhere in the world! Using your static IP or DNS hostname, port 18081 and the RPC username and password you set in ./setup.sh
