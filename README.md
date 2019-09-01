@@ -10,6 +10,10 @@
 ##### For Odroid
 [PiNode-XMR-ODROID-XU4-HC1&2-v0.6.19-v0.14.1.0.img 5GB Block 0](http://bit.ly/PiNode-XMR_ODROID-XU4-HC1-2)
 
+*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
+
+43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
+
 ## Hardware requirements:
 
 1. Raspberry Pi 2/3 B or Odroid XU4/HC1/HC2
