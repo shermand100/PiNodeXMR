@@ -31,6 +31,7 @@ With a little further configuration this node will allow wallet connections from
    * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
    * [Log](https://github.com/shermand100/pinode-xmr#log)
    * [Web Terminal: WiFi setup, Pruning & Advances Users](https://github.com/shermand100/pinode-xmr#web-terminal-advanced-users-wi-fi-pruning-and-more)
+      * [Updating](https://github.com/shermand100/pinode-xmr#web-terminal-updater)
 * [A note on tor](https://github.com/shermand100/pinode-xmr#tor)
 * [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
   * [Monero GUI](https://github.com/shermand100/pinode-xmr#monero-gui)
@@ -196,7 +197,8 @@ The Process to update:
 * Stop your running node with the relevent stop button in the 'advanced settings' tab.
 * To update to Monero version 0.14.1.2, select '--strip 1' also on the 'advanvaced settings' tab.
 * Log into the Web Terminal as usual and enter
-    ./Updater.sh
+
+        ./Updater.sh
    
 The updater script will run and bring your node up to the latest version. At the end of the process it will then start your node in the last mode it was run.
 
