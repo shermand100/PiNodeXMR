@@ -187,6 +187,19 @@ Exit the utility by using `CTRL+c`
  Where the value '50' can be between 0-100. Save changes with > ctrl+O exit the editor with > ctrl+x.
  Monerod will require a restart for mining intensity changes to take effect. Carefully monitor your CPU temp, the Pi will auto-throttle CPU voltage at ~82'C
 
+## Web-Terminal: Updater
+
+The web terminal is also used to process the updates of the underlying monero version. 
+
+The Process to update:
+
+* Stop your running node with the relevent stop button in the 'advanced settings' tab.
+* To update to Monero version 0.14.1.2, select '--strip 1' also on the 'advanvaced settings' tab.
+* Log into the Web Terminal as usual and enter
+    ./Updater.sh
+   
+The updater script will run and bring your node up to the latest version. At the end of the process it will then start your node in the last mode it was run.
+
 ## tor
 
 Your PiNode-XMR utilises tor in Monero's default manner. To quote https://github.com/monero-project/monero#using-tor :
