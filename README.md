@@ -10,6 +10,10 @@
 ##### For Odroid
 [PiNode-XMR-ODROID-XU4-HC1&2-v0.6.19-v0.14.1.0.img 5GB Block 0](http://bit.ly/PiNode-XMR_ODROID-XU4-HC1-2)
 
+*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
+
+43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
+
 ## Hardware requirements:
 
 1. Raspberry Pi 2/3 B or Odroid XU4/HC1/HC2
@@ -31,6 +35,7 @@ With a little further configuration this node will allow wallet connections from
    * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
    * [Log](https://github.com/shermand100/pinode-xmr#log)
    * [Web Terminal: WiFi setup, Pruning & Advances Users](https://github.com/shermand100/pinode-xmr#web-terminal-advanced-users-wi-fi-pruning-and-more)
+      * [Updating](https://github.com/shermand100/pinode-xmr#web-terminal-updater)
 * [A note on tor](https://github.com/shermand100/pinode-xmr#tor)
 * [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
   * [Monero GUI](https://github.com/shermand100/pinode-xmr#monero-gui)
@@ -186,6 +191,20 @@ Exit the utility by using `CTRL+c`
      
  Where the value '50' can be between 0-100. Save changes with > ctrl+O exit the editor with > ctrl+x.
  Monerod will require a restart for mining intensity changes to take effect. Carefully monitor your CPU temp, the Pi will auto-throttle CPU voltage at ~82'C
+
+## Web-Terminal: Updater
+
+The web terminal is also used to process the updates of the underlying monero version. 
+
+The Process to update:
+
+* Stop your running node with the relevent stop button in the 'advanced settings' tab.
+* To update to Monero version 0.14.1.2, select '--strip 1' also on the 'advanvaced settings' tab.
+* Log into the Web Terminal as usual and enter
+
+        ./Updater.sh
+   
+The updater script will run and bring your node up to the latest version. At the end of the process it will then start your node in the last mode it was run.
 
 ## tor
 
