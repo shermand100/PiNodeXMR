@@ -9,4 +9,4 @@ DEVICE_IP="$(hostname -I)"
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
 #Node Status
-./monero/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled status > /var/www/html/Node_Status.txt
+./monero/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled status | sed -n '/Height:/p' > /var/www/html/Node_Status.txt
