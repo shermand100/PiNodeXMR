@@ -29,7 +29,7 @@
 * * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-short-status.lock /home/pinodexmr/TXPool-short-status.sh
 * * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-status.lock /home/pinodexmr/TXPool-status.sh
 * * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-verbose-status.lock /home/pinodexmr/TXPool-verbose-status.sh
-
+* 12 * * 7 /home/pinodexmr/weekly-log-clean.sh
  
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
