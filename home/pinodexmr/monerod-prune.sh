@@ -8,7 +8,7 @@ sleep "1"
 if [ $PRUNE_STATUS -lt 1 ]
 then
 #Start prune binary
-cd /home/pinodexmr/monero/
+cd /home/pinodexmr/monero-active/
 ./monero-blockchain-prune
 	
 #Update prune status to show binary run

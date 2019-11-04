@@ -29,4 +29,4 @@ echo "tor Node - Not Mining" > /var/www/html/iamrunning_version.txt
 	echo "#!/bin/sh
 BOOT_STATUS=4" > /home/pinodexmr/bootstatus.sh
 #Start Monerod
-DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1 ./monero/monerod  --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$RPCu:$RPCp --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --log-file=/var/www/html/monerod.log --max-log-file-size=10485000  --log-level=1 --max-log-files=1 --non-interactive
+DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1 ./monero-active/monerod  --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$RPCu:$RPCp --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --log-file=/var/www/html/monerod.log --max-log-file-size=10485000  --log-level=1 --max-log-files=1 --non-interactive
