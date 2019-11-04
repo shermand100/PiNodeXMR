@@ -26,28 +26,6 @@ echo $CURRENT_VERSION 'Current Version'
 echo $DEVICE_IP 'Device IP'
 echo $MONERO_PORT 'Monero Port'
 sleep "3"
-if [ $CURRENT_VERSION -lt $NEW_VERSION ]
-then
-	rm -rf /home/pinodexmr/monero
-	echo "Deleting Old Version"
-	sleep "2"
-	mkdir /home/pinodexmr/monero
-	wget https://downloads.getmonero.org/cli/linuxarm7
-	tar -xvf ./linuxarm7 -C /home/pinodexmr/monero --strip 2
-	echo "Software Update Complete - Resuming Node if not first boot"
-	sleep "2"
-	echo "Tidying up leftover installation packages"
-	#Clean-up stage
-	#Update system version number
-	echo "#!/bin/bash
-CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
-	#Remove downloaded version check file
-	rm /home/pinodexmr/xmr-new-ver.sh
-	rm /home/pinodexmr/linuxarm7
-else
-	echo "Your node is up to date"
-
-fi
 
 if [ $BOOT_STATUS -eq 2 ]
 then

@@ -26,14 +26,14 @@ then
 	sudo systemctl stop monerod-start-tor.service
 	echo "Monerod stop command sent, allowing 30 seconds for safe shutdown"
 	sleep "30"
-	rm -rf /home/pinodexmr/monero
+	rm -rf /home/pinodexmr/monero-active/
 	echo "Deleting Old Version"
 	sleep "2"
-	mkdir /home/pinodexmr/monero
+	mkdir /home/pinodexmr/monero-active
 	sleep "2"
-	chmod 755 /home/pinodexmr/monero
+	chmod 755 /home/pinodexmr/monero-active
 	wget https://downloads.getmonero.org/cli/linuxarm7
-	tar -xvf ./linuxarm7 -C /home/pinodexmr/monero --strip $STRIP
+	tar -xvf ./linuxarm7 -C /home/pinodexmr/monero-active --strip $STRIP
 	echo "Software Update Complete - Resuming Node"
 	sleep "2"
 	sudo systemctl start monerod-start.service
