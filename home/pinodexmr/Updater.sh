@@ -69,7 +69,7 @@ fi
 	tar -xvf ./linuxarm7 -C /home/pinodexmr/monero-active --strip $STRIP
 	echo "Software Update Complete - Resuming Node"
 	sleep "2"
-	sudo systemctl start monerod-start.service
+	. /home/pinodexmr/init.sh
 	echo "Monero Node Started in background"
 	echo "Tidying up leftover installation packages"
 	#Clean-up stage
