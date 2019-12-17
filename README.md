@@ -199,7 +199,7 @@ The web terminal is also used to process the updates of the underlying monero ve
 The Process to update:
 
 * Stop your running node with the relevent stop button in the 'advanced settings' tab.
-* To update to Monero version 0.14.1.2, select '--strip 1' also on the 'advanvaced settings' tab.
+* To update to Monero version 'Carbon Chamaeleon' 0.15, select '--strip 1' also on the 'advanvaced settings' tab.
 * Log into the Web Terminal as usual and enter
 
         ./Updater.sh
