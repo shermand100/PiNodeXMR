@@ -4,4 +4,4 @@
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
 #Print PL_STATS white vs grey nodes
-./monero/monerod --rpc-bind-ip=$(hostname -I) --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_pl_stats | sed '1d' > /var/www/html/print_pl_stats.txt
+./monero-active/monerod --rpc-bind-ip=$(hostname -I) --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_pl_stats | sed '1d' > /var/www/html/print_pl_stats.txt

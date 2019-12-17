@@ -19,7 +19,7 @@ Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/b
 # User privilege specification
 root	ALL=(ALL:ALL) ALL
 pinodexmr ALL=NOPASSWD: ALL
-www-data ALL=(ALL) NOPASSWD: /bin/systemctl start monerod-start.service, /bin/systemctl stop monerod-start.service, /bin/systemctl start monerod-reboot.service, /bin/systemctl start monerod-update.service, /sbin/shutdown now, /bin/systemctl start shutdown.service, /bin/systemctl start monerod-start-mining.service, /bin/systemctl stop monerod-start-mining.service, /bin/systemctl start monerod-start-tor.service, /bin/systemctl stop monerod-start-tor.service, /bin/systemctl start kill.service, /bin/systemctl start monerod-prune.service, /bin/systemctl start enable-swap.service, /bin/systemctl start disable-swap.service
+www-data ALL=(ALL) NOPASSWD: /bin/systemctl start monerod-start.service, /bin/systemctl stop monerod-start.service, /bin/systemctl start monerod-reboot.service, /bin/systemctl start monerod-update.service, /sbin/shutdown now, /bin/systemctl start shutdown.service, /bin/systemctl start monerod-start-mining.service, /bin/systemctl stop monerod-start-mining.service, /bin/systemctl start monerod-start-tor.service, /bin/systemctl stop monerod-start-tor.service, /bin/systemctl start kill.service, /bin/systemctl start monerod-prune.service, /bin/systemctl start enable-swap.service, /bin/systemctl start disable-swap.service, /bin/systemctl start blockexplorer-start.service
 # Allow members of group sudo to execute any command
 %sudo	ALL=(ALL:ALL) ALL
 

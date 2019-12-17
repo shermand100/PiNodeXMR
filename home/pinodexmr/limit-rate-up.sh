@@ -1,2 +1,2 @@
 #!/bin/bash
-LIMIT_RATE_UP=-1
+LIMIT_RATE_UP=200

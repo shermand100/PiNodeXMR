@@ -1,2 +1,2 @@
-#!/bin/sh
-MONERO_PORT=18081
+#!/bin/bash
+MONERO_PORT=18083

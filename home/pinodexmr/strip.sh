@@ -1,2 +1,2 @@
 #!/bin/bash
-STRIP=2
+STRIP=1
