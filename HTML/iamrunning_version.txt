@@ -1,1 +1,1 @@
-tor Node - Not Mining
+First Boot - Node not running. Select mode from "Advanced Settings" tab.
