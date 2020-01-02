@@ -1,2 +1,2 @@
 #!/bin/sh
-BOOT_STATUS=0
+BOOT_STATUS=3
