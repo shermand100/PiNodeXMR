@@ -36,6 +36,7 @@
 				<li><a href="peer_status.html">Connection Status </span><span class="fui-info-circle"></a></li>
 				<li><a href="advanced-settings.html">Advanced Settings <span class="fui-gear"></span></a></li>
 				<li><a href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"" >Web Terminal <span class="fui-exit"></span></span></a></li>
+				<li><a href="/" onclick="javascript:event.target.port=8081;event.target.protocol='http:';"" >Block Explorer <span class="fui-list-small-thumbnails"></span></span></a></li>
 				<li><a href="log.html">Log <span class="fui-new"></span></span></a></li>
                </ul>
                 </div>
@@ -55,16 +56,19 @@
         </h1>
       </div> <!-- /demo-headline -->
 
-      <h3 class="demo-panel-title">Configuration: <small> Advanced Settings</small></h3>
       		<div class="demo-type-example">
-	      		<span class="demo-text-note">PiNode-XMR <small>[CLEARNET]</small></span>
-	          <p><small>Manual Start/Stop</small></p>
+	      	<h3 class="demo-panel-title">Node Control <small>& Advanced Settings</small></h3>
+			
+				     <span class="demo-text-note">Use this page to start and stop your node in different modes and configure how you'd like it to run. <br><br>Changes made to settings here will require the Monero daemon to be restarted before the changes take effect. Do this by using the 'stop'/'start' buttons for the mode you are in. </span>
+			
+		<h3 class="demo-panel-title">Private Node: <small> Requiring your RPC login</small></h3>
+	          <p><small>Use this mode to run your own personal node. When connecting an external wallet you will need the RPC username and password you have configured in the './setup' Script to use this service. [Clearnet]</small></p>
       		</div>
 
 
       <div class="row demo-row">
         <div class="col">
-		<a onclick="startbutton()" href="#Start Monerod" class="btn btn-block btn-lg btn-inverse">Start Monerod <span class="fui-power"></span></a>
+		<a onclick="startbutton()" href="#Start Monerod" class="btn btn-block btn-lg btn-inverse">Start Private Node <span class="fui-power"></span></a>
         </div>
 
 
@@ -81,7 +85,7 @@
 </script> 
 
         <div class="col">
-          <a onclick="rebootbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Monerod <span class="fui-power"></span></a>
+          <a onclick="rebootbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Private Node <span class="fui-power"></span></a>
         </div>
 		
 <script>
@@ -97,7 +101,7 @@
 </script>
 
         <div class="col">
-          <a onclick="stopbutton()" href="#Stop Monerod" class="btn btn-block btn-lg btn-inverse">Stop Monerod <span class="fui-power"></span></a>
+          <a onclick="stopbutton()" href="#Stop Monerod" class="btn btn-block btn-lg btn-inverse">Stop Private Node <span class="fui-power"></span></a>
         </div>
 		
 <script>
@@ -113,13 +117,284 @@
 </script>
       </div> <!-- /row -->
 	  
+	         <div class="col">
+	      	<h3 class="demo-panel-title">Public Node: <small> Requiring hash payment</small></h3>
+		
+      		<div class="demo-type-example">
+	      		<span class="demo-text-note">Note:</span>
+	          <p><small>This mode is intended for public use and will be set up to require payment in the form of hashes in exchange for this service. This enables you to receive payment for your PiNode-XMRs work over a large number of calls. This system behaves similarly to a mining pool, so payment takes the form of a connected user submitting a valid blocks every so often*, yielding a large one off payment, rather than constant micropayments.<br> *Note: clearnet</small></p>
+      		</div>
+				  
+			      <div class="row demo-row">
+        <div class="col">
+		<a onclick="startpublicnode()" href="#Start Public Node" class="btn btn-block btn-lg btn-inverse">Start Public Node <span class="fui-user"></span></a>
+        </div>
+			   <script>
+ function startpublicnode () {
+      $.ajax({
+        url:"monerod-start-public.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+        <div class="col">
+          <a onclick="stoppublicnode()" href="#Stop Public Node" class="btn btn-block btn-lg btn-inverse">Stop Public Node <span class="fui-user"></span></a>
+        </div>
+			   <script>
+ function stoppublicnode () {
+      $.ajax({
+        url:"monerod-stop-public.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+			<div class="form-group btn-inverse" >
+			<form method="post">
+			<input type="text" placeholder="Enter Payment Address" class="form-control" onchange='if(this.value != 0) { payment(this.value); }'>
+			<span class="fui-check-inverted"></span>
+			</div>
+			</form>
+		  <script>
+ function payment(value){
+      $.ajax({
+        url:"payment-address.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+		</div>
+      <div class="row">
+        <div class="col">
+			<h3 class="demo-panel-title">Credits Required<span class="fui-check"></span></h3>
+          <div class="btn-group">
+<form method="post">
+    <select name='Credits Required' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { credits(this.value); }'>
+         <option value='0'>Credits Required</option>
+         <option value='5'>5</option>
+         <option value='10'>10</option>
+		 <option value='20'>20</option>
+		 <option value='30'>30</option>
+         <option value='50'>50</option>
+		 <option value='80'>80</option>
+		 <option value='100'>100</option>
+		 <option value='125'>125</option>
+		 <option value='150'>150</option>
+		 <option value='175'>175</option>
+		 <option value='200'>200</option>		 
+		 <option value='250'>250</option>
+		 <option value='300'>300</option>
+		 <option value='400'>400</option>
+		 <option value='500'>500</option>	 
+		 
+    </select>
+</form>
+<script type="text/javascript">
+function credits(value){
+      $.ajax({
+        url:"credits.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>
+
+          </div><!-- /btn-group -->
+        </div> <!-- /.col -->
+		
+        <div class="col">
+          <h3 class="demo-panel-title">Difficulty <span class="fui-loop"></span></h3>
+          <div class="btn-group">
+<form method="post">
+    <select name='Difficulty' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { difficulty(this.value); }'>
+			  <option value='0'>Difficulty</option>
+			  <option value='50'>50</option>
+			  <option value='100'>100</option>
+              <option value='200'>200</option>
+			  <option value='300'>300</option>
+			  <option value='500'>500</option>
+			  <option value='600'>600</option>
+			  <option value='800'>800</option>
+			  <option value='1000'>1000</option>
+              <option value='1200'>1200</option>
+			  <option value='1400'>1400</option>
+			  <option value='1600'>1600</option>
+			  <option value='1800'>1800</option>
+			  <option value='2000'>2000</option>			  
+			  </select>
+</form>
+<script type="text/javascript">
+function difficulty(value){
+      $.ajax({
+        url:"difficulty.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>
+		  </div>
+		  </div>
+		  </div>
+		  
+			<div class="col" class="demo-type-example">
+			<h3 class="demo-panel-title">TOR: <small>Private Bridging node</small></h3>
+			<span class="demo-text-note">Public address:</span>
+			<p> <embed src="onion-address.txt"
+			width=750px
+			height=50px> 
+			<small><br>This address is unique to your PiNode-XMR. It was generated on it's first boot and will not change.</p>
+			</div>
+
+	          <p><small>For details on how this "Bridging" tor node works, view the manual for this project at https://github.com/shermand100/pinode-xmr#tor</small></p>
+      		</div> <!-- /.col -->
+
+		<div class="row demo-row">
+        <div class="col">
+          <a onclick="starttorbutton()" href="#start-monero-tor" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
+        </div>
+			   <script>
+ function starttorbutton () {
+      $.ajax({
+        url:"monerod-start-tor.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+				
+        <div class="col">
+          <a onclick="stoptorbutton()" href="#stop-monero-tor" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
+        </div>
+				<script>
+ function stoptorbutton () {
+      $.ajax({
+        url:"monerod-stop-tor.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+		</div><!-- /btn-group -->
+		  
+	  
+
+	         <div class="demo-type-example">
+	  		<h3 class="demo-panel-title">Mining</h3>
+	      	<span class="demo-text-note">Note:</span>
+	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible.<br>
+			  This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent
+			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.<br> *Note: Mining currently over clearnet only.</small></p>
+      		</div>
+				  
+			      <div class="row demo-row">
+        <div class="col">
+		<a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-inverse">Start Solo Mining <span class="fui-lock"></span></a>
+        </div>
+			   <script>
+ function startminingbutton () {
+      $.ajax({
+        url:"monerod-start-mining.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+        <div class="col">
+          <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
+        </div>
+			   <script>
+ function stopminingbutton () {
+      $.ajax({
+        url:"monerod-stop-mining.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+			<div class="form-group btn-inverse" >
+			<form method="post">
+			<input type="text" placeholder="Enter Mining Address" class="form-control" onchange='if(this.value != 0) { address(this.value); }'>
+			<span class="fui-check-inverted"></span>
+			</div>
+			</form>
+		  <script>
+ function address(value){
+      $.ajax({
+        url:"mining-address.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+		  
+		  
+
+	  </div>
+	  
 	  <div class="row">
         <div class="col">
-		  <h3 class="demo-panel-title">Bandwidth:</h3>
+		<h2 class="demo-panel-title">Global settings:</h2>
+		<h3 class="demo-panel-title"><small> RPC Port:</small></h3>
+		
+		    <div class="btn-group">
+			<div class="form-group btn-inverse" >
+			<form method="post">
+			<input type="text" placeholder="Enter New Monero RPC Port Number" class="form-control" onchange='if(this.value != 0) { monerorpcport(this.value); }'>
+			<span class="fui-check-inverted"></span>
+			</div>
+			</form>
+		  <script>
+ function monerorpcport(value){
+      $.ajax({
+        url:"monero-rpc-port.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+</div>
+</div>
+</div>
+	     <span class="demo-text-note">If needed, enter a new port number for RPC connections here. Used to connect your wallet to this node.</span>
+
+		<h3 class="demo-panel-title">Bandwidth:</h3>
 
       		<div class="demo-type-example">
 	      		<span class="demo-text-note">Optimization</span>
-	          <p><small>If you have a slow internet connection, by default the node can be bandwidth intensive in both upload and download.  Limits on this node can be imposed below. Once changes to these parameters have been made, use "Reboot Monerod" above for changes to take effect. <br>[Note: value -1 restores parameter to default]</small></p>
+	          <p><small>By default the node can be bandwidth intensive in both upload and download.  Limits on this node can be imposed below. <br>[Note: value -1 restores parameter to default]</small></p>
       		</div>
 		  
       <div class="row">
@@ -257,137 +532,10 @@ function inpeers(value){
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
 
-        
-			<div class="col" class="demo-type-example">
-			<h3 class="demo-panel-title">TOR: <small>Public Address</small></h3>
-			<p> <embed src="onion-address.txt"
-			width=250px
-			height=50px> 
-			<small><br>This address is unique to your PiNode-XMR. It was generated on it's first boot and will not change.</p>
-			</div>
-
-	          <p><small>To enable PiNode-XMR over Tor, stop the currently running session in the [CLEARNET] section above, then start the Tor session below. <br>
-			  To revert back to clearnet, stop the session running over Tor using the button below, the start a [CLEARNET] session using the button above.</small></p>
-      		</div> <!-- /.col -->
-
-			      <div class="row demo-row">
-        <div class="col">
-          <a onclick="starttorbutton()" href="#start-monero-tor" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
-        </div>
-			   <script>
- function starttorbutton () {
-      $.ajax({
-        url:"monerod-start-tor.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-				</script>
-				
-        <div class="col">
-          <a onclick="stoptorbutton()" href="#stop-monero-tor" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
-        </div>
-				<script>
- function stoptorbutton () {
-      $.ajax({
-        url:"monerod-stop-tor.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-				</script>
-		</div><!-- /btn-group -->
-        </div> <!-- /.col -->
-        <div class="col">
-	  		<h3 class="demo-panel-title">Mining</h3>
-		
-      		<div class="demo-type-example">
-	      		<span class="demo-text-note">Note:</span>
-	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible.<br>
-			  This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent
-			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.<br> *Note: Mining currently over clearnet only.</small></p>
-      		</div>
-				  
-			      <div class="row demo-row">
-        <div class="col">
-		<a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-inverse">Start Solo Mining <span class="fui-lock"></span></a>
-        </div>
-			   <script>
- function startminingbutton () {
-      $.ajax({
-        url:"monerod-start-mining.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-</script>
-        <div class="col">
-          <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
-        </div>
-			   <script>
- function stopminingbutton () {
-      $.ajax({
-        url:"monerod-stop-mining.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-</script>
-
-			<div class="form-group btn-inverse" >
-			<form method="post">
-			<input type="text" placeholder="Enter Mining Address" class="form-control" onchange='if(this.value != 0) { address(this.value); }'>
-			<span class="fui-check-inverted"></span>
-			</div>
-			</form>
-		  <script>
- function address(value){
-      $.ajax({
-        url:"mining-address.php", //the page containing php script
-        type: "POST", //request type
-		data: ({value}),
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-</script>
-		  
-		  
-	  <div class="container">
-		<h3 class="demo-panel-title"> Update: <small>Manual trigger for Monero update check </small></h3>
-		<p><small>New Monero versions need to be compiled for the Raspberry Pi by the Monero dev team. There is usually a short delay between the main rollout of a 
-		new version and the Raspberry Pi compatible version. Due to the collaboratiorive nature of Monero the "--strip" option may need to be used. Consult reddit.com/r/PiNode for instructions.</small></p>
-      <div class="row demo-row">
-        <div class="col">
-          <a onclick="updatebutton()" href="#Update" class="btn btn-block btn-lg btn-inverse">Check for Update Now<span class="fui-triangle-up"></span></a>
-       </div>
-	   <script>
- function updatebutton () {
-      $.ajax({
-        url:"monerod-update.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-</script>
-		</div><!-- /btn-group -->
-        </div> <!-- /.col -->
-	  </div>
-
-        <div class="col">
+         <div class="col">
           <h3 class="demo-panel-title">Update custom --"strip" setting <span class="fui-gear"></span></h3>
-
+	          <p><small>This setting is to allow for variations in the update process depending on the way the Monero Dev team package their releases.<br>
+			  See https://github.com/shermand100/pinode-xmr#web-terminal-updater for usage instructions.</small></p>
           <div class="btn-group">
 <form method="post">
     <select name='--strip' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { strip(this.value); }'>
