@@ -1,4 +1,4 @@
 <?php 
   exec("sudo systemctl stop monerod-start.service");
-  echo "Stop Command Sent";
+  echo "Stop Command Sent for Private Node";
  ?>
