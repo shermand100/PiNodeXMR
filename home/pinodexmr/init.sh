@@ -48,5 +48,18 @@ then
 else
 		echo "loading ..."
 fi
+
+if [ $BOOT_STATUS -eq 6 ]
+then
+	sudo systemctl start monerod-start-public.service
+	echo "Monero Public Node Started in background"
+else
+		echo "loading ..."
+fi
+
+echo "Start Monero-onion-block-explorer"
+	sudo systemctl start explorer-start.service
+	echo "Starting Onion-Block-Explorer in background"
+	
 #Notes:
 #
