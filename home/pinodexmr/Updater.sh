@@ -80,5 +80,5 @@ CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
 	rm /home/pinodexmr/xmr-new-ver.sh
 	rm /home/pinodexmr/linuxarm7
 else
-	echo "Your node is up to date, no further action required, I'll check again next week."
+	echo "Your node is now up to date!"
 fi
