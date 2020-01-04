@@ -7,9 +7,47 @@ _temp="./dialog.$$"
 #Load menu status - to track setup progress - will be re-called throughout
 . /home/pinodexmr/setupstatus.sh
 
+if [ $SETUP_STATUS -eq 0 ]; then
+		dialog
+		HEIGHT=20
+		WIDTH=60
+		CHOICE_HEIGHT=4
+		BACKTITLE="Welcome"
+		TITLE="PiNode-XMR Setup"
+		MENU="Welcome to PiNode-XMR.\n\nWhat do you require?"
+
+		OPTIONS=(1 "First time setup"
+		2 "Command line")
+
+		CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${OPTIONS[@]}" \
+                2>&1 >/dev/tty)
+
+		clear
+		case $CHOICE in
+		1)
+			dialog \
+		--title "PiNode-XMR Setup" \
+		--msgbox "You will now be guided through the initial setup for your PiNode-XMR\n\nIf you intend to use an external USB device to store the blockchain (device over 100GB) you may attach it now.\n\nThis menu will allow you to set a USB storage device, secure user name/password and Dynamic DNS configuration (optional)" 20 60
+            ;;
+        2)
+		echo "#!/bin/sh
+SETUP_STATUS=99" > /home/pinodexmr/setupstatus.sh
+            ;;
+		esac
+		fi
+		
+##Start Config
+
+#Load menu status - to track setup progress - will be re-called throughout
+. /home/pinodexmr/setupstatus.sh
 
 if [ $SETUP_STATUS -eq 0 ]; then
-dialog --title "PiNode-XMR Setup 1/4" --msgbox "Welcome to your private node.\n\nThis menu will allow you to configure your\npasswords and user name for securing your device\nand allowing secure external connections." 16 60
+dialog --title "PiNode-XMR Setup 1/4" --msgbox "First we'll set your master password for logging onto here." 16 60
 	echo "#!/bin/sh
 SETUP_STATUS=1" > /home/pinodexmr/setupstatus.sh
 fi
@@ -256,18 +294,19 @@ if [ $SETUP_STATUS -eq 4 ]; then
 
 		#Menu for install options
 
-		#No suitable storage
-		if [ ${existsHDD} -eq 0 ] && [ ${MicroSDsize} -lt 100 ]; then
+		#No suitable storage (note to self || means or)
+		if [ ${existsHDD} -eq 0 ] || [ ${SDAsize} -lt 100 ] && [ ${MicroSDsize} -lt 100 ]; then
 		dialog
 		HEIGHT=20
 		WIDTH=60
 		CHOICE_HEIGHT=4
 		BACKTITLE="No suitable storage found"
 		TITLE="PiNode-XMR Setup 3/4"
-		MENU="PiNode-XMR can not find any suitable storage locations for the Monero blockchain. If you believe this is incorrect, continue on SD card?"
+		MENU="PiNode-XMR can not find any suitable storage locations for the Monero blockchain.\n\nPlease install the PiNode-XMR disk image on an SD card larger than 100GB to hold this software and the Monero Blockchain\nor\nAdd an external USB device of over 100GB\n\nIf you believe this is incorrect, you may continue anyway. To make hardware changes, shutdown?"
 
-		OPTIONS=(1 "Continue anyway"
-		2 "Shutdown")
+		OPTIONS=(1 "Continue using SD card"
+		2 "Continue using USB (if detected)"
+		3 "Shutdown")
 
 		CHOICE=$(dialog --clear \
                 --backtitle "$BACKTITLE" \
@@ -282,12 +321,22 @@ if [ $SETUP_STATUS -eq 4 ]; then
 		1)
 			dialog \
 		--title "PiNode-XMR Setup" \
-		--msgbox "Storage setup complete, I will attempt to store the Monero blockchain on this MicroSD card." 20 60
+		--msgbox "Although I have detected the SD card is too small for both the PiNode-XMR software and the Monero Blockchain I will continue anyway.\n\n***Storage Setup complete***" 20 60
 		echo "#!/bin/sh
 SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
             ;;
-        2)
+		2)
+			dialog \
+		--title "PiNode-XMR Setup" \
+		--msgbox "Although I think the USB device is too small (if at all detected) I will attempt to store the Monero blockchain on USB device 'sda'" 20 60
+		echo "#!/bin/sh
+SETUP_STATUS=6" > /home/pinodexmr/setupstatus.sh
+            ;;
+        3)
             echo "Shutting down in 20 seconds. To resolve the storage issue, write the PiNode-XMR image to a larger SD card or connect a USB drive larger than 100GB"
+			#restore this setup status to beginning
+			echo "#!/bin/sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
 			sleep 20
 			sudo shutdown now
             ;;
@@ -328,6 +377,9 @@ SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
             ;;
         2)
             echo "Shutting down in 20 seconds. You can connect a USB drive larger than 100GB and try again"
+			#restore this setup status to beginning
+			echo "#!/bin/sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
 			sleep 20
 			sudo shutdown now
             ;;
@@ -342,7 +394,7 @@ SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
 		CHOICE_HEIGHT=4
 		BACKTITLE="USB device Storage"
 		TITLE="PiNode-XMR Setup 3/4"
-		MENU="PiNode-XMR found a suitable external USB storage device. This can be used to store the Monero Blockchain.\n\n If you choose to continue it will be formatted for PiNode-XMR use (all other data will be lost).\n\nIf this device contains the blockchain already a recovery can be attempted."
+		MENU="PiNode-XMR found a suitable external USB storage device. This can be used to store the Monero Blockchain.\n\nIf this device has been used with PiNode-XMR before it can be configured to re-use the blockchain\n\nIf this device has not been used with PiNode-XMR before\n\n***All data will be lost***"
 
 		OPTIONS=(1 "Continue setting up USB device"
 				2 "Don't use this USB device and Shutdown")
@@ -360,13 +412,16 @@ SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
         1)
 			dialog \
 		--title "PiNode-XMR Setup" \
-		--msgbox "USB storage device selected. Detecting if device contains Monero blockchain from previous installation." 20 60
+		--msgbox "USB storage device selected.\n\n I will detect if device contains Monero blockchain from previous installation.\n\nPress enter" 20 60
 		echo "#!/bin/sh
 SETUP_STATUS=6" > /home/pinodexmr/setupstatus.sh
 		sleep 2
             ;;
         2)
             echo "Shutting down in 20 seconds. Your data on the USB device hasn't been altered"
+			#restore this setup status to beginning
+					echo "#!/bin/sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
 			sleep 20
 			sudo shutdown now
             ;;
@@ -411,7 +466,7 @@ recoverUSB=$(lsblk -o LABEL "/dev/sda" | grep -c XMRBLOCKCHAIN)
 		UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}')
 		#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
 		sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero ext4 noexec,defaults 0 2" -i /etc/fstab
-		echo "Drive has been initialized and will auto-mount on boot"
+		echo "Drive data has been preserved for this configuration, initialized and will auto-mount on boot"
 		sleep 2
 		echo "Storage device setup complete. Continuing PiNode-XMR setup."
 		sleep 3
@@ -443,10 +498,12 @@ SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
 SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
             ;;
 	esac
-	else
+	
+else
+	
 	dialog \
     --title "PiNode-XMR Setup" \
-    --msgbox "This USB device doesn't hold the "XMRBLOCKCHAIN" label so setup is assuming this is a fresh install\n\n***Contents of the USB drive will now be deleted***. Press enter to continue. (Last chance to abort by unplugging device) " 20 60
+    --msgbox "This USB device doesn't hold the "XMRBLOCKCHAIN" label so setup is assuming this is a fresh install\n\n***Contents of the USB drive will now be deleted***.\n\nPress enter to continue. (Last chance to abort by unplugging device) " 20 60
             echo "***Preparing Drive***"
 			sleep 1
 			echo "***Deleting data***"
@@ -467,7 +524,10 @@ SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
 SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
 	
 	fi
-
+	#All setup and storage/drive mounting configured. Onion blockexplorer can now be given access to .bitmonero directory.
+	sudo systemctl start explorer-start.service
+	echo "Storage accessible: Starting Monero Onion-Block-Explorer in background"
+	sleep 3
 fi
 sleep 1
 #Load menu status - to track setup progress - will be re-called throughout
@@ -507,8 +567,7 @@ case $CHOICE in
             echo "Your PiNode-XMR setup is complete. Navigate to the \"Advanced Settings\" tab in the Web-UI and select a Start button to begin your Monero Node"
             ;;
 esac
+fi
 
 	echo "#!/bin/sh
 SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
-
-fi
