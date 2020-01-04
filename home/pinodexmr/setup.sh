@@ -568,6 +568,9 @@ case $CHOICE in
             ;;
 esac
 fi
-
+#Restore setup back to nil to allow script to be run again if needed
 	echo "#!/bin/sh
 SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
+#To allow Monero onion-block-explorer to be run from boot now storage has been configured. Referenced from init.sh
+	echo "#!/bin/sh
+SETUP_COMPLETE=1" > /home/pinodexmr/setupcomplete.sh

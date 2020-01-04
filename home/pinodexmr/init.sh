@@ -12,6 +12,7 @@ sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 #Load Variables
 . /home/pinodexmr/current-ver.sh
 . /home/pinodexmr/monero-port.sh
+. /home/pinodexmr/setupcomplete.sh
 
 echo $CURRENT_VERSION 'Current Version'
 echo $DEVICE_IP 'Device IP'
@@ -57,9 +58,12 @@ else
 		echo "loading ..."
 fi
 
+if [ $BOOT_STATUS -gt 2 || $SETUP_COMPLETE -eq 1 ]
+then
 echo "Start Monero-onion-block-explorer"
 	sudo systemctl start explorer-start.service
 	echo "Starting Onion-Block-Explorer in background"
-	
+fi
 #Notes:
-#
+#Block explorer won't auto start on boot unless node is configured to auto-start monerod. 
+#This to prevent .bitmonero directory being in use when configuring storage during setup, preventing mounting of drive to in use location.
