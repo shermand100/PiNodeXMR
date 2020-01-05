@@ -1,14 +1,11 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/PiNode-XMR%20logo.jpg)
-# User Manual v0.6.19		
-### Associated disk image 'PiNodeXMR-v0.6.19-v0.14.1.0'		(version optimised for SD card use)
+# User Manual v2.12.19		
+### Associated disk image 'PiNode-XMR_v2.12.19_M0.15.0.1'		(image size optimised for SD cards)
 #### Downloads
 ##### For Raspberry Pi
-[PiNode-XMR-RPI2&3-v0.6.19-v0.14.1.0.img  5.2GB  Block 0](http://bit.ly/PiNodeXMR_v0619_v01410_block0img)
 
-[PiNode-XMR-RPI2&3-v0.6.19-v0.14.1.0.img  78.1GB  Block 1860473](http://bit.ly/PiNode_XMR_v0619_v01410_block1860473_img)
 
-##### For Odroid
-[PiNode-XMR-ODROID-XU4-HC1&2-v0.6.19-v0.14.1.0.img 5GB Block 0](http://bit.ly/PiNode-XMR_ODROID-XU4-HC1-2)
+Tempoarily disabled - Uploading new version!
 
 *Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
 
@@ -16,8 +13,8 @@
 
 ## Hardware requirements:
 
-1. Raspberry Pi 2/3 B or Odroid XU4/HC1/HC2
-2. 128GB MicroSD Card (or larger)
+1. Raspberry Pi 2/3/4 (incl B&+ models)
+2. 8GB MicroSD Card with aditional min 100GB USB storage device for Monero Blockchain. Or 128GB MicroSD to store all-in-one.
 3. Ethernet connection (can be replaced by WiFi after config)
 
 A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
@@ -85,14 +82,14 @@ From here click on "Web Terminal" from the top navigation bar. You will most pro
 Username: pinodexmr
 Password: PiNodeXMR
 
-![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/webterminal-first.png)
+![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/Welcome_screen.png)
 
-From here enter as the screenshot shows to do the final setup phase which will allow you to set a new device password (for SSH, root and pinodexmr user), RPC username and password (this is the username and password you'll need to login to your device from an external Monero wallet, using the PiNode-XMR as remote node) and finally as an optional step to configure a noip.com client to allow dynamic DNS updates. 
-For beginners this last optional step is because most internet connections and IP addresses provided by ISPs are dynamic and so change regularly. To keep the address of your PiNode-XMR static it is simplest to use hostnames instead. If you don't intend to use your node remotely and just for use with a local desktop wallet for example then the Dynamic DNS step can be skipped.
+If this is your devices first boot then follow the on-screen instructions presented to you. It will guide you through 4 steps, master password (for logging in from now on), RPC password for connecting your wallet to this node, storage setup (MicroSD card or external USB device) and a final optional step for Dynamic DNS connections.
 
-So once logged in enter: `./setup.sh` as shown in the screenshot
+A note on the USB storage, it is advised for your convenience to use USB storage for the blockchain. When I release updates from now on you should be able to keep the blockchain intact on the USB drive and just update the SD card when there are new version of PiNode-XMR. Avoiding lengthy re-download times. Monero updates can be processed internally and will be covered later.
+For speed a USB SSD is best and offers a complete Monero sync in little over 48 hrs. HDDs are considerably slower. Using just the MicroSD for the device is a little slower than the SSD, but also experiences I/O wear and performance trails off after approx 12 months in my experience. Also bear in mind that although the initial blockchain sync can be lengthy, performance of the storage device is also needed for when your connected wallet searches for it's funds. This like the block sync is only lengthy on it's first run. Basically consider your hardware.
 
-This brings you to the landing page:
+For beginners the last optional step is because most internet connections and IP addresses provided by ISPs are dynamic and so change regularly. To keep the address of your PiNode-XMR static it is simplest to use hostnames instead. If you don't intend to use your node remotely and just for use with a local desktop wallet for example then the Dynamic DNS step can be skipped.
 
 
 ![screenshot setup1](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/setup1.png)
