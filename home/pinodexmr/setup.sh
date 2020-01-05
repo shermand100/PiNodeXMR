@@ -461,8 +461,9 @@ recoverUSB=$(lsblk -o LABEL "/dev/sda" | grep -c XMRBLOCKCHAIN)
 	case $CHOICE in
         1)
 		#Evidence this drive has contained Pinode-XMR blockchain format. Attempt re-mount and continue.
-		sudo mount /dev/sda /home/pinodexmr/.bitmonero
+		sudo mount -t ext4 -o rw /dev/sda /home/pinodexmr/.bitmonero
 		sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
+		sudo chmod 777 -R /home/pinodexmr/.bitmonero
 		UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}')
 		#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
 		sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero ext4 noexec,defaults 0 2" -i /etc/fstab
@@ -484,8 +485,9 @@ SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
 			echo "***Drive format to ext4 complete***"
 			sleep 3
 			echo "***Mounting drive to /home/pinodexmr/.bitmonero***"
-			sudo mount /dev/sda /home/pinodexmr/.bitmonero
+			sudo mount -t ext4 -o rw /dev/sda /home/pinodexmr/.bitmonero
 			sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
+			sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}')
 			#ADD UUID to fstab. To mount on boot
 			sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero ext4 noexec,defaults 0 2" -i /etc/fstab
@@ -511,8 +513,9 @@ else
 			echo "***Drive format to ext4 complete***"
 			sleep 3
 			echo "***Mounting drive to /home/pinodexmr/.bitmonero***"
-			sudo mount /dev/sda /home/pinodexmr/.bitmonero
+			sudo mount -t ext4 -o rw /dev/sda /home/pinodexmr/.bitmonero
 			sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
+			sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}')
 			#ADD UUID to fstab. To mount on boot
 			sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero ext4 noexec,defaults 0 2" -i /etc/fstab
@@ -574,3 +577,5 @@ SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
 #To allow Monero onion-block-explorer to be run from boot now storage has been configured. Referenced from init.sh
 	echo "#!/bin/sh
 SETUP_COMPLETE=1" > /home/pinodexmr/setupcomplete.sh
+#Fix PiNode-XMR Issue #12, swap file on image shrink for upload compresses to 1.2GB not correct 2GB. sudo dphys-swapfile setup re-sizes swap to 2GB.
+	sudo dphys-swapfile setup

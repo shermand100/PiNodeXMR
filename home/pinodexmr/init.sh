@@ -17,7 +17,9 @@ sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 echo $CURRENT_VERSION 'Current Version'
 echo $DEVICE_IP 'Device IP'
 echo $MONERO_PORT 'Monero Port'
-sleep "3"
+sleep 3
+		sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
+		sudo chmod 777 -R /home/pinodexmr/.bitmonero
 
 if [ $BOOT_STATUS -eq 2 ]
 then
