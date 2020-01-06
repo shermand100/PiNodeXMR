@@ -1,5 +1,11 @@
 #!/bin/bash
 
+##Open Sources:
+# Web-UI by designmodo Flat-UI free project at https://github.com/designmodo/Flat-UI
+# Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
+# Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
+# PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
+###Begin
 ##User pinodexmr creation
 echo -e "\e[32mStep 1: produce user 'pinodexmr'\e[0m" 
 sleep 2
@@ -40,10 +46,15 @@ echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
 sudo apt install apache2 shellinabox php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-gd php7.3-json php7.3-mbstring php7.3-mysql php7.3-xml -y
 
+##Update and Upgrade system (2nd time to prevent error in next dependency set install)
+echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"
+sleep 3
+sudo apt update && sudo apt upgrade -y
+
 ##Installing dependencies for --- Monero
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
-sudo apt install git build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
+sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libunbound-dev graphviz doxygen libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
 
 ##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
