@@ -30,6 +30,7 @@
 
 
 *Public Node has settings configured - require test and activation on implementation of  [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context of issue at [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083)
+
 **Connection via Ethernet required to configure WiFi
 
 ## Hardware requirements:
@@ -101,6 +102,7 @@ When you enter this IP address into the web browser of a device on the same netw
 From here click on "Web Terminal" from the top navigation bar. You will most probably get a warning that it isn't a secure site. I haven't yet configured SSL certificates yet so this is normal. Click proceed and login with the default Username (all lowercase despite screenshot) and password of:
 
 Username: pinodexmr
+
 Password: PiNodeXMR
 
 ![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/Welcome_screen.png)
@@ -115,7 +117,7 @@ For beginners the last optional step is because most internet connections and IP
 
 ![screenshot setup1](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/setup1.png)
 
-*A note here that this menu whilst functional does require some cosmetic tweaking and unfortunately if you break a parameter when entering new passwords the menu cycles back to the start, not just the section that failed. A work in progress.*
+*A note here that this menu whilst functional does require some cosmetic tweaking*
 
 First of all you'll be asked to choose a new password for the device to replace the "PiNodeXMR" password you just used in this terminal.
 
@@ -127,7 +129,7 @@ Finally the option for Dynamic DNS client download via noip.com. If this is sele
 ## Web-UI: Starting your Node and General Usage
 
 ### Welcome page -
-I won't duplicate the homepage screenshot used above as there's not a lot to say about it apart from the PiNode-XMR version number (presented version.MM.YY). However a shout out to the guys at https://designmodo.com/ for the template of the Web-UI. Their template has made this build much quicker. Check out their site if you're ever in the need of an interface for a project.
+I won't duplicate the homepage screenshot used above as there's not a lot to say about it apart from the PiNode-XMR version number (presented version#.MM.YY). However a shout out to the guys at https://designmodo.com/ for the template of the Web-UI. Their template has made this build much quicker. Check out their site if you're ever in the need of an interface for a project.
 
 I'll also take this opportunity to mention that most of the displays of Node and Hardware data within all the UI are updated every 60 seconds (with the exception of the 'storage usage' section on the 'Node Status' page which updates every 4 hours), so in most cases hammering the refresh button won't provide new data until it is sourced and processed in the background.
 
@@ -135,7 +137,12 @@ I'll also take this opportunity to mention that most of the displays of Node and
 
 ![Advanced Settings](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/advancedsettings.png)
 
-This is the main page for starting/stopping and setting variables on your node. It can either be started as a Clearnet,tor or Mining node, and you may switch between modes as you wish. The node has memory, so if power is lost and restored the node will reboot and continue in the mode it was last set (clearnet/tor/mining).
+This is the main page for starting/stopping and setting variables on your node. It can either be started as a Clearnet Private/Public,tor or Mining node, and you may switch between modes as you wish. The node has memory, so if power is lost and restored the node will reboot and continue in the mode it was last set, hence the wording on the Node Status page to remind you what you last clicked.
+
+- *Private Node:* A node that only you can connect a wallet to using the RPC username and password you've set. How you configure your firewall will determin external access, (covered later)
+
+- *Public Node:* Be a little patient for this cool new feature, where you could be paid to run this node. See [Monero project commit message for this feature](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937). This feature is installed but waiting for a fix to be committed. More info on the issue [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083). Expect to be active on release of Monero 0.15.0.3. I've put the settings is according t this documentation but have been unable to test yet. Minor tweak at time of release may also be necessary.
+
 
 **To switch from one mode type to another use the appropriate stop button for the service that is running. To indicate which version is running your node will tell you on the “node status” page.
 Stop the current service before starting a new one.**
@@ -146,11 +153,11 @@ Stop the current service before starting a new one.**
 
 - *Mining:* TBH it's a feature I expected people to ask for and it was simple enough to implement so it's included. The Raspberry Pi is absolutely unsuitable for this purpose, but there it is. 
 Enter your address on the right and the page will confirm submission with a read-back. Hit start (once all previous instances of the node have been stopped) and enjoy your sub 1H/s. Setting mining intensity (default 50%) can  be found in the build/developer notes at the end of this manual.
+A final note on this, now I've updated to v2 of this project and RandomX has come along mining is even less suitable in a Pi. However I intend to step away from making disk images and instead produce installing scripts so this software can be installed on devices other than Pis. Then this feature may once again have a use.
 
-- *Update:* This version has the auto-update removed. This is to prevent downtime at inconvenient times if you rely on this as a remote node. I will try new released Monero versions on my test node before activating your update button and inform you which “--strip” setting to use for the update. This seems the safest way to avoid bricking nodes.
+- *Update:* This version has the auto-update removed. This is to prevent downtime at inconvenient times if you rely on this as a remote node. I will try newly released Monero versions on my test node before activating your update button and inform you which “--strip” setting to use for the update. This seems the safest way to avoid bricking nodes.
 
-- *Shutdown:* To gently shutdown+power off the node use the stop buttons as  normal and then hit this “shutdown” button. It will complete it's shutdown
- process in 60 seconds.
+- *Shutdown:* To gently shutdown+power off the node use the stop buttons as  normal and then hit this “shutdown” button. It will complete it's shutdown process in 60 seconds.
 
 - *Kill:* (Not power off) Try not to use this, but it's there. I guess it's in case you cant remember what mode your node is in and the “status” page isn't helping. Ideally use each stop button in turn for a safe shutdown then maybe you could hit this to be sure? Dunno, this'll probably disappear in a future release.
 
@@ -159,6 +166,12 @@ Enter your address on the right and the page will confirm submission with a read
 ![Node Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/nodestatus.png)
 
 This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or if you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disable the swapfile to preserve the read/write health of your storage device.
+
+## **New** Monero Blockchain Explorer
+
+![Block Explorer Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/blockexplorer.png)
+
+**New** With some collaboration from its maker reddit user /u/mWo12 I've managed to include his "Onion Monero-Blockchain Explorer" which is a fantastic tool for any auditing needs you have and don't want to send view_keys to any external website/untrusted source. It also includes a transaction pusher for those cold wallet users. The Explorer is all open source and can be found here [Github - Onion Monero Blockchain Explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer). Many thanks to /u/mWo12.
 
 ## Transaction Status
 
@@ -218,11 +231,11 @@ The Process to update:
 
 * Stop your running node with the relevent stop button in the 'advanced settings' tab.
 * To update to Monero version 'Carbon Chamaeleon' 0.15, select '--strip 1' also on the 'advanvaced settings' tab.
-* Log into the Web Terminal as usual and enter
+* Log into the Web Terminal as usual and enter the "Update Monero" setting. Follow the instructions
 
-        ./Updater.sh
+If an update is available you are strongly encouraged to follow the instruction to verify the SHA256 hash of the downloaded binary. 
    
-The updater script will run and bring your node up to the latest version. At the end of the process it will then start your node in the last mode it was run.
+The updater script will run and bring your node up to the latest version. 
 
 ## tor
 
