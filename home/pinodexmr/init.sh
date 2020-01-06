@@ -60,9 +60,9 @@ else
 		echo "loading ..."
 fi
 
-if [ $BOOT_STATUS -gt 2 || $SETUP_COMPLETE -eq 1 ]
+if [ $BOOT_STATUS -gt 2 ] || [ $SETUP_COMPLETE -eq 1 ]
 then
-echo "Start Monero-onion-block-explorer"
+	echo "Start Monero-onion-block-explorer"
 	sudo systemctl start explorer-start.service
 	echo "Starting Onion-Block-Explorer in background"
 fi
