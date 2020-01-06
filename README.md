@@ -50,11 +50,12 @@ With a little further configuration this node will allow wallet connections from
    * [Welcome Page](https://github.com/shermand100/pinode-xmr#welcome-page--)
    * [Advanced Settings & Starting Monero](https://github.com/shermand100/pinode-xmr#advanced-settings---starting-monero)
    * [Node Status](https://github.com/shermand100/pinode-xmr#node-status--)
+   * [Monero Blockchain Explorer](https://github.com/shermand100/pinode-xmr#Monero-Blockchain-Explorer)
    * [Transaction Status](https://github.com/shermand100/pinode-xmr#transaction-status)
    * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
    * [Log](https://github.com/shermand100/pinode-xmr#log)
    * [Web Terminal: WiFi setup, Pruning & Advances Users](https://github.com/shermand100/pinode-xmr#web-terminal-advanced-users-wi-fi-pruning-and-more)
-      * [Updating](https://github.com/shermand100/pinode-xmr#web-terminal-updater)
+     * [Updating](https://github.com/shermand100/pinode-xmr#web-terminal-updater)
 * [A note on tor](https://github.com/shermand100/pinode-xmr#tor)
 * [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
   * [Monero GUI](https://github.com/shermand100/pinode-xmr#monero-gui)
@@ -65,7 +66,7 @@ With a little further configuration this node will allow wallet connections from
   
 ## Intro
 
-Then let me start by saying I'm glad the internet has bought you to here. It's taken several months to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. This however is the first disk image I have ever produced for download, and I have no doubt in it's stability or ability to perform it's purpose, however it does mark a change in my direction. Throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that perhaps users don't want to make their own node step by step, they too have busy lifestyles, they want them fast. 
+Let me start by saying I'm glad the internet has bought you to here. It's taken several months to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. This however is the first disk image I have ever produced for download, and I have no doubt in it's stability or ability to perform it's purpose, however it does mark a change in my direction. Throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that perhaps users don't want to make their own node step by step, they too have busy lifestyles, they want them fast. 
 
 To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync however will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
 
@@ -167,7 +168,7 @@ A final note on this, now I've updated to v2 of this project and RandomX has com
 
 This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or if you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disable the swapfile to preserve the read/write health of your storage device.
 
-## **New** Monero Blockchain Explorer
+## Monero Blockchain Explorer
 
 ![Block Explorer Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/blockexplorer.png)
 
