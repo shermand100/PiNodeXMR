@@ -11,6 +11,27 @@
 
 43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
 
+### Features:
+* 4 Node modes (click to start)
+  * Private Node
+  * tor bridging Node - routes your transactions through the tor network
+  * Public Node - Using new RPC payment feature* [Monero project commit message for more info](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937)
+  * Private Node - with mining (For education/experiment only)
+* Simple control with Web-UI
+  * View Monero node and hardware status
+  * Control bandwidth, connection limits and RPC port
+  * Transaction pool and summary viewer
+  * View connected peer info
+  * Monerod log file view page
+* **New** - Included the open source Monero Block Explorer [Github - onion-monero-blockchain-explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer)
+* Easy setup menu for config of passwords, USB storage, Update and optional dynamic DNS.
+* All the benefits of running on a Pi, silent/fanless, low power (approx 15w) for 24/7 node, low cost.
+* Headless (No need for extra monitor,keyboard,etc) and connect via Ethernet or WiFi**
+
+
+*Public Node has settings configured - require test and activation on implementation of  [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context of issue at [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083)
+**Connection via Ethernet required to configure WiFi
+
 ## Hardware requirements:
 
 1. Raspberry Pi 2/3/4 (incl B&+ models)
