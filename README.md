@@ -5,11 +5,32 @@
 ##### For Raspberry Pi
 
 
-Tempoarily disabled - Uploading new version!
+[PiNode-XMR_v2.12.19_m0.15.0.1.img   -   Hosted on Google drive - 6.45GB](https://drive.google.com/file/d/1u9leBw4-SEUcmZaZ9nh5iQVvO4Q2A7nU/view?usp=sharing)
 
 *Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
 
 43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
+
+### Features:
+* 4 Node modes (click to start)
+  * Private Node
+  * tor bridging Node - routes your transactions through the tor network
+  * Public Node - Using new RPC payment feature* [Monero project commit message for more info](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937)
+  * Private Node - with mining (For education/experiment only)
+* Simple control with Web-UI
+  * View Monero node and hardware status
+  * Control bandwidth, connection limits and RPC port
+  * Transaction pool and summary viewer
+  * View connected peer info
+  * Monerod log file view page
+* **New** - Included the open source Monero Block Explorer [Github - onion-monero-blockchain-explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer)
+* Easy setup menu for config of passwords, USB storage, Update and optional dynamic DNS.
+* All the benefits of running on a Pi, silent/fanless, low power (approx 15w) for 24/7 node, low cost.
+* Headless (No need for extra monitor,keyboard,etc) and connect via Ethernet or WiFi**
+
+
+*Public Node has settings configured - require test and activation on implementation of  [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context of issue at [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083)
+**Connection via Ethernet required to configure WiFi
 
 ## Hardware requirements:
 
@@ -167,7 +188,7 @@ A 5 MB rolling log is kept here. Should you suspect your node is not performing 
 
 The Web-Terminal allows a more advanced user a huge amount of control over their node. The PiNode-XMR is built upon the Raspbian image "2019-04-08-raspbian-stretch-lite" and has all of the standard features intact.
 
-- *WiFi:* One of the most asked for features is wifi. This can easily be configured at a beginner level *Note-ODROID has no built in hardware, additional Wifi adaptor required* ~as the standard command `sudo raspi-config` will bring up the Raspberry Pi's hardware interface. This allows setting Wi-Fi SSID and password under 'network options' settings. Once configured the device will ask to reboot.~ This is a known bug, sorry, I mis-configured the file it relates to. Instead for Wifi enter `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf` Where you will find 2 fields to complete. Enter the SSID between the "" and password below. Leave the "" around what you enter. To leave the text editor save your changes with `ctrl+o` and exit with `ctrl+x` For the changes to take effect a reboot is required. `sudo reboot`
+- *WiFi:* One of the most asked for features is wifi. This can easily be configured at a beginner level *Note-ODROID has no built in hardware, additional Wifi adaptor required* as the standard command `sudo raspi-config` will bring up the Raspberry Pi's hardware interface. This allows setting Wi-Fi SSID and password under 'network options' settings. Once configured the device will ask to reboot.
 
 **However if Wi-Fi is to be used then the Ethernet cable must be unplugged. If you do not, the device will assign itself 2 IP addresses, one for each connection method, and Monerod will fail to boot**
 
