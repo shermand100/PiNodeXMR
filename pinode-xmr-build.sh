@@ -25,11 +25,18 @@
 		1)
 			dialog \
 		--title "PiNode-XMR Setup" \
-		--msgbox "PiNode-XMR will now be configures for Raspbian" 20 60
-		wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/xmr-new-ver.sh
+		--msgbox "PiNode-XMR will now be configured for Raspbian" 20 60
+		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/raspbian.sh
+		echo -e "\e[32mPiNode-XMR Raspbian configuration file received\e[0m"
+		echo -e "\eStarting Installation\e[0m"
+		sleep 2
+		./raspbian.sh
+		exit 1
             ;;
         2)
-		echo "#!/bin/sh
-SETUP_STATUS=99" > /home/pinodexmr/setupstatus.sh
+			dialog \
+		--title "PiNode-XMR Setup" \
+		--msgbox "PiNode-XMR will now be configured for Debian/Armbian" 20 60
+		exit 1
             ;;
 		esac
