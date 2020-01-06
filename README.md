@@ -5,7 +5,7 @@
 ##### For Raspberry Pi
 
 
-Tempoarily disabled - Uploading new version!
+[PiNode-XMR_v2.12.19_m0.15.0.1.img   -   Hosted on Google drive - 6.45GB](https://drive.google.com/file/d/1u9leBw4-SEUcmZaZ9nh5iQVvO4Q2A7nU/view?usp=sharing)
 
 *Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
 
