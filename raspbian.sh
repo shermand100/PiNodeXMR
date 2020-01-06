@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##User pinodexmr creation
-echo -e "\e[32mStep 1 produce user 'pinodexmr'\e[0m" 
+echo -e "\e[32mStep 1: produce user 'pinodexmr'\e[0m" 
 sleep 2
 sudo adduser pinodexmr --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 echo "pinodexmr:PiNodeXMR" | sudo chpasswd
@@ -32,5 +32,33 @@ sleep 1
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"
-sleep 2
-sudo apt-get update && sudo apt-get upgrade -y
+sleep 3
+sudo apt update && sudo apt upgrade -y
+
+##Installing dependencies for --- Web Interface
+echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
+sleep 3
+sudo apt install apache2 shellinabox php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-gd php7.3-json php7.3-mbstring php7.3-mysql php7.3-xml -y
+
+##Installing dependencies for --- Monero
+echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
+sleep 3
+sudo apt install git build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
+
+##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
+sleep 3
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils tor nyx fail2ban ufw  dialog -y
+
+##Update and Upgrade dependencies (again)
+echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"
+sleep 3
+sudo apt update && sudo apt upgrade -y
+
+##Configure Swap file
+echo -e "\e[32mConfiguring 2GB Swap file (required for Monero build)\e[0m"
+sleep 3
+sudo echo "CONF_SWAPSIZE=2000" > /etc/dphys-swapfile
+sudo dphys-swapfile setup
+sudo dphys-swapfile swapon
+
