@@ -13,6 +13,7 @@ sleep 1
 #sudo passwd --lock pi
 echo -e "\e[32mUser 'pi' Locked\e[0m"
 sleep 1
+sudo apt install git -y
 git clone -b mybranch --single-branch development https://github.com/shermand100/pinode-xmr.git
 
 ##Update and Upgrade system
