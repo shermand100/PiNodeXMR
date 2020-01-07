@@ -8,5 +8,5 @@ DEVICE_IP="$(hostname -I)"
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
 #Stop Monerod
-cd /home/pinodexmr/monero-active/
+cd /home/pinodexmr/monero/build/release/bin/
 ./monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp exit

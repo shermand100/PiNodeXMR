@@ -1,2 +1,2 @@
-#!/bin/bash
-RPCp=password
+#!/bin/sh
+RPCp=PiNodeXMR978645

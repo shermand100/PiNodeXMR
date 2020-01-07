@@ -8,9 +8,9 @@ WorkingDirectory=/home/pinodexmr/
 StandardOutput=inherit
 StandardError=inherit
 Type=forking
-PIDFile=/home/pinodexmr/monero/explorer.pid
-Restart=always
-RestartSec=30
+PIDFile=/home/pinodexmr/onion-monero-blockchain-explorer/explorer.pid
+Restart=on-failure
+RestartSec=300
 User=pinodexmr
 
 [Install]

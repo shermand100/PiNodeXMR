@@ -8,41 +8,28 @@ _temp="./dialog.$$"
 . /home/pinodexmr/setupstatus.sh
 
 if [ $SETUP_STATUS -eq 0 ]; then
-		dialog
-		HEIGHT=20
-		WIDTH=60
-		CHOICE_HEIGHT=4
-		BACKTITLE="Welcome"
-		TITLE="PiNode-XMR Setup"
-		MENU="Welcome to PiNode-XMR.\n\nWhat do you require?"
-
-		OPTIONS=(1 "First time setup"
-		2 "Command line"
-		3 "Update Monero")
-
-		CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
-
-		clear
+		
+		#HEIGHT=20
+		#WIDTH=60
+		#CHOICE_HEIGHT=8
+		CHOICE=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Setup" --menu "What would you like to do?" 20 60 8 \
+    "1)" "First time setup"   \
+	"2)" "Update Monero"  \
+	"3)" "Prune Node" \
+	"4)" "Install PiVPN" \
+	"5)" "Exit to Command line"  2>&1 >/dev/tty)
+	
 		case $CHOICE in
-		1)
-			dialog \
+		"1)")
+			whiptail \
 		--title "PiNode-XMR Setup" \
-		--msgbox "You will now be guided through the initial setup for your PiNode-XMR\n\nIf you intend to use an external USB device to store the blockchain (device over 100GB) you may attach it now.\n\nThis menu will allow you to set a USB storage device, secure user name/password and Dynamic DNS configuration (optional)" 20 60
+		--msgbox "You will now be guided through the initial setup for your PiNode-XMR\n\nIf you intend to use an external USB device to store the blockchain (device over 100GB) you may attach it now.\n\nThis menu will allow you to set a USB storage device, secure user name/password and Dynamic DNS configuration (optional)"
             ;;
-        2)
-		echo "#!/bin/sh
-SETUP_STATUS=99" > /home/pinodexmr/setupstatus.sh
-            ;;
-		3)
+
+		"2)")
 			dialog \
 		--title "PiNode-XMR Update" \
-		--msgbox "Your PiNode-XMR will check to see if an update is available" 20 60
+		--msgbox "Your PiNode-XMR will check to see if an update is available"
 		#Establish IP
 		DEVICE_IP="$(hostname -I)"
 		echo "PiNode-XMR on ${DEVICE_IP} is checking for available updates"
@@ -631,6 +618,11 @@ SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
 	sleep 3
 fi
 sleep 1
+
+        "1)"
+		echo "#!/bin/sh
+SETUP_STATUS=99" > /home/pinodexmr/setupstatus.sh
+            ;;
 #Load menu status - to track setup progress - will be re-called throughout
 . /home/pinodexmr/setupstatus.sh
 

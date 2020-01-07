@@ -4,4 +4,4 @@ DEVICE_IP="$(hostname -I)"
 #Import Port Number
 . /home/pinodexmr/monero-port.sh
 #Stop Monerod
-./monero-active/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT exit
+./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT exit

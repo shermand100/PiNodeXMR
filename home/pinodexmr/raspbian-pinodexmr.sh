@@ -53,7 +53,7 @@ sleep 3
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b mybranch --single-branch development https://github.com/shermand100/pinode-xmr.git
+git clone -b development --single-branch https://github.com/shermand100/pinode-xmr.git
 
 
 ##Configure ssh security. Allow only user 'pinodexmr' & 'root' login disabled, restart config to make changes
@@ -140,9 +140,9 @@ sudo chmod 755 -R /var/www/html/
 
 ##Build Monero and Onion Blockchain Explorer (the simple by time comsuming bit)
 #First build monero, single build directory
-echo -e "\e[32mDownloading Monero v0.15\e[0m"
+echo -e "\e[32mDownloading latest Monero version \e[0m"
 sleep 3
-git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
+git clone --recursive https://github.com/monero-project/monero.git
 echo -e "\e[32mBuilding Monero v0.15\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
@@ -164,6 +164,16 @@ mkdir build && cd build
 cmake ..
 make
 cd
+
+##Install crontab
+echo -e "\e[32mConfiguring crontab\e[0m"
+sleep 3
+sudo chmod 644 -r /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/
+sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/
+sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/pinodexmr
+sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/root
+echo -e "\e[32mcrontab config complete\e[0m"
+sleep 3
 
 ## Remove left over files from git clone actions
 echo -e "\e[32mCleanup leftover directories\e[0m"

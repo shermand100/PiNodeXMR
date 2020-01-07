@@ -1,3 +1,3 @@
 #!/bin/sh
 #SSD Status
-df -h / > /var/www/html/df-h.txt
+df -h | grep -E -- 'File|^/dev/' > /var/www/html/df-h.txt

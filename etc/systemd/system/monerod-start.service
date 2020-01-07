@@ -8,8 +8,8 @@ WorkingDirectory=/home/pinodexmr/
 StandardOutput=inherit
 StandardError=inherit
 Type=forking
-PIDFile=/home/pinodexmr/monero-active/monerod.pid
-Restart=always
+PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
+Restart=on-failure
 RestartSec=30
 User=pinodexmr
 

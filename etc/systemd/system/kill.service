@@ -1,5 +1,5 @@
 [Unit]
-Description=Node Shutdown
+Description=Kill monerod processes
 After=network.target
 
 [Service]

@@ -1,2 +1,2 @@
 #!/bin/sh
-RPCu=PiNodeXMR
+RPCu=shermand100
