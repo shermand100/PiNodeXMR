@@ -36,9 +36,14 @@ wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/raspbi
 sudo mv /home/pi/raspbian-pinodexmr.sh /home/pinodexmr/
 sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
 sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
+
+##make script run when user logs in
+#echo '. /home/pinodexmr/raspbian-pinodexmr.sh' | sudo tee -a /home/pinodexmr/.profile
+
 ##Change from user 'pi' to 'pinodexmr' and lock 'pi'
 echo -e "\e[32mSwitching user to 'pinodexmr'\e[0m"
 sleep 3
-sudo su pinodexmr && cd && . /raspbian-pinodexmr.sh
+sudo su pinodexmr
+sudo -H -u pinodexmr bash -c 'bash /home/pinodexmr/raspbian-pinodexmr.sh' 
 
 #End of script as user 'pi'. Continues in directory /home/pinodexmr
