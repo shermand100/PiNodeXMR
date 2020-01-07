@@ -33,7 +33,7 @@ sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 ##Change from user 'pi' to 'pinodexmr' and lock 'pi'
 echo -e "\e[32mSwitching user to 'pinodexmr'\e[0m"
 sleep 3
-sudo su pinodexmr && cd && ./raspbian-pinodexmr.sh
+sudo su pinodexmr && cd && ./home/pinodexmr/raspbian-pinodexmr.sh
 
 #End of script as user 'pi'. Continues in directory /home/pinodexmr
 
