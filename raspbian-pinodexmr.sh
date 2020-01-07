@@ -13,13 +13,6 @@ sleep 1
 #sudo passwd --lock pi
 echo -e "\e[32mUser 'pi' Locked\e[0m"
 sleep 1
-sudo apt install git -y
-git clone -b development --single-branch https://github.com/shermand100/pinode-xmr.git
-
-#Set pinodexmr password 'PiNodeXMR'
-#echo "pinodexmr:PiNodeXMR" | sudo chpasswd
-echo -e "\e[32mpinodexmr password changed to 'PiNodeXMR'\e[0m"
-sleep 5
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"

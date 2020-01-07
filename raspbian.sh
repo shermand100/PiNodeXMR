@@ -15,13 +15,19 @@ sudo adduser pinodexmr --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --dis
 echo -e "\e[32mUser 'pinodexmr' created\e[0m"
 sleep 2
 
+#Set pinodexmr password 'PiNodeXMR'
+echo "pinodexmr:PiNodeXMR" | sudo chpasswd
+echo -e "\e[32mpinodexmr password changed to 'PiNodeXMR'\e[0m"
+sleep 5
+
 ##Change system hostname to PiNodeXMR
 #echo -e "\e[32mChaning system hostname to 'PiNodeXMR'\e[0m"
 #sleep 2
 #echo 'PiNodeXMR' | sudo tee /etc/hostname
+#Also need to change /etc/hosts 
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules
-echo -e "\e[32mDownlaod and replace /etc/sudoers file\e[0m"
+echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 2
 wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/etc/sudoers
 sudo chmod 0440 /home/pi/sudoers
@@ -37,12 +43,12 @@ sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
 sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 
 ##make script run when user logs in
-echo '. /home/pinodexmr/raspbian-pinodexmr.sh' | sudo tee -a /home/pinodexmr/.profile
+#echo '. /home/pinodexmr/raspbian-pinodexmr.sh' | sudo tee -a /home/pinodexmr/.profile
 
 ##Change from user 'pi' to 'pinodexmr' and lock 'pi'
 echo -e "\e[32mSwitching user to 'pinodexmr'\e[0m"
 sleep 3
-su - pinodexmr
-#sudo -H -u pinodexmr bash -c 'bash /home/pinodexmr/raspbian-pinodexmr.sh' 
+#echo "PiNodeXMR" | su - pinodexmr
+sudo -H -u pinodexmr bash -c 'bash /home/pinodexmr/raspbian-pinodexmr.sh' 
 
 #End of script as user 'pi'. Continues in directory /home/pinodexmr
