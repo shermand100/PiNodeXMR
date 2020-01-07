@@ -10,7 +10,7 @@
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
 sleep 1
-sudo passwd --lock pi
+#sudo passwd --lock pi
 echo -e "\e[32mUser 'pi' Locked\e[0m"
 sleep 1
 
