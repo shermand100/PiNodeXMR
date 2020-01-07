@@ -1,5 +1,6 @@
 #!/bin/bash
-echo -e "\e[32mPreparing...\e[0m"
+##To run me on cmd line wget -O - https://raw.githubusercontent.com/shermand100/pinode-xmr/development/pinode-xmr-build.sh | bash
+echo -e "\e[32mPreparing Menu...\e[0m"
 sleep 3
 sudo apt-get install whiptail
 
@@ -16,11 +17,9 @@ case $CHOICE in
 		echo -e "\e[32mDownloading data for install\e[0m"
 		sleep 3
 		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/raspbian.sh
-		sudo apt-get install dialog -y
-		sleep 2
 		echo -e "\e[32mPiNode-XMR Raspbian configuration file received\e[0m"
 		echo -e "\e[32mStarting Installation\e[0m"
-		sudo chmod 755 /home/pinodexmr/raspbian.sh
+		sudo chmod 755 /home/pi/raspbian.sh
 		sleep 2
 		./raspbian.sh
 		exit 1
