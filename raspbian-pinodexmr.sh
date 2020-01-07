@@ -7,7 +7,7 @@
 # PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
 
 ###Continue as 'pinodexmr'
-
+cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
 sleep 1
 sudo passwd --lock pi
@@ -142,7 +142,7 @@ sudo chmod 755 -R /var/www/html/
 #First build monero, single build directory
 echo -e "\e[32mDownloading Monero v0.15\e[0m"
 sleep 3
-git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
+#git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
 echo -e "\e[32mBuilding Monero v0.15\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
@@ -150,20 +150,20 @@ echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
-cd monero
-USE_SINGLE_BUILDDIR=1 make
-cd
+#cd monero
+#USE_SINGLE_BUILDDIR=1 make
+#cd
 echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 sleep 10
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
-cd onion-monero-blockchain-explorer
-mkdir build && cd build
-cmake ..
-make
-cd
+#git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+#cd onion-monero-blockchain-explorer
+#mkdir build && cd build
+#cmake ..
+#make
+#cd
 
 ## Remove left over files from git clone actions
 echo -e "\e[32mCleanup leftover directories\e[0m"
