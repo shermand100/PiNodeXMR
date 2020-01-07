@@ -14,7 +14,7 @@ sleep 1
 echo -e "\e[32mUser 'pi' Locked\e[0m"
 sleep 1
 sudo apt install git -y
-git clone -b mybranch --single-branch development https://github.com/shermand100/pinode-xmr.git
+git clone -b development --single-branch https://github.com/shermand100/pinode-xmr.git
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"
@@ -55,7 +55,7 @@ sleep 3
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b mybranch --single-branch development https://github.com/shermand100/pinode-xmr.git
+git clone -b development --single-branch https://github.com/shermand100/pinode-xmr.git
 
 
 ##Configure ssh security. Allow only user 'pinodexmr' & 'root' login disabled, restart config to make changes
