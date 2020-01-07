@@ -23,11 +23,16 @@ sudo chmod 0440 /home/pi/sudoers
 sudo chown root /home/pi/sudoers
 sudo mv /home/pi/sudoers /etc/sudoers
 echo -e "\e[32mGlobal permissions changed\e[0m"
-sleep 1
+sleep 3
 
+##Download user 'pinodexmr' script and put in home directory to continue
+wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/raspbian-pinodexmr.sh
+sudo mv /home/pi/raspbian-pinodexmr.sh /home/pinodexmr/
+sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
+sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 ##Change from user 'pi' to 'pinodexmr' and lock 'pi'
 echo -e "\e[32mSwitching user to 'pinodexmr'\e[0m"
-sleep 1
+sleep 3
 sudo su pinodexmr && cd && ./raspbian-pinodexmr.sh
 
 #End of script as user 'pi'. Continues in directory /home/pinodexmr
