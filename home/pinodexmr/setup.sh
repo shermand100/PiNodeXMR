@@ -3,7 +3,7 @@
 		#HEIGHT=20
 		#WIDTH=60
 		#CHOICE_HEIGHT=8
-		CHOICE=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Setup" --menu "\n\nWhat would you like to do?" 20 60 8 \
+		CHOICE=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Setup" --menu "\n\nWhat would you like to do?" 20 60 10 \
     "1)" "Terminal Password & RPC username:password setup"   \
 	"2)" "USB storage setup"   \
 	"3)" "Update Monero"  \
@@ -73,9 +73,7 @@ fi
 		;;
 		
 		"9)")
-			whiptail \
-		--title "PiNode-XMR Update" \
-		--msgbox "Your PiNode-XMR will check to see if an update is available"
+		exit 1
 		;;
 esac
 

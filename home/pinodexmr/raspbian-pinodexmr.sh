@@ -5,12 +5,12 @@
 # Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
 # Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
 # PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
-
+whiptail --title "PiNode-XMR Continue Install" --msgbox "Your PiNode-XMR is taking shape...\n\nHowever this next part will take several hours. When testing this installation I would leave it overnight.\n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
-
+cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
 sleep 1
-sudo passwd --lock pi
+#sudo passwd --lock pi
 echo -e "\e[32mUser 'pi' Locked\e[0m"
 sleep 1
 
@@ -138,11 +138,11 @@ sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
 sudo chown www-data -R /var/www/html/
 sudo chmod 755 -R /var/www/html/
 
-##Build Monero and Onion Blockchain Explorer (the simple by time comsuming bit)
+##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 #First build monero, single build directory
-echo -e "\e[32mDownloading latest Monero version \e[0m"
+echo -e "\e[32mDownloading Monero v0.15\e[0m"
 sleep 3
-git clone --recursive https://github.com/monero-project/monero.git
+git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
 echo -e "\e[32mBuilding Monero v0.15\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
@@ -166,13 +166,15 @@ make
 cd
 
 ##Install crontab
-echo -e "\e[32mConfiguring crontab\e[0m"
+echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
-sudo chmod 644 -r /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/
-sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/
-sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/pinodexmr
-sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/root
-echo -e "\e[32mcrontab config complete\e[0m"
+sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
+sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
+sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
+sudo chown pinodexmr /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
+sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/
+sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/
+echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 ## Remove left over files from git clone actions
@@ -181,15 +183,20 @@ sleep 3
 sudo rm -r /home/pinodexmr/Flat-UI/
 sudo rm -r /home/pinodexmr/pinode-xmr/
 
+##Change log in menu to 'main'
+#Delete line 28 (previous setting)
+sudo sed -i '28d' /home/pinodexmr/.profile
+#Set to auto run main setup menu on login
+echo '. /home/pinodexmr/setup.sh' | tee -a /home/pinodexmr/.profile
+
 ## Install complete
 echo -e "\e[32mAll Installs complete\e[0m"
-
+whiptail --title "PiNode-XMR Continue Install" --msgbox "Your PiNode-XMR is ready\n\nInstall complete. When you log in after the reboot use the menu to change your passwords and other features.\n\nEnjoy your Private Node\n\nSelect ok to reboot" 16 60
 echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m**********PiNode-XMR rebooting**********\e[0m"
 echo -e "\e[32m**********Reminder:*********************\e[0m"
 echo -e "\e[32m**********User: 'pinodexmr'*************\e[0m"
 echo -e "\e[32m**********Password: 'PiNodeXMR'*********\e[0m"
-echo -e "\e[32m****
-************************************\e[0m"
+echo -e "\e[32m****************************************\e[0m"
 sleep 10
 sudo reboot
