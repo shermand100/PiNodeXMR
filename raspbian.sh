@@ -26,6 +26,7 @@ sleep 5
 echo 'PiNodeXMR' | sudo tee /etc/hostname
 sudo sed -i '6d' /etc/hosts
 echo '127.0.1.1       raspberrypi' | sudo tee -a /etc/hosts
+sudo hostname PiNodeXMR
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
