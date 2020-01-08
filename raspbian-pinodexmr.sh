@@ -9,10 +9,10 @@ whiptail --title "PiNode-XMR Continue Install" --msgbox "Your PiNode-XMR is taki
 ###Continue as 'pinodexmr'
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
-sleep 1
+sleep 2
 #sudo passwd --lock pi
 echo -e "\e[32mUser 'pi' Locked\e[0m"
-sleep 1
+sleep 3
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"
@@ -26,9 +26,9 @@ sudo apt install apache2 shellinabox php7.3 php7.3-cli php7.3-common php7.3-curl
 sleep 3
 
 ##Installing dependencies for --- Monero
-echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
-sleep 3
-sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libunbound-dev graphviz doxygen libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
+#echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
+#sleep 3
+#sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libunbound-dev graphviz doxygen libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
 sleep 3
 
 ##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
@@ -110,7 +110,7 @@ sudo ufw allow 18080	#monero spare
 sudo ufw allow 18081	#monero node default
 sudo ufw allow 4200		#web terminal
 sudo ufw allow 22		#ssh
-sudo ufw enable
+echo "y" | sudo ufw enable
 echo -e "\e[32mFirewall configured\e[0m"
 sleep 3
 
@@ -142,7 +142,7 @@ sudo chmod 755 -R /var/www/html/
 #First build monero, single build directory
 echo -e "\e[32mDownloading Monero v0.15\e[0m"
 sleep 3
-git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
+#git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
 echo -e "\e[32mBuilding Monero v0.15\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
@@ -150,20 +150,20 @@ echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
-cd monero
-USE_SINGLE_BUILDDIR=1 make
-cd
+#cd monero
+#USE_SINGLE_BUILDDIR=1 make
+#cd
 echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 sleep 10
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
-cd onion-monero-blockchain-explorer
-mkdir build && cd build
-cmake ..
-make
-cd
+#git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+#cd onion-monero-blockchain-explorer
+#mkdir build && cd build
+#cmake ..
+#make
+#cd
 
 ##Install crontab
 echo -e "\e[32mSetup crontab\e[0m"

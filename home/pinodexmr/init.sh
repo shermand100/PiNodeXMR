@@ -12,7 +12,7 @@ sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 #Load Variables
 . /home/pinodexmr/current-ver.sh
 . /home/pinodexmr/monero-port.sh
-. /home/pinodexmr/setupcomplete.sh
+. /home/pinodexmr/explorer-flag.sh
 
 echo $CURRENT_VERSION 'Current Version'
 echo $DEVICE_IP 'Device IP'
@@ -60,7 +60,7 @@ else
 		echo "loading ..."
 fi
 
-if [ $BOOT_STATUS -gt 2 ] || [ $SETUP_COMPLETE -eq 1 ]
+if [ $BOOT_STATUS -gt 2 ] && [ $EXPLORER_START -eq 1 ]
 then
 	echo "Start Monero-onion-block-explorer"
 	sudo systemctl start explorer-start.service

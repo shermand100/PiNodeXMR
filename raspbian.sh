@@ -5,24 +5,25 @@
 # Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
 # Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
 # PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
+# PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
 
 ###Begin
 
 ##User pinodexmr creation
 echo -e "\e[32mStep 1: produce user 'pinodexmr'\e[0m" 
-sleep 2
+sleep 3
 sudo adduser pinodexmr --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 echo -e "\e[32mUser 'pinodexmr' created\e[0m"
-sleep 2
+sleep 3
 
 #Set pinodexmr password 'PiNodeXMR'
 echo "pinodexmr:PiNodeXMR" | sudo chpasswd
 echo -e "\e[32mpinodexmr password changed to 'PiNodeXMR'\e[0m"
-sleep 5
+sleep 3
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
-sleep 2
+sleep 3
 wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/etc/sudoers
 sudo chmod 0440 /home/pi/sudoers
 sudo chown root /home/pi/sudoers
@@ -37,8 +38,8 @@ sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
 sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 
 ##Change system hostname to PiNodeXMR
-#echo -e "\e[32mChaning system hostname to 'PiNodeXMR'\e[0m"
-#sleep 2
+echo -e "\e[32mChaning system hostname to 'PiNodeXMR'\e[0m"
+sleep 3
 echo 'PiNodeXMR' | sudo tee /etc/hostname
 #sudo sed -i '6d' /etc/hosts
 echo '127.0.0.1       PiNodeXMR' | sudo tee -a /etc/hosts
@@ -46,14 +47,14 @@ sudo hostname PiNodeXMR
 
 ##make script run when user logs in
 echo '. /home/pinodexmr/raspbian-pinodexmr.sh' | sudo tee -a /home/pinodexmr/.profile
-whiptail --title "PiNode-XMR Continue Install" --msgbox "I've installed everything I can as user 'pi'\n\nSystem will reboot, then login as 'pinodexmr' to continue\n\nSelect ok to continue with reboot" 16 60
+whiptail --title "PiNode-XMR Continue Install" --msgbox "I've installed everything I can as user 'pi'\n\nSystem will reboot, then login as 'pinodexmr' to continue using password 'PiNodeXMR'\n\nSelect ok to continue with reboot" 16 60
 echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m**********PiNode-XMR rebooting**********\e[0m"
 echo -e "\e[32m**********Reminder:*********************\e[0m"
 echo -e "\e[32m**********User: 'pinodexmr'*************\e[0m"
 echo -e "\e[32m**********Password: 'PiNodeXMR'*********\e[0m"
 echo -e "\e[32m****************************************\e[0m"
-sleep 10
+sleep 5
 #reboot for hostname changes. Continue as pinodexmr
 sudo reboot
 
