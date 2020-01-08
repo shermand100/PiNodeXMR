@@ -41,7 +41,7 @@ sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 #sleep 2
 echo 'PiNodeXMR' | sudo tee /etc/hostname
 sudo sed -i '6d' /etc/hosts
-echo '127.0.1.1       raspberrypi' | sudo tee -a /etc/hosts
+echo '127.0.0.1       PiNodeXMR' | sudo tee -a /etc/hosts
 sudo hostname PiNodeXMR
 
 ##make script run when user logs in
