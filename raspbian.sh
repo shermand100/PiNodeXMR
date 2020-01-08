@@ -20,14 +20,6 @@ echo "pinodexmr:PiNodeXMR" | sudo chpasswd
 echo -e "\e[32mpinodexmr password changed to 'PiNodeXMR'\e[0m"
 sleep 5
 
-##Change system hostname to PiNodeXMR
-#echo -e "\e[32mChaning system hostname to 'PiNodeXMR'\e[0m"
-#sleep 2
-echo 'PiNodeXMR' | sudo tee /etc/hostname
-sudo sed -i '6d' /etc/hosts
-echo '127.0.1.1       raspberrypi' | sudo tee -a /etc/hosts
-sudo hostname PiNodeXMR
-
 ##Replace file /etc/sudoers to set global sudo permissions/rules
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 2
@@ -43,6 +35,14 @@ wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/raspbi
 sudo mv /home/pi/raspbian-pinodexmr.sh /home/pinodexmr/
 sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
 sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
+
+##Change system hostname to PiNodeXMR
+#echo -e "\e[32mChaning system hostname to 'PiNodeXMR'\e[0m"
+#sleep 2
+echo 'PiNodeXMR' | sudo tee /etc/hostname
+sudo sed -i '6d' /etc/hosts
+echo '127.0.1.1       raspberrypi' | sudo tee -a /etc/hosts
+sudo hostname PiNodeXMR
 
 ##make script run when user logs in
 echo '. /home/pinodexmr/raspbian-pinodexmr.sh' | sudo tee -a /home/pinodexmr/.profile
