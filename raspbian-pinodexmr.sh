@@ -138,7 +138,7 @@ sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
 sudo chown www-data -R /var/www/html/
 sudo chmod 755 -R /var/www/html/
 
-##Build Monero and Onion Blockchain Explorer (the simple by time comsuming bit)
+##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 #First build monero, single build directory
 echo -e "\e[32mDownloading Monero v0.15\e[0m"
 sleep 3
@@ -165,6 +165,17 @@ sleep 10
 #make
 #cd
 
+##Install crontab
+echo -e "\e[32mSetup crontab\e[0m"
+sleep 3
+sudo chmod 644 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
+sudo chmod 644 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
+sudo chown root -R /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/
+sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/
+sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
 ## Remove left over files from git clone actions
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
@@ -179,7 +190,6 @@ echo -e "\e[32m**********PiNode-XMR rebooting**********\e[0m"
 echo -e "\e[32m**********Reminder:*********************\e[0m"
 echo -e "\e[32m**********User: 'pinodexmr'*************\e[0m"
 echo -e "\e[32m**********Password: 'PiNodeXMR'*********\e[0m"
-echo -e "\e[32m****
-************************************\e[0m"
+echo -e "\e[32m****************************************\e[0m"
 sleep 10
 sudo reboot

@@ -25,6 +25,8 @@ sleep "3"
 		sudo systemctl stop monerod-start.service
 		sudo systemctl stop monerod-start-mining.service
 		sudo systemctl stop monerod-start-tor.service
+		sudo systemctl stop monerod-start-public.service
+		sudo systemctl stop explorer-start.service
 		echo "Monerod stop command sent, allowing 30 seconds for safe shutdown"
 		sleep "30"
 		echo "Deleting Old Version"
@@ -41,18 +43,18 @@ sleep "3"
 		echo "Software Update Complete - Resuming Node"
 		sleep 2
 		. /home/pinodexmr/init.sh
+		sudo systemctl stop monerod-start-public.service
 		echo "Monero Node Started in background"
 
 		#Update system version number
 		echo "#!/bin/bash
 		CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
 		#Remove downloaded version check file
-		echo "Update complete"
+		whiptail --title "PiNode-XMR Monero Update Complete" --msgbox "Your PiNode-XMR has completed updating to the latest version of Monero" 16 60
 		sleep 3
 else
-	echo "Your node is up to date!"
-sleep 3
+		rm /home/pinodexmr/xmr-new-ver.sh
+		whiptail --title "PiNode-XMR Up-to-date" --msgbox "Your PiNode-XMR is running the latest version of Monero" 16 60
 
 fi
-
 ./setup.sh

@@ -1,2 +1,2 @@
 #!/bin/sh
-RPCp=PiNodeXMR978645
+RPCp=qwertyuiop
