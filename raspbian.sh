@@ -23,8 +23,9 @@ sleep 5
 ##Change system hostname to PiNodeXMR
 #echo -e "\e[32mChaning system hostname to 'PiNodeXMR'\e[0m"
 #sleep 2
-#echo 'PiNodeXMR' | sudo tee /etc/hostname
-#Also need to change /etc/hosts 
+echo 'PiNodeXMR' | sudo tee /etc/hostname
+sudo sed -i '6d' /etc/hosts
+echo '127.0.1.1       raspberrypi' | sudo tee -a /etc/hosts
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
@@ -43,12 +44,22 @@ sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
 sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 
 ##make script run when user logs in
-#echo '. /home/pinodexmr/raspbian-pinodexmr.sh' | sudo tee -a /home/pinodexmr/.profile
+echo '. /home/pinodexmr/raspbian-pinodexmr.sh' | sudo tee -a /home/pinodexmr/.profile
+whiptail --title "PiNode-XMR Continue Install" --msgbox "I've installed everything I can as user 'pi'\n\nSystem will reboot, then login as 'pinodexmr' to continue\n\nSelect ok to continue with reboot" 16 60
+echo -e "\e[32m****************************************\e[0m"
+echo -e "\e[32m**********PiNode-XMR rebooting**********\e[0m"
+echo -e "\e[32m**********Reminder:*********************\e[0m"
+echo -e "\e[32m**********User: 'pinodexmr'*************\e[0m"
+echo -e "\e[32m**********Password: 'PiNodeXMR'*********\e[0m"
+echo -e "\e[32m****************************************\e[0m"
+sleep 10
+#reboot for hostname changes. Continue as pinodexmr
+sudo reboot
 
 ##Change from user 'pi' to 'pinodexmr' and lock 'pi'
-echo -e "\e[32mSwitching user to 'pinodexmr'\e[0m"
-sleep 3
+#echo -e "\e[32mSwitching user to 'pinodexmr'\e[0m"
+#sleep 3
 #echo "PiNodeXMR" | su - pinodexmr
-sudo -H -u pinodexmr bash -c 'bash /home/pinodexmr/raspbian-pinodexmr.sh' 
+#sudo -H -u pinodexmr bash -c 'bash /home/pinodexmr/raspbian-pinodexmr.sh' 
 
 #End of script as user 'pi'. Continues in directory /home/pinodexmr

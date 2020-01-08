@@ -5,7 +5,7 @@
 # Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
 # Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
 # PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
-
+whiptail --title "PiNode-XMR Continue Install" --msgbox "Your PiNode-XMR is taking shape...\n\nHowever this next part will take several hours. When testing this installation I would leave it overnight.\n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
@@ -142,7 +142,7 @@ sudo chmod 755 -R /var/www/html/
 #First build monero, single build directory
 echo -e "\e[32mDownloading Monero v0.15\e[0m"
 sleep 3
-#git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
+git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
 echo -e "\e[32mBuilding Monero v0.15\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
@@ -150,20 +150,20 @@ echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
-#cd monero
-#USE_SINGLE_BUILDDIR=1 make
-#cd
+cd monero
+USE_SINGLE_BUILDDIR=1 make
+cd
 echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 sleep 10
-#git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
-#cd onion-monero-blockchain-explorer
-#mkdir build && cd build
-#cmake ..
-#make
-#cd
+git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+cd onion-monero-blockchain-explorer
+mkdir build && cd build
+cmake ..
+make
+cd
 
 ##Install crontab
 echo -e "\e[32mSetup crontab\e[0m"
@@ -182,9 +182,15 @@ sleep 3
 sudo rm -r /home/pinodexmr/Flat-UI/
 sudo rm -r /home/pinodexmr/pinode-xmr/
 
+##Change log in menu to 'main'
+#Delete line 28 (previous setting)
+sudo sed -i '28d' /home/pinodexmr/.profile
+#Set to auto run main setup menu on login
+echo '. /home/pinodexmr/setup.sh' | tee -a /home/pinodexmr/.profile
+
 ## Install complete
 echo -e "\e[32mAll Installs complete\e[0m"
-
+whiptail --title "PiNode-XMR Continue Install" --msgbox "Your PiNode-XMR is ready\n\nInstall complete. When you log in after the reboot use the menu to change your passwords and other features.\n\nEnjoy your Private Node\n\nSelect ok to reboot" 16 60
 echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m**********PiNode-XMR rebooting**********\e[0m"
 echo -e "\e[32m**********Reminder:*********************\e[0m"
