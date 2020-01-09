@@ -11,12 +11,16 @@ chmod 755 /home/pinodexmr/new-ver-pi.sh
 echo $NEW_VERSION_PI 'New Version'
 echo $CURRENT_VERSION_PI 'Current Version'
 sleep "3"
-	if [ $CURRENT_VERSION_PI -lt $NEW_VERSION_PI ]
+	if [ $CURRENT_VERSION_PI -lt $NEW_VERSION_PI ]; then
 		#Remove old version of update-pinodexmr.sh
 		rm /home/pinodexmr/update-pinodexmr.sh
+		#Update system version number to new one about to be installed
+		echo "#!/bin/bash
+CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 		#Get new update script and run
 		wget -O - https://raw.githubusercontent.com/shermand100/pinode-xmr/development/update-pinodexmr.sh | bash
-		else
+		
+else
 		whiptail --title "PiNode-XMR Update" --msgbox "\n\nYour PiNode-XMR is running the newest version" 12 78
 	fi
 	
