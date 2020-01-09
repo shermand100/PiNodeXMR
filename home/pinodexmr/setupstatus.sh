@@ -1,2 +1,2 @@
 #!/bin/sh
-			SETUP_STATUS=0
+SETUP_STATUS=0
