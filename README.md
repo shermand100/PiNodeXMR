@@ -12,6 +12,10 @@ SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
 
 43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
 
+##### Support at
+* Redit.com/r/PiNode
+* Telegram group PiNode-XMR t.me/PiNodeXMR
+
 ### Features:
 * 4 Node modes (click to start)
   * Private Node
