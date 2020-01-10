@@ -38,7 +38,7 @@ sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
 sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 
 ##Change system hostname to PiNodeXMR
-echo -e "\e[32mChaning system hostname to 'PiNodeXMR'\e[0m"
+echo -e "\e[32mChanging system hostname to 'PiNodeXMR'\e[0m"
 sleep 3
 echo 'PiNodeXMR' | sudo tee /etc/hostname
 #sudo sed -i '6d' /etc/hosts

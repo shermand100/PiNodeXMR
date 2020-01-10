@@ -10,7 +10,7 @@ whiptail --title "PiNode-XMR Continue Install" --msgbox "Your PiNode-XMR is taki
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
 sleep 2
-#sudo passwd --lock pi
+sudo passwd --lock pi
 echo -e "\e[32mUser 'pi' Locked\e[0m"
 sleep 3
 
@@ -153,6 +153,8 @@ sleep 10
 cd monero
 USE_SINGLE_BUILDDIR=1 make
 cd
+#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+mkdir .bitmonero
 echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
