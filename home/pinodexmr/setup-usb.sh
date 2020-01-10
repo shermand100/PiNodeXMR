@@ -68,29 +68,25 @@ if [ $SETUP_STATUS -eq 0 ]; then
 		#No suitable storage (note to self || means or)
 		if [ ${existsHDD} -eq 0 ] || [ ${SDAsize} -lt 100 ] && [ ${MicroSDsize} -lt 100 ]; then
 		
-		CHOICE=$(whiptail --backtitle "No suitable storage found" --title "PiNode-XMR Setup" --menu "PiNode-XMR can not find any suitable storage locations for the Monero blockchain.\n\nPlease install the PiNode-XMR disk image on an SD card larger than 100GB to hold this software and the Monero Blockchain\nor\nAdd an external USB device of over 100GB\n\nIf you believe this is incorrect, you may continue anyway. To make hardware changes, shutdown?" 20 60 8 \
+		CHOICE=$(whiptail --backtitle "No suitable storage found" --title "PiNode-XMR Setup" --menu "PiNode-XMR can not find any suitable storage locations for the Monero blockchain.\n\nPlease install PiNode-XMR disk on a device larger than 100GB to hold this software and the Monero Blockchain\nor\nAdd an external USB device of over 100GB\n\nIf you believe this is incorrect, you may continue anyway." 20 60 8 \
     "1)" "Continue using SD card"   \
 	"2)" "Continue using USB (if detected)"   \
-	"3)" "Shutdown" 2>&1 >/dev/tty)
+	"3)" "Cancel to make hardware changes" 2>&1 >/dev/tty)
 	
 			case $CHOICE in
 		"1)") 
-			whiptail --title "PiNode-XMR Setup" --msgbox "Although I have detected the SD card is too small for both the PiNode-XMR software and the Monero Blockchain I will continue anyway.\n\n***Storage Setup complete***" 20 60
+			whiptail --title "PiNode-XMR Setup" --msgbox "Although I have detected this device is too small for both the PiNode-XMR software and the Monero Blockchain I will continue anyway.\n\n***Storage Setup complete***" 20 60
 		echo "#!/bin/sh
-		SETUP_STATUS=10" > /home/pinodexmr/setupstatus.sh
+SETUP_STATUS=10" > /home/pinodexmr/setupstatus.sh
             ;;
 
 		"2)") whiptail --title "PiNode-XMR Setup" --msgbox "Although I think the USB device is too small (if at all detected) I will attempt to store the Monero blockchain on USB device 'sda'" 20 60
 		echo "#!/bin/sh
-		SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
+SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
             ;;
 			
-			"3)") echo "Shutting down in 20 seconds. To resolve the storage issue run PiNode-XMR on a larger SD card or connect a USB drive larger than 100GB"
-			#restore this setup status to beginning
-			echo "#!/bin/sh
-			SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
-			sleep 20
-			sudo shutdown now
+			"3)") echo whiptail --title "PiNode-XMR Setup" --msgbox "No storage configuration has been changed\n\nYou may make hardware changes and run this setup again\n\nReturning to menu" 20 60
+			./setup.sh
             ;;
 			
 			esac
@@ -101,23 +97,22 @@ if [ $SETUP_STATUS -eq 0 ]; then
 #SD Suitable - no USB drive
 		if [ ${existsHDD} -eq 0 ] && [ ${MicroSDsize} -gt 100 ]; then
 		
-				CHOICE=$(whiptail --backtitle "MicroSD Storage" --title "PiNode-XMR Setup" --menu "PiNode-XMR found suitable space on your SD card, and no external USB storage. Continue on SD card only, or shutdown to attach storage and try again." 20 60 8 \
+				CHOICE=$(whiptail --backtitle "MicroSD Storage" --title "PiNode-XMR Setup" --menu "PiNode-XMR found suitable space on your current device, and no external USB storage.\n\n 'Yes' To Continue on current storage only\n'No' to cancel and make hardware changes" 20 60 8 \
     "1)" "Continue using SD card"   \
 	"2)" "Shutdown" 2>&1 >/dev/tty)
 	
 			case $CHOICE in
 		"1)") 
-			whiptail --title "PiNode-XMR Setup" --msgbox "Storage setup complete, I will store the Monero Blockchain on this MicroSD card." 20 60
+			whiptail --title "PiNode-XMR Setup" --msgbox "Storage setup complete, I will store the Monero Blockchain on current device" 20 60
 		echo "#!/bin/sh
-		SETUP_STATUS=10" > /home/pinodexmr/setupstatus.sh
+SETUP_STATUS=10" > /home/pinodexmr/setupstatus.sh
             ;;
 			
-			"2)") echo "Shutting down in 20 seconds."
+			"2)") whiptail --title "PiNode-XMR Setup" --msgbox "No changes were made to storage configuration\n\nYou may make hardware changes and try again" 20 60
 			#restore this setup status to beginning
 			echo "#!/bin/sh
-			SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
-			sleep 20
-			sudo shutdown now
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
+			./setup.sh
             ;;
 			esac
 
@@ -126,23 +121,22 @@ if [ $SETUP_STATUS -eq 0 ]; then
 		#USB drive Suitable
 		if [ ${SDAsize} -gt 100 ]; then
 		
-						CHOICE=$(whiptail --backtitle "USB device Storage" --title "PiNode-XMR Setup" --menu "PiNode-XMR found a suitable external USB storage device. \n\nThis can be used to store the Monero Blockchain.\n\nIf this device has been used with PiNode-XMR before the data could be recovered in the next step\n\nIf this device has not been used with PiNode-XMR before ***All data will be lost***" 20 60 8 \
+						CHOICE=$(whiptail --backtitle "USB device Storage" --title "PiNode-XMR Setup" --menu "PiNode-XMR found a suitable external USB storage device. \n\nThis can be used to store the Monero Blockchain.\n\nIf this device has been used with PiNode-XMR before the data could be recovered in the next step\n\nIf this device has not been used with PiNode-XMR before ***All data will be lost***" 25 60 8 \
     "1)" "Continue setting up USB device"   \
-	"2)" "Don't use this USB device and Shutdown" 2>&1 >/dev/tty)
+	"2)" "Don't use this USB device return to menu" 2>&1 >/dev/tty)
 	
 			case $CHOICE in
 		"1)") 
 			whiptail --title "PiNode-XMR Setup" --msgbox "USB storage device selected.\n\n I will detect if device contains Monero blockchain from previous installation.\n\nPress enter" 20 60
 		echo "#!/bin/sh
-		SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
+SETUP_STATUS=5" > /home/pinodexmr/setupstatus.sh
             ;;
 			
-			"2)") echo "Shutting down in 20 seconds. To resolve the storage issue run PiNode-XMR on a larger SD card or connect a USB drive larger than 100GB"
+			"2)") whiptail --title "PiNode-XMR Setup" --msgbox "No changes were made to storage configuration\n\nYou may make hardware changes and try again" 20 60
 			#restore this setup status to beginning
 			echo "#!/bin/sh
-			SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
-			sleep 20
-			sudo shutdown now
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
+			./setup.sh
             ;;
 			
 			esac
@@ -170,13 +164,14 @@ recoverUSB=$(lsblk -o LABEL "/dev/sda" | grep -c XMRBLOCKCHAIN)
 		sudo chmod 777 -R /home/pinodexmr/.bitmonero
 		#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
 		UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}')
+		sudo sed -i '4d' /etc/fstab #removes existing entry is script run before (delete 4th line fstab)
 		sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero ext4 noexec,defaults 0 2" -i /etc/fstab
 		echo "Drive data has been preserved for this configuration, initialized and will auto-mount on boot"
 		sleep 2
 		echo "Storage device setup complete."
 		sleep 3
 		echo "#!/bin/sh
-		SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
             ;;
 			
         "2)")
@@ -193,6 +188,7 @@ recoverUSB=$(lsblk -o LABEL "/dev/sda" | grep -c XMRBLOCKCHAIN)
 			sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}')
 			#ADD UUID to fstab. To mount on boot
+			sudo sed -i '4d' /etc/fstab #removes existing entry is script run before (delete 4th line fstab)
 			sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero ext4 noexec,defaults 0 2" -i /etc/fstab
 			echo "Drive has been initialized and will auto-mount on boot"
 			sleep 3
@@ -200,7 +196,7 @@ recoverUSB=$(lsblk -o LABEL "/dev/sda" | grep -c XMRBLOCKCHAIN)
 			sleep 3
 			
 			echo "#!/bin/sh
-			SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
             ;;
 		esac
 	
@@ -219,15 +215,18 @@ recoverUSB=$(lsblk -o LABEL "/dev/sda" | grep -c XMRBLOCKCHAIN)
 			sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
 			sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}')
+			
 			#ADD UUID to fstab. To mount on boot
+			sudo sed -i '4d' /etc/fstab #removes existing entry is script run before (delete 4th line fstab)
 			sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero ext4 noexec,defaults 0 2" -i /etc/fstab
-			echo "Drive has been initialized and will auto-mount on boot"
-			sleep 3
-			echo "***Storage setup complete***"
+			whiptail --title "PiNode-XMR Setup" --msgbox "USB Storage setup complete\n\nDevice has been:\n* Formatted to ext4\n* Labelled 'XMRBLOCKCHAIN' for future identification\n* Mounted to ~/.bitmonero\n* /etc/fstab/ ammended to auto-mount drive on PiNode-XMR boot" 20 60
 			sleep 3
 			echo "#!/bin/sh
-			SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
 	
 	fi
+else
+			echo "#!/bin/sh
+SETUP_STATUS=0" > /home/pinodexmr/setupstatus.sh
 fi
 ./setup.sh
