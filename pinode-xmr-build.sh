@@ -13,7 +13,8 @@ whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct install
 )
 
 case $CHOICE in
-	"1)")   
+	"1)")
+		#Commands for Raspbian
 		echo -e "\e[32mDownloading data for install\e[0m"
 		sleep 3
 		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/raspbian.sh
@@ -32,7 +33,14 @@ case $CHOICE in
 
 	"3)")   
 		#Commands for Armbian
-		echo -e "\e[32mCommands for Armbian\e[0m"
+		echo -e "\e[32mDownloading data for install\e[0m"
+		sleep 3
+		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/armbian.sh
+		echo -e "\e[32mPiNode-XMR Raspbian configuration file received\e[0m"
+		echo -e "\e[32mStarting Installation\e[0m"
+		sudo chmod 755 /home/pi/armbian.sh
+		sleep 2
+		./armbian.sh
 		exit 1
         ;;
 
