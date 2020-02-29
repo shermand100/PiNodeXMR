@@ -17,7 +17,7 @@ case $CHOICE in
 		#Commands for Raspbian
 		echo -e "\e[32mDownloading data for install\e[0m"
 		sleep 3
-		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/raspbian.sh
+		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/raspbian.sh
 		echo -e "\e[32mPiNode-XMR Raspbian configuration file received\e[0m"
 		echo -e "\e[32mStarting Installation\e[0m"
 		sudo chmod 755 /home/pi/raspbian.sh
@@ -35,7 +35,7 @@ case $CHOICE in
 		#Commands for Armbian
 		echo -e "\e[32mDownloading data for install\e[0m"
 		sleep 3
-		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/armbian.sh
+		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Armbian-install/armbian.sh
 		echo -e "\e[32mPiNode-XMR Raspbian configuration file received\e[0m"
 		echo -e "\e[32mStarting Installation\e[0m"
 		sudo chmod 755 /home/pi/armbian.sh
