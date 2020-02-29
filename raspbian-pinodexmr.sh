@@ -37,23 +37,10 @@ sleep 3
 sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils tor nyx fail2ban ufw  dialog -y
 sleep 3
 
-##Configure Swap file
-echo -e "\e[32mConfiguring 2GB Swap file (required for Monero build)\e[0m"
-sleep 3
-wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/etc/dphys-swapfile
-sudo mv /home/pinodexmr/dphys-swapfile /etc/dphys-swapfile
-sudo chmod 664 /etc/dphys-swapfile
-sudo chown root /etc/dphys-swapfile
-sudo dphys-swapfile setup
-sleep 5
-sudo dphys-swapfile swapon
-echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
-sleep 3
-
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b development --single-branch https://github.com/shermand100/pinode-xmr.git
+git clone -b Armbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
 
 
 ##Configure ssh security. Allow only user 'pinodexmr' & 'root' login disabled, restart config to make changes
@@ -66,7 +53,7 @@ sudo /etc/init.d/ssh restart
 echo -e "\e[32mSSH security config complete\e[0m"
 sleep 3
 
-##Disable IPv6 on boot. Enabled causes errors as Raspbian generates a IPv4 and IPv6 address and Monerod will fail with both.
+##Disable IPv6 on boot. Enabled causes errors as Armbian generates a IPv4 and IPv6 address and Monerod will fail with both.
 echo -e "\e[32mDisable IPv6 on boot\e[0m"
 sleep 3
 echo 'ipv6.disable=1' | sudo tee -a /boot/cmdline.txt
