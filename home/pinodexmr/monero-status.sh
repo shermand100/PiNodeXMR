@@ -16,8 +16,8 @@ DEVICE_IP="$(hostname -I)"
 	if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-		./monero-active/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled status | sed -n '/Height:/p' > /var/www/html/Node_Status.txt
+		./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled status | sed -n '/Height:/p' > /var/www/html/Node_Status.txt
 else
 		#Node Status
-		./monero-active/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled status | sed -n '/Height:/p' > /var/www/html/Node_Status.txt	
+		./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled status | sed -n '/Height:/p' > /var/www/html/Node_Status.txt	
 fi

@@ -14,8 +14,8 @@
 		if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-		./monero-active/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_pl_stats | sed '1d' > /var/www/html/print_pl_stats.txt
+		./monero/build/release/bin/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_pl_stats | sed '1d' > /var/www/html/print_pl_stats.txt
 else
 	#Print PL_STATS white vs grey nodes
-	./monero-active/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_pl_stats | sed '1d' > /var/www/html/print_pl_stats.txt	
+	./monero/build/release/bin/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_pl_stats | sed '1d' > /var/www/html/print_pl_stats.txt	
 fi

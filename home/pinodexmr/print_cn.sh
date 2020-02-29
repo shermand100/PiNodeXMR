@@ -14,10 +14,10 @@
 	if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-	./monero-active/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_cn | sed '1d' > /var/www/html/print_cn.txt
+	./monero/build/release/bin/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_cn | sed '1d' > /var/www/html/print_cn.txt
 else
 	#Connected Peers info
-	./monero-active/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_cn | sed '1d' > /var/www/html/print_cn.txt			
+	./monero/build/release/bin/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_cn | sed '1d' > /var/www/html/print_cn.txt			
 fi	
 	
 	
