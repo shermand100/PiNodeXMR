@@ -145,8 +145,8 @@ sudo chmod 775 -R /var/www/html/
 #First build monero, single build directory
 echo -e "\e[32mDownloading Monero v0.15\e[0m"
 sleep 3
-git clone --recursive https://github.com/monero-project/monero.git
-#git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git
+#git clone --recursive https://github.com/monero-project/monero.git         #Development release
+git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git       #Latest Stable release
 echo -e "\e[32mBuilding Monero v0.15\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
