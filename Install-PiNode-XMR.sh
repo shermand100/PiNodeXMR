@@ -1,7 +1,8 @@
 #!/bin/bash
 ##To run me on cmd line wget -O - https://raw.githubusercontent.com/shermand100/pinode-xmr/master/pinode-xmr-build.sh | bash
 echo -e "\e[32mPreparing Menu...\e[0m"
-sleep 3
+sleep 2
+#Check user has whiptail - required to display menu
 sudo apt-get install whiptail
 
 CHOICE=$(
@@ -36,9 +37,9 @@ case $CHOICE in
 		echo -e "\e[32mDownloading data for install\e[0m"
 		sleep 3
 		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Armbian-install/armbian.sh
-		echo -e "\e[32mPiNode-XMR Raspbian configuration file received\e[0m"
+		echo -e "\e[32mPiNode-XMR Armbian configuration file received\e[0m"
 		echo -e "\e[32mStarting Installation\e[0m"
-		sudo chmod 755 /home/pi/armbian.sh
+		sudo chmod 755 /home/pinodexmr/armbian.sh
 		sleep 2
 		./armbian.sh
 		exit 1
