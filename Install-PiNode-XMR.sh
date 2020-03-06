@@ -27,8 +27,8 @@ case $CHOICE in
 	;;
 	"2)")   
 		#Commands for Debian
-		echo -e "\e[32mCommands for Debian\e[0m"
-		exit 1
+		whiptail --title "Debian Installer coming soon" --msgbox "Debian is not yet available, but is a work in progress\n\n\Please select either the Raspbian or Armbian installer if your Hardware/OS is ready." 16 60;
+		./Install-PiNode-XMR.sh
 	;;
 
 	"3)")   
