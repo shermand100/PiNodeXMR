@@ -20,8 +20,7 @@ DEVICE_IP="$(hostname -I)"
 	. /home/pinodexmr/RPCu.sh
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
-#Removed commands
-	#  --block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE
+
 #Update power cycle reboot state
 	echo "#!/bin/sh
 BOOT_STATUS=3" > /home/pinodexmr/bootstatus.sh

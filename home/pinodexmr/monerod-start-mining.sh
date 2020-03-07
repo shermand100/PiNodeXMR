@@ -24,8 +24,7 @@ DEVICE_IP="$(hostname -I)"
 	. /home/pinodexmr/RPCu.sh
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
-#Omitted commands - for future versions, unstable for now.
-	#--block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE 
+ 
 #Output the currently running node mode
 	echo "#!/bin/sh
 BOOT_STATUS=5" > /home/pinodexmr/bootstatus.sh

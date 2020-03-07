@@ -69,7 +69,7 @@
 							fi
 						;;
 				
-					"2)")	if (whiptail --title "Update PiNode-XMR" --yesno "This will check for updates to PiNode-XMR features not covered by other titles in the main menu\n\nWould you like to continue?" 12 78); then
+					"2)")	if (whiptail --title "Update PiNode-XMR" --yesno "This will check for updates to PiNode-XMR Including performance, features and web interface\n\nWould you like to continue?" 12 78); then
 							. /home/pinodexmr/setup-update-pinodexmr.sh
 							else
 							. /home/pinodexmr/setup.sh

@@ -28,8 +28,7 @@ DEVICE_IP="$(hostname -I)"
 	. /home/pinodexmr/difficulty.sh
 	#RPC payment address
 	. /home/pinodexmr/payment-address.sh
-#Removed commands
-	#  --block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE
+
 #Output the currently running state
 	echo "#!/bin/sh
 BOOT_STATUS=6" > /home/pinodexmr/bootstatus.sh
