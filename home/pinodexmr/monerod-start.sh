@@ -22,8 +22,7 @@ DEVICE_IP="$(hostname -I)"
 	. /home/pinodexmr/RPCp.sh
 #Removed commands
 	#  --block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE
-#Output the currently running node mode & update power cycle reboot state
-	echo "Clearnet Node - Private" > /var/www/html/iamrunning_version.txt
+#Update power cycle reboot state
 	echo "#!/bin/sh
 BOOT_STATUS=3" > /home/pinodexmr/bootstatus.sh
 #Start Monerod

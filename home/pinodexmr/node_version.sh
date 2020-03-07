@@ -9,14 +9,16 @@
 	. /home/pinodexmr/RPCu.sh
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
+	#Establish IP/Port
+	DEVICE_IP="$(hostname -I)"
 
 
 	if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-	./monero-active/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled version | sed '1d' > /var/www/html/node_version.txt
+		VERSION="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_STATS_PORT} --rpc-ssl disabled version | sed -n 's/Monero/&/p')" && echo "${VERSION#*I}" > /var/www/html/node_version.txt
 else
 		#Node Version Print
-		./monero-active/monerod --rpc-bind-ip=$(hostname -I) --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled version | sed '1d' > /var/www/html/node_version.txt
-			
+		VERSION="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled version | sed -n 's/Monero/&/p')" && echo "${VERSION#*I}" | cut -c9- > /var/www/html/node_version.txt
+	
 fi 

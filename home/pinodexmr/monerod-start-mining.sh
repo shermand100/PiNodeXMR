@@ -27,7 +27,6 @@ DEVICE_IP="$(hostname -I)"
 #Omitted commands - for future versions, unstable for now.
 	#--block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE 
 #Output the currently running node mode
-echo "Clearnet Node - Mining [YES]" > /var/www/html/iamrunning_version.txt
 	echo "#!/bin/sh
 BOOT_STATUS=5" > /home/pinodexmr/bootstatus.sh
 #Allow time for previous service stop
