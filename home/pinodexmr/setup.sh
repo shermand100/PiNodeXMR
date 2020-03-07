@@ -17,9 +17,10 @@
 				
 		"2)")CHOICE2=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nSystem Settings" 20 60 10 \
 				"1)" "Hardware & WiFi Settings (raspi-config)" \
-				"2)" "Terminal Password & RPC username:password setup" \
-				"3)" "USB storage setup" \
-				"4)" "SD Card Health Checker" 2>&1 >/dev/tty)
+				"2)" "Master Login Password Set" \
+				"3)" "Monero RPC Username and Password setup" \
+				"4)" "USB storage setup" \
+				"5)" "SD Card Health Checker" 2>&1 >/dev/tty)
 				
 				case $CHOICE2 in
 		
@@ -27,21 +28,28 @@
 							sudo raspi-config; . /home/pinodexmr/setup.sh
 					;;
 				
-					"2)") 	if (whiptail --title "PiNode-XMR Set Passwords" --yesno "This will change your web terminal log in password & your RPC user name and password\n\nWould you like to continue?" 12 78); then
-					. /home/pinodexmr/setup-passwords.sh
+					"2)") 	if (whiptail --title "PiNode-XMR Set Password" --yesno "This will change your SSH/Web terminal log in password\n\nWould you like to continue?" 12 78); then
+					. /home/pinodexmr/setup-password-master.sh
+							else
+					. /home/pinodexmr/setup.sh
+							fi
+					;;
+					
+					"3)") 	if (whiptail --title "PiNode-XMR Set Password" --yesno "This will set your credentials needed to connect your wallet to your node\n\nWould you like to continue?" 12 78); then
+					. /home/pinodexmr/setup-password-monerorpc.sh
 							else
 					. /home/pinodexmr/setup.sh
 							fi
 					;;
 			
-					"3)")	if (whiptail --title "PiNode-XMR configure storage" --yesno "This will allow you to add USB storage for the Monero blockchain.\n\nConnect your device now.\n\n***If this device has not been used with PiNode-XMR before it will be formatted and all data on it lost***\n\nWould you like to continue?" 16 78); then
+					"4)")	if (whiptail --title "PiNode-XMR configure storage" --yesno "This will allow you to add USB storage for the Monero blockchain.\n\nConnect your device now.\n\n***If this device has not been used with PiNode-XMR before it will be formatted and all data on it lost***\n\nWould you like to continue?" 16 78); then
 					. /home/pinodexmr/setup-usb.sh
 							else
 					. /home/pinodexmr/setup.sh
 							fi
 					;;
 					
-					"4)")	if (whiptail --title "PiNode-XMR MicroSD Health Check" --yesno "This utility (agnostics) will run speed tests on your SD card read/write functions to give an indication of its current health.\n\nBefore starting this check, stop all services that are currently reading/writing (Node and BlockExplorer) for most accurate results.\n\nWould you like to continue?" 16 78); then
+					"5)")	if (whiptail --title "PiNode-XMR MicroSD Health Check" --yesno "This utility (agnostics) will run speed tests on your SD card read/write functions to give an indication of its current health.\n\nBefore starting this check, stop all services that are currently reading/writing (Node and BlockExplorer) for most accurate results.\n\nWould you like to continue?" 16 78); then
 					 clear;
 					 echo -e "\e[32mRunning test script. This will take a few minutes...\e[0m";
 					 sudo sh /usr/share/agnostics/sdtest.sh;
