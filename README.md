@@ -1,20 +1,6 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # User Manual v3.20.03-Open-Build		
-### Self Install for Raspbian and Armbian or Associated disk image for Raspberry Pi 'New Image Pending'		(image size optimised for SD cards)
-#### Downloads
-##### For Raspberry Pi
-
-New Updated Image pending - older v2.12.19 below
-[PiNode-XMR_v2.12.19_m0.15.0.1.img   -   Hosted on Google drive - 6.45GB](https://drive.google.com/file/d/1u9leBw4-SEUcmZaZ9nh5iQVvO4Q2A7nU/view?usp=sharing)
-SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
-
-*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
-
-43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
-
-##### Support at
-* [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
-* Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
+### Open Source Build for Raspbian and Armbian
 
 ### Features:
 * 4 Node modes (click to start)
@@ -55,6 +41,21 @@ SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
 
 A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
 With a little further configuration this node will allow wallet connections from your mobile app on the move.
+
+## Downloads
+### For Raspberry Pi
+
+New v3 Image pending - older v2.12.19 below
+[PiNode-XMR_v2.12.19_m0.15.0.1.img   -   Hosted on Google drive - 6.45GB](https://drive.google.com/file/d/1u9leBw4-SEUcmZaZ9nh5iQVvO4Q2A7nU/view?usp=sharing)
+SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
+
+*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
+
+43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
+
+## Support at
+* [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
+* Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
 
 ## Contents:
 
