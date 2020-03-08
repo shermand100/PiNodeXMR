@@ -135,8 +135,9 @@
 
 		"5)")CHOICE5=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 20 60 10 \
 				"1)" "Install tor" \
-				"2)" "Install PiVPN" \
-				"3)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
+				"2)" "tor NYX" \
+				"3)" "Install PiVPN" \
+				"4)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
 				
 				case $CHOICE5 in
 		
@@ -146,15 +147,23 @@
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
+												
+							"2)")	if (whiptail --title "PiNode-XMR tor NYX" --yesno "This tool will allow you to monitor tor bandwidth usage\n\nWhen prompted for a password, enter 'PiNodeXMR'\nAnd to exit the utility press 'CTRL+C' \n\nWould you like to continue?" 12 78); then
+									nyx; . /home/pinodexmr/setup.sh
+							
+									else
+									. /home/pinodexmr/setup.sh
+									fi
+								;;
 				
-							"2)")	if (whiptail --title "PiNode-XMR PiVPN Install" --yesno "This feature will install PiVPN on your PiNode-XMR\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
+							"3)")	if (whiptail --title "PiNode-XMR PiVPN Install" --yesno "This feature will install PiVPN on your PiNode-XMR\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setup-PiVPN.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
 									
-							"3)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
+							"4)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setup-noip.sh
 									else
 									. /home/pinodexmr/setup.sh
