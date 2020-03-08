@@ -1,11 +1,3 @@
-2019-07-02 14:08:03.251	I Monero 'Boron Butterfly' (v0.14.1.0-release)
-Remote Host                   SSL   Peer id             Support Flags       Recv/Sent (inactive,sec)      State                    Livetime(sec)       Down (kB/s) Down(now)     Up (kB/s) Up(now)      
+Remote Host                   Type    SSL   Peer id             Support Flags       Recv/Sent (inactive,sec)      State                    Livetime(sec)       Down (kB/s) Down(now)     Up (kB/s) Up(now)      
 
-OUT 193.41.188.62:18080       no    32f6173dd5701c92    1                   50443707(16)/1142013(17)      synchronizing            2130                23          35            0         0            
-OUT 95.217.36.126:18080       no    726450205e573289    1                   64758716(17)/1220374(17)      synchronizing            2133                29          35            0         0            
-OUT 101.174.34.166:18080      no    eb90d0aa910638fd    1                   53379344(11)/1200982(17)      synchronizing            2270                22          34            0         3            
-OUT 163.172.102.112:18080     no    ce57d5061798b9d1    1                   83987513(16)/1479674(17)      synchronizing            2273                36          35            0         3            
-OUT 125.177.123.206:5900      no    ff164ba94f74270f    1                   51049360(15)/1228231(17)      synchronizing            2275                21          35            0         0            
-OUT 70.161.251.52:18080       no    f56a215eef20204f    1                   953636(2272)/36291(71)        synchronizing            2276                0           103           0         0            
-OUT 95.216.170.83:18080       no    c84a87a2f73d3143    1                   46992879(14)/1247927(17)      synchronizing            2282                20          35            0         0            
-OUT 54.39.75.65:7239          no    296f00e638c0874d    1                   371711(1)/1106973(0)          synchronizing            2283                0           0             0         3            
+-- Data Will be generated on next crontab run --
