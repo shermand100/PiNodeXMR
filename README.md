@@ -1,6 +1,6 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/PiNode-XMR%20logo.jpg)
-# User Manual v2.12.19		
-### Associated disk image 'PiNode-XMR_v2.12.19_M0.15.0.1'		(image size optimised for SD cards)
+# User Manual v3.12.19		- This document is out of date, work in progress for new features
+### Associated disk image To to be made, legacy version ='PiNode-XMR_v2.12.19_M0.15.0.1'		(image size optimised for SD cards)
 #### Downloads
 ##### For Raspberry Pi
 
