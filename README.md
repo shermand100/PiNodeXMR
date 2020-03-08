@@ -45,9 +45,10 @@ With a little further configuration this node will allow wallet connections from
 ## Downloads
 ### For Raspberry Pi
 
-New v3 Image pending - older v2.12.19 below
-[PiNode-XMR_v2.12.19_m0.15.0.1.img   -   Hosted on Google drive - 6.45GB](https://drive.google.com/file/d/1u9leBw4-SEUcmZaZ9nh5iQVvO4Q2A7nU/view?usp=sharing)
-SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
+New v3.20.03 Images (Base image and pre-sync'd image to block 2050060) uploading now - 20:00GMT 08/03/20. Please allow 24hrs for upload, test, SHA256 hash generation etc)
+
+Pre-sync est 92GB
+Base image est 5.7GB
 
 *Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
 
