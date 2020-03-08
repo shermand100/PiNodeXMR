@@ -34,11 +34,11 @@ SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
   * raspi-config (Hardware and Wifi settings pre-built into PiNode-XMR menu
   * Agnostics - SD Card read/write health checker included
   * PiVPN - Tool for easy configuration of OpenVPN for Raspbian and Armbian
-  * PoPblocks - Monero tool to help recover blockchain problems - UI
+  * PoP blocks - Monero tool to help recover blockchain problems - UI
   * Systemd Monitor to track running node and explorer functions
-  * tor installer - tor is no longer included and running as default due to censorship, political or legal restriction of users host counrty. Simple select to install and activate on user request.
+  * tor installer - tor is no longer included and running as default due to censorship, political or legal restriction of users host country. Simple select to install and activate on user request.
   * All status boxes have improved scripts for clearer more constant feedback during high CPU loads.
-* All the benefits of running on a Single Board computer (EG. RasPi, silent/fanless, low power (approx 15w) for 24/7 node, low cost)
+* All the benefits of running on a Single Board computer (EG. RasPi, silent/fan-less, low power (approx 15w) for 24/7 node, low cost)
 * Headless (No need for extra monitor,keyboard,etc) and connect via Ethernet or WiFi**
 
 
@@ -86,9 +86,10 @@ With a little further configuration this node will allow wallet connections from
        * [Prune Node](https://github.com/shermand100/pinode-xmr#prune-node)
        * [Pop Blocks](https://github.com/shermand100/pinode-xmr#pop-blocks)
      * [Extra Network Tools](https://github.com/shermand100/pinode-xmr#extra-network-tools)
-       * Install tor
-       * Install PiVPN
-       * Install No-IP (Dynamic DNS)
+       * [Install tor](https://github.com/shermand100/pinode-xmr#install-tor)
+       * [Install tor NYX](https://github.com/shermand100/pinode-xmr#tor-nyx)
+       * [Install PiVPN](https://github.com/shermand100/pinode-xmr#install-pivpn)
+       * [Install No-IP (Dynamic DNS)](https://github.com/shermand100/pinode-xmr#noip.com-dynamic-dns)
   
 * [A note on tor](https://github.com/shermand100/pinode-xmr#tor)
 * [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
@@ -100,7 +101,7 @@ With a little further configuration this node will allow wallet connections from
   
 ## Intro
 
-Let me start by saying I'm glad the internet has bought you to here. It's taken several years to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. The project is in a changing state at the moment with a shift from pre-built disk images, to you the user running a single command to initiate the install from this github repository. The reason for this change is to present the project as open source, increase transparency and trust. It also gives the added benefit of no longer being tied to the hardware of the device I was building the disk images on. This gives you the user much greater freedom to install your node on any Armbian device of your choice. Whilst this transition to open source finallises I will continue to provide the pre-made and pre-syncd disk images for the Raspberry Pi, but will phase this out over the year.
+Let me start by saying I'm glad the internet has bought you to here. It's taken several years to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. The project is in a changing state at the moment with a shift from pre-built disk images, to you the user running a single command to initiate the install from this github repository. The reason for this change is to present the project as open source, increase transparency and trust. It also gives the added benefit of no longer being tied to the hardware of the device I was building the disk images on. This gives you the user much greater freedom to install your node on any Armbian device of your choice. Whilst this transition to open source finalises I will continue to provide the pre-made and pre-syncd disk images for the Raspberry Pi, but will phase this out over the year.
 Also throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that users too have busy lifestyles, they want a node fast and I hope this project is a reasonable solution to that request.
 
 To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
@@ -125,7 +126,7 @@ Once complete insert the card into your device and power on.
 This project can now self install on Raspbian and Armbian OS in an effort to become completely Open Source (my disk images require you to trust me). This is a better alternative for everyone.
 
 #### Raspberry Pi
-Install your Raspbian OS as usual and idealy SSH into it as user `pi` and enter
+Install your Raspbian OS as usual and ideally SSH into it as user `pi` and enter
 
 `wget -O - https://github.com/shermand100/pinode-xmr/raw/master/Install-PiNode-XMR.sh | bash`
 
@@ -191,7 +192,7 @@ I'll also take this opportunity to mention that most of the displays of Node and
 
 This is the main page for starting/stopping and setting variables on your node. It can either be started as a Clearnet Private/Public,tor or Mining node, and you may switch between modes as you wish. The node has memory, so if power is lost and restored the node will reboot and continue in the mode it was last set, hence the wording on the Node Status page to remind you what you last clicked.
 
-- *Private Node:* A node that only you can connect a wallet to using the RPC username and password you've set. How you configure your firewall will determin external access, (covered later)
+- *Private Node:* A node that only you can connect a wallet to using the RPC username and password you've set. How you configure your firewall will determine external access, (covered later)
 
 - *Public Node:* Be a little patient for this cool new feature, where you could be paid to run this node. See [Monero project commit message for this feature](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937). This feature is installed but waiting for a fix to be committed. More info on the issue [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083). Expect to be active on release of Monero 0.15.0.3. I've put the settings is according t this documentation but have been unable to test yet. Minor tweak at time of release may also be necessary.
 
@@ -290,7 +291,7 @@ Notes on USB storage -
 Be aware the device will become `/dev/sda` mounted at `/home/pinodexmr/.bitmonero` with no partition and the entire drive will be used. Other devices (windows) can sometimes not detect this drive after use with PiNode-XMR because of the lack of partition, it is easily reverted back, just a heads up, this is most likely your issue.
 
 #### Agnostics - SD card health checker
-A new tool for checking SD card read/write sequential and random speeds. It has some performance targets set into it and will inform you wether or not you meet those targets via PASS/FAIL.
+A new tool for checking SD card read/write sequential and random speeds. It has some performance targets set into it and will inform you whether or not you meet those targets via PASS/FAIL.
 
 Before starting this test ensure you have stopped the node and block explorer, if they read/write in the background the test will fail.
 
@@ -302,17 +303,17 @@ Before starting this test ensure you have stopped the node and block explorer, i
 PiNode-XMR will download a new version number from this site and compare it to your current version. If the new version number is higher you will have the option to update.
 On update the nodes and block explorer will stop, old Monero versions deleted and new versions will be downloaded and built from the official Monero repositories.
 
-The compiling of Monero on single board computers is very CPU intensive, at worst on a Raspberry Pi 3b+ it has been known to take approx 7 hours. More powerful hardware will be proportionatley faster.
+The compiling of Monero on single board computers is very CPU intensive, at worst on a Raspberry Pi 3b+ it has been known to take approx 7 hours. More powerful hardware will be proportionately faster.
 
 #### Update PiNode-XMR
 This will update your Web UI, install new tools, features that are not covered by another option in this Update menu.
-If you have set custom variables during normal use (Bandwidth settings, Addreses, passwords) they will be retained during the update process.
+If you have set custom variables during normal use (Bandwidth settings, Addresses, passwords) they will be retained during the update process.
 
 #### Update Block-Explorer
 As the title suggests. If there is a new version available it will be sourced from the external repository https://github.com/moneroexamples/onion-monero-blockchain-explorer
 
 #### Update background system dependencies
-This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to update background dependencies that are used by the underlying operating system (Raspbian or Armbian). This can include things like secuirty upgrades so is worth running on occassion.
+This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to update background dependencies that are used by the underlying operating system (Raspbian or Armbian). This can include things like security upgrades so is worth running on occasion.
 
 ### Node Tools
 
@@ -321,31 +322,31 @@ This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to
 #### Start/Stop Blockchain Explorer
 As the title says, use this to manually start/stop the explorer.
 
-When the explorer is started it also updates a flag elsewhere in the system so that the explorer will be strated on system boot (in case of power cycle). This flag is then removed on the manual stop selection.
+When the explorer is started it also updates a flag elsewhere in the system so that the explorer will be started on system boot (in case of power cycle). This flag is then removed on the manual stop selection.
 
 #### Prune Node
 I think this is the simplest method for new users. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. For this reason the prune option can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
 
 #### Pop Blocks
-Another new feature. This uses a blockchain tool stored on yuor system to remove a specified number of blocks from the end of the blockchain. It will prompt you for a value, and that many blocks will be removed.
+Another new feature. This uses a blockchain tool stored on your system to remove a specified number of blocks from the end of the blockchain. It will prompt you for a value, and that many blocks will be removed.
 
 Ensure the blockchain is not in use by the node or explorer first, (stop them).
 
-This can be used is you have blockchain transaction errors preventing you from completeing a sync. It can help avoid a lengthy re-start sync from scratch.
+This can be used is you have blockchain transaction errors preventing you from completing a sync. It can help avoid a lengthy re-start sync from scratch.
 
 ### Extra Network Tools
 
 ![Network-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/network-tools.png)
 
 ### Install tor
-From v3 of PiNode-XMR tor is no longer installed by default due the pottential for a user to encounter trouble from cencorship, political or legal issues in their country. Therefore use this option to add the tool and enbale the tor mode on the web UI. Once installed see https://github.com/shermand100/pinode-xmr#tor below for how it works, and how it affects your privacy.
+From v3 of PiNode-XMR tor is no longer installed by default due the potential for a user to encounter trouble from censorship, political or legal issues in their country. Therefore use this option to add the tool and enable the tor mode on the web UI. Once installed see https://github.com/shermand100/pinode-xmr#tor below for how it works, and how it affects your privacy.
 
 ### tor NYX
 Is a bandwidth monitoring utility for tor, (Previously tor-arm).
 
-Detailed bandwidth stats are available when running as a tor node using the nyx utility. (Available for Raspbery Pi image only) It is installed as a package with the "Install tor" option mentioned above. 
+Detailed bandwidth stats are available when running as a tor node using the nyx utility. (Available for Raspberry Pi image only) It is installed as a package with the "Install tor" option mentioned above. 
 
-Selecting tor NYX will bring you to the terminal and be promtped for the controller password, use: `PiNodeXMR`
+Selecting tor NYX will bring you to the terminal and be prompted for the controller password, use: `PiNodeXMR`
 
 ![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/arm.png)
 
@@ -354,19 +355,21 @@ Exit the utility by using `CTRL+C` and return to the setting menu.
 ### Install PiVPN
 This is a great open source tool from https://www.pivpn.io/ enabling you to run your own home VPN. Check out their site for more info
 
-### NoIp Dynamic DNS
-This can be helpful if you have a dynamic external IP address, and want to connect to your Node from a mobile wallet on the go. This service lets you set a easy to remember hostname which will always point to your home network. Port forwarding is then required to complete the connecion to your PiNode-XMR, and concern should be given to your home security settings before allowing this. Configured correctly this is a great tool. 
+### NoIp.com Dynamic DNS
+This can be helpful if you have a dynamic external IP address, and want to connect to your Node from a mobile wallet on the go. This service lets you set a easy to remember hostname which will always point to your home network. Port forwarding is then required to complete the connection to your PiNode-XMR, and concern should be given to your home security settings before allowing this. Configured correctly this is a great tool.
+Before starting this option it is required that you register (free) at NoIP.com for a username and password that will be required after installation. From their site you set your custom hostname.
 
 ## tor
 A note on tor:
 Your PiNode-XMR utilises tor in Monero's default manner. To quote https://github.com/monero-project/monero#using-tor :
 
-> ' The feature allows connecting over IPv4 and Tor simulatenously - IPv4 is used for relaying blocks and relaying transactions received by peers whereas Tor is used solely for relaying transactions received over local RPC. This provides privacy and better protection against surrounding node (sybil) attacks. '
+> ' The feature allows connecting over IPv4 and Tor simultaneously - IPv4 is used for relaying blocks and relaying transactions received by peers whereas Tor is used solely for relaying transactions received over local RPC. This provides privacy and better protection against surrounding node (sybil) attacks. '
 
 and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#behavior :
 
 > ' If any anonymity network is enabled, transactions being broadcast that lack a valid "context" (i.e. the transaction did not come from a p2p connection), will only be sent to peers on anonymity networks. If an anonymity network is enabled but no peers over an anonymity network are available, an error is logged and the transaction is kept for future broadcasting over an anonymity network. The transaction will not be broadcast unless an anonymity connection is made or until monerod is shutdown and restarted with only public connections enabled. '
 
+### Misc options:
 ##### *Mining_Intensity:* The default mining intensity is set to 50% and is configurable through the web terminal command line
  
      nano /home/pinodexmr/mining-intensity.sh
@@ -384,7 +387,7 @@ To use your Monero GUI on a device that is on the same local network as your nod
 Your wallet will then scan the node's blockchain for any transaction outputs that belong to your wallet, this can take a few minutes the first time but subsequent connections will only scan for changes since the last connection being much faster.
 
 ### Monerujo app
-Unfortunatly the app won't allow a screenshot, but it's very similar to the GUI method.
+Unfortunately the app won't allow a screenshot, but it's very similar to the GUI method.
 With your mobile device connected by WiFi to the same network as your node simply enter the node IP in the 'hostname' field, port is 18081. 'Node name' is for your reference on your apps node list, call it what you want. Username and Password are required and are the RPC username and password you set in the ./setup.sh menu.
 
 ## Connecting a Wallet - External Connections
