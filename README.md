@@ -81,11 +81,11 @@ With a little further configuration this node will allow wallet connections from
        * [Update PiNode-XMR](https://github.com/shermand100/pinode-xmr#update-pinode-xmr)
        * [Update Blockchain Explorer](https://github.com/shermand100/pinode-xmr#update-block-explorer)
        * [Update background system dependencies](https://github.com/shermand100/pinode-xmr#update-background-system-dependencies)
-     * Node Tools
-       * Start/Stop Blockchain Explorer
-       * Prune Node
-       * Pop Blocks
-     * Extra Network Tools
+     * [Node Tools](https://github.com/shermand100/pinode-xmr#node-tools)
+       * [Start/Stop Blockchain Explorer](https://github.com/shermand100/pinode-xmr#startstop-blockchain-explorer)
+       * [Prune Node](https://github.com/shermand100/pinode-xmr#prune-node)
+       * [Pop Blocks](https://github.com/shermand100/pinode-xmr#pop-blocks)
+     * [Extra Network Tools](https://github.com/shermand100/pinode-xmr#extra-network-tools)
        * Install tor
        * Install PiVPN
        * Install No-IP (Dynamic DNS)
@@ -334,29 +334,31 @@ Ensure the blockchain is not in use by the node or explorer first, (stop them).
 This can be used is you have blockchain transaction errors preventing you from completeing a sync. It can help avoid a lengthy re-start sync from scratch.
 
 ### Extra Network Tools
+
 ![Network-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/network-tools.png)
-###
 
-- *nyx* (Previously tor-arm): Detailed bandwidth stats are available when running as a tor node using the nyx utility. (Available for Raspbery Pi image only) It is installed and running as default. To view these stats enter the command
+### Install tor
+From v3 of PiNode-XMR tor is no longer installed by default due the pottential for a user to encounter trouble from cencorship, political or legal issues in their country. Therefore use this option to add the tool and enbale the tor mode on the web UI. Once installed see https://github.com/shermand100/pinode-xmr#tor below for how it works, and how it affects your privacy.
 
-`nyx`
-and when prompted for the controller password use: `PiNodeXMR`
+### tor NYX
+Is a bandwidth monitoring utility for tor, (Previously tor-arm).
+
+Detailed bandwidth stats are available when running as a tor node using the nyx utility. (Available for Raspbery Pi image only) It is installed as a package with the "Install tor" option mentioned above. 
+
+Selecting tor NYX will bring you to the terminal and be promtped for the controller password, use: `PiNodeXMR`
 
 ![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/arm.png)
 
-Exit the utility by using `CTRL+c`
+Exit the utility by using `CTRL+C` and return to the setting menu.
 
- *Mining_Intensity:* The default mining intensity is set to 50% and is configurable through the web terminal command
- 
-     nano /home/pinodexmr/mining-intensity.sh
-     
- Where the value '50' can be between 0-100. Save changes with > ctrl+O exit the editor with > ctrl+x.
- Monerod will require a restart for mining intensity changes to take effect. Carefully monitor your CPU temp, the Pi will auto-throttle CPU voltage at ~82'C
+### Install PiVPN
+This is a great open source tool from https://www.pivpn.io/ enabling you to run your own home VPN. Check out their site for more info
 
-
+### NoIp Dynamic DNS
+This can be helpful if you have a dynamic external IP address, and want to connect to your Node from a mobile wallet on the go. This service lets you set a easy to remember hostname which will always point to your home network. Port forwarding is then required to complete the connecion to your PiNode-XMR, and concern should be given to your home security settings before allowing this. Configured correctly this is a great tool. 
 
 ## tor
-
+A note on tor:
 Your PiNode-XMR utilises tor in Monero's default manner. To quote https://github.com/monero-project/monero#using-tor :
 
 > ' The feature allows connecting over IPv4 and Tor simulatenously - IPv4 is used for relaying blocks and relaying transactions received by peers whereas Tor is used solely for relaying transactions received over local RPC. This provides privacy and better protection against surrounding node (sybil) attacks. '
@@ -365,6 +367,14 @@ and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#b
 
 > ' If any anonymity network is enabled, transactions being broadcast that lack a valid "context" (i.e. the transaction did not come from a p2p connection), will only be sent to peers on anonymity networks. If an anonymity network is enabled but no peers over an anonymity network are available, an error is logged and the transaction is kept for future broadcasting over an anonymity network. The transaction will not be broadcast unless an anonymity connection is made or until monerod is shutdown and restarted with only public connections enabled. '
 
+##### *Mining_Intensity:* The default mining intensity is set to 50% and is configurable through the web terminal command line
+ 
+     nano /home/pinodexmr/mining-intensity.sh
+     
+ Where the value '50' can be between 0-100. Save changes with > ctrl+O exit the editor with > ctrl+x.
+ Monerod will require a restart for mining intensity changes to take effect. Carefully monitor your CPU temp, the Pi will auto-throttle CPU voltage at ~82'C
+ 
+ 
 ## Connecting a Wallet - LAN
 ### Monero GUI
 To use your Monero GUI on a device that is on the same local network as your node enter the IP address you have been using to view the interface into the remote node page of the GUI, port 18081 and the RPC username/password you set in the ./setup.sh menu. You may also select ' mark as trusted daemon ' as it's your trusted node.
