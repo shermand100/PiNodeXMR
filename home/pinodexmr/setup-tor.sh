@@ -15,8 +15,10 @@ sudo mv /home/pinodexmr/torrc /etc/tor/torrc
 sudo chmod 644 /etc/tor/torrc
 sudo chown root /etc/tor/torrc
 echo -e "\e[32mRestarting tor service...\e[0m"
-sleep 3
 sudo service tor restart
+sleep 3
+#Output onion address
+sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 echo -e "\e[32mSuccess! Returning to menu\e[0m"
 sleep 3
 
