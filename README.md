@@ -318,16 +318,31 @@ This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to
 
 ![Node-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/node-tools.png)
 
-####
+#### Start/Stop Blockchain Explorer
+As the title says, use this to manually start/stop the explorer.
 
-- *Pruning:* I have tried to keep this as simple as possible for new users. For now it is enabled by entering one command in the web-terminal. It is necessary to stop your currently running Monerod using the buttons in the "advanced settings" page then in the web-terminal use `./monerod-prune.sh` to start the prune. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. The `./monerod-prune.sh` command can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
+When the explorer is started it also updates a flag elsewhere in the system so that the explorer will be strated on system boot (in case of power cycle). This flag is then removed on the manual stop selection.
+
+#### Prune Node
+I think this is the simplest method for new users. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. For this reason the prune option can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
+
+#### Pop Blocks
+Another new feature. This uses a blockchain tool stored on yuor system to remove a specified number of blocks from the end of the blockchain. It will prompt you for a value, and that many blocks will be removed.
+
+Ensure the blockchain is not in use by the node or explorer first, (stop them).
+
+This can be used is you have blockchain transaction errors preventing you from completeing a sync. It can help avoid a lengthy re-start sync from scratch.
+
+### Extra Network Tools
+![Network-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/network-tools.png)
+###
 
 - *nyx* (Previously tor-arm): Detailed bandwidth stats are available when running as a tor node using the nyx utility. (Available for Raspbery Pi image only) It is installed and running as default. To view these stats enter the command
 
 `nyx`
 and when prompted for the controller password use: `PiNodeXMR`
 
-![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/a20080a60e69d095be5dac6382ad621f75d96c9c/Screenshots/arm.png)
+![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/arm.png)
 
 Exit the utility by using `CTRL+c`
 
@@ -338,19 +353,7 @@ Exit the utility by using `CTRL+c`
  Where the value '50' can be between 0-100. Save changes with > ctrl+O exit the editor with > ctrl+x.
  Monerod will require a restart for mining intensity changes to take effect. Carefully monitor your CPU temp, the Pi will auto-throttle CPU voltage at ~82'C
 
-## Web-Terminal: Updater
 
-The web terminal is also used to process the updates of the underlying monero version. 
-
-The Process to update:
-
-* Stop your running node with the relevent stop button in the 'advanced settings' tab.
-* To update to Monero version 'Carbon Chamaeleon' 0.15, select '--strip 1' also on the 'advanvaced settings' tab.
-* Log into the Web Terminal as usual and enter the "Update Monero" setting. Follow the instructions
-
-If an update is available you are strongly encouraged to follow the instruction to verify the SHA256 hash of the downloaded binary. 
-   
-The updater script will run and bring your node up to the latest version. 
 
 ## tor
 
