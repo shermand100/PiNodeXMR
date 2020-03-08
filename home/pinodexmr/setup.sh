@@ -85,7 +85,7 @@
 						;;
 			
 					"3)")	if (whiptail --title "Update Onion-Blockchain-Explorer" --yesno "This will check for and install updates to your Blockchain Explorer\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
-							. /home/pinodexmr/setup-prune-node.sh
+							. /home/pinodexmr/setup-update-explorer.sh
 							else
 							. /home/pinodexmr/setup.sh
 							fi

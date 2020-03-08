@@ -2,17 +2,19 @@
 
 #Download update file
 sleep "1"
-wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/new-ver-exp.sh -O /home/pinodexmr/exp-new-ver.sh
-echo "Version Info file received:"
+wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh
+
 #Permission Setting
 chmod 755 /home/pinodexmr/current-ver-exp.sh
 chmod 755 /home/pinodexmr/exp-new-ver.sh
 #Load Variables
 . /home/pinodexmr/current-ver-exp.sh
 . /home/pinodexmr/exp-new-ver.sh
-. /home/pinodexmr/strip.sh
-echo $NEW_VERSION_EXP 'New Version'
-echo $CURRENT_VERSION_EXP 'Current Version'
+
+# Display versions
+echo -e "\e[32mVersion Info file received:\e[0m"
+echo -e "\e[36mCurrent Version: ${CURRENT_VERSION_EXP}\e[0m"
+echo -e "\e[36mAvailable Version: ${NEW_VERSION_EXP}\e[0m"
 sleep "3"
 	if [ $CURRENT_VERSION_EXP -lt $NEW_VERSION_EXP ]
 		then
