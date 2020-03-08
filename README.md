@@ -69,18 +69,18 @@ With a little further configuration this node will allow wallet connections from
    * [Transaction Status](https://github.com/shermand100/pinode-xmr#transaction-status)
    * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
    * [Log](https://github.com/shermand100/pinode-xmr#log)
-* [Web Terminal: Main System Menu](https://github.com/shermand100/pinode-xmr#web-terminal-advanced-users-wi-fi-pruning-and-more)
-     * System Settings
-       * Raspi-Config
-       * Master Login Password set
-       * Monero RPC password and user name set
-       * USB Stoage setup
-       * Agnostics - SDCard Health Checker
-     * Update Tools
-       * Update Monero
-       * Update PiNode-XMR
-       * Update Blockchain Explorer
-       * Update background system dependencies
+* [Web Terminal: Main System Menu](https://github.com/shermand100/pinode-xmr#web-terminal--main-system-menu)
+     * [System Settings](https://github.com/shermand100/pinode-xmr#system-settings)
+       * [Raspi-Config](https://github.com/shermand100/pinode-xmr#raspi-config---hardware-management)
+       * [Master Login Password set](https://github.com/shermand100/pinode-xmr#master-login-password)
+       * [Monero RPC password and user name set](https://github.com/shermand100/pinode-xmr#monero-rpc-password-and-username)
+       * [USB Stoage setup](https://github.com/shermand100/pinode-xmr#usb-storage-setup)
+       * [SDCard Health Checker - via "Agnostics"](https://github.com/shermand100/pinode-xmr#agnostics---sd-card-health-checker)
+     * [Update Tools](https://github.com/shermand100/pinode-xmr#update-tools)
+       * [Update Monero](https://github.com/shermand100/pinode-xmr#update-monero)
+       * [Update PiNode-XMR](https://github.com/shermand100/pinode-xmr#update-pinode-xmr)
+       * [Update Blockchain Explorer](https://github.com/shermand100/pinode-xmr#update-block-explorer)
+       * [Update background system dependencies](https://github.com/shermand100/pinode-xmr#update-background-system-dependencies)
      * Node Tools
        * Start/Stop Blockchain Explorer
        * Prune Node
@@ -174,21 +174,9 @@ Password: PiNodeXMR
 
 ![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/Welcome_screen.png)
 
-If this is your devices first boot then follow the on-screen instructions presented to you. It will guide you through steps any steps you wish to carry out, however the first is essentail, master password (for logging in from now on), RPC password for connecting your wallet to this node. Storage setup (MicroSD card or external USB device) is recommended unless you intend of only using the SD card. Finnaly any other additional features.
+If this is your devices first boot then follow the select "System Settings" and the two password setting options should be used for "Master" and "RPC". 
 
-A note on the USB storage, it is advised for your convenience to use USB storage for the blockchain. When I release updates from now on you should be able to keep the blockchain intact on the USB drive and just update the SD card when there are new version of PiNode-XMR. Avoiding lengthy re-download times. Monero updates can be processed internally and will be covered later.
-For speed a USB SSD is best and offers a complete Monero sync in little over 48 hrs. HDDs are considerably slower. Using just the MicroSD for the device is a little slower than the SSD, but also experiences I/O wear and performance trails off after approx 12 months in my experience. Also bear in mind that although the initial blockchain sync can be lengthy, performance of the storage device is also needed for when your connected wallet searches for it's funds. This like the block sync is only lengthy on it's first run. Basically consider your hardware.
-
-For beginners the NoIP DunamicDNS is optional because most internet connections and IP addresses provided by ISPs are dynamic and so change regularly. To keep the address of your PiNode-XMR static it is simplest to use hostnames instead. If you don't intend to use your node remotely and just for use with a local desktop wallet for example then the Dynamic DNS step can be skipped.
-
-
-####Passwords
-First of all you'll be asked to choose a new password for the device to replace the "PiNodeXMR" password you just used in this terminal.
-
-**It must not be left blank, at least 8 characters long, standard AbC123 (Don't use uncommon special characters, spaces or quotes ' or " )**
-
-A re-entry check will be carried out and then proceed to setting the RPC username and password. The same rules apply for password character entry.
-Finally the option for Dynamic DNS client download via noip.com. If this is selected you will be prompted to make an account with NoIp.com first. Go to their website and create a free account. Once that has been verified continue with the PiNode-XMr menu and the client will download and configure itself, then asking for your NoIp.com login. Keep the update interval as default (30), and when asked to 'run something at successful update' enter 'N'. That configures the .conf file. You will be asked to enter this information again for the client and that's it. Setup Complete.
+Once the passwords are set the device is yours. Head back to the Web UI to start your node.
 
 ## Web-UI: Starting your Node and General Usage
 
@@ -308,6 +296,8 @@ Before starting this test ensure you have stopped the node and block explorer, i
 
 ### Update Tools
 
+![Update-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/update-tools.png)
+
 #### Update Monero
 PiNode-XMR will download a new version number from this site and compare it to your current version. If the new version number is higher you will have the option to update.
 On update the nodes and block explorer will stop, old Monero versions deleted and new versions will be downloaded and built from the official Monero repositories.
@@ -324,7 +314,11 @@ As the title suggests. If there is a new version available it will be sourced fr
 #### Update background system dependencies
 This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to update background dependencies that are used by the underlying operating system (Raspbian or Armbian). This can include things like secuirty upgrades so is worth running on occassion.
 
-###
+### Node Tools
+
+![Node-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/node-tools.png)
+
+####
 
 - *Pruning:* I have tried to keep this as simple as possible for new users. For now it is enabled by entering one command in the web-terminal. It is necessary to stop your currently running Monerod using the buttons in the "advanced settings" page then in the web-terminal use `./monerod-prune.sh` to start the prune. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. The `./monerod-prune.sh` command can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
 
