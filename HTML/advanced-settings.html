@@ -62,7 +62,7 @@
 				     <span class="demo-text-note">Use this page to start and stop your node in different modes and configure how you'd like it to run. <br><br>Changes made to settings here will require the Monero daemon to be restarted before the changes take effect. Do this by using the 'stop'/'start' buttons for the mode you are in. </span>
 			
 		<h3 class="demo-panel-title">Private Node: <small> Requiring your RPC login</small></h3>
-	          <p><small>Use this mode to run your own personal node. When connecting an external wallet you will need the RPC username and password you have configured in the './setup' Script to use this service. [Clearnet]</small></p>
+	          <p><small>Use this mode to run your own personal node. When connecting an external wallet you will need the RPC username and password you have configured in the web terminal menu to use this service. [Clearnet]</small></p>
       		</div>
 
 
@@ -302,9 +302,9 @@ function difficulty(value){
 	         <div class="demo-type-example">
 	  		<h3 class="demo-panel-title">Mining</h3>
 	      	<span class="demo-text-note">Note:</span>
-	          <p><small>Mining, by design is CPU intensive and not suited to single board computers. Although not at all recommended on this device, it is possible.<br>
+	          <p><small>Mining, by design is CPU intensive and not suited to single board computers.<br>
 			  This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent
-			  physical damage. This feature may also handicap the nodes speed verifying transactions/blocks.<br> *Note: Mining currently over clearnet only.</small></p>
+			  physical damage. This feature may also handicap the speed this device verifies transactions and blocks.<br> *Note: Mining currently over clearnet only.</small></p>
       		</div>
 				  
 			      <div class="row demo-row">
@@ -532,34 +532,7 @@ function inpeers(value){
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
 
-         <div class="col">
-          <h3 class="demo-panel-title">Update custom --"strip" setting <span class="fui-gear"></span></h3>
-	          <p><small>This setting is to allow for variations in the update process depending on the way the Monero Dev team package their releases.<br>
-			  See https://github.com/shermand100/pinode-xmr#web-terminal-updater for usage instructions.</small></p>
-          <div class="btn-group">
-<form method="post">
-    <select name='--strip' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { strip(this.value); }'>
-              <option value='0'>--strip</option>
-			  <option value='1'>1</option>
-			  <option value='2'>2</option>
-			  <option value='3'>3</option>
-			  <option value='4'>4</option>
-			  </select>
-</form>
-<script type="text/javascript">
-function strip(value){
-      $.ajax({
-        url:"strip.php", //the page containing php script
-        type: "POST", //request type
-		data: ({value}),
-        success:function(result){
-         alert(result);
-       }
-     });
-}
-</script>            
-          </div><!-- /btn-group -->
-        </div> <!-- /.col -->	  
+ 
 
 	  </div>	  
 		

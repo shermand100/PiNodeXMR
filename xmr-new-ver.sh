@@ -1,2 +1,0 @@
-#!/bin/sh
-NEW_VERSION=01501

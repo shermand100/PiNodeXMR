@@ -23,7 +23,7 @@ sleep 3
 
 if [ $BOOT_STATUS -eq 2 ]
 then
-		echo "First boot complete, system ready for start. See web-ui at $(hostname -I) to interface."
+		echo "Boot complete, system ready for start. See web-ui at $(hostname -I) to interface."
 else
 	echo "loading ."	
 fi

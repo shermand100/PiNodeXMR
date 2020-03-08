@@ -22,10 +22,8 @@ DEVICE_IP="$(hostname -I)"
 	. /home/pinodexmr/RPCu.sh
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
-#Removed commands
-#   torsocks --block-sync-size=$MONERO_BLOCK_SYNC_SIZE --db-sync-mode=$DB_SYNC_MODE --detach --pidfile /home/pinodexmr/monero/monerod.pid
-#Output the currently running node mode & boot state
-echo "tor Node - Not Mining" > /var/www/html/iamrunning_version.txt
+
+#Output the currently running state
 	echo "#!/bin/sh
 BOOT_STATUS=4" > /home/pinodexmr/bootstatus.sh
 #Start Monerod

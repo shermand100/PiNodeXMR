@@ -7,14 +7,17 @@ sleep "1"
 #Download update file
 sleep "1"
 wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/xmr-new-ver.sh -O /home/pinodexmr/xmr-new-ver.sh
-echo "Version Info file recieved:"
+echo "Version Info file received:"
+#Download variable for current monero version
+wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/release.sh -O /home/pinodexmr/release.sh
 #Permission Setting
 chmod 755 /home/pinodexmr/current-ver.sh
 chmod 755 /home/pinodexmr/xmr-new-ver.sh
+chmod 755 /home/pinodexmr/release.sh
 #Load Variables
 . /home/pinodexmr/current-ver.sh
 . /home/pinodexmr/xmr-new-ver.sh
-. /home/pinodexmr/strip.sh
+. /home/pinodexmr/release.sh
 echo $NEW_VERSION 'New Version'
 echo $CURRENT_VERSION 'Current Version'
 sleep "3"
@@ -35,7 +38,7 @@ sleep "3"
 		echo "Ensuring swap-file enabled for Monero build"
 		sudo dphys-swapfile swapon
 		echo "Downloading latest Monero version"
-		git clone --recursive https://github.com/monero-project/monero.git
+		git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git
 		cd monero
 		USE_SINGLE_BUILDDIR=1 make
 		cd
@@ -43,13 +46,14 @@ sleep "3"
 		echo "Software Update Complete - Resuming Node"
 		sleep 2
 		. /home/pinodexmr/init.sh
-		sudo systemctl stop monerod-start-public.service
 		echo "Monero Node Started in background"
 
 		#Update system version number
 		echo "#!/bin/bash
 		CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
-		#Remove downloaded version check file
+		#Remove downloaded version check files
+		rm /home/pinodexmr/release.sh
+		rm /home/pinodexmr/xmr-new-ver.sh
 		whiptail --title "PiNode-XMR Monero Update Complete" --msgbox "Your PiNode-XMR has completed updating to the latest version of Monero" 16 60
 		sleep 3
 else

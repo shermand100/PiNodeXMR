@@ -34,7 +34,7 @@ sleep 3
 ##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils tor nyx fail2ban ufw  dialog -y
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw  dialog -y
 sleep 3
 
 ##Configure Swap file
@@ -88,15 +88,6 @@ sleep 3
 sudo mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/*.service
 sudo chown root /etc/systemd/system/*.service
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
-
-##Setup tor hidden service and monitor file
-echo -e "\e[32mSetup tor hidden service and monitor file\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/pinode-xmr/etc/tor/torrc /etc/tor/torrc
-sudo chmod 644 /etc/tor/torrc
-sudo chown root /etc/tor/torrc
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 

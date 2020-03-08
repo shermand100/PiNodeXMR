@@ -16,8 +16,9 @@ DEVICE_IP="$(hostname -I)"
 		if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-		./monero-active/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_pool_sh | sed '1d' > /var/www/html/TXPool-short_Status.txt	
+		PRINT_TX_SHORT="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_STATS_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool_sh | sed '1d')" && echo "$PRINT_TX_SHORT" > /var/www/html/TXPool-short_Status.txt
 else
 		#Node MemPool status
-		./monero-active/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --rpc-ssl disabled print_pool_sh | sed '1d' > /var/www/html/TXPool-short_Status.txt	
+		PRINT_TX_SHORT="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool_sh | sed '1d')" && echo "$PRINT_TX_SHORT" > /var/www/html/TXPool-short_Status.txt
+
 fi

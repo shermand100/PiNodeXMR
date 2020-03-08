@@ -1,3 +1,3 @@
 Updates every 60 seconds
-Tue Jul  2 15:08:02 BST 2019
-temp=58.5'C
+Sun  8 Mar 16:36:01 GMT 2020
+temp=52.1'C

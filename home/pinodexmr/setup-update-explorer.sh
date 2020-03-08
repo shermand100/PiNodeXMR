@@ -2,17 +2,19 @@
 
 #Download update file
 sleep "1"
-wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/new-ver-exp.sh -O /home/pinodexmr/exp-new-ver.sh
-echo "Version Info file recieved:"
+wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh
+
 #Permission Setting
 chmod 755 /home/pinodexmr/current-ver-exp.sh
-chmod 755 /home/pinodexmr/new-ver-exp.sh
+chmod 755 /home/pinodexmr/exp-new-ver.sh
 #Load Variables
 . /home/pinodexmr/current-ver-exp.sh
 . /home/pinodexmr/exp-new-ver.sh
-. /home/pinodexmr/strip.sh
-echo $NEW_VERSION_EXP 'New Version'
-echo $CURRENT_VERSION_EXP 'Current Version'
+
+# Display versions
+echo -e "\e[32mVersion Info file received:\e[0m"
+echo -e "\e[36mCurrent Version: ${CURRENT_VERSION_EXP}\e[0m"
+echo -e "\e[36mAvailable Version: ${NEW_VERSION_EXP}\e[0m"
 sleep "3"
 	if [ $CURRENT_VERSION_EXP -lt $NEW_VERSION_EXP ]
 		then
@@ -28,7 +30,7 @@ sleep "3"
 		echo "Deleting Old Version"
 		rm -rf /home/pinodexmr/onion-monero-blockchain-explorer/
 		sleep "2"
-		echo "Ensuring swap-file enabled for Monero build"
+		echo "Ensuring swap-file enabled for build"
 		sudo dphys-swapfile swapon
 		echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 		echo -e "\e[32m*******************************************************\e[0m"
@@ -41,11 +43,9 @@ sleep "3"
 		cmake ..
 		make
 		cd
-		echo "Software Update Complete - Resuming Node"
+		echo "Software Update Complete - Resuming Node if required"
 		sleep 2
 		. /home/pinodexmr/init.sh
-		sudo systemctl stop monerod-start-public.service
-		echo "Monero Node Started in background"
 
 		#Update system version number
 		echo "#!/bin/bash

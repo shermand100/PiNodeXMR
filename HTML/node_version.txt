@@ -1,1 +1,1 @@
-Monero 'Carbon Chamaeleon' (v0.15.0.1-release)
+Monero 'Carbon Chamaeleon' (v0.15.0.1-6def88ad4)
