@@ -1,4 +1,4 @@
-![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/PiNode-XMR%20logo.jpg)
+![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # User Manual v3.20.03-Open-Build		
 ### Self Install for Raspbian and Armbian or Associated disk image for Raspberry Pi 'New Image Pending'		(image size optimised for SD cards)
 #### Downloads
@@ -263,11 +263,68 @@ A 5 MB rolling log is kept here. Should you suspect your node is not performing 
 
 ## Web-Terminal: & Main System Menu
 
-The Web-Terminal allows a more advanced user a huge amount of control over their node. The PiNode-XMR is built upon the Raspbian image "2019-04-08-raspbian-stretch-lite" and has all of the standard features intact.
+### System Settings
 
-- *WiFi:* One of the most asked for features is wifi. This can easily be configured at a beginner level *Note-ODROID has no built in hardware, additional Wifi adaptor required* as the standard command `sudo raspi-config` will bring up the Raspberry Pi's hardware interface. This allows setting Wi-Fi SSID and password under 'network options' settings. Once configured the device will ask to reboot.
+![System-Settings](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/system-settings.png)
+
+#### Raspi-config - Hardware management
+ Here are the standard hardware config options that the Raspbian OS provides. A detailed explanation of each feature is best found at the official Raspbery Pi pages: https://www.raspberrypi.org/documentation/configuration/
+
+However - some special notes on Wifi and the PiNode-XMR
+
+- *WiFi:* One of the most asked for features is wifi. This can easily be configured at a beginner level and allows setting Wi-Fi SSID and password under 'network options' settings. Once configured the device will ask to reboot.
 
 **However if Wi-Fi is to be used then the Ethernet cable must be unplugged. If you do not, the device will assign itself 2 IP addresses, one for each connection method, and Monerod will fail to boot**
+
+#### Master Login Password
+
+This menu allows you to set a new root/pinodexmr user password. Doing so is strongly recommended to change from the default password.
+
+When creating this password the input box cannot be empty, the password must be longer than 8 characters, alphanumeric aBc123, **no** special characters %^-_
+
+This password will be used to log into the web terminal in future and for those that access via SSH. If you forget this password you will be locked out of these menus, keep it safe.
+
+#### Monero RPC Password and username
+
+This menu allows you to set a new root/pinodexmr user password. Doing so is strongly recommended to change from the default password.
+
+When creating this password the input box cannot be empty, the password must be longer than 8 characters, alphanumeric aBc123, **no** special characters %^-_
+
+This password/username combo is used to connect your wallet to this node.
+
+#### USB storage setup
+
+For storage the ideal configuration is to have your OS and PiNode-XMR on your standard media that your device supports, then have the monero blockchain separately on a USB SSD. This has been proven to have faster sync times.
+
+However this menu option will allow you to store the blockchain on any USB device over 100GB. It will run several checks, and on your command format (wipe) the drive and mount it for use with the PiNode-XMR. It also labels the drive "XMRBLOCKCHAIN" and can be re-detected by PiNode-XMR future installs so should the worst happen and your SD card fail, on installing a new PiNode-XMR it should detect the configured drive and continue.
+
+Notes on USB storage - 
+Be aware the device will become `/dev/sda` mounted at `/home/pinodexmr/.bitmonero` with no partition and the entire drive will be used. Other devices (windows) can sometimes not detect this drive after use with PiNode-XMR because of the lack of partition, it is easily reverted back, just a heads up, this is most likely your issue.
+
+#### Agnostics - SD card health checker
+A new tool for checking SD card read/write sequential and random speeds. It has some performance targets set into it and will inform you wether or not you meet those targets via PASS/FAIL.
+
+Before starting this test ensure you have stopped the node and block explorer, if they read/write in the background the test will fail.
+
+### Update Tools
+
+#### Update Monero
+PiNode-XMR will download a new version number from this site and compare it to your current version. If the new version number is higher you will have the option to update.
+On update the nodes and block explorer will stop, old Monero versions deleted and new versions will be downloaded and built from the official Monero repositories.
+
+The compiling of Monero on single board computers is very CPU intensive, at worst on a Raspberry Pi 3b+ it has been known to take approx 7 hours. More powerful hardware will be proportionatley faster.
+
+#### Update PiNode-XMR
+This will update your Web UI, install new tools, features that are not covered by another option in this Update menu.
+If you have set custom variables during normal use (Bandwidth settings, Addreses, passwords) they will be retained during the update process.
+
+#### Update Block-Explorer
+As the title suggests. If there is a new version available it will be sourced from the external repository https://github.com/moneroexamples/onion-monero-blockchain-explorer
+
+#### Update background system dependencies
+This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to update background dependencies that are used by the underlying operating system (Raspbian or Armbian). This can include things like secuirty upgrades so is worth running on occassion.
+
+###
 
 - *Pruning:* I have tried to keep this as simple as possible for new users. For now it is enabled by entering one command in the web-terminal. It is necessary to stop your currently running Monerod using the buttons in the "advanced settings" page then in the web-terminal use `./monerod-prune.sh` to start the prune. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. The `./monerod-prune.sh` command can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
 
