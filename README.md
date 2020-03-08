@@ -1,10 +1,10 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/PiNode-XMR%20logo.jpg)
-# User Manual v2.12.19-O		
-### Self Install for Raspbian and Armbian or Associated disk image for Raspberry Pi 'PiNode-XMR_v2.12.19_M0.15.0.1'		(image size optimised for SD cards)
+# User Manual v3.20.03-Open-Build		
+### Self Install for Raspbian and Armbian or Associated disk image for Raspberry Pi 'New Image Pending'		(image size optimised for SD cards)
 #### Downloads
 ##### For Raspberry Pi
 
-
+New Updated Image pending - older v2.12.19 below
 [PiNode-XMR_v2.12.19_m0.15.0.1.img   -   Hosted on Google drive - 6.45GB](https://drive.google.com/file/d/1u9leBw4-SEUcmZaZ9nh5iQVvO4Q2A7nU/view?usp=sharing)
 SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
 
@@ -28,9 +28,17 @@ SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
   * Transaction pool and summary viewer
   * View connected peer info
   * Monerod log file view page
-* **New** - Included the open source Monero Block Explorer [Github - onion-monero-blockchain-explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer)
-* Easy setup menu for config of passwords, USB storage, Update and optional dynamic DNS.
-* All the benefits of running on a Pi, silent/fanless, low power (approx 15w) for 24/7 node, low cost.
+* Monero Block Explorer [Github - onion-monero-blockchain-explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer)
+* Easy setup menu for config of passwords, USB storage and Updates.
+* **New** - Additional tools
+  * raspi-config (Hardware and Wifi settings pre-built into PiNode-XMR menu
+  * Agnostics - SD Card read/write health checker included
+  * PiVPN - Tool for easy configuration of OpenVPN for Raspbian and Armbian
+  * PoPblocks - Monero tool to help recover blockchain problems - UI
+  * Systemd Monitor to track running node and explorer functions
+  * tor installer - tor is no longer included and running as default due to censorship, political or legal restriction of users host counrty. Simple select to install and activate on user request.
+  * All status boxes have improved scripts for clearer more constant feedback during high CPU loads.
+* All the benefits of running on a Single Board computer (EG. RasPi, silent/fanless, low power (approx 15w) for 24/7 node, low cost)
 * Headless (No need for extra monitor,keyboard,etc) and connect via Ethernet or WiFi**
 
 
@@ -40,9 +48,8 @@ SHA256 Hash: 0EE90EEC65F430DC89FB3236474AA576BA0AFFFF4005B044FFE40D4A47B148F0
 
 ## Hardware requirements:
 
-1. 
-* Raspberry Pi 2/3/4 (incl B&+ models) for Pre-Configured disk image
-* Any device that supports Armbian OS with 2GB RAM. *RAM required for Monero source compile* 
+1. * Raspberry Pi 2/3/4 (incl B&+ models) for Pre-Configured disk image
+   * Any device that supports Armbian OS with 2GB RAM. *RAM required for Monero source compile* 
 2. 8GB MicroSD Card with aditional min 100GB USB storage device for Monero Blockchain. Or 128GB MicroSD to store all-in-one.
 3. Ethernet connection (can be replaced by WiFi after config, hardware dependant)
 
@@ -62,8 +69,27 @@ With a little further configuration this node will allow wallet connections from
    * [Transaction Status](https://github.com/shermand100/pinode-xmr#transaction-status)
    * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
    * [Log](https://github.com/shermand100/pinode-xmr#log)
-   * [Web Terminal: WiFi setup, Pruning & Advances Users](https://github.com/shermand100/pinode-xmr#web-terminal-advanced-users-wi-fi-pruning-and-more)
-     * [Updating](https://github.com/shermand100/pinode-xmr#web-terminal-updater)
+* [Web Terminal: Main System Menu](https://github.com/shermand100/pinode-xmr#web-terminal-advanced-users-wi-fi-pruning-and-more)
+     * System Settings
+       * Raspi-Config
+       * Master Login Password set
+       * Monero RPC password and user name set
+       * USB Stoage setup
+       * Agnostics - SDCard Health Checker
+     * Update Tools
+       * Update Monero
+       * Update PiNode-XMR
+       * Update Blockchain Explorer
+       * Update background system dependencies
+     * Node Tools
+       * Start/Stop Blockchain Explorer
+       * Prune Node
+       * Pop Blocks
+     * Extra Network Tools
+       * Install tor
+       * Install PiVPN
+       * Install No-IP (Dynamic DNS)
+  
 * [A note on tor](https://github.com/shermand100/pinode-xmr#tor)
 * [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
   * [Monero GUI](https://github.com/shermand100/pinode-xmr#monero-gui)
@@ -74,9 +100,10 @@ With a little further configuration this node will allow wallet connections from
   
 ## Intro
 
-Let me start by saying I'm glad the internet has bought you to here. It's taken several months to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. This however is the first disk image I have ever produced for download, and I have no doubt in it's stability or ability to perform it's purpose, however it does mark a change in my direction. Throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that perhaps users don't want to make their own node step by step, they too have busy lifestyles, they want them fast. 
+Let me start by saying I'm glad the internet has bought you to here. It's taken several years to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. The project is in a changing state at the moment with a shift from pre-built disk images, to you the user running a single command to initiate the install from this github repository. The reason for this change is to present the project as open source, increase transparency and trust. It also gives the added benefit of no longer being tied to the hardware of the device I was building the disk images on. This gives you the user much greater freedom to install your node on any Armbian device of your choice. Whilst this transition to open source finallises I will continue to provide the pre-made and pre-syncd disk images for the Raspberry Pi, but will phase this out over the year.
+Also throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that users too have busy lifestyles, they want a node fast and I hope this project is a reasonable solution to that request.
 
-To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync however will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
+To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
 
 Dan
 
@@ -111,7 +138,7 @@ Install Armbian on your device and create a user called `pinodexmr`. Once logged
 
 This will present you with the menu to select which OS you are building PiNode-XMR onto
 
-![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/OS-Select.png)
+![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/OS-Select.png)
 
 Select your OS and follow the on screen steps for installation.
 
@@ -119,7 +146,7 @@ It is a relatively fast process except for the compiling of Monero from source w
 
 Once complete you will see
 
-![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/Install-Complete.png)
+![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/Install-Complete.png)
 
 
 ## Setup:
@@ -135,7 +162,7 @@ To continue with setup simply type the IP address of the Node into the web brows
 When you enter this IP address into the web browser of a device on the same network as your Node you'll be presented with the following screen...
 
 
-![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/index.png)
+![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/index.png)
 
 From here click on "Web Terminal" from the top navigation bar. You will most probably get a warning that it isn't a secure site. I haven't yet configured SSL certificates yet so this is normal. Click proceed and login with the default Username and password of:
 
@@ -145,7 +172,7 @@ Password: PiNodeXMR
 
 *Note: Armbian users may have already set a different password*
 
-![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/Welcome_screen.png)
+![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/Welcome_screen.png)
 
 If this is your devices first boot then follow the on-screen instructions presented to you. It will guide you through steps any steps you wish to carry out, however the first is essentail, master password (for logging in from now on), RPC password for connecting your wallet to this node. Storage setup (MicroSD card or external USB device) is recommended unless you intend of only using the SD card. Finnaly any other additional features.
 
@@ -172,7 +199,7 @@ I'll also take this opportunity to mention that most of the displays of Node and
 
 ## Advanced Settings - Starting Monero
 
-![Advanced Settings](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/advancedsettings.png)
+![Advanced Settings](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/advancedsettings.png)
 
 This is the main page for starting/stopping and setting variables on your node. It can either be started as a Clearnet Private/Public,tor or Mining node, and you may switch between modes as you wish. The node has memory, so if power is lost and restored the node will reboot and continue in the mode it was last set, hence the wording on the Node Status page to remind you what you last clicked.
 
@@ -200,19 +227,19 @@ A final note on this, now I've updated to v2 of this project and RandomX has com
 
 ## Node Status -
 
-![Node Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/nodestatus.png)
+![Node Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/nodestatus.png)
 
 This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or if you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disable the swapfile to preserve the read/write health of your storage device.
 
 ## Monero Blockchain Explorer
 
-![Block Explorer Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/blockexplorer.png)
+![Block Explorer Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/blockexplorer.png)
 
 **New** With some collaboration from its maker reddit user /u/mWo12 I've managed to include his "Onion Monero-Blockchain Explorer" which is a fantastic tool for any auditing needs you have and don't want to send view_keys to any external website/untrusted source. It also includes a transaction pusher for those cold wallet users. The Explorer is all open source and can be found here [Github - Onion Monero Blockchain Explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer). Many thanks to /u/mWo12.
 
 ## Transaction Status
 
-![Transaction Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/transactions.png)
+![Transaction Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/transactions.png)
 
 A very useful page. Here you can check to see if a transaction you have broadcast has done so successfully. Most web browsers have a search function (CTRL+F) use this to search the page by Transaction ID and if broadcast it will find it in the lower box.
 
@@ -220,7 +247,7 @@ The Overview above gives a picture of the general network condition and estimate
 
 ## Connection Status
 
-![Connection Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/connectionstatus.png)
+![Connection Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/connectionstatus.png)
 
 Displays OUT and IN peers along with their 'state' which is commonly either 'normal' or 'synchronising' it also gives some detail to data consumption.
 
@@ -230,11 +257,11 @@ That list of nodes is viewable in full at the bottom of the page.
 
 ## Log:
 
-![Log](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/logs.png)
+![Log](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/logs.png)
 
 A 5 MB rolling log is kept here. Should you suspect your node is not performing as it should you may find a clue as to why here. I strongly suggest that if you find [WARN] flags here that you consult google first. Monero is plenty developed by now that most questions have been answered by other users, and most warnings (once investigated of course) can be safely ignored and are connection related as peers drop off the network.
 
-## Web-Terminal: Advanced Users (Wi-Fi, Pruning and more)
+## Web-Terminal: & Main System Menu
 
 The Web-Terminal allows a more advanced user a huge amount of control over their node. The PiNode-XMR is built upon the Raspbian image "2019-04-08-raspbian-stretch-lite" and has all of the standard features intact.
 
@@ -249,7 +276,7 @@ The Web-Terminal allows a more advanced user a huge amount of control over their
 `nyx`
 and when prompted for the controller password use: `PiNodeXMR`
 
-![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/a20080a60e69d095be5dac6382ad621f75d96c9c/Screenshots-v0.6.19/arm.png)
+![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/a20080a60e69d095be5dac6382ad621f75d96c9c/Screenshots/arm.png)
 
 Exit the utility by using `CTRL+c`
 
@@ -288,7 +315,7 @@ and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#b
 ### Monero GUI
 To use your Monero GUI on a device that is on the same local network as your node enter the IP address you have been using to view the interface into the remote node page of the GUI, port 18081 and the RPC username/password you set in the ./setup.sh menu. You may also select ' mark as trusted daemon ' as it's your trusted node.
 
-![GUI-screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots-v0.6.19/GUIremote.png)
+![GUI-screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/GUIremote.png)
 
 Your wallet will then scan the node's blockchain for any transaction outputs that belong to your wallet, this can take a few minutes the first time but subsequent connections will only scan for changes since the last connection being much faster.
 
