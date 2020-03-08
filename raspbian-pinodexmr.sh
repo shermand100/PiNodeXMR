@@ -119,7 +119,7 @@ echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
 mv /home/pinodexmr/pinode-xmr/home/pinodexmr/* /home/pinodexmr/
 mv /home/pinodexmr/pinode-xmr/home/pinodexmr/.profile /home/pinodexmr/
-chmod 755 /home/pinodexmr/*
+chmod 775 /home/pinodexmr/*
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
@@ -136,7 +136,7 @@ sleep 3
 sudo mv /home/pinodexmr/pinode-xmr/HTML/*.* /var/www/html/
 sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
 sudo chown www-data -R /var/www/html/
-sudo chmod 755 -R /var/www/html/
+sudo chmod 775 -R /var/www/html/
 
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 #First build monero, single build directory
