@@ -91,20 +91,6 @@ sudo chown root /etc/systemd/system/*.service
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
-##UFW Setup
-echo -e "\e[32mSetup Uncomplicated Firewall\e[0m"
-sleep 3
-sudo ufw allow 80		#web
-sudo ufw allow 8081		#onion explorer
-sudo ufw allow 443		#ssl 
-sudo ufw allow 18080	#monero spare
-sudo ufw allow 18081	#monero node default
-sudo ufw allow 4200		#web terminal
-sudo ufw allow 22		#ssh
-echo "y" | sudo ufw enable
-echo -e "\e[32mFirewall configured\e[0m"
-sleep 3
-
 ##Copy PiNode-XMR scripts to home folder
 echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
