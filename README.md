@@ -7,11 +7,11 @@ See the [Installing](https://github.com/shermand100/pinode-xmr#installing) secti
 or...
 ## Downloads
 ### Download PiNode-XMR disk image for Raspberry Pi
-[PiNode-XMR_v3.20.03.img  base image](https://drive.google.com/file/d/1grRvfFiCHY41E2L8TTBF-8hq9zA1XjzL/view?usp=sharing)
+[PiNode-XMR_v3.20.03.img  base image](https://drive.google.com/open?id=1grRvfFiCHY41E2L8TTBF-8hq9zA1XjzL)
 **5GB**
 SHA256: 60698729D161D7339BF5D438D6F86FD2B55A5E6D299616A79A0ACB36F755BA53
 
-[PiNode-XMR_v3.20.03.img  Pre-sync'd to block 2050060-sun-8th-march-1700GMT](https://drive.google.com/file/d/12-XSecCWW90OrRVmTYdiKG5_wsgroY3G/view?usp=sharing)
+[PiNode-XMR_v3.20.03.img  Pre-sync'd to block 2050060-sun-8th-march-1700GMT](https://drive.google.com/open?id=12-XSecCWW90OrRVmTYdiKG5_wsgroY3G)
 **88GB**
 SHA256: B4D9A42785CB01E9B8F63C79FAC9E71BF1FB11C287B88FB6F16ACC137AA2397C
 *Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
