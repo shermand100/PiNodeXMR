@@ -1,8 +1,28 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # User Manual v3.20.03-Open-Build		
-### Open Source Build for Raspbian and Armbian
+### Open Source Build for Raspbian and Armbian*
+*Armbian in development*
 
-### Features:
+See the [Installing](https://github.com/shermand100/pinode-xmr#installing) section for the one line command to build this open source project on-top of your Raspbian OS
+or...
+## Downloads
+### Download PiNode-XMR disk image for Raspberry Pi
+[PiNode-XMR_v3.20.03.img  base image](https://drive.google.com/file/d/1grRvfFiCHY41E2L8TTBF-8hq9zA1XjzL/view?usp=sharing)
+**5GB**
+SHA256: 60698729D161D7339BF5D438D6F86FD2B55A5E6D299616A79A0ACB36F755BA53
+
+[PiNode-XMR_v3.20.03.img  Pre-sync'd to block 2050060-sun-8th-march-1700GMT](https://drive.google.com/file/d/12-XSecCWW90OrRVmTYdiKG5_wsgroY3G/view?usp=sharing)
+**88GB**
+SHA256: B4D9A42785CB01E9B8F63C79FAC9E71BF1FB11C287B88FB6F16ACC137AA2397C
+*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
+
+43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
+
+## Support at
+* [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
+* Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
+
+## Features:
 * 4 Node modes (click to start)
   * Private Node
   * tor bridging Node - routes your transactions through the tor network
@@ -41,22 +61,6 @@
 
 A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
 With a little further configuration this node will allow wallet connections from your mobile app on the move.
-
-## Downloads
-### For Raspberry Pi
-
-New v3.20.03 Images (Base image and pre-sync'd image to block 2050060) uploading now - 20:00GMT 08/03/20. Please allow 24hrs for upload, test, SHA256 hash generation etc)
-
-Pre-sync est 92GB
-Base image est 5.7GB
-
-*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
-
-43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
-
-## Support at
-* [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
-* Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
 
 ## Contents:
 
@@ -153,10 +157,10 @@ Once complete you will see
 
 
 ## Setup:
+For the disk images, a bug exists that the SD card doesn't auto-resize. Continue with the setup below and once logged in to the web terminal menu select "2) system settings", "1) raspi-config", "7) advanced options", "A1) Expand file system". The device will reboot on menu exit and operate as intended. Applogies for this inconvenience, it'll be rectified on next update.
+~~On first time power-on the software will check to see if it has booted before. On it's first usage it will resize it's rootfs partition automatically to make best use of whichever size MicroSD card you've purchased ready for the Monero Blockchain.~~
 
-On first time power-on the software will check to see if it has booted before. On it's first usage it will resize it's rootfs partition automatically to make best use of whichever size MicroSD card you've purchased ready for the Monero Blockchain.
-
-During this process it will restart itself and will pause for 120 seconds. This is normal. I recommend that once plugged in simply leave the node for 5 mins, after this time it will have self configured and you will be safe to configure it as you wish (covered in a bit). 
+~~During this process it will restart itself and will pause for 120 seconds. This is normal. I recommend that once plugged in simply leave the node for 5 mins, after this time it will have self configured and you will be safe to configure it as you wish (covered in a bit).~~ 
 
 Every subsequent power-on event will skip this step and immediately run the Monero software without delay in the condition it was last run in, Clearnet/tor/Mining. Pruned or not.
 
@@ -179,7 +183,7 @@ Password: PiNodeXMR
 
 If this is your devices first boot then follow the select "System Settings" and the two password setting options should be used for "Master" and "RPC". 
 
-Once the passwords are set the device is yours. Head back to the Web UI to start your node.
+Once the passwords are set the device is yours. Head back to the Web UI to start your node. *Bug exists, run expand file system from raspi-config first.
 
 ## Web-UI: Starting your Node and General Usage
 
