@@ -118,7 +118,7 @@ Dan
 
 ## Installing
 ### Raspberry Pi -
-If using a Raspberry Pi you may use the pre-installed disk image avaliable here. The PiNode-XMR image is available to download as-is. It is un-compressed and ready to write using the same method you would for any other image. For those that are new these free programs will get you started:
+If using a Raspberry Pi you may use the pre-installed disk image avaliable [here](https://github.com/shermand100/pinode-xmr#downloads). The PiNode-XMR image is available to download as-is. It is un-compressed and ready to write using the same method you would for any other image. For those that are new these free programs will get you started:
 
 1. Format the micro-sd card. For all users I recommend [SDFormatter](https://www.sdcard.org/downloads/formatter/)
 2. Write the image file to the formatted card. 
