@@ -211,13 +211,11 @@ Stop the current service before starting a new one.**
 
 - *Bandwidth:* Here are some drop-down boxes for you to interact with if you think the node is hogging too much of your network bandwidth. If you select a value from the list the new variable is  considered “pending”. It takes a node stop+start for changes to take effect.
 
-- *Onion Address:* On your PiNode-XMR's first boot it generated a unique tor onion hostname to you. It is displayed here. 
+- *Onion Address:* When you choose to install tor PiNode-XMR generates a unique tor onion hostname to you for your hidden service. It is displayed here. 
 
 - *Mining:* TBH it's a feature I expected people to ask for and it was simple enough to implement so it's included. The Raspberry Pi is absolutely unsuitable for this purpose, but there it is. 
 Enter your address on the right and the page will confirm submission with a read-back. Hit start (once all previous instances of the node have been stopped) and enjoy your sub 1H/s. Setting mining intensity (default 50%) can  be found in the build/developer notes at the end of this manual.
 A final note on this, now I've updated to v2 of this project and RandomX has come along mining is even less suitable in a Pi. However I intend to step away from making disk images and instead produce installing scripts so this software can be installed on devices other than Pis. Then this feature may once again have a use.
-
-- *Update:* This version has the auto-update removed. This is to prevent downtime at inconvenient times if you rely on this as a remote node. I will try newly released Monero versions on my test node before activating your update button and inform you which “--strip” setting to use for the update. This seems the safest way to avoid bricking nodes.
 
 - *Shutdown:* To gently shutdown+power off the node use the stop buttons as  normal and then hit this “shutdown” button. It will complete it's shutdown process in 60 seconds.
 
@@ -261,11 +259,11 @@ A 5 MB rolling log is kept here. Should you suspect your node is not performing 
 
 ## Web-Terminal: & Main System Menu
 
-### System Settings
+## System Settings
 
 ![System-Settings](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/system-settings.png)
 
-#### Raspi-config - Hardware management
+### Raspi-config - Hardware management
  Here are the standard hardware config options that the Raspbian OS provides. A detailed explanation of each feature is best found at the official Raspbery Pi pages: https://www.raspberrypi.org/documentation/configuration/
 
 However - some special notes on Wifi and the PiNode-XMR
@@ -274,7 +272,7 @@ However - some special notes on Wifi and the PiNode-XMR
 
 **However if Wi-Fi is to be used then the Ethernet cable must be unplugged. If you do not, the device will assign itself 2 IP addresses, one for each connection method, and Monerod will fail to boot**
 
-#### Master Login Password
+### Master Login Password
 
 This menu allows you to set a new root/pinodexmr user password. Doing so is strongly recommended to change from the default password.
 
@@ -282,7 +280,7 @@ When creating this password the input box cannot be empty, the password must be 
 
 This password will be used to log into the web terminal in future and for those that access via SSH. If you forget this password you will be locked out of these menus, keep it safe.
 
-#### Monero RPC Password and username
+### Monero RPC Password and username
 
 This menu allows you to set a new root/pinodexmr user password. Doing so is strongly recommended to change from the default password.
 
@@ -290,7 +288,7 @@ When creating this password the input box cannot be empty, the password must be 
 
 This password/username combo is used to connect your wallet to this node.
 
-#### USB storage setup
+### USB storage setup
 
 For storage the ideal configuration is to have your OS and PiNode-XMR on your standard media that your device supports, then have the monero blockchain separately on a USB SSD. This has been proven to have faster sync times.
 
@@ -299,58 +297,58 @@ However this menu option will allow you to store the blockchain on any USB devic
 Notes on USB storage - 
 Be aware the device will become `/dev/sda` mounted at `/home/pinodexmr/.bitmonero` with no partition and the entire drive will be used. Other devices (windows) can sometimes not detect this drive after use with PiNode-XMR because of the lack of partition, it is easily reverted back, just a heads up, this is most likely your issue.
 
-#### Agnostics - SD card health checker
+### Agnostics - SD card health checker
 A new tool for checking SD card read/write sequential and random speeds. It has some performance targets set into it and will inform you whether or not you meet those targets via PASS/FAIL.
 
 Before starting this test ensure you have stopped the node and block explorer, if they read/write in the background the test will fail.
 
-### Update Tools
+## Update Tools
 
 ![Update-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/update-tools.png)
 
-#### Update Monero
+### Update Monero
 PiNode-XMR will download a new version number from this site and compare it to your current version. If the new version number is higher you will have the option to update.
 On update the nodes and block explorer will stop, old Monero versions deleted and new versions will be downloaded and built from the official Monero repositories.
 
 The compiling of Monero on single board computers is very CPU intensive, at worst on a Raspberry Pi 3b+ it has been known to take approx 7 hours. More powerful hardware will be proportionately faster.
 
-#### Update PiNode-XMR
+### Update PiNode-XMR
 This will update your Web UI, install new tools, features that are not covered by another option in this Update menu.
 If you have set custom variables during normal use (Bandwidth settings, Addresses, passwords) they will be retained during the update process.
 
-#### Update Block-Explorer
+### Update Block-Explorer
 As the title suggests. If there is a new version available it will be sourced from the external repository https://github.com/moneroexamples/onion-monero-blockchain-explorer
 
-#### Update background system dependencies
+### Update background system dependencies
 This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to update background dependencies that are used by the underlying operating system (Raspbian or Armbian). This can include things like security upgrades so is worth running on occasion.
 
-### Node Tools
+## Node Tools
 
 ![Node-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/node-tools.png)
 
-#### Start/Stop Blockchain Explorer
+### Start/Stop Blockchain Explorer
 As the title says, use this to manually start/stop the explorer.
 
 When the explorer is started it also updates a flag elsewhere in the system so that the explorer will be started on system boot (in case of power cycle). This flag is then removed on the manual stop selection.
 
-#### Prune Node
+### Prune Node
 I think this is the simplest method for new users. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. For this reason the prune option can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
 
-#### Pop Blocks
+### Pop Blocks
 Another new feature. This uses a blockchain tool stored on your system to remove a specified number of blocks from the end of the blockchain. It will prompt you for a value, and that many blocks will be removed.
 
 Ensure the blockchain is not in use by the node or explorer first, (stop them).
 
 This can be used is you have blockchain transaction errors preventing you from completing a sync. It can help avoid a lengthy re-start sync from scratch.
 
-### Extra Network Tools
+## Extra Network Tools
 
 ![Network-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/network-tools.png)
 
-### Install tor
+## Install tor
 From v3 of PiNode-XMR tor is no longer installed by default due the potential for a user to encounter trouble from censorship, political or legal issues in their country. Therefore use this option to add the tool and enable the tor mode on the web UI. Once installed see https://github.com/shermand100/pinode-xmr#tor below for how it works, and how it affects your privacy.
 
-### tor NYX
+## tor NYX
 Is a bandwidth monitoring utility for tor, (Previously tor-arm).
 
 Detailed bandwidth stats are available when running as a tor node using the nyx utility. (Available for Raspberry Pi image only) It is installed as a package with the "Install tor" option mentioned above. 
@@ -361,10 +359,10 @@ Selecting tor NYX will bring you to the terminal and be prompted for the control
 
 Exit the utility by using `CTRL+C` and return to the setting menu.
 
-### Install PiVPN
+## Install PiVPN
 This is a great open source tool from https://www.pivpn.io/ enabling you to run your own home VPN. Check out their site for more info
 
-### NoIp.com Dynamic DNS
+## NoIp.com Dynamic DNS
 This can be helpful if you have a dynamic external IP address, and want to connect to your Node from a mobile wallet on the go. This service lets you set a easy to remember hostname which will always point to your home network. Port forwarding is then required to complete the connection to your PiNode-XMR, and concern should be given to your home security settings before allowing this. Configured correctly this is a great tool.
 Before starting this option it is required that you register (free) at NoIP.com for a username and password that will be required after installation. From their site you set your custom hostname.
 
@@ -378,8 +376,8 @@ and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#b
 
 > ' If any anonymity network is enabled, transactions being broadcast that lack a valid "context" (i.e. the transaction did not come from a p2p connection), will only be sent to peers on anonymity networks. If an anonymity network is enabled but no peers over an anonymity network are available, an error is logged and the transaction is kept for future broadcasting over an anonymity network. The transaction will not be broadcast unless an anonymity connection is made or until monerod is shutdown and restarted with only public connections enabled. '
 
-### Misc options:
-##### *Mining_Intensity:* The default mining intensity is set to 50% and is configurable through the web terminal command line
+## Misc options:
+### *Mining_Intensity:* The default mining intensity is set to 50% and is configurable through the web terminal command line
  
      nano /home/pinodexmr/mining-intensity.sh
      
