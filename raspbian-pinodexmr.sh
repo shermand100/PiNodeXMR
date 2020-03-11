@@ -77,7 +77,7 @@ sleep 3
 echo -e "\e[32mEnable PiNode-XMR on boot\e[0m"
 sleep 3
 sudo mv /home/pinodexmr/pinode-xmr/etc/rc.local /etc/rc.local
-sudo chmod 644 /etc/rc.local
+sudo chmod 755 /etc/rc.local
 sudo chown root /etc/rc.local
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
