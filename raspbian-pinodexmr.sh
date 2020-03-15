@@ -154,6 +154,7 @@ sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
 sudo chown pinodexmr /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
 sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/
 sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/
+sudo /etc/init.d/cron restart
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
