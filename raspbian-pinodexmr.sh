@@ -113,7 +113,7 @@ sleep 3
 sudo mv /home/pinodexmr/pinode-xmr/HTML/*.* /var/www/html/
 sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
 sudo chown www-data -R /var/www/html/
-sudo chmod 775 -R /var/www/html/
+sudo chmod 777 -R /var/www/html/
 
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 #First build monero, single build directory
