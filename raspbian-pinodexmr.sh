@@ -69,7 +69,7 @@ sleep 3
 ##Disable IPv6 on boot. Enabled causes errors as Raspbian generates a IPv4 and IPv6 address and Monerod will fail with both.
 echo -e "\e[32mDisable IPv6 on boot\e[0m"
 sleep 3
-echo 'ipv6.disable=1' | sudo tee -a /boot/cmdline.txt
+sudo sed -i '1s/$/ ipv6.disable=1/' /boot/cmdline.txt
 echo -e "\e[32mIPv6 Disabled on boot\e[0m"
 sleep 3
 
