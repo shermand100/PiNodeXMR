@@ -148,13 +148,8 @@ cd
 ##Install crontab
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
-sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-sudo chown pinodexmr /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/
-sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/
-sudo /etc/init.d/cron restart
+sudo crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
+crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
