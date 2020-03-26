@@ -24,4 +24,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-0 */2 * * * systemctl restart explorer-start.service
+0 */2 * * * /home/pinodexmr/explorer-flag-root-crontab.sh
