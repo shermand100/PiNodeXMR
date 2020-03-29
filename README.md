@@ -1,7 +1,8 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # User Manual v3.20.03-Open-Build		
 ### Open Source Build for Raspbian and Armbian*
-### Applolgies - In my haste to release this new version with many new features it has added more minor bugs that I believe are acceptable for a release. I have kept all image downloads active (for now) but recommend using the self installer for the most up to date version which has removed most of them. I'll re-upload better images soon.
+### Applolgies - In my haste to release this new version with many new features it has added more minor bugs than I believe are acceptable for a release. I have kept all image downloads active (for now) but recommend using the self installer for the most up to date version which has removed them. I'll re-upload better images soon. -- as of 29/03/20 the self installer will build monero 0.15.0.5, the disk image is a few minors behind (0.15.0.1)
+
 *Armbian in development*
 
 See the [Installing](https://github.com/shermand100/pinode-xmr#installing) section for the one line command to build this open source project on-top of your Raspbian OS
