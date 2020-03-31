@@ -12,7 +12,7 @@
 	
 	case $CHOICE in
 		
-		"1)") clear
+		"1)")
 		;;
 				
 		"2)")CHOICE2=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nSystem Settings" 20 60 10 \
@@ -42,8 +42,8 @@
 							fi
 					;;
 			
-					"4)")	if (whiptail --title "PiNode-XMR configure storage" --yesno "This will allow you to add USB storage for the Monero blockchain.\n\nConnect your device now.\n\n***If this device has not been used with PiNode-XMR before it will be formatted and all data on it lost***\n\nWould you like to continue?" 16 78); then
-					. /home/pinodexmr/setup-usb.sh
+					"4)")	if (whiptail --title "PiNode-XMR configure storage" --yesno "This will allow you to add USB storage for the Monero blockchain.\n\nConnect your device now.\n\nWould you like to continue?" 16 78); then
+					. /home/pinodexmr/setup-usb-select-device.sh
 							else
 					. /home/pinodexmr/setup.sh
 							fi
