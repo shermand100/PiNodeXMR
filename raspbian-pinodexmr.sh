@@ -96,7 +96,7 @@ echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
 mv /home/pinodexmr/pinode-xmr/home/pinodexmr/* /home/pinodexmr/
 mv /home/pinodexmr/pinode-xmr/home/pinodexmr/.profile /home/pinodexmr/
-chmod 775 /home/pinodexmr/*
+chmod 777 /home/pinodexmr/*
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
