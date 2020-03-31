@@ -1,13 +1,16 @@
 #!/bin/bash
 
 wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
-echo "Version Info file received:"
+
 #Permission Setting
 chmod 755 /home/pinodexmr/current-ver-pi.sh
 chmod 755 /home/pinodexmr/new-ver-pi.sh
 #Load Variables
 . /home/pinodexmr/current-ver-pi.sh
 . /home/pinodexmr/new-ver-pi.sh
+echo "Version Info file received:"
+echo "Current Version: $CURRENT_VERSION_PI "
+echo "Latest Version: $NEW_VERSION_PI "
 
 sleep "3"
 	if [ $CURRENT_VERSION_PI -lt $NEW_VERSION_PI ]; then
@@ -41,7 +44,6 @@ sleep "3"
 					mv /home/pinodexmr/prunestatus.sh /home/pinodexmr/prunestatus_status.sh
 					mv /home/pinodexmr/RPCp.sh /home/pinodexmr/RPCp_retain.sh
 					mv /home/pinodexmr/RPCu.sh /home/pinodexmr/RPCu_retain.sh
-					mv /home/pinodexmr/setupcomplete.sh /home/pinodexmr/setupcomplete_retain.sh
 					
 						#Install Update
 					echo -e "\e[32mInstalling update\e[0m"
@@ -49,7 +51,7 @@ sleep "3"
 						##Update PiNode-XMR systemd services
 					echo -e "\e[32mUpdating PiNode-XMR systemd services\e[0m"
 					sleep 2
-					mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/system/
+					sudo mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/system/
 					sudo chmod 644 /etc/systemd/system/*.service
 					sudo chown root /etc/systemd/system/*.service
 					echo -e "\e[32mSuccess\e[0m"
@@ -122,6 +124,7 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					whiptail --title "PiNode-XMR Updater" --msgbox "\n\nYour PiNode-XMR has been updated to version ${NEW_VERSION_PI}" 12 78
 					
 					else
+					rm /home/pinodexmr/new-ver-pi.sh
 					. /home/pinodexmr/setup.sh
 					fi
 
