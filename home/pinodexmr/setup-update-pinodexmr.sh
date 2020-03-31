@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/shermand100/pinode-xmr/development/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 echo "Version Info file received:"
 #Permission Setting
 chmod 755 /home/pinodexmr/current-ver-pi.sh
@@ -59,7 +59,7 @@ sleep "3"
 					sleep 2
 					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/* /home/pinodexmr/
 					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/.profile /home/pinodexmr/
-					chmod 755 /home/pinodexmr/*
+					chmod 777 /home/pinodexmr/*
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 						##Update web interface
@@ -68,7 +68,7 @@ sleep "3"
 					sudo mv /home/pinodexmr/pinode-xmr/HTML/*.* /var/www/html/
 					sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
 					sudo chown www-data -R /var/www/html/
-					sudo chmod 755 -R /var/www/html/
+					sudo chmod 777 -R /var/www/html/
 					echo -e "\e[32mSuccess\e[0m"
 										
 					#Restore User Values
@@ -97,17 +97,14 @@ sleep "3"
 					mv /home/pinodexmr/setupcomplete_retain.sh /home/pinodexmr/setupcomplete.sh
 					echo -e "\e[32mSuccess\e[0m"
 					
-						##Update crontab
-					echo -e "\e[32mUpdating crontab\e[0m"
-					sleep 2
-					sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-					sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-					sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-					sudo chown pinodexmr /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-					sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/
-					sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/
+					
+					##Update crontab
+					echo -e "\e[32mSetup crontab\e[0m"
+					sleep 3
+					sudo crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
+					crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 2
+					sleep 3
 
 					#Update system version number to new one installed
 					echo "#!/bin/bash
@@ -126,7 +123,6 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					
 					else
 					. /home/pinodexmr/setup.sh
-					exit 1
 					fi
 
 else
