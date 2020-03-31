@@ -1,77 +1,31 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
-# User Manual v3.20.03-Open-Build		
-### Open Source Build for Raspbian and Armbian*
-### Applolgies - In my haste to release this new version with many new features it has added more minor bugs than I believe are acceptable for a release. I have kept all image downloads active (for now) but recommend using the self installer for the most up to date version which has removed them. I'll re-upload better images soon. -- as of 29/03/20 the self installer will build monero 0.15.0.5, the disk image is a few minors behind (0.15.0.1)
-
-*Armbian in development*
-
-See the [Installing](https://github.com/shermand100/pinode-xmr#installing) section for the one line command to build this open source project on-top of your Raspbian OS
-or...
-## Downloads
-### Download PiNode-XMR disk image for Raspberry Pi
-[PiNode-XMR_v3.20.03.img  base image](https://drive.google.com/open?id=1grRvfFiCHY41E2L8TTBF-8hq9zA1XjzL)
-**5GB**
-SHA256: 60698729D161D7339BF5D438D6F86FD2B55A5E6D299616A79A0ACB36F755BA53
-Monero-v0.15.0.1
-
-[PiNode-XMR_v3.20.03.img  Pre-sync'd to block 2050060-sun-8th-march-1700GMT](https://drive.google.com/open?id=12-XSecCWW90OrRVmTYdiKG5_wsgroY3G)
-**88GB**
-SHA256: B4D9A42785CB01E9B8F63C79FAC9E71BF1FB11C287B88FB6F16ACC137AA2397C
-Monero-v0.15.0.1
-
-*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
-
-43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
+# User Manual v3.20.04-Open-Build		
+### Open Source Build for Raspbian - *Armbian in development*
+#### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
 
 ## Support at
 * [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
 * Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
 
-## Features:
-* 4 Node modes (click to start)
-  * Private Node
-  * tor bridging Node - routes your transactions through the tor network
-  * Public Node - Using new RPC payment feature* [Monero project commit message for more info](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937)
-  * Private Node - with mining (For education/experiment only)
-* Simple control with Web-UI
-  * View Monero node and hardware status
-  * Control bandwidth, connection limits and RPC port
-  * Transaction pool and summary viewer
-  * View connected peer info
-  * Monerod log file view page
-* Monero Block Explorer [Github - onion-monero-blockchain-explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer)
-* Easy setup menu for config of passwords, USB storage and Updates.
-* **New** - Additional tools
-  * raspi-config (Hardware and Wifi settings pre-built into PiNode-XMR menu
-  * Agnostics - SD Card read/write health checker included
-  * PiVPN - Tool for easy configuration of OpenVPN for Raspbian and Armbian
-  * PoP blocks - Monero tool to help recover blockchain problems - UI
-  * Systemd Monitor to track running node and explorer functions
-  * tor installer - tor is no longer included and running as default due to censorship, political or legal restriction of users host country. Simple select to install and activate on user request.
-  * All status boxes have improved scripts for clearer more constant feedback during high CPU loads.
-* All the benefits of running on a Single Board computer (EG. RasPi, silent/fan-less, low power (approx 15w) for 24/7 node, low cost)
-* Headless (No need for extra monitor,keyboard,etc) and connect via Ethernet or WiFi**
+## Intro
 
+Let me start by saying I'm glad the internet has bought you to here. It's taken several years to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. The project is in a changing state at the moment with a shift from pre-built disk images, to you the user running a single command to initiate the install from this github repository. The reason for this change is to present the project as open source, increase transparency and trust. It also gives the added benefit of no longer being tied to the hardware of the device I was building the disk images on. This gives you the user much greater freedom to install your node on any Armbian device of your choice. Whilst this transition to open source finalises I will continue to provide the pre-made and pre-syncd disk images for the Raspberry Pi, but will phase this out over the year.
+Also throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that users too have busy lifestyles, they want a node fast and I hope this project is a reasonable solution to that request.
 
-*Public Node has settings configured - require test and activation on implementation of  [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context of issue at [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083)
+To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
 
-**Connection via Ethernet required to configure WiFi
+Dan
 
-## Hardware requirements:
-
-1. * Raspberry Pi 2/3/4 (incl B&+ models) for Pre-Configured disk image
-   * Any device that supports Armbian OS with 2GB RAM. *RAM required for Monero source compile* 
-2. 8GB MicroSD Card with aditional min 100GB USB storage device for Monero Blockchain. Or 128GB MicroSD to store all-in-one.
-3. Ethernet connection (can be replaced by WiFi after config, hardware dependant)
-
-A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
-With a little further configuration this node will allow wallet connections from your mobile app on the move.
+*This Manual is still aimed at a low beginner level user including SD formatting and image writing. After these chapters and node usage you'll find detailed breakdowns of how this node works for those that are interested in contributing. Finally all suggested software used in the setup stages are downloadable for free*
 
 ## Contents:
 
 * [Intro](https://github.com/shermand100/pinode-xmr#intro)
-* [Installing](https://github.com/shermand100/pinode-xmr#installing)
-* [Setup](https://github.com/shermand100/pinode-xmr#setup)
+   * [Features list](https://github.com/shermand100/pinode-xmr#features)
+   * [Hardware Requirements](https://github.com/shermand100/pinode-xmr#hardware-requirements)
+   * [Open Source Installation](https://github.com/shermand100/pinode-xmr#installing)
+   * [Pre-Configured Download](https://github.com/shermand100/pinode-xmr#downloads)
+   * [Setup](https://github.com/shermand100/pinode-xmr#setup)
 * [Web-UI: Getting started & General Usage](https://github.com/shermand100/pinode-xmr#web-ui-starting-your-node-and-general-usage)
    * [Welcome Page](https://github.com/shermand100/pinode-xmr#welcome-page--)
    * [Advanced Settings & Starting Monero](https://github.com/shermand100/pinode-xmr#advanced-settings---starting-monero)
@@ -110,31 +64,52 @@ With a little further configuration this node will allow wallet connections from
   * [IP address considerations](https://github.com/shermand100/pinode-xmr/blob/master/README.md#ip-address-considerations)
   * [Port Forwarding](https://github.com/shermand100/pinode-xmr/blob/master/README.md#port-forwarding)
   
-## Intro
+## Features:
+* 4 Node modes (click to start)
+  * Private Node
+  * tor bridging Node - routes your transactions through the tor network
+  * Public Node - Using new RPC payment feature* [Monero project commit message for more info](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937)
+  * Private Node - with mining (For education/experiment only)
+* Simple control with Web-UI
+  * View Monero node and hardware status
+  * Control bandwidth, connection limits and RPC port
+  * Transaction pool and summary viewer
+  * View connected peer info
+  * Monerod log file view page
+* Monero Block Explorer [Github - onion-monero-blockchain-explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer)
+* Easy setup menu for config of passwords and Updates.
+* **New** - Additional tools
+  * raspi-config (Hardware and Wifi settings pre-built into PiNode-XMR menu
+  * Agnostics - SD Card read/write health checker included
+  * PiVPN - Tool for easy configuration of OpenVPN for Raspbian and Armbian
+  * Pop blocks - Monero tool to help recover blockchain problems - UI
+  * Systemd Monitor to track running node and explorer functions
+  * tor installer - tor is no longer included and running as default due to censorship, political or legal restriction of users host country. Simple select to install and activate on user request.
+  * All status boxes have improved scripts for clearer more constant feedback during high CPU loads.
+  * Improved helper to setup an external USB storage device to hold the Monero blockchain. This new script allows a user to import a blockchain already held from a PC. Also on SD card failure this storage device can be identified by PiNode-XMR as configured for use, preserving the blockchain and so reducing re-startup time.
+* All the other benefits of running a node on a Single Board computer (EG. RasPi, silent/fan-less, low power (approx 15w) for 24/7 node, low cost)
+* Headless (No need for extra monitor,keyboard,etc) direct connect via Ethernet or WiFi**
 
-Let me start by saying I'm glad the internet has bought you to here. It's taken several years to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. The project is in a changing state at the moment with a shift from pre-built disk images, to you the user running a single command to initiate the install from this github repository. The reason for this change is to present the project as open source, increase transparency and trust. It also gives the added benefit of no longer being tied to the hardware of the device I was building the disk images on. This gives you the user much greater freedom to install your node on any Armbian device of your choice. Whilst this transition to open source finalises I will continue to provide the pre-made and pre-syncd disk images for the Raspberry Pi, but will phase this out over the year.
-Also throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that users too have busy lifestyles, they want a node fast and I hope this project is a reasonable solution to that request.
 
-To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
+*Public Node has settings configured but requires test and activation on implementation of  [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) For context of issue see [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083)
 
-Dan
+**Connection via Ethernet required to configure WiFi
 
-*This Manual is still aimed at a low beginner level user including SD formatting and image writing. After these chapters and node usage you'll find detailed breakdowns of how this node works for those that are interested in contributing. Finally all suggested software used in the setup stages are downloadable for free*
+## Hardware requirements:
+
+1. * Raspberry Pi 2/3/4 (incl B&+ models) for Pre-Configured disk image
+   * Any device that supports Armbian OS with 2GB RAM. *RAM required for Monero source compile* 
+2. 8GB MicroSD Card with aditional min 100GB USB storage device for Monero Blockchain. Or 128GB MicroSD to store all-in-one.
+3. Ethernet connection (can be replaced by WiFi after config, hardware dependant)
+
+A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
+With a little further configuration this node will allow wallet connections from your mobile app on the move.
 
 ## Installing
-### Raspberry Pi -
-If using a Raspberry Pi you may use the pre-installed disk image avaliable [here](https://github.com/shermand100/pinode-xmr#downloads). The PiNode-XMR image is available to download as-is. It is un-compressed and ready to write using the same method you would for any other image. For those that are new these free programs will get you started:
-
-1. Format the micro-sd card. For all users I recommend [SDFormatter](https://www.sdcard.org/downloads/formatter/)
-2. Write the image file to the formatted card. 
-   - Windows users [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/)
-   - Mac users [Etcher](https://etcher.io/)
-
-
-Once complete insert the card into your device and power on.
-
 ### Self Install scripts
-This project can now self install on Raspbian and Armbian OS in an effort to become completely Open Source (my disk images require you to trust me). This is a better alternative for everyone.
+This project can now self install on Raspbian in an effort to become completely Open Source (my disk images require you to trust me). This is a better alternative for everyone.
+
+**Important - this project is intended to convert your Raspberry Pi into a dedicated Monero node from a clean Raspbian OS. Running this script ontop of anything else existing on the device will likely overwrite it in an unrecoverable manner**
 
 #### Raspberry Pi
 Install your Raspbian OS as usual and ideally SSH into it as user `pi` and enter
@@ -143,29 +118,40 @@ Install your Raspbian OS as usual and ideally SSH into it as user `pi` and enter
 
 You will see the screenshot below to make your selection. Follow the on screen instructions.
 
-#### All other devices - Armbian
-Install Armbian on your device and create a user called `pinodexmr`. Once logged in as this user run:
-
-`wget -O - https://github.com/shermand100/pinode-xmr/raw/master/Install-PiNode-XMR.sh | bash`
-
-This will present you with the menu to select which OS you are building PiNode-XMR onto
-
 ![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/OS-Select.png)
 
-Select your OS and follow the on screen steps for installation.
-
-It is a relatively fast process except for the compiling of Monero from source which is CPU and RAM intensive, expect a couple of hours, % progress readouts are given periodically.
+It is a relatively fast process except for the compiling of Monero from source which is CPU and RAM intensive, expect a couple of hours, % progress readouts are given periodically. It is installed in 2 stages. Stage 1 sets up the environment for user 'pinodexmr', security and network. Once this is completed a restart is required (automatic). Stage 2 once rebooted, log back in with user `pinodexmr` and password `PiNodeXMR` and the script will continue to install. No further interaction is required. However the process of compiling Monero from source is lengthy and resource intensive. For Pi 3b+ expect ~8hours for completion, for Pi 4 ~3hours.
 
 Once complete you will see
 
 ![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/Install-Complete.png)
 
+#### All other devices - Armbian - (In development)
+
+Available soon...
+
+## Downloads
+### Download PiNode-XMR disk image for Raspberry Pi 3b+ & 4
+If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR image is available to download as-is. Meaning it is un-compressed and ready to write using the same method you would for any other disk image. For those that are new to using Raspberry Pi these free programs will get you started:
+
+1. Format the micro-sd card. For all users I recommend [SDFormatter](https://www.sdcard.org/downloads/formatter/)
+2. Write the image file to the formatted card. 
+   - Windows users [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/)
+   - Mac users [Etcher](https://etcher.io/)
+
+Once complete insert the card into your device and power on.
+
+*Update 23:00GMT 31/03/2020 - New disk images are available and are currently being uploaded*
+
+*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
+
+43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
 
 ## Setup:
-For the disk images, a bug exists that the SD card doesn't auto-resize. Continue with the setup below and once logged in to the web terminal menu select "2) system settings", "1) raspi-config", "7) advanced options", "A1) Expand file system". The device will reboot on menu exit and operate as intended. Applogies for this inconvenience, it'll be rectified on next update.
-~~On first time power-on the software will check to see if it has booted before. On it's first usage it will resize it's rootfs partition automatically to make best use of whichever size MicroSD card you've purchased ready for the Monero Blockchain.~~
 
-~~During this process it will restart itself and will pause for 120 seconds. This is normal. I recommend that once plugged in simply leave the node for 5 mins, after this time it will have self configured and you will be safe to configure it as you wish (covered in a bit).~~ 
+On first time power-on the software will check to see if it has booted before. On it's first usage it will resize it's rootfs partition automatically to make best use of whichever size MicroSD card you've purchased ready for the Monero Blockchain.
+
+During this process it will restart itself and will pause for 120 seconds. This is normal. I recommend that once plugged in simply leave the node for 5 mins, after this time it will have self configured and you will be safe to continue setting your passwords (covered in a bit).
 
 Every subsequent power-on event will skip this step and immediately run the Monero software without delay in the condition it was last run in, Clearnet/tor/Mining. Pruned or not.
 
@@ -188,7 +174,7 @@ Password: PiNodeXMR
 
 If this is your devices first boot then follow the select "System Settings" and the two password setting options should be used for "Master" and "RPC". 
 
-Once the passwords are set the device is yours. Head back to the Web UI to start your node. *Bug exists, run expand file system from raspi-config first.
+Once the passwords are set the device is yours. Head back to the Web UI to start your node.
 
 ## Web-UI: Starting your Node and General Usage
 
