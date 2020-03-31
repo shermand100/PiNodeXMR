@@ -59,6 +59,7 @@ sleep "3"
 						##Updating PiNode-XMR scripts in home directory
 					echo -e "\e[32mUpdating PiNode-XMR scripts in home directory\e[0m"
 					sleep 2
+					sudo rm -R /home/pinodexmr/flock #if folder not removed produces error, cannot be overwritten if not empty
 					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/* /home/pinodexmr/
 					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/.profile /home/pinodexmr/
 					chmod 777 /home/pinodexmr/*
@@ -96,7 +97,6 @@ sleep "3"
 					mv /home/pinodexmr/prunestatus_status.sh /home/pinodexmr/prunestatus.sh
 					mv /home/pinodexmr/RPCp_retain.sh /home/pinodexmr/RPCp.sh
 					mv /home/pinodexmr/RPCu_retain.sh /home/pinodexmr/RPCu.sh
-					mv /home/pinodexmr/setupcomplete_retain.sh /home/pinodexmr/setupcomplete.sh
 					echo -e "\e[32mSuccess\e[0m"
 					
 					
