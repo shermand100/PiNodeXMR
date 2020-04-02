@@ -7,9 +7,9 @@ sudo apt-get install whiptail
 
 CHOICE=$(
 whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS" 20 60 5 \
-	"1)" "Raspbian"   \
-	"2)" "Debian"  \
-	"3)" "Armbian" \
+	"1)" "Raspbian (Buster)"   \
+	"2)" "Ubuntu"  \
+	"3)" "Armbian (Buster)" \
 	"4)" "Exit"  3>&2 2>&1 1>&3	
 )
 
@@ -27,8 +27,8 @@ case $CHOICE in
 		exit 1
 	;;
 	"2)")   
-		#Commands for Debian
-		whiptail --title "Debian Installer coming soon" --msgbox "Debian is not yet available, but is a work in progress\n\n\Please select either the Raspbian or Armbian installer if your Hardware/OS is ready." 16 60;
+		#Commands for Ubuntu
+		whiptail --title "Ubuntu Installer coming soon" --msgbox "Ubuntu is not yet available, but is a work in progress\n\n\Please select either the Raspbian or Armbian installer if your Hardware/OS is ready." 16 60;
 		./Install-PiNode-XMR.sh
 	;;
 
