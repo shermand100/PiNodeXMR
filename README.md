@@ -1,11 +1,16 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # User Manual v3.20.04-Open-Build		
-### Open Source Build for Raspbian - *Armbian in development*
+#### Self Install Open Source Build for Raspbian - *Armbian in development*
+or
 #### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
 
 ## Support at
 * [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
 * Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
+
+*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
+
+43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
 
 ## Intro
 
@@ -131,8 +136,40 @@ Once complete you will see
 Available soon...
 
 ## Downloads
-### Download PiNode-XMR disk image for Raspberry Pi 3b+ & 4
-If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR image is available to download as-is. Meaning it is un-compressed and ready to write using the same method you would for any other disk image. For those that are new to using Raspberry Pi these free programs will get you started:
+#### Download PiNode-XMR disk image for Raspberry Pi 3b+ & 4
+If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR image is available to download as-is. Meaning it is un-compressed and ready to write using the same method you would for any other disk image. 
+
+____
+
+#### PiNode-XMR v3.20.04
+
+[PiNode-XMR_v3.20.04.img](https://drive.google.com/file/d/1fkhEleJ8KsjA2bFD16If3NztHFlTzR6n/view?usp=sharing)
+
+Monero v0.15.0.5
+Block Explorer v2020-01-07
+
+Hash Info:
+- Name: PiNodeXMR_v3.20.04.img
+- Size: 6538035200 bytes (6235 MiB)
+- SHA256: 75793D0067338D2379A482F7CEFB716E8A8F2049E1FE5DC8F1BAB4A7686E7CFC
+
+____
+
+#### PiNode-XMR v3.20.04 (Sync'd to block 2067551, 00:38GMT 2nd Apr 2020)
+
+[PiNode-XMR_v3.20.04_blk2067551.img](https://drive.google.com/file/d/1m4MWfRyVf9RKydgIU_IN9P6Wth0PRtdA/view?usp=sharing)
+
+Monero v0.15.0.5
+Block Explorer v2020-01-07
+
+Hash Info:
+- Name: PiNodeXMR_v3.20.04_blk2067551.img
+- Size: 94551162880 bytes (88 GiB)
+- SHA256: 93B7F47B3CA7E82633583F229C66C96BD907B734604D478B37AF4E80A9051C2F
+
+____
+
+For those that are new to writing Raspberry Pi image files these free programs will get you started:
 
 1. Format the micro-sd card. For all users I recommend [SDFormatter](https://www.sdcard.org/downloads/formatter/)
 2. Write the image file to the formatted card. 
@@ -140,12 +177,6 @@ If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR
    - Mac users [Etcher](https://etcher.io/)
 
 Once complete insert the card into your device and power on.
-
-*Update 23:00GMT 31/03/2020 - New disk images are available and are currently being uploaded*
-
-*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
-
-43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
 
 ## Setup:
 
