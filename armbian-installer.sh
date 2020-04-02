@@ -17,9 +17,9 @@ whiptail --title "PiNode-XMR Armbian Installer" --msgbox "Thanks for confirming\
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 3
 wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Armbian-install/etc/sudoers
-sudo chmod 0440 /home/pinodexmr/sudoers
-sudo chown root /home/pinodexmr/sudoers
-sudo mv /home/pinodexmr/sudoers /etc/sudoers
+sudo chmod 0440 ~/sudoers
+sudo chown root ~/sudoers
+sudo mv ~/sudoers /etc/sudoers
 echo -e "\e[32mGlobal permissions changed\e[0m"
 sleep 3
 
@@ -53,9 +53,9 @@ echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m****************************************\e[0m"
 sudo reboot
 
-							else
-
-							fi
+else
+exit 0
+fi
 
 
 
