@@ -6,10 +6,6 @@ DEVICE_IP="$(hostname -I)"
 #Import Start Flag Values:
 	#Import Port Number
 	. /home/pinodexmr/monero-port.sh
-	#Import Block Sync Size
-	. /home/pinodexmr/monero-block-sync-size.sh
-	#Set Sync Mode (Safe,Fast,Fastest)
-	. /home/pinodexmr/db-sync-mode.sh
 	#Import "IN-PEERS" (connections) Limit
 	. /home/pinodexmr/in-peers.sh
 	#Import "OUT-PEERS" (connections) Limit

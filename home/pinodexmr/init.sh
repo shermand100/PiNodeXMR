@@ -6,8 +6,6 @@ sudo iptables -I OUTPUT -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT
 
 #Establish IP
 	DEVICE_IP="$(hostname -I)"
-#Output onion address
-sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 
 #Load Variables
 . /home/pinodexmr/current-ver.sh

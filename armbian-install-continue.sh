@@ -9,6 +9,9 @@
 
 ###Begin2
 
+whiptail --title "PiNode-XMR Continue Armbian Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take several hours dependant on your hardware but I won't require any further input from you. I can be left to install myself if you wish\n\nSelect ok to continue setup" 16 60
+###Continue as 'pinodexmr'
+
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Armbian updates to latest versions\e[0m"
 sleep 3
@@ -26,10 +29,10 @@ sleep 3
 sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libunbound-dev graphviz doxygen libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
 sleep 3
 
-##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+##Installing dependencies for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils tor nyx fail2ban ufw  dialog -y
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw  dialog -y
 sleep 3
 
 ##Clone PiNode-XMR to device from git
@@ -38,7 +41,7 @@ sleep 3
 git clone -b Armbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
 
 
-##Configure ssh security. Allow only user 'pinodexmr' & 'root' login disabled, restart config to make changes
+##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes
 echo -e "\e[32mConfiguring SSH security\e[0m"
 sleep 3
 sudo mv /home/pinodexmr/pinode-xmr/etc/ssh/sshd_config /etc/ssh/sshd_config
@@ -51,7 +54,7 @@ sleep 3
 ##Disable IPv6 on boot. Enabled causes errors as Raspbian generates a IPv4 and IPv6 address and Monerod will fail with both.
 echo -e "\e[32mDisable IPv6 on boot\e[0m"
 sleep 3
-echo 'ipv6.disable=1' | sudo tee -a /boot/cmdline.txt
+sudo sed -i '1s/$/ ipv6.disable=1/' /boot/cmdline.txt
 echo -e "\e[32mIPv6 Disabled on boot\e[0m"
 sleep 3
 
@@ -71,30 +74,6 @@ sudo mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/sys
 sudo chmod 644 /etc/systemd/system/*.service
 sudo chown root /etc/systemd/system/*.service
 echo -e "\e[32mSuccess\e[0m"
-sleep 3
-
-##Setup tor hidden service and monitor file
-echo -e "\e[32mSetup tor hidden service and monitor file\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/pinode-xmr/etc/tor/torrc /etc/tor/torrc
-sudo chmod 644 /etc/tor/torrc
-sudo chown root /etc/tor/torrc
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
-
-##UFW Setup
-echo -e "\e[32mSetup Uncomplicated Firewall\e[0m"
-sleep 3
-sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
-sudo ufw allow 80		#web
-sudo ufw allow 8081		#onion explorer
-sudo ufw allow 443		#ssl 
-sudo ufw allow 18080	#monero spare
-sudo ufw allow 18081	#monero node default
-sudo ufw allow 4200		#web terminal
-sudo ufw allow 22		#ssh
-echo "y" | sudo ufw enable
-echo -e "\e[32mFirewall configured\e[0m"
 sleep 3
 
 ##Copy PiNode-XMR scripts to home folder
@@ -154,12 +133,8 @@ cd
 ##Install crontab
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
-sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-sudo chown pinodexmr /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/
-sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/
+sudo crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
+crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
@@ -179,10 +154,11 @@ echo '. /home/pinodexmr/setup.sh' | tee -a /home/pinodexmr/.profile
 echo -e "\e[32mAll Installs complete\e[0m"
 whiptail --title "PiNode-XMR Continue Install" --msgbox "Your PiNode-XMR is ready\n\nInstall complete. When you log in after the reboot use the menu to change your passwords and other features.\n\nEnjoy your Private Node\n\nSelect ok to reboot" 16 60
 echo -e "\e[32m****************************************\e[0m"
+echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m**********PiNode-XMR rebooting**********\e[0m"
 echo -e "\e[32m**********Reminder:*********************\e[0m"
 echo -e "\e[32m**********User: 'pinodexmr'*************\e[0m"
-echo -e "\e[32m**********Password: 'PiNodeXMR'*********\e[0m"
 echo -e "\e[32m****************************************\e[0m"
-sleep 10
+echo -e "\e[32m****************************************\e[0m"
+sleep 2
 sudo reboot
