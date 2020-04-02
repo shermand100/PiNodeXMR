@@ -39,7 +39,7 @@ case $CHOICE in
 		wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Armbian-install/armbian-installer.sh
 		echo -e "\e[32mPiNode-XMR Armbian configuration file received\e[0m"
 		echo -e "\e[32mStarting Installation\e[0m"
-		sudo chmod 755 /home/pinodexmr/armbian-installer.sh
+		sudo chmod 755 ~/armbian-installer.sh
 		sleep 2
 		./armbian-installer.sh
 		exit 1
