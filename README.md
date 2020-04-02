@@ -44,7 +44,7 @@ Dan
        * [Raspi-Config](https://github.com/shermand100/pinode-xmr#raspi-config---hardware-management)
        * [Master Login Password set](https://github.com/shermand100/pinode-xmr#master-login-password)
        * [Monero RPC password and user name set](https://github.com/shermand100/pinode-xmr#monero-rpc-password-and-username)
-       * [USB Stoage setup](https://github.com/shermand100/pinode-xmr#usb-storage-setup)
+       * [USB Storage setup](https://github.com/shermand100/pinode-xmr#usb-storage-setup)
        * [SDCard Health Checker - via "Agnostics"](https://github.com/shermand100/pinode-xmr#agnostics---sd-card-health-checker)
      * [Update Tools](https://github.com/shermand100/pinode-xmr#update-tools)
        * [Update Monero](https://github.com/shermand100/pinode-xmr#update-monero)
@@ -313,8 +313,14 @@ For storage the ideal configuration is to have your OS and PiNode-XMR on your st
 
 However this menu option will allow you to store the blockchain on any USB device over 100GB. It will run several checks, and on your command format (wipe) the drive and mount it for use with the PiNode-XMR. It also labels the drive "XMRBLOCKCHAIN" and can be re-detected by PiNode-XMR future installs so should the worst happen and your SD card fail, on installing a new PiNode-XMR it should detect the configured drive and continue.
 
-Notes on USB storage - 
-Be aware the device will become `/dev/sda` mounted at `/home/pinodexmr/.bitmonero` with no partition and the entire drive will be used. Other devices (windows) can sometimes not detect this drive after use with PiNode-XMR because of the lack of partition, it is easily reverted back, just a heads up, this is most likely your issue.
+*Notes on USB storage - *
+
+The entire drive will be used for PiNode-XMR, this helper doesn't have the facility for multiple partitions. You are welcome to make your own partitions from the command line, just be sure to mount the blockchain partition to ~/.bitmonero, and if you want to auto-mount of boot, add the UUID of the partition to /etc/fstab
+
+As of PiNode-XMR V3.##.## a new filesystem format is used which greatly improves compatability accross operating systems. This has been made possobile thanks to JElchison and the [format-udf project](https://github.com/JElchison/format-udf).
+The new script will still detect the legacy ext4 filesystems from previous versions however the newer system is now UDF. This has the advantage of being detected accross all major OS's. This allows you to copy your blockchain onto this configured USB device from another source, PiNodeXMR will then detect and use it. JElchison's project creates a fake MBR on your device which is self contained within sd#1 partition itself. Very clever, and meets requirements of both Microsoft and Apple systems.
+
+To import a blockchain simply add the a whole LMDB diretory to the top level of the device. Ensure you trust the blockchain's source.
 
 ### Agnostics - SD card health checker
 A new tool for checking SD card read/write sequential and random speeds. It has some performance targets set into it and will inform you whether or not you meet those targets via PASS/FAIL.
