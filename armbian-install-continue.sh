@@ -32,7 +32,7 @@ sleep 3
 ##Installing dependencies for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw  dialog -y
+sudo apt install mariadb-client-10.3 mariadb-server-10.3 screen exfat-fuse exfat-utils fail2ban ufw  dialog -y
 sleep 3
 
 ##Clone PiNode-XMR to device from git
