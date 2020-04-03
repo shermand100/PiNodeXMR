@@ -1,12 +1,18 @@
 #!/bin/bash
 
-sudo apt install whiptail -y
-
 if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR to the newest version\n\nContinue?" 12 78); then
+		
 		#Download update files
+
+					wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+					chmod 755 /home/pinodexmr/new-ver-pi.sh
+					. /home/pinodexmr/new-ver-pi.sh
+					echo "Latest Version: $NEW_VERSION_PI "
 					echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 					sleep 2
+					
 					git clone -b Raspbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
+					wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 
 					#Backup User values
 					echo -e "\e[32mCreating backups of your configuration\e[0m"
@@ -31,7 +37,6 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 					mv /home/pinodexmr/prunestatus.sh /home/pinodexmr/prunestatus_status.sh
 					mv /home/pinodexmr/RPCp.sh /home/pinodexmr/RPCp_retain.sh
 					mv /home/pinodexmr/RPCu.sh /home/pinodexmr/RPCu_retain.sh
-
 					
 						#Install Update
 					echo -e "\e[32mInstalling update\e[0m"
@@ -39,7 +44,7 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 						##Update PiNode-XMR systemd services
 					echo -e "\e[32mUpdating PiNode-XMR systemd services\e[0m"
 					sleep 2
-					mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/system/
+					sudo mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/system/
 					sudo chmod 644 /etc/systemd/system/*.service
 					sudo chown root /etc/systemd/system/*.service
 					echo -e "\e[32mSuccess\e[0m"
@@ -47,9 +52,10 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 						##Updating PiNode-XMR scripts in home directory
 					echo -e "\e[32mUpdating PiNode-XMR scripts in home directory\e[0m"
 					sleep 2
+					sudo rm -R /home/pinodexmr/flock #if folder not removed produces error, cannot be overwritten if not empty
 					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/* /home/pinodexmr/
 					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/.profile /home/pinodexmr/
-					chmod 755 /home/pinodexmr/*
+					chmod 777 /home/pinodexmr/*
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 						##Update web interface
@@ -58,7 +64,7 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 					sudo mv /home/pinodexmr/pinode-xmr/HTML/*.* /var/www/html/
 					sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
 					sudo chown www-data -R /var/www/html/
-					sudo chmod 755 -R /var/www/html/
+					sudo chmod 777 -R /var/www/html/
 					echo -e "\e[32mSuccess\e[0m"
 										
 					#Restore User Values
@@ -84,22 +90,19 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 					mv /home/pinodexmr/prunestatus_status.sh /home/pinodexmr/prunestatus.sh
 					mv /home/pinodexmr/RPCp_retain.sh /home/pinodexmr/RPCp.sh
 					mv /home/pinodexmr/RPCu_retain.sh /home/pinodexmr/RPCu.sh
-					mv /home/pinodexmr/setupcomplete_retain.sh /home/pinodexmr/setupcomplete.sh
 					echo -e "\e[32mSuccess\e[0m"
 					
-						##Update crontab
-					echo -e "\e[32mUpdating crontab\e[0m"
-					sleep 2
-					sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-					sudo chmod 1730 /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-					sudo chown root /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-					sudo chown pinodexmr /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
-					sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr /var/spool/cron/crontabs/
-					sudo mv /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root /var/spool/cron/crontabs/
+					
+					##Update crontab
+					echo -e "\e[32mSetup crontab\e[0m"
+					sleep 3
+					sudo crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
+					crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 2
+					sleep 3
 
 					#Update system version number to new one installed
+					echo -e "\e[32mUpdate system version number\e[0m"
 					echo "#!/bin/bash
 CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
@@ -109,24 +112,15 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
 					sudo rm -r /home/pinodexmr/pinode-xmr/
+					rm /home/pinodexmr/new-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
 					whiptail --title "PiNode-XMR Updater" --msgbox "\n\nYour PiNode-XMR has been updated to version ${NEW_VERSION_PI}" 12 78
 					
-					else
-					. /home/pinodexmr/setup.sh
-					exit 1
-					fi
-
 else
-		whiptail --title "PiNode-XMR Updater" --msgbox "\n\nUpdate no run" 12 78
-	fi
-
-else
-#Return to menu
-./setup.sh
+    . /home/pinodexmr/setup.sh
 fi
 
-#Complete, return to menu
+#Return to menu
 ./setup.sh
