@@ -49,6 +49,25 @@ sudo chmod 755 /home/pinodexmr/armbian-install-continue.sh
 ##make script run when user logs in
 echo '. /home/pinodexmr/armbian-install-continue.sh' | sudo tee -a /home/pinodexmr/.profile
 
+##Configure Swap file if needed
+if (whiptail --title "PiNode-XMR Armbian Installer" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
+	echo -e "\e[32mSwap file unchanged\e[0m"
+	sleep 3
+		else
+			echo -e "\e[32mConfiguring 2GB Swap file (required for Monero build)\e[0m"
+			yes n | sudo apt install dphys-swapfile -y
+			sleep 3
+			wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Armbian-install/etc/dphys-swapfile
+			sudo mv /root/dphys-swapfile /etc/dphys-swapfile
+			sudo chmod 664 /etc/dphys-swapfile
+			sudo chown root /etc/dphys-swapfile
+			sudo dphys-swapfile setup
+			sleep 5
+			sudo dphys-swapfile swapon
+			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
+			sleep 3
+fi
+
 whiptail --title "PiNode-XMR Continue Install" --msgbox "I've installed everything I can as user 'root'\n\nThe system now requires a reboot for changes to be made, allow 5 minutes then login as 'pinodexmr'\n\nSelect ok to continue with reboot" 16 60
 
 echo -e "\e[32m****************************************\e[0m"
