@@ -118,6 +118,7 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
 					sudo rm -r /home/pinodexmr/pinode-xmr/
+					rm /home/pinodexmr/new-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
