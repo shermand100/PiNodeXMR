@@ -1,6 +1,6 @@
 ![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # User Manual v3.20.04-Open-Build		
-#### Self Install Open Source Build for Raspbian - *Armbian in development*
+#### Self Install Open Source Build for Raspbian (Raspberry Pi) & Armbian Debian Buster (For all other devices)
 or
 #### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
 
@@ -26,10 +26,12 @@ Dan
 ## Contents:
 
 * [Intro](https://github.com/shermand100/pinode-xmr#intro)
-   * [Features list](https://github.com/shermand100/pinode-xmr#features)
+   * [Features List](https://github.com/shermand100/pinode-xmr#features)
    * [Hardware Requirements](https://github.com/shermand100/pinode-xmr#hardware-requirements)
-   * [Open Source Installation](https://github.com/shermand100/pinode-xmr#installing)
-   * [Pre-Configured Download](https://github.com/shermand100/pinode-xmr#downloads)
+   * [Installing - Open Source (option 1)](https://github.com/shermand100/pinode-xmr#installing)
+      * [Raspberry Pi Self Install](https://github.com/shermand100/pinode-xmr#raspberry-pi)
+      * [Installing on all other devices - via Armbian Debian Buster OS](https://github.com/shermand100/pinode-xmr#all-other-devices---armbian-debian-buster-os)
+   * [Download - Pre-Configured Disk Image (option 2)](https://github.com/shermand100/pinode-xmr#downloads)
    * [Setup](https://github.com/shermand100/pinode-xmr#setup)
 * [Web-UI: Getting started & General Usage](https://github.com/shermand100/pinode-xmr#web-ui-starting-your-node-and-general-usage)
    * [Welcome Page](https://github.com/shermand100/pinode-xmr#welcome-page--)
@@ -102,40 +104,63 @@ Dan
 
 ## Hardware requirements:
 
-1. * Raspberry Pi 2/3/4 (incl B&+ models) for Pre-Configured disk image
-   * Any ARM device that supports Armbian Debian OS. *2GB RAM required for Monero source compile, but there is a work around* 
+**For full hardware support view the [PiNode-XMR Hardware Wiki](https://github.com/shermand100/pinode-xmr/wiki/Hardware)**
+
+General
+1. * Raspberry Pi 3/4 (incl B&+ models) for Pre-Configured disk image
+   * Any ARM device that supports Armbian Debian OS for self install. *2GB RAM required for Monero source compile, but there is a work around* 
 2. 8GB MicroSD Card with aditional min 100GB USB storage device for Monero Blockchain. Or 128GB MicroSD to store all-in-one.
 3. Ethernet connection (can be replaced by WiFi after config, hardware dependant)
 
-**For full hardware support view the [PiNode-XMR Hardware Wiki](https://github.com/shermand100/pinode-xmr/wiki/Hardware)**
 
 A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
 
 
 ## Installing
 ### Self Install scripts
-This project can now self install on Raspbian in an effort to become completely Open Source (my disk images require you to trust me). This is a better alternative for everyone.
+This project can now self install on top of an Armbian Debian OS in an effort to become completely Open Source (my disk images require you to trust me). This is a better alternative for everyone.
 
-**Important - this project is intended to convert your Raspberry Pi into a dedicated Monero node from a clean Raspbian OS. Running this script ontop of anything else existing on the device will likely overwrite it in an unrecoverable manner**
+**Important - this project is intended to convert your device into a dedicated Monero node from a clean OS. Running this script on top of anything else existing on the device will likely overwrite it in an unrecoverable manner**
 
-#### Raspberry Pi
+![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/OS-Select.png)
+
+### Raspberry Pi
 Install your Raspbian OS as usual and ideally SSH into it as user `pi` and enter
 
 `wget -O - https://github.com/shermand100/pinode-xmr/raw/master/Install-PiNode-XMR.sh | bash`
 
-You will see the screenshot below to make your selection. Follow the on screen instructions.
+You will see the screenshot above to make your selection. Follow the on screen instructions.
 
-![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/OS-Select.png)
+It is a relatively fast process except for the compiling of Monero from source which is CPU and RAM intensive, % progress readouts are given periodically. It is installed in 2 stages. 
 
-It is a relatively fast process except for the compiling of Monero from source which is CPU and RAM intensive, expect a couple of hours, % progress readouts are given periodically. It is installed in 2 stages. Stage 1 sets up the environment for user 'pinodexmr', security and network. Once this is completed a restart is required (automatic). Stage 2 once rebooted, log back in with user `pinodexmr` and password `PiNodeXMR` and the script will continue to install. No further interaction is required. However the process of compiling Monero from source is lengthy and resource intensive. For Pi 3b+ expect ~8hours for completion, for Pi 4 ~3hours.
+Stage 1 sets up the environment for user 'pinodexmr', security and network. Once this is completed a restart is required (automatic).
 
-Once complete you will see
+Stage 2 once rebooted. Log back in with user `pinodexmr` and password `PiNodeXMR` and the script will continue to install. No further interaction is required. However the process of compiling Monero from source is lengthy and resource intensive. For Pi 3b+ expect ~8hours for completion, for Pi 4 ~4hours.
+
+
+
+### All other devices - Armbian Debian Buster OS
+**(In last stages of testing)**
+
+Install the official Armbian Debian Buster OS, minimal or lite if available for your device. Perform normal first login actions, usually user: `root` and password `1234`.
+
+**Create user** `pinodexmr` with a password of your choice. (this is essential, all lower case, as shown to the left)
+
+Then to install, whilst still logged in as root, simply enter:
+
+`wget -O - https://github.com/shermand100/pinode-xmr/raw/master/Install-PiNode-XMR.sh | bash`
+
+And make your `Armbian` selection.
+
+It will perform it's security and network actions as root. Then it will ask you if your device requires a swap file. You will require one if your device has less than 2GB of RAM for the Monero compilation later.
+
+The device will then reboot and require you to login as `pinodexmr`. Installation will resume automatically, which for this last stage takes several hours dependent on the power of device.
+
+Once complete you'll be presented with the screen below, and your device will do it's final reboot. You can now proceed directly to the [Web-UI and password setup section of this page](https://github.com/shermand100/pinode-xmr#setup) for an overview of how to navigate PiNode-XMR. Just ensure before starting your node you set a new RPC username and password from the web terminal menu.
+
+Welcome to the PiNode-XMR community!
 
 ![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/Install-Complete.png)
-
-#### All other devices - Armbian - (In development)
-
-Available soon...
 
 ## Downloads
 #### Download PiNode-XMR disk image for Raspberry Pi 3b+ & 4
@@ -182,6 +207,7 @@ Once complete insert the card into your device and power on.
 
 ## Setup:
 
+
 On first time power-on the software will check to see if it has booted before. On it's first usage it will resize it's rootfs partition automatically to make best use of whichever size MicroSD card you've purchased ready for the Monero Blockchain.
 
 During this process it will restart itself and will pause for 120 seconds. This is normal. I recommend that once plugged in simply leave the node for 5 mins, after this time it will have self configured and you will be safe to continue setting your passwords (covered in a bit).
@@ -212,7 +238,7 @@ Once the passwords are set the device is yours. Head back to the Web UI to start
 ## Web-UI: Starting your Node and General Usage
 
 ### Welcome page -
-I won't duplicate the homepage screenshot used above as there's not a lot to say about it apart from the PiNode-XMR version number (presented version#.MM.YY). However a shout out to the guys at https://designmodo.com/ for the template of the Web-UI. Their template has made this build much quicker. Check out their site if you're ever in the need of an interface for a project.
+I won't duplicate the homepage screenshot used above as there's not a lot to say about it apart from the PiNode-XMR version number (presented version#.YY.MM). However a shout out to the guys at https://designmodo.com/ for the template of the Web-UI. Their template has made this build much quicker. Check out their site if you're ever in the need of an interface for a project.
 
 I'll also take this opportunity to mention that most of the displays of Node and Hardware data within all the UI are updated every 60 seconds (with the exception of the 'storage usage' section on the 'Node Status' page which updates every 4 hours), so in most cases hammering the refresh button won't provide new data until it is sourced and processed in the background.
 
