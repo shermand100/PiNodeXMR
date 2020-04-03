@@ -102,6 +102,7 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 					sleep 3
 
 					#Update system version number to new one installed
+					echo -e "\e[32mUpdate system version number\e[0m"
 					echo "#!/bin/bash
 CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
