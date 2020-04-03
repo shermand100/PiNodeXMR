@@ -57,7 +57,7 @@ Dan
        * [Pop Blocks](https://github.com/shermand100/pinode-xmr#pop-blocks)
      * [Extra Network Tools](https://github.com/shermand100/pinode-xmr#extra-network-tools)
        * [Install tor](https://github.com/shermand100/pinode-xmr#install-tor)
-       * [Install tor NYX](https://github.com/shermand100/pinode-xmr#tor-nyx)
+       * [View tor NYX - (network monitor)](https://github.com/shermand100/pinode-xmr#tor-nyx)
        * [Install PiVPN](https://github.com/shermand100/pinode-xmr#install-pivpn)
        * [Install No-IP (Dynamic DNS)](https://github.com/shermand100/pinode-xmr#noip.com-dynamic-dns)
   
@@ -103,12 +103,14 @@ Dan
 ## Hardware requirements:
 
 1. * Raspberry Pi 2/3/4 (incl B&+ models) for Pre-Configured disk image
-   * Any device that supports Armbian OS with 2GB RAM. *RAM required for Monero source compile* 
+   * Any ARM device that supports Armbian Debian OS. *2GB RAM required for Monero source compile, but there is a work around* 
 2. 8GB MicroSD Card with aditional min 100GB USB storage device for Monero Blockchain. Or 128GB MicroSD to store all-in-one.
 3. Ethernet connection (can be replaced by WiFi after config, hardware dependant)
 
+**For full hardware support view the [PiNode-XMR Hardware Wiki](https://github.com/shermand100/pinode-xmr/wiki/Hardware)**
+
 A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
-With a little further configuration this node will allow wallet connections from your mobile app on the move.
+
 
 ## Installing
 ### Self Install scripts
