@@ -31,6 +31,13 @@ echo 'PiNodeXMR' | sudo tee /etc/hostname
 echo '127.0.0.1       PiNodeXMR' | sudo tee -a /etc/hosts
 sudo hostname PiNodeXMR
 
+##Disable IPv6 (confuses Monero start script if IPv6 is present)
+echo -e "\e[32mDisable IPv6\e[0m"
+sleep 3
+echo 'net.ipv6.conf.all.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
+echo 'net.ipv6.conf.default.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
+echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
+
 #Download stage 2 Install script
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
 sleep 3
