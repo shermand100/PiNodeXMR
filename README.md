@@ -156,7 +156,7 @@ It will perform it's security and network actions as root. Then it will ask you 
 
 The device will then reboot and require you to login as `pinodexmr`. Installation will resume automatically, which for this last stage takes several hours dependent on the power of device.
 
-Once complete you'll be presented with the screen below, and your device will do it's final reboot. You can now proceed directly to the [Web-UI and password setup section of this page](https://github.com/shermand100/pinode-xmr#setup) for an overview of how to navigate PiNode-XMR. Just ensure before starting your node you set a new RPC username and password from the web terminal menu.
+Once complete you'll be presented with the screen below, and your device will do it's final reboot. You can now proceed directly to the [Web-UI and password setup section of this page](https://github.com/shermand100/pinode-xmr#setup) for an overview of how to navigate PiNode-XMR. Just ensure before starting your node you set a new RPC username and password from the web terminal menu, a local time-zone may also need setting.
 
 Welcome to the PiNode-XMR community!
 
