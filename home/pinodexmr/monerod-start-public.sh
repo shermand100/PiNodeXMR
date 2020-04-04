@@ -1,6 +1,6 @@
 #!/bin/bash
 #Establish IP
-DEVICE_IP="$(hostname -I)"
+DEVICE_IP="$(hostname -I | awk '{print $1}')"
 #Import Start Flag Values:
 	#Import stats Port Number
 	. /home/pinodexmr/monero-stats-port.sh

@@ -1,6 +1,6 @@
 #!/bin/bash
 #Establish IP
-DEVICE_IP="$(hostname -I)"
+DEVICE_IP="$(hostname -I | awk '{print $1}')"
 #Onion Public Address
 #ONION_ADDR="$(sudo cat /var/lib/tor/hidden_service/hostname)"
 #Import Start Flag Values:

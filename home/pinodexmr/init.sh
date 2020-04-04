@@ -5,7 +5,7 @@ sudo iptables -I OUTPUT -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT
 . /home/pinodexmr/bootstatus.sh
 
 #Establish IP
-	DEVICE_IP="$(hostname -I)"
+	DEVICE_IP="$(hostname -I | awk '{print $1}')"
 
 #Load Variables
 . /home/pinodexmr/current-ver.sh

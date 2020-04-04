@@ -1,6 +1,6 @@
 #!/bin/bash
 #Establish IP/Port
-DEVICE_IP="$(hostname -I)"
+DEVICE_IP="$(hostname -I | awk '{print $1}')"
 	#Import Port Number
 	. /home/pinodexmr/monero-port.sh
 	#Import RPC username
