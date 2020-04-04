@@ -3,7 +3,7 @@
 #Import $DEVICE_TO_CONFIGURE variable
 . /home/pinodexmr/setup-usb-path.sh
 #Determine filesystem of device to configured
-	FILESYSTEM="$(blkid -o value -s TYPE /dev/$DEVICE_TO_CONFIGURE)"
+	FILESYSTEM="$(/sbin/blkid -o value -s TYPE /dev/$DEVICE_TO_CONFIGURE)"
 
 #Check if /dev/sda contains the drive label "XMRBLOCKCHAIN" to indicate already holding data from previous version.
 recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
