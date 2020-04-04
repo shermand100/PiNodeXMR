@@ -11,7 +11,7 @@
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
 	#Establish IP/Port
-	DEVICE_IP="$(hostname -I)"
+DEVICE_IP="$(hostname -I | awk '{print $1}')"
 	
 		if [ $BOOT_STATUS -eq 6 ]
 then

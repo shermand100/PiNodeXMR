@@ -1,6 +1,6 @@
 #!/bin/sh
 #Establish IP/Port
-DEVICE_IP="$(hostname -I)"
+DEVICE_IP="$(hostname -I | awk '{print $1}')"
 #Import Start Flag Values:
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh

@@ -1,7 +1,7 @@
 #!/bin/bash
 #Import Start Flag Values:
 	#Create device IP
-	MY_IP="$(hostname -I)"
+	MY_IP="$(hostname -I | awk '{print $1}')"
 	#Import Port Number
 	. /home/pinodexmr/monero-port.sh
 	#Import RPC username

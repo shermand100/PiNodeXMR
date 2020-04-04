@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #Establish IP
-DEVICE_IP="$(hostname -I)"
-echo "PiNode-XMR on ${DEVICE_IP} is checking for available updates"
+echo "PiNode-XMR is checking for available updates"
 sleep "1"
 #Download update file
 sleep "1"
