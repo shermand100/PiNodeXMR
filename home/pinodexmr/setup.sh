@@ -12,15 +12,15 @@
 	
 	case $CHOICE in
 		
-		"1)")
+		"1)") 	clear
+				exit 0
 		;;
 				
 		"2)")CHOICE2=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nSystem Settings" 20 60 10 \
 				"1)" "System, Hardware & WiFi Settings (armbian-config)" \
 				"2)" "Master Login Password Set" \
 				"3)" "Monero RPC Username and Password setup" \
-				"4)" "USB storage setup" \
-				"5)" "SD Card Health Checker" 2>&1 >/dev/tty)
+				"4)" "USB storage setup" 2>&1 >/dev/tty)
 				
 				case $CHOICE2 in
 		
@@ -49,19 +49,6 @@
 							fi
 					;;
 					
-					"5)")	if (whiptail --title "PiNode-XMR MicroSD Health Check" --yesno "This utility (agnostics) will run speed tests on your SD card read/write functions to give an indication of its current health.\n\nBefore starting this check, stop all services that are currently reading/writing (Node and BlockExplorer) for most accurate results.\n\nWould you like to continue?" 16 78); then
-					 clear;
-					 echo -e "\e[32mChecking for required tools...\e[0m";
-					 sudo apt install agnostics -y
-					 echo -e "\e[32mSuccess\e[0m";
-					 sleep 2;
-					 echo -e "\e[32mRunning test script. This will take a few minutes...\e[0m";
-					 sudo sh /usr/share/agnostics/sdtest.sh;
-					 read -n 1 -s -r -p "Press any key to return to Menu"
-							else
-					. /home/pinodexmr/setup.sh
-							fi
-					;;
 				esac
 				. /home/pinodexmr/setup.sh
 				;;
