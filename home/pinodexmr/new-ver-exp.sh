@@ -1,2 +1,0 @@
-#!/bin/bash
-CURRENT_VERSION_EXP=20191215
