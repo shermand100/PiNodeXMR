@@ -13,7 +13,6 @@
 	case $CHOICE in
 		
 		"1)") 	clear
-				exit 0
 		;;
 				
 		"2)")CHOICE2=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nSystem Settings" 20 60 10 \
