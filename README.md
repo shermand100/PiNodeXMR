@@ -382,7 +382,12 @@ This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to
 ### Start/Stop Blockchain Explorer
 As the title says, use this to manually start/stop the explorer.
 
-When the explorer is started it also updates a flag elsewhere in the system so that the explorer will be started on system boot (in case of power cycle). This flag is then removed on the manual stop selection.
+When the explorer is started it also updates a flag elsewhere in the system so that the explorer will be re-started on system boot (in case of power cycle). This flag is then removed on the manual stop selection.
+
+For full features see the [onion-monero-blockchain-explorer github](https://github.com/moneroexamples/onion-monero-blockchain-explorer#onion-monero-blockchain-explorer-features)
+
+The emission monitor is enabled and has been limited to 1 CPU thread. When started, the thread will initially scan the entire blockchain, and calculate the cumulative emission based on each block. This is can be a time consuming heavy read/write process. It is advised to wait until your node has 100% sync'd before starting the block explorer.
+
 
 ### Prune Node
 I think this is the simplest method for new users. By using the command this way the pruning binary will display it's progress and once complete will edit all start commands to use the pruning feature on future starts. For this reason the prune option can only be used once, and the node doesn't currently have a script to reverse the process. Once you have signalled your node to be a pruned node it is fixed as such. I will include instructions at a later date for how to revert back to full-node.
