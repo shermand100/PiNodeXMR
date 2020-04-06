@@ -4,10 +4,10 @@ DEVICE_IP="$(hostname -I | awk '{print $1}')"
 #Import Start Flag Values:
 	#Import Port Number
 	. /home/pinodexmr/monero-port.sh
-	#Import Block Sync Size
-	. /home/pinodexmr/monero-block-sync-size.sh
 	#Import "OUT-PEERS" (connections) Limit
 	. /home/pinodexmr/out-peers.sh
+	#Import "IN_PEERS" (connections) Limit
+	. /home/pinodexmr/in-peers.sh
 	#Import Data Limit Up
 	. /home/pinodexmr/limit-rate-up.sh
 	#Import Data Limit Down
