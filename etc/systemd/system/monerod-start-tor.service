@@ -7,6 +7,8 @@ User=pinodexmr
 Group=pinodexmr
 WorkingDirectory=/home/pinodexmr/
 RuntimeDirectory=monero
+SuccessExitStatus=143
+
 
 # Clearnet config
 #
