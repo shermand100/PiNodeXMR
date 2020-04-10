@@ -170,29 +170,29 @@ ____
 
 #### PiNode-XMR v3.20.04
 
-[PiNode-XMR_v3.20.04.img](https://drive.google.com/file/d/1fkhEleJ8KsjA2bFD16If3NztHFlTzR6n/view?usp=sharing)
+PiNode-XMR_v3.20.04.img - New Image uploading to fix minor bugs
 
 Monero v0.15.0.5
 Block Explorer v2020-01-07
 
 Hash Info:
 - Name: PiNodeXMR_v3.20.04.img
-- Size: 6538035200 bytes (6235 MiB)
-- SHA256: 75793D0067338D2379A482F7CEFB716E8A8F2049E1FE5DC8F1BAB4A7686E7CFC
+- Size: PENDING
+- SHA256: PENDING
 
 ____
 
 #### PiNode-XMR v3.20.04 (Sync'd to block 2067551, 00:38GMT 2nd Apr 2020)
 
-[PiNode-XMR_v3.20.04_blk2067551.img](https://drive.google.com/file/d/1m4MWfRyVf9RKydgIU_IN9P6Wth0PRtdA/view?usp=sharing)
+PiNode-XMR_v3.20.04_blk2067551.img - New Image uploading to fix minor bugs
 
 Monero v0.15.0.5
 Block Explorer v2020-01-07
 
 Hash Info:
-- Name: PiNodeXMR_v3.20.04_blk2067551.img
-- Size: 94551162880 bytes (88 GiB)
-- SHA256: 93B7F47B3CA7E82633583F229C66C96BD907B734604D478B37AF4E80A9051C2F
+- Name: PENDING
+- Size: PENDING
+- SHA256: PENDING
 
 ____
 
