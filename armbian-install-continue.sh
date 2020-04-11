@@ -4,7 +4,7 @@
 # Web-UI by designmodo Flat-UI free project at https://github.com/designmodo/Flat-UI
 # Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
 # Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
-# PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
+# PiNode-XMR scripts and custom files at my repo https://github.com/monero-ecosystem/PiNode-XMR
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
 
 ###Begin2
@@ -38,7 +38,7 @@ sleep 3
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b Armbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
+git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 
 
 ##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes

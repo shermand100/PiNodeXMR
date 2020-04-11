@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 
 #Permission Setting
 chmod 755 /home/pinodexmr/current-ver-pi.sh
@@ -19,7 +19,7 @@ sleep "3"
 					#Download update files
 					echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 					sleep 2
-					git clone -b Raspbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
+					git clone -b Raspbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 
 					#Backup User values
 					echo -e "\e[32mCreating backups of your configuration\e[0m"
