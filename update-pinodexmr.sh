@@ -4,14 +4,14 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 		
 		#Download update files
 
-					wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+					https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 					chmod 755 /home/pinodexmr/new-ver-pi.sh
 					. /home/pinodexmr/new-ver-pi.sh
 					echo "Latest Version: $NEW_VERSION_PI "
 					echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 					sleep 2
 					
-					git clone -b Raspbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
+					git clone -b Raspbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 					wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 
 					#Backup User values

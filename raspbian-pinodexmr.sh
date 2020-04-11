@@ -40,7 +40,7 @@ sleep 3
 ##Configure Swap file
 echo -e "\e[32mConfiguring 2GB Swap file (required for Monero build)\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/etc/dphys-swapfile
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/etc/dphys-swapfile
 sudo mv /home/pinodexmr/dphys-swapfile /etc/dphys-swapfile
 sudo chmod 664 /etc/dphys-swapfile
 sudo chown root /etc/dphys-swapfile
@@ -53,7 +53,7 @@ sleep 3
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b Raspbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
+git clone -b Raspbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 
 
 ##Configure ssh security. Allow only user 'pinodexmr' & 'root' login disabled, restart config to make changes
