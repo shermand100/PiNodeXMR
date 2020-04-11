@@ -1,4 +1,4 @@
-![PiNode-XMR logo](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
+![PiNode-XMR logo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # User Manual v3.20.04-Open-Build		
 #### Self Install Open Source Build for Raspbian (Raspberry Pi) & Armbian Debian Buster (For all other devices)
 or
@@ -25,51 +25,51 @@ Dan
 
 ## Contents:
 
-* [Intro](https://github.com/shermand100/pinode-xmr#intro)
-   * [Features List](https://github.com/shermand100/pinode-xmr#features)
-   * [Hardware Requirements](https://github.com/shermand100/pinode-xmr#hardware-requirements)
-   * [Installing - Open Source (option 1)](https://github.com/shermand100/pinode-xmr#installing)
-      * [Raspberry Pi Self Install](https://github.com/shermand100/pinode-xmr#raspberry-pi)
-      * [Installing on all other devices - via Armbian Debian Buster OS](https://github.com/shermand100/pinode-xmr#all-other-devices---armbian-debian-buster-os)
-   * [Download - Pre-Configured Disk Image (option 2)](https://github.com/shermand100/pinode-xmr#downloads)
-   * [Setup](https://github.com/shermand100/pinode-xmr#setup)
-* [Web-UI: Getting started & General Usage](https://github.com/shermand100/pinode-xmr#web-ui-starting-your-node-and-general-usage)
-   * [Welcome Page](https://github.com/shermand100/pinode-xmr#welcome-page--)
-   * [Advanced Settings & Starting Monero](https://github.com/shermand100/pinode-xmr#advanced-settings---starting-monero)
-   * [Node Status](https://github.com/shermand100/pinode-xmr#node-status--)
-   * [Monero Blockchain Explorer](https://github.com/shermand100/pinode-xmr#Monero-Blockchain-Explorer)
-   * [Transaction Status](https://github.com/shermand100/pinode-xmr#transaction-status)
-   * [Connection Status](https://github.com/shermand100/pinode-xmr#connection-status)
-   * [Log](https://github.com/shermand100/pinode-xmr#log)
-* [Web Terminal: Main System Menu](https://github.com/shermand100/pinode-xmr#web-terminal--main-system-menu)
-     * [System Settings](https://github.com/shermand100/pinode-xmr#system-settings)
-       * [Raspi-Config](https://github.com/shermand100/pinode-xmr#raspi-config---hardware-management)
-       * [Master Login Password set](https://github.com/shermand100/pinode-xmr#master-login-password)
-       * [Monero RPC password and user name set](https://github.com/shermand100/pinode-xmr#monero-rpc-password-and-username)
-       * [USB Storage setup](https://github.com/shermand100/pinode-xmr#usb-storage-setup)
-       * [SDCard Health Checker - via "Agnostics"](https://github.com/shermand100/pinode-xmr#agnostics---sd-card-health-checker)
-     * [Update Tools](https://github.com/shermand100/pinode-xmr#update-tools)
-       * [Update Monero](https://github.com/shermand100/pinode-xmr#update-monero)
-       * [Update PiNode-XMR](https://github.com/shermand100/pinode-xmr#update-pinode-xmr)
-       * [Update Blockchain Explorer](https://github.com/shermand100/pinode-xmr#update-block-explorer)
-       * [Update background system dependencies](https://github.com/shermand100/pinode-xmr#update-background-system-dependencies)
-     * [Node Tools](https://github.com/shermand100/pinode-xmr#node-tools)
-       * [Start/Stop Blockchain Explorer](https://github.com/shermand100/pinode-xmr#startstop-blockchain-explorer)
-       * [Prune Node](https://github.com/shermand100/pinode-xmr#prune-node)
-       * [Pop Blocks](https://github.com/shermand100/pinode-xmr#pop-blocks)
-     * [Extra Network Tools](https://github.com/shermand100/pinode-xmr#extra-network-tools)
-       * [Install tor](https://github.com/shermand100/pinode-xmr#install-tor)
-       * [View tor NYX - (network monitor)](https://github.com/shermand100/pinode-xmr#tor-nyx)
-       * [Install PiVPN](https://github.com/shermand100/pinode-xmr#install-pivpn)
-       * [Install No-IP (Dynamic DNS)](https://github.com/shermand100/pinode-xmr#noip.com-dynamic-dns)
+* [Intro](https://github.com/monero-ecosystem/PiNode-XMR#intro)
+   * [Features List](https://github.com/monero-ecosystem/PiNode-XMR#features)
+   * [Hardware Requirements](https://github.com/monero-ecosystem/PiNode-XMR#hardware-requirements)
+   * [Installing - Open Source (option 1)](https://github.com/monero-ecosystem/PiNode-XMR#installing)
+      * [Raspberry Pi Self Install](https://github.com/monero-ecosystem/PiNode-XMR#raspberry-pi)
+      * [Installing on all other devices - via Armbian Debian Buster OS](https://github.com/monero-ecosystem/PiNode-XMR#all-other-devices---armbian-debian-buster-os)
+   * [Download - Pre-Configured Disk Image (option 2)](https://github.com/monero-ecosystem/PiNode-XMR#downloads)
+   * [Setup](https://github.com/monero-ecosystem/PiNode-XMR#setup)
+* [Web-UI: Getting started & General Usage](https://github.com/monero-ecosystem/PiNode-XMR#web-ui-starting-your-node-and-general-usage)
+   * [Welcome Page](https://github.com/monero-ecosystem/PiNode-XMR#welcome-page--)
+   * [Advanced Settings & Starting Monero](https://github.com/monero-ecosystem/PiNode-XMR#advanced-settings---starting-monero)
+   * [Node Status](https://github.com/monero-ecosystem/PiNode-XMR#node-status--)
+   * [Monero Blockchain Explorer](https://github.com/monero-ecosystem/PiNode-XMR#monero-blockchain-explorer)
+   * [Transaction Status](https://github.com/monero-ecosystem/PiNode-XMR#transaction-status)
+   * [Connection Status](https://github.com/monero-ecosystem/PiNode-XMR#connection-status)
+   * [Log](https://github.com/monero-ecosystem/PiNode-XMR#log)
+* [Web Terminal: Main System Menu](https://github.com/monero-ecosystem/PiNode-XMR#web-terminal--main-system-menu)
+     * [System Settings](https://github.com/monero-ecosystem/PiNode-XMR#system-settings)
+       * [Raspi-Config](https://github.com/monero-ecosystem/PiNode-XMR#raspi-config---hardware-management)
+       * [Master Login Password set](https://github.com/monero-ecosystem/PiNode-XMR#master-login-password)
+       * [Monero RPC password and user name set](https://github.com/monero-ecosystem/PiNode-XMR#monero-rpc-password-and-username)
+       * [USB Storage setup](https://github.com/monero-ecosystem/PiNode-XMR#usb-storage-setup)
+       * [SDCard Health Checker - via "Agnostics"](https://github.com/monero-ecosystem/PiNode-XMR#agnostics---sd-card-health-checker)
+     * [Update Tools](https://github.com/monero-ecosystem/PiNode-XMR#update-tools)
+       * [Update Monero](https://github.com/monero-ecosystem/PiNode-XMR#update-monero)
+       * [Update PiNode-XMR](https://github.com/monero-ecosystem/PiNode-XMR#update-pinode-xmr)
+       * [Update Blockchain Explorer](https://github.com/monero-ecosystem/PiNode-XMR#update-block-explorer)
+       * [Update background system dependencies](https://github.com/monero-ecosystem/PiNode-XMR#update-background-system-dependencies)
+     * [Node Tools](https://github.com/monero-ecosystem/PiNode-XMR#node-tools)
+       * [Start/Stop Blockchain Explorer](https://github.com/monero-ecosystem/PiNode-XMR#startstop-blockchain-explorer)
+       * [Prune Node](https://github.com/monero-ecosystem/PiNode-XMR#prune-node)
+       * [Pop Blocks](https://github.com/monero-ecosystem/PiNode-XMR#pop-blocks)
+     * [Extra Network Tools](https://github.com/monero-ecosystem/PiNode-XMR#extra-network-tools)
+       * [Install tor](https://github.com/monero-ecosystem/PiNode-XMR#install-tor)
+       * [View tor NYX - (network monitor)](https://github.com/monero-ecosystem/PiNode-XMR#tor-nyx)
+       * [Install PiVPN](https://github.com/monero-ecosystem/PiNode-XMR#install-pivpn)
+       * [Install No-IP (Dynamic DNS)](https://github.com/monero-ecosystem/PiNode-XMR#noipcom-dynamic-dns)
   
-* [A note on tor](https://github.com/shermand100/pinode-xmr#tor)
-* [Connecting a Wallet -LAN](https://github.com/shermand100/pinode-xmr#connecting-a-wallet---lan)
-  * [Monero GUI](https://github.com/shermand100/pinode-xmr#monero-gui)
-  * [Monerujo app](https://github.com/shermand100/pinode-xmr#monerujo-app)
-* [Connecting a wallet - External Connections](https://github.com/shermand100/pinode-xmr/blob/master/README.md#connecting-a-wallet---external-connections)
-  * [IP address considerations](https://github.com/shermand100/pinode-xmr/blob/master/README.md#ip-address-considerations)
-  * [Port Forwarding](https://github.com/shermand100/pinode-xmr/blob/master/README.md#port-forwarding)
+* [A note on tor](https://github.com/monero-ecosystem/PiNode-XMR#tor)
+* [Connecting a Wallet -LAN](https://github.com/monero-ecosystem/PiNode-XMR#connecting-a-wallet---lan)
+  * [Monero GUI](https://github.com/monero-ecosystem/PiNode-XMR#monero-gui)
+  * [Monerujo app](https://github.com/monero-ecosystem/PiNode-XMR#monerujo-app)
+* [Connecting a wallet - External Connections](https://github.com/monero-ecosystem/PiNode-XMR#connecting-a-wallet---external-connections)
+  * [IP address considerations](https://github.com/monero-ecosystem/PiNode-XMR#ip-address-considerations)
+  * [Port Forwarding](https://github.com/monero-ecosystem/PiNode-XMR#port-forwarding)
   
 ## Features:
 * 4 Node modes (click to start)
@@ -104,7 +104,7 @@ Dan
 
 ## Hardware requirements:
 
-**For full hardware support view the [PiNode-XMR Hardware Wiki](https://github.com/shermand100/pinode-xmr/wiki/Hardware)**
+**For full hardware support view the [PiNode-XMR Hardware Wiki](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Hardware)**
 
 General
 1. * Raspberry Pi 3/4 (incl B&+ models) for Pre-Configured disk image
@@ -122,12 +122,12 @@ This project can now self install on top of an Armbian Debian OS in an effort to
 
 **Important - this project is intended to convert your device into a dedicated Monero node from a clean OS. Running this script on top of anything else existing on the device will likely overwrite it in an unrecoverable manner**
 
-![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/OS-Select.png)
+![PiNode-XMR landing page](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/OS-Select.png)
 
 ### Raspberry Pi
 Install your Raspbian OS as usual and ideally SSH into it as user `pi` and enter
 
-`wget -O - https://github.com/shermand100/pinode-xmr/raw/master/Install-PiNode-XMR.sh | bash`
+`wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/Install-PiNode-XMR.sh | bash`
 
 You will see the screenshot above to make your selection. Follow the on screen instructions.
 
@@ -140,7 +140,7 @@ Stage 2 once rebooted. Log back in with user `pinodexmr` and password `PiNodeXMR
 
 
 ### All other devices - Armbian Debian Buster OS
-**(In last stages of testing)**
+
 
 Install the official Armbian Debian Buster OS, minimal or lite if available for your device. Perform normal first login actions, usually user: `root` and password `1234`.
 
@@ -148,7 +148,7 @@ Install the official Armbian Debian Buster OS, minimal or lite if available for 
 
 Then to install, whilst still logged in as root, simply enter:
 
-`wget -O - https://github.com/shermand100/pinode-xmr/raw/master/Install-PiNode-XMR.sh | bash`
+`wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/Install-PiNode-XMR.sh | bash`
 
 And make your `Armbian` selection.
 
@@ -156,11 +156,11 @@ It will perform it's security and network actions as root. Then it will ask you 
 
 The device will then reboot and require you to login as `pinodexmr`. Installation will resume automatically, which for this last stage takes several hours dependent on the power of device.
 
-Once complete you'll be presented with the screen below, and your device will do it's final reboot. You can now proceed directly to the [Web-UI and password setup section of this page](https://github.com/shermand100/pinode-xmr#setup) for an overview of how to navigate PiNode-XMR. Just ensure before starting your node you set a new RPC username and password from the web terminal menu, a local time-zone may also need setting.
+Once complete you'll be presented with the screen below, and your device will do it's final reboot. You can now proceed directly to the [Web-UI and password setup section of this page](https://github.com/monero-ecosystem/PiNode-XMR#setup) for an overview of how to navigate PiNode-XMR. Just ensure before starting your node you set a new RPC username and password from the web terminal menu, a local time-zone may also need setting.
 
 Welcome to the PiNode-XMR community!
 
-![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/Install-Complete.png)
+![PiNode-XMR landing page](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/Install-Complete.png)
 
 ## Downloads
 #### Download PiNode-XMR disk image for Raspberry Pi 3b+ & 4
@@ -219,7 +219,7 @@ To continue with setup simply type the IP address of the Node into the web brows
 When you enter this IP address into the web browser of a device on the same network as your Node you'll be presented with the following screen...
 
 
-![PiNode-XMR landing page](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/index.png)
+![PiNode-XMR landing page](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/index.png)
 
 From here click on "Web Terminal" from the top navigation bar. You will most probably get a warning that it isn't a secure site. I haven't yet configured SSL certificates yet so this is normal. Click proceed and login with the default Username and password of:
 
@@ -229,7 +229,7 @@ Password: PiNodeXMR
 
 *Note: Armbian users may have already set a different password*
 
-![PiNode-XMR web terminal](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/Welcome_screen.png)
+![PiNode-XMR web terminal](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/Welcome_screen.png)
 
 If this is your devices first boot then follow the select "System Settings" and the two password setting options should be used for "Master" and "RPC". 
 
@@ -244,7 +244,7 @@ I'll also take this opportunity to mention that most of the displays of Node and
 
 ## Advanced Settings - Starting Monero
 
-![Advanced Settings](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/advancedsettings.png)
+![Advanced Settings](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/advancedsettings.png)
 
 This is the main page for starting/stopping and setting variables on your node. It can either be started as a Clearnet Private/Public,tor or Mining node, and you may switch between modes as you wish. The node has memory, so if power is lost and restored the node will reboot and continue in the mode it was last set, hence the wording on the Node Status page to remind you what you last clicked.
 
@@ -270,19 +270,19 @@ A final note on this, now I've updated to v2 of this project and RandomX has com
 
 ## Node Status -
 
-![Node Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/nodestatus.png)
+![Node Status](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/nodestatus.png)
 
 This is the go-to page for the overall health of the node showing summaries for the Monero software and you'll also find hardware info such as RAM usage, CPU temperature and storage usage. At the bottom of this page you'll also find a toggle button to enable/disable the 2GB swap file. This 2GB swap file is designed for use when asking the node to perform intensive tasks such as the initial sync, pruning or if you were to ever import a new blockchain from an external device. Under normal operation of the node once sync'd it is advised to disable the swapfile to preserve the read/write health of your storage device.
 
 ## Monero Blockchain Explorer
 
-![Block Explorer Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/blockexplorer.png)
+![Block Explorer Status](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/blockexplorer.png)
 
 **New** With some collaboration from its maker reddit user /u/mWo12 I've managed to include his "Onion Monero-Blockchain Explorer" which is a fantastic tool for any auditing needs you have and don't want to send view_keys to any external website/untrusted source. It also includes a transaction pusher for those cold wallet users. The Explorer is all open source and can be found here [Github - Onion Monero Blockchain Explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer). Many thanks to /u/mWo12.
 
 ## Transaction Status
 
-![Transaction Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/transactions.png)
+![Transaction Status](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/transactions.png)
 
 A very useful page. Here you can check to see if a transaction you have broadcast has done so successfully. Most web browsers have a search function (CTRL+F) use this to search the page by Transaction ID and if broadcast it will find it in the lower box.
 
@@ -290,7 +290,7 @@ The Overview above gives a picture of the general network condition and estimate
 
 ## Connection Status
 
-![Connection Status](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/connectionstatus.png)
+![Connection Status](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/connectionstatus.png)
 
 Displays OUT and IN peers along with their 'state' which is commonly either 'normal' or 'synchronising' it also gives some detail to data consumption.
 
@@ -300,7 +300,7 @@ That list of nodes is viewable in full at the bottom of the page.
 
 ## Log:
 
-![Log](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/logs.png)
+![Log](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/logs.png)
 
 A 5 MB rolling log is kept here. Should you suspect your node is not performing as it should you may find a clue as to why here. I strongly suggest that if you find [WARN] flags here that you consult google first. Monero is plenty developed by now that most questions have been answered by other users, and most warnings (once investigated of course) can be safely ignored and are connection related as peers drop off the network.
 
@@ -308,7 +308,7 @@ A 5 MB rolling log is kept here. Should you suspect your node is not performing 
 
 ## System Settings
 
-![System-Settings](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/system-settings.png)
+![System-Settings](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/system-settings.png)
 
 ### Raspi-config - Hardware management
  Here are the standard hardware config options that the Raspbian OS provides. A detailed explanation of each feature is best found at the official Raspbery Pi pages: https://www.raspberrypi.org/documentation/configuration/
@@ -357,7 +357,7 @@ Before starting this test ensure you have stopped the node and block explorer, i
 
 ## Update Tools
 
-![Update-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/update-tools.png)
+![Update-Tools](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/update-tools.png)
 
 ### Update Monero
 PiNode-XMR will download a new version number from this site and compare it to your current version. If the new version number is higher you will have the option to update.
@@ -377,7 +377,7 @@ This option runs the command `sudo apt-get update && sudo apt-get upgrade -y` to
 
 ## Node Tools
 
-![Node-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/node-tools.png)
+![Node-Tools](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/node-tools.png)
 
 ### Start/Stop Blockchain Explorer
 As the title says, use this to manually start/stop the explorer.
@@ -401,7 +401,7 @@ This can be used is you have blockchain transaction errors preventing you from c
 
 ## Extra Network Tools
 
-![Network-Tools](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/network-tools.png)
+![Network-Tools](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/network-tools.png)
 
 ## Install tor
 From v3 of PiNode-XMR tor is no longer installed by default due the potential for a user to encounter trouble from censorship, political or legal issues in their country. Therefore use this option to add the tool and enable the tor mode on the web UI. Once installed see https://github.com/shermand100/pinode-xmr#tor below for how it works, and how it affects your privacy.
@@ -413,7 +413,7 @@ Detailed bandwidth stats are available when running as a tor node using the nyx 
 
 Selecting tor NYX will bring you to the terminal and be prompted for the controller password, use: `PiNodeXMR`
 
-![tor-ARM screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/arm.png)
+![tor-ARM screenshot](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/arm.png)
 
 Exit the utility by using `CTRL+C` and return to the setting menu.
 
@@ -447,7 +447,7 @@ and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#b
 ### Monero GUI
 To use your Monero GUI on a device that is on the same local network as your node enter the IP address you have been using to view the interface into the remote node page of the GUI, port 18081 and the RPC username/password you set in the ./setup.sh menu. You may also select ' mark as trusted daemon ' as it's your trusted node.
 
-![GUI-screenshot](https://github.com/shermand100/pinode-xmr/blob/master/Screenshots/GUIremote.png)
+![GUI-screenshot](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/GUIremote.png)
 
 Your wallet will then scan the node's blockchain for any transaction outputs that belong to your wallet, this can take a few minutes the first time but subsequent connections will only scan for changes since the last connection being much faster.
 
