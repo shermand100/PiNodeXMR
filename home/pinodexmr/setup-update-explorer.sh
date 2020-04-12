@@ -2,7 +2,7 @@
 
 #Download update file
 sleep "1"
-wget -q https://raw.githubusercontent.com/shermand100/pinode-xmr/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh
 
 #Permission Setting
 chmod 755 /home/pinodexmr/current-ver-exp.sh
