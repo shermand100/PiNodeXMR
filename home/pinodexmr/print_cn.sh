@@ -13,14 +13,27 @@
 	#Establish IP/Port
 DEVICE_IP="$(hostname -I | awk '{print $1}')"
 	
-	if [ $BOOT_STATUS -eq 6 ]
-then
-		#Adapted command for restricted public rpc calls (payments)
-	PRINT_CN="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_STATS_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_cn | sed '1d')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
-else
-	#Connected Peers info
-		PRINT_CN="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_cn | sed '1d')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
+	if [ $BOOT_STATUS -eq 2 ]
+then	
+		#System Idle
+		echo "--System Idle--" > /var/www/html/print_cn.txt
 fi	
 	
 	
+	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 5 ]
+then	
+		#Node Status
+	PRINT_CN="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_cn | sed '1d')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
+fi	
+	
+	if [ $BOOT_STATUS -eq 6 ]
+then
+		#Adapted command for restricted public rpc calls (payments)
+	PRINT_CN="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_cn | sed '1d')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
+fi
 
+	if [ $BOOT_STATUS -eq 7 ]
+then
+		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
+	PRINT_CN="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-ssl disabled print_cn | sed '1d')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
+fi

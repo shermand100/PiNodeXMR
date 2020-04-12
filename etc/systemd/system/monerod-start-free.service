@@ -1,5 +1,5 @@
 [Unit]
-Description=Monero Node
+Description=Monero Free Public Node
 After=network.target
 
 [Service]

@@ -12,13 +12,27 @@ DEVICE_IP="$(hostname -I | awk '{print $1}')"
 	. /home/pinodexmr/RPCu.sh
 	#Import RPC password
 	. /home/pinodexmr/RPCp.sh
+
+	if [ $BOOT_STATUS -eq 2 ]
+then	
+		#System Idle
+		echo "--System Idle--" > /var/www/html/TXPool-verbose_Status.txt
+fi	
 	
-		if [ $BOOT_STATUS -eq 6 ]
+	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 5 ]
+then	
+		#Node Status
+		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
+fi	
+	
+	if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_STATS_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
+		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
+fi
 
-else
-		#Node MemPool status
-		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
+	if [ $BOOT_STATUS -eq 7 ]
+then
+		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
+		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
 fi
