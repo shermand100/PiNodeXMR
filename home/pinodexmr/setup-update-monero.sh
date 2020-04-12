@@ -5,7 +5,7 @@ echo "PiNode-XMR is checking for available updates"
 sleep "1"
 #Download update file
 sleep "1"
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/xmr-new-ver.sh -O /home/pinodexmr/xmr-new-ver.sh
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/xmr-new-ver.sh -O /home/pinodexmr/xmr-new-ver.sh
 echo "Version Info file received:"
 #Download variable for current monero version
 wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
