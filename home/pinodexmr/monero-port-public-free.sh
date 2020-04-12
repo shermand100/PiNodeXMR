@@ -1,0 +1,2 @@
+#!/bin/bash
+MONERO_PUBLIC_PORT=18089
