@@ -55,15 +55,19 @@
           <small>Private Dependable Nodes</small>
         </h1>
       </div> <!-- /demo-headline -->
+	        </div> <!-- /container -->
 
-      		<div class="demo-type-example">
-	      	<h3 class="demo-panel-title">Node Control <small>& Advanced Settings</small></h3>
+
+    <div class="container">
+	      	<h3 class="font-weight-bold">Node Control <small>& Advanced Settings</small></h3>
 			
-				     <span class="demo-text-note">Use this page to start and stop your node in different modes and configure how you'd like it to run. <br><br>Changes made to settings here will require the Monero daemon to be restarted before the changes take effect. Do this by using the 'stop'/'start' buttons for the mode you are in. </span>
+				     <span class="demo-text-note">Use this page to start and stop your node in one mode that best suits your needs. Changes can also be made here to fine tune configurations. <br><br>If configuration changes are made after a Monero instance has been selected to run, it will require a restart before the changes take effect. You can use the "Reboot Node" buttons for this.</span>
+	</div> <!-- /container -->			
 			
+    <div class="container py-4">	
 		<h3 class="demo-panel-title">Private Node: <small> Requiring your RPC login</small></h3>
-	          <p><small>Use this mode to run your own personal node. When connecting an external wallet you will need the RPC username and password you have configured in the web terminal menu to use this service. [Clearnet]</small></p>
-      		</div>
+	          <p><small>Use this mode to run your own personal node. When connecting an external wallet you will need the RPC username and password you have configured in the web terminal menu to use this service. [ clearnet ]</small></p>
+
 
 
       <div class="row demo-row">
@@ -116,17 +120,109 @@
  }
 </script>
       </div> <!-- /row -->
-	  
-	         <div class="col">
-	      	<h3 class="demo-panel-title">Public Node: <small> Requiring hash payment</small></h3>
-		
-      		<div class="demo-type-example">
-	      		<span class="demo-text-note">Note:</span>
-	          <p><small>This mode is intended for public use and will be set up to require payment in the form of hashes in exchange for this service. This enables you to receive payment for your PiNode-XMRs work over a large number of calls. This system behaves similarly to a mining pool, so payment takes the form of a connected user submitting a valid blocks every so often*, yielding a large one off payment, rather than constant micropayments.<br> *Note: clearnet</small></p>
-      		</div>
-				  
-			      <div class="row demo-row">
+	</div> <!-- /container -->
+	
+	
+    <div class="container py-4">	
+		<h3 class="demo-panel-title">Public Node: <small> Free</small></h3>
+	          <p><small>This will run a full node and provide a restricted RPC port to allow wallet connections to your node. You may change this port number if you wish. This port does not require hash payments or username and password. Free to all. [ clearnet ]</small></p>
+
+
+
+      <div class="row demo-row">
         <div class="col">
+		<a onclick="startfreebutton()" href="#Start Public Free Node" class="btn btn-block btn-lg btn-inverse">Start Free Public Node <span class="fui-power"></span></a>
+        </div>
+
+
+<script>
+ function startfreebutton () {
+      $.ajax({
+        url:"monerod-start-free.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script> 
+
+        <div class="col">
+          <a onclick="rebootfreebutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Free Node <span class="fui-power"></span></a>
+        </div>
+		
+<script>
+ function rebootfreebutton () {
+      $.ajax({
+        url:"monerod-reboot.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
+        <div class="col">
+          <a onclick="stopfreebutton()" href="#Stop Monerod" class="btn btn-block btn-lg btn-inverse">Stop Free Public Node <span class="fui-power"></span></a>
+        </div>
+		
+<script>
+ function stopfreebutton () {
+      $.ajax({
+        url:"monerod-stop-free.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+      </div> <!-- /row -->
+	  
+	  
+      <div class="row demo-row">
+	  <div class="col">
+<p><small>Set Custom Free RPC Port:</small></p>
+      </div> <!-- /col -->
+	  
+	  <div class="col">
+ 			<div class="form-group btn-inverse" >
+			<form method="post">
+			<input type="text" placeholder="New port" class="form-control" onchange='if(this.value != 0) { freeport(this.value); }'>
+			</form>
+			</div>			
+		  <script>
+ function freeport (value) {
+      $.ajax({
+        url:"monero-port-public-free.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+     </div> <!-- /col -->
+	 
+	 
+	 <div class="col">
+<p><small><embed src="monero-free-public-port.txt"
+		width=200px
+		height=60px></small></p>
+     </div> <!-- /col -->
+     </div> <!-- /row -->
+	</div> <!-- /container -->	
+	  
+    <div class="container py-4">	  
+   	<h3 class="demo-panel-title">Public Node: <small> Requiring hash payment (RPC_Pay)</small></h3>
+	
+ <p><small>This mode can be used to make your PiNode-XMR available to the public for their wallet sync purposes and transaction sending. It will require payment as hashes in exchange for the service. This enables you to receive payment for your PiNode-XMRs work over a large number of calls. This system behaves similarly to a solo mining pool. [clearnet]<br><br>This feature is not yet active, and so settings are removed to avoid confusion.</small></p>
+
+				  
+<!-- 	<div class="row demo-row">
+    <div class="col">
 		<a onclick="startpublicnode()" href="#Start Public Node" class="btn btn-block btn-lg btn-inverse">Start Public Node <span class="fui-user"></span></a>
         </div>
 			   <script>
@@ -177,7 +273,7 @@
 		</div>
       <div class="row">
         <div class="col">
-			<h3 class="demo-panel-title">Credits Required<span class="fui-check"></span></h3>
+			<h6 class="demo-panel-title">Credits Required<span class="fui-check"></span></h6>
           <div class="btn-group">
 <form method="post">
     <select name='Credits Required' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { credits(this.value); }'>
@@ -213,11 +309,11 @@ function credits(value){
 }
 </script>
 
-          </div><!-- /btn-group -->
-        </div> <!-- /.col -->
+          </div>
+        </div>
 		
         <div class="col">
-          <h3 class="demo-panel-title">Difficulty <span class="fui-loop"></span></h3>
+          <h6 class="demo-panel-title">Difficulty <span class="fui-loop"></span></h6>
           <div class="btn-group">
 <form method="post">
     <select name='Difficulty' class="btn btn-inverse dropdown-toggle" onchange='if(this.value != 0) { difficulty(this.value); }'>
@@ -250,62 +346,17 @@ function difficulty(value){
 }
 </script>
 		  </div>
-		  </div>
-		  </div>
-		  
-			<div class="col" class="demo-type-example">
-			<h3 class="demo-panel-title">TOR: <small>Private Bridging node</small></h3>
-			<span class="demo-text-note">Public address:</span>
-			<p> <embed src="onion-address.txt"
-			width=750px
-			height=50px> 
-			<small><br>This address is unique to your PiNode-XMR. It was generated on it's first boot and will not change.</p>
-			</div>
-
-	          <p><small>For details on how this "Bridging" tor node works, view the manual for this project at https://github.com/shermand100/pinode-xmr#tor</small></p>
-      		</div> <!-- /.col -->
-
-		<div class="row demo-row">
-        <div class="col">
-          <a onclick="starttorbutton()" href="#start-monero-tor" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
-        </div>
-			   <script>
- function starttorbutton () {
-      $.ajax({
-        url:"monerod-start-tor.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-				</script>
-				
-        <div class="col">
-          <a onclick="stoptorbutton()" href="#stop-monero-tor" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[tor network]</span></a>
-        </div>
-				<script>
- function stoptorbutton () {
-      $.ajax({
-        url:"monerod-stop-tor.php", //the page containing php script
-        type: "POST", //request type
-        success:function(result){
-         alert(result);
-       }
-     });
- }
-				</script>
-		</div><!-- /btn-group -->
-		  
+		  </div> -->
+		  </div> 
 	  
-
-	         <div class="demo-type-example">
+    <div class="container py-4">
+		<div class="row">	
 	  		<h3 class="demo-panel-title">Mining</h3>
-	      	<span class="demo-text-note">Note:</span>
-	          <p><small>Mining, by design is CPU intensive and not suited to single board computers.<br>
+
+	          <p><small>This a full Private Node (Requires RPC login) with the additional function of solo mining on the device PiNode-XMR is running<br>Note:<br>Mining, by design is CPU intensive and not suited to single board computers.<br>
 			  This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent
 			  physical damage. This feature may also handicap the speed this device verifies transactions and blocks.<br> *Note: Mining currently over clearnet only.</small></p>
-      		</div>
+		</div> <!-- /row -->
 				  
 			      <div class="row demo-row">
         <div class="col">
@@ -322,6 +373,23 @@ function difficulty(value){
      });
  }
 </script>
+
+        <div class="col">
+          <a onclick="rebootminingbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Mining Node <span class="fui-power"></span></a>
+        </div>
+		
+<script>
+ function rebootminingbutton () {
+      $.ajax({
+        url:"monerod-reboot.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+
         <div class="col">
           <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-inverse">Stop Solo Mining <span class="fui-lock"></span></a>
         </div>
@@ -335,13 +403,21 @@ function difficulty(value){
        }
      });
  }
-</script>
+</script>	
+	</div> <!-- /row -->
 
+      <div class="row demo-row">
+	  <div class="col-3">
+<p><small>Set your mining address:</small></p>
+      </div> <!-- /col -->
+	  
+	<div class="col-3">	  
 			<div class="form-group btn-inverse" >
 			<form method="post">
 			<input type="text" placeholder="Enter Mining Address" class="form-control" onchange='if(this.value != 0) { address(this.value); }'>
 			<span class="fui-check-inverted"></span>
 			</div>
+	</div> <!-- /col -->
 			</form>
 		  <script>
  function address(value){
@@ -355,22 +431,343 @@ function difficulty(value){
      });
  }
 </script>
-		  
-		  
-
-	  </div>
+	 
+	 <div class="col-6">
+<p><small><embed src="mining_address.txt"
+		width=480px
+		height=80px></small></p>
+     </div> <!-- /col -->
+     </div> <!-- /row -->
+	 
+	       <div class="row demo-row">
+	  <div class="col-3">
+<p><small>Set mining intensity (%):</small></p>
+      </div> <!-- /col -->
 	  
-	  <div class="row">
-        <div class="col">
-		<h2 class="demo-panel-title">Global settings:</h2>
-		<h3 class="demo-panel-title"><small> RPC Port:</small></h3>
-		
-		    <div class="btn-group">
+	<div class="col-3">	  
 			<div class="form-group btn-inverse" >
 			<form method="post">
-			<input type="text" placeholder="Enter New Monero RPC Port Number" class="form-control" onchange='if(this.value != 0) { monerorpcport(this.value); }'>
+			<input type="text" placeholder="Enter Mining Intensity" class="form-control" onchange='if(this.value != 0) { intensity(this.value); }'>
 			<span class="fui-check-inverted"></span>
 			</div>
+	</div> <!-- /col -->
+			</form>
+		  <script>
+ function intensity(value){
+      $.ajax({
+        url:"mining-intensity.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>
+	 
+	 <div class="col-6">
+<p><small><embed src="mining_intensity.txt"
+		width=3000px
+		height=80px></small></p>
+     </div> <!-- /col -->
+     </div> <!-- /row -->
+	 
+	  </div>
+		</div><!-- /btn-group -->
+		  	</div> <!-- /container -->
+			
+	<div class="container py-4">
+	<h3 class="font-weight-bold">Anonymity Networks <small>Transact via tor or I2P</small></h3>
+			<div class="row">				
+		<p><small><br>These nodes run as a private node (RPC login required) with the added benefit of broadcasting your transactions over an annonyity network. This can obscure the origin of a transaction you broadcast if used correctly.<br><br>The node will still use IPv4 clearnet for syncronisation<br><br> For more information on how this 'bridging' mode works see <a href="https://github.com/monero-ecosystem/PiNode-XMR#tor" target="https://github.com/monero-ecosystem/PiNode-XMR#tor">https://github.com/monero-ecosystem/PiNode-XMR#tor</a></p>
+		</div> <!-- /row -->
+		  	</div> <!-- /container -->
+			
+	<div class="container py-4">
+		<div class="row demo-row">
+		<h3 class="demo-panel-title float-left">TOR: <small>Private Bridging Node</small></h3>
+		</div> <!-- /row -->
+
+				<div class="row">		
+		        <div class="col-2">
+				<p>Public address:</p>
+				</div> <!-- /.col -->
+				<div class="col">
+				<embed class="float-left" src="onion-address.txt"
+				width=500px
+				height=40px>
+			    </div> <!-- /.col -->
+				</div> <!-- /row -->				
+		<div class="row">				
+		<p><small><br>This address is unique to your PiNode-XMR. It was generated on it's first boot and will not change.</p>
+
+		</div> <!-- /row -->
+
+		<div class="row demo-row">
+				<div class="col">
+				<a onclick="starttorbutton()" href="#start-monero-tor" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
+			    </div> <!-- /.col -->
+			   <script>
+ function starttorbutton () {
+      $.ajax({
+        url:"monerod-start-tor.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+				
+        <div class="col">
+          <a onclick="reboottorbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Monerod - <span class="fui-eye"></span><br /> [tor Bridge] </a>
+        </div>
+		
+<script>
+ function reboottorbutton () {
+      $.ajax({
+        url:"monerod-reboot.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>				
+				
+        <div class="col">
+          <a onclick="stoptorbutton()" href="#stop-monero-tor" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
+        </div>
+				<script>
+ function stoptorbutton () {
+      $.ajax({
+        url:"monerod-stop-tor.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+				
+	</div> <!-- /row -->
+	</div> <!-- /container -->
+	
+	<div class="container py-4">
+		<div class="row demo-row">
+		<h3 class="demo-panel-title float-left">I2P: <small>Private Bridging Node</small></h3>
+		</div> <!-- /row -->
+
+
+		<div class="row demo-row">
+				<div class="col">
+				<a onclick="starti2pbutton()" href="#start-monero-i2p" class="btn btn-block btn-lg btn-inverse">Start Monerod - <span class="fui-eye"> <br />[I2P Bridge]</span></a>
+			    </div> <!-- /.col -->
+			   <script>
+ function starti2pbutton () {
+      $.ajax({
+        url:"monerod-start-i2p.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+				
+        <div class="col">
+          <a onclick="rebooti2pbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-inverse">Reboot Monerod - <span class="fui-eye"></span><br /> [I2P Bridge] </a>
+        </div>
+		
+<script>
+ function rebooti2pbutton () {
+      $.ajax({
+        url:"monerod-reboot.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+</script>				
+				
+        <div class="col">
+          <a onclick="stopi2pbutton()" href="#stop-monero-i2p" class="btn btn-block btn-lg btn-inverse">Stop Monerod - <span class="fui-eye"> <br />[I2P Bridge]</span></a>
+        </div>
+				<script>
+ function stopi2pbutton () {
+      $.ajax({
+        url:"monerod-stop-i2p.php", //the page containing php script
+        type: "POST", //request type
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+				</script>
+				
+	</div> <!-- /row -->
+	
+	<div class="row">		
+			<p>I2P configuration:</p>
+	</div> <!-- /.row -->
+				
+	<div class="row">
+		
+		<div class="col-3">
+			<p><small>Set your I2P server address:</small></p>
+		</div> <!-- /col -->
+	  
+		<div class="col-4">	  
+			<div class="form-group btn-inverse" >
+				<form method="post">
+				<input type="text" placeholder="Enter I2P Address" class="form-control" onchange='if(this.value != 0) { i2p-address(this.value); }'>
+				<span class="fui-check-inverted"></span>
+			</div>
+		</div> <!-- /col -->
+				</form>
+					<script>
+ function i2p-address(value){
+      $.ajax({
+        url:"i2p-address.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+					</script>
+				
+		<div class="col-4">
+				<embed class="float-left" src="i2p-address.txt"
+				width=500px
+				height=60px>
+		</div> <!-- /.col -->
+	</div> <!-- /row -->
+				
+	<div class="row">		
+				
+		<div class="col-3">
+			<p><small>Set your I2P server port:</small></p>
+		</div> <!-- /col -->
+	  
+		<div class="col-2">	  
+			<div class="form-group btn-inverse" >
+				<form method="post">
+				<input type="text" placeholder="Enter I2P Port" class="form-control" onchange='if(this.value != 0) { i2p-port(this.value); }'>
+				<span class="fui-check-inverted"></span>
+			</div>
+		</div> <!-- /col -->
+				</form>
+					<script>
+ function i2p-port(value){
+      $.ajax({
+        url:"i2p-port.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+					</script>
+				
+		<div class="col-3">
+				<embed class="float-left" src="i2p-port.txt"
+				width=500px
+				height=60px>
+		</div> <!-- /.col -->
+	</div> <!-- /row -->				
+	
+	<div class="row">		
+			
+		<div class="col-3">
+			<p><small>Set your I2P TX-Proxy port:</small></p>
+		</div> <!-- /col -->
+	  
+		<div class="col-2">	  
+			<div class="form-group btn-inverse" >
+				<form method="post">
+				<input type="text" placeholder="I2P TX-Proxy Port" class="form-control" onchange='if(this.value != 0) { i2p-tx-proxy-port(this.value); }'>
+				<span class="fui-check-inverted"></span>
+			</div>
+		</div> <!-- /col -->
+				</form>
+					<script>
+ function i2p-tx-proxy-port(value){
+      $.ajax({
+        url:"i2p-tx-proxy-port.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+					</script>
+				
+				<div class="col-3">
+				<embed class="float-left" src="i2p-tx-proxy-port.txt"
+				width=500px
+				height=60px>
+			    </div> <!-- /.col -->
+				</div> <!-- /row -->	
+	
+		<div class="row">		
+			
+		<div class="col-3">
+			<p><small>Add Peer (seed):</small></p>
+		</div> <!-- /col -->
+	  
+		<div class="col-4">	  
+			<div class="form-group btn-inverse" >
+				<form method="post">
+				<input type="text" placeholder="Add Peer" class="form-control" onchange='if(this.value != 0) { add-peer(this.value); }'>
+				<span class="fui-check-inverted"></span>
+			</div>
+		</div> <!-- /col -->
+				</form>
+					<script>
+ function add-peer(value){
+      $.ajax({
+        url:"add-peer.php", //the page containing php script
+        type: "POST", //request type
+		data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+ }
+					</script>
+				
+		<div class="col-4">
+			<embed class="float-left" src="add-peer.txt"
+			width=500px
+			height=60px>
+		</div> <!-- /.col -->
+	</div> <!-- /row -->	
+	
+	</div> <!-- /container -->	
+	  
+    <div class="container py-4">
+	
+		<div class="row">
+		<h2 class="demo-panel-title">Global settings:</h2>
+		</div> <!-- /row -->
+		
+				<div class="row">
+				<div class="col-2">
+				<p>RPC Port</p>
+				</div> <!-- /.col -->				
+
+			<div class="col">
+			<div class="btn-group form-group btn-inverse" >
+			<form method="post">
+			<input type="text" placeholder="New Monero RPC Port #" class="form-control" onchange='if(this.value != 0) { monerorpcport(this.value); }'>
+			<span class="fui-check-inverted"></span>
+			</div>
+			</div>	
 			</form>
 		  <script>
  function monerorpcport(value){
@@ -385,9 +782,15 @@ function difficulty(value){
  }
 </script>
 
-</div>
-</div>
-</div>
+	 <div class="col-6">
+<p><small><embed src="monero-rpc-port.txt"
+		width=300px
+		height=40px></small></p>
+     </div> <!-- /col -->
+     </div> <!-- /row -->
+
+
+
 	     <span class="demo-text-note">If needed, enter a new port number for RPC connections here. Used to connect your wallet to this node.</span>
 
 		<h3 class="demo-panel-title">Bandwidth:</h3>
@@ -531,11 +934,11 @@ function inpeers(value){
 </script>            
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
-
+		  	</div> <!-- /container -->	
  
 
 	  </div>	  
-		
+    <div class="container py-4">		
 		<h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
       <div class="row demo-row">
         <div class="col">
@@ -554,7 +957,10 @@ function inpeers(value){
 </script>
 
 	  </div>
-	  	  <div class="container">
+		  	</div> <!-- /container -->	  
+
+
+    <div class="container py-4">
 	  		<h3 class="demo-panel-title"> Kill Switch: <small>unsafe shutdown of PiNode-XMR </small></h3>
 			<p><small>For those times when a stop command just isn't enough... <br>If you suspect monerod is stuck and cannot recover itself or be recovered this button will send command 'sudo killall -9 monerod'. <br>Corruption of stored blockchain could occur, not to be used lightly.</small></p>
       <div class="row demo-row">
