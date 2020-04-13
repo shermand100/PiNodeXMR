@@ -16,7 +16,8 @@ DEVICE_IP="$(hostname -I | awk '{print $1}')"
 	if [ $BOOT_STATUS -eq 2 ]
 then	
 		#System Idle
-		echo "--System Idle--" > /var/www/html/print_pl.txt
+		echo "--This field is populated every 4 hours--
+		If you have run a 'start node' command recently this status will update at the next command run." > /var/www/html/print_pl.txt
 fi	
 	
 	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 5 ]
