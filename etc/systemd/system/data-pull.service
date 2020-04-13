@@ -1,0 +1,16 @@
+[Unit]
+Description=White Node Data Pull
+After=network.target
+
+[Service]
+ExecStart=/bin/bash Connected-white-Node-IPs.sh
+WorkingDirectory=/home/pinodexmr/NodeGeoIP/
+StandardOutput=inherit
+StandardError=inherit
+Type=oneshot
+RemainAfterExit=true
+Restart=no
+User=pinodexmr
+
+[Install]
+WantedBy=multi-user.target
