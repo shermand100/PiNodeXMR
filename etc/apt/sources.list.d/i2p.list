@@ -1,0 +1,2 @@
+deb https://deb.i2p2.de/ buster main
+deb-src https://deb.i2p2.de/ buster main
