@@ -33,7 +33,7 @@ sleep 3
 
 ##Download user 'pinodexmr' script and put in home directory to continue
 wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/raspbian-pinodexmr.sh
-sudo mv /home/pi/dev-raspbian-pinodexmr.sh /home/pinodexmr/
+sudo mv /home/pi/raspbian-pinodexmr.sh /home/pinodexmr/
 sudo chown pinodexmr /home/pinodexmr/raspbian-pinodexmr.sh
 sudo chmod 755 /home/pinodexmr/raspbian-pinodexmr.sh
 
