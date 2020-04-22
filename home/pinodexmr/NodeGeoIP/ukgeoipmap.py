@@ -90,17 +90,17 @@ def generate_map(output, lats=[], lons=[], wesn=None):
     print("Generating map and saving it to {}".format(output))
     if wesn:
         wesn = [float(i) for i in wesn.split('/')]
-        m = Basemap(projection='cyl', resolution='f',
+        m = Basemap(projection='cyl', resolution='h',
                 llcrnrlon=wesn[0], llcrnrlat=wesn[2],
                 urcrnrlon=wesn[1], urcrnrlat=wesn[3])
     else:
-        m = Basemap(projection='cyl', resolution='f')
+        m = Basemap(projection='cyl', resolution='h')
     m.bluemarble()
     m.drawcountries(linewidth=0.2)
     m.drawstates(linewidth=0.1) 
     x, y = m(lons, lats)
     m.scatter(x, y, s=4, color='#ff0000', marker='.', alpha=0.3)
-    plt.savefig(output, dpi=150, bbox_inches='tight')
+    plt.savefig(output, dpi=900, bbox_inches='tight')
 
 
 def main():
