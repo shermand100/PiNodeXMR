@@ -91,6 +91,10 @@ sudo chown root /etc/systemd/system/*.service
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
+##Setup local hostname
+sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
+sudo /etc/init.d/avahi-daemon restart
+
 ##Copy PiNode-XMR scripts to home folder
 echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
