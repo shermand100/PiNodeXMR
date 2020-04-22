@@ -19,11 +19,17 @@ then
 		echo "--System Idle--" > /var/www/html/print_pl_stats.txt
 fi	
 	
-	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 5 ]
+	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 5 ]
 then	
 		#Node Status
 	PRINT_PL_STATS="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl_stats | sed '1d')" && echo "$PRINT_PL_STATS" > /var/www/html/print_pl_stats.txt
 fi	
+
+	if [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 8 ]
+then	
+		#Node Status
+	PRINT_PL_STATS="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl_stats | sed '1d')" && echo "$PRINT_PL_STATS" > /var/www/html/print_pl_stats.txt
+fi
 	
 	if [ $BOOT_STATUS -eq 6 ]
 then

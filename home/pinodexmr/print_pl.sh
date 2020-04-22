@@ -20,11 +20,17 @@ then
 		If you have run a 'start node' command recently this status will update at the next command run." > /var/www/html/print_pl.txt
 fi	
 	
-	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 5 ]
+	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 5 ]
 then	
 		#Node Status
 			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt
-fi	
+fi
+
+	if [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 8 ]
+then	
+		#Node Status
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt
+fi
 	
 	if [ $BOOT_STATUS -eq 6 ]
 then

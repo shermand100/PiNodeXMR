@@ -66,6 +66,14 @@ else
 		echo "loading ......"
 fi
 
+if [ $BOOT_STATUS -eq 8 ]
+then
+	sudo systemctl start monerod-start-i2p.service
+	echo "Monero I2P Node Started in background"
+else
+		echo "loading ......."
+fi
+
 if [ $BOOT_STATUS -gt 2 ] && [ $EXPLORER_START -eq 1 ]
 then
 	echo "Start Monero-onion-block-explorer"
