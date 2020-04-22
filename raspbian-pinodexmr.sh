@@ -40,7 +40,7 @@ sleep 3
 ##Configure Swap file
 echo -e "\e[32mConfiguring 2GB Swap file (required for Monero build)\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/shermand100/pinode-xmr/Raspbian-install/etc/dphys-swapfile
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/etc/dphys-swapfile
 sudo mv /home/pinodexmr/dphys-swapfile /etc/dphys-swapfile
 sudo chmod 664 /etc/dphys-swapfile
 sudo chown root /etc/dphys-swapfile
@@ -53,13 +53,13 @@ sleep 3
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b Raspbian-install --single-branch https://github.com/shermand100/pinode-xmr.git
+git clone -b Development-Raspbian --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 
 
 ##Configure ssh security. Allow only user 'pinodexmr' & 'root' login disabled, restart config to make changes
 echo -e "\e[32mConfiguring SSH security\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/pinode-xmr/etc/ssh/sshd_config /etc/ssh/sshd_config
+sudo mv /home/pinodexmr/PiNode-XMR/etc/ssh/sshd_config /etc/ssh/sshd_config
 sudo chmod 644 /etc/ssh/sshd_config
 sudo chown root /etc/ssh/sshd_config
 sudo /etc/init.d/ssh restart
@@ -76,7 +76,7 @@ sleep 3
 ##Enable PiNode-XMR on boot
 echo -e "\e[32mEnable PiNode-XMR on boot\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/pinode-xmr/etc/rc.local /etc/rc.local
+sudo mv /home/pinodexmr/PiNode-XMR/etc/rc.local /etc/rc.local
 sudo chmod 755 /etc/rc.local
 sudo chown root /etc/rc.local
 echo -e "\e[32mSuccess\e[0m"
@@ -85,9 +85,19 @@ sleep 3
 ##Add PiNode-XMR systemd services
 echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/system/
+sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/*.service
 sudo chown root /etc/systemd/system/*.service
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
+##Add PiNode-XMR php settings
+echo -e "\e[32mAdd PiNode-XMR php settings\e[0m"
+sleep 3
+sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/
+sudo chmod 644 /etc/systemd/system/*.service
+sudo chown root /etc/systemd/system/*.service
+sudo /etc/init.d/apache2 restart
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
@@ -98,8 +108,8 @@ sudo /etc/init.d/avahi-daemon restart
 ##Copy PiNode-XMR scripts to home folder
 echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
-mv /home/pinodexmr/pinode-xmr/home/pinodexmr/* /home/pinodexmr/
-mv /home/pinodexmr/pinode-xmr/home/pinodexmr/.profile /home/pinodexmr/
+mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/
+mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/
 chmod 777 /home/pinodexmr/*
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
@@ -114,8 +124,8 @@ sudo mv /home/pinodexmr/Flat-UI/app/ /var/www/html/
 sudo mv /home/pinodexmr/Flat-UI/dist/ /var/www/html/
 echo -e "\e[32mConfiguring Web-UI template\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/pinode-xmr/HTML/*.* /var/www/html/
-sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
+sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
+sudo cp -R /home/pinodexmr/PiNode-XMR/HTML/docs/ /var/www/html/
 sudo chown www-data -R /var/www/html/
 sudo chmod 777 -R /var/www/html/
 
@@ -152,8 +162,8 @@ cd
 ##Install crontab
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
-sudo crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
+sudo crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/root
+crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
@@ -161,7 +171,7 @@ sleep 3
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
 sudo rm -r /home/pinodexmr/Flat-UI/
-sudo rm -r /home/pinodexmr/pinode-xmr/
+sudo rm -r /home/pinodexmr/PiNode-XMR/
 
 ##Change log in menu to 'main'
 #Delete line 28 (previous setting)
