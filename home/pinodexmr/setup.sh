@@ -193,4 +193,4 @@
 				. /home/pinodexmr/setup.sh
 				;;
 esac
-#clear
+clear
