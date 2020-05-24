@@ -1,2 +1,2 @@
 #!/bin/bash
-RELEASE=$'release-v0.15'
+RELEASE=$'release-v0.16'
