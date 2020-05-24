@@ -5,7 +5,8 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will force update PiNode
 		#Download update files
 
 					https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
-
+					chmod 755 /home/pinodexmr/new-ver-pi.sh
+					. /home/pinodexmr/new-ver-pi.sh
 					echo "Latest Version: $NEW_VERSION_PI "
 					echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 					sleep 2
