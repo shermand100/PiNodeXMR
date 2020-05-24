@@ -16,9 +16,9 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will force update PiNode
 					echo -e "\e[32mDownload and update /sudoers file\e[0m"
 					sleep 3
 					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/etc/sudoers
-					sudo chmod 0440 /home/pi/sudoers
-					sudo chown root /home/pi/sudoers
-					sudo mv /home/pi/sudoers /etc/sudoers
+					sudo chmod 0440 /home/pinodexmr/sudoers
+					sudo chown root /home/pinodexmr/sudoers
+					sudo mv /home/pinodexmr/sudoers /etc/sudoers
 					echo -e "\e[32mGlobal permissions changed\e[0m"
 					sleep 3
 
