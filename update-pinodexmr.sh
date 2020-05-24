@@ -10,8 +10,21 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will force update PiNode
 					echo "Latest Version: $NEW_VERSION_PI "
 					echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 					sleep 2
+
+
+					##Replace file /etc/sudoers to set global sudo permissions/rules
+					echo -e "\e[32mDownload and update /sudoers file\e[0m"
+					sleep 3
+					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/etc/sudoers
+					sudo chmod 0440 /home/pi/sudoers
+					sudo chown root /home/pi/sudoers
+					sudo mv /home/pi/sudoers /etc/sudoers
+					echo -e "\e[32mGlobal permissions changed\e[0m"
+					sleep 3
+
 					
 					git clone -b Raspbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
+
 
 					#Backup User values
 					echo -e "\e[32mCreating backups of your configuration\e[0m"
