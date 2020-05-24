@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR to the newest version\n\nContinue?" 12 78); then
+if (whiptail --title "PiNode-XMR Updater" --yesno "This will force update PiNode-XMR to the newest version\n\nContinue?" 12 78); then
 		
 		#Download update files
 
@@ -105,6 +105,13 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 					echo -e "\e[32mUpdate system version number\e[0m"
 					echo "#!/bin/bash
 CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 2
+					
+					#Update Monero version number to new one installed
+					echo -e "\e[32mUpdate Monero version number to allow manual update\e[0m"
+					echo "#!/bin/bash
+CURRENT_VERSION=0" > /home/pinodexmr/current-ver.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
