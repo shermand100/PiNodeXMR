@@ -21,7 +21,34 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will force update PiNode
 					sudo mv /home/pinodexmr/sudoers /etc/sudoers
 					echo -e "\e[32mGlobal permissions changed\e[0m"
 					sleep 3
+					
+					##Update and Upgrade system
+					echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"
+					sleep 3
+					sudo apt update && sudo apt upgrade -y
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3					
 
+					##Checking for missing dependencies for --- Web Interface
+					echo -e "\e[32mChecking for missing dependencies for --- Web Interface\e[0m"
+					sleep 3
+					sudo apt install apache2 shellinabox php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-gd php7.3-json php7.3-mbstring php7.3-mysql php7.3-xml -y
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3
+
+					##Checking for missing dependencies for --- Monero
+					echo -e "\e[32mChecking for missing dependencies for --- Monero\e[0m"
+					sleep 3
+					sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libunbound-dev graphviz doxygen libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
+					echo -e "\e[32mSuccess\e[0m"					
+					sleep 3
+
+					##Checking for missing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+					echo -e "\e[32mChecking for missing dependencies for --- Miscellaneous\e[0m"
+					sleep 3
+					sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw  dialog -y
+					echo -e "\e[32mSuccess\e[0m"					
+					sleep 3
 					
 					git clone -b Raspbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 
