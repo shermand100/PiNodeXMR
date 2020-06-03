@@ -99,8 +99,8 @@ sudo chmod 775 -R /var/www/html/
 echo -e "\e[32mDownloading Monero v0.15\e[0m"
 sleep 3
 #git clone --recursive https://github.com/monero-project/monero.git         #Development release
-git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git       #Latest Stable release
-echo -e "\e[32mBuilding Monero v0.15\e[0m"
+git clone --recursive -b release-v0.16 https://github.com/monero-project/monero.git       #Latest Stable release
+echo -e "\e[32mBuilding Monero v0.16\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
