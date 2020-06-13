@@ -117,11 +117,11 @@ sudo chmod 777 -R /var/www/html/
 
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 #First build monero, single build directory
-echo -e "\e[32mDownloading Monero v0.15\e[0m"
+echo -e "\e[32mDownloading Monero v0.16\e[0m"
 sleep 3
 #git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
-git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git         #Latest Stable Branch
-echo -e "\e[32mBuilding Monero v0.15\e[0m"
+git clone --recursive -b release-v0.16 https://github.com/monero-project/monero.git         #Latest Stable Branch
+echo -e "\e[32mBuilding Monero v0.16\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
