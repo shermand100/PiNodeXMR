@@ -34,7 +34,7 @@ sleep 3
 ##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw  dialog -y
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog -y
 sleep 3
 
 ##Configure Swap file
@@ -131,11 +131,16 @@ sudo chmod 777 -R /var/www/html/
 
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 #First build monero, single build directory
-echo -e "\e[32mDownloading Monero v0.15\e[0m"
+	#Download release number
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
+chmod 755 /home/pinodexmr/release.sh
+. /home/pinodexmr/release.sh
+
+echo -e "\e[32mDownloading Monero $RELEASE\e[0m"
 sleep 3
 #git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
-git clone --recursive -b release-v0.15 https://github.com/monero-project/monero.git         #Latest Stable Branch
-echo -e "\e[32mBuilding Monero v0.15\e[0m"
+git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git         #Latest Stable Branch
+echo -e "\e[32mBuilding Monero $RELEASE\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
