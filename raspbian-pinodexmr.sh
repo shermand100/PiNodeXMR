@@ -34,7 +34,11 @@ sleep 3
 ##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog -y
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip -y
+	## Installing new dependencies for IP2Geo map creation
+sudo apt install python3-numpy python3-matplotlib libgeos-dev python3-geoip2 python3-mpltoolkits.basemap -y
+	##More IP2Geo dependencies
+sudo pip3 install ip2geotools
 sleep 3
 
 ##Configure Swap file
@@ -110,7 +114,7 @@ echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/
-chmod 777 /home/pinodexmr/*
+sudo chmod 777 -R /home/pinodexmr/*
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
