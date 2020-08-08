@@ -24,6 +24,10 @@ echo -e "\e[32mInstalling I2P...\e[0m"
 sleep 3	
 	sudo apt-get install i2p i2p-keyring -y
 
+
+##Setup Basic config of i2p
+sudo dpkg-reconfigure i2p
+
 ###Make web console accessable on lan
 
 	##If port is random may need to extract I2P web client port. Set as variable to be re-inserted. disabled until needed
@@ -34,13 +38,9 @@ sleep 3
 	
 	##add lan ip to config (default blocks lan access to web client)
 	#This allows access from ip e.g.: 192.168.1.116:7657
-	sed -i '/clientApp.0.args*/c\clientApp.0.args=7657 ::1,127.0.0.1,"$(DEVICE_IP)" ./webapps/' /home/pinodexmr/.i2p/clients.config.d/00-net.i2p.router.web.RouterConsoleRunner-clients.config
-	#This allows acces from hostanme e.g: http://pinodexmr.local:7657
+	sed -i '/clientApp.0.args*/c\clientApp.0.args=7657 ::1,127.0.0.1,"${DEVICE_IP}" ./webapps/' /home/pinodexmr/.i2p/clients.config.d/00-net.i2p.router.web.RouterConsoleRunner-clients.config
+	#This allows access from hostname e.g: http://pinodexmr.local:7657
 	echo "routerconsole.allowedHosts=pinodexmr.local" >> /home/pinodexmr/.i2p/router.config
-
-
-##Setup Basic config of i2p
-sudo dpkg-reconfigure i2p
 
 if (whiptail --title "PiNode-XMR Start I2P?" --yesno "I2P installer script has finished.\n\nWould you like to start I2P now?" 14 78); then
 									i2prouter start
