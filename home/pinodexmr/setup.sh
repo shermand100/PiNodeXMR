@@ -136,10 +136,11 @@
 		"5)")CHOICE5=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
 				"1)" "Install tor" \
 				"2)" "View tor NYX interface" \
-				"3)" "Install I2P Server/Router" \
-				"4)" "Start/Stop I2P Server/Router" \
-				"5)" "Install PiVPN" \
-				"6)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
+				"3)" "Start/Stop tor Service" \
+				"4)" "Install I2P Server/Router" \
+				"5)" "Start/Stop I2P Server/Router" \
+				"6)" "Install PiVPN" \
+				"7)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
 				
 				case $CHOICE5 in
 		
@@ -157,14 +158,25 @@
 									fi
 								;;
 								
-							"3)")if (whiptail --title "PiNode-XMR Install I2P" --yesno "This will install the I2P server/router onto your PiNode-XMR\n\nWould you like to continue?" 14 78); then
+							"3)")if (whiptail --title "PiNode-XMR Start/Stop tor" --yesno "Manually Start or Stop the service." --yes-button "Start tor" --no-button "Stop tor"  14 78); then
+									sudo service tor start;
+									whiptail --title "PiNode-XMR tor" --msgbox "The tor service has been started" 12 78;
+									. /home/pinodexmr/setup.sh
+									else
+									sudo service tor stop;
+									whiptail --title "PiNode-XMR tor" --msgbox "The tor service has been stopped" 12 78;
+									. /home/pinodexmr/setup.sh
+									fi
+								;;
+								
+							"4)")if (whiptail --title "PiNode-XMR Install I2P" --yesno "This will install the I2P server/router onto your PiNode-XMR\n\nWould you like to continue?" 14 78); then
 									. /home/pinodexmr/setup-i2p.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
 							
-							"4)")if (whiptail --title "PiNode-XMR Start/Stop I2P" --yesno "Manually Start or Stop the service." --yes-button "Start I2P" --no-button "Stop I2P"  14 78); then
+							"5)")if (whiptail --title "PiNode-XMR Start/Stop I2P" --yesno "Manually Start or Stop the service." --yes-button "Start I2P" --no-button "Stop I2P"  14 78); then
 									i2prouter start;
 									whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78;
 									. /home/pinodexmr/setup.sh
@@ -175,14 +187,14 @@
 									fi
 								;;
 								
-							"5)")	if (whiptail --title "PiNode-XMR PiVPN Install" --yesno "This feature will install PiVPN on your PiNode-XMR\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
+							"6)")	if (whiptail --title "PiNode-XMR PiVPN Install" --yesno "This feature will install PiVPN on your PiNode-XMR\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setup-PiVPN.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
 								
-							"6)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
+							"7)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setup-noip.sh
 									else
 									. /home/pinodexmr/setup.sh
