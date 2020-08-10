@@ -38,7 +38,7 @@ sudo dpkg-reconfigure i2p
 	
 	##add lan ip to config (default blocks lan access to web client)
 	#This allows access from ip e.g.: 192.168.1.116:7657
-	sed -i '/clientApp.0.args*/c\clientApp.0.args=7657 ::1,127.0.0.1,"${DEVICE_IP}" ./webapps/' /home/pinodexmr/.i2p/clients.config.d/00-net.i2p.router.web.RouterConsoleRunner-clients.config
+	sed -i "/clientApp.0.args*/c\clientApp.0.args=7657 ::1,127.0.0.1,"${DEVICE_IP}" ./webapps/" /home/pinodexmr/.i2p/clients.config.d/00-net.i2p.router.web.RouterConsoleRunner-clients.config
 	#This allows access from hostname e.g: http://pinodexmr.local:7657
 	echo "routerconsole.allowedHosts=pinodexmr.local" >> /home/pinodexmr/.i2p/router.config
 
