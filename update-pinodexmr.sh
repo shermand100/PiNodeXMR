@@ -80,12 +80,14 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					mv /home/pinodexmr/mining-intensity.sh /home/pinodexmr/mining-intensity_retain.sh
 					mv /home/pinodexmr/monero-port.sh /home/pinodexmr/monero-port_retain.sh
 					mv /home/pinodexmr/monero-port-public-free.sh /home/pinodexmr/monero-port-public-free_retain.sh
-					mv /home/pinodexmr/monero-stats-port.sh /home/pinodexmr/monero-stats-port_retain.sh
 					mv /home/pinodexmr/out-peers.sh /home/pinodexmr/out-peers_retain.sh
 					mv /home/pinodexmr/payment-address.sh /home/pinodexmr/payment-address_retain.sh
 					mv /home/pinodexmr/prunestatus.sh /home/pinodexmr/prunestatus_status.sh
 					mv /home/pinodexmr/RPCp.sh /home/pinodexmr/RPCp_retain.sh
 					mv /home/pinodexmr/RPCu.sh /home/pinodexmr/RPCu_retain.sh
+					mv /home/pinodexmr/monero-rpcpay-port.sh /home/pinodexmr/monero-rpcpay-port_retain.sh
+					mv /home/pinodexmr/add-i2p-peer.sh /home/pinodexmr/add-i2p-peer_retain.sh
+					mv /home/pinodexmr/add-tor-peer.sh /home/pinodexmr/add-tor-peer_retain.sh					
 					echo -e "\e[32mUser-set configuration saved\e[0m"					
 					
 				#Install Update
@@ -168,12 +170,14 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					mv /home/pinodexmr/mining-intensity_retain.sh /home/pinodexmr/mining-intensity.sh
 					mv /home/pinodexmr/monero-port_retain.sh /home/pinodexmr/monero-port.sh
 					mv /home/pinodexmr/monero-port-public-free_retain.sh /home/pinodexmr/monero-port-public-free.sh
-					mv /home/pinodexmr/monero-stats-port_retain.sh /home/pinodexmr/monero-stats-port.sh
 					mv /home/pinodexmr/out-peers_retain.sh /home/pinodexmr/out-peers.sh
 					mv /home/pinodexmr/payment-address_retain.sh /home/pinodexmr/payment-address.sh
 					mv /home/pinodexmr/prunestatus_status.sh /home/pinodexmr/prunestatus.sh
 					mv  /home/pinodexmr/RPCp_retain.sh/home/pinodexmr/RPCp.sh
 					mv /home/pinodexmr/RPCu_retain.sh /home/pinodexmr/RPCu.sh
+					mv /home/pinodexmr/monero-rpcpay-port_retain.sh /home/pinodexmr/monero-rpcpay-port.sh
+					mv /home/pinodexmr/add-i2p-peer_retain.sh /home/pinodexmr/add-i2p-peer.sh
+					mv /home/pinodexmr/add-tor-peer_retain.sh /home/pinodexmr/add-tor-peer.sh					
 					echo -e "\e[32mUser configuration restored\e[0m"
 					
 					
@@ -195,7 +199,7 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					#Clean up files
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
-					sudo rm -r /home/pinodexmr/pinode-xmr/
+					sudo rm -R /home/pinodexmr/PiNode-XMR/
 					rm /home/pinodexmr/new-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
