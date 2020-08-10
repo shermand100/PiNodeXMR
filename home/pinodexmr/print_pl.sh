@@ -2,8 +2,6 @@
 #Import Start Flag Values:
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
-	#Import Un-restricted Port Number (for internal status updates)
-	. /home/pinodexmr/monero-stats-port.sh
 	#Import Restricted Port Number (external use)
 	. /home/pinodexmr/monero-port.sh
 	#Import RPC username
@@ -35,7 +33,7 @@ fi
 	if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_STATS_PORT --rpc-ssl disabled print_pl | sed '1d')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-ssl disabled print_pl | sed '1d')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt
 fi
 
 	if [ $BOOT_STATUS -eq 7 ]
