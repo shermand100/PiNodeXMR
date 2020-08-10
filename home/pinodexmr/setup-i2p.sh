@@ -11,10 +11,10 @@ echo -e "\e[32mInstalling I2P...\e[0m"
 sleep 3	
 wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/etc/apt/sources.list.d/i2p.list
 sleep 1
-sudo mv ~/i2p.list /etc/apt/sources.list.d/
+sudo mv /home/pinodexmr/i2p.list /etc/apt/sources.list.d/
 sudo chmod 644 /etc/apt/sources.list.d/i2p.list
 sudo chown root /etc/apt/sources.list.d/i2p.list
-curl -o i2p-debian-repo.key.asc https://geti2p.net/_static/i2p-debian-repo.key.asc
+sudo curl -o i2p-debian-repo.key.asc https://geti2p.net/_static/i2p-debian-repo.key.asc
 gpg -n --import --import-options import-show i2p-debian-repo.key.asc
 sudo apt-key add i2p-debian-repo.key.asc
 sudo apt-get update
@@ -28,6 +28,12 @@ sleep 3
 ##Setup Basic config of i2p
 sudo dpkg-reconfigure i2p
 
+sleep 2
+
+i2prouter start
+
+sleep 5
+						
 ###Make web console accessable on lan
 
 	##If port is random may need to extract I2P web client port. Set as variable to be re-inserted. disabled until needed
@@ -42,11 +48,15 @@ sudo dpkg-reconfigure i2p
 	#This allows access from hostname e.g: http://pinodexmr.local:7657
 	echo "routerconsole.allowedHosts=pinodexmr.local" >> /home/pinodexmr/.i2p/router.config
 
-if (whiptail --title "PiNode-XMR Start I2P?" --yesno "I2P installer script has finished.\n\nWould you like to start I2P now?" 14 78); then
-									i2prouter start
-									whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78
-									else
-									. /home/pinodexmr/setup.sh
-									fi
+sleep 2 
+
+i2prouter restart
+
+sleep 5
+	
+whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been installed and started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78
+
+
+
 ./setup.sh
 
