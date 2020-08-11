@@ -1,1 +1,1 @@
-nitbdip72kdg5z6g.onion:28083 has been set as your tor seed peer
+No seed peer set
