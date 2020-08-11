@@ -204,7 +204,7 @@ CURRENT_VERSION_PI=40000" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
-					whiptail --title "PiNode-XMR Updater" --msgbox "\n\nYour PiNode-XMR has been updated to version ${NEW_VERSION_PI}" 12 78
+					whiptail --title "PiNode-XMR Updater" --msgbox "\n\nYour PiNode-XMR has been updated to version 40000" 12 78
 					
 
 
