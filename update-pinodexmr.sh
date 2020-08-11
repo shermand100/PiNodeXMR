@@ -200,6 +200,7 @@ CURRENT_VERSION_PI=40000" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
 					sudo rm -R /home/pinodexmr/PiNode-XMR/
+					sudo rm -R /home/pinodexmr/Flat-UI/					
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
