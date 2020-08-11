@@ -47,7 +47,6 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					echo -e "\e[32mIf a setting did not exist on your previous version you may see some errors here for missing files, these can safely be ignored\e[0m"					
 					echo -e "\e[32m*****\e[0m"						
 					sleep 8
-					mv /home/pinodexmr/add-peer.sh /home/pinodexmr/add-peer_retain.sh
 					mv /home/pinodexmr/bootstatus.sh /home/pinodexmr/bootstatus_retain.sh
 					mv /home/pinodexmr/credits.sh /home/pinodexmr/credits_retain.sh
 					mv /home/pinodexmr/current-ver.sh /home/pinodexmr/current-ver_retain.sh
@@ -109,12 +108,12 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 				##Copy PiNode-XMR scripts to home folder
 					echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
 					sleep 3
-					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/
+					#error suppressed from failed to copy directories as lock files don't require update
+					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2>/dev/null 
 					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/
 					sudo chmod 777 -R /home/pinodexmr/*
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 3					
-					
+					sleep 3
 
 				##Download (git clone) Web-UI template
 					echo -e "\e[32mDownloading Web-UI template\e[0m"
@@ -123,8 +122,9 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					
 					echo -e "\e[32mInstalling Web-UI template\e[0m"
 					sleep 3
-					sudo mv /home/pinodexmr/Flat-UI/app/ /var/www/html/
-					sudo mv /home/pinodexmr/Flat-UI/dist/ /var/www/html/
+					#error suppressed from failed to move directories as template files don't require update
+					sudo mv /home/pinodexmr/Flat-UI/app/ /var/www/html/ 2>/dev/null
+					sudo mv /home/pinodexmr/Flat-UI/dist/ /var/www/html/ 2>/dev/null
 					
 					echo -e "\e[32mConfiguring Web-UI template with PiNode-XMR pages\e[0m"
 					sleep 3
@@ -137,7 +137,6 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					#Restore User Values
 					echo -e "\e[32mRestoring your personal settings\e[0m"
 					sleep 2
-					mv /home/pinodexmr/add-peer_retain.sh /home/pinodexmr/add-peer.sh
 					mv /home/pinodexmr/bootstatus_retain.sh /home/pinodexmr/bootstatus.sh
 					mv /home/pinodexmr/credits_retain.sh /home/pinodexmr/credits.sh
 					mv /home/pinodexmr/current-ver_retain.sh /home/pinodexmr/current-ver.sh
@@ -159,7 +158,7 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					mv /home/pinodexmr/out-peers_retain.sh /home/pinodexmr/out-peers.sh
 					mv /home/pinodexmr/payment-address_retain.sh /home/pinodexmr/payment-address.sh
 					mv /home/pinodexmr/prunestatus_status.sh /home/pinodexmr/prunestatus.sh
-					mv  /home/pinodexmr/RPCp_retain.sh/home/pinodexmr/RPCp.sh
+					mv /home/pinodexmr/RPCp_retain.sh /home/pinodexmr/RPCp.sh
 					mv /home/pinodexmr/RPCu_retain.sh /home/pinodexmr/RPCu.sh
 					mv /home/pinodexmr/monero-rpcpay-port_retain.sh /home/pinodexmr/monero-rpcpay-port.sh
 					mv /home/pinodexmr/add-i2p-peer_retain.sh /home/pinodexmr/add-i2p-peer.sh
@@ -188,12 +187,12 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					sudo service tor restart
 					sleep 3
 					#Delete unused torrc file on event of update fail (tor not installed by user)
-					sudo rm /home/pinodexmr/torrc
+					sudo rm /home/pinodexmr/torrc 2>/dev/null
 
 					#Update system version number to new one installed
 					echo -e "\e[32mUpdate system version number\e[0m"
 					echo "#!/bin/bash
-CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
+CURRENT_VERSION_PI=40000" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
@@ -201,7 +200,6 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
 					sudo rm -R /home/pinodexmr/PiNode-XMR/
-					rm /home/pinodexmr/new-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
