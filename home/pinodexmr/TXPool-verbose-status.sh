@@ -25,12 +25,12 @@ then
 		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
 fi	
 
-	if [ $BOOT_STATUS -eq 4 ] || [ $BOOT_STATUS -eq 8 ]
+	if [ $BOOT_STATUS -eq 4 ]
 then	
-		#Node Status
-		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
+		#Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
+		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
 fi
-	
+
 	if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
@@ -41,4 +41,9 @@ fi
 then
 		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
 		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
+fi
+	if [ $BOOT_STATUS -eq 8 ]
+then	
+		#I2p Node Status
+		PRINT_POOL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool | sed '1d')" && echo "$PRINT_POOL" > /var/www/html/TXPool-verbose_Status.txt
 fi
