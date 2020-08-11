@@ -1,6 +1,6 @@
 #!/bin/bash
 
-					whiptail --title "PiNode-XMR Updater" --msgbox "\n\nPerforming PiNode-XMR update to version ${NEW_VERSION_PI}" 12 78
+					whiptail --title "PiNode-XMR Updater" --msgbox "\n\nPerforming PiNode-XMR update to latest version" 12 78
 					
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Raspberry OS updates to latest versions\e[0m"
@@ -34,20 +34,6 @@ sudo pip3 install ip2geotools
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
-##Check config of Swap file
-echo -e "\e[32mChecking configuration of 2GB Swap file (required for Monero build and IP2Geo Mapping)\e[0m"
-sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/etc/dphys-swapfile
-sudo mv /home/pinodexmr/dphys-swapfile /etc/dphys-swapfile
-sudo chmod 664 /etc/dphys-swapfile
-sudo chown root /etc/dphys-swapfile
-sudo dphys-swapfile setup
-sleep 5
-sudo dphys-swapfile swapon
-echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
-sleep 3
-
-					
 		#Download update files
 
 ##Clone PiNode-XMR to device from git
@@ -121,7 +107,7 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					echo -e "\e[32mSuccess\e[0m"					
 					
 				##Copy PiNode-XMR scripts to home folder
-					echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
+					echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
 					sleep 3
 					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/
 					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/
@@ -188,6 +174,21 @@ git clone -b Development-Raspbian --single-branch https://github.com/monero-ecos
 					crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
+					
+					#Attempt update of tor hidden service settings
+					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
+					sleep 6
+					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/etc/tor/torrc
+					echo -e "\e[32mApplying Settings...\e[0m"
+					sleep 3
+					sudo mv /home/pinodexmr/torrc /etc/tor/torrc
+					sudo chmod 644 /etc/tor/torrc
+					sudo chown root /etc/tor/torrc
+					echo -e "\e[32mRestarting tor service...\e[0m"
+					sudo service tor restart
+					sleep 3
+					#Delete unused torrc file on event of update fail (tor not installed by user)
+					sudo rm /home/pinodexmr/torrc
 
 					#Update system version number to new one installed
 					echo -e "\e[32mUpdate system version number\e[0m"
