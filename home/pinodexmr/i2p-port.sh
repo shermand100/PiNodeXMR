@@ -1,2 +1,2 @@
 #!/bin/bash
-CREDITS=250
+I2P_PORT=

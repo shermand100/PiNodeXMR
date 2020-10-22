@@ -12,19 +12,20 @@
 	
 	case $CHOICE in
 		
-		"1)") 	clear
+		"1)")
 		;;
 				
 		"2)")CHOICE2=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nSystem Settings" 20 60 10 \
-				"1)" "System, Hardware & WiFi Settings (armbian-config)" \
+				"1)" "Hardware & WiFi Settings (raspi-config)" \
 				"2)" "Master Login Password Set" \
 				"3)" "Monero RPC Username and Password setup" \
-				"4)" "USB storage setup" 2>&1 >/dev/tty)
+				"4)" "USB storage setup" \
+				"5)" "SD Card Health Checker" 2>&1 >/dev/tty)
 				
 				case $CHOICE2 in
 		
-					"1)")	whiptail --title "PiNode-XMR Settings" --msgbox "You will now be taken to the Armbian menu to configure your hardware" 8 78;
-							sudo armbian-config; . /home/pinodexmr/setup.sh
+					"1)")	whiptail --title "PiNode-XMR Settings" --msgbox "You will now be taken to the Raspbian menu to configure your hardware" 8 78;
+							sudo raspi-config; . /home/pinodexmr/setup.sh
 					;;
 				
 					"2)") 	if (whiptail --title "PiNode-XMR Set Password" --yesno "This will change your SSH/Web terminal log in password\n\nWould you like to continue?" 12 78); then
@@ -48,6 +49,19 @@
 							fi
 					;;
 					
+					"5)")	if (whiptail --title "PiNode-XMR MicroSD Health Check" --yesno "This utility (agnostics) will run speed tests on your SD card read/write functions to give an indication of its current health.\n\nBefore starting this check, stop all services that are currently reading/writing (Node and BlockExplorer) for most accurate results.\n\nWould you like to continue?" 16 78); then
+					 clear;
+					 echo -e "\e[32mChecking for required tools...\e[0m";
+					 sudo apt install agnostics -y
+					 echo -e "\e[32mSuccess\e[0m";
+					 sleep 2;
+					 echo -e "\e[32mRunning test script. This will take a few minutes...\e[0m";
+					 sudo sh /usr/share/agnostics/sdtest.sh;
+					 read -n 1 -s -r -p "Press any key to return to Menu"
+							else
+					. /home/pinodexmr/setup.sh
+							fi
+					;;
 				esac
 				. /home/pinodexmr/setup.sh
 				;;
@@ -119,11 +133,14 @@
 				. /home/pinodexmr/setup.sh
 				;;
 
-		"5)")CHOICE5=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 20 60 10 \
+		"5)")CHOICE5=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
 				"1)" "Install tor" \
-				"2)" "tor NYX" \
-				"3)" "Install PiVPN" \
-				"4)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
+				"2)" "View tor NYX interface" \
+				"3)" "Start/Stop tor Service" \
+				"4)" "Install I2P Server/Router" \
+				"5)" "Start/Stop I2P Server/Router" \
+				"6)" "Install PiVPN" \
+				"7)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
 				
 				case $CHOICE5 in
 		
@@ -133,29 +150,57 @@
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
-												
-							"2)")	if (whiptail --title "PiNode-XMR tor NYX" --yesno "This tool will allow you to monitor tor bandwidth usage\n\nWhen prompted for a password, enter 'PiNodeXMR'\nAnd to exit the utility press 'CTRL+C' \n\nWould you like to continue?" 12 78); then
+
+							"2)")if (whiptail --title "PiNode-XMR tor NYX" --yesno "This tool will allow you to monitor tor bandwidth usage\n\nWhen prompted for a password, enter 'PiNodeXMR'\nAnd to exit the utility press 'CTRL+C' \n\nWould you like to continue?" 12 78); then
 									nyx; . /home/pinodexmr/setup.sh
-							
 									else
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
-				
-							"3)")	if (whiptail --title "PiNode-XMR PiVPN Install" --yesno "This feature will install PiVPN on your PiNode-XMR\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
+								
+							"3)")if (whiptail --title "PiNode-XMR Start/Stop tor" --yesno "Manually Start or Stop the service." --yes-button "Start tor" --no-button "Stop tor"  14 78); then
+									sudo service tor start;
+									whiptail --title "PiNode-XMR tor" --msgbox "The tor service has been started" 12 78;
+									. /home/pinodexmr/setup.sh
+									else
+									sudo service tor stop;
+									whiptail --title "PiNode-XMR tor" --msgbox "The tor service has been stopped" 12 78;
+									. /home/pinodexmr/setup.sh
+									fi
+								;;
+								
+							"4)")if (whiptail --title "PiNode-XMR Install I2P" --yesno "This will install the I2P server/router onto your PiNode-XMR\n\nWould you like to continue?" 14 78); then
+									. /home/pinodexmr/setup-i2p.sh
+									else
+									. /home/pinodexmr/setup.sh
+									fi
+								;;
+							
+							"5)")if (whiptail --title "PiNode-XMR Start/Stop I2P" --yesno "Manually Start or Stop the service." --yes-button "Start I2P" --no-button "Stop I2P"  14 78); then
+									i2prouter start;
+									whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78;
+									. /home/pinodexmr/setup.sh
+									else
+									i2prouter stop;
+									whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been stopped" 12 78;
+									. /home/pinodexmr/setup.sh
+									fi
+								;;
+								
+							"6)")	if (whiptail --title "PiNode-XMR PiVPN Install" --yesno "This feature will install PiVPN on your PiNode-XMR\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setup-PiVPN.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
-									
-							"4)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
+								
+							"7)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setup-noip.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
-								;;
-			
+								;;								
+
 				esac
 				. /home/pinodexmr/setup.sh
 				;;

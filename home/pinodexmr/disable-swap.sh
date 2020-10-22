@@ -1,2 +1,4 @@
 #!/bin/bash
-sudo dphys-swapfile swapoff && free -h -w / > /var/www/html/free-h.txt
+dphys-swapfile swapoff
+sleep 3
+free -h -w / > /var/www/html/free-h.txt
