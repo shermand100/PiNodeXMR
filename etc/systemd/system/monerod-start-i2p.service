@@ -5,13 +5,13 @@ After=network.target
 [Service]
 ExecStart=/bin/bash monerod-start-i2p.sh
 WorkingDirectory=/home/pinodexmr/
-StandardOutput=inherit
-StandardError=inherit
-Type=forking
-PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
-Restart=on-failure
+Type=simple
+Restart=always
 RestartSec=30
 User=pinodexmr
+StandardOutput=null
+StandardError=null
 
 [Install]
 WantedBy=multi-user.target
+
