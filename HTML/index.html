@@ -1,83 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <!-- Bootstrap 4 -->
+    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Font Awesome cdn -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" type="text/css" href="/app.css">
+    <!-- Title  -->
     <title>PiNode-XMR - Interface</title>
-    <meta name="description" content="Plug and Play Monero Node"/>
-
-    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
-
-    <!-- Loading stylesheet -->
-    <link href="dist/css/vendor/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Loading PiNode-XMR UI -->
-    <link href="dist/css/flat-ui.css" rel="stylesheet">
-    <link href="docs/assets/css/demo.css" rel="stylesheet">
-
-    <link rel="shortcut icon" href="dist/favicon.ico">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-      <script src="dist/js/vendor/html5shiv.js"></script>
-      <script src="dist/js/vendor/respond.min.js"></script>
-    <![endif]-->
+    <link rel="shortcut icon" type="image/x-icon" href="images/XMR.ico" />
   </head>
-      <div class="row demo-row">
-        <div class="col">
-          <nav class="navbar navbar-inverse navbar-embossed navbar-expand-lg" role="navigation">
-            <a class="navbar-brand" href="index.html">PiNode-XMR</a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-01"></button>
-            <div class="collapse navbar-collapse" id="navbar-collapse-01">
-              <ul class="nav navbar-nav mr-auto">
-                <li><a href="node_status.html">Node Status </span><span class="fui-info-circle"></a></li>
-				<li><a href="tx_status.html">Tx Status </span><span class="fui-info-circle"></a></li>
-				<li><a href="peer_status.html">Connection Status </span><span class="fui-info-circle"></a></li>
-				<li><a href="advanced-settings.html">Node Control <span class="fui-gear"></span></a></li>
-				<li><a href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"" >Web Terminal <span class="fui-exit"></span></span></a></li>
-				<li><a href="/" onclick="javascript:event.target.port=8081;event.target.protocol='http:';"" >Block Explorer <span class="fui-list-small-thumbnails"></span></span></a></li>
-				<li><a href="/" onclick="javascript:event.target.port=7657;event.target.protocol='http:';"" >I2P Interface <span class="fui-gear"></span></span></a></li>
-				<li><a href="GeoIP.html">IP2Geo <span class="fui-location"></span></a></li>				
-				<li><a href="log.html">Log <span class="fui-new"></span></span></a></li>
-               </ul>
-                </div>
-              </form>
-            </div><!-- /.navbar-collapse -->
-          </nav><!-- /navbar -->
-        </div>
-      </div> <!-- /row -->
+
   <body>
 
-      <div class="demo-headline">
-        <h1 class="demo-logo">
-          <div class="logo"></div>
-          
-          <small>Private Dependable Nodes</small>
-        </h1>
-      </div> <!-- /demo-headline -->
-	      <div class="container">
-	        <div class="row demo-row">
-	  	 <div class="col">
-<p>v3.20.04-Open-Build<br/>
-			Hardware and Node Configuration:<br/>
-			<a href="https://github.com/monero-ecosystem/PiNode-XMR/blob/master/README.md" target="_blank">User Manual for PiNode-XMR [external link to GitHub]</a> <br/>
-			<br/>
-            <a href="https://pinode.co.uk" target="_blank">PiNode.co.uk</a> Copyright (c) 2017-2019 <a href="PiNode-XMR-License.txt" target="_blank">LICENSE</a><br/> <br/>
-            GUI Design:<br/>
-			<a href="https://designmodo.com/flat" target="_blank">designmodo.com/flat</a> Copyright (c) 2013-2018 <a href="LICENSE.txt" target="_blank">LICENSE</a><br/>
-            </p>
-      </div> <!-- /col -->
-	  </div> <!-- /row -->
-	  	        </div> <!-- /container -->
-	  	      <div class="container">
-			 <div class="row demo-row">
-	 
-			<div class="col-6 .text-warning float-left">
-			<p>Development Donation address:<br><small>43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18<br>qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9</small></p>
-			</div> <!-- /col -->			
-	  	 <div class="col-6">			
-			<img src="QRCode.png" class="rounded" alt="Donation QR">
-			</div> <!-- /col -->
-			  </div> <!-- /row -->
-			 </div> <!-- /container -->
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="index.html"><i class="fab fa-monero active"></i> PiNode-XMR</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav justify-content-around w-100">
+      <li class="nav-item">
+        <a class="nav-link" href="node_status.html"><i class="fas fa-info"></i> Node Status</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="advanced-settings.html"><i class="fas fa-cogs"></i> Node Control</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"" ><i class="fas fa-terminal"></i> Web Terminal</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/" onclick="javascript:event.target.port=8081;event.target.protocol='http:';"" ><i class="fas fa-search-dollar"></i> Block Explorer</a>
+      </li>      <li class="nav-item">
+      <a class="nav-link" href="/" onclick="javascript:event.target.port=7657;event.target.protocol='http:';"" ><i class="fas fa-network-wired"></i> I2P Interface </a>      </li>      
+      <li class="nav-item">
+      <a class="nav-link" href="GeoIP.html"><i class="fas fa-globe-americas"></i> IP2GEO</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="log.html"><i class="fas fa-file-alt"></i> Log</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+          <img class="img-fluid d-block mx-auto" src="images/pinode-xmr-banner.png">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+          <h2 class="text-center">
+              <small>Private Dependable Nodes</small>
+          </h2>
+          <hr>
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- container -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>v4.20.10-Open-Build</h3>
+        <h3><a class="badge badge-light" href="https://github.com/monero-ecosystem/PiNode-XMR/blob/master/README.md" target="_blank">User Manual for PiNode-XMR</a></h3>
+              </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table>
+          <tr>
+            <td>
+              <img class="img-responsive center-block" src="images/QRCode.png">
+            </td>
+            <td>
+              <h6 class="badge badge-light">Development Donation address:</h6>
+              <h6 class="text-justify" id="address">43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9</h6>
+            </td>
+          </tr>
+        </table>
+      </div>      
+    </div>
+
+    <p><a href="https://pinode.co.uk" target="_blank" class="badge badge-light">PiNode.co.uk Copyright (c) 2017-2020 </a></p>
+    <p><a href="PiNode-XMR-License.txt" target="_blank" class="badge badge-light">LICENSE</a></p>
+
+  </div> <!-- container -->
+
+
+
+<!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </body>
 </html>
