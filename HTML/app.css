@@ -1,0 +1,26 @@
+body {
+	padding-top: 80px;
+}
+
+#address {
+  word-break: break-all;
+}
+
+hr {
+	width: 60%;
+}
+
+h3 {
+	text-decoration: underline #f0f0f0;
+		padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.imported-text {
+    white-space: pre-wrap;
+    width: 100%;
+}
+
+.row {
+
+}

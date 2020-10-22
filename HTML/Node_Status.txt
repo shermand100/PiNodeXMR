@@ -1,1 +1,3 @@
-Height: 2050049/2050049 (100.0%) on mainnet, not mining, net hash 1.18 GH/s, v12, up to date, 8(out)+63(in) connections, uptime 0d 1h 35m 52s
+--System Idle--
+Select a mode for your PiNode-XMR to start on the "Advanced Settings" page.
+Then allow at least 5 minutes for stats to appear here. 

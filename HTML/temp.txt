@@ -1,3 +1,1 @@
-Updates every 60 seconds
-Sun  8 Mar 16:36:01 GMT 2020
-temp=52.1'C
+-- Data Will be generated on next crontab run --

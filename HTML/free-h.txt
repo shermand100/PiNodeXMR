@@ -1,3 +1,2 @@
               total        used        free      shared     buffers       cache   available
-Mem:          926Mi       404Mi        32Mi       6.0Mi       3.0Mi       485Mi       455Mi
-Swap:         2.0Gi       101Mi       1.9Gi
+							-- Data Will be generated on next crontab run --

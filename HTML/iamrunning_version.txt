@@ -1,6 +1,6 @@
-This report generated Sun  8 Mar 16:36:01 GMT 2020
-Private Node:  active (running) since Sun 2020-03-08 15:00:10 GMT; 1h 35min ago
-Mining  Node:  inactive (dead)
-Public  Node:  inactive (dead)
-Tor     Node:  inactive (dead)
-Explorer    :  active (running) since Sun 2020-03-08 15:00:53 GMT; 1h 35min ago
+This report generated: DATE & TIME
+Private Node:  -- Data Will be generated on next crontab run --
+Mining  Node:  -- Data Will be generated on next crontab run --
+Public  Node:  -- Data Will be generated on next crontab run --
+Tor     Node:  -- Data Will be generated on next crontab run --
+Explorer    :  -- Data Will be generated on next crontab run --

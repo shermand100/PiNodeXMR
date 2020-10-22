@@ -1,3 +1,2 @@
 Filesystem      Size  Used Avail Use% Mounted on
-/dev/root       117G   85G   28G  76% /
-/dev/mmcblk0p1  253M   53M  200M  21% /boot
+-- Data Will be generated on next crontab run --

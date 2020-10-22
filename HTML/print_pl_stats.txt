@@ -1,2 +1,1 @@
-White list size: 1000/1000 (100%)
-Gray list size: 2851/5000 (57.02%)
+-- Data Will be generated on next crontab run --
