@@ -3,7 +3,7 @@ Description=Monero Node
 After=network.target
 
 [Service]
-ExecStart=/bin/bash monerod-reboot.sh
+ExecStart=/bin/bash monerod-stop.sh
 WorkingDirectory=/home/pinodexmr/
 StandardOutput=inherit
 StandardError=inherit

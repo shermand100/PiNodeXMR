@@ -4,5 +4,10 @@ $fp = fopen('/home/pinodexmr/credits.sh', 'w');
 fwrite($fp, "#!/bin/bash\nCREDITS=$VALUE
 ");
 fclose($fp);
-echo "Number of credits required for RPC service set to $VALUE";
+
+$fpa = fopen('/var/www/html/credits.txt', 'w');
+fwrite($fpa, "Credits set to: $VALUE");
+fclose($fpa);
+
+echo "Number of credits awarded for valid share set to $VALUE";
  ?>

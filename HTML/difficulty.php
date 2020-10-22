@@ -4,5 +4,10 @@ $fp = fopen('/home/pinodexmr/difficulty.sh', 'w');
 fwrite($fp, "#!/bin/bash\nDIFFICULTY=$VALUE
 ");
 fclose($fp);
-echo "Difficulty of share required before submit set to $VALUE";
+
+$fpa = fopen('/var/www/html/difficulty.txt', 'w');
+fwrite($fpa, "Difficulty set to: $VALUE");
+fclose($fpa);
+
+echo "Difficulty of share required before client submit set to $VALUE";
  ?>

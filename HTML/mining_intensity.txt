@@ -1,0 +1,2 @@
+[Defualt 50%]
+To set a new value enter a number between 1-100. Do not enter the % symbol.

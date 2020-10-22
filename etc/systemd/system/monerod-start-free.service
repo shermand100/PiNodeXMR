@@ -1,0 +1,17 @@
+[Unit]
+Description=Monero Free Public Node
+After=network.target
+
+[Service]
+ExecStart=/bin/bash monerod-start-public-free.sh
+WorkingDirectory=/home/pinodexmr/
+Type=simple
+Restart=always
+RestartSec=30
+User=pinodexmr
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
+

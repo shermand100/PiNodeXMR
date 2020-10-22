@@ -1,2 +1,2 @@
 #!/bin/bash
-CREDITS=100
+CREDITS=250

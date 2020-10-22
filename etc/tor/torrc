@@ -16,7 +16,6 @@
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.
 SOCKSPort 9050 # Default: Bind to localhost:9050 for local connections.
-SOCKSPort 18081 # Bind to this address:port too.
 
 ## Entry policies to allow/deny SOCKS requests based on IP address.
 ## First entry that matches wins. If no SOCKSPolicy is set, we accept
@@ -70,7 +69,7 @@ HashedControlPassword 16:AC98E29BEB12067860AB94CC2C5262F6AA3153863BCB03B8B6FE8A8
 ## address y:z.
 
 HiddenServiceDir /var/lib/tor/hidden_service/
-HiddenServicePort 18081 127.0.0.1:18081
+HiddenServicePort 18080 127.0.0.1:18081
 
 #HiddenServiceDir /var/lib/tor/other_hidden_service/
 #HiddenServicePort 80 127.0.0.1:80

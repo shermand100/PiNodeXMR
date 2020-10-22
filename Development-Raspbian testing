@@ -1,0 +1,67 @@
+Development Building:
+wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/raspbian.sh | bash
+
+Development-Raspbian Checklist
+
+* Install Script runs without errors
+* pinode.local ✓
+	* Updated avahi-daemon.conf
+* Test Pages
+	* Index ✓
+	* Node Status
+		* Swap enable-disable ✓
+										- Increase reliability, removed systemd one-shot complication
+	* TX Status ✓
+	* Connection Status ✓
+	* Node Control
+		* Private Node
+
+* Test Function
+	* Private Node ✓
+	* Public Node - Free ✓
+	* Public - RPC Pay  X
+	* 
+	
+* Setup.sh
+	* System Settings
+		* Hardware & WiFi Settings ✓
+		* MAster Login Password Set ?
+		* RPC User:Pass Set ?
+		* USB Storage setup ?
+		* SD Card Health Checker ✓
+		
+	* Update Tools
+		* Monero ?
+		* PiNode-XMR ?
+		* Block Explorer ?
+		* Update && Upgrade ?
+		
+	* Node Tools
+		* Start/Stop Explorer ?
+		* Prune Node ?
+		* Pop Blocks ?
+		
+	* Extra Network Tools
+		* Install Tor ✓
+		* View tor Nyx ✓
+		* Install I2P ?
+		* Start/Stop I2p ?
+		* Install PiVPN ?
+		* NoIP DynDNS ?
+
+
+* Updated
+- Hostname pinodexmr.local
+
+To Do
+* Re-add UFW
+* Re-add Fail2Ban
+* Confirm Prune node settings - !must not have blank last line!
+* Add dependencies to updater
+* Updater "bumper" - update script to come from monero-ecosystem
+* Always option to force update
+* Find way to re-download dependencies if fail ## poss fix ## echo "APT::Acquire::Retries \"3\";" | sudo tee -a /etc/apt/apt.conf.d/80-retries
+
+
+
+

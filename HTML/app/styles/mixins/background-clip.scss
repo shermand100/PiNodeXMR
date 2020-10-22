@@ -1,6 +1,0 @@
-// Background clip
-@mixin background-clip($clip: border-box) {
-  -webkit-background-clip: $clip;
-     -moz-background-clip: $clip;
-          background-clip: $clip;
-}
