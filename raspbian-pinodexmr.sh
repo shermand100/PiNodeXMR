@@ -126,7 +126,6 @@ sleep 3
 echo -e "\e[32mConfiguring Web-UI\e[0m"
 sleep 3
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
-sudo cp -R /home/pinodexmr/PiNode-XMR/HTML/docs/ /var/www/html/
 sudo chown www-data -R /var/www/html/
 sudo chmod 777 -R /var/www/html/
 
