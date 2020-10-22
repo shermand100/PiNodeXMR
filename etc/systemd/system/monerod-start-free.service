@@ -1,9 +1,9 @@
 [Unit]
-Description=Monero Public Node
+Description=Monero Free Public Node
 After=network.target
 
 [Service]
-ExecStart=/bin/bash monerod-start-public.sh
+ExecStart=/bin/bash monerod-start-public-free.sh
 WorkingDirectory=/home/pinodexmr/
 Type=simple
 Restart=always
