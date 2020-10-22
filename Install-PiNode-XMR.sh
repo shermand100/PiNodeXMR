@@ -7,10 +7,9 @@ sudo apt-get install whiptail -y
 
 CHOICE=$(
 whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS" 20 60 5 \
-	"1)" "Raspbian (Buster)"   \
-	"2)" "Ubuntu"  \
-	"3)" "Armbian (Buster)" \
-	"4)" "Exit"  3>&2 2>&1 1>&3	
+	"1)" "Raspberry Pi OS (Buster)"   \
+	"2)" "Armbian Debian (Buster)" \
+	"3)" "Exit"  3>&2 2>&1 1>&3	
 )
 
 case $CHOICE in
@@ -26,13 +25,8 @@ case $CHOICE in
 		./raspbian.sh
 		exit 1
 	;;
-	"2)")   
-		#Commands for Ubuntu
-		whiptail --title "Ubuntu Installer coming soon" --msgbox "Ubuntu is not yet available, but is a work in progress\n\n\Please select either the Raspbian or Armbian installer if your Hardware/OS is ready." 16 60;
-		./Install-PiNode-XMR.sh
-	;;
 
-	"3)")   
+	"2)")   
 		#Commands for Armbian
 		echo -e "\e[32mDownloading data for install\e[0m"
 		sleep 3
@@ -45,7 +39,7 @@ case $CHOICE in
 		exit 1
         ;;
 
-	"4)") exit
+	"3)") exit
         ;;
 esac
 exit
