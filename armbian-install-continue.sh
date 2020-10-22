@@ -31,8 +31,12 @@ sleep 3
 ##Installing dependencies for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.3 mariadb-server-10.3 screen exfat-fuse exfat-utils fail2ban ufw  dialog -y
+sudo apt install mariadb-client-10.3 mariadb-server-10.3 screen exfat-fuse exfat-utils fail2ban ufw avahi-daemon dialog -y
 sleep 3
+	## Installing new dependencies for IP2Geo map creation
+sudo apt install python3-numpy python3-matplotlib libgeos-dev python3-geoip2 python3-mpltoolkits.basemap -y
+	##More IP2Geo dependencies
+sudo pip3 install ip2geotools
 
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
