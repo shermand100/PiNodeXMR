@@ -118,15 +118,9 @@ sudo chmod 777 -R /home/pinodexmr/*
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
-##Download (git clone) Web-UI template
-echo -e "\e[32mDownloading Web-UI template\e[0m"
-sleep 3
-git clone https://github.com/designmodo/Flat-UI.git
-echo -e "\e[32mInstalling Web-UI template\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/Flat-UI/app/ /var/www/html/
-sudo mv /home/pinodexmr/Flat-UI/dist/ /var/www/html/
-echo -e "\e[32mConfiguring Web-UI template\e[0m"
+##Configure Web-UI
+
+echo -e "\e[32mConfiguring Web-UI\e[0m"
 sleep 3
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
 sudo cp -R /home/pinodexmr/PiNode-XMR/HTML/docs/ /var/www/html/
