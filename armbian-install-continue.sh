@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ##Open Sources:
-# Web-UI by designmodo Flat-UI free project at https://github.com/designmodo/Flat-UI
 # Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
 # Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
 # PiNode-XMR scripts and custom files at my repo https://github.com/monero-ecosystem/PiNode-XMR
@@ -70,6 +69,19 @@ sudo chown root /etc/systemd/system/*.service
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
+##Add PiNode-XMR php settings
+echo -e "\e[32mAdd PiNode-XMR php settings\e[0m"
+sleep 3
+sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/
+sudo /etc/init.d/apache2 restart
+
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
+##Setup local hostname
+sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
+sudo /etc/init.d/avahi-daemon restart
+
 ##Copy PiNode-XMR scripts to home folder
 echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
@@ -79,28 +91,28 @@ chmod 755 /home/pinodexmr/*
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
-##Download (git clone) Web-UI template
-echo -e "\e[32mDownloading Web-UI template\e[0m"
-sleep 3
-git clone https://github.com/designmodo/Flat-UI.git
-echo -e "\e[32mInstalling Web-UI template\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/Flat-UI/app/ /var/www/html/
-sudo mv /home/pinodexmr/Flat-UI/dist/ /var/www/html/
-echo -e "\e[32mConfiguring Web-UI template\e[0m"
+##Configure Web-UI
+
+echo -e "\e[32mConfiguring Web-UI\e[0m"
 sleep 3
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
-sudo cp -R /home/pinodexmr/PiNode-XMR/HTML/docs/ /var/www/html/
+sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html
 sudo chown www-data -R /var/www/html/
-sudo chmod 775 -R /var/www/html/
+sudo chmod 777 -R /var/www/html/
 
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 #First build monero, single build directory
-echo -e "\e[32mDownloading Monero v0.15\e[0m"
+
+	#Download release number
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
+chmod 755 /home/pinodexmr/release.sh
+. /home/pinodexmr/release.sh
+
+echo -e "\e[32mDownloading Monero $RELEASE\e[0m"
 sleep 3
-#git clone --recursive https://github.com/monero-project/monero.git         #Development release
-git clone --recursive -b release-v0.16 https://github.com/monero-project/monero.git       #Latest Stable release
-echo -e "\e[32mBuilding Monero v0.16\e[0m"
+#git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
+git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git         #Latest Stable Branch
+echo -e "\e[32mBuilding Monero $RELEASE\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
@@ -154,5 +166,5 @@ echo -e "\e[32m**********Reminder:*********************\e[0m"
 echo -e "\e[32m**********User: 'pinodexmr'*************\e[0m"
 echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m****************************************\e[0m"
-sleep 2
+sleep 10
 sudo reboot
