@@ -51,12 +51,7 @@
 					
 					"5)")	if (whiptail --title "PiNode-XMR MicroSD Health Check" --yesno "This utility (agnostics) will run speed tests on your SD card read/write functions to give an indication of its current health.\n\nBefore starting this check, stop all services that are currently reading/writing (Node and BlockExplorer) for most accurate results.\n\nWould you like to continue?" 16 78); then
 					 clear;
-					 echo -e "\e[32mChecking for required tools...\e[0m";
-					 sudo apt install agnostics -y
-					 echo -e "\e[32mSuccess\e[0m";
-					 sleep 2;
-					 echo -e "\e[32mRunning test script. This will take a few minutes...\e[0m";
-					 sudo sh /usr/share/agnostics/sdtest.sh;
+					 echo -e "\e[32mSorry agnostics is a Raspberry Pi OS only tool\e[0m";
 					 read -n 1 -s -r -p "Press any key to return to Menu"
 							else
 					. /home/pinodexmr/setup.sh
