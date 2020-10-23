@@ -16,7 +16,7 @@
 		;;
 				
 		"2)")CHOICE2=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nSystem Settings" 20 60 10 \
-				"1)" "Hardware & WiFi Settings (raspi-config)" \
+				"1)" "Hardware & WiFi Settings (Armbian-config)" \
 				"2)" "Master Login Password Set" \
 				"3)" "Monero RPC Username and Password setup" \
 				"4)" "USB storage setup" \
@@ -24,8 +24,8 @@
 				
 				case $CHOICE2 in
 		
-					"1)")	whiptail --title "PiNode-XMR Settings" --msgbox "You will now be taken to the Raspbian menu to configure your hardware" 8 78;
-							sudo raspi-config; . /home/pinodexmr/setup.sh
+					"1)")	whiptail --title "PiNode-XMR Settings" --msgbox "You will now be taken to the Armbian menu to configure your hardware" 8 78;
+							sudo armbian-config; . /home/pinodexmr/setup.sh
 					;;
 				
 					"2)") 	if (whiptail --title "PiNode-XMR Set Password" --yesno "This will change your SSH/Web terminal log in password\n\nWould you like to continue?" 12 78); then
