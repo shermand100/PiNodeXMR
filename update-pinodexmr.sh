@@ -98,10 +98,6 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					chmod 777 /home/pinodexmr/*
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
-						##Update web interface
-					echo -e "\e[32mUpdating your Web Interface\e[0m"
-					sleep 2
-					sleep 3
 					
 				##Add PiNode-XMR php settings
 					echo -e "\e[32mAdd PiNode-XMR php settings to allow for IP2Geo database upload\e[0m"
@@ -133,7 +129,7 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					echo -e "\e[32mConfiguring Web-UI template with PiNode-XMR pages\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
-					sudo cp -R /home/pinodexmr/PiNode-XMR/HTML/docs/ /var/www/html/
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html
 					sudo chown www-data -R /var/www/html/
 					sudo chmod 777 -R /var/www/html/
 					echo -e "\e[32mSuccess\e[0m"
