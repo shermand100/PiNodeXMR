@@ -9,7 +9,7 @@ sleep 3
 ##Setup update location for i2p updates via debian inc keys
 echo -e "\e[32mInstalling I2P...\e[0m"
 sleep 3	
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/etc/apt/sources.list.d/i2p.list
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/apt/sources.list.d/i2p.list
 sleep 1
 sudo mv /home/pinodexmr/i2p.list /etc/apt/sources.list.d/
 sudo chmod 644 /etc/apt/sources.list.d/i2p.list
