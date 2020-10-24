@@ -34,9 +34,7 @@ sleep 3
 sudo apt install mariadb-client-10.3 mariadb-server-10.3 screen exfat-fuse exfat-utils fail2ban ufw avahi-daemon dialog -y
 sleep 3
 	## Installing new dependencies for IP2Geo map creation
-sudo apt install python3-numpy python3-matplotlib libgeos-dev python3-geoip2 python3-mpltoolkits.basemap python3-pip -y
-	##More IP2Geo dependencies
-sudo pip3 install ip2geotools
+sudo apt install python3-numpy python3-matplotlib libgeos-dev python3-geoip2 python3-mpltoolkits.basemap -y
 
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
@@ -92,6 +90,7 @@ sleep 3
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/
 chmod 755 /home/pinodexmr/*
+chmod 777 -R /home/pinodexmr/NodeGeoIP/GeoIPData	#Allow write permissions to www-data to upload maxmind database
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
@@ -151,7 +150,6 @@ sleep 3
 ## Remove left over files from git clone actions
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
-sudo rm -r /home/pinodexmr/Flat-UI/
 sudo rm -r /home/pinodexmr/PiNode-XMR/
 
 ##Change log in menu to 'main'
