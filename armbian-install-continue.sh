@@ -89,8 +89,7 @@ echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
 sleep 3
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/
-chmod 755 /home/pinodexmr/*
-chmod 777 -R /home/pinodexmr/NodeGeoIP/GeoIPData	#Allow write permissions to www-data to upload maxmind database
+sudo chmod 777 -R /home/pinodexmr/*	#Read/write access needed by www-data to action php port, address customisation
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
