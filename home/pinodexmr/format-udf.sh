@@ -779,7 +779,7 @@ sleep 10
 			#Import $DEVICE_TO_CONFIGURE variable
 				. /home/pinodexmr/setup-usb-path.sh
 			#Determine filesystem of device to configured
-				FILESYSTEM="$(blkid -o value -s TYPE /dev/$DEVICE_TO_CONFIGURE)"
+				FILESYSTEM="$(sudo blkid -o value -s TYPE /dev/$DEVICE_TO_CONFIGURE)"
 			#Mount
 				sudo mount -t $FILESYSTEM -o rw /dev/$DEVICE_TO_CONFIGURE /home/pinodexmr/.bitmonero
 				sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
@@ -787,7 +787,7 @@ sleep 10
 			
 			#ADD UUID to fstab. To mount on boot
 			UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p) #
-			sudo sed -i '4d' /etc/fstab #removes existing entry if script run before (delete 4th line fstab)
-			sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero udf noexec,defaults 0 2" -i /etc/fstab
+			sudo sed -i '3d' /etc/fstab #removes existing entry if this script has run before (delete 3rd line fstab)
+			sudo sed "2 a UUID=${UUID} /home/pinodexmr/.bitmonero udf noexec,defaults 0 2" -i /etc/fstab
 			whiptail --title "PiNode-XMR Storage Setup Finished" --msgbox "Your storage device has been configured for use with PiNode-XMR\n\nPress OK to continue..." 20 60
 			./setup.sh
