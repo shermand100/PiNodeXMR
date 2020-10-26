@@ -38,6 +38,16 @@ echo 'net.ipv6.conf.all.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.default.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 
+##ZRAM Optimizations to improve system responsiveness and performance
+# I don't tiptoe around the crypto they said I smoking endo
+# it's a gaffe but I got the last laugh despite all the 
+# wining and dining for us to be dining - ChiefGyk3D
+echo "vm.vfs_cache_pressure=500" | sudo tee -a /etc/sysctl.conf
+echo "vm.dirty_background_ratio=1" | sudo tee -a /etc/sysctl.conf
+echo "vm.dirty_ratio=50" | sudo tee -a /etc/sysctl.conf
+# Lock and load the settings
+sudo sysctl -p
+
 #Download stage 2 Install script
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
 sleep 3

@@ -146,9 +146,6 @@ crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
-##Set Swappiness lower
-sudo sysctl vm.swappiness=10
-
 ## Remove left over files from git clone actions
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
