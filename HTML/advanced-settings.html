@@ -1132,6 +1132,37 @@ function inpeers(value){
 </script>            
           </div><!-- /btn-group -->
         </div> <!-- /.col -->
+        <div class="col">
+          <h3 class="demo-panel-title">Block Sync Size<span class="fui-triangle-right-large"></span></h3>
+
+          <div class="btn-group">
+<form method="post">
+    <select name='Block Sync Size' class="btn btn-dark dropdown-toggle" onchange='if(this.value != 0) { blocksize(this.value); }'>
+        <option value='0'>Block Sync Size</option>
+              <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='5'>5</option>
+        <option value='10'>10</option>
+        <option value='15'>15</option>
+        <option value='20'>20 [DEFAULT]</option>
+        <option value='25'>25</option>
+              <option value='30'>30</option>
+        </select>
+</form>
+<script type="text/javascript">
+function blocksize(value){
+      $.ajax({
+        url:"block-sync-size.php", //the page containing php script
+        type: "POST", //request type
+    data: ({value}),
+        success:function(result){
+         alert(result);
+       }
+     });
+}
+</script>
+          </div><!-- /btn-group -->
+        </div> <!-- /.col -->
         </div> <!-- /container -->
       </div>
     </div>
