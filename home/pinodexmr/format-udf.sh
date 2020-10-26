@@ -781,8 +781,15 @@ sleep 10
 			#Determine filesystem of device to configured
 				FILESYSTEM="$(sudo blkid -o value -s TYPE /dev/$DEVICE_TO_CONFIGURE)"
 			#Mount
-				sudo mount -t $FILESYSTEM -o rw /dev/$DEVICE_TO_CONFIGURE /home/pinodexmr/.bitmonero
-				sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
+				sudo mkdir /media/xmrblockchain
+				sudo mount -t $FILESYSTEM -o rw /dev/$DEVICE_TO_CONFIGURE /media/xmrblockchain
+			#Symlinking from ChiefGyk3D
+				#On a roll got a new bag told imma be bold cause 
+				#I'm getting old haters fester like mold tossed bleach to get them cold 
+				#fire bars to get them scold hoping to get records sold
+				sudo chown -R pinodexmr:pinodexmr /media/blockchain
+                                ln -s /media/xmrblockchain/.bitmonero /home/pinodexmr/.bitmonero
+				sudo chown -R pinodexmr:pinodexmr /home/pinodexmr/.bitmonero
 				sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			
 			#ADD UUID to fstab. To mount on boot
