@@ -1000,23 +1000,24 @@
       
       <div class="row">
         <div class="col">
-      <h3 class="demo-panel-title">Upload <small> kB/s</small><span class="fui-triangle-up"></span></h3>
+      <h3 class="demo-panel-title">Upload <small> mB/s</small><span class="fui-triangle-up"></span></h3>
           <div class="btn-group">
 <form method="post">
     <select name='Speed Up' class="btn btn-dark dropdown-toggle" onchange='if(this.value != 0) { speedup(this.value); }'>
          <option value='0'>Upload Speed</option>
-         <option value='256'>256</option>
-         <option value='512'>512</option>
-         <option value='1024'>1024</option>
-     <option value='1536'>1536</option>
-     <option value='-1'>2048 [DEFAULT]</option>
-     <option value='2560'>2560</option>
-     <option value='3072'>3072</option>
-     <option value='3548'>3548</option>
-         <option value='4096'>4096</option>
-     <option value='4608'>4608</option>
-     <option value='5120'>5120</option>
-     <option value='5632'>5632</option>
+         <option value='256'>0.25 mBps</option>
+         <option value='512'>0.5 mBps</option>
+         <option value='1024'>1 mBps</option>
+     <option value='1536'>1.5 mBps</option>
+     <option value='-1'>2 mBps [DEFAULT]</option>
+     <option value='2560'>2.5 mBps</option>
+     <option value='3072'>3 mBps</option>
+     <option value='3548'>3.5 mBps</option>
+     <option value='4096'>4 mBps</option>
+     <option value='4608'>4.5 mBps</option>
+     <option value='5120'>5 mBps</option>
+     <option value='5632'>5.5 mBps</option>
+    <option value='6144'>6 mBps</option>
     </select>
 </form>
 <script type="text/javascript">
@@ -1036,24 +1037,24 @@ function speedup(value){
         </div> <!-- /.col -->
     
         <div class="col">
-          <h3 class="demo-panel-title">Download <small> kB/s</small><span class="fui-triangle-down-small"></span></h3>
+          <h3 class="demo-panel-title">Download <small> mB/s</small><span class="fui-triangle-down-small"></span></h3>
           <div class="btn-group">
 <form method="post">
     <select name='Speed Down' class="btn btn-dark dropdown-toggle" onchange='if(this.value != 0) { speeddown(this.value); }'>
         <option value='0'>Download Speed</option>
-        <option value='1024'>1 Mbps</option>
-        <option value='2048'>2 Mbps</option>
-        <option value='3072'>3 Mbps</option>
-        <option value='4096'>4 Mbps</option>
-        <option value='6144'>6 Mbps</option>
-        <option value='-1'>8 Mbps [DEFAULT]</option>
-        <option value='10240'>10 Mbps</option>
-        <option value='15360'>15 Mbps</option>
-        <option value='20480'>20 Mbps</option>
-        <option value='25600'>25 Mbps</option>
-        <option value='30720'>30 Mbps</option>
-        <option value='35840'>35 Mbps</option>
-        <option value='40960'>40 Mbps</option>
+        <option value='1024'>1 mBps</option>
+        <option value='2048'>2 mBps</option>
+        <option value='3072'>3 mBps</option>
+        <option value='4096'>4 mBps</option>
+        <option value='6144'>6 mBps</option>
+        <option value='-1'>8 mBps [DEFAULT]</option>
+        <option value='10240'>10 mBps</option>
+        <option value='15360'>15 mBps</option>
+        <option value='20480'>20 mBps</option>
+        <option value='25600'>25 mBps</option>
+        <option value='30720'>30 mBps</option>
+        <option value='35840'>35 mBps</option>
+        <option value='40960'>40 mBps</option>
         </select>
 </form>
 <script type="text/javascript">
