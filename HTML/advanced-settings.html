@@ -1041,19 +1041,19 @@ function speedup(value){
 <form method="post">
     <select name='Speed Down' class="btn btn-dark dropdown-toggle" onchange='if(this.value != 0) { speeddown(this.value); }'>
         <option value='0'>Download Speed</option>
-        <option value='1024'>1024</option>
-        <option value='2048'>2048</option>
-              <option value='3072'>3072</option>
-        <option value='4096'>4096</option>
-        <option value='6144'>6144</option>
-        <option value='-1'>8192 [DEFAULT]</option>
-        <option value='10240'>10240</option>
-        <option value='12228'>12228</option>
-              <option value='14336'>14336</option>
-        <option value='16384'>16384</option>
-		<option value='18432'>18432</option>
-        <option value='22528'>22528</option>
-        <option value='30720'>30720</option>
+        <option value='1024'>1 Mbps</option>
+        <option value='2048'>2 Mbps</option>
+        <option value='3072'>3 Mbps</option>
+        <option value='4096'>4 Mbps</option>
+        <option value='6144'>6 Mbps</option>
+        <option value='-1'>8 Mbps [DEFAULT]</option>
+        <option value='10240'>10 Mbps</option>
+        <option value='15360'>15 Mbps</option>
+        <option value='20480'>20 Mbps</option>
+        <option value='25600'>25 Mbps</option>
+        <option value='30720'>30 Mbps</option>
+        <option value='35840'>35 Mbps</option>
+        <option value='40960'>40 Mbps</option>
         </select>
 </form>
 <script type="text/javascript">
@@ -1076,18 +1076,17 @@ function speeddown(value){
           <div class="btn-group">
 <form method="post">
     <select name='Out Peers' class="btn btn-dark dropdown-toggle" onchange='if(this.value != 0) { outpeers(this.value); }'>
-        <option value='-1'>8 </option>
-        <option value='12'>12</option>
-		<option value='16'>16 [DEFAULT]</option>
+    <option value='1'>1</option>
+    <option value='2'>2</option>
+    <option value='1'>4</option>
+    <option value='-1'>8 [DEFAULT]</option>
+    <option value='12'>12</option>
+		<option value='16'>16</option>
 		<option value='20'>20</option>
 		<option value='24'>24</option>
 		<option value='28'>28</option>
 		<option value='32'>32</option>
-		<option value='40'>40</option>
-		<option value='48'>48</option>
-		<option value='56'>56</option>
-		<option value='64'>64</option>
-        </select>
+    </select>
 </form>
 <script type="text/javascript">
 function outpeers(value){
@@ -1117,10 +1116,6 @@ function outpeers(value){
 		<option value='32'>32</option>
 		<option value='64'>64</option>
 		<option value='128'>128</option>
-		<option value='256'>256</option>
-		<option value='512'>512</option>
-		<option value='1024'>1024</option>
-		<option value='2048'>2048</option>
         </select>
 </form>
 <script type="text/javascript">
