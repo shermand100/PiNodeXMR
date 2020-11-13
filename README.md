@@ -1,8 +1,8 @@
 ![PiNode-XMR logo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
-# User Manual v3.20.04-Open-Build		
+# User Manual v4.20.10-Open-Build		
 #### Self Install Open Source Build for Raspbian (Raspberry Pi) & Armbian Debian Buster (For all other devices)
 or
-#### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
+#### [Update in progress - not available at the moment ] Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
 
 ## Support at
 * [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
@@ -125,7 +125,7 @@ This project can now self install on top of an Armbian Debian OS in an effort to
 ![PiNode-XMR landing page](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/OS-Select.png)
 
 ### Raspberry Pi
-Install your Raspbian OS as usual and ideally SSH into it as user `pi` and enter
+Install your Raspbian OS as usual but ensure to install the "Minimal/Lite" version (No GUI) and ideally SSH into it as user `pi` and enter
 
 `wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/Install-PiNode-XMR.sh | bash`
 
@@ -168,29 +168,9 @@ If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR
 
 ____
 
-#### PiNode-XMR v3.20.04
+#### PiNode-XMR v4.20.10
 
-[Downlaod PiNode-XMR_v3.20.04.img](https://drive.google.com/file/d/16TnIyVESoQHHE1PK_P-VYTOTahhpwZ4c/view?usp=sharing)
-
-Monero v0.15.0.5 & Block Explorer v2020-01-07
-
-Hash Info:
-- Name: PiNodeXMR_v3.20.04.img
-- Size: 6552576000 bytes (6249 MiB)
-- SHA256: 77A38C7DC1CBD5E41C6F7AD33A0B41B3F9EE71A91911597196CE74BE92114592
-
-____
-
-#### PiNode-XMR v3.20.04 (Sync'd to block ~2073250, ~21:38GMT 9th Apr 2020)
-
-[Download PiNode-XMR_v3.20.04_blk2073250.img](https://drive.google.com/file/d/1DJwX_aveTdkbASjnqYfI2gqO8-r68BzP/view?usp=sharing)
-
-Monero v0.15.0.5 & Block Explorer v2020-01-07
-
-Hash Info:
-- Name: PiNodeXMR_v3.20.04_blk2073250.img
-- Size: 94646566912 bytes (88 GiB)
-- SHA256: 75D4D752FF3C857CC6CD13EA4B5EFCEA85DEF04388E983B14598B54F08FA4684
+### PiNodeXMR disk images will be re-uploaded here soon once updated.
 
 ____
 
