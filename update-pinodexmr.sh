@@ -177,7 +177,7 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					#Attempt update of tor hidden service settings
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
 					sleep 6
-					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Development-Raspbian/etc/tor/torrc
+					wget https://github.com/monero-ecosystem/PiNode-XMR/blob/Raspbian-install/etc/tor/torrc
 					echo -e "\e[32mApplying Settings...\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/torrc /etc/tor/torrc
@@ -190,9 +190,10 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sudo rm /home/pinodexmr/torrc 2>/dev/null
 
 					#Update system version number to new one installed
+					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 					echo -e "\e[32mUpdate system version number\e[0m"
 					echo "#!/bin/bash
-CURRENT_VERSION_PI=40000" > /home/pinodexmr/current-ver-pi.sh
+CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
