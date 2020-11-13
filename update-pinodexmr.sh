@@ -191,6 +191,8 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 
 					#Update system version number to new one installed
 					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+					chmod 755 /home/pinodexmr/new-ver-pi.sh
+					. /home/pinodexmr/new-ver-pi.sh
 					echo -e "\e[32mUpdate system version number\e[0m"
 					echo "#!/bin/bash
 CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
