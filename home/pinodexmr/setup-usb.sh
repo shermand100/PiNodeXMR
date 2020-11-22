@@ -33,10 +33,8 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 		sudo sed "2 a UUID=$UUID /home/pinodexmr/.bitmonero $FILESYSTEM noexec,defaults 0 2" -i /etc/fstab
 		echo "Drive data has been preserved for this configuration, initialized and will auto-mount on boot"
 		sleep 2
-			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your device /dev/$DEVICE_TO_CONFIGURE containing the Monero Blockchain has been:\n* Mounted to /home/pinodexmr/.bitmonero for PiNodeXMR use\n* /dev/$DEVICE_TO_CONFIGURE has been added to /etc/fstab to auto mount on future system boots\n\nYou are ready to resume your node" 20 60
-		clear
-		sleep 1
-		./setup.sh
+			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your device /dev/$DEVICE_TO_CONFIGURE containing the Monero Blockchain has been:\n* Mounted to /home/pinodexmr/.bitmonero for PiNodeXMR use\n* /dev/$DEVICE_TO_CONFIGURE has been added to /etc/fstab to auto mount on future system boots\nA system reboot is required\n\nPress OK to continue..." 20 60
+			sudo reboot
 
             ;;
 			
