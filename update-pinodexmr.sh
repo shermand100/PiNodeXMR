@@ -25,15 +25,13 @@ echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
-echo -e "\e[32m##Checking all dependencies are installed for --- Miscellaneous\e[0m"
+echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
 sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip -y
 	## Installing new dependencies for IP2Geo map creation
-sudo apt install python3-numpy python3-matplotlib libgeos-dev python3-geoip2 python3-mpltoolkits.basemap -y
-	##More IP2Geo dependencies
-sudo pip3 install ip2geotools
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
+sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
+	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
+sudo pip3 install ip2geotools matplotlib==3.2.1
 
 		#Download update files
 
