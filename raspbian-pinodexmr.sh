@@ -34,7 +34,7 @@ sleep 3
 ##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip -y
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y
 	## Installing new dependencies for IP2Geo map creation
 sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
 	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
@@ -177,6 +177,13 @@ sleep 3
 
 ##Set Swappiness lower
 sudo sysctl vm.swappiness=10
+
+				##Add Selta's ban list
+					echo -e "\e[32mAdding Selstas Ban List\e[0m"
+					sleep 3
+					wget -O block.txt https://gui.xmr.pm/files/block.txt
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3
 
 ## Remove left over files from git clone actions
 echo -e "\e[32mCleanup leftover directories\e[0m"
