@@ -28,13 +28,14 @@ sleep 3
 sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libpgm-dev libexpat1-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libunbound-dev graphviz doxygen liblzma-dev libldns-dev libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline6-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
 sleep 3
 
-##Installing dependencies for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
-echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
+##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.3 mariadb-server-10.3 screen exfat-fuse exfat-utils fail2ban ufw avahi-daemon dialog -y
-sleep 3
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y
 	## Installing new dependencies for IP2Geo map creation
-sudo apt install python3-numpy python3-matplotlib libgeos-dev python3-geoip2 python3-mpltoolkits.basemap -y
+sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
+	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
+sudo pip3 install ip2geotools matplotlib==3.2.1
 
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
@@ -137,6 +138,14 @@ mkdir build && cd build
 cmake ..
 make
 cd
+
+##Add Selta's ban list
+echo -e "\e[32mAdding Selstas Ban List\e[0m"
+sleep 3
+wget -O block.txt https://gui.xmr.pm/files/block.txt
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
 
 ##Install crontab
 echo -e "\e[32mSetup crontab\e[0m"

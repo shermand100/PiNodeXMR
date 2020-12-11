@@ -1,7 +1,33 @@
 #!/bin/bash
 
 if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR to the newest version\n\nContinue?" 12 78); then
-		
+
+sudo apt update && sudo apt upgrade -y
+sleep 3
+
+##Checking all dependencies are installed for --- Web Interface
+echo -e "\e[32m##Checking all dependencies are installed for --- Web Interface\e[0m"
+sleep 3
+sudo apt install apache2 shellinabox php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-gd php7.3-json php7.3-mbstring php7.3-mysql php7.3-xml -y
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
+##Checking all dependencies are installed for --- Monero
+echo -e "\e[32m##Checking all dependencies are installed for --- Monero\e[0m"
+sleep 3
+sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libunbound-dev graphviz doxygen libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
+##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
+sleep 3
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y
+	## Installing new dependencies for IP2Geo map creation
+sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
+	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
+sudo pip3 install ip2geotools matplotlib==3.2.1
+
 		#Download update files
 
 					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
@@ -92,7 +118,20 @@ if (whiptail --title "PiNode-XMR Updater" --yesno "This will update PiNode-XMR t
 					mv /home/pinodexmr/RPCu_retain.sh /home/pinodexmr/RPCu.sh
 					echo -e "\e[32mSuccess\e[0m"
 					
-					
+				##Add Selta's ban list
+					echo -e "\e[32mAdding Selstas Ban List\e[0m"
+					sleep 3
+					wget -O block.txt https://gui.xmr.pm/files/block.txt
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3
+
+				##Set Swappiness lower
+				echo -e "\e[32mDecreasing swappiness\e[0m"
+				sleep 3				
+				sudo sysctl vm.swappiness=10
+				echo -e "\e[32mSuccess\e[0m"
+				sleep 3						
+
 					##Update crontab
 					echo -e "\e[32mSetup crontab\e[0m"
 					sleep 3
