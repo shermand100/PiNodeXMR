@@ -27,7 +27,7 @@ sleep 3
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip -y
+sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y
 	## Installing new dependencies for IP2Geo map creation
 sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
 	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
@@ -163,7 +163,20 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					mv /home/pinodexmr/add-tor-peer_retain.sh /home/pinodexmr/add-tor-peer.sh					
 					echo -e "\e[32mUser configuration restored\e[0m"
 					
-					
+				##Add Selta's ban list
+					echo -e "\e[32mAdding Selstas Ban List\e[0m"
+					sleep 3
+					wget -O block.txt https://gui.xmr.pm/files/block.txt
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3
+
+				##Set Swappiness lower
+				echo -e "\e[32mDecreasing swappiness\e[0m"
+				sleep 3				
+				sudo sysctl vm.swappiness=10
+				echo -e "\e[32mSuccess\e[0m"
+				sleep 3				
+
 				##Update crontab
 					echo -e "\e[32mUpdating crontab tasks\e[0m"
 					sleep 3
