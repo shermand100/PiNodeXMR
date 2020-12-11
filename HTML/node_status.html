@@ -1,302 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
-    <!-- Bootstrap 4 -->
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- Bootstrap 4 -->
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Load Ajax -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    </script>
-    <!-- Font Awesome cdn -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!-- Title  -->
-    <title>PiNode-XMR - Status</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-	   <meta http-equiv="Pragma" content="no-cache" />
-	   <meta http-equiv="Expires" content="0" />
-    <link rel="shortcut icon" type="image/x-icon" href="images/XMR.ico" />
-    <!-- Custom Style Sheet -->
-    <link rel="stylesheet" type="text/css" href="/app.css">
-  </head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-  <body>
+  <!-- Load Ajax -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  </script>
+  <!-- Font Awesome cdn -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Title  -->
+  <title>PiNode-XMR - Status</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/XMR.ico" />
+  <!-- Custom Style Sheet -->
+  <link rel="stylesheet" type="text/css" href="/app.css">
+</head>
 
-<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav justify-content-around w-100">
-      <li class="nav-item active">
-        <a class="nav-link" href="node_status.html"><i class="fas fa-info"></i> Node Status</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="advanced-settings.html"><i class="fas fa-cogs"></i> Node Control</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"" ><i class="fas fa-terminal"></i> Web Terminal</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link" href="/" onclick="javascript:event.target.port=8081;event.target.protocol='http:';"" ><i class="fas fa-search-dollar"></i> Block Explorer</a>
-      </li>      <li class="nav-item">
-      <a class="nav-link" href="/" onclick="javascript:event.target.port=7657;event.target.protocol='http:';"" ><i class="fas fa-network-wired"></i> I2P Interface </a>      </li>      
-      <li class="nav-item">
-      <a class="nav-link" href="GeoIP.html"><i class="fas fa-globe-americas"></i> IP2GEO</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="log.html"><i class="fas fa-file-alt"></i> Log</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-  
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav justify-content-around w-100">
+        <li class="nav-item active">
+          <a class="nav-link" href="node_status.html"><i class="fas fa-info"></i> Node Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="advanced-settings.html"><i class="fas fa-cogs"></i> Node Control</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/"
+            onclick="javascript:event.target.port=4200;event.target.protocol='https:';"" ><i class=" fas
+            fa-terminal"></i> Web Terminal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/"
+            onclick="javascript:event.target.port=8081;event.target.protocol='http:';"" ><i class=" fas
+            fa-search-dollar"></i> Block Explorer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/"
+            onclick="javascript:event.target.port=7657;event.target.protocol='http:';"" ><i class=" fas
+            fa-network-wired"></i> I2P Interface </a> </li>
+        <li class="nav-item">
+          <a class="nav-link" href="GeoIP.html"><i class="fas fa-globe-americas"></i> IP2GEO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="log.html"><i class="fas fa-file-alt"></i> Log</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
 
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-          <img class="img-fluid d-block mx-auto" src="images/pinode-xmr-banner.png">
+        <img class="img-fluid d-block mx-auto" src="images/pinode-xmr-banner.png">
       </div>
     </div>
 
     <div class="row">
       <div class="col">
-          <h2 class="text-center">
-              <small>Private Dependable Nodes</small>
-          </h2>
-          <hr>
+        <h2 class="text-center">
+          <small>Private Dependable Nodes</small>
+        </h2>
+        <hr>
       </div> <!-- col -->
     </div> <!-- row -->
   </div> <!-- container -->
 
- 	<div class="container">
-		<div class="row">
-			<div class="col-6">
-				<h3>Sync <small> Status</small></h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h3>Sync <small> Status</small></h3>
 
         <div class="node_status imported-text">
         </div>
 
         <script>
-        $.get("Node_Status.txt", function(data){
-        $(".node_status").html(data);
-        });
+          $.get("Node_Status.txt", function (data) {
+            $(".node_status").html(data);
+          });
         </script>
 
-			</div> <!-- /.col -->
-			
-			<div class="col-6">
-				<h3 class="demo-panel-title">Monero <small> Version</small></h3>
+      </div> <!-- /.col -->
+      <div class="col-6">
 
-        <div class="node_version imported-text">
-        </div>
-
-        <script>
-        $.get("node_version.txt", function(data){
-        $(".node_version").html(data);
-        });
-        </script>
-					
-			</div> <!-- /.col -->
-		</div>  <!-- /row -->
-	</div> <!-- container -->
-		
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h3>System <small>Monitor</small></h3>
+        <h3>System <small>Monitor</small></h3>
 
         <div class="iamrunning imported-text">
         </div>
 
         <script>
-        $.get("iamrunning_version.txt", function(data){
-        $(".iamrunning").html(data);
-        });
+          $.get("iamrunning_version.txt", function (data) {
+            $(".iamrunning").html(data);
+          });
         </script>
 
+      </div> <!-- /.col -->
+    </div> <!-- /row -->
+  </div> <!-- container -->
 
-			</div> <!-- col -->
-		</div> <!-- row -->
-	</div> <!-- container -->
-
-
-
-<!-- Start Accordian -->
-<div class="container py-5">
-<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          <i class="fas fa-arrows-alt-v"></i> Hardware Status
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        <div class="container">
-			<h1>Hardware Status:</h1>
-			<div class="row">
-				<div class="col-md-6">
-					<h3>Storage: <small>Usage</small></h3>
-        <div class="df-h imported-text">
+  <!-- Start Accordian -->
+  <div class="container py-5">
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
+              data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <i class="fas fa-arrows-alt-v"></i> Hardware Status
+            </button>
+          </h5>
         </div>
 
-        <script>
-        $.get("df-h.txt", function(data){
-        $(".df-h").html(data);
-        });
-        </script>
-				</div> <!-- /.col -->
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="container">
+              <h1>Hardware Status:</h1>
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Storage: <small>Usage</small></h3>
+                  <div class="df-h imported-text">
+                  </div>
 
-				<div class="col-md-6">
-					<h3>Temperature: <small>CPU</small></h3>
-        <div class="temp imported-text">
-        </div>
+                  <script>
+                    $.get("df-h.txt", function (data) {
+                      $(".df-h").html(data);
+                    });
+                  </script>
+                </div> <!-- /.col -->
 
-        <script>
-        $.get("temp.txt", function(data){
-        $(".temp").html(data);
-        });
-        </script>
-				</div> <!-- /.col -->
-			</div>  <!-- /row -->
-		</div> <!-- container -->
+                <div class="col-md-6">
+                  <h3>Temperature: <small>CPU</small></h3>
+                  <div class="temp imported-text">
+                  </div>
 
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<h3>Memory: <small>RAM/swap-file* Usage</small></h3>
-        <div class="free-h imported-text">
-        </div>
+                  <script>
+                    $.get("temp.txt", function (data) {
+                      $(".temp").html(data);
+                    });
+                  </script>
+                </div> <!-- /.col -->
+              </div> <!-- /row -->
+            </div> <!-- container -->
 
-        <script>
-        $.get("free-h.txt", function(data){
-        $(".free-h").html(data);
-        });
-        </script>
-				</div> <!-- col -->
-			</div> <!-- row -->
-		</div> <!-- container -->
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed badge badge-light" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <i class="fas fa-arrows-alt-v"></i> Transaction Pool Status
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-         <div class="container">
-   <div class="row">
-     <div class="col-12">
-      <h1>Monero Network:</h1>			
-			
-			<h3>MemPool <small> Overview</small></h3>
-        <div class="txpoolstatus imported-text">
-        </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <h3>Memory: <small>RAM/swap-file* Usage</small></h3>
+                  <div class="free-h imported-text">
+                  </div>
 
-        <script>
-        $.get("TXPool_Status.txt", function(data){
-        $(".txpoolstatus").html(data);
-        });
-        </script>
-    </div> <!-- col -->
-  </div> <!-- row -->
-  <div class="row">
-    <div class="col-12">
-			<h3 class="demo-panel-title">Transactions Pending <small> Live</small></h3>
-        <div class="txpoolshort imported-text">
-        </div>
-
-        <script>
-        $.get("TXPool-short_Status.txt", function(data){
-        $(".txpoolshort").html(data);
-        });
-        </script>
-     </div> <!-- col -->
-   </div> <!-- row -->
- </div> <!-- container -->
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed badge badge-light" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <i class="fas fa-arrows-alt-v"></i> Connection Status
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        <div class="container">
-   <div class="row">
-     <div class="col-md-12">
-        <h1>Monero Network:</h1>
-        <h3>Network Peers: <small> Live Connected</small></h3>
-			   <p>Currently connected Monero peers to this device with connection initiative (incoming/outgoing) and other stats</p>
-        <div class="printcn imported-text">
-        </div>
-
-        <script>
-        $.get("print_cn.txt", function(data){
-        $(".printcn").html(data);
-        });
-        </script>
-			
-			   <h3>Network Peers <small> stored</small></h3>
-          <div>
-			     <p>Number of Peers info encountered and stored num/max.<br> White peers are online and reachable.<br> Grey peers are offline but your monerod remembers them from past sessions</p>
+                  <script>
+                    $.get("free-h.txt", function (data) {
+                      $(".free-h").html(data);
+                    });
+                  </script>
+                </div> <!-- col -->
+              </div> <!-- row -->
+            </div> <!-- container -->
           </div>
-
-        <div class="printplstats imported-text">
         </div>
-
-        <script>
-        $.get("print_pl_stats.txt", function(data){
-        $(".printplstats").html(data);
-        });
-        </script>
-
-			<h3 class="demo-panel-title">Network Peers <small> Full</small></h3>
-			<p><small>List updates every 4 hours <br></small></p>
-
-			<div class="demo-type-example">
-        <div class="printpl imported-text">
-        </div>
-
-        <script>
-        $.get("print_pl.txt", function(data){
-        $(".printpl").html(data);
-        });
-        </script>
-
-     </div> <!-- col -->
-   </div> <!-- row -->
- </div> <!-- container -->
       </div>
-    </div>
-  </div>
-</div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed badge badge-light" type="button" data-toggle="collapse"
+              data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <i class="fas fa-arrows-alt-v"></i> Transaction Pool Status
+            </button>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <h1>Monero Network:</h1>
 
-</div> <!-- container -->
+                  <h3>MemPool <small> Overview</small></h3>
+                  <div class="txpoolstatus imported-text">
+                  </div>
 
-<!-- JavaScript -->
+                  <script>
+                    $.get("TXPool_Status.txt", function (data) {
+                      $(".txpoolstatus").html(data);
+                    });
+                  </script>
+                </div> <!-- col -->
+              </div> <!-- row -->
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="demo-panel-title">Transactions Pending <small> Live</small></h3>
+                  <div class="txpoolshort imported-text">
+                  </div>
+
+                  <script>
+                    $.get("TXPool-short_Status.txt", function (data) {
+                      $(".txpoolshort").html(data);
+                    });
+                  </script>
+                </div> <!-- col -->
+              </div> <!-- row -->
+            </div> <!-- container -->
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingThree">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed badge badge-light" type="button" data-toggle="collapse"
+              data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <i class="fas fa-arrows-alt-v"></i> Connection Status
+            </button>
+          </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1>Monero Network:</h1>
+                  <h3>Network Peers: <small> Live Connected</small></h3>
+                  <p>Currently connected Monero peers to this device with connection initiative (incoming/outgoing) and
+                    other stats</p>
+                  <div class="printcn imported-text">
+                  </div>
+
+                  <script>
+                    $.get("print_cn.txt", function (data) {
+                      $(".printcn").html(data);
+                    });
+                  </script>
+
+                  <h3>Network Peers <small> stored</small></h3>
+                  <div>
+                    <p>Number of Peers info encountered and stored num/max.<br> White peers are online and
+                      reachable.<br> Grey peers are offline but your monerod remembers them from past sessions</p>
+                  </div>
+
+                  <div class="printplstats imported-text">
+                  </div>
+
+                  <script>
+                    $.get("print_pl_stats.txt", function (data) {
+                      $(".printplstats").html(data);
+                    });
+                  </script>
+
+                  <h3 class="demo-panel-title">Network Peers <small> Full</small></h3>
+                  <p><small>List updates every 4 hours <br></small></p>
+
+                  <div class="demo-type-example">
+                    <div class="printpl imported-text">
+                    </div>
+
+                    <script>
+                      $.get("print_pl.txt", function (data) {
+                        $(".printpl").html(data);
+                      });
+                    </script>
+
+                  </div> <!-- col -->
+                </div> <!-- row -->
+              </div> <!-- container -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- container -->
+
+    <!-- JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"></script>
+</body>
+
 </html>
