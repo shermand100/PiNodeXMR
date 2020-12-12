@@ -193,9 +193,7 @@ sudo rm -r /home/pinodexmr/PiNode-XMR/
 
 ##Change log in menu to 'main'
 #Delete line 28 (previous setting)
-sudo sed -i '28d' /home/pinodexmr/.profile
-#Set to auto run main setup menu on login
-echo '. /home/pinodexmr/setup.sh' | tee -a /home/pinodexmr/.profile
+wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/home/pinodexmr/.profile
 
 ## Install complete
 echo -e "\e[32mAll Installs complete\e[0m"
