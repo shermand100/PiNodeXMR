@@ -30,7 +30,7 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 		#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
 		UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p)
 		sudo sed -i '4d' /etc/fstab #removes existing entry is script run before (delete 4th line fstab)
-		sudo sed "3 a UUID=$UUID /home/pinodexmr/.bitmonero $FILESYSTEM noexec,defaults 0 2" -i /etc/fstab
+		sudo sed "3 a UUID=$UUID /home/pinodexmr/.bitmonero $FILESYSTEM noexec,defaults,nofail 0 2" -i /etc/fstab
 		echo "Drive data has been preserved for this configuration, initialized and will auto-mount on boot"
 		sleep 2
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your device /dev/$DEVICE_TO_CONFIGURE containing the Monero Blockchain has been:\n* Mounted to /home/pinodexmr/.bitmonero for PiNodeXMR use\n* /dev/$DEVICE_TO_CONFIGURE has been added to /etc/fstab to auto mount on future system boots\n\nA Reboot is now required" 20 60
