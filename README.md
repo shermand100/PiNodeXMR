@@ -170,7 +170,9 @@ ____
 
 #### PiNode-XMR v4.20.10
 
-### PiNodeXMR disk images will be re-uploaded here soon once updated.
+[Download PiNodeXMR v4.20.10 Base image for Raspberry Pi3B/4](https://drive.google.com/file/d/1f-Os6_4dyVFiLLMe1EBGKyRZmsG8GePp/view?usp=sharing) 7GB
+
+[Download PiNodeXMR v4.20.10 Pre-sync'd and Pruned disk image to block 2239688 for Raspberry Pi 3B/4](https://drive.google.com/file/d/1Lz6H3WSOdeNi-AVCLywIfh6yllWmNnzM/view?usp=sharing) 39GB
 
 ____
 
