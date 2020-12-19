@@ -2,7 +2,7 @@
 # User Manual v4.20.10-Open-Build		
 #### Self Install Open Source Build for Raspbian (Raspberry Pi) & Armbian Debian Buster (For all other devices)
 or
-#### [Update in progress - not available at the moment ] Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
+#### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
 
 ## Support at
 * [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
