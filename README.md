@@ -4,7 +4,8 @@
 or
 #### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
 
-## Support at
+## Support
+
 * [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
 * Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
 
@@ -72,10 +73,11 @@ Dan
   * [Port Forwarding](https://github.com/monero-ecosystem/PiNode-XMR#port-forwarding)
   
 ## Features:
-* 4 Node modes (click to start)
+* 5 Node modes (click to start)
   * Private Node
   * tor bridging Node - routes your transactions through the tor network
-  * Public Node - Using new RPC payment feature* [Monero project commit message for more info](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937)
+  * I2P bridging Node - routes your transactions through the I2P network
+  * Public Node - Using new RPC payment feature
   * Private Node - with mining (For education/experiment only)
 * Simple control with Web-UI
   * View Monero node and hardware status
@@ -97,8 +99,6 @@ Dan
 * All the other benefits of running a node on a Single Board computer (EG. RasPi, silent/fan-less, low power (approx 15w) for 24/7 node, low cost)
 * Headless (No need for extra monitor,keyboard,etc) direct connect via Ethernet or WiFi**
 
-
-*Public Node has settings configured but requires test and activation on implementation of  [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) For context of issue see [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083)
 
 **Connection via Ethernet required to configure WiFi
 
@@ -194,7 +194,7 @@ During this process it will restart itself and will pause for 120 seconds. This 
 
 Every subsequent power-on event will skip this step and immediately run the Monero software without delay in the condition it was last run in, Clearnet/tor/Mining. Pruned or not.
 
-To continue with setup simply type the IP address of the Node into the web browser of a device . If you don't know how to find the IP address you can [read about some methods on the Raspberry Pi doc library.](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) 
+Your Web-UI should be available on pinodexmr.local from your browsers address bar. If not it may be required to enter the IP address of the Node into the web browser of a device . If you don't know how to find the IP address you can [read about some methods on the Raspberry Pi doc library.](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) 
 
 When you enter this IP address into the web browser of a device on the same network as your Node you'll be presented with the following screen...
 
