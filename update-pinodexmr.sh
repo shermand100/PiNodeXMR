@@ -37,8 +37,7 @@ sudo pip3 install ip2geotools matplotlib==3.2.1
 					echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 					sleep 2
 					
-					git clone -b Raspbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
-					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+					git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 
 					#Backup User values
 					echo -e "\e[32mCreating backups of your configuration\e[0m"
@@ -70,7 +69,7 @@ sudo pip3 install ip2geotools matplotlib==3.2.1
 						##Update PiNode-XMR systemd services
 					echo -e "\e[32mUpdating PiNode-XMR systemd services\e[0m"
 					sleep 2
-					sudo mv /home/pinodexmr/pinode-xmr/etc/systemd/system/*.service /etc/systemd/system/
+					sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/
 					sudo chmod 644 /etc/systemd/system/*.service
 					sudo chown root /etc/systemd/system/*.service
 					echo -e "\e[32mSuccess\e[0m"
@@ -79,16 +78,16 @@ sudo pip3 install ip2geotools matplotlib==3.2.1
 					echo -e "\e[32mUpdating PiNode-XMR scripts in home directory\e[0m"
 					sleep 2
 					sudo rm -R /home/pinodexmr/flock #if folder not removed produces error, cannot be overwritten if not empty
-					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/* /home/pinodexmr/
-					mv /home/pinodexmr/pinode-xmr/home/pinodexmr/.profile /home/pinodexmr/
+					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/
+					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/
 					chmod 777 /home/pinodexmr/*
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 						##Update web interface
 					echo -e "\e[32mUpdating your Web Interface\e[0m"
 					sleep 2
-					sudo mv /home/pinodexmr/pinode-xmr/HTML/*.* /var/www/html/
-					sudo cp -R /home/pinodexmr/pinode-xmr/HTML/docs/ /var/www/html/
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
+					sudo cp -R /home/pinodexmr/PiNode-XMR/HTML/docs/ /var/www/html/
 					sudo chown www-data -R /var/www/html/
 					sudo chmod 777 -R /var/www/html/
 					echo -e "\e[32mSuccess\e[0m"
@@ -135,8 +134,8 @@ sudo pip3 install ip2geotools matplotlib==3.2.1
 					##Update crontab
 					echo -e "\e[32mSetup crontab\e[0m"
 					sleep 3
-					sudo crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/root
-					crontab /home/pinodexmr/pinode-xmr/var/spool/cron/crontabs/pinodexmr
+					sudo crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/root
+					crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 
@@ -150,7 +149,7 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					#Clean up files
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
-					sudo rm -r /home/pinodexmr/pinode-xmr/
+					sudo rm -r /home/pinodexmr/PiNode-XMR/
 					rm /home/pinodexmr/new-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
