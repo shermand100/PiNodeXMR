@@ -10,6 +10,9 @@ then
 		sudo systemctl stop monerod-start-mining.service
 		sudo systemctl stop monerod-start-tor.service
 		sudo systemctl stop monerod-start-public.service
+		sudo systemctl stop monerod-start-i2p.service
+		sudo systemctl stop monerod-start-free.service
+
 		echo "Monerod stop command sent, allowing 30 seconds for safe shutdown"
 		sleep 30
 #Start prune binary
@@ -25,6 +28,8 @@ echo " --prune-blockchain" >> /home/pinodexmr/monerod-start.sh
 echo " --prune-blockchain" >> /home/pinodexmr/monerod-start-tor.sh
 echo " --prune-blockchain" >> /home/pinodexmr/monerod-start-mining.sh
 echo " --prune-blockchain" >> /home/pinodexmr/monerod-start-public.sh
+echo " --prune-blockchain" >> /home/pinodexmr/monerod-start-public-free.sh
+echo " --prune-blockchain" >> /home/pinodexmr/monerod-start-i2p.sh
 sleep "1"
 else
 
