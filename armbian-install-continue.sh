@@ -31,7 +31,7 @@ sleep 3
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y
+sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq avahi-daemon -y
 	## Installing new dependencies for IP2Geo map creation
 sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
 	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
@@ -142,7 +142,7 @@ cd
 ##Add Selta's ban list
 echo -e "\e[32mAdding Selstas Ban List\e[0m"
 sleep 3
-wget -O block.txt https://gui.xmr.pm/files/block.txt
+wget -O block.txt https://gui.xmr.pm/files/block_tor.txt
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
