@@ -120,7 +120,7 @@ sudo pip3 install ip2geotools matplotlib==3.2.1
 				##Add Selta's ban list
 					echo -e "\e[32mAdding Selstas Ban List\e[0m"
 					sleep 3
-					wget -O block.txt https://gui.xmr.pm/files/block.txt
+					wget -O block.txt https://gui.xmr.pm/files/block_tor.txt
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 
