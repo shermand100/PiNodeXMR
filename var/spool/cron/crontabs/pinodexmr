@@ -41,4 +41,4 @@
 * * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-status.lock /home/pinodexmr/TXPool-status.sh
 * * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-verbose-status.lock /home/pinodexmr/TXPool-verbose-status.sh
 * 12 * * 7 /home/pinodexmr/weekly-log-clean.sh
-0 0 * * * wget -O block.txt https://gui.xmr.pm/files/block.txt
+0 0 * * * wget -O block.txt https://gui.xmr.pm/files/block_tor.txt
