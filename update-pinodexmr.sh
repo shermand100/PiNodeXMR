@@ -41,7 +41,7 @@ sleep 3
 git clone -b Raspbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git
 
 
-					#Backup User values
+				#Backup User values
 					echo -e "\e[32mCreating backups of any settings you have customised\e[0m"
 					echo -e "\e[32m*****\e[0m"					
 					echo -e "\e[32mIf a setting did not exist on your previous version you may see some errors here for missing files, these can safely be ignored\e[0m"					
@@ -85,9 +85,13 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/
 					sudo chmod 644 /etc/systemd/system/*.service
 					sudo chown root /etc/systemd/system/*.service
+					sudo systemctl daemon-reload
+					sudo systemctl start statusOutputs.service
+					sudo systemctl enable statusOutputs.service
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 2
-						##Updating PiNode-XMR scripts in home directory
+					sleep 3
+
+				##Updating PiNode-XMR scripts in home directory
 					echo -e "\e[32mUpdating PiNode-XMR scripts in home directory\e[0m"
 					sleep 2
 					sudo rm -R /home/pinodexmr/flock #if folder not removed produces error, cannot be overwritten if not empty
@@ -132,7 +136,7 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sudo chmod 777 -R /var/www/html/
 					echo -e "\e[32mSuccess\e[0m"
 										
-					#Restore User Values
+				#Restore User Values
 					echo -e "\e[32mRestoring your personal settings\e[0m"
 					sleep 2
 					mv /home/pinodexmr/bootstatus_retain.sh /home/pinodexmr/bootstatus.sh
@@ -171,11 +175,11 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sleep 3
 
 				##Set Swappiness lower
-				echo -e "\e[32mDecreasing swappiness\e[0m"
-				sleep 3				
-				sudo sysctl vm.swappiness=10
-				echo -e "\e[32mSuccess\e[0m"
-				sleep 3				
+					echo -e "\e[32mDecreasing swappiness\e[0m"
+					sleep 3				
+					sudo sysctl vm.swappiness=10
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3				
 
 				##Update crontab
 					echo -e "\e[32mUpdating crontab tasks\e[0m"
@@ -185,7 +189,7 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 					
-					#Attempt update of tor hidden service settings
+				#Attempt update of tor hidden service settings
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
 					sleep 6
 					wget https://github.com/monero-ecosystem/PiNode-XMR/blob/Raspbian-install/etc/tor/torrc
@@ -197,10 +201,10 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					echo -e "\e[32mRestarting tor service...\e[0m"
 					sudo service tor restart
 					sleep 3
-					#Delete unused torrc file on event of update fail (tor not installed by user)
+				#Delete unused torrc file on event of update fail (tor not installed by user)
 					sudo rm /home/pinodexmr/torrc 2>/dev/null
 
-					#Update system version number to new one installed
+				#Update system version number to new one installed
 					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 					chmod 755 /home/pinodexmr/new-ver-pi.sh
 					. /home/pinodexmr/new-ver-pi.sh
@@ -210,14 +214,14 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
-					#Update Monero version number to new one installed
+				#Update Monero version number to new one installed
 					echo -e "\e[32mUpdate Monero version number to allow manual update\e[0m"
 					echo "#!/bin/bash
 CURRENT_VERSION=0" > /home/pinodexmr/current-ver.sh
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 					
-					#Clean up files
+				#Clean up files
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
 

@@ -97,6 +97,9 @@ sleep 3
 sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/*.service
 sudo chown root /etc/systemd/system/*.service
+sudo systemctl daemon-reload
+sudo systemctl start statusOutputs.service
+sudo systemctl enable statusOutputs.service
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
@@ -188,7 +191,6 @@ sudo sysctl vm.swappiness=10
 ## Remove left over files from git clone actions
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
-sudo rm -r /home/pinodexmr/Flat-UI/
 sudo rm -r /home/pinodexmr/PiNode-XMR/
 
 ##Change log in menu to 'main'
