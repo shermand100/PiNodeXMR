@@ -131,7 +131,8 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					echo -e "\e[32mConfiguring Web-UI template with PiNode-XMR pages\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html
+					#Demo Images are installed if a new user to this version. Error of 'directory not empty' suppressed so user created images aren't overwritten.
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>/dev/null 
 					sudo chown www-data -R /var/www/html/
 					sudo chmod 777 -R /var/www/html/
 					echo -e "\e[32mSuccess\e[0m"
