@@ -1,8 +1,5 @@
 #!/bin/bash
-
-
-					whiptail --title "PiNode-XMR Updater" --msgbox "\n\nPerforming PiNode-XMR update to latest version" 12 78;
-					
+sleep 1	
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Raspberry OS updates to latest versions\e[0m"
 sleep 3
