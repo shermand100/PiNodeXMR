@@ -2,6 +2,7 @@
 
 (
 	echo -n "This report generated " & date;
+	echo -n "Status Scripts: " && sudo systemctl status statusOutputs.service | sed -n '3'p | cut -c11-;
 	echo -n "Private Node: " && sudo systemctl status monerod-start.service | sed -n '3'p | cut -c11-;
 	echo -n "Public  Free: " && sudo systemctl status monerod-start-free.service | sed -n '3'p | cut -c11-;
 	echo -n " -\"- RPC Pay: " && sudo systemctl status monerod-start-public.service | sed -n '3'p | cut -c11-;		
