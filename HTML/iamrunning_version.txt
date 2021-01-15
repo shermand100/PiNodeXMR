@@ -1,1 +1,0 @@
-First Boot - Node not running. Select mode from "Advanced Settings" tab.

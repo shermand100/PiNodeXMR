@@ -1,2 +1,0 @@
-2019-07-02 14:08:03.254	I Monero 'Boron Butterfly' (v0.14.1.0-release)
-Height: 196750/1869731 (10.5%) on mainnet, not mining, net hash 25.23 MH/s, v1, up to date, 8(out)+0(in) connections, uptime 0d 0h 44m 49s

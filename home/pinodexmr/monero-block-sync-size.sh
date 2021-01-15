@@ -1,2 +1,0 @@
-#!/bin/bash
-MONERO_BLOCK_SYNC_SIZE=10

@@ -1,3 +1,0 @@
-Updates every 60 seconds
-Tue Jul  2 15:08:02 BST 2019
-temp=58.5'C

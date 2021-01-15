@@ -1,1 +1,0 @@
-Install tor from the terminal menu to replace this message with your hidden service address

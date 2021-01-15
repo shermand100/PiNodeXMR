@@ -1,5 +1,0 @@
-2019-07-02 14:08:03.252	I Monero 'Boron Butterfly' (v0.14.1.0-release)
-0 tx(es), 0 bytes total (min 0, max 0, avg 0, median 0)
-fees 0.000000000000 (avg 0.000000000000 per tx, 0.000000000000 per byte)
-0 double spends, 0 not relayed, 0 failing, 0 older than 10 minutes (oldest -), no backlog
-
