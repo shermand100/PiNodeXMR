@@ -21,9 +21,9 @@
 		##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 			echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 			sleep 3
-			sudo apt install mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y
+			sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y
 		## Installing new dependencies for IP2Geo map creation
-			sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
+			sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap python-setuptools -y
 		##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
 			sudo pip3 install ip2geotools matplotlib==3.2.1
 
@@ -93,7 +93,6 @@
 			sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/
 		#Demo Images are installed if a new user to this version. Error of 'directory not empty' suppressed so user created images aren't overwritten.
 			sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>/dev/null
-			sudo cp -R /home/pinodexmr/PiNode-XMR/HTML/docs/ /var/www/html/
 			sudo chown www-data -R /var/www/html/
 			sudo chmod 777 -R /var/www/html/
 			echo -e "\e[32mSuccess\e[0m"
@@ -145,7 +144,9 @@
 			sleep 3
 		
 		#Attempt update of tor hidden service settings
+			echo -e "\e[32m*************************************\e[0m"
 			echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
+			echo -e "\e[32m*************************************\e[0m"
 			sleep 6
 			wget https://github.com/monero-ecosystem/PiNode-XMR/blob/Armbian-install/etc/tor/torrc
 			echo -e "\e[32mApplying Settings...\e[0m"
@@ -153,7 +154,6 @@
 			sudo mv /home/pinodexmr/torrc /etc/tor/torrc
 			sudo chmod 644 /etc/tor/torrc
 			sudo chown root /etc/tor/torrc
-			echo -e "\e[32mRestarting tor service...\e[0m"
 			sudo service tor restart
 			sleep 3
 		#Delete unused torrc file on event of update fail (tor not installed by user)
