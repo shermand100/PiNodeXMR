@@ -154,11 +154,13 @@
 								;;
 								
 							"3)")if (whiptail --title "PiNode-XMR Start/Stop tor" --yesno "Manually Start or Stop the service." --yes-button "Start tor" --no-button "Stop tor"  14 78); then
-									sudo service tor start;
+									sudo systemctl start tor
+									sudo systemctl enable tor
 									whiptail --title "PiNode-XMR tor" --msgbox "The tor service has been started" 12 78;
 									. /home/pinodexmr/setup.sh
 									else
-									sudo service tor stop;
+									sudo systemctl stop tor
+									sudo systemctl disable to
 									whiptail --title "PiNode-XMR tor" --msgbox "The tor service has been stopped" 12 78;
 									. /home/pinodexmr/setup.sh
 									fi
