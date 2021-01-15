@@ -1,0 +1,15 @@
+[Unit]
+Description=nodeStatusGeneration
+After=network.target
+
+[Service]
+ExecStart=/bin/bash monero-status.sh
+WorkingDirectory=/home/pinodexmr/
+PIDFile=/tmp/statusGeneration.pid
+Type=simple
+Restart=always
+RestartSec=30
+User=pinodexmr
+
+[Install]
+WantedBy=multi-user.target

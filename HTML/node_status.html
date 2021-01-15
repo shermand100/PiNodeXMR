@@ -56,7 +56,8 @@
         <li class="nav-item">
           <a class="nav-link" href="/"
             onclick="javascript:event.target.port=7657;event.target.protocol='http:';"" ><i class=" fas
-            fa-network-wired"></i> I2P Interface </a> </li>
+            fa-network-wired"></i> I2P Interface </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="GeoIP.html"><i class="fas fa-globe-americas"></i> IP2GEO</a>
         </li>
@@ -250,52 +251,34 @@
                     });
                   </script>
 
-                  <h3>Network Peers <small> stored</small></h3>
-                  <div>
-                    <p>Number of Peers info encountered and stored num/max.<br> White peers are online and
-                      reachable.<br> Grey peers are offline but your monerod remembers them from past sessions</p>
-                  </div>
+                  <h3 class="demo-panel-title">Network Peers <small> Full</small></h3>
 
-                  <div class="printplstats imported-text">
-                  </div>
+                  <div class="printpl imported-text"></div>
 
                   <script>
-                    $.get("print_pl_stats.txt", function (data) {
-                      $(".printplstats").html(data);
+                    $.get("print_pl.txt", function (data) {
+                      $(".printpl").html(data);
                     });
                   </script>
 
-                  <h3 class="demo-panel-title">Network Peers <small> Full</small></h3>
-                  <p><small>List updates every 4 hours <br></small></p>
-
-                  <div class="demo-type-example">
-                    <div class="printpl imported-text">
-                    </div>
-
-                    <script>
-                      $.get("print_pl.txt", function (data) {
-                        $(".printpl").html(data);
-                      });
-                    </script>
-
-                  </div> <!-- col -->
-                </div> <!-- row -->
-              </div> <!-- container -->
-            </div>
+                </div> <!-- col -->
+              </div> <!-- row -->
+            </div> <!-- container -->
           </div>
         </div>
       </div>
+    </div>
 
-    </div> <!-- container -->
+  </div> <!-- container -->
 
-    <!-- JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"></script>
+  <!-- JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
