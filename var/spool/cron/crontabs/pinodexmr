@@ -32,13 +32,5 @@
 0 */4 * * * /home/pinodexmr/df-h.sh 
 * * * * * /home/pinodexmr/free-h.sh
 * * * * * /home/pinodexmr/system-monitor.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/status.lock /home/pinodexmr/monero-status.sh 
-#0 */1 * * * /usr/bin/flock -n /home/pinodexmr/flock/version.lock /home/pinodexmr/node_version.sh 
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/print_cn.lock /home/pinodexmr/print_cn.sh 
-0 */4 * * * /usr/bin/flock -n /home/pinodexmr/flock/print_pl.lock /home/pinodexmr/print_pl.sh 
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/print_pl_stats.lock /home/pinodexmr/print_pl_stats.sh 
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-short-status.lock /home/pinodexmr/TXPool-short-status.sh 
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-status.lock /home/pinodexmr/TXPool-status.sh
-* * * * * /usr/bin/flock -n /home/pinodexmr/flock/TXPool-verbose-status.lock /home/pinodexmr/TXPool-verbose-status.sh
 * 12 * * 7 /home/pinodexmr/weekly-log-clean.sh
 0 0 * * * wget -O block.txt https://gui.xmr.pm/files/block_tor.txt
