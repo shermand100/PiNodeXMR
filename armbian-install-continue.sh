@@ -33,9 +33,9 @@ echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0
 sleep 3
 sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq avahi-daemon -y
 	## Installing new dependencies for IP2Geo map creation
-sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y
+sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap python-setuptools -y
 	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
-sudo pip3 install ip2geotools matplotlib==3.2.1
+sudo pip3 install setuptools ip2geotools matplotlib==3.2.1
 
 ##Clone PiNode-XMR to device from git
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
