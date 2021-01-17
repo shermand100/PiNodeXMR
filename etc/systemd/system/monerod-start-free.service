@@ -5,12 +5,13 @@ After=network.target
 [Service]
 ExecStart=/bin/bash monerod-start-public-free.sh
 WorkingDirectory=/home/pinodexmr/
-Type=simple
+Type=forking
 Restart=always
 RestartSec=30
 User=pinodexmr
-StandardOutput=null
-StandardError=null
+StandardOutput=inherit
+StandardError=inherit
+PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
 
 [Install]
 WantedBy=multi-user.target
