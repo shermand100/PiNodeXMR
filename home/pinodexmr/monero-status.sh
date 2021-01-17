@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#Establish Local IP
-DEVICE_IP="$(hostname -I | awk '{print $1}')"
 # use temp file 
 _temp="./dialog.$$"
 
@@ -23,6 +21,8 @@ _temp="./dialog.$$"
 defineVariables () {
 
 #Import Start Flag Values:
+	#Establish Local IP
+	DEVICE_IP="$(hostname -I | awk '{print $1}')"
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
 	#Import Restricted Port Number (external use)
