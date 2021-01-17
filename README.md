@@ -1,5 +1,5 @@
 ![PiNode-XMR logo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
-# User Manual v4.20.10-Open-Build		
+# User Manual v4.21.01-Open-Build		
 #### Self Install Open Source Build for Raspbian (Raspberry Pi) & Armbian Debian Buster (For all other devices)
 or
 #### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
@@ -169,6 +169,8 @@ If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR
 ____
 
 #### PiNode-XMR v4.20.10
+
+Note current PiNodeXMR version is v4.21.01. Once installed perform an update through the terminal menu as normal.
 
 [Download PiNodeXMR v4.20.10 Base image for Raspberry Pi3B/4](https://drive.google.com/file/d/1f-Os6_4dyVFiLLMe1EBGKyRZmsG8GePp/view?usp=sharing) 7GB
 
