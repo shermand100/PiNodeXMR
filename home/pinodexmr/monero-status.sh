@@ -1,16 +1,7 @@
 #!/bin/sh
-#Establish IP/Port
-DEVICE_IP="$(hostname -I | awk '{print $1}')"
-#Import Start Flag Values:
-	#Load boot status - what condition was node last run
-	. /home/pinodexmr/bootstatus.sh
-	#Import Restricted Port Number (external use)
-	. /home/pinodexmr/monero-port.sh
-	#Import RPC username
-	. /home/pinodexmr/RPCu.sh
-	#Import RPC password
-	. /home/pinodexmr/RPCp.sh
 
+#Establish Local IP
+DEVICE_IP="$(hostname -I | awk '{print $1}')"
 # use temp file 
 _temp="./dialog.$$"
 
@@ -27,6 +18,21 @@ _temp="./dialog.$$"
 #2)I spent far too much time trying to incorporate 'target height' into the main status section, however this would often sit below the current height once sync'd...
 #So next I used 'Current_Sync_Progress:((.result.height/.result.target_height)*100)|floor' to readout a percentage of sync'd rounded down to a whole number. This meant that when the current height was above target sync status read as 100%...
 #However in tor mode target height sometimes outputs to 0 and the math fails killing the whole command. In the end the boolean 'Busy_Syncing:.result.busy_syncing' is used but not as pretty.
+
+#Define user customisable variables
+defineVariables () {
+
+#Import Start Flag Values:
+	#Load boot status - what condition was node last run
+	. /home/pinodexmr/bootstatus.sh
+	#Import Restricted Port Number (external use)
+	. /home/pinodexmr/monero-port.sh
+	#Import RPC username
+	. /home/pinodexmr/RPCu.sh
+	#Import RPC password
+	. /home/pinodexmr/RPCp.sh
+
+}
 
 #Define status functions
 
@@ -276,6 +282,7 @@ fi
 
 #Call status functions and loop indefinately:
 while true; do
+defineVariables
 syncStatus
 connectionStatus
 printFullPeers
