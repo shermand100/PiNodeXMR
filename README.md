@@ -168,11 +168,20 @@ If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR
 
 ____
 
-#### PiNode-XMR v4.20.10
+[Download PiNodeXMR v4.21.01 Base image for Raspberry Pi3B/4](https://drive.google.com/file/d/13CiIJ2TrZ5nxdwLto2OKcuowzq1v7-b5/view?usp=sharing) 7GB
 
-Note current PiNodeXMR version is v4.21.01. Once installed perform an update through the terminal menu as normal.
 
-[Download PiNodeXMR v4.20.10 Base image for Raspberry Pi3B/4](https://drive.google.com/file/d/1f-Os6_4dyVFiLLMe1EBGKyRZmsG8GePp/view?usp=sharing) 7GB
+Name: PiNodeXMR-v4.21.01.img
+
+Size: 7088381952 bytes (6760 MiB)
+
+SHA256: BE0531C90EAE4D3D768D10826AF09084270475CB78E77793CBA5D7B304C73C99
+
+
+____
+
+Note: I am working on the new pre-sync'd pruned image now (18th Jan 2021). I will leave this older image available for now. Be sure to use the updater settings before starting the node with this image
+
 
 [Download PiNodeXMR v4.20.10 Pre-sync'd and Pruned disk image to block 2239688 for Raspberry Pi 3B/4](https://drive.google.com/file/d/1Lz6H3WSOdeNi-AVCLywIfh6yllWmNnzM/view?usp=sharing) 39GB
 
