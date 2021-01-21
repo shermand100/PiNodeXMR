@@ -180,10 +180,13 @@ SHA256: BE0531C90EAE4D3D768D10826AF09084270475CB78E77793CBA5D7B304C73C99
 
 ____
 
-Note: I am working on the new pre-sync'd pruned image now (18th Jan 2021). I will leave this older image available for now. Be sure to use the updater settings before starting the node with this image
+[Download PiNodeXMR v4.21.01 Pre-sync'd and Pruned disk image to block 2278908 for Raspberry Pi 3B/4](https://drive.google.com/file/d/15OnZMx8M0bsgUN4W6-h7mg9fWLsOUzVk/view?usp=sharing) 40GB
 
+Name: PiNodeXMR-v4.21.01-prunedToBlock2278908.img
 
-[Download PiNodeXMR v4.20.10 Pre-sync'd and Pruned disk image to block 2239688 for Raspberry Pi 3B/4](https://drive.google.com/file/d/1Lz6H3WSOdeNi-AVCLywIfh6yllWmNnzM/view?usp=sharing) 39GB
+Size: 43458240512 bytes (40 GiB)
+
+SHA256: 202FAA2BF71EC1A2914A216E48F95C2C3EB9F1C0677124AD37B516A276CFE2B2
 
 ____
 
