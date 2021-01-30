@@ -281,8 +281,9 @@ This is the main page for starting/stopping and setting variables on your node. 
 
 - *Private Node:* A node that only you can connect a wallet to using the RPC username and password you've set. How you configure your firewall will determine external access, (covered later)
 
-- *Public Node:* Be a little patient for this cool new feature, where you could be paid to run this node. See [Monero project commit message for this feature](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937). This feature is installed but waiting for a fix to be committed. More info on the issue [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083). Expect to be active on release of Monero 0.15.0.3. I've put the settings is according t this documentation but have been unable to test yet. Minor tweak at time of release may also be necessary.
+- *Public Node (Free External RPC):* A full public node that is free to all users anywhere in the world. You can set a custom port here if you want, but whatever port is used must be [forwarded.](https://github.com/monero-ecosystem/PiNode-XMR#port-forwarding)
 
+- *Public Node (Requires RPC Pay):* Be a little patient for this cool new feature, where you could be paid to run this node. See [Monero project commit message for this feature](https://github.com/monero-project/monero/commit/2899379791b7542e4eb920b5d9d58cf232806937). This feature is installed but waiting for a fix to be committed. More info on the issue [monero-project pull #6260](https://github.com/monero-project/monero/pull/6260) & context [monero-project issue #3083](https://github.com/monero-project/monero/issues/3083). Expect to be active on release of Monero 0.15.0.3. I've put the settings is according to this documentation but have been unable to test yet. Minor tweak at time of release may also be necessary.
 
 **To switch from one mode type to another use the appropriate stop button for the service that is running. To indicate which version is running your node will tell you on the “node status” page.
 Stop the current service before starting a new one.**
@@ -511,7 +512,15 @@ Where this causes a problem for us is that we're reading this chapter with the v
 
 So once you've got an IP address that consistently points to the network the PiNode-XMR is in we're ready for the last step, port forwarding.
 
-The IP address or hostname if you use Dynamic DNS points to your router. If you open your router settings you should see some options for port forwarding. The idea here is that you are going to tell the router that any external traffic it receives on port 18081 (Monero's RPC port) should be directed to the PiNode-XMR IP (usually 192.168.xx.xxx) and port 18081.
+The IP address or hostname if you use Dynamic DNS points to your router. If you open your router settings you should see some options for port forwarding. The idea here is that you are going to tell the router that any external traffic it receives on a specifc port (usually 18081 or 18089 for Monero RPC) should be directed to the PiNode-XMR IP (usually 192.168.xx.xxx) and that same port.
+
+Depending on which mode you started the node in above you will want to open different ports (assuming you didn't change the defualt port values):
+
+* Prive Node: Forward port **18081**
+* Public Node (Free External RPC): Forward port **18089**
+* Public Node (Requires RPC Pay): Forward port **18083**
+
+Additionally, you may want to also forward port **18080** to help other nodes sync their blockchains.
 
 Every router has a different configuration menu so you may have to refer to it's manual if you're unsure. Alternatively there are some nice examples for multiple brands here with pictures.
 
