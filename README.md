@@ -177,7 +177,19 @@ Size: 7088381952 bytes (6760 MiB)
 
 SHA256: BE0531C90EAE4D3D768D10826AF09084270475CB78E77793CBA5D7B304C73C99
 
+or as a torrent...
 
+[Download PiNodeXMR v4.21.01 Base image for Raspberry Pi3B/4] 2.3GB
+
+[magnet:?xt=urn:btih:bdfdf0ef3b94e4a8aa15dd2a0ed17aafb0243d74&dn=PiNodeXMR-v4.21.01.zip&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce]
+
+Name: PiNodeXMR-v4.21.01.zip
+
+Size: 2437957944 bytes (2325 MiB)
+
+SHA256: 74CC71A0202834E972678587E7B5875CDF383FD927B00A7419CB355F2DE55252
+
+*Note, this is the hash for the zipped/compressed file. Once extracted the image can be verified with the direct download hash if you choose to.
 ____
 
 [Download PiNodeXMR v4.21.01 Pre-sync'd and Pruned disk image to block 2278908 for Raspberry Pi 3B/4](https://drive.google.com/file/d/15OnZMx8M0bsgUN4W6-h7mg9fWLsOUzVk/view?usp=sharing) 40GB
