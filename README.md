@@ -189,7 +189,7 @@ Size: 2437957944 bytes (2325 MiB)
 
 SHA256: 74CC71A0202834E972678587E7B5875CDF383FD927B00A7419CB355F2DE55252
 
-*Note, this is the hash for the zipped/compressed file. Once extracted the image can be verified with the direct download hash if you choose to.
+*Note, this is the hash for the zipped/compressed file. Once extracted the image can be verified with the direct download hash if you choose to. Torrent files kindly provided by JackieCat.
 ____
 
 [Download PiNodeXMR v4.21.01 Pre-sync'd and Pruned disk image to block 2278908 for Raspberry Pi 3B/4](https://drive.google.com/file/d/15OnZMx8M0bsgUN4W6-h7mg9fWLsOUzVk/view?usp=sharing) 40GB
