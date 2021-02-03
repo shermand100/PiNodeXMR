@@ -167,6 +167,7 @@ Welcome to the PiNode-XMR community!
 If using a Raspberry Pi you may use the pre-installed disk image. The PiNode-XMR image is available to download as-is. Meaning it is un-compressed and ready to write using the same method you would for any other disk image. 
 
 ____
+#### Direct Downloads
 
 [Download PiNodeXMR v4.21.01 Base image for Raspberry Pi3B/4](https://drive.google.com/file/d/13CiIJ2TrZ5nxdwLto2OKcuowzq1v7-b5/view?usp=sharing) 7GB
 
@@ -177,19 +178,6 @@ Size: 7088381952 bytes (6760 MiB)
 
 SHA256: BE0531C90EAE4D3D768D10826AF09084270475CB78E77793CBA5D7B304C73C99
 
-or as a torrent...
-
-[Download PiNodeXMR v4.21.01 Base image for Raspberry Pi3B/4] 2.3GB
-
-[magnet:?xt=urn:btih:bdfdf0ef3b94e4a8aa15dd2a0ed17aafb0243d74&dn=PiNodeXMR-v4.21.01.zip&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce]
-
-Name: PiNodeXMR-v4.21.01.zip
-
-Size: 2437957944 bytes (2325 MiB)
-
-SHA256: 74CC71A0202834E972678587E7B5875CDF383FD927B00A7419CB355F2DE55252
-
-*Note, this is the hash for the zipped/compressed file. Once extracted the image can be verified with the direct download hash if you choose to. Torrent files kindly provided by JackieCat.
 ____
 
 [Download PiNodeXMR v4.21.01 Pre-sync'd and Pruned disk image to block 2278908 for Raspberry Pi 3B/4](https://drive.google.com/file/d/15OnZMx8M0bsgUN4W6-h7mg9fWLsOUzVk/view?usp=sharing) 40GB
@@ -199,6 +187,43 @@ Name: PiNodeXMR-v4.21.01-prunedToBlock2278908.img
 Size: 43458240512 bytes (40 GiB)
 
 SHA256: 202FAA2BF71EC1A2914A216E48F95C2C3EB9F1C0677124AD37B516A276CFE2B2
+
+____
+
+#### Torrent downloads [magnet links]
+
+[Download PiNodeXMR v4.21.01 Base image for Raspberry Pi3B/4] 2.3GB
+
+```
+magnet:?xt=urn:btih:bdfdf0ef3b94e4a8aa15dd2a0ed17aafb0243d74&dn=PiNodeXMR-v4.21.01.zip&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce
+
+```
+
+Name: PiNodeXMR-v4.21.01.zip
+
+Size: 2437957944 bytes (2325 MiB)
+
+SHA256: 74CC71A0202834E972678587E7B5875CDF383FD927B00A7419CB355F2DE55252
+
+*Note, this is the hash for the zipped/compressed file. Once extracted the image can be verified with the direct download .img hash if you choose to. Torrent files kindly provided by JackieCat.
+
+____
+
+[Download PiNodeXMR v4.21.01 Pre-sync'd and Pruned disk image to block 2278908 for Raspberry Pi 3B/4] 28.2GB
+
+```
+[magnet:?xt=urn:btih:494ca720db6053f892393aebc9c9129a1323def4&dn=PiNodeXMR-v4.21.01-prunedToBlock2278908.zip&tr=udp%3a%2f%2f9.rarbg.to%3a2710%2fannounce&tr=udp%3a%2f%2f9.rarbg.me%3a2710%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.internetwarriors.net%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.cyberia.is%3a6969%2fannounce&tr=udp%3a%2f%2fexodus.desync.com%3a6969%2fannounce&tr=udp%3a%2f%2f3rt.tace.ru%3a60889%2fannounce&tr=http%3a%2f%2f5rt.tace.ru%3a60889%2fannounce&tr=udp%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=udp%3a%2f%2fp4p.arenabg.ch%3a1337%2fannounce&tr=http%3a%2f%2fp4p.arenabg.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker2.itzmx.com%3a6961%2fannounce&tr=udp%3a%2f%2f47.ip-51-68-199.eu%3a6969%2fannounce&tr=http%3a%2f%2fopen.acgnxtracker.com%3a80%2fannounce&tr=udp%3a%2f%2fwww.torrent.eu.org%3a451%2fannounce&tr=udp%3a%2f%2ftracker.torrent.eu.org%3a451%2fannounce&tr=udp%3a%2f%2ftracker.tiny-vps.com%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.ds.is%3a6969%2fannounce&tr=udp%3a%2f%2fopen.stealth.si%3a80%2fannounce&tr=http%3a%2f%2fopentracker.i2p.rocks]
+
+```
+
+Name: PiNodeXMR-v4.21.01-prunedToBlock2278908.zip
+
+Size: 30350869562 bytes
+
+SHA256: EEA83A2D15BA0B65267999D514821E7F67622D3003F3FC69C428057625E4376B
+
+
+*Note, this is the hash for the zipped/compressed file. Once extracted the image can be verified with the direct download .img hash if you choose to. Torrent files kindly provided by JackieCat.
 
 ____
 
