@@ -275,9 +275,12 @@ I'll also take this opportunity to mention that most of the displays of Node and
 
 ## Advanced Settings - Starting Monero
 
-![Advanced Settings](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/advancedsettings.png)
-
 This is the main page for starting/stopping and setting variables on your node. It can either be started as a Clearnet Private/Public,tor or Mining node, and you may switch between modes as you wish. The node has memory, so if power is lost and restored the node will reboot and continue in the mode it was last set, hence the wording on the Node Status page to remind you what you last clicked.
+
+### Clearnet Nodes
+![Clearnet Nodes](Screenshots/clearnet.png)
+
+These nodes will broadcast all transactions over IPv4.
 
 - *Private Node:* A node that only you can connect a wallet to using the RPC username and password you've set. How you configure your firewall will determine external access, (covered later)
 
@@ -288,13 +291,34 @@ This is the main page for starting/stopping and setting variables on your node. 
 **To switch from one mode type to another use the appropriate stop button for the service that is running. To indicate which version is running your node will tell you on the “node status” page.
 Stop the current service before starting a new one.**
 
-- *Bandwidth:* Here are some drop-down boxes for you to interact with if you think the node is hogging too much of your network bandwidth. If you select a value from the list the new variable is  considered “pending”. It takes a node stop+start for changes to take effect.
+### Mining
 
-- *Onion Address:* When you choose to install tor PiNode-XMR generates a unique tor onion hostname to you for your hidden service. It is displayed here. 
+![Mining](Screenshots/mining.png)
 
-- *Mining:* TBH it's a feature I expected people to ask for and it was simple enough to implement so it's included. The Raspberry Pi is absolutely unsuitable for this purpose, but there it is. 
+TBH this is a feature I expected people to ask for and it was simple enough to implement so it's included. The Raspberry Pi is absolutely unsuitable for this purpose, but there it is. 
 Enter your address on the right and the page will confirm submission with a read-back. Hit start (once all previous instances of the node have been stopped) and enjoy your sub 1H/s. Setting mining intensity (default 50%) can  be found in the build/developer notes at the end of this manual.
 A final note on this, now I've updated to v2 of this project and RandomX has come along mining is even less suitable in a Pi. However I intend to step away from making disk images and instead produce installing scripts so this software can be installed on devices other than Pis. Then this feature may once again have a use.
+
+### Anonymity Nodes
+
+![Annonymity Nodes](Screenshots/anonymity.png)
+
+Run a private node that broadcasts your transactions over either Tor or I2P.
+
+**To use either of these modes you must first install the relevant option via the [web terminal](#extra-network-tools)**
+
+- *TOR:* When you choose to install tor PiNode-XMR generates a unique tor onion hostname to you for your hidden service. It is displayed here as "Public Address". The one trick here is that you need to add a seed node for your first hop to the network. To quote the [official documentation](https://monerodocs.org/infrastructure/tor-onion-p2p-seed-nodes/):
+ >Your monero daemon will discover other P2P nodes but it needs to start somewhere. These starting nodes are known as "seed nodes". For clearnet the seed nodes are hardcoded in the software so no configuration is needed.
+ 
+ ### Global Settings
+
+![Global Settings](Screenshots/global_settings.png)
+
+- *RPC Port:* Here you can set the *unrestricted* RPC port.
+
+- *Bandwidth:* Here are some drop-down boxes for you to interact with if you think the node is hogging too much of your network bandwidth. If you select a value from the list the new variable is  considered “pending”. It takes a node stop+start for changes to take effect.
+
+- *Swap File:* If your device has less than 2GB of RAM then you'll probably need to turn on the swapfile when building monero.
 
 - *Shutdown:* To gently shutdown+power off the node use the stop buttons as  normal and then hit this “shutdown” button. It will complete it's shutdown process in 60 seconds.
 
@@ -468,13 +492,13 @@ and https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#b
 
 ## Misc options:
 ### *Mining_Intensity:* The default mining intensity is set to 50% and is configurable through the web terminal command line
- 
+
      nano /home/pinodexmr/mining-intensity.sh
-     
+
  Where the value '50' can be between 0-100. Save changes with > ctrl+O exit the editor with > ctrl+x.
  Monerod will require a restart for mining intensity changes to take effect. Carefully monitor your CPU temp, the Pi will auto-throttle CPU voltage at ~82'C
- 
- 
+
+
 ## Connecting a Wallet - LAN
 ### Monero GUI
 To use your Monero GUI on a device that is on the same local network as your node enter the IP address you have been using to view the interface into the remote node page of the GUI, port 18081 and the RPC username/password you set in the ./setup.sh menu. You may also select ' mark as trusted daemon ' as it's your trusted node.
@@ -502,9 +526,9 @@ Where this causes a problem for us is that we're reading this chapter with the v
   * Providers may be able to offer what's known as a static IP - one that doesn't expire. These however can come with a fee or are only available on their top tier packages. You get the idea but it can't hurt to ask.
 * Dynamic DNS
   * This is a solution that is included with your PiNode-XMR if you wish to download and enable it. It can be found at the end of the ./setup.sh process.  The idea behind this is that you make an account with a Dynamic DNS provider, in this case noip.com. The company noip.com instead of giving you an IP address let you choose a hostname (for example I chose whilst trialling was pinodexmr.hopto.org). This can also be easier to remember. A small program runs on the PiNode-XMR that monitors it's public IP address and if a change is detected it notifies noip.com of the new IP address. Noip.com then updates it's index so when I request my wallet connection to pinodexmr.hopto.org noip.com refers the traffic to whatever my new public IP address is from it's index and I never have a problem with my dynamic IP address. It's worth mentioning that your internet traffic is not routed through them, they are what's known as a DNS server, the same as when you type www.bbc.co.uk a DNS server turns those words into an IP address and you are referred to your destination. Like an address book for the internet pointing traffic to it's destination.
-  
+
  *There are lots of online services that provide Dynamic DNS and I plan to add more so you as a user have more choice. I've no affiliation with noip.com. I just chose them because they're free and have a simple linux installer. I should also mention their software is not installed on the PiNode-XMR by default, it is only downloaded if selected from the ./setup.sh script*
- 
+
 * VPN
   * Using a VPN you may be able to connect your mobile device to your home network so your wallet connects as though you are still at home. I have not used this method, but it may be the preferable method for privacy as all traffic from the wallet to the node would be encrypted, masking that you are even using Monero at all. {Community input?}
 
