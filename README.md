@@ -36,7 +36,7 @@ Dan
    * [Setup](https://github.com/monero-ecosystem/PiNode-XMR#setup)
 * [Web-UI: Getting started & General Usage](https://github.com/monero-ecosystem/PiNode-XMR#web-ui-starting-your-node-and-general-usage)
    * [Welcome Page](https://github.com/monero-ecosystem/PiNode-XMR#welcome-page--)
-   * [Advanced Settings & Starting Monero](https://github.com/monero-ecosystem/PiNode-XMR#advanced-settings---starting-monero)
+   * [Node Control & Starting Monero](#node-control---starting-monero)
    * [Node Status](https://github.com/monero-ecosystem/PiNode-XMR#node-status--)
    * [Monero Blockchain Explorer](https://github.com/monero-ecosystem/PiNode-XMR#monero-blockchain-explorer)
    * [Transaction Status](https://github.com/monero-ecosystem/PiNode-XMR#transaction-status)
@@ -273,7 +273,7 @@ I won't duplicate the homepage screenshot used above as there's not a lot to say
 
 I'll also take this opportunity to mention that most of the displays of Node and Hardware data within all the UI are updated every 60 seconds (with the exception of the 'storage usage' section on the 'Node Status' page which updates every 4 hours), so in most cases hammering the refresh button won't provide new data until it is sourced and processed in the background.
 
-## Advanced Settings - Starting Monero
+## Node Control - Starting Monero
 
 This is the main page for starting/stopping and setting variables on your node. It can either be started as a Clearnet Private/Public,tor or Mining node, and you may switch between modes as you wish. The node has memory, so if power is lost and restored the node will reboot and continue in the mode it was last set, hence the wording on the Node Status page to remind you what you last clicked.
 
