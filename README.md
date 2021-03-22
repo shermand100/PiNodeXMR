@@ -13,12 +13,24 @@ or
 
 43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
 
-## Intro
+## Intro + Expectations
 
-Let me start by saying I'm glad the internet has bought you to here. It's taken several years to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. The project is in a changing state at the moment with a shift from pre-built disk images, to you the user running a single command to initiate the install from this github repository. The reason for this change is to present the project as open source, increase transparency and trust. It also gives the added benefit of no longer being tied to the hardware of the device I was building the disk images on. This gives you the user much greater freedom to install your node on any Armbian device of your choice. Whilst this transition to open source finalises I will continue to provide the pre-made and pre-syncd disk images for the Raspberry Pi, but will phase this out over the year.
-Also throughout the years I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that users too have busy lifestyles, they want a node fast and I hope this project is a reasonable solution to that request.
+Let me start by saying I'm glad the internet has bought you to here. It's taken several years to get to this point of the project, which in itself has been part of a multi year hobby creating nodes for cryptocurrencies and producing guides for beginners to follow along the way. 
+I've had many requests from users if they could purchase pre-made nodes and although this is not something my lifestyle can accommodate, it does signal that users too have busy lifestyles, they want a node fast and I hope this project is a reasonable solution to that request.
 
-To that end I hope you find this latest project invaluable to running your own Monero node, fast. The initial sync will take some time, and for that reason I also supply this node pre-sync'd as an image. Security for the device has been configured but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
+**What can you expect this project to do...**
+
+Single board computers (SBCs) such as the Raspberry Pi, Rock64 and many Odroid models are supported and are fantastic devices for running Monero nodes. Where these devices excel are in their ability to run stable 24/7 with minimal power consumption and a low initial cost in hardware. This project, from a single instruction will self-install/build the latest official Monero packages and allow you to interact with your node using a simple web interface with pre-set, generic parameters suitable for most users. The aim is to reduce the technical knowledge barrier of entry into running a Monero node.
+
+**Limitations**
+
+Cryptography and therefore Cryptocurrencies require a large amount of computational work to function, and SBCs do not and will not be able to compete in their ability to do this work against laptop/desktop devices. In running a node you will be asking your device to enforce the rules of the Monero network, downloading and verifying every block and transaction that has ever occurred (currently over 100GB). So to set your expectations I think it would be fair to point out that where a new laptop with SSD can verify this data in ~3days, it takes a 15W SBC ~3 weeks to verify this data from scratch.
+
+So to aid you in getting set up quickly there are tools included with this project that allow you to copy or import a trusted blockchain you already have on your laptop or PC onto PiNodeXMR. Once sync'd these hardware limitations pose no issue whatsoever.
+
+A final point on limitations: The Raspberry Pi devices (and some other SBC's) lack a feature called AES. To keep it simple it's an optimisation in how the CPU processes encryption. A device without AES will still run a Monero node, just not as efficiently as one with AES. If you have not purchased a device for this project yet I suggest you pick a device that does. I will always (despite it's lack of AES) support the Raspberry Pi, purely because of its abundance, market share and low cost.
+
+To that end I hope you find this project invaluable to running your own Monero node, fast. Security for the device has been configured on installation but every copy of this device currently has the same password as I set it. It is important you change it to something unique, this is detailed later on in this document.
 
 Dan
 
