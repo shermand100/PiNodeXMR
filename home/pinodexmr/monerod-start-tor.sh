@@ -1,6 +1,8 @@
 #!/bin/bash
 #Establish IP
 DEVICE_IP="$(hostname -I | awk '{print $1}')"
+#Extra display hidden service address incase of error on tor install
+sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 #Onion Public Address
 NAME_FILE="/var/lib/tor/hidden_service/hostname"
 ONION_ADDR="$(sudo cat $NAME_FILE)"
