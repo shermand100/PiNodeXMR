@@ -62,7 +62,7 @@ fi
 	if [ $BOOT_STATUS -eq 4 ]
 then
 		#Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
-				STATUS="$(curl -su ${RPCu}:${RPCp} --digest -X POST http://127.0.0.1:${MONERO_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json' | cat -s | jq -Mr {"Monero_Version:.result.version,Node_Status:.result.status,Busy_Syncing:.result.busy_syncing,Current_Sync_Height:.result.height,P2P_Outgoing_Connections:.result.outgoing_connections_count,P2P_Incoming_Connections:.result.incoming_connections_count,RPC_Connections_Count:.result.rpc_connections_count,Network_Type:.result.nettype,TX_Pool_Size:.result.tx_pool_size,White_Peerlist_Size:.result.white_peerlist_size,Grey_Peerlist_Size:.result.grey_peerlist_size,Update_Available:.result.update_available"} | sed 's/"//g;s/{//g;s/}//g;s/,//g;s/_/ /g;s/^$/ /g;')" && echo "$STATUS" > /var/www/html/Node_Status.txt
+				STATUS="$(curl -su ${RPCu}:${RPCp} --digest -X POST http://${DEVICE_IP}:${MONERO_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json' | cat -s | jq -Mr {"Monero_Version:.result.version,Node_Status:.result.status,Busy_Syncing:.result.busy_syncing,Current_Sync_Height:.result.height,P2P_Outgoing_Connections:.result.outgoing_connections_count,P2P_Incoming_Connections:.result.incoming_connections_count,RPC_Connections_Count:.result.rpc_connections_count,Network_Type:.result.nettype,TX_Pool_Size:.result.tx_pool_size,White_Peerlist_Size:.result.white_peerlist_size,Grey_Peerlist_Size:.result.grey_peerlist_size,Update_Available:.result.update_available"} | sed 's/"//g;s/{//g;s/}//g;s/,//g;s/_/ /g;s/^$/ /g;')" && echo "$STATUS" > /var/www/html/Node_Status.txt
 				date >> /var/www/html/Node_Status.txt
 fi
 
@@ -114,7 +114,7 @@ fi
 	if [ $BOOT_STATUS -eq 4 ]
 then	
 		#Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
-	PRINT_CN="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_cn | sed '1d')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
+	PRINT_CN="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_cn | sed '1d')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
 	date >> /var/www/html/print_cn.txt
 
 fi
@@ -165,7 +165,7 @@ fi
 	if [ $BOOT_STATUS -eq 4 ]
 then	
 		#Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
-		PRINT_POOL_STATS="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool_stats | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_POOL_STATS" > /var/www/html/TXPool_Status.txt
+		PRINT_POOL_STATS="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool_stats | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_POOL_STATS" > /var/www/html/TXPool_Status.txt
 fi	
 	
 	if [ $BOOT_STATUS -eq 6 ]
@@ -211,7 +211,7 @@ fi
 	if [ $BOOT_STATUS -eq 4 ]
 then	
 		#Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
-		PRINT_TX_SHORT="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool_sh | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_TX_SHORT" > /var/www/html/TXPool-short_Status.txt
+		PRINT_TX_SHORT="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pool_sh | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_TX_SHORT" > /var/www/html/TXPool-short_Status.txt
 fi
 	
 	if [ $BOOT_STATUS -eq 6 ]
