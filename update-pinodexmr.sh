@@ -144,6 +144,10 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sudo chown www-data -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					sudo chmod 777 -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
+
+				#Create hard symbolic link for WebUI to access Monero log file
+					echo "Create hard symbolic link for WebUI to access Monero log file" >>debug.log
+					ln /home/pinodexmr/.bitmonero/bitmonero.log /var/www/html/bitmonero.log 2> >(tee -a debug.log >&2)
 										
 				#Restore User Values
 						echo "Restore user variables" >>debug.log	

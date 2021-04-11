@@ -183,6 +183,10 @@ USE_SINGLE_BUILDDIR=1 make 2> >(tee -a debug.log >&2)
 cd
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
 mkdir .bitmonero 2> >(tee -a debug.log >&2)
+#Create hard symbolic link for WebUI to access Monero log file
+		echo "Create hard symbolic link for WebUI to access Monero log file" >>debug.log
+ln /home/pinodexmr/.bitmonero/bitmonero.log /var/www/html/bitmonero.log 2> >(tee -a debug.log >&2)
+
 echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"

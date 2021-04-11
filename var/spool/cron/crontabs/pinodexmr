@@ -29,7 +29,8 @@
 # m h  dom mon dow   command
 
 * * * * * /home/pinodexmr/temp.sh 
-0 */4 * * * /home/pinodexmr/df-h.sh 
+0 */4 * * * /home/pinodexmr/df-h.sh
+0 */4 * * * /home/pinodexmr/printPl.sh 
 * * * * * /home/pinodexmr/free-h.sh
 * * * * * /home/pinodexmr/system-monitor.sh
 * 12 * * 7 /home/pinodexmr/weekly-log-clean.sh
