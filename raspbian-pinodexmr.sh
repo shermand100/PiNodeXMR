@@ -127,6 +127,10 @@ sleep 3
 echo -e "\e[32mAdd PiNode-XMR php settings\e[0m"
 sleep 3
 sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/ 2> >(tee -a debug.log >&2)
+#Configure apache server for access to monero log file
+sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
+sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
+sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
 sudo /etc/init.d/apache2 restart 2> >(tee -a debug.log >&2)
 
 echo -e "\e[32mSuccess\e[0m"
@@ -183,9 +187,6 @@ USE_SINGLE_BUILDDIR=1 make 2> >(tee -a debug.log >&2)
 cd
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
 mkdir .bitmonero 2> >(tee -a debug.log >&2)
-#Create hard symbolic link for WebUI to access Monero log file
-		echo "Create hard symbolic link for WebUI to access Monero log file" >>debug.log
-ln /home/pinodexmr/.bitmonero/bitmonero.log /var/www/html/bitmonero.log 2> >(tee -a debug.log >&2)
 
 echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"

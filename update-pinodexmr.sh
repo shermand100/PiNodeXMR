@@ -120,6 +120,10 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/ 2> >(tee -a debug.log >&2)
 					sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 					sudo chown root /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
+				#Configure apache server for access to monero log file
+					sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
+					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
+					sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
 					sudo /etc/init.d/apache2 restart 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
@@ -145,10 +149,6 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sudo chmod 777 -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 
-				#Create hard symbolic link for WebUI to access Monero log file
-					echo "Create hard symbolic link for WebUI to access Monero log file" >>debug.log
-					ln /home/pinodexmr/.bitmonero/bitmonero.log /var/www/html/bitmonero.log 2> >(tee -a debug.log >&2)
-										
 				#Restore User Values
 						echo "Restore user variables" >>debug.log	
 					echo -e "\e[32mRestoring your personal settings\e[0m"
