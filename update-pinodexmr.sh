@@ -210,7 +210,7 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 						echo "Update torrc settings - if installed" >>debug.log
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
 					sleep 6
-					wget https://github.com/monero-ecosystem/PiNode-XMR/blob/Raspbian-install/etc/tor/torrc 2> >(tee -a debug.log >&2)
+					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/etc/tor/torrc 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mApplying Settings...\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/torrc /etc/tor/torrc 2> >(tee -a debug.log >&2)
