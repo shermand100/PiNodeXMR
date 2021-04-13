@@ -216,6 +216,8 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					sudo mv /home/pinodexmr/torrc /etc/tor/torrc 2> >(tee -a debug.log >&2)
 					sudo chmod 644 /etc/tor/torrc 2> >(tee -a debug.log >&2)
 					sudo chown root /etc/tor/torrc 2> >(tee -a debug.log >&2)
+					#Insert user specific local IP for correct hiddenservice redirect (line 73 overwrite)
+					sudo sed -i "73s/.*/HiddenServicePort 18081 $(hostname -I | awk '{print $1}'):18081/" /etc/tor/torrc 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mRestarting tor service...\e[0m"
 					sudo service tor restart 2> >(tee -a debug.log >&2)
 					sleep 3

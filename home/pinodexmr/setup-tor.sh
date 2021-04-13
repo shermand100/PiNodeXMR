@@ -17,6 +17,8 @@ sleep 3
 sudo mv /home/pinodexmr/torrc /etc/tor/torrc
 sudo chmod 644 /etc/tor/torrc
 sudo chown root /etc/tor/torrc
+#Insert user specific local IP for correct hiddenservice redirect (line 73 overwrite)
+sudo sed -i "73s/.*/HiddenServicePort 18081 $(hostname -I | awk '{print $1}'):18081/" /etc/tor/torrc
 echo -e "\e[32mRestarting tor service...\e[0m"
 sudo service tor restart
 sleep 3
