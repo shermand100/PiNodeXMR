@@ -82,7 +82,7 @@ sudo pip3 install ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/prunestatus.sh /home/pinodexmr/prunestatus_status.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/RPCp.sh /home/pinodexmr/RPCp_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/RPCu.sh /home/pinodexmr/RPCu_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-rpcpay-port.sh /home/pinodexmr/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)h
+					mv /home/pinodexmr/monero-rpcpay-port.sh /home/pinodexmr/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/add-i2p-peer.sh /home/pinodexmr/add-i2p-peer_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/add-tor-peer.sh /home/pinodexmr/add-tor-peer_retain.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUser-set configuration saved\e[0m"
