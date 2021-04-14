@@ -82,7 +82,7 @@ sudo pip3 install ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/prunestatus.sh /home/pinodexmr/prunestatus_status.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/RPCp.sh /home/pinodexmr/RPCp_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/RPCu.sh /home/pinodexmr/RPCu_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-rpcpay-port.sh /home/pinodexmr/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)h
+					mv /home/pinodexmr/monero-rpcpay-port.sh /home/pinodexmr/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/add-i2p-peer.sh /home/pinodexmr/add-i2p-peer_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/add-tor-peer.sh /home/pinodexmr/add-tor-peer_retain.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUser-set configuration saved\e[0m"
@@ -205,7 +205,7 @@ sudo pip3 install ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log >&2)
 						echo "Update torrc settings - if installed" >>debug.log
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
 					sleep 6
-			wget https://github.com/monero-ecosystem/PiNode-XMR/blob/Armbian-install/etc/tor/torrc 2> >(tee -a debug.log >&2)
+			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/tor/torrc 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mApplying Settings...\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/torrc /etc/tor/torrc 2> >(tee -a debug.log >&2)
