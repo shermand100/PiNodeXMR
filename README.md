@@ -1,5 +1,5 @@
 ![PiNode-XMR logo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
-# User Manual v4.21.01-Open-Build		
+# User Manual v4.21.04-Open-Build		
 #### Self Install Open Source Build for Raspbian (Raspberry Pi) & Armbian Debian Buster (For all other devices)
 or
 #### Pre assembled disk images available for download (Raspberry Pi 3b+ & 4)
@@ -24,7 +24,7 @@ Single board computers (SBCs) such as the Raspberry Pi, Rock64 and many Odroid m
 
 **Limitations**
 
-Cryptography and therefore Cryptocurrencies require a large amount of computational work to function, and SBCs do not and will not be able to compete in their ability to do this work against laptop/desktop devices. In running a node you will be asking your device to enforce the rules of the Monero network, downloading and verifying every block and transaction that has ever occurred (currently over 100GB). So to set your expectations I think it would be fair to point out that where a new laptop with SSD can verify this data in ~3days, it takes a 15W SBC ~3 weeks to verify this data from scratch.
+Cryptography and therefore Cryptocurrencies require a large amount of computational work to function, and SBCs do not and will not be able to compete in their ability to do this work against laptop/desktop devices. In running a node you will be asking your device to enforce the rules of the Monero network, downloading and verifying every block and transaction that has ever occurred (currently over 100GB). So to set your expectations I think it would be fair to point out that where a new laptop with SSD can verify this data in ~12hours to 3days, it takes a 15W RAspberry Pi or similar SBC ~3 weeks to verify this data from scratch.
 
 So to aid you in getting set up quickly there are tools included with this project that allow you to copy or import a trusted blockchain you already have on your laptop or PC onto PiNodeXMR. Once sync'd these hardware limitations pose no issue whatsoever.
 
@@ -99,7 +99,7 @@ Dan
   * Monerod log file view page
 * Monero Block Explorer [Github - onion-monero-blockchain-explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer)
 * Easy setup menu for config of passwords and Updates.
-* **New** - Additional tools
+* Additional tools
   * raspi-config (Hardware and Wifi settings pre-built into PiNode-XMR menu
   * Agnostics - SD Card read/write health checker included
   * PiVPN - Tool for easy configuration of OpenVPN for Raspbian and Armbian
@@ -120,9 +120,11 @@ Dan
 
 General
 1. * Raspberry Pi 3/4 (incl B&+ models) for Pre-Configured disk image
-   * Any ARM device that supports Armbian Debian OS for self install. *2GB RAM required for Monero source compile, but there is a work around* 
-2. 8GB MicroSD Card with aditional min 100GB USB storage device for Monero Blockchain. Or 128GB MicroSD to store all-in-one.
-3. Ethernet connection (can be replaced by WiFi after config, hardware dependant)
+   * Or other ARM device that supports Armbian Debian OS for self install (See Hardware Wiki for tested hardware). *2GB RAM required for Monero source compile, but there is a work around* 
+2. Ethernet connection (can be replaced by WiFi after config, hardware dependant)
+3. Some kind of storage. This project can run entirely from an inexpensive MicroSD card. However experience with this has shown that MicroSD's last about a year before they show signs of fatigue and incur errors. I am now of the opinion that where possible, if your hardware allows, you should try to use USB booting via USB3. What I mean by this is that the Raspberry Pis and Rock64 devices allow you to flash your OS boot images directly to a USB HDD/SSD/NVMe and build PiNodeXMR from there. Read/write performance is greatly improved, as is longevity. A hybrid is also possible if USB boot is not possible with the OS on a MicroSD and the blockchain on a USB device.
+
+It is strongly suggested you consult the [PiNode-XMR Hardware Wiki](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Hardware) before committing to purchases for this project. 
 
 
 A final point on the hardware. This node is designed to be used 'headless'. The HDMI cable, mouse and keyboard is not required. This should allow you to tuck the node away somewhere and all interactions can be made with a device (pc or mobile) that is connected to the same network (your home one in most cases).
