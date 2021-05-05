@@ -778,20 +778,18 @@ sleep 10
 			##Dependencies
 			#Import $DEVICE_TO_CONFIGURE variable
 				. /home/pinodexmr/setup-usb-path.sh
-			#Determine filesystem of device to configured
-				FILESYSTEM="$(sudo blkid -o value -s TYPE /dev/$DEVICE_TO_CONFIGURE)"
 			#Mount
-				sudo mount -t $FILESYSTEM -o rw /dev/$DEVICE_TO_CONFIGURE /home/pinodexmr/.bitmonero
+				sudo mount -t udf -o rw "/dev/$DEVICE_TO_CONFIGURE"1 /home/pinodexmr/.bitmonero
 				sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
 				sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			
 			#ADD UUID to fstab. To mount on boot
 			UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p) #
-			sudo sed -i '3d' /etc/fstab #removes existing entry if this script has run before (delete 3rd line fstab)
-			sudo sed "2 a UUID=${UUID} /home/pinodexmr/.bitmonero udf noexec,defaults,nofail 0 2" -i /etc/fstab
-			
-            		if (whiptail --title "PiNode-XMR Storage Setup Finished" --yesno "Your selected storage device has been configured for use with PiNode-XMR.\n\nIf you intend to unplug this device and copy a trusted blockchain onto it, then select the Shutdown button below\n\nIf you intend to sync from block 0 on this device a restart is required." --yes-button "Shutdown Now" --no-button "Restart Now"  14 78); then
+			sudo sed -i '3d' /etc/fstab #removes existing entry if script run before (delete 3rd line fstab)
+			sudo sed "3 a UUID=${UUID} /home/pinodexmr/.bitmonero udf noexec,defaults,nofail 0 2" -i /etc/fstab
+
+            		if (whiptail --title "PiNode-XMR Storage Setup Finished" --yesno "Your selected storage device has been configured for use with PiNode-XMR.\n\nIf you intend to unplug this device and copy a trusted blockchain onto it, then select the Shutdown button below\n\nIf you intend to sync from block 0 on this device then setup is complete." --yes-button "Shutdown Now" --no-button "Setup Complete"  14 78); then
 	                sudo shutdown now
 	                else
-					sudo reboot
+					./setup.sh
 					fi
