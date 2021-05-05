@@ -208,3 +208,4 @@
 				;;
 esac
 clear
+echo -e "\e[32mReturn to the settings menu at any time by typing 'setup'\e[0m";
