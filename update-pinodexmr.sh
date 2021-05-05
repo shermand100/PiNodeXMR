@@ -35,7 +35,7 @@ sleep 3
 	echo "Update dependencies for Misc" >>debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq -y 2> >(tee -a debug.log >&2)
+sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq ntfs-3g -y 2> >(tee -a debug.log >&2)
 	## Installing new dependencies for IP2Geo map creation
 sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap -y 2> >(tee -a debug.log >&2)
 	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
