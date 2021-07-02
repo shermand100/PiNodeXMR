@@ -1,0 +1,13 @@
+[Unit]
+Description=Monero LWS
+After=network.target
+
+[Service]
+User=pinodexmr
+Group=pinodexmr
+EnvironmentFile=/home/pinodexmr/IPforLWS.txt
+ExecStart=/home/pinodexmr/monero-lws/build/src/monero-lws-daemon --rest-server=https://${IP}:8443 --confirm-external-bind --rest-ssl-key=/home/pinodexmr/lwsSslCert/key.pem --rest-ssl-certificate=/home/pinodexmr/lwsSslCert/cert.pem
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

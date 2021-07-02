@@ -109,7 +109,9 @@
 		"4)")CHOICE4=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nNode Tools" 20 60 10 \
 				"1)" "Start/Stop Blockchain Explorer" \
 				"2)" "Prune Node" \
-				"3)" "Pop Blocks" 2>&1 >/dev/tty)
+				"3)" "Pop Blocks" \
+				"4)" "Monero-LWS Install" \
+				"5)" "Monero-LWS Admin" 2>&1 >/dev/tty)
 				
 				case $CHOICE4 in
 							"1)") . /home/pinodexmr/setup-explorer.sh	#Has functional legacy script, will change this format one day.
@@ -128,6 +130,80 @@
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
+							"4)") if (whiptail --title "Monero-LWS Install" --yesno "This will install the functional but developing Monero-LWS service\nOnce complete, the generated SSL cert will also need installing on your wallet device\n\nWould you like to continue?" 14 78); then
+									echo -e "\e[32mChecking dependencies\e[0m"
+									sleep 2
+									#Check dependencies (Should be installed already from Monero install)
+									sudo apt update && sudo apt install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y
+									echo -e "\e[32mDownloading VTNerd Monero-LWS\e[0m"
+									sleep 2
+									git clone --recursive https://github.com/vtnerd/monero-lws.git;
+									echo -e "\e[32mConfiguring install\e[0m"
+									sleep 2									
+									cd monero-lws
+									git checkout develop
+									mkdir build && cd build
+									cmake -DMONERO_SOURCE_DIR=/home/pinodexmr/monero -DMONERO_BUILD_DIR=/home/pinodexmr/monero/build/release ..
+									#Below line required so Raspberry Pi can find libatomic
+									sed -i '73 a set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -latomic")' /home/pinodexmr/monero-lws/CMakeLists.txt
+									echo -e "\e[32mBuilding VTNerd Monero-LWS\e[0m"
+									sleep 2								
+									make
+									cd
+									echo -e "\e[32mCreating SSL Certificates for wallet device bound to this local IP\e[0m"
+									sleep 2	
+									mkdir ~/lwsSslCert && cd lwsSslCert
+									#Generate cert and key
+									. /home/pinodexmr/antelleGenrateIpCert.sh $(hostname -I)
+									sleep 2
+									#Generate Android Cert and Key pair
+									openssl pkcs12 -export -in cert.pem -inkey key.pem -out androidCert.p12
+									sleep 2
+									#Add Monero-LWS service to system monitor (crontab will run this every minute)
+									sed -i '13 a 	echo -n "Monero-LWS  : " && sudo systemctl status monero-lws.service | sed -n '3'p | cut -c11-;' /home/pinodexmr/system-monitor.sh
+									#Set IP for systemd monero-lws
+									. /home/pinodexmr/IPforLWS.sh
+									#Install complete
+									whiptail --title "Monero-LWS installer" --msgbox "\nThe Monero-LWS installation is complete and SSL certificates have been generated.\n\nA copy of the generated /home/pinodexmr/lswSslCert/cert.pem should be added to (windows) 'LocalComputer\Trusted Root Certification Authorities\Certificates' for use with MyMonero desktop... " 20 78
+									whiptail --title "Monero-LWS installer" --msgbox "\nFor Android Lightweight Wallets the\n/home/pinodexmr/lswSslCert/androidCert.p12 should be installed via\n'Settings>Security>Encryption&Credentials>Install certificates from storage'..." 20 78
+											if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS on PiNodeXMR boot?" 14 78); then
+											sudo systemctl enable monero-lws
+											else
+											sleep 1
+											fi
+											if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS now?" 14 78); then
+											sudo systemctl start monero-lws
+											else
+											sleep 1
+											fi
+									whiptail --title "Monero-LWS install complete" --msgbox "\nInstallation and configuration is now complete\n\nUSe the 'Monero-LWS Admin' tool to add your address and view key pair" 12 78
+									else
+									. /home/pinodexmr/setup.sh
+									fi
+								;;
+								"5)") if (whiptail --title "PiNode-XMR Monero-LWS Admin" --yesno "This tool is for adding your wallet address and view key so Monero-LWS can scan for your transactions in the background.\n\nMonero-LWS must be installed first\n\nWould you like to continue?" 14 78); then
+								# use temp file 
+								_temp="./dialog.$$"
+								#Wallet Address - set
+								whiptail --title "Monero-LWS Wallet Address" --inputbox "Enter the Wallet address you would like to monitor:" 10 60 2>$_temp
+								# set wallet addres var
+								walletadd=$( cat $_temp )
+								shred $_temp
+								whiptail --title "Monero-LWS Wallet View Key" --msgbox "\nYou will next be asked for the view key for the address you have just provided. Take care to ensure you provide the VIEW KEY, NOT THE PRIVATE KEY" 12 78
+								whiptail --title "Monero-LWS Wallet View Key" --inputbox "VIEW KEY:" 10 60 2>$_temp
+								# set wallet addres var
+								viewkey=$( cat $_temp )
+								shred $_temp
+								echo -e "\e[32mConfiguring Monero_LWS with the provided Wallet address and View Key...\e[0m"
+								sleep 2
+								/home/pinodexmr/monero-lws/build/src/monero-lws-admin add_account $walletadd $viewkey
+								##Rescan address: (Tell lws-admin to rescan from block <0> (change as required) for tx belonging to address and continue to monitor)
+								/home/pinodexmr/monero-lws/build/src/monero-lws-admin rescan 0 $walletadd
+								whiptail --title "Monero-LWS Wallet added" --msgbox "\nThe credentials you supplied have been passed to Monero-LWS for monitoring. The service is scanning for historic outputs that belong to that wallet which will take some time on this first run." 12 78
+								else
+									. /home/pinodexmr/setup.sh
+									fi
+								;;							
 			
 				esac
 				. /home/pinodexmr/setup.sh
