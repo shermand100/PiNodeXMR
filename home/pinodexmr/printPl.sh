@@ -77,3 +77,9 @@ then
 			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt			
 fi
+
+	if [ $BOOT_STATUS -eq 9 ]
+then	
+#Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
+			echo "It is not currently possible to retrieve connected peer information when running a public tor node." > /var/www/html/print_pl.txt
+fi

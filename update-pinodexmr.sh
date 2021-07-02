@@ -41,7 +41,23 @@ sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev pyth
 	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
 sudo pip3 install ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log >&2)
 
-		#Download new PiNodeXMR version number
+		#Download update files
+
+##Replace file /etc/sudoers to set global sudo permissions/rules (required to add new permissions to www-data user for interface buttons)
+echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
+sleep 3
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/sudoers
+sudo chmod 0440 /home/pinodexmr/sudoers
+sudo chown root /home/pinodexmr/sudoers
+sudo mv /home/pinodexmr/sudoers /etc/sudoers
+echo -e "\e[32mGlobal permissions changed\e[0m"
+sleep 3
+
+##Clone PiNode-XMR to device from git
+	echo "Downlaod PiNodeXMR files" >>debug.log
+echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
+sleep 3
+git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
 
 			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
 			chmod 755 /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
