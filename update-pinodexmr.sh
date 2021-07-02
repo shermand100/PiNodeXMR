@@ -43,6 +43,16 @@ sudo pip3 install ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log >&2)
 
 		#Download update files
 
+##Replace file /etc/sudoers to set global sudo permissions/rules (required to add new permissions to www-data user for interface buttons)
+echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
+sleep 3
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/etc/sudoers
+sudo chmod 0440 /home/pi/sudoers
+sudo chown root /home/pi/sudoers
+sudo mv /home/pi/sudoers /etc/sudoers
+echo -e "\e[32mGlobal permissions changed\e[0m"
+sleep 3
+
 ##Clone PiNode-XMR to device from git
 	echo "Downlaod PiNodeXMR files" >>debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
