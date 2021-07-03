@@ -139,8 +139,6 @@
 									git checkout develop
 									mkdir build && cd build
 									cmake -DMONERO_SOURCE_DIR=/home/pinodexmr/monero -DMONERO_BUILD_DIR=/home/pinodexmr/monero/build/release ..
-									#Below line required so Raspberry Pi can find libatomic
-									sed -i '73 a set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -latomic")' /home/pinodexmr/monero-lws/CMakeLists.txt
 									echo -e "\e[32mBuilding VTNerd Monero-LWS\e[0m"
 									sleep 2								
 									make
