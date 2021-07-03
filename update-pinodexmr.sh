@@ -101,7 +101,14 @@ git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem
 					mv /home/pinodexmr/monero-rpcpay-port.sh /home/pinodexmr/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/add-i2p-peer.sh /home/pinodexmr/add-i2p-peer_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/add-tor-peer.sh /home/pinodexmr/add-tor-peer_retain.sh 2> >(tee -a debug.log >&2)
-					echo -e "\e[32mUser-set configuration saved\e[0m"
+					echo -e "\e[32mUser-set configuration saved\e[0m"					
+					
+				#Remove old html images (prevents error when trying to overwrite non-empty directory)
+				rm -R /home/pinodexmr/PiNode-XMR/HTML/images
+				
+				#Install Update
+					echo -e "\e[32mInstalling update\e[0m"
+					sleep 2
 					
 		#Install Update
 			echo -e "\e[32mInstalling update\e[0m"
