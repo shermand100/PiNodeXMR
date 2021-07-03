@@ -105,10 +105,7 @@ git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem
 					
 				#Remove old html images (prevents error when trying to overwrite non-empty directory)
 				rm -R /home/pinodexmr/PiNode-XMR/HTML/images
-				
-				#Install Update
-					echo -e "\e[32mInstalling update\e[0m"
-					sleep 2
+
 					
 		#Install Update
 			echo -e "\e[32mInstalling update\e[0m"
