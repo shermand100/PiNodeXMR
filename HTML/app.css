@@ -20,7 +20,40 @@ h3 {
     white-space: pre-wrap;
     width: 100%;
 }
-
-.row {
-
+.badge-light {
+	width: 100%;
 }
+.text {
+	text-justify: auto;
+	text-align: center;
+}
+
+@media (prefers-color-scheme: light) {
+
+	body {
+		color: #e0e0e0;
+		background: #212121;
+	  	}
+	  .card-header {
+		background: #bdbdbd;
+	  }
+	  .badge-light {
+		background: #bdbdbd;
+		}
+	  .card-body {
+		color: #e0e0e0;
+		background: #212121;
+	  }
+	  hr {
+		background-color: #e0e0e0;
+		}
+		img {
+			filter: brightness(.80) contrast(1.2);
+		}
+		.navbar.navbar-expand-md.navbar-light.bg-light.fixed-top {
+			background-color: #616161 !important;
+		}
+		.nav-link {
+			color: #e0e0e0 !important;	
+		}
+	}

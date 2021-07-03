@@ -115,10 +115,10 @@
   <!-- Start Accodian 1-->
   <div class="container">
     <div class="accordion" id="accordionExample1">
-      <div class="card border-0">
-        <div class="card-header p-0 border-0 mb-1 bg-white" id="headingOne">
+      <div class="card border-1">
+        <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
               data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               <i class="fas fa-arrows-alt-v"></i> Private Node: <small> Requiring RPC login</small>
             </button>
@@ -127,7 +127,7 @@
 
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample1">
           <div class="card-body">
-            <div class="container py-4">
+            <div class="container-fluid">
               <h3 class="demo-panel-title">Private Node: <small> Requiring RPC login</small></h3>
               <p><small>Use this mode to run your own personal node. When connecting an external wallet you will need
                   the RPC username and password you have configured in the web terminal menu to use this service. [
@@ -192,10 +192,10 @@
           </div>
         </div>
       </div>
-      <div class="card border-0">
-        <div class="card-header p-0 border-0 mb-1 bg-white bg-white" id="headingTwo">
+      <div class="card border-1">
+        <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
-            <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
               data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               <i class="fas fa-arrows-alt-v"></i> Public Node: <small>Free External RPC</small>
             </button>
@@ -297,10 +297,10 @@
         </div>
       </div>
 
-      <div class="card border-0">
-        <div class="card-header p-0 border-0 mb-1 bg-white" id="headingThree">
+      <div class="card border-1">
+        <div class="card-header" id="headingThree">
           <h5 class="mb-0">
-            <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
               data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
               <i class="fas fa-arrows-alt-v"></i> Public Node: <small> Requires RPC Pay</small>
             </button>
@@ -475,151 +475,150 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="card border-0">
-      <div class="card-header p-0 border-0 border-0 bg-white" id="headingFour">
-        <h5 class="mb-0">
-          <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
-            data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            <i class="fas fa-arrows-alt-v"></i> Mining: <small> Solo Mine On This Device</small>
-          </button>
-        </h5>
+
+      <div class="card border-1">
+        <div class="card-header" id="headingFour">
+          <h5 class="mb-0">
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
+              data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              <i class="fas fa-arrows-alt-v"></i> Mining: <small> Solo Mine On This Device</small>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample1">
+          <div class="card-body">
+            <div class="container py-4">
+              <div class="row">
+                <h3 class="demo-panel-title">Mining</h3>
+
+                <p class="text-center"><small>This a full Private Node (Requires RPC login) with the additional function
+                    of solo mining on the device PiNode-XMR is running<br>Note:<br>Mining, by design is CPU intensive
+                    and
+                    not suited to single board computers.<br>
+                    This feature has been added for experimental/educational purposes and thought should be given for
+                    your
+                    devices CPU cooling before activating to prevent
+                    physical damage. This feature may also handicap the speed this device verifies transactions and
+                    blocks.<br> *Note: Mining currently over clearnet only.</small></p>
+              </div> <!-- /row -->
+
+              <div class="row demo-row">
+                <div class="col-lg-4 mb-4">
+                  <a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-dark">Start Solo
+                    Mining <span class="fui-lock"></span></a>
+                </div>
+                <script>
+                  function startminingbutton() {
+                    $.ajax({
+                      url: "monerod-start-mining.php", //the page containing php script
+                      type: "POST", //request type
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+                <div class="col-lg-4 mb-4">
+                  <a onclick="rebootminingbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-dark">Reboot
+                    Mining Node <span class="fui-power"></span></a>
+                </div>
+
+                <script>
+                  function rebootminingbutton() {
+                    $.ajax({
+                      url: "monerod-reboot.php", //the page containing php script
+                      type: "POST", //request type
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+                <div class="col-lg-4 mb-4">
+                  <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-dark">Stop Solo
+                    Mining <span class="fui-lock"></span></a>
+                </div>
+                <script>
+                  function stopminingbutton() {
+                    $.ajax({
+                      url: "monerod-stop-mining.php", //the page containing php script
+                      type: "POST", //request type
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+              </div> <!-- /row -->
+
+              <div class="row demo-row">
+                <div class="col-3">
+                  <h6 class="demo-panel-title">Set Your Mining Address</span></h6>
+
+                  <div class="form-group">
+                    <form method="post">
+                      <input type="text" placeholder="Enter Mining Address" class="form-control"
+                        onchange='if(this.value != 0) { address(this.value); }'>
+                      <span class="fui-check-inverted"></span>
+                  </div>
+                </div> <!-- /col -->
+                </form>
+                <script>
+                  function address(value) {
+                    $.ajax({
+                      url: "mining-address.php", //the page containing php script
+                      type: "POST", //request type
+                      data: ({ value }),
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+                <div class="col-6">
+                  <p><small><embed src="mining_address.txt" width=480px height=80px></small></p>
+                </div> <!-- /col -->
+              </div> <!-- /row -->
+
+              <div class="row demo-row">
+                <div class="col-3">
+                  <h6 class="demo-panel-title">Set Mining Intensity</span></h6>
+
+                  <div class="form-group">
+                    <form method="post">
+                      <input type="number" placeholder="Enter Mining Intensity" class="form-control"
+                        onchange='if(this.value != 0) { intensity(this.value); }'>
+                  </div>
+                </div> <!-- /col -->
+                </form>
+                <script>
+                  function intensity(value) {
+                    $.ajax({
+                      url: "mining-intensity.php", //the page containing php script
+                      type: "POST", //request type
+                      data: ({ value }),
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+                <div class="col-6">
+                  <p><small><embed src="mining_intensity.txt" width=3000px height=80px></small></p>
+                </div> <!-- /col -->
+              </div> <!-- /row -->
+
+            </div>
+          </div><!-- /btn-group -->
+        </div> <!-- /container -->
       </div>
-      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample1">
-        <div class="card-body">
-          <div class="container py-4">
-            <div class="row">
-              <h3 class="demo-panel-title">Mining</h3>
-
-              <p class="text-center"><small>This a full Private Node (Requires RPC login) with the additional function
-                  of solo mining on the device PiNode-XMR is running<br>Note:<br>Mining, by design is CPU intensive and
-                  not suited to single board computers.<br>
-                  This feature has been added for experimental/educational purposes and thought should be given for your
-                  devices CPU cooling before activating to prevent
-                  physical damage. This feature may also handicap the speed this device verifies transactions and
-                  blocks.<br> *Note: Mining currently over clearnet only.</small></p>
-            </div> <!-- /row -->
-
-            <div class="row demo-row">
-              <div class="col-lg-4 mb-4">
-                <a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-dark">Start Solo
-                  Mining <span class="fui-lock"></span></a>
-              </div>
-              <script>
-                function startminingbutton() {
-                  $.ajax({
-                    url: "monerod-start-mining.php", //the page containing php script
-                    type: "POST", //request type
-                    success: function (result) {
-                      alert(result);
-                    }
-                  });
-                }
-              </script>
-
-              <div class="col-lg-4 mb-4">
-                <a onclick="rebootminingbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-dark">Reboot
-                  Mining Node <span class="fui-power"></span></a>
-              </div>
-
-              <script>
-                function rebootminingbutton() {
-                  $.ajax({
-                    url: "monerod-reboot.php", //the page containing php script
-                    type: "POST", //request type
-                    success: function (result) {
-                      alert(result);
-                    }
-                  });
-                }
-              </script>
-
-              <div class="col-lg-4 mb-4">
-                <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-dark">Stop Solo
-                  Mining <span class="fui-lock"></span></a>
-              </div>
-              <script>
-                function stopminingbutton() {
-                  $.ajax({
-                    url: "monerod-stop-mining.php", //the page containing php script
-                    type: "POST", //request type
-                    success: function (result) {
-                      alert(result);
-                    }
-                  });
-                }
-              </script>
-            </div> <!-- /row -->
-
-            <div class="row demo-row">
-              <div class="col-3">
-                <h6 class="demo-panel-title">Set Your Mining Address</span></h6>
-
-                <div class="form-group">
-                  <form method="post">
-                    <input type="text" placeholder="Enter Mining Address" class="form-control"
-                      onchange='if(this.value != 0) { address(this.value); }'>
-                    <span class="fui-check-inverted"></span>
-                </div>
-              </div> <!-- /col -->
-              </form>
-              <script>
-                function address(value) {
-                  $.ajax({
-                    url: "mining-address.php", //the page containing php script
-                    type: "POST", //request type
-                    data: ({ value }),
-                    success: function (result) {
-                      alert(result);
-                    }
-                  });
-                }
-              </script>
-
-              <div class="col-6">
-                <p><small><embed src="mining_address.txt" width=480px height=80px></small></p>
-              </div> <!-- /col -->
-            </div> <!-- /row -->
-
-            <div class="row demo-row">
-              <div class="col-3">
-                <h6 class="demo-panel-title">Set Mining Intensity</span></h6>
-
-                <div class="form-group">
-                  <form method="post">
-                    <input type="number" placeholder="Enter Mining Intensity" class="form-control"
-                      onchange='if(this.value != 0) { intensity(this.value); }'>
-                </div>
-              </div> <!-- /col -->
-              </form>
-              <script>
-                function intensity(value) {
-                  $.ajax({
-                    url: "mining-intensity.php", //the page containing php script
-                    type: "POST", //request type
-                    data: ({ value }),
-                    success: function (result) {
-                      alert(result);
-                    }
-                  });
-                }
-              </script>
-
-              <div class="col-6">
-                <p><small><embed src="mining_intensity.txt" width=3000px height=80px></small></p>
-              </div> <!-- /col -->
-            </div> <!-- /row -->
-
-          </div>
-        </div><!-- /btn-group -->
-      </div> <!-- /container -->
     </div>
   </div>
-  </div>
-  </div>
-
-  </div><!-- container -->
 
   <div class="container py-4">
     <div class="row my-4">
@@ -639,10 +638,10 @@
   <!-- Start Accodian 2-->
   <div class="container">
     <div class="accordion" id="accordionExample2">
-      <div class="card border-0">
-        <div class="card-header p-0 border-0 mb-1 bg-white" id="headingFive">
+      <div class="card border-1">
+        <div class="card-header" id="headingFive">
           <h5 class="mb-0">
-            <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
               data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
               <i class="fas fa-arrows-alt-v"></i> TOR: <small>Private Bridging Node</small>
             </button>
@@ -758,10 +757,134 @@
           </div>
         </div>
       </div>
-      <div class="card border-0">
-        <div class="card-header p-0 border-0 mb-1 bg-white" id="headingSix">
+
+      <div class="card border-1">
+        <div class="card-header" id="headingFive-A">
           <h5 class="mb-0">
-            <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
+              data-target="#collapseFive-A" aria-expanded="false" aria-controls="collapseFive-A">
+              <i class="fas fa-arrows-alt-v"></i> TOR: <small>Public Bridging Node</small>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseFive-A" class="collapse" aria-labelledby="headingFive-A" data-parent="#accordionExample2">
+          <div class="card-body">
+            <div class="container py-4">
+              <div class="row demo-row">
+                <h3 class="demo-panel-title float-left">TOR: <small>Public Bridging Node</small></h3>
+              </div> <!-- /row -->
+
+              <div class="row">
+                <div class="col-2">
+                  <h6 class="demo-panel-title">Public Address</h6>
+                </div> <!-- /.col -->
+                <div class="col">
+                  <embed class="float-left" src="onion-address.txt" width=500px height=40px>
+                </div> <!-- /.col -->
+              </div> <!-- /row -->
+              <div class="row">
+                <p><small>This address is unique to your PiNode-XMR. It was generated when you installed tor, and will
+                    not change.<br>To ensure a robust configuration some settings cannot be changed<br>Anyone can make
+                    RPC
+                    connections remotely from a "tor-ified" wallet using your .onion hostname, port 18081. Non-tor RPC
+                    connections should also be possible on your local network with PiNodeXMR-IP
+                    and Port 18081.<br></p>
+
+              </div> <!-- /row -->
+
+              <div class="row demo-row">
+                <div class="col">
+                  <a onclick="starttorpublicbutton()" href="#start-monero-tor-public"
+                    class="btn btn-block btn-lg btn-dark">Start
+                    Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
+                </div> <!-- /.col -->
+                <script>
+                  function starttorpublicbutton() {
+                    $.ajax({
+                      url: "monerod-start-tor-public.php", //the page containing php script
+                      type: "POST", //request type
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+                <div class="col">
+                  <a onclick="reboottorbutton()" href="#Reboot Monerod" class="btn btn-block btn-lg btn-dark">Reboot
+                    Monerod - <span class="fui-eye"></span><br /> [tor Bridge] </a>
+                </div>
+
+                <script>
+                  function reboottorbutton() {
+                    $.ajax({
+                      url: "monerod-reboot.php", //the page containing php script
+                      type: "POST", //request type
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+                <div class="col">
+                  <a onclick="stoptorpublicbutton()" href="#stop-monero-tor-public"
+                    class="btn btn-block btn-lg btn-dark">Stop
+                    Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
+                </div>
+                <script>
+                  function stoptorpublicbutton() {
+                    $.ajax({
+                      url: "monerod-stop-tor-public.php", //the page containing php script
+                      type: "POST", //request type
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+              </div> <!-- /row -->
+
+              <div class="row pt-3">
+                <div class="col-8">
+                  <h6 class="demo-panel-title">Add Peer (seed):</h6>
+
+                  <div class="form-group">
+                    <form method="post">
+                      <input type="text" placeholder="Add Peer" class="form-control"
+                        onchange='if(this.value != 0) { addtorpeer(this.value); }'>
+                      <span class="fui-check-inverted"></span>
+                  </div>
+                </div> <!-- /col -->
+                </form>
+                <script>
+                  function addtorpeer(value) {
+                    $.ajax({
+                      url: "add-tor-peer.php", //the page containing php script
+                      type: "POST", //request type
+                      data: ({ value }),
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+                <div class="col-4">
+                  <embed class="float-left" src="add-tor-peer.txt" width=500px height=60px>
+                </div> <!-- /.col -->
+              </div> <!-- /row -->
+
+            </div> <!-- /container -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card border-1">
+        <div class="card-header" id="headingSix">
+          <h5 class="mb-0">
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
               data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
               <i class="fas fa-arrows-alt-v"></i> I2P: <small>Private Bridging Node</small>
             </button>
@@ -983,10 +1106,10 @@
   <!-- Start Accodian 3-->
   <div class="container">
     <div class="accordion" id="accordionExample3">
-      <div class="card border-0">
-        <div class="card-header p-0 border-0 mb-1 bg-white" id="headingSeven">
+      <div class="card border-1">
+        <div class="card-header" id="headingSeven">
           <h5 class="mb-0">
-            <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
               data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
               <i class="fas fa-arrows-alt-v"></i> Network: <small>Global Settings</small>
             </button>
@@ -1191,61 +1314,43 @@
             </div>
           </div>
         </div>
-        <div class="card border-0">
-          <div class="card-header p-0 border-0 mb-1 bg-white" id="headingEight">
-            <h5 class="mb-0">
-              <button class="btn btn-link bg-dark text-white btn-lg w-50 text-left" type="button" data-toggle="collapse"
-                data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                <i class="fas fa-arrows-alt-v"></i> 2GB Swap File Enble/Disable
-              </button>
-            </h5>
-          </div>
-          <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample3">
-            <div class="card-body">
-              <div class="container">
-                <div class="row">
-                  <h3 class="demo-panel-title">Swap File: <small>Enable/Disable</small></h3>
+      </div>
+      <div class="card border-1">
+        <div class="card-header" id="headingEight">
+          <h5 class="mb-0">
+            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
+              data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+              <i class="fas fa-arrows-alt-v"></i> 2GB Swap File Enble/Disable
+            </button>
+          </h5>
+        </div>
+        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample3">
+          <div class="card-body">
+            <div class="container">
+              <div class="row">
+                <h3 class="demo-panel-title">Swap File: <small>Enable/Disable</small></h3>
+              </div>
+
+              <div class="row">
+                <div class="demo-type-example">
+                  <span class="demo-text-note"></span>
+                  <p>*If your device has less than 2GB RAM this swap file should be used for large blockchain syncs
+                    and Monero updates. It can artificially augment system performance. Then to preserve SD card
+                    read/write life this should be disabled when not required.</p>
                 </div>
+              </div> <!-- row -->
 
-                <div class="row">
-                  <div class="demo-type-example">
-                    <span class="demo-text-note"></span>
-                    <p>*If your device has less than 2GB RAM this swap file should be used for large blockchain syncs
-                      and Monero updates. It can artificially augment system performance. Then to preserve SD card
-                      read/write life this should be disabled when not required.</p>
-                  </div>
-                </div> <!-- row -->
+              <div class="row">
+                <div class="col-md-6">
 
-                <div class="row">
-                  <div class="col-md-6">
+                  <a onclick="enableswap()" href="#swap-enable" class="btn btn-block btn-lg btn-dark">Enable 2GB
+                    swap-file <i class="fas fa-hdd"></i></span></a>
 
-                    <a onclick="enableswap()" href="#swap-enable" class="btn btn-block btn-lg btn-dark">Enable 2GB
-                      swap-file <i class="fas fa-hdd"></i></span></a>
-
-
-                    <script>
-                      function enableswap() {
-                        $.ajax({
-                          url: "enable-swap.php", //the page containing php script
-                          type: "POST", //request type
-                          success: function (result) {
-                            alert(result);
-                          }
-                        });
-                      }
-                    </script>
-
-                  </div> <!-- /.col -->
-                  <div class="col">
-
-                    <a onclick="disableswap()" href="#swap-disable" class="btn btn-block btn-lg btn-dark">Disable 2GB
-                      swap-file <i class="far fa-hdd"></i></span></a>
-                  </div>
 
                   <script>
-                    function disableswap() {
+                    function enableswap() {
                       $.ajax({
-                        url: "disable-swap.php", //the page containing php script
+                        url: "enable-swap.php", //the page containing php script
                         type: "POST", //request type
                         success: function (result) {
                           alert(result);
@@ -1254,74 +1359,87 @@
                     }
                   </script>
 
-
                 </div> <!-- /.col -->
-              </div> <!-- row -->
-            </div> <!-- container -->
-          </div>
+                <div class="col">
+
+                  <a onclick="disableswap()" href="#swap-disable" class="btn btn-block btn-lg btn-dark">Disable 2GB
+                    swap-file <i class="far fa-hdd"></i></span></a>
+                </div>
+
+                <script>
+                  function disableswap() {
+                    $.ajax({
+                      url: "disable-swap.php", //the page containing php script
+                      type: "POST", //request type
+                      success: function (result) {
+                        alert(result);
+                      }
+                    });
+                  }
+                </script>
+
+
+              </div> <!-- /.col -->
+            </div> <!-- row -->
+          </div> <!-- container -->
         </div>
       </div>
     </div>
-    <div>
-      <!-- container -->
+  </div> <!-- container -->
 
 
 
 
 
 
-
-    </div>
-    <div class="container py-4">
-      <div class="row">
-        <div class="col-md-6">
-          <h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
-          <a onclick="shutdownbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-warning">Shutdown
-            PiNode-XMR<span class="fui-power"></span></a>
-
-          <script>
-            function shutdownbutton() {
-              $.ajax({
-                url: "monerod-shutdown.php", //the page containing php script
-                type: "POST", //request type
-                success: function (result) {
-                  alert(result);
-                }
-              });
-            }
-          </script>
-
-        </div>
-
-        <div class="col-md-6">
-          <h3 class="demo-panel-title"> Kill Switch: <small>unsafe shutdown of PiNode-XMR </small></h3>
-
-          <a onclick="killbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill Process - monerod<span
-              class="fui-trash"></span></a>
-
-          <script>
-            function killbutton() {
-              $.ajax({
-                url: "monerod-kill.php", //the page containing php script
-                type: "POST", //request type
-                success: function (result) {
-                  alert(result);
-                }
-              });
-            }
-          </script>
-
-          <p class="text-center">If you suspect monerod is stuck and cannot recover itself or be recovered this button
-            will send command 'sudo killall -9 monerod'. <br>Corruption of stored blockchain could occur, not to be used
-            lightly.</p>
-        </div> <!-- col -->
-      </div> <!-- row -->
-
-    </div> <!-- /container -->
 
   </div>
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
+        <a onclick="shutdownbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-warning">Shutdown
+          PiNode-XMR<span class="fui-power"></span></a>
 
+        <script>
+          function shutdownbutton() {
+            $.ajax({
+              url: "monerod-shutdown.php", //the page containing php script
+              type: "POST", //request type
+              success: function (result) {
+                alert(result);
+              }
+            });
+          }
+        </script>
 
+      </div>
+
+      <div class="col-md-6">
+        <h3 class="demo-panel-title"> Kill Switch: <small>unsafe shutdown of PiNode-XMR </small></h3>
+
+        <a onclick="killbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill Process - monerod<span
+            class="fui-trash"></span></a>
+
+        <script>
+          function killbutton() {
+            $.ajax({
+              url: "monerod-kill.php", //the page containing php script
+              type: "POST", //request type
+              success: function (result) {
+                alert(result);
+              }
+            });
+          }
+        </script>
+
+        <p class="text-center">If you suspect monerod is stuck and cannot recover itself or be recovered this button
+          will send command 'sudo killall -9 monerod'. <br>Corruption of stored blockchain could occur, not to be used
+          lightly.</p>
+      </div> <!-- col -->
+    </div> <!-- row -->
+
+  </div> <!-- /container -->
 
   <!-- JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
