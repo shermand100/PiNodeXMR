@@ -28,7 +28,7 @@ h3 {
 	text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
 
 	body {
 		color: #e0e0e0;
