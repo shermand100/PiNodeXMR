@@ -13,7 +13,7 @@ PiNode-XMR can provide a Full or Pruned Monero Node and optional integration wit
 ## Quick Start
 
 ### Hardware
-PiNode-XMR was originaly designed and built on Raspberry Pi OS, and has now expanded to support Armbain Buster. This for allows installation on many different devices.
+PiNode-XMR was originaly designed and built on Raspberry Pi OS, and has now expanded to support Armbain Buster. This allows for installation on many different devices.
 
 A list of tested and supported hardware can be found here [PiNodeXMR Wiki: Hardware](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Hardware)
 However any similar device should work that has a Armbian Buster OS available, USB3 preferred, minimum overall specification should not be lower than a Pi3B.
