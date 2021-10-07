@@ -54,8 +54,7 @@ sudo pip3 install setuptools ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log
 	echo "Clone PiNode-XMR to device from git" >>debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-#git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
-git clone -b Armbian-install --single-branch https://github.com/jahway603/PiNode-XMR.git 2> >(tee -a debug.log >&2)
+git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
 
 ##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes
 	echo "Configure ssh security" >>debug.log
@@ -114,7 +113,7 @@ sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-
 sudo /etc/init.d/avahi-daemon restart 2> >(tee -a debug.log >&2)
 
 ##Copy PiNode-XMR scripts to home folder
-echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
+echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
 sleep 3
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a debug.log >&2)
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2> >(tee -a debug.log >&2)

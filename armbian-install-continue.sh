@@ -8,7 +8,7 @@
 
 ###Begin2
 
-whiptail --title "PiNode-XMR Continue Armbian Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take several hours dependant on your hardware but I won't require any further input from you. I can be left to install myself if you wish\n\nSelect ok to continue setup" 16 60
+whiptail --title "PiNode-XMR Continue Armbian Buster (oldstable) Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take several hours dependant on your hardware but I won't require any further input from you. I can be left to install myself if you wish\n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
 
 #Create debug file for handling install errors:
@@ -114,7 +114,7 @@ sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-
 sudo /etc/init.d/avahi-daemon restart 2> >(tee -a debug.log >&2)
 
 ##Copy PiNode-XMR scripts to home folder
-echo -e "\e[32mMoving PiNode-XMR scripts into possition\e[0m"
+echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
 sleep 3
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a debug.log >&2)
 mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2> >(tee -a debug.log >&2)
