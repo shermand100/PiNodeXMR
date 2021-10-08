@@ -8,7 +8,7 @@
 
 ###Begin2
 
-whiptail --title "PiNode-XMR Continue Armbian Buster (oldstable) Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take several hours dependant on your hardware but I won't require any further input from you. I can be left to install myself if you wish\n\nSelect ok to continue setup" 16 60
+whiptail --title "PiNode-XMR Continue Armbian Bullseye (Stable) Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take several hours dependant on your hardware but I won't require any further input from you. I can be left to install myself if you wish\n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
 
 #Create debug file for handling install errors:
@@ -30,7 +30,7 @@ sudo apt update 2> >(tee -a debug.log >&2) && sudo apt upgrade -y 2> >(tee -a de
 	echo "Installing dependencies for --- Web Interface" >>debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
-sudo apt install apache2 shellinabox php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-gd php7.3-json php7.3-mbstring php7.3-mysql php7.3-xml -y 2> >(tee -a debug.log >&2)
+sudo apt install apache2 shellinabox php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd php7.4-json php7.4-mbstring php7.4-mysql php7.4-xml -y 2> >(tee -a debug.log >&2)
 sleep 3
 
 ##Installing dependencies for --- Monero
@@ -55,7 +55,6 @@ sudo pip3 install setuptools ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
 git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
-
 
 ##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes
 	echo "Configure ssh security" >>debug.log
@@ -96,7 +95,7 @@ sleep 3
 	echo "Add PiNode-XMR php settings" >>debug.log
 echo -e "\e[32mAdd PiNode-XMR php settings\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/ 2> >(tee -a debug.log >&2)
+sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.4/apache2/php.ini /etc/php/7.4/apache2/ 2> >(tee -a debug.log >&2)
 sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 sudo chown root /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 #Configure apache server for access to monero log file
