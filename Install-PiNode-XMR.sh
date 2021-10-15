@@ -8,9 +8,9 @@ sudo apt-get install whiptail -y
 CHOICE=$(
 whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS" 20 60 5 \
 	"1)" "Raspberry Pi OS"   \
-	"2)" "Armbian Debian (Bullseye - latest)" \	
+	"2)" "Armbian Debian (Bullseye - latest)" \
 	"3)" "Armbian Debian (Buster - older, stable)" \
-	"4)" "Exit"  3>&2 2>&1 1>&3	
+	"4)" "Exit"  3>&2 2>&1 1>&3
 )
 
 case $CHOICE in
@@ -25,7 +25,7 @@ case $CHOICE in
 		sleep 2
 		./raspbian.sh
 		exit 1
-	;;
+		;;
 
 	"2)")   
 		#Commands for Armbian Bullseye (latest)
@@ -38,7 +38,7 @@ case $CHOICE in
 		sleep 2
 		./armbian-bullseye-installer.sh
 		exit 1
-        ;;	
+    	;;	
 
 	"3)")   
 		#Commands for Armbian Buster (legacy stable)
