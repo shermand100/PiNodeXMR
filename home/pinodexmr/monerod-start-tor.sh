@@ -1,6 +1,5 @@
 #!/bin/bash
-#Establish IP
-DEVICE_IP="$(hostname -I | awk '{print $1}')"
+
 #Extra display hidden service address incase of error on tor install
 sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
 #Onion Public Address
@@ -8,6 +7,8 @@ NAME_FILE="/var/lib/tor/hidden_service/hostname"
 ONION_ADDR="$(sudo cat $NAME_FILE)"
 ANONYMOUS_INBOUND="${ONION_ADDR},127.0.0.1:18083"
 #Import Start Flag Values:
+	#Establish Device IP
+	. /home/pinodexmr/deviceIp.sh
 	#Import RPC Port Number
 	. /home/pinodexmr/monero-port.sh
 	#Import "IN-PEERS" (connections) Limit

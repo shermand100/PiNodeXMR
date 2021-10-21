@@ -1,7 +1,8 @@
 #!/bin/bash
-#Establish IP
-DEVICE_IP="$(hostname -I | awk '{print $1}')"
+
 #Import Start Flag Values:
+	#Establish Device IP
+	. /home/pinodexmr/deviceIp.sh
 	#Import RPC Pay Port Number
 	. /home/pinodexmr/monero-rpcpay-port.sh
 	#Import restricted Port Number
