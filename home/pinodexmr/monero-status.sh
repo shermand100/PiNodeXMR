@@ -22,8 +22,8 @@ _temp="./dialog.$$"
 defineVariables () {
 
 #Import Start Flag Values:
-	#Establish Local IP
-	DEVICE_IP="$(hostname -I | awk '{print $1}')"
+	#Establish Device IP
+	. /home/pinodexmr/deviceIp.sh
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
 	#Import Restricted Port Number (external use)
