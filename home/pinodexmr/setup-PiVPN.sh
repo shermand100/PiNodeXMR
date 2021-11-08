@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Get latest sources and package updates
+sudo apt-get update && sudo apt-get upgrade -y
+
 #Configuration of Dynamic DNS service - instructions from https://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client/
 
 curl -L https://install.pivpn.dev | bash
