@@ -34,4 +34,3 @@
 * * * * * /home/pinodexmr/free-h.sh
 * * * * * /home/pinodexmr/system-monitor.sh
 * 12 * * 7 /home/pinodexmr/weekly-log-clean.sh
-0 0 * * * wget -O block.txt https://gui.xmr.pm/files/block_tor.txt
