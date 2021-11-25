@@ -1,3 +1,7 @@
 #!/bin/sh
 #CPU temp Status
-{ sudo /opt/vc/bin/vcgencmd measure_temp & echo "Updates every 60 seconds" & date; } > /var/www/html/temp.txt
+
+cpu=$(cat /sys/class/thermal/thermal_zone0/temp)
+echo "$((cpu / 1000))'C" > /var/www/html/temp.txt
+echo "Updates every 60 seconds" >> /var/www/html/temp.txt
+echo `date` >> /var/www/html/temp.txt
