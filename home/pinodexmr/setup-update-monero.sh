@@ -85,11 +85,55 @@ else
 		sleep "2"
 		echo "Ensuring swap-file enabled for Monero build"
 		sudo dphys-swapfile swapon
-		echo "Downloading latest Monero version"
-		git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git
-		cd monero
-		USE_SINGLE_BUILDDIR=1 make
-		cd
+# SECTION TEMP REMOVED DUE TO BUILD ERRORS https://github.com/monero-ecosystem/PiNode-XMR/issues/46
+#********************************************
+#******START OF TEMP REMOVE SOURCE BULD******
+#********************************************
+# ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
+# 	echo "Build Monero" >>debug.log
+# #First build monero, single build directory
+
+# 	#Download release number
+# wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
+# chmod 755 /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
+# . /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
+
+# echo -e "\e[32mDownloading Monero $RELEASE\e[0m"
+# sleep 3
+# #git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
+# git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git 2> >(tee -a debug.log >&2) #Latest Stable Branch
+# echo -e "\e[32mBuilding Monero $RELEASE\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# sleep 10
+# cd monero
+# USE_SINGLE_BUILDDIR=1 make 2> >(tee -a debug.log >&2)
+# cd
+#********************************************
+#******END OF TEMP REMOVE SOURCE BULD********
+#********************************************
+
+#********************************************
+#*******START OF TEMP ARMv7 BINARY USE*******
+#********************************************
+echo "Downloading pre-built Monero from get.monero" >>debug.log
+#Make standard location for Monero
+mkdir -p ~/monero/build/release/bin
+#Downlaod Monero
+wget https://downloads.getmonero.org/cli/linuxarm7
+#Make temp folder to extract binaries
+mkdir temp && tar -xf linuxarm7 -C ~/temp
+#Mode Monerod files to standard location
+mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.2.3/monero* /home/pinodexmr/monero/build/release/bin/
+#Clean-up used downloaded files
+rm -R ~/temp
+rm linuxarm7
+#********************************************
+#*******END OF TEMP ARMv7 BINARY USE*******
+#********************************************
 		
 		if [ $BOOT_STATUS -eq 2 ]
 then
