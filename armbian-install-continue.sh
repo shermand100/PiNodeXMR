@@ -30,25 +30,38 @@ sudo apt update 2> >(tee -a debug.log >&2) && sudo apt upgrade -y 2> >(tee -a de
 	echo "Installing dependencies for --- Web Interface" >>debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
-sudo apt install apache2 shellinabox php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-gd php7.3-json php7.3-mbstring php7.3-mysql php7.3-xml -y 2> >(tee -a debug.log >&2)
+sudo apt install apache2 shellinabox php php-common -y 2> >(tee -a debug.log >&2)
 sleep 3
 
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" >>debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
-sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc pkg-config libpgm-dev libexpat1-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libunbound-dev graphviz doxygen liblzma-dev libldns-dev libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline6-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y 2> >(tee -a debug.log >&2)
+sudo apt update && sudo apt install build-essential cmake libpython2.7-dev libminiupnpc-dev libhidapi-libusb0 libboost-all-dev libgtest-dev libcurl4-openssl-dev libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2> >(tee -a debug.log >&2)
 sleep 3
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" >>debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq ntfs-3g avahi-daemon -y 2> >(tee -a debug.log >&2)
-	## Installing new dependencies for IP2Geo map creation
-sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap python-setuptools -y 2> >(tee -a debug.log >&2)
-	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
-sudo pip3 install setuptools ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log >&2)
+sudo apt install git mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog jq -y 2> >(tee -a debug.log >&2)
+sleep 3
+
+##Configure Swap file
+	echo "Configure Swap file" >>debug.log
+echo -e "\e[32mConfiguring 2GB Swap file (required for Monero build)\e[0m"
+sleep 3
+
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Raspbian-install/etc/dphys-swapfile 2> >(tee -a debug.log >&2)
+
+sudo mv /home/pinodexmr/dphys-swapfile /etc/dphys-swapfile 2> >(tee -a debug.log >&2)
+sudo chmod 664 /etc/dphys-swapfile 2> >(tee -a debug.log >&2)
+sudo chown root /etc/dphys-swapfile 2> >(tee -a debug.log >&2)
+sudo dphys-swapfile setup 2> >(tee -a debug.log >&2)
+sleep 5
+sudo dphys-swapfile swapon 2> >(tee -a debug.log >&2)
+echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
+sleep 3
 
 ##Clone PiNode-XMR to device from git
 	echo "Clone PiNode-XMR to device from git" >>debug.log
@@ -92,13 +105,6 @@ sudo systemctl enable statusOutputs.service 2> >(tee -a debug.log >&2)
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
-##Add PiNode-XMR php settings
-	echo "Add PiNode-XMR php settings" >>debug.log
-echo -e "\e[32mAdd PiNode-XMR php settings\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/ 2> >(tee -a debug.log >&2)
-sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
-sudo chown root /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 #Configure apache server for access to monero log file
 	sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
 sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
