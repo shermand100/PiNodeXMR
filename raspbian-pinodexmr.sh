@@ -41,10 +41,10 @@ sleep 3
 	echo "Installing dependencies for --- Monero" >>debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
-sudo apt update && sudo apt install build-essential cmake libpython2.7-dev libminiupnpc-dev libhidapi-libusb0 libboost-all-dev libgtest-dev libcurl4-openssl-dev libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2> >(tee -a debug.log >&2)
+sudo apt update && sudo apt install build-essential cmake libminiupnpc-dev libhidapi-libusb0 libboost-all-dev libgtest-dev libcurl4-openssl-dev libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2> >(tee -a debug.log >&2)
 sleep 3
 
-##Installing dependencies for --- miscellaneous (tor+tor monitor-nyx, security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+##Installing dependencies for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" >>debug.log
 echo -e "\e[32mInstalling dependencies for --- Miscellaneous\e[0m"
 sleep 3
@@ -152,44 +152,70 @@ sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2> >(tee -a debug.l
 sudo chown www-data -R /var/www/html/ 2> >(tee -a debug.log >&2)
 sudo chmod 777 -R /var/www/html/ 2> >(tee -a debug.log >&2)
 
-##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
-	echo "Build Monero" >>debug.log
-#First build monero, single build directory
+# SECTION TEMP REMOVED DUE TO BUILD ERRORS https://github.com/monero-ecosystem/PiNode-XMR/issues/46
+#********************************************
+#******START OF TEMP REMOVE SOURCE BULD******
+#********************************************
+# ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
+# 	echo "Build Monero" >>debug.log
+# #First build monero, single build directory
 
-	#Download release number
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
-chmod 755 /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
-. /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
+# 	#Download release number
+# wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
+# chmod 755 /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
+# . /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
 
-echo -e "\e[32mDownloading Monero $RELEASE\e[0m"
-sleep 3
-#git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
-git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git 2> >(tee -a debug.log >&2) #Latest Stable Branch
-echo -e "\e[32mBuilding Monero $RELEASE\e[0m"
-echo -e "\e[32m****************************************************\e[0m"
-echo -e "\e[32m****************************************************\e[0m"
-echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
-echo -e "\e[32m****************************************************\e[0m"
-echo -e "\e[32m****************************************************\e[0m"
-sleep 10
-cd monero
-USE_SINGLE_BUILDDIR=1 make 2> >(tee -a debug.log >&2)
-cd
-#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2> >(tee -a debug.log >&2)
+# echo -e "\e[32mDownloading Monero $RELEASE\e[0m"
+# sleep 3
+# #git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
+# git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git 2> >(tee -a debug.log >&2) #Latest Stable Branch
+# echo -e "\e[32mBuilding Monero $RELEASE\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# echo -e "\e[32m****************************************************\e[0m"
+# sleep 10
+# cd monero
+# USE_SINGLE_BUILDDIR=1 make 2> >(tee -a debug.log >&2)
+# cd
+# #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+# mkdir .bitmonero 2> >(tee -a debug.log >&2)
 
-echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
-echo -e "\e[32m*******************************************************\e[0m"
-echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
-echo -e "\e[32m*******************************************************\e[0m"
-sleep 10
-		echo "Build Monero Onion Block Explorer" >>debug.log
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a debug.log >&2)
-cd onion-monero-blockchain-explorer 2> >(tee -a debug.log >&2)
-mkdir build && cd build 2> >(tee -a debug.log >&2)
-cmake .. 2> >(tee -a debug.log >&2)
-make 2> >(tee -a debug.log >&2)
-cd
+# echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
+# echo -e "\e[32m*******************************************************\e[0m"
+# echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
+# echo -e "\e[32m*******************************************************\e[0m"
+# sleep 10
+# 		echo "Build Monero Onion Block Explorer" >>debug.log
+# git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a debug.log >&2)
+# cd onion-monero-blockchain-explorer 2> >(tee -a debug.log >&2)
+# mkdir build && cd build 2> >(tee -a debug.log >&2)
+# cmake .. 2> >(tee -a debug.log >&2)
+# make 2> >(tee -a debug.log >&2)
+# cd
+#********************************************
+#******END OF TEMP REMOVE SOURCE BULD********
+#********************************************
+
+#********************************************
+#*******START OF TEMP ARMv7 BINARY USE*******
+#********************************************
+echo "Downloading pre-built Monero from get.monero" >>debug.log
+#Make standard location for Monero
+mkdir -p ~/monero/build/release/bin
+#Downlaod Monero
+wget https://downloads.getmonero.org/cli/linuxarm7
+#Make temp folder to extract binaries
+mkdir temp && tar -xf linuxarm7 -C ~/temp
+#Mode Monerod files to standard location
+mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.2.3/monero* /home/pinodexmr/monero/build/release/bin/
+#Clean-up used downloaded files
+rm -R ~/temp
+rm linuxarm7
+#********************************************
+#*******END OF TEMP ARMv7 BINARY USE*******
+#********************************************
 
 ##Install crontab
 		echo "Install crontab" >>debug.log
