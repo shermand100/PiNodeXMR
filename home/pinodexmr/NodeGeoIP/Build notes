@@ -1,7 +1,0 @@
-
-##Dependencies
-sudo apt install python3-numpy python3-matplotlib libgeos-dev python3-geoip2 python3-mpltoolkits.basemap python-pip -y
-
-sudo pip3 install ip2geotools
-
-echo "IP_Address     City     Region     Country     Latitude     Logitude" > Raw_IPGEO-location.txt && while read line; do ip2geotools -d maxmindgeolite2city --db_path /home/pinodexmr/NodeGeoIP/GeoIPData/GeoLite2-City.mmdb -f csv-tab $line; done < /home/pinodexmr/NodeGeoIP/IPoutput.txt >> Raw_IPGEO-location.txt
