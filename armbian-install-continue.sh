@@ -44,7 +44,7 @@ sleep 3
 	echo "Installing dependencies for --- miscellaneous" >>debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install git mariadb-client-10.0 mariadb-server-10.0 screen exfat-fuse exfat-utils fail2ban ufw dialog jq -y 2> >(tee -a debug.log >&2)
+sudo apt install git mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog jq -y 2> >(tee -a debug.log >&2)
 sleep 3
 
 ##Configure Swap file
@@ -176,15 +176,6 @@ mkdir build && cd build 2> >(tee -a debug.log >&2)
 cmake .. 2> >(tee -a debug.log >&2)
 make 2> >(tee -a debug.log >&2)
 cd
-
-##Add Selta's ban list
-	echo "Add Selta's ban list" >>debug.log
-echo -e "\e[32mAdding Selstas Ban List\e[0m"
-sleep 3
-wget -O block.txt https://gui.xmr.pm/files/block_tor.txt 2> >(tee -a debug.log >&2)
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
-
 
 ##Install crontab
 		echo "Install crontab" >>debug.log

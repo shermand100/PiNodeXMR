@@ -30,7 +30,7 @@ sudo apt update 2> >(tee -a debug.log >&2) && sudo apt upgrade -y 2> >(tee -a de
 	echo "Installing dependencies for --- Web Interface" >>debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
-sudo apt install apache2 shellinabox php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd php7.4-json php7.4-mbstring php7.4-mysql php7.4-xml -y 2> >(tee -a debug.log >&2)
+sudo apt install apache2 shellinabox php php-common -y 2> >(tee -a debug.log >&2)
 sleep 3
 
 ##Installing dependencies for --- Monero
@@ -44,11 +44,7 @@ sleep 3
 	echo "Installing dependencies for --- miscellaneous" >>debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog python3-pip jq ntfs-3g avahi-daemon -y 2> >(tee -a debug.log >&2)
-	## Installing new dependencies for IP2Geo map creation
-sudo apt install python3-numpy libgeos-dev python3-geoip2 libatlas-base-dev python3-mpltoolkits.basemap python-setuptools -y 2> >(tee -a debug.log >&2)
-	##More IP2Geo dependencies - matplotlibv3.2.1 required for basemap support - post v3.3 basemap depreciated
-sudo pip3 install setuptools ip2geotools matplotlib==3.2.1 2> >(tee -a debug.log >&2)
+sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog jq ntfs-3g avahi-daemon -y 2> >(tee -a debug.log >&2)
 
 ##Clone PiNode-XMR to device from git
 	echo "Clone PiNode-XMR to device from git" >>debug.log
@@ -91,13 +87,6 @@ sudo systemctl enable statusOutputs.service 2> >(tee -a debug.log >&2)
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
-##Add PiNode-XMR php settings
-	echo "Add PiNode-XMR php settings" >>debug.log
-echo -e "\e[32mAdd PiNode-XMR php settings\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.4/apache2/php.ini /etc/php/7.4/apache2/ 2> >(tee -a debug.log >&2)
-sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
-sudo chown root /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 #Configure apache server for access to monero log file
 	sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
 sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
@@ -169,15 +158,6 @@ mkdir build && cd build 2> >(tee -a debug.log >&2)
 cmake .. 2> >(tee -a debug.log >&2)
 make 2> >(tee -a debug.log >&2)
 cd
-
-##Add Selta's ban list
-	echo "Add Selta's ban list" >>debug.log
-echo -e "\e[32mAdding Selstas Ban List\e[0m"
-sleep 3
-wget -O block.txt https://gui.xmr.pm/files/block_tor.txt 2> >(tee -a debug.log >&2)
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
-
 
 ##Install crontab
 		echo "Install crontab" >>debug.log
