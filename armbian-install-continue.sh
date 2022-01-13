@@ -197,6 +197,8 @@ wget https://downloads.getmonero.org/cli/linuxarm7
 mkdir temp && tar -xf linuxarm7 -C ~/temp
 #Mode Monerod files to standard location
 mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
+#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+mkdir .bitmonero 2> >(tee -a debug.log >&2)
 #Clean-up used downloaded files
 rm -R ~/temp
 rm linuxarm7
