@@ -111,7 +111,8 @@
 				"2)" "Prune Node" \
 				"3)" "Pop Blocks" \
 				"4)" "Monero-LWS Install" \
-				"5)" "Monero-LWS Admin" 2>&1 >/dev/tty)
+				"5)" "Monero-LWS Admin" \
+				"6)" "Generate SSL self-signed certificates" 2>&1 >/dev/tty)
 				
 				case $CHOICE4 in
 							"1)") . /home/pinodexmr/setup-explorer.sh	#Has functional legacy script, will change this format one day.
@@ -203,8 +204,25 @@
 								else
 									. /home/pinodexmr/setup.sh
 									fi
-								;;							
-			
+								;;
+								"6)") if (whiptail --title "SSL Certificate generation" --yesno "This will now generate self-signed SSL certifictes for this device.\n\nNote that the certificate is bound to this local device IP $(hostname -I | awk '{print $1}'), a change to this address will render this certificate invalid.\n\nYou will also be asked to create an 'export password', this will be used by you to add the generated certificates to your other devices\n\nWould you like to continue?" 18 78); then
+								cd
+								echo -e "\e[32mCreating SSL Certificates for wallet device bound to this local IP\e[0m"
+								sleep 2	
+								mkdir ~/lwsSslCert && cd lwsSslCert
+								#Generate cert and key
+								. /home/pinodexmr/antelleGenrateIpCert.sh $(hostname -I)
+								sleep 2
+								#Generate Android Cert and Key pair
+								openssl pkcs12 -export -in cert.pem -inkey key.pem -out androidCert.p12
+								sleep 2
+								#Generation complete
+								whiptail --title "SSL Certificate generation" --msgbox "\nSSL certificates have been generated.\n\nA copy of the generated\n/home/pinodexmr/lwsSslCert/cert.pem\nshould be added to (windows)\n'LocalComputer\Trusted Root Certification Authorities\Certificates'\nfor use with desktop devices... " 20 78
+								whiptail --title "SSL Certificate generation" --msgbox "\nFor Android devices the\n/home/pinodexmr/lwsSslCert/androidCert.p12\nshould be installed via\n'Settings>Security>Encryption&Credentials>Install certificates from storage'...\n\nReturning to setup menu" 20 78
+								else
+									. /home/pinodexmr/setup.sh
+									fi
+							;;									
 				esac
 				. /home/pinodexmr/setup.sh
 				;;
