@@ -61,7 +61,7 @@ else
 		sleep 3
 else
 
-		if (whiptail --title "Monero Onion Block Explorer Update" --yesno "This device thinks it's running the latest version of Monero Onion Block Explorer.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
+		if (whiptail --title "Monero Onion Block Explorer Update" --yesno "This device thinks it's running the latest version of Monero Onion Block Explorer.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Update" --no-button "Return to Main Menu"  14 78); then
 
 		echo -e "\e[32mForcing update/re-install of Monero Onion Block Explorer\e[0m"
 		sleep "2"
