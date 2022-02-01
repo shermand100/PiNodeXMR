@@ -203,7 +203,7 @@
             <div class="container py-4">
               <h3 class="demo-panel-title">Public Node: <small>Free External RPC</small></h3>
               <p><small>This will run a full node and provide a restricted RPC port to allow wallet connections to your
-                  node. You may change this port number if you wish. This port does not require hash payments or
+                  node. This port does not require hash payments or
                   username and password. Free to all. [ clearnet ]</small></p>
 
 
@@ -265,7 +265,11 @@
 
               <div class="row">
                 <div class="col-md-6">
-                  <h6 class="demo-panel-title">Set Custom Free RPC Port: </h6>
+                  <h6 class="demo-panel-title">Set Custom Unrestricted RPC Port: </h6>
+                  <p><small>Because this option is open and free to the public (once you forward the RPC port number
+                      from the Global Settings section) it is run on a restriced port. An unrestriced RPC port is made
+                      available on the number below and is used for local only status outputs. Do not expose the port
+                      below.</small></p>
                   <div class="input-group">
                     <form method="post">
                       <input type="number" placeholder="New port" class="form-control"

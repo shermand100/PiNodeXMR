@@ -28,6 +28,8 @@ defineVariables () {
 	. /home/pinodexmr/bootstatus.sh
 	#Import Restricted Port Number (external use)
 	. /home/pinodexmr/monero-port.sh
+	#Import unrestriced port number when running public node for internal use only
+	. /home/pinodexmr/monero-port-public-free.sh
 	#Import RPC username
 	. /home/pinodexmr/RPCu.sh
 	#Import RPC password
@@ -79,7 +81,7 @@ fi
 	if [ $BOOT_STATUS -eq 7 ]
 then
 		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-			STATUS="$(curl -s --digest -X POST http://${DEVICE_IP}:${MONERO_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json' | cat -s | jq -Mr {"Monero_Version:.result.version,Node_Status:.result.status,Busy_Syncing:.result.busy_syncing,Current_Sync_Height:.result.height,P2P_Outgoing_Connections:.result.outgoing_connections_count,P2P_Incoming_Connections:.result.incoming_connections_count,RPC_Connections_Count:.result.rpc_connections_count,Network_Type:.result.nettype,TX_Pool_Size:.result.tx_pool_size,White_Peerlist_Size:.result.white_peerlist_size,Grey_Peerlist_Size:.result.grey_peerlist_size,Update_Available:.result.update_available"} | sed 's/"//g;s/{//g;s/}//g;s/,//g;s/_/ /g;s/^$/ /g;')" && echo "$STATUS" > /var/www/html/Node_Status.txt
+			STATUS="$(curl -s --digest -X POST http://${DEVICE_IP}:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json' | cat -s | jq -Mr {"Monero_Version:.result.version,Node_Status:.result.status,Busy_Syncing:.result.busy_syncing,Current_Sync_Height:.result.height,P2P_Outgoing_Connections:.result.outgoing_connections_count,P2P_Incoming_Connections:.result.incoming_connections_count,RPC_Connections_Count:.result.rpc_connections_count,Network_Type:.result.nettype,TX_Pool_Size:.result.tx_pool_size,White_Peerlist_Size:.result.white_peerlist_size,Grey_Peerlist_Size:.result.grey_peerlist_size,Update_Available:.result.update_available"} | sed 's/"//g;s/{//g;s/}//g;s/,//g;s/_/ /g;s/^$/ /g;')" && echo "$STATUS" > /var/www/html/Node_Status.txt
 			date >> /var/www/html/Node_Status.txt
 fi
 
