@@ -214,6 +214,10 @@ git clone -b Raspbian-install --single-branch https://github.com/monero-ecosyste
 					echo -e "\e[32mRestarting tor service...\e[0m"
 					sudo service tor restart 2> >(tee -a debug.log >&2)
 					sleep 3
+
+				#Restart statusOutputs script service for changes to take effect
+				sudo systemctl restart statusOutputs
+
 				#Delete unused torrc file on event of update fail (tor not installed by user)
 					sudo rm /home/pinodexmr/torrc 2> >(tee -a debug.log >&2)
 
