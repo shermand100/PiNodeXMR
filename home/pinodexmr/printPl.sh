@@ -22,7 +22,9 @@ _temp="./dialog.$$"
 	DEVICE_IP="$(hostname -I | awk '{print $1}')"
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
-	#Import Restricted Port Number (external use)
+	#Import unrestriced port number when running public node for internal use only
+	. /home/pinodexmr/monero-port-public-free.sh
+	#Import Restricted Port Number (external use)	
 	. /home/pinodexmr/monero-port.sh
 	#Import RPC username
 	. /home/pinodexmr/RPCu.sh
@@ -68,7 +70,7 @@ fi
 	if [ $BOOT_STATUS -eq 7 ]
 then
 		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt
 fi
 	if [ $BOOT_STATUS -eq 8 ]
