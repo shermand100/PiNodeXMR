@@ -29,10 +29,10 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 		sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
 		sudo chmod 777 -R /home/pinodexmr/.bitmonero
 		
-		#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
+		#ADD UUID of USB drive to fstab. To auto-mount on boot.
 		UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p)
-		sudo sed -i '3d' /etc/fstab #removes existing entry is script run before (delete 3rd line fstab)
-		sudo sed "3 a UUID=$UUID /home/pinodexmr/.bitmonero $FILESYSTEM noexec,defaults,nofail 0 2" -i /etc/fstab
+		sudo sed -i '/bitmonero/d' /etc/fstab #removes existing entry if script run before (match 'bitmonero' and delete line)
+		sudo sed "$ a UUID=$UUID /home/pinodexmr/.bitmonero $FILESYSTEM noexec,defaults,nofail 0 2" -i /etc/fstab # '$' add to last line of file
 		echo "Drive data has been preserved for this configuration, initialized and will auto-mount on boot"
 		sleep 2
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your device /dev/$DEVICE_TO_CONFIGURE containing the Monero Blockchain has been:\n* Mounted to /home/pinodexmr/.bitmonero for PiNodeXMR use\n* /dev/$DEVICE_TO_CONFIGURE has been added to /etc/fstab to auto mount on future system boots." 20 60
@@ -106,10 +106,10 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 			# Set permissions of new mount
 				sudo chown -R pinodexmr /home/pinodexmr/.bitmonero
 				sudo chmod 777 -R /home/pinodexmr/.bitmonero
-			#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
+			#ADD UUID of USB drive to fstab. To auto-mount on boot.
 				UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p)
-				sudo sed -i '3d' /etc/fstab #removes existing entry is script run before (delete 3rd line fstab)
-				sudo sed "3 a UUID=$UUID /home/pinodexmr/.bitmonero ext4 noexec,defaults,nofail 0 2" -i /etc/fstab
+				sudo sed -i '/bitmonero/d' /etc/fstab #removes existing entry if script run before (match 'bitmonero' and delete line)
+				sudo sed "$ a UUID=$UUID /home/pinodexmr/.bitmonero ext4 noexec,defaults,nofail 0 2" -i /etc/fstab # '$' add to last line of file
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your selected drive has been configured as Linux filesystem ext4 labeled as 'XMRBLOCKCHAIN'\n\nIt has been mounted to /home/pinodexmr/.bitmonero\nIt will auto mount to this location on system boot" 20 60
 			./setup.sh
 
@@ -137,8 +137,9 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 				sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
 				UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p)
-				sudo sed -i '3d' /etc/fstab #removes existing entry is script run before (delete 3rd line fstab)
-				sudo sed "3 a UUID=$UUID /home/pinodexmr/.bitmonero ntfs noexec,defaults,nofail,umask=000 0 2" -i /etc/fstab
+				sudo sed -i '/bitmonero/d' /etc/fstab #removes existing entry if script run before (match 'bitmonero' and delete line)
+				sudo sed "$ a UUID=$UUID /home/pinodexmr/.bitmonero ntfs noexec,defaults,nofail,umask=000 0 2" -i /etc/fstab
+
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your selected drive has been configured as filesystem ntfs labeled as 'XMRBLOCKCHAIN'\n\nIt has been mounted to /home/pinodexmr/.bitmonero\nIt will auto mount to this location on system boot" 20 60
 			./setup.sh
 
@@ -219,8 +220,9 @@ if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold th
 				sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
 				UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p)
-				sudo sed -i '3d' /etc/fstab #removes existing entry is script run before (delete 3rd line fstab)
-				sudo sed "3 a UUID=$UUID /home/pinodexmr/.bitmonero ext4 noexec,defaults,nofail 0 2" -i /etc/fstab
+				sudo sed -i '/bitmonero/d' /etc/fstab #removes existing entry if script run before (match 'bitmonero' and delete line)
+				sudo sed "$ a UUID=$UUID /home/pinodexmr/.bitmonero ext4 noexec,defaults,nofail 0 2" -i /etc/fstab
+
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your selected drive has been configured as Linux filesystem ext4 labeled as 'XMRBLOCKCHAIN'\n\nIt has been mounted to /home/pinodexmr/.bitmonero\nIt will auto mount to this location on system boot" 20 60
 			./setup.sh
 
@@ -248,8 +250,9 @@ if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold th
 				sudo chmod 777 -R /home/pinodexmr/.bitmonero
 			#ADD UUID of USB drive to fstab. To auto-mount on boot. (add to 3rd line of fstab)
 				UUID=$(lsblk -o UUID,LABEL | grep XMRBLOCKCHAIN | awk '{print $1}' | sed -n 1p)
-				sudo sed -i '3d' /etc/fstab #removes existing entry is script run before (delete 3rd line fstab)
-				sudo sed "3 a UUID=$UUID /home/pinodexmr/.bitmonero ntfs noexec,defaults,nofail,umask=000 0 2" -i /etc/fstab
+				sudo sed -i '/bitmonero/d' /etc/fstab #removes existing entry if script run before (match 'bitmonero' and delete line)
+				sudo sed "$ a UUID=$UUID /home/pinodexmr/.bitmonero ntfs noexec,defaults,nofail,umask=000 0 2" -i /etc/fstab
+				
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your selected drive has been configured as filesystem ntfs labeled as 'XMRBLOCKCHAIN'\n\nIt has been mounted to /home/pinodexmr/.bitmonero\nIt will auto mount to this location on system boot" 20 60
 			./setup.sh
 
