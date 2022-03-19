@@ -70,6 +70,21 @@ else
 
 		echo -e "\e[32mSystem will now install the latest available of Monero.\e[0m"
 		sleep "2"
+
+#Establish OS 32 or 64 bit
+CPU_ARCH=`getconf LONG_BIT`
+echo "OS getconf LONG_BIT $CPU_ARCH" >> debug.log
+if [[ $CPU_ARCH -eq 64 ]]
+then
+  echo "ARCH: 64-bit"
+elif [[ $CPU_ARCH -eq 32 ]]
+then
+  echo "ARCH: 32-bit"
+else
+  echo "OS Unknown"
+fi
+sleep 3
+
 		sudo systemctl stop monerod-start.service
 		sudo systemctl stop monerod-prune.service
 		sudo systemctl stop monerod-start-free.service
@@ -85,55 +100,103 @@ else
 		sleep "2"
 		echo "Ensuring swap-file enabled for Monero build"
 		sudo dphys-swapfile swapon
-# SECTION TEMP REMOVED DUE TO BUILD ERRORS https://github.com/monero-ecosystem/PiNode-XMR/issues/46
-#********************************************
-#******START OF TEMP REMOVE SOURCE BULD******
-#********************************************
-# ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
-# 	echo "Build Monero" >>debug.log
-# #First build monero, single build directory
+# ********************************************
+# ******START OF MONERO SOURCE BULD******
+# ********************************************
+##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
+	echo "Build Monero" >>debug.log
+#First build monero, single build directory
 
-# 	#Download release number
-# wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
-# chmod 755 /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
-# . /home/pinodexmr/release.sh 2> >(tee -a debug.log >&2)
+	#Download latest Monero release/tag number
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/moneroLatestTag.sh -O /home/pinodexmr/moneroLatestTag.sh 2> >(tee -a debug.log >&2)
+chmod 755 /home/pinodexmr/moneroLatestTag.sh 2> >(tee -a debug.log >&2)
+. /home/pinodexmr/moneroLatestTag.sh 2> >(tee -a debug.log >&2)
 
-# echo -e "\e[32mDownloading Monero $RELEASE\e[0m"
-# sleep 3
-# #git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
-# git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git 2> >(tee -a debug.log >&2) #Latest Stable Branch
-# echo -e "\e[32mBuilding Monero $RELEASE\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# sleep 10
-# cd monero
-# USE_SINGLE_BUILDDIR=1 make 2> >(tee -a debug.log >&2)
-# cd
-#********************************************
-#******END OF TEMP REMOVE SOURCE BULD********
-#********************************************
+echo -e "\e[32mDownloading Monero $TAG\e[0m"
+sleep 3
+#git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
+git clone --recursive https://github.com/monero-project/monero.git 2> >(tee -a debug.log >&2) #Latest Stable Branch
+echo -e "\e[32mBuilding Monero $TAG\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+sleep 10
+cd monero
+git checkout $TAG 2> >(tee -a debug.log >&2)
+git submodule sync 2> >(tee -a debug.log >&2) && git submodule update --init --force 2> >(tee -a debug.log >&2)
+USE_SINGLE_BUILDDIR=1 make release 2> >(tee -a debug.log >&2)
+cd
+#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+mkdir .bitmonero 2> >(tee -a debug.log >&2)
 
-#********************************************
-#*******START OF TEMP ARMv7 BINARY USE*******
-#********************************************
-echo "Downloading pre-built Monero from get.monero" >>debug.log
-#Make standard location for Monero
-mkdir -p ~/monero/build/release/bin
-#Downlaod Monero
-wget https://downloads.getmonero.org/cli/linuxarm7
-#Make temp folder to extract binaries
-mkdir temp && tar -xf linuxarm7 -C ~/temp
-#Mode Monerod files to standard location
-mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
-#Clean-up used downloaded files
-rm -R ~/temp
-rm linuxarm7
-#********************************************
-#*******END OF TEMP ARMv7 BINARY USE*******
-#********************************************
+echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
+echo -e "\e[32m*******************************************************\e[0m"
+echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
+echo -e "\e[32m*******************************************************\e[0m"
+sleep 10
+		echo "Build Monero Onion Block Explorer" >>debug.log
+git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a debug.log >&2)
+cd onion-monero-blockchain-explorer 2> >(tee -a debug.log >&2)
+mkdir build && cd build 2> >(tee -a debug.log >&2)
+cmake .. 2> >(tee -a debug.log >&2)
+make 2> >(tee -a debug.log >&2)
+cd
+# ********************************************
+# ********END OF MONERO SOURCE BULD **********
+# ********************************************
+
+# #********************************************
+# #*******START OF TEMP BINARY USE*******
+# #**************(Disabled)********************
+
+# #Define Install Monero function to reduce repeat script
+# function f_installMonero {
+# echo "Downloading pre-built Monero from get.monero" >>debug.log
+# #Make standard location for Monero
+# mkdir -p ~/monero/build/release/bin
+# if [[ $CPU_ARCH -eq 64 ]]
+# then
+#   #Download 64-bit Monero
+# wget https://downloads.getmonero.org/cli/linuxarm8
+# #Make temp folder to extract binaries
+# mkdir temp && tar -xvf linuxarm8 -C ~/temp
+# #Move Monerod files to standard location
+# mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
+# rm linuxarm8
+# else
+#   #Download 32-bit Monero
+# wget https://downloads.getmonero.org/cli/linuxarm7
+# #Make temp folder to extract binaries
+# mkdir temp && tar -xvf linuxarm7 -C ~/temp
+# #Move Monerod files to standard location
+# mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
+# rm linuxarm7
+# fi
+# #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+# mkdir .bitmonero 2> >(tee -a debug.log >&2)
+# #Clean-up used downloaded files
+# rm -R ~/temp
+# }
+
+
+# if [[ $CPU_ARCH -ne 64 ]] && [[ $CPU_ARCH -ne 32 ]]
+# then
+#   if (whiptail --title "OS version" --yesno "I've tried to auto-detect what version of Monero you need based on your OS but I've not been successful.\n\nPlease select your OS architecture..." 8 78 --no-button "32-bit" --yes-button "64-bit"); then
+#     CPU_ARCH=64
+# 	f_installMonero
+# 	else
+#     CPU_ARCH=32
+# 	f_installMonero
+#   fi
+# else
+#  f_installMonero
+# fi
+
+# #********************************************
+# #*******END OF TEMP BINARY USE*******
+# #**************(Disabled)********************
 		
 		if [ $BOOT_STATUS -eq 2 ]
 then
