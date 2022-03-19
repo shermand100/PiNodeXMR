@@ -13,12 +13,12 @@ touch debug.log
 echo "
 ####################
 " >>debug.log
-echo "Start raspbian-pinodexmr.sh script $(date)" >>debug.log
+echo "Start ubuntu-install-continue.sh script $(date)" >>debug.log
 echo "
 ####################
 " >>debug.log
 
-whiptail --title "PiNode-XMR Continue Ubuntu Buster (oldstable) Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take several hours dependant on your hardware but I won't require any further input from you. I can be left to install myself if you wish\n\nSelect ok to continue setup" 16 60
+whiptail --title "PiNode-XMR Continue Ubuntu LTS Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take several hours dependant on your hardware but I won't require any further input from you. I can be left to install myself if you wish\n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
 
 ##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
@@ -34,6 +34,19 @@ if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compil
 			free -h
 			sleep 3
 fi
+
+###Continue as 'pinodexmr'
+cd
+echo -e "\e[32mLock old user 'pi'\e[0m"
+sleep 2
+sudo passwd --lock pi
+echo -e "\e[32mUser 'pi' Locked\e[0m"
+sleep 3
+echo -e "\e[32mLock old user 'ubuntu'\e[0m"
+sleep 2
+sudo passwd --lock ubuntu
+echo -e "\e[32mUser 'ubuntu' Locked\e[0m"
+sleep 3
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
