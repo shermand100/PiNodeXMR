@@ -8,15 +8,23 @@
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
 
 #Welcome
-if (whiptail --title "PiNode-XMR Armbian Installer" --yesno "To install PiNodeXMR using this installer the following conditions are required\n\n* You have logged in as 'root'\n* You created a user called 'pinodexmr'\n* You are still logged in as 'root' now\n\nWould you like to continue?" 12 60); then
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "To install PiNodeXMR using this installer the following condition is required\n\n* You are logged in as user 'ubuntu'\n* Would you like to continue?" 12 60); then
 
-whiptail --title "PiNode-XMR Armbian Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds." 12 78
+whiptail --title "PiNode-XMR Ubuntu Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds." 12 78
 
+
+##Create new user 'pinodexmr'
+sudo adduser pinodexmr --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+
+#Set pinodexmr password 'PiNodeXMR'
+echo "pinodexmr:PiNodeXMR" | sudo chpasswd
+echo -e "\e[32mpinodexmr password changed to 'PiNodeXMR'\e[0m"
+sleep 3
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/sudoers
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/sudoers
 sudo chmod 0440 ~/sudoers
 sudo chown root ~/sudoers
 sudo mv ~/sudoers /etc/sudoers
@@ -41,32 +49,13 @@ echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 #Download stage 2 Install script
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/armbian-install-continue.sh
-sudo mv /root/armbian-install-continue.sh /home/pinodexmr/
-sudo chown pinodexmr /home/pinodexmr/armbian-install-continue.sh
-sudo chmod 755 /home/pinodexmr/armbian-install-continue.sh
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-install-continue.sh
+sudo mv /root/ubuntu-install-continue.sh /home/pinodexmr/
+sudo chown pinodexmr /home/pinodexmr/ubuntu-install-continue.sh
+sudo chmod 755 /home/pinodexmr/ubuntu-install-continue.sh
 
 ##make script run when user logs in
-echo '. /home/pinodexmr/armbian-install-continue.sh' | sudo tee -a /home/pinodexmr/.profile
-
-##Configure Swap file if needed
-if (whiptail --title "PiNode-XMR Armbian Installer" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
-	echo -e "\e[32mSwap file unchanged\e[0m"
-	sleep 3
-		else
-			echo -e "\e[32mConfiguring 2GB Swap file (required for Monero build)\e[0m"
-			yes n | sudo apt install dphys-swapfile -y
-			sleep 3
-			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/dphys-swapfile
-			sudo mv /root/dphys-swapfile /etc/dphys-swapfile
-			sudo chmod 664 /etc/dphys-swapfile
-			sudo chown root /etc/dphys-swapfile
-			sudo dphys-swapfile setup
-			sleep 5
-			sudo dphys-swapfile swapon
-			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
-			sleep 3
-fi
+echo '. /home/pinodexmr/ubuntu-install-continue.sh' | sudo tee -a /home/pinodexmr/.profile
 
 whiptail --title "PiNode-XMR Continue Install" --msgbox "I've installed everything I can as user 'root'\n\nThe system now requires a reboot for changes to be made, allow 5 minutes then login as 'pinodexmr'\n\nSelect ok to continue with reboot" 16 60
 

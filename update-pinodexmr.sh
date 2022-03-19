@@ -42,7 +42,7 @@ sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fai
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add new permissions to www-data user for interface buttons)
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/sudoers
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/sudoers
 sudo chmod 0440 /home/pinodexmr/sudoers
 sudo chown root /home/pinodexmr/sudoers
 sudo mv /home/pinodexmr/sudoers /etc/sudoers
@@ -53,16 +53,16 @@ sleep 3
 	echo "Downlaod PiNodeXMR files" >>debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
+git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
 
-			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
+			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
 			chmod 755 /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
 			. /home/pinodexmr/new-ver-pi.sh
 			echo "Latest Version: $NEW_VERSION_PI "
 			echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 			sleep 2
-		#Downlaod all Armbian PiNodeXMR Files (git clone)			
-			git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
+		#Download all Armbian PiNodeXMR Files (git clone)			
+			git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
 
 				#Backup User values
 						echo "Backup variables" >>debug.log
@@ -197,14 +197,6 @@ git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem
 					mv /home/pinodexmr/add-tor-peer_retain.sh /home/pinodexmr/add-tor-peer.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUser configuration restored\e[0m"
 				
-				##Add Selta's ban list
-						echo "Add Selsta ban list" >>debug.log
-					echo -e "\e[32mAdding Selstas Ban List\e[0m"
-					sleep 3
-					wget -O block.txt https://gui.xmr.pm/files/block_tor.txt 2> >(tee -a debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
-					sleep 3
-
 				##Set Swappiness lower
 						echo "Set swappiness" >>debug.log
 					echo -e "\e[32mDecreasing swappiness\e[0m"
@@ -225,7 +217,7 @@ git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem
 						echo "Update torrc settings - if installed" >>debug.log
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
 					sleep 6
-			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/tor/torrc 2> >(tee -a debug.log >&2)
+			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/tor/torrc 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mApplying Settings...\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/torrc /etc/tor/torrc 2> >(tee -a debug.log >&2)
@@ -245,7 +237,7 @@ git clone -b Armbian-install --single-branch https://github.com/monero-ecosystem
 
 #Update system version number to new one installed
 				echo "Update PiNodeXMR version number" >>debug.log
-					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
+					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
 					chmod 755 /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
 					. /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUpdate system version number\e[0m"
