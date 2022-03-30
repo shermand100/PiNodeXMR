@@ -50,7 +50,7 @@ echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
 sleep 3
 wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-install-continue.sh
-sudo mv /root/ubuntu-install-continue.sh /home/pinodexmr/
+sudo mv ~/ubuntu-install-continue.sh /home/pinodexmr/
 sudo chown pinodexmr /home/pinodexmr/ubuntu-install-continue.sh
 sudo chmod 755 /home/pinodexmr/ubuntu-install-continue.sh
 
