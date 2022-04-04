@@ -8,9 +8,9 @@
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
 
 #Welcome
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "To install PiNodeXMR using this installer the following condition is required\n\n* You are logged in as user 'ubuntu'\n* Would you like to continue?" 12 60); then
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "To install PiNodeXMR using this installer the following condition is required\n\n* You are logged in as user 'pi' or 'ubuntu'\n* Would you like to continue?" 12 60); then
 
-whiptail --title "PiNode-XMR Ubuntu Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds." 12 78
+whiptail --title "PiNode-XMR Ubuntu Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds.\n\nOnce complete your Username will be 'pinodexmr' with Password 'PiNodeXMR'" 12 78
 
 
 ##Create new user 'pinodexmr'
@@ -64,6 +64,7 @@ echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m**********PiNode-XMR rebooting**********\e[0m"
 echo -e "\e[32m**********Reminder:*********************\e[0m"
 echo -e "\e[32m**********User: 'pinodexmr'*************\e[0m"
+echo -e "\e[32m**********Password: 'PiNodeXMR'*********\e[0m"
 echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m****************************************\e[0m"
 sudo reboot
