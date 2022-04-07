@@ -57,7 +57,7 @@ sudo chmod 755 /home/pinodexmr/ubuntu-install-continue.sh
 ##make script run when user logs in
 echo '. /home/pinodexmr/ubuntu-install-continue.sh' | sudo tee -a /home/pinodexmr/.profile
 
-whiptail --title "PiNode-XMR Continue Install" --msgbox "I've installed everything I can as user 'root'\n\nThe system now requires a reboot for changes to be made, allow 5 minutes then login as 'pinodexmr'\n\nSelect ok to continue with reboot" 16 60
+whiptail --title "PiNode-XMR Continue Install" --msgbox "I've installed everything I can as the default user\n\nThe system now requires a reboot for changes to be made, allow 5 minutes then login as 'pinodexmr'\n\nSelect ok to continue with reboot" 16 60
 
 echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m****************************************\e[0m"
