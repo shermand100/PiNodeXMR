@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Bootstrap 4 -->
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- Load Ajax -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  </script>
+  <!-- Font Awesome cdn -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Title  -->
+  <title>PiNode-XMR - Status</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/XMR.ico" />
+  <!-- Custom Style Sheet -->
+  <link rel="stylesheet" type="text/css" href="/app.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav justify-content-around w-100">
+        <li class="nav-item">
+          <a class="nav-link" href="node_status.html"><i class="fas fa-info"></i> Node Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="advanced-settings.html"><i class="fas fa-cogs"></i> Node Control</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
+            <i class="fas fa-terminal"></i> Web Terminal</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/" onclick="javascript:event.target.port=8081;event.target.protocol='http:';">
+            <i class="fas fa-search-dollar"></i> Block Explorer</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="p2Pool.html"><i class="fas fa-comment-dollar"></i> P2Pool</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/" onclick="javascript:event.target.port=7657;event.target.protocol='http:';">
+            <i class="fas fa-network-wired"></i> I2P Interface</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <img class="img-fluid d-block mx-auto" src="images/pinode-xmr-banner.png">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h2 class="text-center">
+          <small>Private Dependable Nodes</small>
+        </h2>
+        <hr>
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- container-fluid -->
+
+  <div class="container py-4">
+    <h3 class="demo-panel-title">P2Pool: <small> Decentralised Mining</small></h3>
+    <p><small>Whilst this device can run it's own P2Pool server to serve your other mining devices, mining on this low powered single board computer is not recommended. Mining on this device and the overheating that results may damage your device.</small></p>
+    <p><small>Solo mining is 100% independent and the best for the network. P2Pool mining has all the advantages of solo mining, but also makes regular payouts possible.</small></p>
+    <p><small>This feature is the result of the hard work of SChernykh (also known as sech1). This feature is pulled from <a href="github.com/SChernykh/p2pool">github.com/SChernykh/p2pool</a> Full useage instructions and documentation can be found there.</small></p>
+
+
+    <div class="row demo-row">
+      <div class="col-lg-4 mb-4">
+        <a onclick="startbutton()" href="#Start p2pool" class="btn btn-block btn-lg btn-dark">Start P2Pool <span class="fui-power"></span></a>
+      </div>
+
+
+      <script>
+        function startbutton() {
+          $.ajax({
+            url: "p2pool-start.php", //the page containing php script
+            type: "POST", //request type
+            success: function (result) {
+              alert(result);
+            }
+          });
+        }
+      </script>
+
+      <div class="col-lg-4 mb-4">
+        <a onclick="stopbutton()" href="#Stop p2pool" class="btn btn-block btn-lg btn-dark">Stop P2Pool
+          <span class="fui-power"></span></a>
+      </div>
+
+      <script>
+        function stopbutton() {
+          $.ajax({
+            url: "p2pool-stop.php", //the page containing php script
+            type: "POST", //request type
+            success: function (result) {
+              alert(result);
+            }
+          });
+        }
+      </script>
+
+<div class="container py-4">
+    <h6 class="demo-panel-title">Set Your Monero Address </span><small> Payouts will be sent to this address (min 0.0003XMR)</small></h6>
+      <div class="form-group">
+        <form method="post">
+          <input type="text" placeholder="Enter Monero Address" class="form-control"
+          onchange='if(this.value != 0) { address(this.value); }'><span class="fui-check-inverted"></span>
+        </form>
+      </div>
+
+  <script>
+    function address(value) {
+      $.ajax({
+        url: "mining-address.php", //the page containing php script
+        type: "POST", //request type
+        data: ({ value }),
+        success: function (result) {
+          alert(result);
+        }
+      });
+    }
+  </script>
+
+<div class="row">
+    <p><small><embed src="mining_address.txt" width=480px height=80px></small></p>
+</div> <!-- /row -->
+</div> <!-- /container -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3>View P2Pool: <small> Whilst running, view P2Pool live</small></h3>
+
+      <div class="col-lg-4 mb-4">
+        <a href="/" onclick="javascript:event.target.port=6688;event.target.protocol='http:';" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View P2Pool</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    </div> <!-- /container -->
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>
