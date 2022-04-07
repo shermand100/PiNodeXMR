@@ -32,25 +32,22 @@ else
 fi
 sleep 3
 
-whiptail --title "PiNode-XMR Continue Ubuntu LTS Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take ~20 minutes installing Monero and PiNodeXMR \n\nSelect ok to continue setup" 16 60
+whiptail --title "PiNode-XMR Continue Ubuntu LTS Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take ~80 minutes installing Monero and PiNodeXMR \n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
 
 ##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
+	echo -e "\e[32mSwap file unchanged\e[0m"
+	sleep 3
+		else
 			sudo fallocate -l 2G /swapfile 2>&1 | tee -a debug.log
 			sudo chmod 600 /swapfile 2>&1 | tee -a debug.log
 			sudo mkswap /swapfile 2>&1 | tee -a debug.log
-
-# This step temp removed as Monero not currently compiled from source
-# #Ask user if they'd like to turn on swap (above step necessary to enable web ui swap on/off button to work)
-# if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
-# 	echo -e "\e[32mSwap file unchanged\e[0m"
-# 	sleep 3
-# 		else
-# 			sudo swapon /swapfile 2>&1 | tee -a debug.log
-# 			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
-# 			free -h
-# 			sleep 3
-# fi
+			sudo swapon /swapfile 2>&1 | tee -a debug.log
+			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
+			free -h
+			sleep 3
+fi
 
 ###Continue as 'pinodexmr'
 cd
@@ -88,6 +85,11 @@ sleep 2
 	echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
 sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log && cd /usr/src/gtest 2>&1 | tee -a debug.log && sudo cmake . 2>&1 | tee -a debug.log && sudo make 2>&1 | tee -a debug.log
 sudo mv lib/libg* /usr/lib/ 2>&1 | tee -a debug.log
+
+##Installing dependencies for --- P2Pool
+	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
+sudo apt install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
+sleep 2
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a debug.log
@@ -174,106 +176,135 @@ sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
 
 
-# # ********************************************
-# # ******START OF MONERO SOURCE BULD******
-# # ********************************************
-# ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
-# 	echo "Build Monero" 2>&1 | tee -a debug.log
-# #First build monero, single build directory
+# ********************************************
+# ******START OF MONERO SOURCE BULD******
+# ********************************************
+##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
+	echo "Build Monero" 2>&1 | tee -a debug.log
 
-# 	#Download latest Monero release/tag number
-# wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/moneroLatestTag.sh -O /home/pinodexmr/moneroLatestTag.sh 2>&1 | tee -a debug.log
-# chmod 755 /home/pinodexmr/moneroLatestTag.sh 2>&1 | tee -a debug.log
-# . /home/pinodexmr/moneroLatestTag.sh
+	#Download latest Monero release number
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
+chmod 755 /home/pinodexmr/release.sh
+. /home/pinodexmr/release.sh
 
-# echo -e "\e[32mDownloading Monero $TAG\e[0m"
-# sleep 3
-# #git clone --recursive https://github.com/monero-project/monero.git       #Dev Branch
-# git clone --recursive https://github.com/monero-project/monero.git 2>&1 | tee -a debug.log #Latest Stable Branch
-# echo -e "\e[32mBuilding Monero $TAG\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# echo -e "\e[32m***This will take a 3-8hours - Hardware Dependent***\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# echo -e "\e[32m****************************************************\e[0m"
-# sleep 10
-# cd monero
-# git checkout $TAG 2>&1 | tee -a debug.log
-# git submodule sync 2>&1 | tee -a debug.log && git submodule update --init --force 2>&1 | tee -a debug.log
-# USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a debug.log
-# cd
-# #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-# mkdir .bitmonero 2>&1 | tee -a debug.log
+echo -e "\e[32mDownloading Monero \e[0m"
+sleep 3
 
-# echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
-# echo -e "\e[32m*******************************************************\e[0m"
-# echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
-# echo -e "\e[32m*******************************************************\e[0m"
-# sleep 10
-# 		echo "Build Monero Onion Block Explorer" 2>&1 | tee -a debug.log
-# git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2>&1 | tee -a debug.log
-# cd onion-monero-blockchain-explorer
-# mkdir build
-# cd build
-# cmake .. 2>&1 | tee -a debug.log
-# make 2>&1 | tee -a debug.log
-# cd
-# # ********************************************
-# # ********END OF MONERO SOURCE BULD **********
-# # **************(Disabled)********************
-
-#********************************************
-#**********START OF Monero BINARY USE**********
-#********************************************
-
-#Define Install Monero function to reduce repeat script
-function f_installMonero {
-echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a debug.log
-#Make standard location for Monero
-mkdir -p ~/monero/build/release/bin
-if [[ $CPU_ARCH -eq 64 ]]
-then
-  #Download 64-bit Monero
-wget https://downloads.getmonero.org/cli/linuxarm8
-#Make temp folder to extract binaries
-mkdir temp && tar -xvf linuxarm8 -C ~/temp
-#Move Monerod files to standard location
-mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
-rm linuxarm8
-rm -R /home/pinodexmr/temp/
-else
-  #Download 32-bit Monero
-wget https://downloads.getmonero.org/cli/linuxarm7
-#Make temp folder to extract binaries
-mkdir temp && tar -xvf linuxarm7 -C ~/temp
-#Move Monerod files to standard location
-mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
-rm linuxarm7
-rm -R /home/pinodexmr/temp/
-fi
+git clone --recursive https://github.com/monero-project/monero
+echo -e "\e[32mBuilding Monero \e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m***This will take a while - Hardware Dependent***\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+sleep 10
+cd monero && git submodule init && git submodule update
+git checkout $RELEASE
+git submodule sync && git submodule update
+USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a debug.log
+cd
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
 mkdir .bitmonero 2>&1 | tee -a debug.log
-#Clean-up used downloaded files
-rm -R ~/temp
-}
+
+echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
+echo -e "\e[32m*******************************************************\e[0m"
+echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
+echo -e "\e[32m*******************************************************\e[0m"
+sleep 10
+		echo "Build Monero Onion Block Explorer" 2>&1 | tee -a debug.log
+git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2>&1 | tee -a debug.log
+cd onion-monero-blockchain-explorer
+mkdir build
+cd build
+cmake .. 2>&1 | tee -a debug.log
+make 2>&1 | tee -a debug.log
+cd
+rm ~/release.sh
+
+# ********************************************
+# ********END OF MONERO SOURCE BULD **********
+# ********************************************
+
+# #********************************************
+# #**********START OF Monero BINARY USE********
+# #********************************************
+
+# #Define Install Monero function to reduce repeat script
+# function f_installMonero {
+# echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a debug.log
+# #Make standard location for Monero
+# mkdir -p ~/monero/build/release/bin
+# if [[ $CPU_ARCH -eq 64 ]]
+# then
+#   #Download 64-bit Monero
+# wget https://downloads.getmonero.org/cli/linuxarm8
+# #Make temp folder to extract binaries
+# mkdir temp && tar -xvf linuxarm8 -C ~/temp
+# #Move Monerod files to standard location
+# mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
+# rm linuxarm8
+# rm -R /home/pinodexmr/temp/
+# else
+#   #Download 32-bit Monero
+# wget https://downloads.getmonero.org/cli/linuxarm7
+# #Make temp folder to extract binaries
+# mkdir temp && tar -xvf linuxarm7 -C ~/temp
+# #Move Monerod files to standard location
+# mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
+# rm linuxarm7
+# rm -R /home/pinodexmr/temp/
+# fi
+# #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+# mkdir .bitmonero 2>&1 | tee -a debug.log
+# #Clean-up used downloaded files
+# rm -R ~/temp
+# }
 
 
-if [[ $CPU_ARCH -ne 64 ]] && [[ $CPU_ARCH -ne 32 ]]
-then
-  if (whiptail --title "OS version" --yesno "I've tried to auto-detect what version of Monero you need based on your OS but I've not been successful.\n\nPlease select your OS architecture..." 8 78 --no-button "32-bit" --yes-button "64-bit"); then
-    CPU_ARCH=64
-	f_installMonero
-	else
-    CPU_ARCH=32
-	f_installMonero
-  fi
-else
- f_installMonero
-fi
+# if [[ $CPU_ARCH -ne 64 ]] && [[ $CPU_ARCH -ne 32 ]]
+# then
+#   if (whiptail --title "OS version" --yesno "I've tried to auto-detect what version of Monero you need based on your OS but I've not been successful.\n\nPlease select your OS architecture..." 8 78 --no-button "32-bit" --yes-button "64-bit"); then
+#     CPU_ARCH=64
+# 	f_installMonero
+# 	else
+#     CPU_ARCH=32
+# 	f_installMonero
+#   fi
+# else
+#  f_installMonero
+# fi
 
-#********************************************
-#*******END OF Monero BINARY USE*******
-#********************************************
+# #********************************************
+# #*******END OF Monero BINARY USE*******
+# #********************************************
+
+##Install P2Pool
+echo -e "\e[32mInstalling P2Pool\e[0m"
+git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a debug.log
+cd p2pool
+mkdir build && cd build
+cmake .. 2>&1 | tee -a debug.log
+make -j2 2>&1 | tee -a debug.log
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
+#Manage P2pool log file ia log rotate
+sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
+sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
+sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
+
+
+##Install log.io (Real-time service monitoring)
+echo -e "\e[32mInstalling log.io\e[0m"
+sudo apt install nodejs npm -y
+mkdir -p ~/.log.io/inputs/
+mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json /.log.io/inputs/file.json 2>&1 | tee -a debug.log
+mv /home/pinodexmr/PiNode-XMR/.log.io/server.json /.log.io/server.json 2>&1 | tee -a debug.log
+sudo systemctl start log-io-server.service
+sudo systemctl start log-io-file.service
+sudo systemctl enable log-io-server.service
+sudo systemctl enable log-io-file.service
+
 
 ##Install crontab
 		echo "Install crontab" 2>&1 | tee -a debug.log
