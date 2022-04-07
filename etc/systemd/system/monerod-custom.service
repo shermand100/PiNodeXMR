@@ -1,0 +1,17 @@
+[Unit]
+Description=Monero Node - custom
+After=network.target
+
+[Service]
+ExecStart=/bin/bash monerod-custom.sh
+WorkingDirectory=/home/pinodexmr/
+Type=forking
+Restart=always
+RestartSec=30
+User=pinodexmr
+StandardOutput=inherit
+StandardError=inherit
+PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
+
+[Install]
+WantedBy=multi-user.target

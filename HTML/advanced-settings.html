@@ -38,23 +38,26 @@
         <li class="nav-item">
           <a class="nav-link" href="node_status.html"><i class="fas fa-info"></i> Node Status</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="advanced-settings.html"><i class="fas fa-cogs"></i> Node Control</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
             <i class="fas fa-terminal"></i> Web Terminal</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/" onclick="javascript:event.target.port=8081;event.target.protocol='http:';">
             <i class="fas fa-search-dollar"></i> Block Explorer</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="p2Pool.html"><i class="fas fa-comment-dollar"></i> P2Pool</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/" onclick="javascript:event.target.port=7657;event.target.protocol='http:';">
             <i class="fas fa-network-wired"></i> I2P Interface</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="log.html"><i class="fas fa-file-alt"></i> Log</a>
+          <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
         </li>
       </ul>
     </div>
@@ -262,7 +265,9 @@
               <div class="row">
                 <div class="col-md-6">
                   <h6 class="demo-panel-title">External Free Access Port Number: </h6>
-                  <p><small>The following port is set is allow for safe (restricted) access to this node. You will need to allow port-forwarding in your router settings for this port to allow external access. This port number can be changed in the 'Global Settings' section at the bottom of this page.</small></p>
+                  <p><small>The following port is set is allow for safe (restricted) access to this node. You will need
+                      to allow port-forwarding in your router settings for this port to allow external access. This port
+                      number can be changed in the 'Global Settings' section at the bottom of this page.</small></p>
                   <p><small><embed src="monero-rpc-port.txt" width=200px height=60px></small></p>
                 </div> <!-- /col -->
               </div> <!-- /row -->
@@ -1102,6 +1107,126 @@
   <div class="container py-4">
     <div class="row my-4">
       <div class="col-md-12">
+        <h3 class="font-weight-bold">Custom Node <small>configure personalised run options</small></h3>
+        <p><br>This sections allows a user comfortable with monero settings to customise their own startup options.<br><br></p>
+      </div> <!-- col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<!-- Start Accodian 3-->
+<div class="container">
+  <div class="accordion" id="accordionExample3">
+    <div class="card border-1">
+      <div class="card-header" id="headingSeven">
+        <h5 class="mb-0">
+          <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
+            data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            <i class="fas fa-arrows-alt-v"></i> Custom Configuration: <small> view/edit run conditions</small>
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample3">
+        <div class="card-body">
+          <div class="container-fluid">
+            <h3 class="demo-panel-title">Custom Node: <small> personalised run options</small></h3>
+            <p>Use this mode to run your own personal node with custom settings.<br><br> current config: </p>
+
+            <embed class="col-12 mb-2 float-left" src="user-set-custom.txt" width=500px height=120px>
+
+            <div class="row demo-row">
+              <div class="col-lg-4 mb-4">
+                <a onclick="startbutton()" href="#Start Custom" class="btn btn-block btn-lg btn-dark">Start Custom
+                  Node <span class="fui-power"></span></a>
+              </div>
+
+
+              <script>
+                function startbutton() {
+                  $.ajax({
+                    url: "custom-start.php", //the page containing php script
+                    type: "POST", //request type
+                    success: function (result) {
+                      alert(result);
+                    }
+                  });
+                }
+              </script>
+
+              <div class="col-lg-4 mb-4">
+                <a onclick="stopbutton()" href="#Stop Custom" class="btn btn-block btn-lg btn-dark">Stop Custom Node
+                  <span class="fui-power"></span></a>
+              </div>
+
+              <script>
+                function stopbutton() {
+                  $.ajax({
+                    url: "custom-stop.php", //the page containing php script
+                    type: "POST", //request type
+                    success: function (result) {
+                      alert(result);
+                    }
+                  });
+                }
+              </script>
+            </div> <!-- /row -->
+
+            <p>Set your custom options below and click 'save' to apply changes: </p>
+
+            <form method="post">
+              <textarea name="custom-setting" id="customSetting" rows="6" cols="100%" style="overflow:auto;resize:none" placeholder="./monerod --rpc-bind-ip=$DEVICE_IP --zmq-pub tcp://$DEVICE_IP:18083 --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$username:$password --rpc-ssl disabled --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --enable-dns-blocklist --detach"></textarea>
+              <button onclick="savebutton(customSetting.value)" class="btn btn-dark" type="submit">Save</button>
+            </form>
+
+          <script>
+            function savebutton(value) {
+              $.ajax({
+                url: "save-custom.php", //the page containing php script
+                type: "POST", //request type
+                data: ({ value }),
+                success: function (result) {
+                  alert(result);
+                }
+              });
+            }
+          </script>
+
+<div class="card border-1">
+  <div class="card-header" id="headingExamples">
+    <h5 class="mb-0">
+      <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
+        data-target="#collapseExamples" aria-expanded="false" aria-controls="collapseExamples">
+        <i class="fas fa-info"></i> Example configs
+      </button>
+    </h5>
+  </div>
+  <div id="collapseExamples" class="collapse" aria-labelledby="headingExamples" data-parent="#headingExamples">
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <h3 class="demo-panel-title">Examples: <small>...</small></h3>
+        </div>
+
+        <div class="row">
+          <div class="demo-type-example">
+            <span class="demo-text-note"></span>
+            <p>*These are a few examples and placeholder text</p>
+          </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+  </div>
+</div>
+
+          </div> <!-- /container -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="container py-4">
+    <div class="row my-4">
+      <div class="col-md-12">
         <h3 class="font-weight-bold">Global Settings: <small>System-wide Customisation</small></h3>
         <p><br>Specify a custom RPC Port for wallet connections if required<br><br>Control bandwidth use by specifying
           the number of in/out peer connections, or directly limit data rate (kb/s)</p>
@@ -1109,20 +1234,20 @@
     </div> <!-- /row -->
   </div> <!-- /container -->
 
-  <!-- Start Accodian 3-->
+  <!-- Start Accodian 4-->
   <div class="container">
-    <div class="accordion" id="accordionExample3">
+    <div class="accordion" id="accordionExample4">
       <div class="card border-1">
-        <div class="card-header" id="headingSeven">
+        <div class="card-header" id="headingEight">
           <h5 class="mb-0">
             <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-              data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+              data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
               <i class="fas fa-arrows-alt-v"></i> Network: <small>Global Settings</small>
             </button>
           </h5>
         </div>
 
-        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample3">
+        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample4">
           <div class="card-body">
             <div class="container py-4">
               <div class="row">
@@ -1322,15 +1447,15 @@
         </div>
       </div>
       <div class="card border-1">
-        <div class="card-header" id="headingEight">
+        <div class="card-header" id="headingNine">
           <h5 class="mb-0">
             <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-              data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+              data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
               <i class="fas fa-arrows-alt-v"></i> 2GB Swap File Enble/Disable
             </button>
           </h5>
         </div>
-        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample3">
+        <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample4">
           <div class="card-body">
             <div class="container">
               <div class="row">
