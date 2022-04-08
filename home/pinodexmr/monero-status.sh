@@ -3,7 +3,7 @@
 # use temp file 
 _temp="./dialog.$$"
 
-# Key -
+# Key - BOOT_STATUS
 # 2 = idle
 # 3 || 5 = private node || mining node
 # 4 = tor
@@ -27,13 +27,13 @@ defineVariables () {
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
 	#Import Restricted Port Number (external use)
-	. /home/pinodexmr/monero-port.sh
+	. /home/pinodexmr/variables/monero-port.sh
 	#Import unrestriced port number when running public node for internal use only
-	. /home/pinodexmr/monero-port-public-free.sh
+	. /home/pinodexmr/variables/monero-port-public-free.sh
 	#Import RPC username
-	. /home/pinodexmr/RPCu.sh
+	. /home/pinodexmr/variables/RPCu.sh
 	#Import RPC password
-	. /home/pinodexmr/RPCp.sh
+	. /home/pinodexmr/variables/RPCp.sh
 
 }
 

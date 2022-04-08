@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/i2p-port.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/i2p-port.sh', 'w');
 fwrite($fp, "#!/bin/bash\nI2P_PORT=$VALUE");
 fclose($fp);
 

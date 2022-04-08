@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/add-i2p-peer.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/add-i2p-peer.sh', 'w');
 fwrite($fp, "#!/bin/bash\nADD_I2P_PEER=$VALUE");
 fclose($fp);
 

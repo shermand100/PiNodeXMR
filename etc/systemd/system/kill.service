@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 ExecStart=/bin/bash kill.sh
-WorkingDirectory=/home/pinodexmr/
+WorkingDirectory=/home/pinodexmr/execScripts/
 StandardOutput=inherit
 StandardError=inherit
 Type=oneshot

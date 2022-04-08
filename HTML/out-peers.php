@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/out-peers.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/out-peers.sh', 'w');
 fwrite($fp, "#!/bin/bash\nOUT_PEERS=$VALUE");
 fclose($fp);
 

@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/monero-port.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/monero-port.sh', 'w');
 fwrite($fp, "#!/bin/bash\nMONERO_PORT=$VALUE");
 fclose($fp);
 

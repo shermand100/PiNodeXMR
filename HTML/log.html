@@ -35,10 +35,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav justify-content-around w-100">
         <li class="nav-item">
-          <a class="nav-link" href="node_status.html"><i class="fas fa-info"></i> Node Status</a>
+          <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="advanced-settings.html"><i class="fas fa-cogs"></i> Node Control</a>
+          <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
@@ -80,22 +80,30 @@
     </div> <!-- row -->
   </div> <!-- container -->
 
-
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h3>Log: <small> Node File</small></h3>
-
-        <div class="demo-type-example">
-          <p> <embed src="bitmonero.log" width=100% height=1000px></p>
+        <h3>View logs Live: <small> Whilst running, view node services live</small></h3>
+  
+        <div class="col-lg-4 mb-4">
+          <a href="/" onclick="javascript:event.target.port=6688;event.target.protocol='http:';" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View System Streams</a>
         </div>
+  
       </div>
     </div>
   </div>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h3>Log: <small> Download log Files:</small></h3>
 
+        <a href="bitmonero.log" download>Download Monero.log</a>
+        <a href="p2pool.log" download>Download P2Pool.log</a>
 
-
+      </div>
+    </div>
+  </div>
 
   <!-- JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

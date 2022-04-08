@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/monerod-custom.sh', 'w');
+$fp = fopen('/home/pinodexmr/execScripts/moneroCustomNode.sh', 'w');
 fwrite($fp, "#!/bin/bash\ncd /home/pinodexmr/monero/build/release/bin/\n$VALUE");
 fclose($fp);
 

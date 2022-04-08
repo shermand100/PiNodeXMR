@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/mining-intensity.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/mining-intensity.sh', 'w');
 fwrite($fp, "#!/bin/bash\nMINING_INTENSITY=$VALUE");
 fclose($fp);
 

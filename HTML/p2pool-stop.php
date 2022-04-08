@@ -1,5 +1,5 @@
 <?php 
-  exec("sudo systemctl stop p2pool-start.service");
-  echo "Stop Command Sent for Private Node";
-  exec (". /home/pinodexmr/remove-autostart.sh");
+  exec("sudo systemctl stop p2pool.service");
+  exec("sudo systemctl disable p2pool.service");
+  echo "Stop Command Sent for P2Pool";
 ?>

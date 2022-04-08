@@ -64,23 +64,30 @@ sleep 3
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
+#ubuntu /dev/null odd requiremnt to set permissions
+sudo chmod 666 /dev/null
 sleep 3
-sudo apt update 2>&1 | tee -a debug.log && sudo apt upgrade -y 2>&1 | tee -a debug.log
+sudo apt-get update 2>&1 | tee -a debug.log
+sudo apt-get upgrade -y 2>&1 | tee -a debug.log
 ##Auto remove any obsolete packages
-sudo apt autoremove -y 2>&1 | tee -a debug.log
+sudo apt-get autoremove -y 2>&1 | tee -a debug.log
+## Add universe repository for exfat-utils install
+sudo add-apt-repository universe -y 2>&1 | tee -a debug.log
+sudo apt-get update 2>&1 | tee -a debug.log
+sudo apt-get upgrade -y 2>&1 | tee -a debug.log
 
 ##Installing dependencies for --- Web Interface
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
-sudo apt install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
+sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
 sleep 3
 
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
-sudo apt update && sudo apt install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
+sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
 sleep 2
 	echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
 sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log && cd /usr/src/gtest 2>&1 | tee -a debug.log && sudo cmake . 2>&1 | tee -a debug.log && sudo make 2>&1 | tee -a debug.log
@@ -88,14 +95,15 @@ sudo mv lib/libg* /usr/lib/ 2>&1 | tee -a debug.log
 
 ##Installing dependencies for --- P2Pool
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
-sudo apt install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
+sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install git mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a debug.log
+sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a debug.log
+sudo apt-get install exfat-fuse exfat-utils -y
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 sleep 3
 
@@ -166,7 +174,6 @@ sleep 3
 
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a debug.log
-echo -e "\e[32mConfiguring Web-UI\e[0m"
 sleep 3
 #First move hidden file specifically .htaccess file then entire directory
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
@@ -174,14 +181,13 @@ sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2>&1 | tee -a debug.l
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>&1 | tee -a debug.log
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+echo -e "\e[32mSuccess\e[0m"
 
 
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
 # ********************************************
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
-	echo "Build Monero" 2>&1 | tee -a debug.log
-
 	#Download latest Monero release number
 wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
 chmod 755 /home/pinodexmr/release.sh
@@ -296,7 +302,7 @@ sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
 
 ##Install log.io (Real-time service monitoring)
 echo -e "\e[32mInstalling log.io\e[0m"
-sudo apt install nodejs npm -y
+sudo apt-get install nodejs npm -y
 mkdir -p ~/.log.io/inputs/
 mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json /.log.io/inputs/file.json 2>&1 | tee -a debug.log
 mv /home/pinodexmr/PiNode-XMR/.log.io/server.json /.log.io/server.json 2>&1 | tee -a debug.log
@@ -324,7 +330,6 @@ sudo sysctl vm.swappiness=10 2>&1 | tee -a debug.log
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
 sudo rm -r /home/pinodexmr/PiNode-XMR/ 2>&1 | tee -a debug.log
-sudo rm /home/pinodexmr/moneroLatestTag.sh 2>&1 | tee -a debug.log
 
 ##Change log in menu to 'main'
 #Delete line 28 (previous setting)

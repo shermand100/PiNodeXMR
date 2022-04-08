@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/add-tor-peer.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/add-tor-peer.sh', 'w');
 fwrite($fp, "#!/bin/bash\nADD_TOR_PEER=$VALUE");
 fclose($fp);
 

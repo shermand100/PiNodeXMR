@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/credits.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/credits.sh', 'w');
 fwrite($fp, "#!/bin/bash\nCREDITS=$VALUE");
 fclose($fp);
 

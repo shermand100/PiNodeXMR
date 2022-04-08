@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/difficulty.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/difficulty.sh', 'w');
 fwrite($fp, "#!/bin/bash\nDIFFICULTY=$VALUE");
 fclose($fp);
 

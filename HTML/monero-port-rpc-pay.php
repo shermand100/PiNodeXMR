@@ -1,6 +1,6 @@
 <?php
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/monero-rpcpay-port.sh', 'w');
+$fp = fopen('/home/pinodexmr/variables/monero-rpcpay-port.sh', 'w');
 fwrite($fp, "#!/bin/bash\nMONERO_RPCPAY_PORT=$VALUE");
 fclose($fp);
 
