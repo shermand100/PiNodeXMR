@@ -64,17 +64,14 @@ sleep 3
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
-#ubuntu /dev/null odd requiremnt to set permissions
-sudo chmod 666 /dev/null
-sleep 3
 sudo apt-get update 2>&1 | tee -a debug.log
 sudo apt-get upgrade -y 2>&1 | tee -a debug.log
 ##Auto remove any obsolete packages
 sudo apt-get autoremove -y 2>&1 | tee -a debug.log
 ## Add universe repository for exfat-utils install
-sudo add-apt-repository universe -y 2>&1 | tee -a debug.log
-sudo apt-get update 2>&1 | tee -a debug.log
-sudo apt-get upgrade -y 2>&1 | tee -a debug.log
+# sudo add-apt-repository universe -y 2>&1 | tee -a debug.log
+# sudo apt-get update 2>&1 | tee -a debug.log
+# sudo apt-get upgrade -y 2>&1 | tee -a debug.log
 
 ##Installing dependencies for --- Web Interface
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a debug.log
@@ -90,9 +87,12 @@ sleep 3
 sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
 sleep 2
 	echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
-sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log && cd /usr/src/gtest 2>&1 | tee -a debug.log && sudo cmake . 2>&1 | tee -a debug.log && sudo make 2>&1 | tee -a debug.log
-sudo mv lib/libg* /usr/lib/ 2>&1 | tee -a debug.log
-
+sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log
+cd /usr/src/gtest
+sudo cmake . 2>&1 | tee -a debug.log
+sudo make
+sudo mv lib/libg* /usr/lib/
+cd
 ##Installing dependencies for --- P2Pool
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
@@ -103,7 +103,7 @@ sleep 2
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
 sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a debug.log
-sudo apt-get install exfat-fuse exfat-utils -y
+sudo apt-get install exfat-fuse exfat-utils -y 2>&1 | tee -a debug.log
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 sleep 3
 
@@ -136,6 +136,16 @@ sudo chown root /etc/rc.local 2>&1 | tee -a debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
+
+##Copy PiNode-XMR scripts to home folder
+echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
+sleep 3
+mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2>&1 | tee -a debug.log
+mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2>&1 | tee -a debug.log
+sudo chmod 777 -R /home/pinodexmr/* 2>&1 | tee -a debug.log #Read/write access needed by www-data to action php port, address customisation
+echo -e "\e[32mSuccess\e[0m"
+sleep 3
+
 ##Add PiNode-XMR systemd services
 	echo "Add PiNode-XMR systemd services" 2>&1 | tee -a debug.log
 echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
@@ -144,13 +154,13 @@ sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/sys
 sudo chmod 644 /etc/systemd/system/*.service 2>&1 | tee -a debug.log
 sudo chown root /etc/systemd/system/*.service 2>&1 | tee -a debug.log
 sudo systemctl daemon-reload 2>&1 | tee -a debug.log
-sudo systemctl start statusOutputs.service 2>&1 | tee -a debug.log
-sudo systemctl enable statusOutputs.service 2>&1 | tee -a debug.log
+sudo systemctl start moneroStatus.service 2>&1 | tee -a debug.log
+sudo systemctl enable moneroStatus.service 2>&1 | tee -a debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 #Configure apache server for access to monero log file
-	sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a debug.log
 sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a debug.log
 sudo chown root /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a debug.log
 sudo /etc/init.d/apache2 restart 2>&1 | tee -a debug.log
@@ -162,15 +172,6 @@ sleep 3
 	echo "Setup local hostname" 2>&1 | tee -a debug.log
 sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a debug.log
 sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a debug.log
-
-##Copy PiNode-XMR scripts to home folder
-echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
-sleep 3
-mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2>&1 | tee -a debug.log
-mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2>&1 | tee -a debug.log
-sudo chmod 777 -R /home/pinodexmr/* 2>&1 | tee -a debug.log #Read/write access needed by www-data to action php port, address customisation
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
 
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a debug.log
@@ -189,6 +190,9 @@ echo -e "\e[32mSuccess\e[0m"
 # ********************************************
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
 	#Download latest Monero release number
+#ubuntu /dev/null odd requiremnt to set permissions
+sudo chmod 666 /dev/null
+sleep 3
 wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
 chmod 755 /home/pinodexmr/release.sh
 . /home/pinodexmr/release.sh
@@ -304,8 +308,8 @@ sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
 echo -e "\e[32mInstalling log.io\e[0m"
 sudo apt-get install nodejs npm -y
 mkdir -p ~/.log.io/inputs/
-mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json /.log.io/inputs/file.json 2>&1 | tee -a debug.log
-mv /home/pinodexmr/PiNode-XMR/.log.io/server.json /.log.io/server.json 2>&1 | tee -a debug.log
+mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a debug.log
+mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a debug.log
 sudo systemctl start log-io-server.service
 sudo systemctl start log-io-file.service
 sudo systemctl enable log-io-server.service
