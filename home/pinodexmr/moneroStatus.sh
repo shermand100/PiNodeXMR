@@ -23,7 +23,7 @@ defineVariables () {
 
 #Import Start Flag Values:
 	#Establish Device IP
-	. /home/pinodexmr/deviceIp.sh
+	. /home/pinodexmr/variables/deviceIp.sh
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
 	#Import Restricted Port Number (external use)

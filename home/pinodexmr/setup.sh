@@ -29,21 +29,21 @@
 					;;
 				
 					"2)") 	if (whiptail --title "PiNode-XMR Set Password" --yesno "This will change your SSH/Web terminal log in password\n\nWould you like to continue?" 12 78); then
-					. /home/pinodexmr/setup-password-master.sh
+					. /home/pinodexmr/setupMenuScripts/setup-password-master.sh
 							else
 					. /home/pinodexmr/setup.sh
 							fi
 					;;
 					
 					"3)") 	if (whiptail --title "PiNode-XMR Set Password" --yesno "This will set your credentials needed to connect your wallet to your node\n\nWould you like to continue?" 12 78); then
-					. /home/pinodexmr/setup-password-monerorpc.sh
+					. /home/pinodexmr/setupMenuScripts/setup-password-monerorpc.sh
 							else
 					. /home/pinodexmr/setup.sh
 							fi
 					;;
 			
 					"4)")	if (whiptail --title "PiNode-XMR configure storage" --yesno "This will allow you to add USB storage for the Monero blockchain.\n\nConnect your device now.\n\nWould you like to continue?" 16 78); then
-					. /home/pinodexmr/setup-usb-select-device.sh
+					. /home/pinodexmr/setupMenuScripts/setup-usb-select-device.sh
 							else
 					. /home/pinodexmr/setup.sh
 							fi
@@ -70,21 +70,21 @@
 				case $CHOICE3 in
 		
 					"1)")	if (whiptail --title "PiNode-XMR Update Monero" --yesno "This will run a check to see if a Monero update is available\n\nIf an update is found PiNode-XMR will perform the update.\n\n***This will take several hours***\n\nWould you like to continue?" 12 78); then
-							. /home/pinodexmr/setup-update-monero.sh
+							. /home/pinodexmr/setupMenuScripts/setup-update-monero.sh
 							else
 							. /home/pinodexmr/setup.sh
 							fi
 						;;
 				
 					"2)")	if (whiptail --title "Update PiNode-XMR" --yesno "This will check for updates to PiNode-XMR Including performance, features and web interface\n\nWould you like to continue?" 12 78); then
-							. /home/pinodexmr/setup-update-pinodexmr.sh
+							. /home/pinodexmr/setupMenuScripts/setup-update-pinodexmr.sh
 							else
 							. /home/pinodexmr/setup.sh
 							fi
 						;;
 			
 					"3)")	if (whiptail --title "Update Onion-Blockchain-Explorer" --yesno "This will check for and install updates to your Blockchain Explorer\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
-							. /home/pinodexmr/setup-update-explorer.sh
+							. /home/pinodexmr/setupMenuScripts/setup-update-explorer.sh
 							else
 							. /home/pinodexmr/setup.sh
 							fi
@@ -110,18 +110,18 @@
 				"6)" "Generate SSL self-signed certificates" 2>&1 >/dev/tty)
 				
 				case $CHOICE4 in
-							"1)") . /home/pinodexmr/setup-explorer.sh	#Has functional legacy script, will change this format one day.
+							"1)") . /home/pinodexmr/setupMenuScripts/setup-explorer.sh	#Has functional legacy script, will change this format one day.
 								;;
 								
 							"2)")	if (whiptail --title "PiNode-XMR Prune Monero Node" --yesno "This will configure your node to run 'pruned' to reduce storage space required for the blockchain\n\n***This command only be run once and cannot be undone***\n\nAre you sure you want to continue?" 12 78); then
-									. /home/pinodexmr/setup-prune-node.sh
+									. /home/pinodexmr/setupMenuScripts/setup-prune-node.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
 				
 							"3)")	if (whiptail --title "PiNode-XMR Pop Blocks" --yesno "If you have errors for duplicate transactions in your log file, you may be able to 'pop' off the last blocks from the chain to un-freeze the sync process without syncing from scratch\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
-									. /home/pinodexmr/pop-blocks.sh
+									. /home/pinodexmr/setupMenuScripts/pop-blocks.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
@@ -148,25 +148,23 @@
 									sleep 2	
 									mkdir ~/lwsSslCert && cd lwsSslCert
 									#Generate cert and key
-									. /home/pinodexmr/antelleGenrateIpCert.sh $(hostname -I)
+									. /home/pinodexmr/setupMenuScripts/antelleGenrateIpCert.sh $(hostname -I)
 									sleep 2
 									#Generate Android Cert and Key pair
 									openssl pkcs12 -export -in cert.pem -inkey key.pem -out androidCert.p12
 									sleep 2
-									#Add Monero-LWS service to system monitor (crontab will run this every minute)
-									sed -i '13 a 	echo -n "Monero-LWS  : " && sudo systemctl status monero-lws.service | sed -n '3'p | cut -c11-;' /home/pinodexmr/system-monitor.sh
 									#Set IP for systemd monero-lws
-									. /home/pinodexmr/IPforLWS.sh
+									. /home/pinodexmr/variables/IPforLWS.sh
 									#Install complete
 									whiptail --title "Monero-LWS installer" --msgbox "\nThe Monero-LWS installation is complete and SSL certificates have been generated.\n\nA copy of the generated /home/pinodexmr/lswSslCert/cert.pem should be added to (windows) 'LocalComputer\Trusted Root Certification Authorities\Certificates' for use with MyMonero desktop... " 20 78
 									whiptail --title "Monero-LWS installer" --msgbox "\nFor Android Lightweight Wallets the\n/home/pinodexmr/lswSslCert/androidCert.p12 should be installed via\n'Settings>Security>Encryption&Credentials>Install certificates from storage'..." 20 78
 											if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS on PiNodeXMR boot?" 14 78); then
-											sudo systemctl enable monero-lws
+											sudo systemctl enable monero-lws.service
 											else
 											sleep 1
 											fi
 											if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS now?" 14 78); then
-											sudo systemctl start monero-lws
+											sudo systemctl start monero-lws.service
 											else
 											sleep 1
 											fi
@@ -204,7 +202,7 @@
 								sleep 2	
 								mkdir ~/lwsSslCert && cd lwsSslCert
 								#Generate cert and key
-								. /home/pinodexmr/antelleGenrateIpCert.sh $(hostname -I)
+								. /home/pinodexmr/setupMenuScripts/antelleGenrateIpCert.sh $(hostname -I)
 								sleep 2
 								#Generate Android Cert and Key pair
 								openssl pkcs12 -export -in cert.pem -inkey key.pem -out androidCert.p12
@@ -232,7 +230,7 @@
 				case $CHOICE5 in
 		
 							"1)")	if (whiptail --title "PiNode-XMR Install tor" --yesno "Some countries for censorship, political or legal reasons do not look favorably on tor and other anonymity services, so tor is not installed on this device by default. However this option can install it now for you.\n\nWould you like to continue?" 14 78); then
-									. /home/pinodexmr/setup-tor.sh
+									. /home/pinodexmr/setupMenuScripts/setup-tor.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
@@ -252,14 +250,14 @@
 									. /home/pinodexmr/setup.sh
 									else
 									sudo systemctl stop tor
-									sudo systemctl disable to
+									sudo systemctl disable tor
 									whiptail --title "PiNode-XMR tor" --msgbox "The tor service has been stopped" 12 78;
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
 								
 							"4)")if (whiptail --title "PiNode-XMR Install I2P" --yesno "This will install the I2P server/router onto your PiNode-XMR\n\nWould you like to continue?" 14 78); then
-									. /home/pinodexmr/setup-i2p.sh
+									. /home/pinodexmr/setupMenuScripts/setup-i2p.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
@@ -277,14 +275,14 @@
 								;;
 								
 							"6)")	if (whiptail --title "PiNode-XMR PiVPN Install" --yesno "This feature will install PiVPN on your PiNode-XMR\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
-									. /home/pinodexmr/setup-PiVPN.sh
+									. /home/pinodexmr/setupMenuScripts/setup-PiVPN.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
 								
 							"7)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
-									. /home/pinodexmr/setup-noip.sh
+									. /home/pinodexmr/setupMenuScripts/setup-noip.sh
 									else
 									. /home/pinodexmr/setup.sh
 									fi

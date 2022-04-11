@@ -305,11 +305,17 @@ sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
 
 
 ##Install log.io (Real-time service monitoring)
+#Establish Device IP
+. ~/variables/deviceIp.sh
 echo -e "\e[32mInstalling log.io\e[0m"
 sudo apt-get install nodejs npm -y
+sudo npm install -g log.io
+sudo npm install -g log.io-file-input
 mkdir -p ~/.log.io/inputs/
 mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a debug.log
 mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a debug.log
+sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json
+sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json
 sudo systemctl start log-io-server.service
 sudo systemctl start log-io-file.service
 sudo systemctl enable log-io-server.service

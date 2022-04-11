@@ -27,55 +27,55 @@ LINE8=$(lsblk --nodeps | sed -n 9p)
 	
 	case $CHOICE in
 	
-		"__") . /home/pinodexmr/setup-usb-select-device.sh
+		"__") . /home/pinodexmr/setupMenuScripts/setup-usb-select-device.sh
 		;;
 		
 		"1)") DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 2p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 2p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 				
 		"2)")DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 3p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 3p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 		
 		"3)")DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 4p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 4p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 		
 		"4)")DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 5p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 5p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 
 		"5)")DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 6p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 6p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 
 		"6)")DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 7p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 7p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 		
 		"7)")DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 8p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 8p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 		
 		"8)")DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 9p)
 		echo "#!/bin/sh
 DEVICE_TO_CONFIGURE=$(lsblk --nodeps -o name | sed -n 9p)" > /home/pinodexmr/setup-usb-path.sh
-				sudo /home/pinodexmr/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+				sudo /home/pinodexmr/setupMenuScripts/setup-usb.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 		;;
 	esac
 		./setup.sh

@@ -777,7 +777,7 @@ sleep 10
 
 			##Dependencies
 			#Import $DEVICE_TO_CONFIGURE variable
-				. /home/pinodexmr/setup-usb-path.sh
+				. /home/pinodexmr/setupMenuScripts/setup-usb-path.sh
 			#Mount
 				sudo mount -t udf -o rw "/dev/$DEVICE_TO_CONFIGURE"1 /home/pinodexmr/.bitmonero
 				sudo chown -R pinodexmr /home/pinodexmr/.bitmonero

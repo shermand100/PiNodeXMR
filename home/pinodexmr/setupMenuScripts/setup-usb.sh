@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Import $DEVICE_TO_CONFIGURE variable e.g /dev/sda
-. /home/pinodexmr/setup-usb-path.sh
+. /home/pinodexmr/setupMenuScripts/setup-usb-path.sh
 #Append partition number of drive (+1)
 	fullDrivePath="/dev/$DEVICE_TO_CONFIGURE"1
 #Determine filesystem of device to configured
@@ -84,7 +84,7 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 		"1)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as UDF for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			#Run format-UDF script to do the work of configuring drive and mounting
-			sudo /home/pinodexmr/format-udf.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+			sudo /home/pinodexmr/setupMenuScripts/format-udf.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 
             ;;
 			
@@ -196,7 +196,7 @@ if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold th
 		"1)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as UDF for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			#Run format-UDF script to do the work of configuring drive and mounting
-			sudo /home/pinodexmr/format-udf.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
+			sudo /home/pinodexmr/setupMenuScripts/format-udf.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
 
             ;;
 			

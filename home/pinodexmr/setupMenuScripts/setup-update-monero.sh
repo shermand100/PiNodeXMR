@@ -21,6 +21,55 @@ chmod 755 /home/pinodexmr/release.sh
 . /home/pinodexmr/release.sh
 echo $NEW_VERSION 'New Version'
 echo $CURRENT_VERSION 'Current Version'
+
+#Define update function:
+
+fn_updateMonero () {
+		#Stop Node to make system resources available.
+		sudo systemctl stop blockExplorer.service
+		sudo systemctl stop moneroPrivate.service
+		sudo systemctl stop moneroMiningNode.service
+		sudo systemctl stop moneroTorPrivate.service
+		sudo systemctl stop moneroTorPublic.service
+		sudo systemctl stop moneroPublicFree.service
+		sudo systemctl stop moneroI2PPrivate.service
+		sudo systemctl stop moneroCustomNode.service
+		sudo systemctl stop moneroPublicRPCPay.service
+		echo "Monero node stop command sent, allowing 30 seconds for safe shutdown"
+		sleep "30"
+		echo "Deleting Old Version"
+		rm -rf /home/pinodexmr/monero/
+		sleep "2"
+	#Download latest Monero release number
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
+chmod 755 /home/pinodexmr/release.sh
+. /home/pinodexmr/release.sh
+
+#ubuntu /dev/null requirement to set permission
+sudo chmod 666 /dev/null
+sleep 1
+
+echo -e "\e[32mDownloading Monero \e[0m"
+sleep 3
+
+git clone --recursive https://github.com/monero-project/monero
+echo -e "\e[32mBuilding Monero \e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m***This will take a while - Hardware Dependent***\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+echo -e "\e[32m****************************************************\e[0m"
+sleep 10
+cd monero && git submodule init && git submodule update
+git checkout $RELEASE
+git submodule sync && git submodule update
+USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a debug.log
+cd
+		#Update system version number
+		echo "#!/bin/bash
+		CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
+}
+
 sleep "3"
 	if [ $CURRENT_VERSION -lt $NEW_VERSION ]
 		then
@@ -40,13 +89,7 @@ sleep "3"
 		echo "Deleting Old Version"
 		rm -rf /home/pinodexmr/monero/
 		sleep "2"
-		echo "Ensuring swap-file enabled for Monero build"
-		sudo dphys-swapfile swapon
-		echo "Downloading latest Monero version"
-		git clone --recursive -b $RELEASE https://github.com/monero-project/monero.git
-		cd monero
-		USE_SINGLE_BUILDDIR=1 make
-		cd
+
 		
 		sleep 2
 		if [ $BOOT_STATUS -eq 2 ]

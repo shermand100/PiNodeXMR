@@ -62,7 +62,7 @@ whiptail --clear
 	NEWRPCp="${NEWRPCp1}"
 #Set new RPC Password
 	echo "#!/bin/sh
-RPCp=${NEWRPCp}" > /home/pinodexmr/RPCp.sh
+RPCp=${NEWRPCp}" > /home/pinodexmr/variables/RPCp.sh
 
 	whiptail \
 	--title "PiNode-XMR RPC config" --msgbox "New RPC Password set.\n\nNext select a new RPC username" 10 30
@@ -80,7 +80,7 @@ RPCp=${NEWRPCp}" > /home/pinodexmr/RPCp.sh
 	exitstatus=$?
 	if [ $exitstatus = 0 ]; then
 	echo "#!/bin/sh
-RPCu=${NEWRPCu}" > /home/pinodexmr/RPCu.sh
+RPCu=${NEWRPCu}" > /home/pinodexmr/variables/RPCu.sh
 
 	whiptail --title "PiNode-XMR RPC config" --msgbox "New RPC Username set:\n\n ${NEWRPCu}" 10 30
 	else

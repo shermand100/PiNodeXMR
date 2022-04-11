@@ -9,7 +9,7 @@ sleep 3
 ##Setup update location for i2p updates via debian inc keys
 echo -e "\e[32mInstalling I2P...\e[0m"
 sleep 3	
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/etc/apt/sources.list.d/i2p.list
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/apt/sources.list.d/i2p.list
 sleep 1
 sudo mv /home/pinodexmr/i2p.list /etc/apt/sources.list.d/
 sudo chmod 644 /etc/apt/sources.list.d/i2p.list
@@ -40,7 +40,8 @@ sleep 5
 	#WEB_CLIENT_PORT="$(cat /home/pinodexmr/.i2p/clients.config.d/00-net.i2p.router.web.RouterConsoleRunner-clients.config | sed '3q;d' | awk '{ print $1, $4 }' | cut -d'=' -f2-)"
 
 	##Set Device IP variable
-	DEVICE_IP="$(hostname -I | awk '{print $1}')"
+	cd
+	. ~/variables/deviceIp.sh
 	
 	##add lan ip to config (default blocks lan access to web client)
 	#This allows access from ip e.g.: 192.168.1.116:7657
