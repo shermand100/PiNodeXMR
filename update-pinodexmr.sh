@@ -10,33 +10,50 @@ echo "
 " >>debug.log
 sleep 1	
 ##Update and Upgrade system
-	echo "Update and Upgrade system" >>debug.log
-echo -e "\e[32mReceiving and applying Raspbian updates to latest versions\e[0m"
-sleep 3
-sudo apt update 2> >(tee -a debug.log >&2) && sudo apt upgrade -y 2> >(tee -a debug.log >&2)
+##Update and Upgrade system
+echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
+sudo apt-get update 2>&1 | tee -a debug.log
+sudo apt-get upgrade -y 2>&1 | tee -a debug.log
+##Auto remove any obsolete packages
+sudo apt-get autoremove -y 2>&1 | tee -a debug.log
+## Add universe repository for exfat-utils install
+# sudo add-apt-repository universe -y 2>&1 | tee -a debug.log
+# sudo apt-get update 2>&1 | tee -a debug.log
+# sudo apt-get upgrade -y 2>&1 | tee -a debug.log
 
 ##Checking all dependencies are installed for --- Web Interface
 	echo "Update dependencies for Web interface" >>debug.log
 echo -e "\e[32m##Checking all dependencies are installed for --- Web Interface\e[0m"
 sleep 3
-sudo apt install apache2 shellinabox php php-common -y 2> >(tee -a debug.log >&2)
-echo -e "\e[32mSuccess\e[0m"
+sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
 sleep 3
 
 ##Checking all dependencies are installed for --- Monero
 	echo "Update dependencies for Monero" >>debug.log
 echo -e "\e[32m##Checking all dependencies are installed for --- Monero\e[0m"
 sleep 3
-sudo apt install git build-essential cmake libpython2.7-dev libboost-all-dev miniupnpc libminiupnpc-dev pkg-config libunbound-dev graphviz doxygen libunwind8-dev libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y 2> >(tee -a debug.log >&2)
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
+sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
+sleep 2
+	echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
+sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log
+cd /usr/src/gtest
+sudo cmake . 2>&1 | tee -a debug.log
+sudo make
+sudo mv lib/libg* /usr/lib/
+cd
+##Installing dependencies for --- P2Pool
+	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
+sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
+sleep 2
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Update dependencies for Misc" >>debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt install mariadb-client mariadb-server screen exfat-fuse exfat-utils fail2ban ufw dialog jq ntfs-3g -y 2> >(tee -a debug.log >&2)
-
+sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a debug.log
+sudo apt-get install exfat-fuse exfat-utils -y 2>&1 | tee -a debug.log
+#libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
+sleep 3
 		#Download update files
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add new permissions to www-data user for interface buttons)
@@ -50,19 +67,10 @@ echo -e "\e[32mGlobal permissions changed\e[0m"
 sleep 3
 
 ##Clone PiNode-XMR to device from git
-	echo "Downlaod PiNodeXMR files" >>debug.log
+	echo "Clone PiNode-XMR to device from git" 2>&1 | tee -a debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
-
-			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
-			chmod 755 /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
-			. /home/pinodexmr/new-ver-pi.sh
-			echo "Latest Version: $NEW_VERSION_PI "
-			echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
-			sleep 2
-		#Download all Armbian PiNodeXMR Files (git clone)			
-			git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2> >(tee -a debug.log >&2)
+git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2>&1 | tee -a debug.log
 
 				#Backup User values
 						echo "Backup variables" >>debug.log
@@ -71,32 +79,33 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					echo -e "\e[32mIf a setting did not exist on your previous version you may see some errors here for missing files, these can safely be ignored\e[0m"					
 					echo -e "\e[32m*****\e[0m"						
 					sleep 8
+					#home dir
 					mv /home/pinodexmr/bootstatus.sh /home/pinodexmr/bootstatus_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/credits.sh /home/pinodexmr/credits_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/current-ver.sh /home/pinodexmr/current-ver_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/current-ver-exp.sh /home/pinodexmr/current-ver-exp_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/current-ver-pi.sh /home/pinodexmr/current-ver-pi_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/difficulty.sh /home/pinodexmr/difficulty_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/error.log /home/pinodexmr/error_retain.log 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/explorer-flag.sh /home/pinodexmr/explorer-flag_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/i2p-address.sh /home/pinodexmr/i2p-address_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/i2p-port.sh /home/pinodexmr/i2p-port_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/i2p-tx-proxy-port.sh /home/pinodexmr/i2p-tx-proxy-port_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/in-peers.sh /home/pinodexmr/in-peers_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/limit-rate-down.sh /home/pinodexmr/limit-rate-down_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/limit-rate-up.sh /home/pinodexmr/limit-rate-up_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/mining-address.sh /home/pinodexmr/mining-address_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/mining-intensity.sh /home/pinodexmr/mining-intensity_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-port.sh /home/pinodexmr/monero-port_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-port-public-free.sh /home/pinodexmr/monero-port-public-free_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/out-peers.sh /home/pinodexmr/out-peers_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/payment-address.sh /home/pinodexmr/payment-address_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/prunestatus.sh /home/pinodexmr/prunestatus_status.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/RPCp.sh /home/pinodexmr/RPCp_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/RPCu.sh /home/pinodexmr/RPCu_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-rpcpay-port.sh /home/pinodexmr/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/add-i2p-peer.sh /home/pinodexmr/add-i2p-peer_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/add-tor-peer.sh /home/pinodexmr/add-tor-peer_retain.sh 2> >(tee -a debug.log >&2)
+					#variables dir
+					mv /home/pinodexmr/variables/add-i2p-peer.sh /home/pinodexmr/variables/add-i2p-peer_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/add-tor-peer.sh /home/pinodexmr/variables/add-tor-peer_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/credits.sh /home/pinodexmr/variables/credits_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/current-ver.sh /home/pinodexmr/variables/current-ver_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/current-ver-exp.sh /home/pinodexmr/variables/current-ver-exp_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/current-ver-pi.sh /home/pinodexmr/variables/current-ver-pi_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/difficulty.sh /home/pinodexmr/variables/difficulty_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/i2p-address.sh /home/pinodexmr/variables/i2p-address_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/i2p-port.sh /home/pinodexmr/variables/i2p-port_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/i2p-tx-proxy-port.sh /home/pinodexmr/variables/i2p-tx-proxy-port_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/in-peers.sh /home/pinodexmr/variables/in-peers_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/limit-rate-down.sh /home/pinodexmr/variables/limit-rate-down_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/limit-rate-up.sh /home/pinodexmr/variables/limit-rate-up_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/mining-address.sh /home/pinodexmr/variables/mining-address_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/mining-intensity.sh /home/pinodexmr/variables/mining-intensity_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-port.sh /home/pinodexmr/variables/monero-port_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-port-public-free.sh /home/pinodexmr/variables/monero-port-public-free_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-rpcpay-port.sh /home/pinodexmr/variables/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-stats-port.sh /home/pinodexmr/variables/monero-stats-port_retain.s 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/out-peers.sh /home/pinodexmr/variables/out-peers_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/payment-address.sh /home/pinodexmr/variables/payment-address_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/prunestatus.sh /home/pinodexmr/variables/prunestatus_status.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/RPCp.sh /home/pinodexmr/variables/RPCp_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/RPCu.sh /home/pinodexmr/variables/RPCu_retain.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUser-set configuration saved\e[0m"					
 					
 				#Remove old html images (prevents error when trying to overwrite non-empty directory)

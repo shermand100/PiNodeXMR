@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 
 
 #Permission Setting
@@ -18,22 +18,19 @@ sleep "3"
 	if [ $CURRENT_VERSION_PI -lt $NEW_VERSION_PI ]; then
 					if (whiptail --title "PiNode-XMR Updater" --yesno "An update has been found for your PiNode-XMR. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-	wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/update-pinodexmr.sh | bash
+	wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-pinodexmr.sh | bash
 
 					else
-					rm /home/pinodexmr/new-ver-pi.sh
-					. /home/pinodexmr/setup.sh
+					whiptail --title "PiNode-XMR Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 					fi
 
 else
 		if (whiptail --title "PiNode-XMR Update" --yesno "This device thinks it's running the latest version of PiNode-XMR.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-	wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/Armbian-install/update-pinodexmr.sh | bash
+	wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-pinodexmr.sh | bash
 		
 									else
 									whiptail --title "PiNode-XMR Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
-									rm /home/pinodexmr/new-ver-pi.sh
-									. /home/pinodexmr/setup.sh
 									fi
 	fi
 	

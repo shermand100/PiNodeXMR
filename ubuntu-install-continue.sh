@@ -326,7 +326,6 @@ sudo systemctl enable log-io-file.service
 		echo "Install crontab" 2>&1 | tee -a debug.log
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
-sudo crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/root 2>&1 | tee -a debug.log
 crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
