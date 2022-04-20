@@ -3,15 +3,13 @@
 	#Create device IP
 	MY_IP="$(hostname -I | awk '{print $1}')"
 	#Import Port Number
-	. /home/pinodexmr/monero-port.sh
+	. /home/pinodexmr/variables/monero-port.sh
 	#Import RPC username
-	. /home/pinodexmr/RPCu.sh
+	. /home/pinodexmr/variables/RPCu.sh
 	#Import RPC password
-	. /home/pinodexmr/RPCp.sh
+	. /home/pinodexmr/variables/RPCp.sh
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
-	#Import Restricted Port Number (external use)
-	. /home/pinodexmr/monero-port.sh
 
 		if [ $BOOT_STATUS -eq 6 ]
 then

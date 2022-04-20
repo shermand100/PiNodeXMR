@@ -2,29 +2,29 @@
 
 #Import Start Flag Values:
 	#Establish Device IP
-	. /home/pinodexmr/deviceIp.sh
+	. /home/pinodexmr/variables/deviceIp.sh
 	#Import RPC Port Number
-	. /home/pinodexmr/monero-port.sh
+	. /home/pinodexmr/variables/monero-port.sh
 	#Import IN-PEERS (connections) Limit
-	. /home/pinodexmr/in-peers.sh
+	. /home/pinodexmr/variables/in-peers.sh
 	#Import OUT-PEERS (connections) Limit
-	. /home/pinodexmr/out-peers.sh
+	. /home/pinodexmr/variables/out-peers.sh
 	#Import Data Limit Up
-	. /home/pinodexmr/limit-rate-up.sh
+	. /home/pinodexmr/variables/limit-rate-up.sh
 	#Import Data Limit Down
-	. /home/pinodexmr/limit-rate-down.sh
+	. /home/pinodexmr/variables/limit-rate-down.sh
 	#Import RPC username
-	. /home/pinodexmr/RPCu.sh
+	. /home/pinodexmr/variables/RPCu.sh
 	#Import RPC password
-	. /home/pinodexmr/RPCp.sh
+	. /home/pinodexmr/variables/RPCp.sh
 	#Import your I2P server/router hostname
-	. /home/pinodexmr/i2p-address.sh
+	. /home/pinodexmr/variables/i2p-address.sh
 	#Import your I2P server/router port
-	. /home/pinodexmr/i2p-port.sh
+	. /home/pinodexmr/variables/i2p-port.sh
 	#Import i2p-tx-proxy port
-	. /home/pinodexmr/i2p-tx-proxy-port.sh
+	. /home/pinodexmr/variables/i2p-tx-proxy-port.sh
 	#Import ADD_I2P_PEER (seed) port
-	. /home/pinodexmr/add-i2p-peer.sh
+	. /home/pinodexmr/variables/add-i2p-peer.sh
 
 #Update power cycle reboot state
 	echo "#!/bin/sh

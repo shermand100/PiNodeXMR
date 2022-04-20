@@ -2,25 +2,25 @@
 
 #Import Start Flag Values:
 	#Establish Device IP
-	. /home/pinodexmr/deviceIp.sh
+	. /home/pinodexmr/variables/deviceIp.sh
 	#Import Port Number
-	. /home/pinodexmr/monero-port.sh
+	. /home/pinodexmr/variables/monero-port.sh
 	#Import "OUT-PEERS" (connections) Limit
-	. /home/pinodexmr/out-peers.sh
+	. /home/pinodexmr/variables/out-peers.sh
 	#Import "IN_PEERS" (connections) Limit
-	. /home/pinodexmr/in-peers.sh
+	. /home/pinodexmr/variables/in-peers.sh
 	#Import Data Limit Up
-	. /home/pinodexmr/limit-rate-up.sh
+	. /home/pinodexmr/variables/limit-rate-up.sh
 	#Import Data Limit Down
-	. /home/pinodexmr/limit-rate-down.sh
+	. /home/pinodexmr/variables/limit-rate-down.sh
 	#Import Mining Address
-	. /home/pinodexmr/mining-address.sh
+	. /home/pinodexmr/variables/mining-address.sh
 	#Import Mining Intensity
-	. /home/pinodexmr/mining-intensity.sh
+	. /home/pinodexmr/variables/mining-intensity.sh
 	#Import RPC username
-	. /home/pinodexmr/RPCu.sh
+	. /home/pinodexmr/variables/RPCu.sh
 	#Import RPC password
-	. /home/pinodexmr/RPCp.sh
+	. /home/pinodexmr/variables/RPCp.sh
  
 #Output the currently running node mode
 	echo "#!/bin/sh
