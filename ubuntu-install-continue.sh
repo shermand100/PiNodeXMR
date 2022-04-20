@@ -65,13 +65,12 @@ sleep 3
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
 sudo apt-get update 2>&1 | tee -a debug.log
-sudo apt-get upgrade -y 2>&1 | tee -a debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a debug.log
+
 ##Auto remove any obsolete packages
 sudo apt-get autoremove -y 2>&1 | tee -a debug.log
-## Add universe repository for exfat-utils install
-# sudo add-apt-repository universe -y 2>&1 | tee -a debug.log
-# sudo apt-get update 2>&1 | tee -a debug.log
-# sudo apt-get upgrade -y 2>&1 | tee -a debug.log
+
 
 ##Installing dependencies for --- Web Interface
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a debug.log
