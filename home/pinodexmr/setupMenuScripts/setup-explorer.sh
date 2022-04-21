@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 		CHOICE=$(whiptail --title "Monero Onion Blockchain Explorer" --menu "\n\nStart or Stop the Blockchain Explorer manually" 20 60 10 \
 	"1)" "Start Blockchain Explorer"   \
 	"2)" "Stop Blockchain Explorer"   \

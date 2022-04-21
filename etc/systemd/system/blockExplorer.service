@@ -5,9 +5,9 @@ After=network.target
 [Service]
 ExecStart=/bin/bash blockExplorer.sh
 WorkingDirectory=/home/pinodexmr/execScripts/
-StandardOutput=inherit
-StandardError=inherit
-Type=forking
+StandardOutput=file:/home/pinodexmr/onion-monero-blockchain-explorer/explorer.log
+StandardError=file:/home/pinodexmr/onion-monero-blockchain-explorer/explorer.log
+Type=exec
 PIDFile=/home/pinodexmr/onion-monero-blockchain-explorer/explorer.pid
 Restart=on-failure
 RestartSec=300
