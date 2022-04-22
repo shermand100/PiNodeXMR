@@ -159,9 +159,9 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sleep 3
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2> >(tee -a debug.log >&2)
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2> >(tee -a debug.log >&2)
 					#Demo Images are installed if a new user to this version. Error of 'directory not empty' suppressed so user created images aren't overwritten.
-					sudo cp -afr /home/pinodexmr/PiNode-XMR/HTML/images/* /var/www/html/images/ 2> >(tee -a debug.log >&2)
+					sudo cp -afr /home/pinodexmr/PiNode-XMR/HTML/images/*.* /var/www/html/images/ 2> >(tee -a debug.log >&2)
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2> >(tee -a debug.log >&2)
 					sudo chown www-data -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					sudo chmod 777 -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
