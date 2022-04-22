@@ -8,29 +8,27 @@ echo "Start update-pinodexmr.sh script $(date)" >>debug.log
 echo "
 ####################
 " >>debug.log
-sleep 1	
-##Update and Upgrade system
+sleep 1
+
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
 sudo apt-get update 2>&1 | tee -a debug.log
-sudo apt-get upgrade -y 2>&1 | tee -a debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a debug.log
+
 ##Auto remove any obsolete packages
 sudo apt-get autoremove -y 2>&1 | tee -a debug.log
-## Add universe repository for exfat-utils install
-# sudo add-apt-repository universe -y 2>&1 | tee -a debug.log
-# sudo apt-get update 2>&1 | tee -a debug.log
-# sudo apt-get upgrade -y 2>&1 | tee -a debug.log
 
-##Checking all dependencies are installed for --- Web Interface
-	echo "Update dependencies for Web interface" >>debug.log
-echo -e "\e[32m##Checking all dependencies are installed for --- Web Interface\e[0m"
+##Installing dependencies for --- Web Interface
+	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a debug.log
+echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
 sleep 3
 
-##Checking all dependencies are installed for --- Monero
-	echo "Update dependencies for Monero" >>debug.log
-echo -e "\e[32m##Checking all dependencies are installed for --- Monero\e[0m"
+##Installing dependencies for --- Monero
+	echo "Installing dependencies for --- Monero" 2>&1 | tee -a debug.log
+echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
 sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
 sleep 2
@@ -47,7 +45,7 @@ sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-
 sleep 2
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
-	echo "Update dependencies for Misc" >>debug.log
+	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
 sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a debug.log
@@ -82,8 +80,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					#home dir
 					mv /home/pinodexmr/bootstatus.sh /home/pinodexmr/bootstatus_retain.sh 2> >(tee -a debug.log >&2)
 					#variables dir
-					mv /home/pinodexmr/variables/add-i2p-peer.sh /home/pinodexmr/variables/add-i2p-peer_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/add-tor-peer.sh /home/pinodexmr/variables/add-tor-peer_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/credits.sh /home/pinodexmr/variables/credits_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/current-ver.sh /home/pinodexmr/variables/current-ver_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/current-ver-exp.sh /home/pinodexmr/variables/current-ver-exp_retain.sh 2> >(tee -a debug.log >&2)
@@ -202,8 +198,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/RPCp_retain.sh /home/pinodexmr/RPCp.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/RPCu_retain.sh /home/pinodexmr/RPCu.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/monero-rpcpay-port_retain.sh /home/pinodexmr/monero-rpcpay-port.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/add-i2p-peer_retain.sh /home/pinodexmr/add-i2p-peer.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/add-tor-peer_retain.sh /home/pinodexmr/add-tor-peer.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUser configuration restored\e[0m"
 				
 				##Set Swappiness lower
@@ -217,7 +211,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update crontabs" >>debug.log
 					echo -e "\e[32mUpdating crontab tasks\e[0m"
 					sleep 3
-					sudo crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/root 2> >(tee -a debug.log >&2)
 					crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
