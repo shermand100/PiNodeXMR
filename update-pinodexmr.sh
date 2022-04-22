@@ -98,8 +98,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/variables/mining-intensity.sh /home/pinodexmr/variables/mining-intensity_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/monero-port.sh /home/pinodexmr/variables/monero-port_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/monero-port-public-free.sh /home/pinodexmr/variables/monero-port-public-free_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/monero-rpcpay-port.sh /home/pinodexmr/variables/monero-rpcpay-port_retain.s 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/monero-stats-port.sh /home/pinodexmr/variables/monero-stats-port_retain.s 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-rpcpay-port.sh /home/pinodexmr/variables/monero-rpcpay-port_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-stats-port.sh /home/pinodexmr/variables/monero-stats-port_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/out-peers.sh /home/pinodexmr/variables/out-peers_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/payment-address.sh /home/pinodexmr/variables/payment-address_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/pruneStatus.sh /home/pinodexmr/variables/pruneStatus_status.sh 2> >(tee -a debug.log >&2)
@@ -161,7 +161,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2> >(tee -a debug.log >&2)
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2> >(tee -a debug.log >&2)
 					#Demo Images are installed if a new user to this version. Error of 'directory not empty' suppressed so user created images aren't overwritten.
-					sudo cp -afr /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2> >(tee -a debug.log >&2)
+					sudo cp -afr /home/pinodexmr/PiNode-XMR/HTML/images/* /var/www/html/images/ 2> >(tee -a debug.log >&2)
 					sudo chown www-data -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					sudo chmod 777 -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
@@ -172,14 +172,12 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sleep 2
 					#home dir
 					mv /home/pinodexmr/bootstatus_retain.sh /home/pinodexmr/bootstatus.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/credits_retain.sh /home/pinodexmr/credits.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/current-ver_retain.sh /home/pinodexmr/current-ver.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/current-ver-exp_retain.sh /home/pinodexmr/current-ver-exp.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/current-ver-pi_retain.sh /home/pinodexmr/current-ver-pi.sh 2> >(tee -a debug.log >&2)
 					#variables dir
 					mv /home/pinodexmr/variables/difficulty_retain.sh /home/pinodexmr/variables/difficulty.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/error_retain.log /home/pinodexmr/variables/error.log 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/explorer-flag_retain.sh /home/pinodexmr/variables/explorer-flag.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/credits_retain.sh /home/pinodexmr/variables/credits.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-address_retain.sh /home/pinodexmr/variables/i2p-address.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-port_retain.sh /home/pinodexmr/variables/i2p-port.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-tx-proxy-port_retain.sh /home/pinodexmr/variables/i2p-tx-proxy-port.sh 2> >(tee -a debug.log >&2)
@@ -196,6 +194,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/variables/RPCp_retain.sh /home/pinodexmr/variables/RPCp.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/RPCu_retain.sh /home/pinodexmr/variables/RPCu.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/monero-rpcpay-port_retain.sh /home/pinodexmr/variables/monero-rpcpay-port.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-stats-port_retain.sh /home/pinodexmr/variables/monero-stats-port.sh 2> >(tee -a debug.log >&2)
+
 					echo -e "\e[32mUser configuration restored\e[0m"
 				
 				##Set Swappiness lower
