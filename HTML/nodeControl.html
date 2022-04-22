@@ -664,37 +664,6 @@
                 </script>
 
               </div> <!-- /row -->
-
-              <div class="row pt-3">
-                <div class="col-8">
-                  <h6 class="demo-panel-title">Add Peer (seed):</h6>
-
-                  <div class="form-group">
-                    <form method="post">
-                      <input type="text" placeholder="Add Peer" class="form-control"
-                        onchange='if(this.value != 0) { addtorpeer(this.value); }'>
-                      <span class="fui-check-inverted"></span>
-                  </div>
-                </div> <!-- /col -->
-                </form>
-                <script>
-                  function addtorpeer(value) {
-                    $.ajax({
-                      url: "add-tor-peer.php", //the page containing php script
-                      type: "POST", //request type
-                      data: ({ value }),
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
-                <div class="col-4">
-                  <embed class="float-left" src="add-tor-peer.txt" width=500px height=60px>
-                </div> <!-- /.col -->
-              </div> <!-- /row -->
-
             </div> <!-- /container -->
           </div>
         </div>
@@ -770,37 +739,6 @@
                 </script>
 
               </div> <!-- /row -->
-
-              <div class="row pt-3">
-                <div class="col-8">
-                  <h6 class="demo-panel-title">Add Peer (seed):</h6>
-
-                  <div class="form-group">
-                    <form method="post">
-                      <input type="text" placeholder="Add Peer" class="form-control"
-                        onchange='if(this.value != 0) { addtorpeer(this.value); }'>
-                      <span class="fui-check-inverted"></span>
-                  </div>
-                </div> <!-- /col -->
-                </form>
-                <script>
-                  function addtorpeer(value) {
-                    $.ajax({
-                      url: "add-tor-peer.php", //the page containing php script
-                      type: "POST", //request type
-                      data: ({ value }),
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
-                <div class="col-4">
-                  <embed class="float-left" src="add-tor-peer.txt" width=500px height=60px>
-                </div> <!-- /.col -->
-              </div> <!-- /row -->
-
             </div> <!-- /container -->
           </div>
         </div>
