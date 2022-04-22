@@ -23,8 +23,6 @@
 	. /home/pinodexmr/variables/i2p-port.sh
 	#Import i2p-tx-proxy port
 	. /home/pinodexmr/variables/i2p-tx-proxy-port.sh
-	#Import ADD_I2P_PEER (seed) port
-	. /home/pinodexmr/variables/add-i2p-peer.sh
 
 #Update power cycle reboot state
 	echo "#!/bin/sh
@@ -32,4 +30,4 @@ BOOT_STATUS=8" > /home/pinodexmr/bootstatus.sh
 #Start Monerod
 cd /home/pinodexmr/monero/build/release/bin/
 
-DNS_PUBLIC=tcp ./monerod --p2p-bind-ip 127.0.0.1 --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --confirm-external-bind --anonymous-inbound $I2P_ADDRESS,127.0.0.1:$I2P_PORT --tx-proxy i2p,127.0.0.1:$I2P_TX_PROXY_PORT --rpc-ssl disabled --log-level=1 --add-peer $ADD_I2P_PEER --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --enable-dns-blocklist --non-interactive
+DNS_PUBLIC=tcp ./monerod --p2p-bind-ip 127.0.0.1 --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --confirm-external-bind --anonymous-inbound $I2P_ADDRESS,127.0.0.1:$I2P_PORT --tx-proxy i2p,127.0.0.1:$I2P_TX_PROXY_PORT --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --enable-dns-blocklist --non-interactive
