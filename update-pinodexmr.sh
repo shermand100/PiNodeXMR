@@ -57,10 +57,13 @@ sleep 3
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add new permissions to www-data user for interface buttons)
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/sudoers
+wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/sudoers -O /home/pinodexmr/sudoers
 sudo chmod 0440 /home/pinodexmr/sudoers
 sudo chown root /home/pinodexmr/sudoers
 sudo mv /home/pinodexmr/sudoers /etc/sudoers
+
+#ubuntu /dev/null odd requirment to set permissions
+sudo chmod 666 /dev/null
 echo -e "\e[32mGlobal permissions changed\e[0m"
 sleep 3
 
@@ -79,11 +82,11 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sleep 8
 					#home dir
 					mv /home/pinodexmr/bootstatus.sh /home/pinodexmr/bootstatus_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/current-ver.sh /home/pinodexmr/current-ver_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/current-ver-exp.sh /home/pinodexmr/current-ver-exp_retain.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/current-ver-pi.sh /home/pinodexmr/current-ver-pi_retain.sh 2> >(tee -a debug.log >&2)					
 					#variables dir
 					mv /home/pinodexmr/variables/credits.sh /home/pinodexmr/variables/credits_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/current-ver.sh /home/pinodexmr/variables/current-ver_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/current-ver-exp.sh /home/pinodexmr/variables/current-ver-exp_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/current-ver-pi.sh /home/pinodexmr/variables/current-ver-pi_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/difficulty.sh /home/pinodexmr/variables/difficulty_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-address.sh /home/pinodexmr/variables/i2p-address_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-port.sh /home/pinodexmr/variables/i2p-port_retain.sh 2> >(tee -a debug.log >&2)
@@ -99,7 +102,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/variables/monero-stats-port.sh /home/pinodexmr/variables/monero-stats-port_retain.s 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/out-peers.sh /home/pinodexmr/variables/out-peers_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/payment-address.sh /home/pinodexmr/variables/payment-address_retain.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/variables/prunestatus.sh /home/pinodexmr/variables/prunestatus_status.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/pruneStatus.sh /home/pinodexmr/variables/pruneStatus_status.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/RPCp.sh /home/pinodexmr/variables/RPCp_retain.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/variables/RPCu.sh /home/pinodexmr/variables/RPCu_retain.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUser-set configuration saved\e[0m"					
@@ -119,8 +122,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 					sudo chown root /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 					sudo systemctl daemon-reload 2> >(tee -a debug.log >&2)
-					sudo systemctl start statusOutputs.service 2> >(tee -a debug.log >&2)
-					sudo systemctl enable statusOutputs.service 2> >(tee -a debug.log >&2)
+					sudo systemctl start moneroStatus.service 2> >(tee -a debug.log >&2)
+					sudo systemctl enable moneroStatus.service 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 
@@ -128,21 +131,14 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update PiNodeXMR scripts" >>debug.log
 					echo -e "\e[32mUpdating PiNode-XMR scripts in home directory\e[0m"
 					sleep 2
-					sudo rm -R /home/pinodexmr/flock  2> >(tee -a debug.log >&2) #if folder not removed produces error, cannot be overwritten if not empty
-					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a debug.log >&2)
+					cp -afr /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2> >(tee -a debug.log >&2)
-					chmod 777 /home/pinodexmr/* 2> >(tee -a debug.log >&2)
+					sudo chmod 777 /home/pinodexmr/* 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 
-				##Add PiNode-XMR php settings
-						echo "Update php settings" >>debug.log
-					echo -e "\e[32mAdd PiNode-XMR php settings to allow for IP2Geo database upload\e[0m"
-					sleep 3
-					sudo mv /home/pinodexmr/PiNode-XMR/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/ 2> >(tee -a debug.log >&2)
-					sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
-					sudo chown root /etc/systemd/system/*.service 2> >(tee -a debug.log >&2)
 				#Configure apache server for access to monero log file
+					echo -e "\e[32mConfigure apache server for access to monero log file\e[0m"
 					sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
 					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a debug.log >&2)					
@@ -165,7 +161,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2> >(tee -a debug.log >&2)
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2> >(tee -a debug.log >&2)
 					#Demo Images are installed if a new user to this version. Error of 'directory not empty' suppressed so user created images aren't overwritten.
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2> >(tee -a debug.log >&2)
+					sudo cp -afr /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2> >(tee -a debug.log >&2)
 					sudo chown www-data -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					sudo chmod 777 -R /var/www/html/ 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
@@ -174,30 +170,32 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Restore user variables" >>debug.log	
 					echo -e "\e[32mRestoring your personal settings\e[0m"
 					sleep 2
+					#home dir
 					mv /home/pinodexmr/bootstatus_retain.sh /home/pinodexmr/bootstatus.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/credits_retain.sh /home/pinodexmr/credits.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/current-ver_retain.sh /home/pinodexmr/current-ver.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/current-ver-exp_retain.sh /home/pinodexmr/current-ver-exp.sh 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/current-ver-pi_retain.sh /home/pinodexmr/current-ver-pi.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/difficulty_retain.sh /home/pinodexmr/difficulty.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/error_retain.log /home/pinodexmr/error.log 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/explorer-flag_retain.sh /home/pinodexmr/explorer-flag.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/i2p-address_retain.sh /home/pinodexmr/i2p-address.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/i2p-port_retain.sh /home/pinodexmr/i2p-port.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/i2p-tx-proxy-port_retain.sh /home/pinodexmr/i2p-tx-proxy-port.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/in-peers_retain.sh /home/pinodexmr/in-peers.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/limit-rate-down_retain.sh /home/pinodexmr/limit-rate-down.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/limit-rate-up_retain.sh /home/pinodexmr/limit-rate-up.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/mining-address_retain.sh /home/pinodexmr/mining-address.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/mining-intensity_retain.sh /home/pinodexmr/mining-intensity.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-port_retain.sh /home/pinodexmr/monero-port.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-port-public-free_retain.sh /home/pinodexmr/monero-port-public-free.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/out-peers_retain.sh /home/pinodexmr/out-peers.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/payment-address_retain.sh /home/pinodexmr/payment-address.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/prunestatus_status.sh /home/pinodexmr/prunestatus.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/RPCp_retain.sh /home/pinodexmr/RPCp.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/RPCu_retain.sh /home/pinodexmr/RPCu.sh 2> >(tee -a debug.log >&2)
-					mv /home/pinodexmr/monero-rpcpay-port_retain.sh /home/pinodexmr/monero-rpcpay-port.sh 2> >(tee -a debug.log >&2)
+					#variables dir
+					mv /home/pinodexmr/variables/difficulty_retain.sh /home/pinodexmr/variables/difficulty.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/error_retain.log /home/pinodexmr/variables/error.log 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/explorer-flag_retain.sh /home/pinodexmr/variables/explorer-flag.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/i2p-address_retain.sh /home/pinodexmr/variables/i2p-address.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/i2p-port_retain.sh /home/pinodexmr/variables/i2p-port.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/i2p-tx-proxy-port_retain.sh /home/pinodexmr/variables/i2p-tx-proxy-port.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/in-peers_retain.sh /home/pinodexmr/variables/in-peers.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/limit-rate-down_retain.sh /home/pinodexmr/variables/limit-rate-down.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/limit-rate-up_retain.sh /home/pinodexmr/variables/limit-rate-up.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/mining-address_retain.sh /home/pinodexmr/variables/mining-address.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/mining-intensity_retain.sh /home/pinodexmr/variables/mining-intensity.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-port_retain.sh /home/pinodexmr/variables/monero-port.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-port-public-free_retain.sh /home/pinodexmr/variables/monero-port-public-free.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/out-peers_retain.sh /home/pinodexmr/variables/out-peers.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/payment-address_retain.sh /home/pinodexmr/variables/payment-address.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/pruneStatus_status.sh /home/pinodexmr/variables/pruneStatus.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/RPCp_retain.sh /home/pinodexmr/variables/RPCp.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/RPCu_retain.sh /home/pinodexmr/variables/RPCu.sh 2> >(tee -a debug.log >&2)
+					mv /home/pinodexmr/variables/monero-rpcpay-port_retain.sh /home/pinodexmr/variables/monero-rpcpay-port.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mUser configuration restored\e[0m"
 				
 				##Set Swappiness lower
@@ -219,10 +217,9 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update torrc settings - if installed" >>debug.log
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
 					sleep 6
-			wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/tor/torrc 2> >(tee -a debug.log >&2)
+					sudo wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/tor/torrc -O /etc/tor/torrc 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mApplying Settings...\e[0m"
 					sleep 3
-					sudo mv /home/pinodexmr/torrc /etc/tor/torrc 2> >(tee -a debug.log >&2)
 					sudo chmod 644 /etc/tor/torrc 2> >(tee -a debug.log >&2)
 					sudo chown root /etc/tor/torrc 2> >(tee -a debug.log >&2)
 				#Insert user specific local IP for correct hiddenservice redirect (line 73 overwrite)
@@ -232,12 +229,10 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sleep 3
 
 				#Restart statusOutputs script service for changes to take effect
-				sudo systemctl restart statusOutputs
+				sudo systemctl restart moneroStatus.service
 
-				#Delete unused torrc file on event of update fail (tor not installed by user)
-					sudo rm /home/pinodexmr/torrc 2> >(tee -a debug.log >&2)
 
-#Update system version number to new one installed
+				#Update system version number to new one installed
 				echo "Update PiNodeXMR version number" >>debug.log
 					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
 					chmod 755 /home/pinodexmr/new-ver-pi.sh 2> >(tee -a debug.log >&2)
@@ -247,7 +242,9 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
-					
+				#ubuntu /dev/null odd requiremnt to set permissions
+				sudo chmod 666 /dev/null
+
 				#Clean up files
 				echo "Cleanup leftover files" >>debug.log
 					echo -e "\e[32mCleanup leftover directories\e[0m"
