@@ -91,7 +91,14 @@
 						;;
 						
 					"4)")	if (whiptail --title "Update System" --yesno "PiNode-XMR will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
-							clear; sudo apt-get update && sudo apt-get upgrade -y;
+							clear; 
+							##Update and Upgrade system
+							echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
+							sudo apt-get update 2>&1 | tee -a debug.log
+							sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a debug.log
+							sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a debug.log
+							##Auto remove any obsolete packages
+							sudo apt-get autoremove -y 2>&1 | tee -a debug.log
 							sleep 2
 							else
 							sleep 2
@@ -265,10 +272,14 @@
 							
 							"5)")	if (whiptail --title "PiNode-XMR Start/Stop I2P" --yesno "Manually Start or Stop the service." --yes-button "Start I2P" --no-button "Stop I2P"  14 78); then
 									i2prouter start;
+									sudo systemctl start i2p;
+									sudo systemctl enable i2p;
 									whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78;
 									sleep 2
 									else
 									i2prouter stop;
+									sudo systemctl stop i2p;
+									sudo systemctl disable i2p;
 									whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been stopped" 12 78;
 									sleep 2
 									fi
