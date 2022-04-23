@@ -10,7 +10,8 @@ whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct install
 	"1)" "Raspberry Pi OS"   \
 	"2)" "Armbian Debian (Bullseye - latest)" \
 	"3)" "Armbian Debian (Buster - older, stable)" \
-	"4)" "Exit"  3>&2 2>&1 1>&3
+	"4)" "Ubunutu Server 64bit 20.04 LTS (Dev)" \	
+	"5)" "Exit"  3>&2 2>&1 1>&3
 )
 
 case $CHOICE in
@@ -53,7 +54,20 @@ case $CHOICE in
 		exit 1
         ;;
 
-	"4)") exit
+	"4)")   
+		#Commands for Armbian Buster (legacy stable)
+		echo -e "\e[32mDownloading data for install\e[0m"
+		sleep 3
+		https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-installer.sh
+		echo -e "\e[32mPiNode-XMR Ubuntu configuration file received\e[0m"
+		echo -e "\e[32mStarting Installation\e[0m"
+		sudo chmod 755 ~/ubuntu-installer.sh
+		sleep 2
+		./ubuntu-installer.sh
+		exit 1
+        ;;		
+
+	"5)") exit
         ;;
 esac
 exit
