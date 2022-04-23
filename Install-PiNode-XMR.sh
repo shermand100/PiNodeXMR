@@ -5,13 +5,12 @@ sleep 2
 #Check user has whiptail - required to display menu
 sudo apt-get install whiptail -y
 
-CHOICE=$(
-whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS" 20 60 5 \
+CHOICE=$(whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS" 20 60 5 \
 	"1)" "Raspberry Pi OS"   \
 	"2)" "Armbian Debian (Bullseye - latest)" \
 	"3)" "Armbian Debian (Buster - older, stable)" \
-	"4)" "Ubunutu Server 64bit 20.04 LTS (Dev)" \	
-	"5)" "Exit"  3>&2 2>&1 1>&3
+	"4)" "Ubunutu Server 64bit 20.04 LTS (Dev)" \
+	"5)" "Exit" 3>&2 2>&1 1>&3
 )
 
 case $CHOICE in
