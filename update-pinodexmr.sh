@@ -133,7 +133,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sleep 2
 					cp -afr /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a debug.log >&2)
 					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2> >(tee -a debug.log >&2)
-					sudo chmod 777 /home/pinodexmr/* 2> >(tee -a debug.log >&2)
+					sudo chmod -R 777 /home/pinodexmr/* 2> >(tee -a debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 
