@@ -49,6 +49,31 @@ if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compil
 			sleep 3
 fi
 
+##Hardware configure: Many features and builds only work with 64bit OS/Hardware, but we dont want to exclude older 32bit devices. Configure vaiable $LIGHTMODE for core node functions.
+if [[ $CPU_ARCH -eq 64 ]]
+then
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 64bit OS. This means you can run PiNodeXMR with all features. If however you would prefer to run PiNodeXMR in 'light mode' with only core node functions you may select that option here" --no-button "PiNodeXMR Light" --yes-button "PiNodeXMR Full" 18 60); then
+	LIGHTMODE=FALSE
+		else
+			LIGHTMODE=TRUE
+fi
+elif [[ $CPU_ARCH -eq 32 ]]
+then
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 32bit OS. This means you can run PiNodeXMR run PiNodeXMR in 'light mode' with only core node functions. If you believe this is incorrect you can select the Full installer below but it is not recommended." --no-button "PiNodeXMR Full" --yes-button "PiNodeXMR Light" 18 60); then
+	LIGHTMODE=TRUE
+		else
+			LIGHTMODE=FALSE
+fi
+else
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer cannot detect if you are using 32/64bit Hradware/OS. You may select below to either use PiNodeXMR Full with all features for 64bit devices or PiNodeXMR Light with only core node functions" --no-button "PiNodeXMR Light" --yes-button "PiNodeXMR Full" 18 60); then
+	LIGHTMODE=FALSE
+		else
+			LIGHTMODE=TRUE
+fi
+fi
+sleep 3
+
+
 ###Continue as 'pinodexmr'
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
@@ -79,6 +104,9 @@ sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
 sleep 3
 
+if [[ $LIGHTMODE -eq FALSE ]]
+then
+  echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
@@ -96,6 +124,9 @@ cd
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
+else
+fi
+
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a debug.log
@@ -122,17 +153,6 @@ sudo chmod 644 /etc/ssh/sshd_config 2>&1 | tee -a debug.log
 sudo chown root /etc/ssh/sshd_config 2>&1 | tee -a debug.log
 sudo /etc/init.d/ssh restart 2>&1 | tee -a debug.log
 echo -e "\e[32mSSH security config complete\e[0m"
-sleep 3
-
-
-##Enable PiNode-XMR on boot
-	echo "Enable PiNode-XMR on boot" 2>&1 | tee -a debug.log
-echo -e "\e[32mEnable PiNode-XMR on boot\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/rc.local /etc/rc.local 2>&1 | tee -a debug.log
-sudo chmod 755 /etc/rc.local 2>&1 | tee -a debug.log
-sudo chown root /etc/rc.local 2>&1 | tee -a debug.log
-echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 
@@ -175,15 +195,27 @@ sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a debug.log
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a debug.log
 sleep 3
+if [[ $LIGHTMODE -eq TRUE ]]
+then
+#First move hidden file specifically .htaccess file then entire directory
+sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.* /var/www/html/ 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/images /var/www/html 2>&1 | tee -a debug.log
+sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
+sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+else
 #First move hidden file specifically .htaccess file then entire directory
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2>&1 | tee -a debug.log
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>&1 | tee -a debug.log
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+fi
+
 echo -e "\e[32mSuccess\e[0m"
 
-
+if [[ $LIGHTMODE -eq FALSE ]]
+then
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
 # ********************************************
@@ -233,60 +265,68 @@ rm ~/release.sh
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
 # ********************************************
+else
+fi
 
+if [[ $LIGHTMODE -eq TRUE ]]
+then
 # #********************************************
 # #**********START OF Monero BINARY USE********
 # #********************************************
 
-# #Define Install Monero function to reduce repeat script
-# function f_installMonero {
-# echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a debug.log
-# #Make standard location for Monero
-# mkdir -p ~/monero/build/release/bin
-# if [[ $CPU_ARCH -eq 64 ]]
-# then
-#   #Download 64-bit Monero
-# wget https://downloads.getmonero.org/cli/linuxarm8
-# #Make temp folder to extract binaries
-# mkdir temp && tar -xvf linuxarm8 -C ~/temp
-# #Move Monerod files to standard location
-# mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
-# rm linuxarm8
-# rm -R /home/pinodexmr/temp/
-# else
-#   #Download 32-bit Monero
-# wget https://downloads.getmonero.org/cli/linuxarm7
-# #Make temp folder to extract binaries
-# mkdir temp && tar -xvf linuxarm7 -C ~/temp
-# #Move Monerod files to standard location
-# mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
-# rm linuxarm7
-# rm -R /home/pinodexmr/temp/
-# fi
-# #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-# mkdir .bitmonero 2>&1 | tee -a debug.log
-# #Clean-up used downloaded files
-# rm -R ~/temp
-# }
+#Define Install Monero function to reduce repeat script
+function f_installMonero {
+echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a debug.log
+#Make standard location for Monero
+mkdir -p ~/monero/build/release/bin
+if [[ $CPU_ARCH -eq 64 ]]
+then
+  #Download 64-bit Monero
+wget https://downloads.getmonero.org/cli/linuxarm8
+#Make temp folder to extract binaries
+mkdir temp && tar -xvf linuxarm8 -C ~/temp
+#Move Monerod files to standard location
+mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
+rm linuxarm8
+rm -R /home/pinodexmr/temp/
+else
+  #Download 32-bit Monero
+wget https://downloads.getmonero.org/cli/linuxarm7
+#Make temp folder to extract binaries
+mkdir temp && tar -xvf linuxarm7 -C ~/temp
+#Move Monerod files to standard location
+mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.0/monero* /home/pinodexmr/monero/build/release/bin/
+rm linuxarm7
+rm -R /home/pinodexmr/temp/
+fi
+#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+mkdir .bitmonero 2>&1 | tee -a debug.log
+#Clean-up used downloaded files
+rm -R ~/temp
+}
 
 
-# if [[ $CPU_ARCH -ne 64 ]] && [[ $CPU_ARCH -ne 32 ]]
-# then
-#   if (whiptail --title "OS version" --yesno "I've tried to auto-detect what version of Monero you need based on your OS but I've not been successful.\n\nPlease select your OS architecture..." 8 78 --no-button "32-bit" --yes-button "64-bit"); then
-#     CPU_ARCH=64
-# 	f_installMonero
-# 	else
-#     CPU_ARCH=32
-# 	f_installMonero
-#   fi
-# else
-#  f_installMonero
-# fi
+if [[ $CPU_ARCH -ne 64 ]] && [[ $CPU_ARCH -ne 32 ]]
+then
+  if (whiptail --title "OS version" --yesno "I've tried to auto-detect what version of Monero you need based on your OS but I've not been successful.\n\nPlease select your OS architecture..." 8 78 --no-button "32-bit" --yes-button "64-bit"); then
+    CPU_ARCH=64
+	f_installMonero
+	else
+    CPU_ARCH=32
+	f_installMonero
+  fi
+else
+ f_installMonero
+fi
 
 # #********************************************
 # #*******END OF Monero BINARY USE*******
 # #********************************************
+else
+fi
 
+if [[ $LIGHTMODE -eq FALSE ]]
+then
 ##Install P2Pool
 echo -e "\e[32mInstalling P2Pool\e[0m"
 git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a debug.log
@@ -301,7 +341,8 @@ sleep 3
 sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
 sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
 sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
-
+else
+fi
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
@@ -340,8 +381,11 @@ sleep 3
 sudo rm -r /home/pinodexmr/PiNode-XMR/ 2>&1 | tee -a debug.log
 
 ##Change log in menu to 'main'
-#Delete line 28 (previous setting)
 wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/home/pinodexmr/.profile 2>&1 | tee -a debug.log
+
+#Write value of LIGHTMODE variable
+	echo "#!/bin/sh
+LIGHTMODE=${LIGHTMODE}" > /home/pinodexmr/variables/light-mode.sh
 
 ##End debug log
 echo "

@@ -1,0 +1,2 @@
+#!/bin/bash
+LIGHTMODE=FALSE
