@@ -1,0 +1,59 @@
+body {
+	padding-top: 80px;
+}
+
+#address {
+  word-break: break-all;
+}
+
+hr {
+	width: 60%;
+}
+
+h3 {
+	text-decoration: underline #f0f0f0;
+		padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.imported-text {
+    white-space: pre-wrap;
+    width: 100%;
+}
+.badge-light {
+	width: 100%;
+}
+.text {
+	text-justify: auto;
+	text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+	body {
+		color: #e0e0e0;
+		background: #212121;
+	  	}
+	  .card-header {
+		background: #bdbdbd;
+	  }
+	  .badge-light {
+		background: #bdbdbd;
+		}
+	  .card-body {
+		color: #e0e0e0;
+		background: #212121;
+	  }
+	  hr {
+		background-color: #e0e0e0;
+		}
+		img {
+			filter: brightness(.80) contrast(1.2);
+		}
+		.navbar.navbar-expand-md.navbar-light.bg-light.fixed-top {
+			background-color: #616161 !important;
+		}
+		.nav-link {
+			color: #e0e0e0 !important;	
+		}
+	}

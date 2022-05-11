@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Bootstrap 4 -->
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- Font Awesome cdn -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Custom Style Sheet -->
+  <link rel="stylesheet" type="text/css" href="/app.css">
+  <!-- Title  -->
+  <title>PiNode-XMR - Interface</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/XMR.ico" />
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="index.html"><i class="fab fa-monero active"></i> PiNode-XMR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav justify-content-around w-100">
+        <li class="nav-item">
+          <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
+            <i class="fas fa-terminal"></i> Web Terminal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <img class="img-fluid d-block mx-auto" src="images/pinode-xmr-banner.png">
+      </div>
+    </div>
+
+    <div class=" row">
+      <div class="col">
+        <h2 class="text-center">
+          <small>Private Dependable Nodes</small>
+        </h2>
+        <hr>
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- container -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>v5.22.04-Open-Build</h3>
+        <h3><a class="badge badge-light" href="https://github.com/monero-ecosystem/PiNode-XMR/blob/master/README.md"
+            target="_blank">User Manual for PiNode-XMR</a></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table>
+          <tr>
+            <td>
+              <img class="QR img-responsive center-block" src="images/QRCode.png">
+            </td>
+            <td>
+              <h6 class="badge badge-light">Development Donation address:</h6>
+              <h6 class="text" id="address">
+                43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9</h6>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <p><a href="https://pinode.co.uk" target="_blank" class="badge badge-light">PiNode.co.uk Copyright (c) 2017-2020
+      </a></p>
+    <p><a href="PiNode-XMR-License.txt" target="_blank" class="badge badge-light">LICENSE</a></p>
+
+  </div> <!-- container -->
+
+
+
+  <!-- JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
