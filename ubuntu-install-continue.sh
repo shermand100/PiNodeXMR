@@ -59,7 +59,7 @@ if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has d
 fi
 elif [[ $CPU_ARCH -eq 32 ]]
 then
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 32bit OS. This means you can run PiNodeXMR run PiNodeXMR in 'light mode' with only core node functions. If you believe this is incorrect you can select the Full installer below but it is not recommended." --no-button "PiNodeXMR Full" --yes-button "PiNodeXMR Light" 18 60); then
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 32bit OS. This means you can run PiNodeXMR in 'light mode' with only core node functions. If you believe this is incorrect you can select the Full installer below but it is not recommended." --no-button "PiNodeXMR Full" --yes-button "PiNodeXMR Light" 18 60); then
 	LIGHTMODE=TRUE
 		else
 			LIGHTMODE=FALSE
