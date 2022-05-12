@@ -74,21 +74,13 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 			echo "Device found to be larger than 100GB, this is good"
 			sleep 3
 		
-	CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'UDF'. This provides maximum compatibility if you intend to copy the blockchain onto this device from another computer.\n\nIf you intend to sync on this device from scratch you may choose another type for slightly improved performance." 20 80 8 \
-    "1)" "[default] Format using 'UDF'"   \
-	"2)" "Format using Linux 'EXT4'"   \
-	"3)" "Format using 'NTFS'" 2>&1 >/dev/tty)
+	CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'EXT4'. This is a Linux type partition and will be fastest on this device. You may however select NTFS if you intend to copy the blockchain onto this device from another Windows computer.\n\n" 20 80 8 \
+	"1)" "Format using Linux 'EXT4'"   \
+	"2)" "Format using 'NTFS'" 2>&1 >/dev/tty)
 	
 			case $CHOICE in
-		
+				
 		"1)")
-			whiptail --title "WARNING" --msgbox "This drive will now be formatted as UDF for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
-			#Run format-UDF script to do the work of configuring drive and mounting
-			sudo /home/pinodexmr/setupMenuScripts/format-udf.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
-
-            ;;
-			
-		"2)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as EXT4 for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			#Perform wipefs. This is due to the UDF script applying the disk label to the root sd# which cannot be removed via the other methods below
 			echo -e "\e[32mWiping old disk labels...\e[0m"			
@@ -115,7 +107,7 @@ recoverUSB=$(lsblk -o LABEL "/dev/$DEVICE_TO_CONFIGURE" | grep -c XMRBLOCKCHAIN)
 
             ;;
 			
-			"3)")
+			"2)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as NTFS for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			#Perform wipefs. This is due to the UDF script applying the disk label to the root sd# which cannot be removed via the other methods below
 			echo -e "\e[32mWiping old disk labels...\e[0m"			
@@ -186,21 +178,13 @@ if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold th
 			sleep 3
 	fi
 		
-	CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'UDF'. This provides maximum compatibility if you intend to copy the blockchain onto this device from another computer.\n\nIf you intend to sync on this device from scratch you may choose another type for slightly improved performance." 20 80 8 \
-    "1)" "[default] Format using 'UDF'"   \
-	"2)" "Format using Linux 'EXT4'"   \
-	"3)" "Format using 'NTFS'" 2>&1 >/dev/tty)
+	CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'EXT4'. This is a Linux type partition and will be fastest on this device. You may however select NTFS if you intend to copy the blockchain onto this device from another Windows computer.\n\n" 20 80 8 \
+	"1)" "Format using Linux 'EXT4'"   \
+	"2)" "Format using 'NTFS'" 2>&1 >/dev/tty)
 	
 			case $CHOICE in
-		
-		"1)")
-			whiptail --title "WARNING" --msgbox "This drive will now be formatted as UDF for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
-			#Run format-UDF script to do the work of configuring drive and mounting
-			sudo /home/pinodexmr/setupMenuScripts/format-udf.sh /dev/$DEVICE_TO_CONFIGURE XMRBLOCKCHAIN
-
-            ;;
 			
-		"2)")
+		"1)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as EXT4 for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			#Perform wipefs. This is due to the UDF script applying the disk label to the root sd# which cannot be removed via the other methods below
 			echo -e "\e[32mWiping old disk labels...\e[0m"			
@@ -228,7 +212,7 @@ if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold th
 
             ;;
 			
-			"3)")
+			"2)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as NTFS for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			#Perform wipefs. This is due to the UDF script applying the disk label to the root sd# which cannot be removed via the other methods below
 			echo -e "\e[32mWiping old disk labels...\e[0m"			
@@ -270,4 +254,3 @@ fi
 
 fi
 ./setup.sh
-
