@@ -89,7 +89,7 @@ fi
 		sleep "2"
 
 
-if [[ $LIGHTMODE -eq FALSE ]]
+if [[ $LIGHTMODE = FALSE ]]
 then
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
@@ -117,10 +117,9 @@ mkdir .bitmonero 2>&1 | tee -a debug.log
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
 # ********************************************
-else
 fi
 
-if [[ $LIGHTMODE -eq TRUE ]]
+if [[ $LIGHTMODE = TRUE ]]
 then
 	#********************************************
 	#**********START OF Monero BINARY USE********

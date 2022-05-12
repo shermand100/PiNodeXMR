@@ -104,7 +104,7 @@ sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
 sleep 3
 
-if [[ $LIGHTMODE -eq FALSE ]]
+if [[ $LIGHTMODE = FALSE ]]
 then
   echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
@@ -124,7 +124,6 @@ cd
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
-else
 fi
 
 
@@ -195,7 +194,7 @@ sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a debug.log
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a debug.log
 sleep 3
-if [[ $LIGHTMODE -eq TRUE ]]
+if [[ $LIGHTMODE = TRUE ]]
 then
 #First move hidden file specifically .htaccess file then entire directory
 sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
@@ -214,7 +213,7 @@ fi
 
 echo -e "\e[32mSuccess\e[0m"
 
-if [[ $LIGHTMODE -eq FALSE ]]
+if [[ $LIGHTMODE = FALSE ]]
 then
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
@@ -265,10 +264,9 @@ rm ~/release.sh
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
 # ********************************************
-else
 fi
 
-if [[ $LIGHTMODE -eq TRUE ]]
+if [[ $LIGHTMODE = TRUE ]]
 then
 # #********************************************
 # #**********START OF Monero BINARY USE********
@@ -322,10 +320,9 @@ fi
 # #********************************************
 # #*******END OF Monero BINARY USE*******
 # #********************************************
-else
 fi
 
-if [[ $LIGHTMODE -eq FALSE ]]
+if [ $LIGHTMODE = FALSE ]
 then
 ##Install P2Pool
 echo -e "\e[32mInstalling P2Pool\e[0m"
@@ -341,7 +338,6 @@ sleep 3
 sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
 sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
 sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
-else
 fi
 
 ##Install log.io (Real-time service monitoring)

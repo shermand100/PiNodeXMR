@@ -12,7 +12,7 @@ sleep 1
 
 #Import Variable: Light-mode true/false
 . /home/pinodexmr/variables/light-mode.sh
-echo "Light-Mode value is: $(LIGHTMODE)" >>debug.log
+echo "Light-Mode value is: $LIGHTMODE" >>debug.log
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
@@ -30,7 +30,7 @@ sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
 sleep 3
 
-if [[ $LIGHTMODE -eq FALSE ]]
+if [ $LIGHTMODE = FALSE ]
 then
   echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
@@ -50,7 +50,6 @@ cd
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
-else
 fi
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
@@ -166,7 +165,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update html template" >>debug.log	
 					echo -e "\e[32mConfiguring Web-UI template with PiNode-XMR pages\e[0m"
 					sleep 3
-					if [[ $LIGHTMODE -eq TRUE ]]
+					if [[ $LIGHTMODE = TRUE ]]
 					then
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
@@ -185,7 +184,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 
 					echo -e "\e[32mSuccess\e[0m"
 
-					if [[ $LIGHTMODE -eq FALSE ]]
+					if [[ $LIGHTMODE = FALSE ]]
 					then
 										
 				#Restore User Values
