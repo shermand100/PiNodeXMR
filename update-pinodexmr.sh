@@ -10,6 +10,10 @@ echo "
 " >>debug.log
 sleep 1
 
+#Import Variable: Light-mode true/false
+. /home/pinodexmr/variables/light-mode.sh
+echo "Light-Mode value is: $(LIGHTMODE)" >>debug.log
+
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
 sudo apt-get update 2>&1 | tee -a debug.log
@@ -26,6 +30,9 @@ sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
 sleep 3
 
+if [[ $LIGHTMODE -eq FALSE ]]
+then
+  echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
@@ -43,6 +50,8 @@ cd
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
+else
+fi
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a debug.log
@@ -157,14 +166,27 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update html template" >>debug.log	
 					echo -e "\e[32mConfiguring Web-UI template with PiNode-XMR pages\e[0m"
 					sleep 3
+					if [[ $LIGHTMODE -eq TRUE ]]
+					then
 					#First move hidden file specifically .htaccess file then entire directory
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2> >(tee -a debug.log >&2)
-					#Demo Images are installed if a new user to this version. Error of 'directory not empty' suppressed so user created images aren't overwritten.
-					sudo cp -afr /home/pinodexmr/PiNode-XMR/HTML/images/*.* /var/www/html/images/ 2> >(tee -a debug.log >&2)
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2> >(tee -a debug.log >&2)
-					sudo chown www-data -R /var/www/html/ 2> >(tee -a debug.log >&2)
-					sudo chmod 777 -R /var/www/html/ 2> >(tee -a debug.log >&2)
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.* /var/www/html/ 2>&1 | tee -a debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/images /var/www/html 2>&1 | tee -a debug.log
+					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
+					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+					else
+					#First move hidden file specifically .htaccess file then entire directory
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2>&1 | tee -a debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>&1 | tee -a debug.log
+					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
+					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+					fi
+
 					echo -e "\e[32mSuccess\e[0m"
+
+					if [[ $LIGHTMODE -eq FALSE ]]
+					then
 										
 				#Restore User Values
 						echo "Restore user variables" >>debug.log	
