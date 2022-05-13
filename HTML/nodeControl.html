@@ -246,17 +246,18 @@
                       below.</small></p>
                   <div class="input-group">
                     <form method="post">
-                      <input type="number" placeholder="New port" class="form-control"
-                        onchange='if(this.value != 0) { freeport(this.value); }'>
+                      <input type="number" id="freePort" placeholder="New port" class="form-control">
+                      <button type="submit" onclick="freeport(freePort.value)" class="btn btn-block btn-dark my-1">Save</button>
                     </form>
                   </div> <!-- input-group -->
 
-                  <script>
+                  <script type="text/javascript">
                     function freeport(value) {
                       $.ajax({
-                        url: "monero-port-public-free.php", //the page containing php script
-                        type: "POST", //request type
+                        url: "monero-port-public-free.php",
+                        type: "POST",
                         data: ({ value }),
+                        dataType: 'text',
                         success: function (result) {
                           alert(result);
                         }
@@ -340,24 +341,25 @@
                   <div class="form-group">
                     <h6 class="demo-panel-title">Set Payment Address <span class="fui-check"></span></h6>
                     <form method="post">
-                      <input type="text" placeholder="Address" class="form-control col-8"
-                        onchange='if(this.value != 0) { payment(this.value); }'>
+                      <input type="text" id="RPCpayAddress" placeholder="Address" class="form-control col-8">
+                      <button type="submit" onclick="payment(RPCpayAddress.value)" class="btn btn-dark my-1">Save</button>
                       <span class="fui-check-inverted"></span>
                     </form>
                   </div> <!-- form group -->
 
-                  <script>
+                  <script type="text/javascript">
                     function payment(value) {
-                      $.ajax({
-                        url: "payment-address.php", //the page containing php script
-                        type: "POST", //request type
+                    $.ajax({
+                        url: "payment-address.php",
+                        type: "post",
                         data: ({ value }),
+                        dataType: 'text',
                         success: function (result) {
-                          alert(result);
+                          alert(result); 
                         }
-                      });
-                    }
-                  </script>
+                    });
+                    };
+                    </script>                 
 
                   <p><small><embed src="payment-address.txt" width=100% height=60px></small></p>
 
@@ -369,25 +371,23 @@
                   <h6 class="demo-panel-title">Set RPC Pay Port <span class="fui-check"></span></h6>
                   <div class="form-group">
                     <form method="post">
-                      <input type="number" placeholder="New port" class="form-control"
-                        onchange='if(this.value != 0) { payport(this.value); }'>
+                      <input type="number" id="RPCpayPort" placeholder="New port" class="form-control">
+                      <button type="submit" onclick="payport(RPCpayPort.value)" class="btn btn-dark my-1">Save</button>
                     </form>
                   </div> <!-- form group -->
-                  <script>
+                  <script type="text/javascript">
                     function payport(value) {
-                      $.ajax({
-                        url: "monero-port-rpc-pay.php", //the page containing php script
-                        type: "POST", //request type
-                        data: ({ value }),
-                        success: function (result) {
-                          alert(result);
-                        }
-                      });
-                    }
-                  </script>
-
-
-
+                    $.ajax({
+                      url: "monero-port-rpc-pay.php",
+                      type: "post",
+                      data: ({ value }),
+                      dataType: 'text',
+                      success: function (result) {
+                        alert(result); 
+                      }
+                    });
+                    };
+                    </script> 
 
                   <p><small><embed src="monero-port-rpc-pay.txt" width=200px height=60px></small></p>
                 </div> <!-- /col -->
@@ -399,23 +399,24 @@
 
                   <div class="form-group">
                     <form method="post">
-                      <input type="number" placeholder="Credits" class="form-control"
-                        onchange='if(this.value != 0) { credits(this.value); }'>
+                      <input type="number" id="RPCpayCredits" placeholder="Credits" class="form-control">
+                      <button type="submit" onclick="credits(RPCpayCredits.value)" class="btn btn-dark my-1">Save</button>
                     </form>
                   </div>
 
-                  <script>
+                  <script type="text/javascript">
                     function credits(value) {
-                      $.ajax({
-                        url: "credits.php", //the page containing php script
-                        type: "POST", //request type
-                        data: ({ value }),
-                        success: function (result) {
-                          alert(result);
-                        }
-                      });
+                    $.ajax({
+                    url: "credits.php",
+                    type: "post",
+                    data: ({ value }),
+                    dataType: 'text',
+                    success: function (result) {
+                      alert(result); 
                     }
-                  </script>
+                    });
+                    };
+                    </script>               
 
                   <p><small><embed src="credits.txt" width=120px height=60px></small></p>
                 </div> <!-- /col -->
@@ -425,23 +426,24 @@
                   <h6 class="demo-panel-title">Difficulty</span></h6>
                   <div class="form-group">
                     <form method="post">
-                      <input type="text" placeholder="Difficulty" class="form-control"
-                        onchange='if(this.value != 0) { difficulty(this.value); }'>
+                      <input type="text" id="RPCpayDifficulty" placeholder="Difficulty" class="form-control">
+                      <button type="submit" onclick="difficulty(RPCpayDifficulty.value)" class="btn btn-dark my-1">Save</button>
                     </form>
                   </div>
 
-                  <script>
+                  <script type="text/javascript">
                     function difficulty(value) {
-                      $.ajax({
-                        url: "difficulty.php", //the page containing php script
-                        type: "POST", //request type
-                        data: ({ value }),
-                        success: function (result) {
-                          alert(result);
-                        }
-                      });
+                    $.ajax({
+                    url: "difficulty.php",
+                    type: "post",
+                    data: ({ value }),
+                    dataType: 'text',
+                    success: function (result) {
+                    alert(result); 
                     }
-                  </script>
+                    });
+                    };
+                    </script>
 
                   <p><small><embed src="difficulty.txt" width=120px height=60px></small></p>
                 </div> <!-- /col -->
@@ -518,24 +520,25 @@
 
                   <div class="form-group">
                     <form method="post">
-                      <input type="text" placeholder="Enter Mining Address" class="form-control"
-                        onchange='if(this.value != 0) { address(this.value); }'>
-                      <span class="fui-check-inverted"></span>
-                  </div>
-                </div> <!-- /col -->
+                      <input type="text" id="MiningAddress" placeholder="Enter Mining Address" class="form-control">
+                      <button type="submit" onclick="address(MiningAddress.value)" class="btn btn-block btn-dark my-1">Save</button>
                 </form>
-                <script>
-                  function address(value) {
-                    $.ajax({
-                      url: "mining-address.php", //the page containing php script
-                      type: "POST", //request type
+              </div>
+            </div> <!-- /col -->
+
+                <script type="text/javascript">
+                function address(value) {
+                  $.ajax({
+                      url: "mining-address.php",
+                      type: "post",
                       data: ({ value }),
+                      dataType: 'text',
                       success: function (result) {
-                        alert(result);
+                        alert(result); 
                       }
-                    });
-                  }
-                </script>
+                  });
+                };
+              </script>
 
                 <div class="col-6">
                   <p><small><embed src="mining_address.txt" width=480px height=80px></small></p>
@@ -548,22 +551,25 @@
 
                   <div class="form-group">
                     <form method="post">
-                      <input type="number" placeholder="Enter Mining Intensity" class="form-control"
-                        onchange='if(this.value != 0) { intensity(this.value); }'>
+                      <input type="number" id="MiningIntensity" placeholder="Enter Mining Intensity" class="form-control">
+                      <button type="submit" onclick="intensity(MiningIntensity.value)" class="btn btn-block btn-dark my-1">Save</button>
+                   </form>
                   </div>
                 </div> <!-- /col -->
-                </form>
-                <script>
+
+
+                <script type="text/javascript">
                   function intensity(value) {
                     $.ajax({
-                      url: "mining-intensity.php", //the page containing php script
-                      type: "POST", //request type
-                      data: ({ value }),
-                      success: function (result) {
-                        alert(result);
-                      }
+                        url: "mining-intensity.php",
+                        type: "post",
+                        data: ({ value }),
+                        dataType: 'text',
+                        success: function (result) {
+                          alert(result); 
+                        }
                     });
-                  }
+                  };
                 </script>
 
                 <div class="col-6">
@@ -617,7 +623,7 @@
                   <h6 class="demo-panel-title">Public Address</h6>
                 </div> <!-- /.col -->
                 <div class="col">
-                  <embed class="float-left" src="onion-address.txt" width=500px height=40px>
+                  <embed class="float-left" src="onion-address.txt" width=500px height=60px>
                 </div> <!-- /.col -->
               </div> <!-- /row -->
               <div class="row">
@@ -689,7 +695,7 @@
                   <h6 class="demo-panel-title">Public Address</h6>
                 </div> <!-- /.col -->
                 <div class="col">
-                  <embed class="float-left" src="onion-address.txt" width=500px height=40px>
+                  <embed class="float-left" src="onion-address.txt" width=500px height=60px>
                 </div> <!-- /.col -->
               </div> <!-- /row -->
               <div class="row">
@@ -808,24 +814,25 @@
                 <div class="col-4">
                   <div class="form-group">
                     <form method="post">
-                      <input type="text" placeholder="Enter I2P Address" class="form-control"
-                        onchange='if(this.value != 0) { i2paddress(this.value); }'>
-                      <span class="fui-check-inverted"></span>
+                      <input type="text" id="i2pAddress" placeholder="Enter I2P Address" class="form-control">
+                      <button type="submit" onclick="i2paddress(i2pAddress.value)" class="btn btn-dark my-1">Save</button>
+                    </form>
                   </div>
                 </div> <!-- /col -->
-                </form>
-                <script>
+
+                <script type="text/javascript">
                   function i2paddress(value) {
-                    $.ajax({
-                      url: "i2p-address.php", //the page containing php script
-                      type: "POST", //request type
-                      data: ({ value }),
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
+                  $.ajax({
+                  url: "i2p-address.php",
+                  type: "post",
+                  data: ({ value }),
+                  dataType: 'text',
+                  success: function (result) {
+                  alert(result); 
                   }
-                </script>
+                  });
+                  };
+                  </script>            
 
                 <div class="col-4">
                   <embed class="float-left" src="i2p-address.txt" width=500px height=60px>
@@ -841,24 +848,26 @@
                 <div class="col-2">
                   <div class="form-group">
                     <form method="post">
-                      <input type="text" placeholder="Enter I2P Port" class="form-control"
-                        onchange='if(this.value != 0) { i2pport(this.value); }'>
+                      <input type="text" id="i2pPort" placeholder="Enter I2P Port" class="form-control">
+                      <button type="submit" onclick="i2pport(i2pPort.value)" class="btn btn-dark my-1">Save</button>
                       <span class="fui-check-inverted"></span>
+                    </form>
                   </div>
                 </div> <!-- /col -->
-                </form>
-                <script>
+
+                <script type="text/javascript">
                   function i2pport(value) {
-                    $.ajax({
-                      url: "i2p-port.php", //the page containing php script
-                      type: "POST", //request type
-                      data: ({ value }),
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
+                  $.ajax({
+                  url: "i2p-port.php",
+                  type: "post",
+                  data: ({ value }),
+                  dataType: 'text',
+                  success: function (result) {
+                  alert(result); 
                   }
-                </script>
+                  });
+                  };
+                  </script>                
 
                 <div class="col-3">
                   <embed class="float-left" src="i2p-port.txt" width=500px height=60px>
@@ -874,24 +883,25 @@
                 <div class="col-2">
                   <div class="form-group">
                     <form method="post">
-                      <input type="text" placeholder="I2P TX-Proxy Port" class="form-control"
-                        onchange='if(this.value != 0) { i2ptxproxyport(this.value); }'>
-                      <span class="fui-check-inverted"></span>
+                      <input type="text" id="i2pTxProxyPort" placeholder="I2P TX-Proxy Port" class="form-control">
+                      <button type="submit" onclick="i2ptxproxyport(i2pTxProxyPort.value)" class="btn btn-dark my-1">Save</button>
+                    </form>  
                   </div>
                 </div> <!-- /col -->
-                </form>
-                <script>
+
+                <script type="text/javascript">
                   function i2ptxproxyport(value) {
-                    $.ajax({
-                      url: "i2p-tx-proxy-port.php", //the page containing php script
-                      type: "POST", //request type
-                      data: ({ value }),
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
+                  $.ajax({
+                  url: "i2p-tx-proxy-port.php",
+                  type: "post",
+                  data: ({ value }),
+                  dataType: 'text',
+                  success: function (result) {
+                  alert(result); 
                   }
-                </script>
+                  });
+                  };
+                  </script>            
 
                 <div class="col-3">
                   <embed class="float-left" src="i2p-tx-proxy-port.txt" width=500px height=60px>
@@ -1059,31 +1069,30 @@
               <div class="row">
                 <div class="col-4">
                   <h6 class="demo-panel-title pt-3">RPC Port:</h6>
-
                   <div class="form-group">
                     <form method="post">
-                      <input type="number" placeholder="New Monero RPC Port" class="form-control"
-                        onchange='if(this.value != 0) { monerorpcport(this.value); }'>
-                      <span class="fui-check-inverted"></span>
+                      <input type="number" id="moneroRpcPort" placeholder="New Monero RPC Port" class="form-control">
+                      <button type="submit" onclick="monerorpcport(moneroRpcPort.value)" class="btn btn-dark my-1">Save</button>
                     </form>
                   </div>
                 </div>
 
-                <script>
+                <script type="text/javascript">
                   function monerorpcport(value) {
-                    $.ajax({
-                      url: "monero-rpc-port.php", //the page containing php script
-                      type: "POST", //request type
-                      data: ({ value }),
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
+                  $.ajax({
+                  url: "monero-rpc-port.php",
+                  type: "post",
+                  data: ({ value }),
+                  dataType: 'text',
+                  success: function (result) {
+                  alert(result); 
                   }
-                </script>
+                  });
+                  };
+                  </script>                   
 
                 <div class="col-6">
-                  <p><small><embed src="monero-rpc-port.txt" width=300px height=40px></small></p>
+                  <p><small><embed src="monero-rpc-port.txt" width=300px height=60px></small></p>
                 </div> <!-- /col -->
               </div> <!-- /row -->
 

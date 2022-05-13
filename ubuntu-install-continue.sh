@@ -102,6 +102,7 @@ sudo apt-get autoremove -y 2>&1 | tee -a debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
+sudo usermod -a -G pinodexmr www-data
 sleep 3
 
 if [[ $LIGHTMODE = FALSE ]]
