@@ -1,6 +1,7 @@
 #!/bin/sh
 
 #Dependencies
+sudo apt-get update
 sudo apt-get install udftools coreutils vim-common -y 
 
 TITLE=$(lsblk --nodeps | sed -n 1p)
