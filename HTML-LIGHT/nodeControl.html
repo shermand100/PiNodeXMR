@@ -57,6 +57,24 @@
 
 
   <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <img class="img-fluid d-block mx-auto" src="images/pinode-xmr-banner.png">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h2 class="text-center">
+          <small>Private Dependable Nodes</small>
+        </h2>
+        <hr>
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- container -->
+
+
+  <div class="container">
     <div class="row my-4">
       <div class="col-md-12">
 
@@ -922,13 +940,13 @@
 
             <div class="row demo-row">
               <div class="col-lg-4 mb-4">
-                <a onclick="startbutton()" href="#Start Custom" class="btn btn-block btn-lg btn-dark">Start Custom
+                <a onclick="startCustomButton()" href="#Start Custom" class="btn btn-block btn-lg btn-dark">Start Custom
                   Node <span class="fui-power"></span></a>
               </div>
 
 
               <script>
-                function startbutton() {
+                function startCustomButton() {
                   $.ajax({
                     url: "start-moneroCustomNode.php", //the page containing php script
                     type: "POST", //request type
@@ -940,12 +958,12 @@
               </script>
 
               <div class="col-lg-4 mb-4">
-                <a onclick="stopbutton()" href="#Stop Custom" class="btn btn-block btn-lg btn-dark">Stop Custom Node
+                <a onclick="stopCustomButton()" href="#Stop Custom" class="btn btn-block btn-lg btn-dark">Stop Custom Node
                   <span class="fui-power"></span></a>
               </div>
 
               <script>
-                function stopbutton() {
+                function stopCustomButton() {
                   $.ajax({
                     url: "stop-moneroCustomNode.php", //the page containing php script
                     type: "POST", //request type
