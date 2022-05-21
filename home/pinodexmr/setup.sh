@@ -65,7 +65,8 @@
 				"1)" "Update Monero" \
 				"2)" "Update PiNode-XMR" \
 				"3)" "Update Blockchain Explorer" \
-				"4)" "Update system packages and dependencies" 2>&1 >/dev/tty)
+				"4)" "Update P2Pool" \
+				"5)" "Update system packages and dependencies" 2>&1 >/dev/tty)
 				
 				case $CHOICE3 in
 		
@@ -89,8 +90,15 @@
 							sleep 2
 							fi
 						;;
+
+					"4)")	if (whiptail --title "Update P2Pool" --yesno "This will check for and install updates to P2Pool\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
+							. /home/pinodexmr/setupMenuScripts/setup-update-p2pool.sh
+							else
+							sleep 2
+							fi
+						;;						
 						
-					"4)")	if (whiptail --title "Update System" --yesno "PiNode-XMR will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
+					"5)")	if (whiptail --title "Update System" --yesno "PiNode-XMR will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
 							clear; 
 							##Update and Upgrade system
 							echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
