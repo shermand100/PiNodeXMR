@@ -110,7 +110,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					echo -e "\e[32mUser-set configuration saved\e[0m"					
 					
 				#Remove old html images (prevents error when trying to overwrite non-empty directory)
-				rm -R /home/pinodexmr/PiNode-XMR/HTML/images
+				rm -R /var/www/html/images/
 
 					
 		#Install Update
@@ -165,7 +165,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.* /var/www/html/ 2>&1 | tee -a debug.log
 					sudo rm -R /var/www/html/images 2>&1 | tee -a debug.log
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/images /var/www/html 2>&1 | tee -a debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/images/ /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
 					else
@@ -173,7 +173,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2>&1 | tee -a debug.log
 					sudo rm -R /var/www/html/images 2>&1 | tee -a debug.log
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>&1 | tee -a debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images/ /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
 					fi
