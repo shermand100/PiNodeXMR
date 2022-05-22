@@ -89,6 +89,30 @@
   
       </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <h6>Restart live log viewer: <small> log-io live log monitoring is a new feature and we have found that if you start a new service it doesn't always catch the feed. Click the restart log-io viewer button below and it'll behave as expected.</small></h6>
+  
+        <div class="row demo-row">
+          <div class="col-lg-4 mb-4">
+            <a onclick="restartlogfile()" href="#Restart_Log_io" class="btn btn-dark">Restart log-io <span class="fui-power"></span></a>
+          </div>
+
+
+          <script>
+            function restartlogfile() {
+              $.ajax({
+                url: "restart-logio-file.php", //the page containing php script
+                type: "POST", //request type
+                success: function (result) {
+                  alert(result);
+                }
+              });
+            }
+          </script>
+  
+      </div>
+    </div>
   </div>
 
   <div class="container">
