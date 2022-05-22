@@ -94,7 +94,13 @@ then
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
 # ********************************************
-
+echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
+sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log
+cd /usr/src/gtest
+sudo cmake . 2>&1 | tee -a debug.log
+sudo make
+sudo mv lib/libg* /usr/lib/
+cd
 echo -e "\e[32mDownloading Monero \e[0m"
 sleep 2
 

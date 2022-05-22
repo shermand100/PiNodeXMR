@@ -39,13 +39,7 @@ echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
 sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
 sleep 2
-	echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
-sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log
-cd /usr/src/gtest
-sudo cmake . 2>&1 | tee -a debug.log
-sudo make
-sudo mv lib/libg* /usr/lib/
-cd
+
 ##Installing dependencies for --- P2Pool
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
