@@ -66,7 +66,8 @@
 				"2)" "Update PiNode-XMR" \
 				"3)" "Update Blockchain Explorer" \
 				"4)" "Update P2Pool" \
-				"5)" "Update system packages and dependencies" 2>&1 >/dev/tty)
+				"5)" "Update Monero-LWS" \
+				"6)" "Update system packages and dependencies" 2>&1 >/dev/tty)
 				
 				case $CHOICE3 in
 		
@@ -96,9 +97,16 @@
 							else
 							sleep 2
 							fi
-						;;						
+						;;
+
+					"5)")	if (whiptail --title "Update Monero-LWS" --yesno "Monero-LWS is still in development and as such has no version number. I can delete the version on this device and install the latest from source?\nSSL Certificates will be preserved\n\n**Note: To install Monero-LWS for the first time please use the installer found in the 'Node Tools' Menu\n\nWould you like to continue?" 12 78); then
+							. /home/pinodexmr/setupMenuScripts/setup-update-monero-lws.sh
+							else
+							sleep 2
+							fi
+						;;											
 						
-					"5)")	if (whiptail --title "Update System" --yesno "PiNode-XMR will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
+					"6)")	if (whiptail --title "Update System" --yesno "PiNode-XMR will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
 							clear; 
 							##Update and Upgrade system
 							echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
@@ -171,8 +179,8 @@
 									#Set IP for systemd monero-lws
 									. /home/pinodexmr/variables/IPforLWS.sh
 									#Install complete
-									whiptail --title "Monero-LWS installer" --msgbox "\nThe Monero-LWS installation is complete and SSL certificates have been generated.\n\nA copy of the generated /home/pinodexmr/lswSslCert/cert.pem should be added to (windows) 'LocalComputer\Trusted Root Certification Authorities\Certificates' for use with MyMonero desktop... " 20 78
-									whiptail --title "Monero-LWS installer" --msgbox "\nFor Android Lightweight Wallets the\n/home/pinodexmr/lswSslCert/androidCert.p12 should be installed via\n'Settings>Security>Encryption&Credentials>Install certificates from storage'..." 20 78
+									whiptail --title "Monero-LWS installer" --msgbox "\nThe Monero-LWS installation is complete and SSL certificates have been generated.\n\nA copy of the generated /home/pinodexmr/lwsSslCert/cert.pem should be added to (windows) 'LocalComputer\Trusted Root Certification Authorities\Certificates' for use with MyMonero desktop... " 20 78
+									whiptail --title "Monero-LWS installer" --msgbox "\nFor Android Lightweight Wallets the\n/home/pinodexmr/lwsSslCert/androidCert.p12 should be installed via\n'Settings>Security>Encryption&Credentials>Install certificates from storage'..." 20 78
 											if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS on PiNodeXMR boot?" 14 78); then
 											sudo systemctl enable monero-lws.service
 											else
