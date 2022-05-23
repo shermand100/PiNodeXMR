@@ -6,7 +6,7 @@ sleep 2
 sudo apt-get install whiptail -y
 
 CHOICE=$(whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS" 20 60 5 \
-	"1)" "Ubunutu Server 64bit 22.04 LTS" (current) \
+	"1)" "Ubunutu Server 64bit 22.04 LTS (current)" \
 	"2)" "Armbian Debian (Bullseye - discontinued)" \
 	"3)" "Armbian Debian (Buster - end of life)" \
 	"4)" "Raspberry Pi OS (end of life)" \
