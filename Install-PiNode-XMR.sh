@@ -10,8 +10,7 @@ CHOICE=$(whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correc
 	"2)" "Armbian Debian (Bullseye - discontinued)" \
 	"3)" "Armbian Debian (Buster - end of life)" \
 	"4)" "Raspberry Pi OS (end of life)" \
-	"5)" "Exit" 3>&2 2>&1 1>&3
-)
+	"5)" "Exit" 3>&2 2>&1 1>&3)
 
 case $CHOICE in
 	"1)")
