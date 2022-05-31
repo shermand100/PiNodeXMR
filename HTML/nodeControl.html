@@ -132,39 +132,15 @@
 
               <div class="row demo-row">
                 <div class="col-lg-4 mb-4">
-                  <a onclick="startbutton()" href="#Start Monerod" class="btn btn-block btn-lg btn-dark">Start Private
+                  <a onclick="runScript('start-moneroPrivate')" href="#Start Monerod" class="btn btn-block btn-lg btn-dark">Start Private
                     Node <span class="fui-power"></span></a>
                 </div>
 
-
-                <script>
-                  function startbutton() {
-                    $.ajax({
-                      url: "start-moneroPrivate.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
                 <div class="col-lg-4 mb-4">
-                  <a onclick="stopbutton()" href="#Stop Monerod" class="btn btn-block btn-lg btn-dark">Stop Private Node
+                  <a onclick="runScript('stop-moneroPrivate')" href="#Stop Monerod" class="btn btn-block btn-lg btn-dark">Stop Private Node
                     <span class="fui-power"></span></a>
                 </div>
 
-                <script>
-                  function stopbutton() {
-                    $.ajax({
-                      url: "stop-moneroPrivate.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
               </div> <!-- /row -->
             </div> <!-- /container -->
           </div>
@@ -186,44 +162,16 @@
               <p><small>This will run a full node and provide a restricted RPC port to allow wallet connections to your
                   node. This port does not require hash payments or
                   username and password. Free to all. [ clearnet ]</small></p>
-
-
-
               <div class="row demo-row">
                 <div class="col-lg-4 mb-4">
-                  <a onclick="startfreebutton()" href="#Start Public Free Node"
+                  <a onclick="runScript('start-moneroPublicFree')" href="#Start Public Free Node"
                     class="btn btn-block btn-lg btn-dark">Start Free Public Node <span class="fui-power"></span></a>
                 </div>
 
-
-                <script>
-                  function startfreebutton() {
-                    $.ajax({
-                      url: "start-moneroPublicFree.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
                 <div class="col-lg-4 mb-4">
-                  <a onclick="stopfreebutton()" href="#Stop Monerod" class="btn btn-block btn-lg btn-dark">Stop Free
+                  <a onclick="runScript('stop-moneroPublicFree')" href="#Stop Monerod" class="btn btn-block btn-lg btn-dark">Stop Free
                     Public Node <span class="fui-power"></span></a>
                 </div>
-
-                <script>
-                  function stopfreebutton() {
-                    $.ajax({
-                      url: "stop-moneroPublicFree.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
               </div> <!-- /row -->
 
               <div class="row">
@@ -299,41 +247,16 @@
                 </div> <!-- col -->
               </div> <!-- row -->
 
-
               <div class="row">
                 <div class="col-lg-4 mb-4">
-                  <a onclick="startpublicnode()" href="#Start Public Node" class="btn btn-block btn-lg btn-dark">Start
+                  <a onclick="runScript('start-moneroPublicRPCPay')" href="#Start Public Node" class="btn btn-block btn-lg btn-dark">Start
                     RPC Pay Node <span class="fui-user"></span></a>
                 </div> <!-- col -->
 
-                <script>
-                  function startpublicnode() {
-                    $.ajax({
-                      url: "start-moneroPublicRPCPay.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
                 <div class="col-lg-4 mb-4">
-                  <a onclick="stoppublicnode()" href="#Stop Public Node" class="btn btn-block btn-lg btn-dark">Stop RPC
+                  <a onclick="runScript('stop-moneroPublicRPCPay')" href="#Stop Public Node" class="btn btn-block btn-lg btn-dark">Stop RPC
                     Pay Node <span class="fui-user"></span></a>
                 </div> <!-- col -->
-
-                <script>
-                  function stoppublicnode() {
-                    $.ajax({
-                      url: "stop-moneroPublicRPCPay.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
               </div> <!-- row -->
 
               <div class="row">
@@ -482,36 +405,14 @@
 
               <div class="row demo-row">
                 <div class="col-lg-4 mb-4">
-                  <a onclick="startminingbutton()" href="#Start Mining" class="btn btn-block btn-lg btn-dark">Start Solo
+                  <a onclick="runScript('start-moneroMiningNode')" href="#Start Mining" class="btn btn-block btn-lg btn-dark">Start Solo
                     Mining <span class="fui-lock"></span></a>
                 </div>
-                <script>
-                  function startminingbutton() {
-                    $.ajax({
-                      url: "start-moneroMiningNode.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
 
                 <div class="col-lg-4 mb-4">
-                  <a onclick="stopminingbutton()" href="#Stop Mining" class="btn btn-block btn-lg btn-dark">Stop Solo
+                  <a onclick="runScript('stop-moneroMiningNode')" href="#Stop Mining" class="btn btn-block btn-lg btn-dark">Stop Solo
                     Mining <span class="fui-lock"></span></a>
                 </div>
-                <script>
-                  function stopminingbutton() {
-                    $.ajax({
-                      url: "stop-moneroMiningNode.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
               </div> <!-- /row -->
 
               <div class="row demo-row">
@@ -637,37 +538,14 @@
 
               <div class="row demo-row">
                 <div class="col">
-                  <a onclick="starttorbutton()" href="#start-monero-tor" class="btn btn-block btn-lg btn-dark">Start
+                  <a onclick="runScript('start-moneroTorPrivate')" href="#start-monero-tor" class="btn btn-block btn-lg btn-dark">Start
                     Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
                 </div> <!-- /.col -->
-                <script>
-                  function starttorbutton() {
-                    $.ajax({
-                      url: "start-moneroTorPrivate.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
 
                 <div class="col">
-                  <a onclick="stoptorbutton()" href="#stop-monero-tor" class="btn btn-block btn-lg btn-dark">Stop
+                  <a onclick="runScript('start-moneroTorPrivate')" href="#stop-monero-tor" class="btn btn-block btn-lg btn-dark">Stop
                     Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
-                </div>
-                <script>
-                  function stoptorbutton() {
-                    $.ajax({
-                      url: "stop-moneroTorPrivate.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
+                </div>  <!-- /.col -->
               </div> <!-- /row -->
             </div> <!-- /container -->
           </div>
@@ -710,39 +588,16 @@
 
               <div class="row demo-row">
                 <div class="col">
-                  <a onclick="starttorpublicbutton()" href="#start-monero-tor-public"
+                  <a onclick="runScript('start-moneroTorPublic')" href="#start-monero-tor-public"
                     class="btn btn-block btn-lg btn-dark">Start
                     Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
                 </div> <!-- /.col -->
-                <script>
-                  function starttorpublicbutton() {
-                    $.ajax({
-                      url: "start-moneroTorPublic.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
 
                 <div class="col">
-                  <a onclick="stoptorpublicbutton()" href="#stop-monero-tor-public"
+                  <a onclick="runScript('stop-moneroTorPublic')" href="#stop-monero-tor-public"
                     class="btn btn-block btn-lg btn-dark">Stop
                     Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
-                </div>
-                <script>
-                  function stoptorpublicbutton() {
-                    $.ajax({
-                      url: "stop-moneroTorPublic.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
+                </div>  <!-- /.col -->
               </div> <!-- /row -->
             </div> <!-- /container -->
           </div>
@@ -768,37 +623,14 @@
 
               <div class="row demo-row">
                 <div class="col">
-                  <a onclick="starti2pbutton()" href="#start-monero-i2p" class="btn btn-block btn-lg btn-dark">Start
+                  <a onclick="runScript('start-moneroI2PPrivate')" href="#start-monero-i2p" class="btn btn-block btn-lg btn-dark">Start
                     Monerod - <span class="fui-eye"> <br />[I2P Bridge]</span></a>
                 </div> <!-- /.col -->
-                <script>
-                  function starti2pbutton() {
-                    $.ajax({
-                      url: "start-moneroI2PPrivate.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
 
                 <div class="col">
-                  <a onclick="stopi2pbutton()" href="#stop-monero-i2p" class="btn btn-block btn-lg btn-dark">Stop
+                  <a onclick="runScript('stop-moneroI2PPrivate')" href="#stop-monero-i2p" class="btn btn-block btn-lg btn-dark">Stop
                     Monerod - <span class="fui-eye"> <br />[I2P Bridge]</span></a>
                 </div>
-                <script>
-                  function stopi2pbutton() {
-                    $.ajax({
-                      url: "stop-moneroI2PPrivate.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
               </div> <!-- /row -->
 
               <div class="row">
@@ -946,39 +778,15 @@
 
             <div class="row demo-row">
               <div class="col-lg-4 mb-4">
-                <a onclick="startCustomButton()" href="#Start Custom" class="btn btn-block btn-lg btn-dark">Start Custom
+                <a onclick="runScript('start-moneroCustomNode')" href="#Start Custom" class="btn btn-block btn-lg btn-dark">Start Custom
                   Node <span class="fui-power"></span></a>
               </div>
 
-
-              <script>
-                function startCustomButton() {
-                  $.ajax({
-                    url: "start-moneroCustomNode.php", //the page containing php script
-                    type: "POST", //request type
-                    success: function (result) {
-                      alert(result);
-                    }
-                  });
-                }
-              </script>
-
               <div class="col-lg-4 mb-4">
-                <a onclick="stopCustomButton()" href="#Stop Custom" class="btn btn-block btn-lg btn-dark">Stop Custom Node
+                <a onclick="runScript('stop-moneroCustomNode')" href="#Stop Custom" class="btn btn-block btn-lg btn-dark">Stop Custom Node
                   <span class="fui-power"></span></a>
               </div>
 
-              <script>
-                function stopCustomButton() {
-                  $.ajax({
-                    url: "stop-moneroCustomNode.php", //the page containing php script
-                    type: "POST", //request type
-                    success: function (result) {
-                      alert(result);
-                    }
-                  });
-                }
-              </script>
             </div> <!-- /row -->
 
             <p>Set your custom options below and click 'save' to apply changes: </p>
@@ -1282,43 +1090,14 @@
 
               <div class="row">
                 <div class="col-md-6">
-
-                  <a onclick="enableswap()" href="#swap-enable" class="btn btn-block btn-lg btn-dark">Enable 2GB
+                  <a onclick="runScript('enable-swap')" href="#swap-enable" class="btn btn-block btn-lg btn-dark">Enable 2GB
                     swap-file <i class="fas fa-hdd"></i></span></a>
-
-
-                  <script>
-                    function enableswap() {
-                      $.ajax({
-                        url: "enable-swap.php", //the page containing php script
-                        type: "POST", //request type
-                        success: function (result) {
-                          alert(result);
-                        }
-                      });
-                    }
-                  </script>
-
                 </div> <!-- /.col -->
                 <div class="col">
 
-                  <a onclick="disableswap()" href="#swap-disable" class="btn btn-block btn-lg btn-dark">Disable 2GB
+                  <a onclick="runScript('disable-swap')" href="#swap-disable" class="btn btn-block btn-lg btn-dark">Disable 2GB
                     swap-file <i class="far fa-hdd"></i></span></a>
                 </div>
-
-                <script>
-                  function disableswap() {
-                    $.ajax({
-                      url: "disable-swap.php", //the page containing php script
-                      type: "POST", //request type
-                      success: function (result) {
-                        alert(result);
-                      }
-                    });
-                  }
-                </script>
-
-
               </div> <!-- /.col -->
             </div> <!-- row -->
           </div> <!-- container -->
@@ -1327,50 +1106,20 @@
     </div>
   </div> <!-- container -->
 
-
-
-
-
-
-
   </div>
   <div class="container py-4">
     <div class="row">
       <div class="col-md-6">
         <h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
-        <a onclick="shutdownbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-warning">Shutdown
+        <a onclick="runScript('shutdown')" href="#Shutdown" class="btn btn-block btn-lg btn-warning">Shutdown
           PiNode-XMR<span class="fui-power"></span></a>
-
-        <script>
-          function shutdownbutton() {
-            $.ajax({
-              url: "shutdown.php", //the page containing php script
-              type: "POST", //request type
-              success: function (result) {
-                alert(result);
-              }
-            });
-          }
-        </script>
-
       </div>
 
       <div class="col-md-6">
         <h3 class="demo-panel-title"> Kill Switch: <small>unsafe shutdown of PiNode-XMR </small></h3>
 
-        <a onclick="killbutton()" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill Process - monerod<span
+        <a onclick="runScript('monerod-kill')" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill Process - monerod<span
             class="fui-trash"></span></a>
-
-        <script>
-          function killbutton() {
-            $.ajax({
-              url: "monerod-kill.php", //the page containing php script
-              type: "POST", //request type
-              success: function (result) {
-                alert(result);
-              }
-            });
-          }
         </script>
 
         <p class="text-center">If you suspect monerod is stuck and cannot recover itself or be recovered this button
@@ -1389,7 +1138,17 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
-
+    <script>
+      function runScript(functionName) {
+        $.ajax({
+          url: `runScript.php?function=${functionName}`, //the page containing php script
+          type: "POST", //request type
+          success: function (result) {
+            alert(result);
+          }
+        });
+      }
+    </script>
 
 </body>
 
