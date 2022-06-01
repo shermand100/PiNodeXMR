@@ -1,2 +1,0 @@
-              total        used        free      shared     buffers       cache   available
-							-- Data Will be generated on next crontab run --

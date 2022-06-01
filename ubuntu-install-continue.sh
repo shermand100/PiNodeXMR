@@ -195,22 +195,20 @@ sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a debug.log
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a debug.log
 sleep 3
-if [[ $LIGHTMODE = TRUE ]]
-then
-#First move hidden file specifically .htaccess file then entire directory
-sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.* /var/www/html/ 2>&1 | tee -a debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/images /var/www/html 2>&1 | tee -a debug.log
-sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
-sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
-else
+
 #First move hidden file specifically .htaccess file then entire directory
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2>&1 | tee -a debug.log
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>&1 | tee -a debug.log
+
+#Then if 'light' mode overwrite .html pages for version without banner
+if [[ $LIGHTMODE = TRUE ]]
+then
+sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.* /var/www/html/ 2>&1 | tee -a debug.log
+fi
+
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
-fi
 
 echo -e "\e[32mSuccess\e[0m"
 
