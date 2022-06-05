@@ -20,7 +20,7 @@ git clone --recursive https://github.com/vtnerd/monero-lws.git;
 echo -e "\e[32mConfiguring install\e[0m"
 sleep 2									
 cd monero-lws
-git checkout develop
+git checkout release-v0.1_0.17
 mkdir build && cd build
 cmake -DMONERO_SOURCE_DIR=/home/pinodexmr/monero -DMONERO_BUILD_DIR=/home/pinodexmr/monero/build/release ..
 echo -e "\e[32mBuilding VTNerd Monero-LWS\e[0m"
