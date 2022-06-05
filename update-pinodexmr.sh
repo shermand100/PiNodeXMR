@@ -160,17 +160,13 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					then
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.* /var/www/html/ 2>&1 | tee -a debug.log
-					sudo rm -R /var/www/html/images 2>&1 | tee -a debug.log
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/images/ /var/www/html/ 2>&1 | tee -a debug.log
+					rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
 					else
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2>&1 | tee -a debug.log
-					sudo rm -R /var/www/html/images 2>&1 | tee -a debug.log
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/images/ /var/www/html/ 2>&1 | tee -a debug.log
+					rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
 					fi
