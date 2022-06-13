@@ -10,4 +10,4 @@
 
 #Start P2Pool
 cd /home/pinodexmr/p2pool/build
-./p2pool --host $DEVICE_IP --wallet $MINING_ADDRESS --no-color --light-mode
+./p2pool --host $DEVICE_IP --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2

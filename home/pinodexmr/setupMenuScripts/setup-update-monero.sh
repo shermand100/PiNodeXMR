@@ -27,7 +27,7 @@ chmod 755 /home/pinodexmr/release.sh
 . /home/pinodexmr/bootstatus.sh
 #Import Variable: Light-mode true/false
 . /home/pinodexmr/variables/light-mode.sh
-echo "Light-Mode value is: $(LIGHTMODE)" >>debug.log
+echo "Light-Mode value is: $LIGHTMODE" >>debug.log
 #Load Variables
 . /home/pinodexmr/current-ver.sh
 . /home/pinodexmr/xmr-new-ver.sh
@@ -101,6 +101,11 @@ sudo cmake . 2>&1 | tee -a debug.log
 sudo make
 sudo mv lib/libg* /usr/lib/
 cd
+echo "Check dependencies installed for --- Monero" 2>&1 | tee -a debug.log
+sudo apt-get update
+sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
+
+
 echo -e "\e[32mDownloading Monero \e[0m"
 sleep 2
 
@@ -123,6 +128,7 @@ mkdir .bitmonero 2>&1 | tee -a debug.log
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
 # ********************************************
+
 fi
 
 if [[ $LIGHTMODE = TRUE ]]
@@ -152,13 +158,15 @@ then
 			#Move Monerod files to standard location
 			mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.17.3.2/monero* /home/pinodexmr/monero/build/release/bin/
 			rm linuxarm7
-			rm -R /home/pinodexmr/temp/
+			rm -R ~/temp/
 		fi
+
 	#********************************************
 	#*******END OF Monero BINARY USE*******
 	#********************************************
-else
+
 fi
+
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
 mkdir .bitmonero 2>&1 | tee -a debug.log
 #Clean-up used downloaded files
@@ -234,7 +242,7 @@ sleep "2"
 
 	if [ $CURRENT_VERSION -lt $NEW_VERSION ]
 		then
-		if (whiptail --title "Monero Updater" --yesno "An update to the Monero is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78); then
+		if ( whiptail --title "Monero Updater" --yesno "An update to the Monero is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78 ); then
 			sleep "2"
 			fn_updateMonero
 			fn_restartMoneroNode
@@ -246,23 +254,22 @@ sleep "2"
 
 	else
 
-		if (whiptail --title "Monero Update" --yesno "This device thinks it's running the latest version of Monero.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Update" --no-button "Return to Main Menu"  14 78); then
+		if ( whiptail --title "Monero Update" --yesno "This device thinks it's running the latest version of Monero.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Update" --no-button "Return to Main Menu"  14 78 ); then
 			sleep "2"
 			fn_updateMonero
 			fn_restartMoneroNode
 		else
 			whiptail --title "Monero Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 			rm /home/pinodexmr/new-ver.sh
+		fi
 	fi
 
 ##End debug log
-echo "
-####################
-" 2>&1 | tee -a debug.log
+echo "Update Complete" 2>&1 | tee -a debug.log
+sleep 5
+echo "####################" 2>&1 | tee -a debug.log
 echo "End setup-update-monero.sh script $(date)" 2>&1 | tee -a debug.log
-echo "
-####################
-" 2>&1 | tee -a debug.log
+echo "####################" 2>&1 | tee -a debug.log
 
 rm ~/release.sh
 

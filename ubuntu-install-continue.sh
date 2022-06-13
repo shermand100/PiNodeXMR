@@ -92,6 +92,7 @@ echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
 sudo apt-get update 2>&1 | tee -a debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a debug.log
+sudo apt-get upgrade -y 2>&1 | tee -a debug.log
 
 ##Auto remove any obsolete packages
 sudo apt-get autoremove -y 2>&1 | tee -a debug.log
@@ -112,7 +113,8 @@ then
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
-sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
+sudo apt-get update
+sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
 sleep 2
 	echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
 sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log
@@ -199,15 +201,13 @@ if [[ $LIGHTMODE = TRUE ]]
 then
 #First move hidden file specifically .htaccess file then entire directory
 sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.* /var/www/html/ 2>&1 | tee -a debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/images /var/www/html 2>&1 | tee -a debug.log
+sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a debug.log
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
 else
 #First move hidden file specifically .htaccess file then entire directory
 sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/HTML/*.* /var/www/html/ 2>&1 | tee -a debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/HTML/images /var/www/html 2>&1 | tee -a debug.log
+sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a debug.log
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
 fi
