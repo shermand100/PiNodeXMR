@@ -160,15 +160,82 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					then
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
+					#Remove .php file clutter, see PiNodeXMR PR66 for context.
+					rm -R /var/www/html/*.php
+					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
+					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a debug.log >&2)
+					#Overwrite /var/www/html with updated contents
 					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+					#Restore User variables
+					mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a debug.log >&2)
+					#Lightmode html update complete
 					else
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
+					rm -R /var/www/html/*.php
+					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
+					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a debug.log >&2)
+					#Overwrite /var/www/html with updated contents										
 					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+					#Restore User variables
+					mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a debug.log >&2)
+					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a debug.log >&2)
+					#Full-mode html update complete					
 					fi
 
 					echo -e "\e[32mSuccess\e[0m"
