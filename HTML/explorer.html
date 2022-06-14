@@ -77,40 +77,14 @@
     <h3 class="demo-panel-title">Monero Block-Explorer: <small>with Transaction Pusher and Emission Monitor</small></h3>
     <p><small><a href="Credit: https://github.com/moneroexamples/onion-monero-blockchain-explorer">Credit to: https://github.com/moneroexamples/onion-monero-blockchain-explorer</a></small></p>
 
-
     <div class="row demo-row">
       <div class="col-lg-4 mb-4">
-        <a onclick="startbutton()" href="#Start Explorer" class="btn btn-block btn-lg btn-dark">Start Explorer <span class="fui-power"></span></a>
+        <a onclick="runScript('explorer-start')" href="#Start Explorer" class="btn btn-block btn-lg btn-dark">Start Explorer <span class="fui-power"></span></a>
       </div>
-
-      <script>
-        function startbutton() {
-          $.ajax({
-            url: "explorer-start.php", //the page containing php script
-            type: "POST", //request type
-            success: function (result) {
-              alert(result);
-            }
-          });
-        }
-      </script>
-
       <div class="col-lg-4 mb-4">
-        <a onclick="stopbutton()" href="#Stop Explorer" class="btn btn-block btn-lg btn-dark">Stop Explorer
+        <a onclick="runScript('explorer-stop')" href="#Stop Explorer" class="btn btn-block btn-lg btn-dark">Stop Explorer
           <span class="fui-power"></span></a>
       </div>
-
-      <script>
-        function stopbutton() {
-          $.ajax({
-            url: "explorer-stop.php", //the page containing php script
-            type: "POST", //request type
-            success: function (result) {
-              alert(result);
-            }
-          });
-        }
-      </script>
 
   </div> <!-- /container -->
 </div>
@@ -125,10 +99,20 @@
 
     </div>
   </div>
-
-    </div> <!-- /container -->
+</div> <!-- /container -->
 
     <!-- JavaScript -->
+    <script>
+      function runScript(functionName) {
+        $.ajax({
+          url: `runScript.php?function=${functionName}`, //the page containing php script
+          type: "POST", //request type
+          success: function (result) {
+            alert(result);
+          }
+        });
+      }
+    </script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 

@@ -90,22 +90,8 @@
   
         <div class="row demo-row">
           <div class="col-lg-4 mb-4">
-            <a onclick="restartlogfile()" href="#Restart_Log_io" class="btn btn-dark">Restart log-io <span class="fui-power"></span></a>
+            <a onclick="runScript('restart-logio-file')" href="#Restart_Log_io" class="btn btn-dark">Restart log-io <span class="fui-power"></span></a>
           </div>
-
-
-          <script>
-            function restartlogfile() {
-              $.ajax({
-                url: "restart-logio-file.php", //the page containing php script
-                type: "POST", //request type
-                success: function (result) {
-                  alert(result);
-                }
-              });
-            }
-          </script>
-  
       </div>
     </div>
   </div>
@@ -143,6 +129,17 @@
   <script src="assets/js/bootstrap.bundle.min.js"></script>
 
   </div>
+  <script>
+    function runScript(functionName) {
+      $.ajax({
+        url: `runScript.php?function=${functionName}`, //the page containing php script
+        type: "POST", //request type
+        success: function (result) {
+          alert(result);
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

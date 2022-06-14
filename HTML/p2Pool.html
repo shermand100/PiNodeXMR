@@ -81,37 +81,13 @@
 
     <div class="row demo-row">
       <div class="col-lg-4 mb-4">
-        <a onclick="startbutton()" href="#Start p2pool" class="btn btn-block btn-lg btn-dark">Start P2Pool <span class="fui-power"></span></a>
+        <a onclick="runScript('p2pool-start')" href="#Start p2pool" class="btn btn-block btn-lg btn-dark">Start P2Pool <span class="fui-power"></span></a>
       </div>
-
-      <script>
-        function startbutton() {
-          $.ajax({
-            url: "p2pool-start.php", //the page containing php script
-            type: "POST", //request type
-            success: function (result) {
-              alert(result);
-            }
-          });
-        }
-      </script>
 
       <div class="col-lg-4 mb-4">
-        <a onclick="stopbutton()" href="#Stop p2pool" class="btn btn-block btn-lg btn-dark">Stop P2Pool
+        <a onclick="runScript('p2pool-stop')" href="#Stop p2pool" class="btn btn-block btn-lg btn-dark">Stop P2Pool
           <span class="fui-power"></span></a>
       </div>
-
-      <script>
-        function stopbutton() {
-          $.ajax({
-            url: "p2pool-stop.php", //the page containing php script
-            type: "POST", //request type
-            success: function (result) {
-              alert(result);
-            }
-          });
-        }
-      </script>
 
 <div class="container py-4">
     <h6 class="demo-panel-title">Set Your Monero Address </span><small> Payouts will be sent to this address (min 0.0003XMR)</small></h6>
@@ -152,10 +128,20 @@
     </div>
   </div>
 </div>
-
-    </div> <!-- /container -->
+</div> <!-- /container -->
 
     <!-- JavaScript -->
+    <script>
+      function runScript(functionName) {
+        $.ajax({
+          url: `runScript.php?function=${functionName}`, //the page containing php script
+          type: "POST", //request type
+          success: function (result) {
+            alert(result);
+          }
+        });
+      }
+    </script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
