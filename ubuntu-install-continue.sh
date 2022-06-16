@@ -201,8 +201,6 @@ if [[ $LIGHTMODE = TRUE ]]
 then
 #First move hidden file specifically .htaccess file then entire directory
 sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a debug.log
-#Overwrite /var/www/html (.html files) with light mode versions with reduces features
 sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a debug.log
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log

@@ -159,7 +159,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					if [[ $LIGHTMODE = TRUE ]]
 					then
 					#First move hidden file specifically .htaccess file then entire directory
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
 					#Remove .php file clutter, see PiNodeXMR PR66 for context.
 					rm -R /var/www/html/*.php
 					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
@@ -178,8 +178,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a debug.log >&2)
 					#Overwrite /var/www/html with updated contents
-					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a debug.log
-					#Overwrite /var/www/html (.html files) with light mode versions with reduces features
 					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
@@ -202,7 +200,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					else
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-					#Remove .php file clutter, see PiNodeXMR PR66 for context.
 					rm -R /var/www/html/*.php
 					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
 					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a debug.log >&2)
