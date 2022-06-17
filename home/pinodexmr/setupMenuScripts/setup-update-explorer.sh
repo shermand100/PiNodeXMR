@@ -133,5 +133,6 @@ then
 		else
 			whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 			rm /home/pinodexmr/new-ver-exp.sh
+    fi
 	fi
 ./setup.sh
