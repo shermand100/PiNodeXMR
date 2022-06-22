@@ -13,6 +13,9 @@ sleep 1
 #Import Variable: Light-mode true/false
 . /home/pinodexmr/variables/light-mode.sh
 echo "Light-Mode value is: $LIGHTMODE" >>debug.log
+#Import Variable: htmlPasswordRequired
+. /home/pinodexmr/variables/htmlPasswordRequired.sh
+echo "HMTL Password Required set to: $HTMLPASSWORDREQUIRED" >>debug.log
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
@@ -236,6 +239,16 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a debug.log >&2)
 					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a debug.log >&2)
 					#Full-mode html update complete					
+					fi
+
+					#Set correct config for if HTML (Web UI) Password is required.
+
+					if [[ $HTMLPASSWORDREQUIRED = TRUE ]]
+					then
+					sudo cp /home/pinodexmr/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
+					sudo chown root /etc/apache2/sites-enabled/000-default.conf
+					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+					sudo systemctl restart apache2
 					fi
 
 					echo -e "\e[32mSuccess\e[0m"
