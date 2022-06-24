@@ -248,7 +248,8 @@
 				"4)" "Install I2P Server/Router" \
 				"5)" "Start/Stop I2P Server/Router" \
 				"6)" "Install PiVPN" \
-				"7)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
+				"7)" "Web Interface Password set/enable/disable" \
+				"8)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
 				
 				case $CHOICE5 in
 		
@@ -308,7 +309,57 @@
 									fi
 								;;
 								
-							"7)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
+
+							"7)")	CHOICE6=$(whiptail --backtitle "PiNode-XMR Settings" --title "Web Interface Password Set/Enable/Disable" --menu "\n\nWeb Interface Password Set/Enable/Disable" 30 60 15 \
+										"1)" "Set Web Interface Password" \
+										"2)" "Enable Web Interface Password" \
+										"3)" "Disable Web Interface Password" 2>&1 >/dev/tty)
+				
+									case $CHOICE6 in
+
+								"1)")	if (whiptail --title "Web Interface Password Set" --yesno "Set the password used to access the Web Interface" --yes-button "Set Password" --no-button "Cancel" 14 78); then
+									sudo htpasswd -c /etc/apache2/.htpasswd pinodexmr
+									sleep 3
+									whiptail --title "Web Interface Password Set" --msgbox "The PiNodeXMR Web Interface Password has been configured" 12 78;
+									else
+									sleep 2
+									fi
+								;;
+
+								"2)")	if (whiptail --title "Web Interface Password Enable" --yesno "This will enable the requirement for password authentication to access the Web Interface\n\nWould you like to continue?" 12 78); then
+									sudo cp /home/pinodexmr/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
+									sudo chown root /etc/apache2/sites-enabled/000-default.conf
+									sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+									sudo systemctl restart apache2
+									#Update htmlPasswordRequired flag for use with PiNodeXMR updater script
+	echo "#!/bin/sh
+HTMLPASSWORDREQUIRED=TRUE" > /home/pinodexmr/variables/htmlPasswordRequired.sh
+									sleep 2
+									whiptail --title "Web Interface Password Enable" --msgbox "The PiNodeXMR Web Interface Password has been enabled" 12 78;
+									else
+									sleep 2
+									fi
+								;;
+
+								"3)")	if (whiptail --title "Web Interface Password Disable" --yesno "This will disable the requirement for password authentication to access the Web Interface\n\nWould you like to continue?" 12 78); then
+									sudo cp /home/pinodexmr/variables/000-default-passwordAuthDisabled.conf /etc/apache2/sites-enabled/000-default.conf
+									sudo chown root /etc/apache2/sites-enabled/000-default.conf
+									sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+									sudo systemctl restart apache2
+									#Update htmlPasswordRequired flag for use with PiNodeXMR updater script
+	echo "#!/bin/sh
+HTMLPASSWORDREQUIRED=FALSE" > /home/pinodexmr/variables/htmlPasswordRequired.sh									
+									sleep 2
+									whiptail --title "Web Interface Password Disable" --msgbox "The PiNodeXMR Web Interface Password has been disabled" 12 78;
+									else
+									sleep 2
+									fi
+								;;
+
+									esac
+								;;
+
+							"8)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setupMenuScripts/setup-noip.sh
 									else
 									sleep 2
