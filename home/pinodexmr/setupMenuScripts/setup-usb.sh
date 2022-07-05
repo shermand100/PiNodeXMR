@@ -9,7 +9,7 @@ if [[ $DEVICE_TO_CONFIGURE =~ "sd" ]]; then
 	fullDrivePath="/dev/$DEVICE_TO_CONFIGURE"1
 	else
 	fullDrivePath="/dev/$DEVICE_TO_CONFIGURE"
-	fi
+fi
 
 #Check if device contains the drive label "XMRBLOCKCHAIN" to indicate already holding data from previous version. (value 1 indicates label exists)
 recoverUSB=$(lsblk -o LABEL $fullDrivePath | grep -c XMRBLOCKCHAIN)	
@@ -128,13 +128,13 @@ function fn_createNtfs () {
 			echo "Device found to be larger than 100GB, this is good"
 			sleep 3
 		
-	CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'EXT4'. This is a Linux type partition and will be fastest on this device. You may however select NTFS if you intend to copy the blockchain onto this device from another Windows computer.\n\n" 20 80 8 \
-	"1)" "Format using Linux 'EXT4'"   \
-	"2)" "Format using 'NTFS'" 2>&1 >/dev/tty)
+			CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'EXT4'. This is a Linux type partition and will be fastest on this device. You may however select NTFS if you intend to copy the blockchain onto this device from another Windows computer.\n\n" 20 80 8 \
+			"1)" "Format using Linux 'EXT4'"   \
+			"2)" "Format using 'NTFS'" 2>&1 >/dev/tty)
 	
-			case $CHOICE in
+				case $CHOICE in
 				
-		"1)")
+			"1)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as EXT4 for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			
 			fn_wipeFilesystem
@@ -156,50 +156,50 @@ function fn_createNtfs () {
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "Your selected drive has been configured as filesystem ntfs labeled as 'XMRBLOCKCHAIN'\n\nIt has been mounted to /home/pinodexmr/.bitmonero\nIt will auto mount to this location on system boot" 20 60
             ;;
 			
-			esac
+				esac
 		fi
-	esac
+		esac
 	
-	else
+		else
 	
-if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold the "XMRBLOCKCHAIN" label so setup is assuming this is a fresh install\n\n***Contents of this storage device will now be deleted***.\n\nAre you sure you want to continue?..." 20 60); then
+		if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold the "XMRBLOCKCHAIN" label so setup is assuming this is a fresh install\n\n***Contents of this storage device will now be deleted***.\n\nAre you sure you want to continue?..." 20 60); then
 
-		#Check size of selected storage device. Convert to human readable.
-		raw_device_size=$(lsblk -o NAME,SIZE -b | grep $DEVICE_TO_CONFIGURE | awk 'NR==1{print $2/1000000000}') #device size divided by 1000000000 for GB
-		device_size=$(printf "%.0f\n" $raw_device_size) #Division above produces decimals, this command removes decimal places
+			#Check size of selected storage device. Convert to human readable.
+			raw_device_size=$(lsblk -o NAME,SIZE -b | grep $DEVICE_TO_CONFIGURE | awk 'NR==1{print $2/1000000000}') #device size divided by 1000000000 for GB
+			device_size=$(printf "%.0f\n" $raw_device_size) #Division above produces decimals, this command removes decimal places
 		
-	if [ ${device_size} -lt 100 ]; then
-		CHOICE=$(whiptail --backtitle "Consider larger device?" --title "PiNode-XMR Storage helper" --menu "PiNode-XMR detects that the storage device you intend to use is smaller than 100GB\n\nThe Monero blockchain is over 80GB in size and growing, for a full node consider using a larger device\n\nIf you plan to run a pruned node or believe this is incorrect you may continue anyway" 20 80 8 \
-    "1)" "I'd like to continue with the storage device I have selected"   \
-	"2)" "Cancel and keep the blockchain on my primary storage device"   \
-	"3)" "I'd like to use a bigger device I have (make a hardware change)" 2>&1 >/dev/tty)
+			if [ ${device_size} -lt 100 ]; then
+				CHOICE=$(whiptail --backtitle "Consider larger device?" --title "PiNode-XMR Storage helper" --menu "PiNode-XMR detects that the storage device you intend to use is smaller than 100GB\n\nThe Monero blockchain is over 80GB in size and growing, for a full node consider using a larger device\n\nIf you plan to run a pruned node or believe this is incorrect you may continue anyway" 20 80 8 \
+    			"1)" "I'd like to continue with the storage device I have selected"   \
+				"2)" "Cancel and keep the blockchain on my primary storage device"   \
+				"3)" "I'd like to use a bigger device I have (make a hardware change)" 2>&1 >/dev/tty)
+	
+				case $CHOICE in
+		
+				"1)")
+            	;;
+			
+				"2)") 
+				whiptail --title "PiNode-XMR Storage Helper" --msgbox "No system changes have been made\n\nThe blockchain will be kept on your devices primary storage device." 20 60
+				clear
+           		 ;;
+			
+				"3)") echo whiptail --title "PiNode-XMR Storage Helper" --msgbox "No storage configuration has been changed\n\nYou may make hardware changes and run this setup again\n\nReturning to main menu" 20 60
+          		 ;;
+			
+				esac
+				else
+				echo "Device found to be larger than 100GB, this is good"
+				sleep 3
+			fi
+		
+			CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'EXT4'. This is a Linux type partition and will be fastest on this device. You may however select NTFS if you intend to copy the blockchain onto this device from another Windows computer.\n\n" 20 80 8 \
+			"1)" "Format using Linux 'EXT4'"   \
+			"2)" "Format using 'NTFS'" 2>&1 >/dev/tty)
 	
 			case $CHOICE in
-		
-		"1)")
-            ;;
 			
-		"2)") 
-			whiptail --title "PiNode-XMR Storage Helper" --msgbox "No system changes have been made\n\nThe blockchain will be kept on your devices primary storage device." 20 60
-			clear
-            ;;
-			
-			"3)") echo whiptail --title "PiNode-XMR Storage Helper" --msgbox "No storage configuration has been changed\n\nYou may make hardware changes and run this setup again\n\nReturning to main menu" 20 60
-            ;;
-			
-			esac
-			else
-			echo "Device found to be larger than 100GB, this is good"
-			sleep 3
-	fi
-		
-	CHOICE=$(whiptail --backtitle "Choose Drive Format" --title "PiNode-XMR Storage helper" --menu "Advanced setting:\n\nBy default PiNode-XMR will format the selected drive as 'EXT4'. This is a Linux type partition and will be fastest on this device. You may however select NTFS if you intend to copy the blockchain onto this device from another Windows computer.\n\n" 20 80 8 \
-	"1)" "Format using Linux 'EXT4'"   \
-	"2)" "Format using 'NTFS'" 2>&1 >/dev/tty)
-	
-			case $CHOICE in
-			
-		"1)")
+			"1)")
 			whiptail --title "WARNING" --msgbox "This drive will now be formatted as EXT4 for PiNode-XMR.\n\nALL DATA ON THE SELECTED DRIVE WILL BE DELETED IN THIS PROCESS\n\n\nUnplug the drive now if you do not want to loose the data!\n\nOr select Ok to continue." 20 60
 			
 			fn_wipeFilesystem
@@ -223,9 +223,8 @@ if (whiptail --title "PiNode-XMR Setup" --yesno "This USB device doesn't hold th
 			
 			esac
 
-else
+			else
 			whiptail --title "PiNode-XMR Storage Helper" --msgbox "\n\nConfiguration aborted with no changes made\n\nReturning to main menu" 20 60
-fi
+		fi
 	fi
-fi
 ./setup.sh
