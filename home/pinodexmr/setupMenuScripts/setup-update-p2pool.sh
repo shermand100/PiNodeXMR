@@ -8,6 +8,22 @@ echo "
 ####################
 " 2>&1 | tee -a /home/pinodexmr/debug.log
 
+#Establish OS 32 or 64 bit
+CPU_ARCH=`getconf LONG_BIT`
+
+if [ $CPU_ARCH -eq 32 ]
+	then
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********** ARCH: 32-bit detected ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m********** P2Pool Cannot be built ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********** ARCH: 64-bit required ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m********** SKIPPING P2Pool update ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo "Returning to Menu in 10 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "5"
+	echo "Returning to Menu in 5 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "5"
+	else
 #(1) Define variables and updater functions
 #Download update file
 sleep "1"
@@ -153,9 +169,10 @@ then
 			rm /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 		fi
 	fi
+fi
 
 	##End debug log
-echo "Update Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "Update Script Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep 5
 echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo "End setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log

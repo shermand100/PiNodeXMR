@@ -325,38 +325,54 @@ fi
 
 if [ $LIGHTMODE = FALSE ]
 then
-##Install P2Pool
-echo -e "\e[32mInstalling P2Pool\e[0m"
-git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-cd p2pool
-mkdir build && cd build
-cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
-make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
-echo -e "\e[32mSuccess\e[0m"
-sleep 3
+	##Install P2Pool (Not available on 32 bit systems)
+	if [ $CPU_ARCH -eq 32 ]
+	then
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********** ARCH: 32-bit detected ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m********** P2Pool Cannot be built ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********** ARCH: 64-bit required ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********** SKIPPING P2Pool build ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo "Install resuming in 20 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "10"
+	echo "Install resuming in 10 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "5"
+	echo "Install resuming in 5 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "5"
+	else
+	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	cd p2pool
+	mkdir build && cd build
+	cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
+	make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[32mSuccess\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep 3
 
-#Manage P2pool log file ia log rotate
-sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	#Manage P2pool log file ia log rotate
+	sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	fi
 fi
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
 . ~/variables/deviceIp.sh
-echo -e "\e[32mInstalling log.io\e[0m"
-sudo apt-get install nodejs npm -y
-sudo npm install -g log.io
-sudo npm install -g log.io-file-input
-mkdir -p ~/.log.io/inputs/
+echo -e "\e[32mInstalling log.io\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install nodejs npm -y 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo npm install -g log.io 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo npm install -g log.io-file-input 2>&1 | tee -a /home/pinodexmr/debug.log
+mkdir -p ~/.log.io/inputs/ 2>&1 | tee -a /home/pinodexmr/debug.log
 mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
 mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
-sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json
-sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json
-sudo systemctl start log-io-server.service
-sudo systemctl start log-io-file.service
-sudo systemctl enable log-io-server.service
-sudo systemctl enable log-io-file.service
+sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
+sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo systemctl start log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo systemctl start log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo systemctl enable log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.log
 
 
 ##Install crontab
