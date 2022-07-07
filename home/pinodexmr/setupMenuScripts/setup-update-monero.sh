@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #Error Log:
-touch debug.log
+touch /home/pinodexmr/debug.log
 echo "
 ####################
-" 2>&1 | tee -a debug.log
-echo "Start setup-update-monero.sh script $(date)" 2>&1 | tee -a debug.log
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "Start setup-update-monero.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo "
 ####################
-" 2>&1 | tee -a debug.log
+" 2>&1 | tee -a /home/pinodexmr/debug.log
 
 #Establish IP
 echo "PiNode-XMR is checking for available updates"
@@ -27,7 +27,7 @@ chmod 755 /home/pinodexmr/release.sh
 . /home/pinodexmr/bootstatus.sh
 #Import Variable: Light-mode true/false
 . /home/pinodexmr/variables/light-mode.sh
-echo "Light-Mode value is: $LIGHTMODE" >>debug.log
+echo "Light-Mode value is: $LIGHTMODE" >>/home/pinodexmr/debug.log
 #Load Variables
 . /home/pinodexmr/current-ver.sh
 . /home/pinodexmr/xmr-new-ver.sh
@@ -37,7 +37,7 @@ echo $CURRENT_VERSION 'Current Version'
 
 #Establish OS 32 or 64 bit
 CPU_ARCH=`getconf LONG_BIT`
-echo "OS getconf LONG_BIT $CPU_ARCH" >> debug.log
+echo "OS getconf LONG_BIT $CPU_ARCH" >> /home/pinodexmr/debug.log
 if [[ $CPU_ARCH -eq 64 ]]
 then
   echo "ARCH: 64-bit"
@@ -58,10 +58,10 @@ if (whiptail --title "PiNode-XMR Monero Updater" --yesno "For Monero to compile 
 	echo -e "\e[32mSwap file unchanged\e[0m"
 	sleep 3
 		else
-			sudo fallocate -l 2G /swapfile 2>&1 | tee -a debug.log
-			sudo chmod 600 /swapfile 2>&1 | tee -a debug.log
-			sudo mkswap /swapfile 2>&1 | tee -a debug.log
-			sudo swapon /swapfile 2>&1 | tee -a debug.log
+			sudo fallocate -l 2G /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
+			sudo chmod 600 /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
+			sudo mkswap /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
+			sudo swapon /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
 			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
 			free -h
 			sleep 3
@@ -94,16 +94,16 @@ then
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
 # ********************************************
-echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
-sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log
+echo "manual build of gtest for --- Monero" 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install libgtest-dev -y 2>&1 | tee -a /home/pinodexmr/debug.log
 cd /usr/src/gtest
-sudo cmake . 2>&1 | tee -a debug.log
-sudo make
+sudo cmake .  2>&1 | tee -a /home/pinodexmr/debug.log
+sudo make 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo mv lib/libg* /usr/lib/
 cd
-echo "Check dependencies installed for --- Monero" 2>&1 | tee -a debug.log
+echo "Check dependencies installed for --- Monero" 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get update
-sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
+sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a /home/pinodexmr/debug.log
 
 
 echo -e "\e[32mDownloading Monero \e[0m"
@@ -120,10 +120,10 @@ sleep 10
 cd monero && git submodule init && git submodule update
 git checkout $RELEASE
 git submodule sync && git submodule update
-USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a debug.log
+USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2>&1 | tee -a debug.log
+mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
 
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
@@ -137,7 +137,7 @@ then
 	#**********START OF Monero BINARY USE********
 	#********************************************
 
-	echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a debug.log
+	echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a /home/pinodexmr/debug.log
 	#Make standard location for Monero
 	mkdir -p ~/monero/build/release/bin
 		if [[ $CPU_ARCH -eq 64 ]]
@@ -168,7 +168,7 @@ then
 fi
 
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2>&1 | tee -a debug.log
+mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
 #Clean-up used downloaded files
 rm -R ~/temp
 
@@ -265,11 +265,11 @@ sleep "2"
 	fi
 
 ##End debug log
-echo "Update Complete" 2>&1 | tee -a debug.log
+echo "Update Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep 5
-echo "####################" 2>&1 | tee -a debug.log
-echo "End setup-update-monero.sh script $(date)" 2>&1 | tee -a debug.log
-echo "####################" 2>&1 | tee -a debug.log
+echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "End setup-update-monero.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
 
 rm ~/release.sh
 

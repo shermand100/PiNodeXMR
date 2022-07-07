@@ -9,18 +9,18 @@
 ###Begin2
 
 #Create debug file for handling install errors:
-touch debug.log
+touch /home/pinodexmr/debug.log
 echo "
 ####################
-" 2>&1 | tee -a debug.log
-echo "Start ubuntu-install-continue.sh script $(date)" 2>&1 | tee -a debug.log
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "Start ubuntu-install-continue.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo "
 ####################
-" 2>&1 | tee -a debug.log
+" 2>&1 | tee -a /home/pinodexmr/debug.log
 
 #Establish OS 32 or 64 bit
 CPU_ARCH=`getconf LONG_BIT`
-echo "OS getconf LONG_BIT $CPU_ARCH" >> debug.log
+echo "OS getconf LONG_BIT $CPU_ARCH" >> /home/pinodexmr/debug.log
 if [[ $CPU_ARCH -eq 64 ]]
 then
   echo "ARCH: 64-bit"
@@ -40,10 +40,10 @@ if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compil
 	echo -e "\e[32mSwap file unchanged\e[0m"
 	sleep 3
 		else
-			sudo fallocate -l 2G /swapfile 2>&1 | tee -a debug.log
-			sudo chmod 600 /swapfile 2>&1 | tee -a debug.log
-			sudo mkswap /swapfile 2>&1 | tee -a debug.log
-			sudo swapon /swapfile 2>&1 | tee -a debug.log
+			sudo fallocate -l 2G /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
+			sudo chmod 600 /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
+			sudo mkswap /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
+			sudo swapon /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
 			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
 			free -h
 			sleep 3
@@ -89,20 +89,20 @@ sleep 3
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
-sudo apt-get update 2>&1 | tee -a debug.log
-sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a debug.log
-sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a debug.log
-sudo apt-get upgrade -y 2>&1 | tee -a debug.log
+sudo apt-get update 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get upgrade -y 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Auto remove any obsolete packages
-sudo apt-get autoremove -y 2>&1 | tee -a debug.log
+sudo apt-get autoremove -y 2>&1 | tee -a /home/pinodexmr/debug.log
 
 
 ##Installing dependencies for --- Web Interface
-	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a debug.log
+	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
-sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a debug.log
+sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo usermod -a -G pinodexmr www-data
 sleep 3
 
@@ -110,50 +110,50 @@ if [[ $LIGHTMODE = FALSE ]]
 then
   echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
-	echo "Installing dependencies for --- Monero" 2>&1 | tee -a debug.log
+	echo "Installing dependencies for --- Monero" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
 sleep 3
 sudo apt-get update
-sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a debug.log
+sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep 2
-	echo "manual build of gtest for --- Monero" 2>&1 | tee -a debug.log
-sudo apt-get install libgtest-dev -y 2>&1 | tee -a debug.log
+	echo "manual build of gtest for --- Monero" 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install libgtest-dev -y 2>&1 | tee -a /home/pinodexmr/debug.log
 cd /usr/src/gtest
-sudo cmake . 2>&1 | tee -a debug.log
+sudo cmake . 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo make
 sudo mv lib/libg* /usr/lib/
 cd
 ##Installing dependencies for --- P2Pool
-	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a debug.log
+	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
 fi
 
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
-	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a debug.log
+	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a debug.log
-sudo apt-get install exfat-fuse exfat-utils -y 2>&1 | tee -a debug.log
+sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install exfat-fuse exfat-utils -y 2>&1 | tee -a /home/pinodexmr/debug.log
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 sleep 3
 
 ##Clone PiNode-XMR to device from git
-	echo "Clone PiNode-XMR to device from git" 2>&1 | tee -a debug.log
+	echo "Clone PiNode-XMR to device from git" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2>&1 | tee -a debug.log
+git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
 
 
 ##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes
-	echo "Configure ssh security" 2>&1 | tee -a debug.log
+	echo "Configure ssh security" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mConfiguring SSH security\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/ssh/sshd_config /etc/ssh/sshd_config 2>&1 | tee -a debug.log
-sudo chmod 644 /etc/ssh/sshd_config 2>&1 | tee -a debug.log
-sudo chown root /etc/ssh/sshd_config 2>&1 | tee -a debug.log
-sudo /etc/init.d/ssh restart 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/etc/ssh/sshd_config /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 644 /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chown root /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo /etc/init.d/ssh restart 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSSH security config complete\e[0m"
 sleep 3
 
@@ -161,55 +161,55 @@ sleep 3
 ##Copy PiNode-XMR scripts to home folder
 echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
 sleep 3
-mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2>&1 | tee -a debug.log
-mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2>&1 | tee -a debug.log
-sudo chmod 777 -R /home/pinodexmr/* 2>&1 | tee -a debug.log #Read/write access needed by www-data to action php port, address customisation
+mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2>&1 | tee -a /home/pinodexmr/debug.log
+mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 777 -R /home/pinodexmr/* 2>&1 | tee -a /home/pinodexmr/debug.log #Read/write access needed by www-data to action php port, address customisation
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 ##Add PiNode-XMR systemd services
-	echo "Add PiNode-XMR systemd services" 2>&1 | tee -a debug.log
+	echo "Add PiNode-XMR systemd services" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/ 2>&1 | tee -a debug.log
-sudo chmod 644 /etc/systemd/system/*.service 2>&1 | tee -a debug.log
-sudo chown root /etc/systemd/system/*.service 2>&1 | tee -a debug.log
-sudo systemctl daemon-reload 2>&1 | tee -a debug.log
-sudo systemctl start moneroStatus.service 2>&1 | tee -a debug.log
-sudo systemctl enable moneroStatus.service 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 644 /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chown root /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo systemctl daemon-reload 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo systemctl start moneroStatus.service 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo systemctl enable moneroStatus.service 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 #Configure apache server for access to monero log file
-sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a debug.log
-sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a debug.log
-sudo chown root /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a debug.log
-sudo /etc/init.d/apache2 restart 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chown root /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo /etc/init.d/apache2 restart 2>&1 | tee -a /home/pinodexmr/debug.log
 
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 ##Setup local hostname
-	echo "Setup local hostname" 2>&1 | tee -a debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a debug.log
-sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a debug.log
+	echo "Setup local hostname" 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Configure Web-UI
-	echo "Configure Web-UI" 2>&1 | tee -a debug.log
+	echo "Configure Web-UI" 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep 3
 if [[ $LIGHTMODE = TRUE ]]
 then
 #First move hidden file specifically .htaccess file then entire directory
-sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a debug.log
-sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
-sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 else
 #First move hidden file specifically .htaccess file then entire directory
-sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a debug.log
-sudo chown www-data -R /var/www/html/ 2>&1 | tee -a debug.log
-sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 fi
 
 echo -e "\e[32mSuccess\e[0m"
@@ -242,23 +242,23 @@ sleep 10
 cd monero && git submodule init && git submodule update
 git checkout $RELEASE
 git submodule sync && git submodule update
-USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a debug.log
+USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2>&1 | tee -a debug.log
+mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
 
 echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 sleep 10
-		echo "Build Monero Onion Block Explorer" 2>&1 | tee -a debug.log
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2>&1 | tee -a debug.log
+		echo "Build Monero Onion Block Explorer" 2>&1 | tee -a /home/pinodexmr/debug.log
+git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2>&1 | tee -a /home/pinodexmr/debug.log
 cd onion-monero-blockchain-explorer
 mkdir build
 cd build
-cmake .. 2>&1 | tee -a debug.log
-make 2>&1 | tee -a debug.log
+cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
+make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
 rm ~/release.sh
 
@@ -275,7 +275,7 @@ then
 
 #Define Install Monero function to reduce repeat script
 function f_installMonero {
-echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a debug.log
+echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a /home/pinodexmr/debug.log
 #Make standard location for Monero
 mkdir -p ~/monero/build/release/bin
 if [[ $CPU_ARCH -eq 64 ]]
@@ -299,7 +299,7 @@ rm linuxarm7
 rm -R /home/pinodexmr/temp/
 fi
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2>&1 | tee -a debug.log
+mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
 #Clean-up used downloaded files
 rm -R ~/temp
 }
@@ -327,18 +327,18 @@ if [ $LIGHTMODE = FALSE ]
 then
 ##Install P2Pool
 echo -e "\e[32mInstalling P2Pool\e[0m"
-git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a debug.log
+git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 cd p2pool
 mkdir build && cd build
-cmake .. 2>&1 | tee -a debug.log
-make -j2 2>&1 | tee -a debug.log
+cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
+make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 #Manage P2pool log file ia log rotate
-sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
-sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
-sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a debug.log
+sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 fi
 
 ##Install log.io (Real-time service monitoring)
@@ -349,8 +349,8 @@ sudo apt-get install nodejs npm -y
 sudo npm install -g log.io
 sudo npm install -g log.io-file-input
 mkdir -p ~/.log.io/inputs/
-mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a debug.log
-mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a debug.log
+mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
+mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
 sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json
 sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json
 sudo systemctl start log-io-server.service
@@ -360,25 +360,25 @@ sudo systemctl enable log-io-file.service
 
 
 ##Install crontab
-		echo "Install crontab" 2>&1 | tee -a debug.log
+		echo "Install crontab" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
-crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a debug.log
+crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 ##Set Swappiness lower
-		echo "Set RAM Swappiness lower" 2>&1 | tee -a debug.log
-sudo sysctl vm.swappiness=10 2>&1 | tee -a debug.log
+		echo "Set RAM Swappiness lower" 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo sysctl vm.swappiness=10 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ## Remove left over files from git clone actions
-	echo "Remove left over files from git clone actions" 2>&1 | tee -a debug.log
+	echo "Remove left over files from git clone actions" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
-sudo rm -r /home/pinodexmr/PiNode-XMR/ 2>&1 | tee -a debug.log
+sudo rm -r /home/pinodexmr/PiNode-XMR/ 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Change log in menu to 'main'
-wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/home/pinodexmr/.profile 2>&1 | tee -a debug.log
+wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/home/pinodexmr/.profile 2>&1 | tee -a /home/pinodexmr/debug.log
 
 #Write value of LIGHTMODE variable
 	echo "#!/bin/sh
@@ -387,11 +387,11 @@ LIGHTMODE=${LIGHTMODE}" > /home/pinodexmr/variables/light-mode.sh
 ##End debug log
 echo "
 ####################
-" 2>&1 | tee -a debug.log
-echo "End ubuntu-install-continue.sh script $(date)" 2>&1 | tee -a debug.log
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "End ubuntu-install-continue.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo "
 ####################
-" 2>&1 | tee -a debug.log
+" 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ## Install complete
 echo -e "\e[32mAll Installs complete\e[0m"

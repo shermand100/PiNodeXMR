@@ -1,17 +1,27 @@
 #!/bin/bash
+
+echo "
+####################
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "Start setup-update-explorer.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "
+####################
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+
+
 #(1) Define variables and updater functions
 #Download update file
 sleep "1"
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 
 #Permission Setting
-chmod 755 /home/pinodexmr/current-ver-exp.sh
-chmod 755 /home/pinodexmr/exp-new-ver.sh
+chmod 755 /home/pinodexmr/current-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+chmod 755 /home/pinodexmr/exp-new-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 #Load Variables
-. /home/pinodexmr/current-ver-exp.sh
-. /home/pinodexmr/exp-new-ver.sh
+. /home/pinodexmr/current-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+. /home/pinodexmr/exp-new-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 #Load boot status - what condition was node last run
-. /home/pinodexmr/bootstatus.sh
+. /home/pinodexmr/bootstatus.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 
 # Display versions
 echo -e "\e[32mVersion Info file received:\e[0m"
@@ -23,30 +33,30 @@ sleep "3"
 
 fn_updateBlockExplorer () {
 		#Stop Node to make system resources available.
-		sudo systemctl stop blockExplorer.service
-		sudo systemctl stop moneroPrivate.service
-		sudo systemctl stop moneroMiningNode.service
-		sudo systemctl stop moneroTorPrivate.service
-		sudo systemctl stop moneroTorPublic.service
-		sudo systemctl stop moneroPublicFree.service
-		sudo systemctl stop moneroI2PPrivate.service
-		sudo systemctl stop moneroCustomNode.service
-		sudo systemctl stop moneroPublicRPCPay.service
+		sudo systemctl stop blockExplorer.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroPrivate.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroMiningNode.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroTorPrivate.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroTorPublic.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroPublicFree.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroI2PPrivate.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroCustomNode.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		sudo systemctl stop moneroPublicRPCPay.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
 		echo "Monero node stop command sent to make system resources available for update, allowing 30 seconds for safe shutdown"
 		sleep "30"
 		echo "Deleting Old Version"
-		rm -rf /home/pinodexmr/onion-monero-blockchain-explorer/
+		rm -rf /home/pinodexmr/onion-monero-blockchain-explorer/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
 		sleep "2"
 		echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 		echo -e "\e[32m*******************************************************\e[0m"
 		echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 		echo -e "\e[32m*******************************************************\e[0m"
 		sleep 10
-		git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+		git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a /home/pinodexmr/debug.log >&2)
 		cd onion-monero-blockchain-explorer
 		mkdir build && cd build
-		cmake ..
-		make
+		cmake .. 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		make 2> >(tee -a /home/pinodexmr/debug.log >&2)
 		cd
 		#Update system reference Explorer version number version number
 		echo "#!/bin/bash
@@ -121,7 +131,7 @@ then
 			fn_restartMoneroNode
 		else
 			whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
-			rm /home/pinodexmr/new-ver-exp.sh
+			rm /home/pinodexmr/new-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 		fi
 	
 
@@ -132,7 +142,17 @@ then
 			fn_restartMoneroNode
 		else
 			whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
-			rm /home/pinodexmr/new-ver-exp.sh
+			rm /home/pinodexmr/new-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
     fi
 	fi
+
+##End debug log
+echo "
+####################
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "End setup-update-explorer.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "
+####################
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+
 ./setup.sh

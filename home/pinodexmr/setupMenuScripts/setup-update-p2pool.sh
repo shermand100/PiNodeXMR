@@ -1,22 +1,31 @@
 #!/bin/bash
+
+echo "
+####################
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "Start setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "
+####################
+" 2>&1 | tee -a /home/pinodexmr/debug.log
+
 #(1) Define variables and updater functions
 #Download update file
 sleep "1"
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2pool-new-ver.sh -O /home/pinodexmr/p2pool-new-ver.sh
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2pool-new-ver.sh -O /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 #Permission Setting
-chmod 755 /home/pinodexmr/current-ver-p2pool.sh
-chmod 755 /home/pinodexmr/p2pool-new-ver.sh
+chmod 755 /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
+chmod 755 /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 #Load Variables
-. /home/pinodexmr/current-ver-p2pool.sh
-. /home/pinodexmr/p2pool-new-ver.sh
+. /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
+. /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 #Load boot status - what condition was node last run
-. /home/pinodexmr/bootstatus.sh
+. /home/pinodexmr/bootstatus.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 # Display versions
-echo -e "\e[32mVersion Info file received:\e[0m"
-echo -e "\e[36mCurrent Version: ${CURRENT_VERSION_P2POOL}\e[0m"
-echo -e "\e[36mAvailable Version: ${NEW_VERSION_P2POOL}\e[0m"
+echo -e "\e[32mVersion Info file received:\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo -e "\e[36mCurrent Version: ${CURRENT_VERSION_P2POOL}\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo -e "\e[36mAvailable Version: ${NEW_VERSION_P2POOL}\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep "3"
 
 #Define update function:
@@ -47,17 +56,17 @@ fn_updateP2Pool () {
 		sleep "2"
 		echo -e "\e[32mBuilding new P2Pool\e[0m"
 		##Install P2Pool
-		git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a debug.log
+		git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 		cd p2pool
 		mkdir build && cd build
-		cmake .. 2>&1 | tee -a debug.log
-		make -j2 2>&1 | tee -a debug.log
+		cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
+		make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
 		echo -e "\e[32mSuccess\e[0m"
 		sleep 3
 		cd
 		#Update system reference Explorer version number version number
 		echo "#!/bin/bash
-CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool.sh
+CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 }
 
 fn_restartMoneroNode () {
@@ -126,7 +135,7 @@ then
 			sleep "2"
 			fn_updateP2Pool
 			fn_restartMoneroNode
-			rm /home/pinodexmr/p2pool-new-ver.sh
+			rm /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 		else
 			whiptail --title "P2Pool Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 			rm /home/pinodexmr/p2pool-new-ver.sh
@@ -138,10 +147,19 @@ then
 		if (whiptail --title "P2Pool Update" --yesno "This device thinks it's running the latest version of P2Pool.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Update" --no-button "Return to Main Menu"  14 78); then
 			fn_updateP2Pool
 			fn_restartMoneroNode
-			rm /home/pinodexmr/p2pool-new-ver.sh
+			rm /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 		else
 			whiptail --title "P2Pool Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
-			rm /home/pinodexmr/p2pool-new-ver.sh
+			rm /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 		fi
-	fi	
+	fi
+
+	##End debug log
+echo "Update Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
+sleep 5
+echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "End setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
+
+
 ./setup.sh
