@@ -46,6 +46,25 @@ echo 'net.ipv6.conf.all.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.default.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 
+##Perform system update and upgrade now. This then allows for reboot before next install step, preventing warnings about kernal upgrades when installing the new packages (dependencies).
+#setup debug file to track errors
+echo -e "\e[32mCreate Debug log\e[0m"
+sudo touch /home/pinodexmr/debug.log
+sudo chown pinodexmr /home/pinodexmr/debug.log
+sudo chmod 777 /home/pinodexmr/debug.log
+sleep 1
+
+##Update and Upgrade system
+echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
+sleep 3
+sudo apt-get update 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get upgrade -y 2>&1 | tee -a /home/pinodexmr/debug.log
+
+##Auto remove any obsolete packages
+sudo apt-get autoremove -y 2>&1 | tee -a /home/pinodexmr/debug.log
+
 #Download stage 2 Install script
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
 sleep 3
