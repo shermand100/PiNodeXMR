@@ -59,13 +59,13 @@ if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has d
 fi
 elif [[ $CPU_ARCH -eq 32 ]]
 then
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 32bit OS. This means you can run PiNodeXMR in 'light mode' with only core node functions. If you believe this is incorrect you can select the Full installer below but it is not recommended." --no-button "PiNodeXMR Full" --yes-button "PiNodeXMR Light" 18 60); then
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 32bit OS. This means you can run PiNodeXMR in 'light mode' with only core node functions. If you believe this is incorrect you can select the Full installer below but it is not recommended. Note: P2Pool is not available for 32bit devices" --no-button "PiNodeXMR Full" --yes-button "PiNodeXMR Light" 18 60); then
 	LIGHTMODE=TRUE
 		else
 			LIGHTMODE=FALSE
 fi
 else
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer cannot detect if you are using 32/64bit Hradware/OS. You may select below to either use PiNodeXMR Full with all features for 64bit devices or PiNodeXMR Light with only core node functions" --no-button "PiNodeXMR Light" --yes-button "PiNodeXMR Full" 18 60); then
+if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer cannot detect if you are using 32/64bit Hardware/OS. You may select below to either use PiNodeXMR Full with all features for 64bit devices or PiNodeXMR Light with only core node functions" --no-button "PiNodeXMR Light" --yes-button "PiNodeXMR Full" 18 60); then
 	LIGHTMODE=FALSE
 		else
 			LIGHTMODE=TRUE
@@ -87,16 +87,13 @@ sudo passwd --lock ubuntu
 echo -e "\e[32mUser 'ubuntu' Locked\e[0m"
 sleep 3
 
-##Update and Upgrade system
+##Update and Upgrade system (This step repeated due to importance and maybe someone using this installer sript out-of-sequence)
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
+sleep 3
 sudo apt-get update 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get upgrade -y 2>&1 | tee -a /home/pinodexmr/debug.log
-
-##Auto remove any obsolete packages
-sudo apt-get autoremove -y 2>&1 | tee -a /home/pinodexmr/debug.log
-
 
 ##Installing dependencies for --- Web Interface
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/pinodexmr/debug.log
