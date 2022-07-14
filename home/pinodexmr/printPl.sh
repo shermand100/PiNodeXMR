@@ -19,7 +19,7 @@ _temp="./dialog.$$"
 
 #Import Start Flag Values:
 	#Establish Local IP
-	DEVICE_IP="$(hostname -I | awk '{print $1}')"
+	. /home/pinodexmr/variables/deviceIp.sh
 	#Load boot status - what condition was node last run
 	. /home/pinodexmr/bootstatus.sh
 	#Import unrestriced port number when running public node for internal use only
