@@ -141,7 +141,7 @@ fi
 	if [ $BOOT_STATUS -eq 7 ]
 then
 		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-	PRINT_CN="$(curl -s --digest -X POST http://${DEVICE_IP}:${MONERO_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json' | jq -Mr '.result.connections[] | "Connected to:","Node ID: "+.peer_id,"Connection ID: "+.connection_id,"Node IP: "+.address,"State: "+.state,"Node height: "+(.height|tostring),"Incoming connection: "+(.incoming|tostring),"Sent count: "+(.send_count|tostring),"Receive count: "+(.recv_count|tostring)," "')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
+	PRINT_CN="$(curl -s --digest -X POST http://${DEVICE_IP}:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json' | jq -Mr '.result.connections[] | "Connected to:","Node ID: "+.peer_id,"Connection ID: "+.connection_id,"Node IP: "+.address,"State: "+.state,"Node height: "+(.height|tostring),"Incoming connection: "+(.incoming|tostring),"Sent count: "+(.send_count|tostring),"Receive count: "+(.recv_count|tostring)," "')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
 	date >> /var/www/html/print_cn.txt
 fi
 
