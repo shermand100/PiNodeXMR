@@ -237,7 +237,7 @@ echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
 cd monero && git submodule init && git submodule update
-git checkout release-v0.18
+git checkout $RELEASE
 git submodule sync && git submodule update
 USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
@@ -341,7 +341,6 @@ then
 	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 	git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	cd p2pool
-	git checkout tags/v2.2.1
 	mkdir build && cd build
 	cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
 	make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
