@@ -134,7 +134,6 @@ then
 			rm /home/pinodexmr/new-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 		fi
 	
-
 	else
 
 		if (whiptail --title "Monero Onion Block Explorer Update" --yesno "This device thinks it's running the latest version of Monero Onion Block Explorer.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Update" --no-button "Return to Main Menu"  14 78); then
@@ -143,7 +142,7 @@ then
 		else
 			whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 			rm /home/pinodexmr/new-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-    fi
+    	fi
 	fi
 
 ##End debug log
