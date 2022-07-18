@@ -52,7 +52,7 @@ fn_updateBlockExplorer () {
 		echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 		echo -e "\e[32m*******************************************************\e[0m"
 		sleep 10
-		git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a /home/pinodexmr/debug.log >&2)
+		git clone -b devel https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a /home/pinodexmr/debug.log >&2)
 		cd onion-monero-blockchain-explorer
 		mkdir build && cd build
 		cmake .. 2> >(tee -a /home/pinodexmr/debug.log >&2)
