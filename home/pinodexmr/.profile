@@ -25,5 +25,20 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
 export PATH=$PATH:/home/pinodexmr/
+
+#Reset SDCard filesystem size
+. /home/pinodexmr/bootstatus.sh
+
+if [ $BOOT_STATUS -eq -1 ] ; then
+echo -e "\e[32mPiNodeXMR detects this is first boot - attempting to expand filesystem\e[0m"
+sudo systemctl start armbian-resize-filesystem
+echo -e "\e[32mComplete\e[0m"
+echo "#!/bin/bash
+BOOT_STATUS=0" > /home/pinodexmr/bootstatus.sh
+fi
+
+
+
 . /home/pinodexmr/setup.sh
