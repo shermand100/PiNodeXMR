@@ -49,7 +49,7 @@
 							fi
 					;;
 					
-					"5)")	if (whiptail --title "ATS : by tuxd3v | https://github.com/tuxd3v/ats#credits" --yesno "This utility is only for devices that have a PWM fan plugged directly into the SBC (ie The RockPro64). This tool with read system temps and attempt to adjust fan speed accordingly\n\nWould you like to continue?" 16 78); then
+					"5)")	if (whiptail --title "ATS : by tuxd3v | https://github.com/tuxd3v/ats#credits" --yesno "This utility is only for devices that have a PWM fan plugged directly into the SBC (ie The RockPro64). This tool will read system temps and attempt to adjust fan speed accordingly\n\nWould you like to continue?" 16 78); then
 					sudo apt-get update
 					sudo apt-get install lua5.3 lua5.3-dev gcc make -y
 					git clone https://github.com/tuxd3v/ats.git
