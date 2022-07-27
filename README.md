@@ -8,7 +8,7 @@ PiNode-XMR is a completely free and open source suite of tools to help a user ru
 
 PiNode-XMR can provide a Full or Pruned Monero Node and optional integration with tor/I2P along with many other tools such as your own block explorer, transaction pool viewer and connected peer lists. After setup, normal interaction is available through a built in web interface accessible from any device on your local network:
 
-![nodeStatus](https://github.com/monero-ecosystem/PiNode-XMR/raw/master/Screenshots/nodestatus.png)
+![Demo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNodeXMR_demo.gif)
 
 ## Quick Start
 
