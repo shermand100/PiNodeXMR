@@ -37,20 +37,23 @@ And follow the menu prompts.
 
 
 ## Downloads
-#### Download PiNode-XMR disk image for Raspberry Pi 3b+ & 4
-If using a Raspberry Pi you may use a pre-installed disk image. The PiNode-XMR image is available to download as-is. Meaning it is un-compressed and ready to write using the same method you would for any other disk image. 
+#### Download PiNode-XMR disk images 
+
+Pre-configured disk images are available for the following devices:
+* Raspberry Pi 3 (32-bit)
+* Raspberry Pi 4 (64-bit)
+* RockPro64 (64-bit)
+* Rock64 (64-bit)
+* Odroid XU4 / HC1 / HC2 (32-bit)
+
+Note that 32-bit devices cannot run P2Pool
 
 ____
-#### Direct Downloads
+#### Direct Download links
 
-[Download PiNodeXMR v4.21.01 Base image for Raspberry Pi3B/4](https://drive.google.com/file/d/13CiIJ2TrZ5nxdwLto2OKcuowzq1v7-b5/view?usp=sharing) 7GB
+To assist in managing disk images they are all held on our website PiNodeXMR.co.uk
 
-
-Name: PiNodeXMR-v4.21.01.img
-
-Size: 7088381952 bytes (6760 MiB)
-
-SHA256: BE0531C90EAE4D3D768D10826AF09084270475CB78E77793CBA5D7B304C73C99
+[(Link) All pre-configured disk images @ PiNodeXMR.co.uk](https://www.pinode.co.uk/downloads)
 
 ____
 
