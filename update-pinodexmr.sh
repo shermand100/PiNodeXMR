@@ -324,6 +324,23 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 				sudo systemctl restart moneroStatus.service
 
 
+				##Check-Install log.io (Real-time service monitoring)
+				#Establish Device IP
+				. ~/variables/deviceIp.sh
+				echo -e "\e[32mInstalling log.io\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+				sudo apt-get install nodejs npm -y 2>&1 | tee -a /home/pinodexmr/debug.log
+				sudo npm install -g log.io 2>&1 | tee -a /home/pinodexmr/debug.log
+				sudo npm install -g log.io-file-input 2>&1 | tee -a /home/pinodexmr/debug.log
+				mkdir -p ~/.log.io/inputs/ 2>&1 | tee -a /home/pinodexmr/debug.log
+				mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
+				mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
+				sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
+				sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
+				sudo systemctl start log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
+				sudo systemctl start log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.log
+				sudo systemctl enable log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
+				sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.log
+
 				#Update system version number to new one installed
 				echo "Update PiNodeXMR version number" >>/home/pinodexmr/debug.log
 					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
