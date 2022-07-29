@@ -30,7 +30,7 @@ Once you have your basic OS:
 
 Finally to install the PiNode-XMR project simply run the single line:
 
-`wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/Install-PiNode-XMR.sh | bash`
+`wget -O – install.pinodexmr.co.uk | bash`
 
 And follow the menu prompts.
 
