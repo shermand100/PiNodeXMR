@@ -33,15 +33,15 @@ wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2p
 chmod 755 /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 chmod 755 /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 #Load Variables
-. /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
-. /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
+. /home/pinodexmr/current-ver-p2pool.sh
+. /home/pinodexmr/p2pool-new-ver.sh
 #Load boot status - what condition was node last run
 . /home/pinodexmr/bootstatus.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 # Display versions
 echo -e "\e[32mVersion Info file received:\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-echo -e "\e[36mCurrent Version: ${CURRENT_VERSION_P2POOL}\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-echo -e "\e[36mAvailable Version: ${NEW_VERSION_P2POOL}\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo -e "\e[36mCurrent Version: $CURRENT_VERSION_P2POOL \e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo -e "\e[36mAvailable Version: $NEW_VERSION_P2POOL \e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep "3"
 
 #Define update function:
