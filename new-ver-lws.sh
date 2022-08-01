@@ -1,0 +1,2 @@
+#!/bin/sh
+NEW_VERSION_LWS=02018
