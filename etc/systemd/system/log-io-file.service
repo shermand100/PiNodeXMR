@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=pinodexmr
 Group=pinodexmr
-ExecStart=/usr/local/bin/log.io-file-input
+ExecStart=/usr/bin/log.io-file-input
 Restart=always
 
 [Install]
