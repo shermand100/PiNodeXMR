@@ -11,7 +11,7 @@
 
 ###
 #Start Default action below - no actions performed (Comment out as required)
-whiptail --title "PiNode-XMR Support Script #1" --msgbox "This script has not been configured to provide support at this time\n\nNo Actions performed\n\nReturning to Menu" 8 78;
+whiptail --title "PiNode-XMR Support Script #1" --msgbox "This script has not been configured to provide support at this time\n\nNo Actions performed\n\nReturning to Menu" 12 78;
 #End Default action 
 ###
 
