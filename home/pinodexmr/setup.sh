@@ -160,8 +160,8 @@
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_EXP \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION_EXP \e[0m"
 							sleep 3
-								if [ $CURRENT_VERSION_EXP -lt $NEW_VERSION_EXP ]
-								if (whiptail --title "Monero Onion Block Explorer Update" --yesno "An update to the Monero Block Explorer is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78); then
+								if [ $CURRENT_VERSION_EXP -lt $NEW_VERSION_EXP ]; then
+									if (whiptail --title "Monero Onion Block Explorer Update" --yesno "An update to the Monero Block Explorer is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78); then
 					
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash
 
@@ -187,7 +187,7 @@
 						;;
 
 					"4)")	if (whiptail --title "Update P2Pool" --yesno "This will check for and install updates to P2Pool\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/p2pool-new-ver.sh -O /home/pinodexmr/p2pool-new-ver.sh
+							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2pool-new-ver.sh -O /home/pinodexmr/p2pool-new-ver.sh
 							#Permission Setting
 							chmod 755 /home/pinodexmr/current-ver-p2pool.sh
 							chmod 755 /home/pinodexmr/p2pool-new-ver.sh
@@ -201,7 +201,7 @@
 								if [ $CURRENT_VERSION_P2POOL -lt $NEW_VERSION_P2POOL ]; then
 									if (whiptail --title "P2POOL UPDATER" --yesno "An update has been found for P2Pool. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-pinodexmr.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash
 
 									else
 									whiptail --title "P2POOL UPDATER" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -210,7 +210,7 @@
 								else
 									if (whiptail --title "P2POOL UPDATER" --yesno "This device thinks it's running the latest version of P2Pool.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-pinodexmr.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash
 		
 									else
 									whiptail --title "P2POOL UPDATER" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -225,13 +225,13 @@
 						;;
 
 					"5)")	if (whiptail --title "Update Monero-LWS" --yesno "Monero-LWS is still in development and as such has no version number. I can delete the version on this device and install the latest from source?\nSSL Certificates will be preserved\n\n**Note: To install Monero-LWS for the first time please use the installer found in the 'Node Tools' Menu\n\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-lws.sh -O /home/pinodexmr/new-ver-lws.sh
+							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/new-ver-lws.sh -O /home/pinodexmr/new-ver-lws.sh
 							#Permission Setting
-							chmod 755 /home/pinodexmr/current-ver-pi.sh
-							chmod 755 /home/pinodexmr/new-ver-pi.sh
+							chmod 755 /home/pinodexmr/current-ver-lws.sh
+							chmod 755 /home/pinodexmr/new-ver-lws.sh
 							#Load Variables
-							. /home/pinodexmr/current-ver-pi.sh
-							. /home/pinodexmr/new-ver-pi.sh
+							. /home/pinodexmr/current-ver-lws.sh
+							. /home/pinodexmr/new-ver-lws.sh
 							echo "\e[36mVersion Info file received: \e[0m"
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_LWS \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION_LWS \e[0m"
