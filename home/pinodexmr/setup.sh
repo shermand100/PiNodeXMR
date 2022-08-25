@@ -58,22 +58,22 @@
 
 						case $CHOICE2a in
 		
-					"1)")	whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #1 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/supportScript1.sh\n\nWould you like to continue?" 12 78); then
-					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/supportScript1.sh | bash
+					"1)")	whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #1 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh | bash
 							else
 					sleep 2
 							fi
 					;;
 				
-					"2)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #2 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/supportScript2.sh\n\nWould you like to continue?" 12 78); then
-					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/supportScript2.sh | bash
+					"2)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #2 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh | bash
 							else
 					sleep 2
 							fi
 					;;
 					
-					"3)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #3 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/supportScript3.sh\n\nWould you like to continue?" 12 78); then
-					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/supportScript3.sh | bash
+					"3)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #3 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh | bash
 							else
 					sleep 2
 							fi
