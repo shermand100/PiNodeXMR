@@ -118,7 +118,7 @@ then
 		sudo systemctl start moneroTorPublic.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
-
+fi
 rm /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 	##End debug log
