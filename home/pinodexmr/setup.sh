@@ -20,7 +20,8 @@
 				"2)" "Master Login Password Set" \
 				"3)" "Monero RPC Username and Password setup" \
 				"4)" "USB storage setup" \
-				"5)" "PWM Fan Control tool" 2>&1 >/dev/tty)
+				"5)" "Support Scripts" \
+				"6)" "PWM Fan Control tool" 2>&1 >/dev/tty)
 				
 				case $CHOICE2 in
 		
@@ -48,8 +49,42 @@
 					sleep 2
 							fi
 					;;
+					#Section 5 "PiNode-XMR Support Scripts" created to give ability of giving support to a user that requires complex or unique commands that they may not be able to action themselves. 3 scripts will be available, with default script action of no changes. User will be directed to activate the relevent script to assist them.
+					"5)")	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This section allows for personalised support to be given to a PiNodeXMR user. Only continue if directed to by this project dev. \n\nWould you like to continue?" 16 78); then
+					CHOICE2a=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nSystem Settings" 20 60 10 \
+						"1)" "Support Script Channel 1" \
+						"2)" "Support Script Channel 2" \
+						"3)" "Support Script Channel 3" 2>&1 >/dev/tty)
+
+						case $CHOICE2a in
+		
+					"1)")	whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #1 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh | bash
+							else
+					sleep 2
+							fi
+					;;
+				
+					"2)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #2 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh | bash
+							else
+					sleep 2
+							fi
+					;;
 					
-					"5)")	if (whiptail --title "ATS : by tuxd3v | https://github.com/tuxd3v/ats#credits" --yesno "This utility is only for devices that have a PWM fan plugged directly into the SBC (ie The RockPro64). This tool will read system temps and attempt to adjust fan speed accordingly\n\nWould you like to continue?" 16 78); then
+					"3)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #3 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh | bash
+							else
+					sleep 2
+							fi
+					;;
+					esac
+							else
+					sleep 2
+							fi
+					;;
+					
+					"6)")	if (whiptail --title "ATS : by tuxd3v | https://github.com/tuxd3v/ats#credits" --yesno "This utility is only for devices that have a PWM fan plugged directly into the SBC (ie The RockPro64). This tool will read system temps and attempt to adjust fan speed accordingly\n\nWould you like to continue?" 16 78); then
 					sudo apt-get update
 					sudo apt-get install lua5.3 lua5.3-dev gcc make -y
 					git clone https://github.com/tuxd3v/ats.git
