@@ -90,7 +90,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/current-ver.sh /home/pinodexmr/current-ver_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-exp.sh /home/pinodexmr/current-ver-exp_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-pi.sh /home/pinodexmr/current-ver-pi_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/current-ver-p2pool.sh /home/pinodexmr/current-ver-p2pool_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)	
+					mv /home/pinodexmr/current-ver-p2pool.sh /home/pinodexmr/current-ver-p2pool_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/current-ver-lws.sh /home/pinodexmr/current-ver-lws_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#variables dir
 					mv /home/pinodexmr/variables/credits.sh /home/pinodexmr/variables/credits_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/difficulty.sh /home/pinodexmr/variables/difficulty_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -266,6 +267,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/current-ver-exp_retain.sh /home/pinodexmr/current-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-pi_retain.sh /home/pinodexmr/current-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-p2pool_retain.sh /home/pinodexmr/current-ver-p2pool.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/current-ver-lws_retain.sh /home/pinodexmr/current-ver-lws.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 
 					#variables dir
 					mv /home/pinodexmr/variables/difficulty_retain.sh /home/pinodexmr/variables/difficulty.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)

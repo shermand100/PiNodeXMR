@@ -10,30 +10,17 @@ echo "
 ####################
 " 2>&1 | tee -a /home/pinodexmr/debug.log
 
-#Establish IP
-echo "PiNode-XMR is checking for available updates"
-sleep "1"
-#Download update file
-sleep "1"
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/xmr-new-ver.sh -O /home/pinodexmr/xmr-new-ver.sh
-echo "Version Info file received:"
-#Download variable for current monero version
+#Download variable for current monero release version
 wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
 #Permission Setting
-chmod 755 /home/pinodexmr/current-ver.sh
-chmod 755 /home/pinodexmr/xmr-new-ver.sh
 chmod 755 /home/pinodexmr/release.sh
-#Load boot status - what condition was node last run
+#Load boot status - condition the node was last run
 . /home/pinodexmr/bootstatus.sh
 #Import Variable: Light-mode true/false
 . /home/pinodexmr/variables/light-mode.sh
 echo "Light-Mode value is: $LIGHTMODE" >>/home/pinodexmr/debug.log
 #Load Variables
-. /home/pinodexmr/current-ver.sh
-. /home/pinodexmr/xmr-new-ver.sh
 . /home/pinodexmr/release.sh
-echo $NEW_VERSION 'New Version'
-echo $CURRENT_VERSION 'Current Version'
 
 #Establish OS 32 or 64 bit
 CPU_ARCH=`getconf LONG_BIT`
@@ -48,10 +35,6 @@ else
   echo "OS Unknown"
 fi
 sleep 3
-
-#Define update function:
-
-function fn_updateMonero () {
 
 	##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
 if (whiptail --title "PiNode-XMR Monero Updater" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
@@ -147,7 +130,7 @@ then
 			#Make temp folder to extract binaries
 			mkdir temp && tar -xvf linuxarm8 -C ~/temp
 			#Move Monerod files to standard location
-			mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.18.1.0/monero* /home/pinodexmr/monero/build/release/bin/
+			mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.18.0.0/monero* /home/pinodexmr/monero/build/release/bin/
 			rm linuxarm8
 			rm -R /home/pinodexmr/temp/
 		else
@@ -156,7 +139,7 @@ then
 			#Make temp folder to extract binaries
 			mkdir temp && tar -xvf linuxarm7 -C ~/temp
 			#Move Monerod files to standard location
-			mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.18.1.0/monero* /home/pinodexmr/monero/build/release/bin/
+			mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.18.0.0/monero* /home/pinodexmr/monero/build/release/bin/
 			rm linuxarm7
 			rm -R ~/temp/
 		fi
@@ -177,9 +160,9 @@ rm -R ~/temp
 		CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
 		#cleanup old version number file
 		rm /home/pinodexmr/xmr-new-ver.sh
-}
 
-fn_restartMoneroNode () {
+
+
 #Define Restart Monero Node
 		# Key - BOOT_STATUS
 		# 2 = idle
@@ -234,34 +217,6 @@ then
 then
 		sudo systemctl start moneroTorPublic.service
 		whiptail --title "Monero Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
-	fi
-}
-
-sleep "2"
-	#(2)Start of Updater logic
-
-	if [ $CURRENT_VERSION -lt $NEW_VERSION ]
-		then
-		if ( whiptail --title "Monero Updater" --yesno "An update to the Monero is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78 ); then
-			sleep "2"
-			fn_updateMonero
-			fn_restartMoneroNode
-		else
-			whiptail --title "Monero Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
-			rm /home/pinodexmr/new-ver.sh
-		fi
-	
-
-	else
-
-		if ( whiptail --title "Monero Update" --yesno "This device thinks it's running the latest version of Monero.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Update" --no-button "Return to Main Menu"  14 78 ); then
-			sleep "2"
-			fn_updateMonero
-			fn_restartMoneroNode
-		else
-			whiptail --title "Monero Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
-			rm /home/pinodexmr/new-ver.sh
-		fi
 	fi
 
 ##End debug log

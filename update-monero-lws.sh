@@ -35,9 +35,9 @@ echo -e "\e[32mBuilding VTNerd Monero-LWS\e[0m"
 sleep 2								
 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
-if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS now?" 14 78); then
+#Resrating Monero-LWS servcice
 	sudo systemctl start monero-lws.service
-fi
+
 
 ##End debug log
 echo "Update Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -47,5 +47,3 @@ echo "End setup-update-monero-lws.sh script $(date)" 2>&1 | tee -a /home/pinodex
 echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
 
 whiptail --title "Monero-LWS Updater" --msgbox "\nThe Monero-LWS installation is complete and SSL certificates have been preserved.\n\nReturning to Menu..." 20 78
-
-./setup.sh
