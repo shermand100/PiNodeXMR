@@ -256,9 +256,7 @@
 									whiptail --title "P2POOL UPDATER" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 								fi
-							#Update system reference Explorer version number version number
-							echo "#!/bin/bash
-							CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
+	
 							#clean up
 							rm /home/pinodexmr/p2pool-new-ver.sh
 							else
