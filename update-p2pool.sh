@@ -60,6 +60,8 @@ if [[ $CPU_ARCH -eq 32 ]]
 		sleep 3
 		cd
 		#Update system reference Explorer version number version number
+		chmod 755 /home/pinodexmr/p2pool-new-ver.sh
+		. /home/pinodexmr/p2pool-new-ver.sh
 		echo "#!/bin/bash
 CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
