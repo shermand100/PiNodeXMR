@@ -59,9 +59,6 @@ if [[ $CPU_ARCH -eq 32 ]]
 		echo -e "\e[32mSuccess\e[0m"
 		sleep 3
 		cd
-		#Update system reference Explorer version number version number
-		echo "#!/bin/bash
-CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 #Define Restart Monero Node
 		# Key - BOOT_STATUS
