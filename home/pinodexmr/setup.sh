@@ -20,7 +20,7 @@
 				"2)" "Master Login Password Set" \
 				"3)" "Monero RPC Username and Password setup" \
 				"4)" "USB storage setup" \
-				"5)" "SD Card Health Checker" 2>&1 >/dev/tty)
+				"5)" "PWM Fan Control tool" 2>&1 >/dev/tty)
 				
 				case $CHOICE2 in
 		
@@ -49,10 +49,15 @@
 							fi
 					;;
 					
-					"5)")	if (whiptail --title "PiNode-XMR MicroSD Health Check" --yesno "This utility (agnostics) will run speed tests on your SD card read/write functions to give an indication of its current health.\n\nBefore starting this check, stop all services that are currently reading/writing (Node and BlockExplorer) for most accurate results.\n\nWould you like to continue?" 16 78); then
-					 clear;
-					 echo -e "\e[32mSorry agnostics is a Raspberry Pi OS only tool\e[0m";
-					 read -n 1 -s -r -p "Press any key to return to Menu"
+					"5)")	if (whiptail --title "ATS : by tuxd3v | https://github.com/tuxd3v/ats#credits" --yesno "This utility is only for devices that have a PWM fan plugged directly into the SBC (ie The RockPro64). This tool will read system temps and attempt to adjust fan speed accordingly\n\nWould you like to continue?" 16 78); then
+					sudo apt-get update
+					sudo apt-get install lua5.3 lua5.3-dev gcc make -y
+					git clone https://github.com/tuxd3v/ats.git
+					cd ats
+					make
+					sudo make install
+					sleep 10
+					whiptail --title "ATS : by tuxd3v" --msgbox "The ATS (Active Thermal Service) tool has been installed on your device\nCheck the service is functioning with 'sudo systemctl status ats'" 8 78;
 							else
 					sleep 2
 							fi
