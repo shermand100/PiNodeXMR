@@ -11,7 +11,7 @@ echo "
 #Establish OS 32 or 64 bit
 CPU_ARCH=`getconf LONG_BIT`
 
-if [ $CPU_ARCH -eq 32 ]
+if [[ $CPU_ARCH -eq 32 ]]
 	then
 	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 	echo -e "\e[33m*********** ARCH: 32-bit detected ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -72,54 +72,53 @@ CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool
 		# 7 = Public free
 		# 8 = I2P
 		# 9 tor public
-	if [ $BOOT_STATUS -eq 2 ]
+	if [[ $BOOT_STATUS -eq 2 ]]
 then
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60
 	fi
 
-	if [ $BOOT_STATUS -eq 3 ]
+	if [[ $BOOT_STATUS -eq 3 ]]
 then
 		sudo systemctl start moneroPrivate.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
-	if [ $BOOT_STATUS -eq 4 ]
+	if [[ $BOOT_STATUS -eq 4 ]]
 then
 		sudo systemctl start moneroTorPrivate.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi		
 
-	if [ $BOOT_STATUS -eq 5 ]
+	if [[ $BOOT_STATUS -eq 5 ]]
 then
 		sudo systemctl start moneroMiningNode.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
-	if [ $BOOT_STATUS -eq 6 ]
+	if [[ $BOOT_STATUS -eq 6 ]]
 then
 		sudo systemctl start moneroPublicRPCPay.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
-	if [ $BOOT_STATUS -eq 7 ]
+	if [[ $BOOT_STATUS -eq 7 ]]
 then
 		sudo systemctl start moneroPublicFree.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
-	if [ $BOOT_STATUS -eq 8 ]
+	if [[ $BOOT_STATUS -eq 8 ]]
 then
 		sudo systemctl start moneroI2PPrivate.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
-	if [ $BOOT_STATUS -eq 9 ]
+	if [[ $BOOT_STATUS -eq 9 ]]
 then
 		sudo systemctl start moneroTorPublic.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 fi
-rm /home/pinodexmr/p2pool-new-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 	##End debug log
 echo "Update Script Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
