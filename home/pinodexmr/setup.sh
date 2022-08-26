@@ -58,7 +58,7 @@
 
 						case $CHOICE2a in
 		
-					"1)")	whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #1 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh\n\nWould you like to continue?" 12 78); then
+					"1)")	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #1 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh\n\nWould you like to continue?" 12 78); then
 					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh | bash
 							else
 					sleep 2
