@@ -35,9 +35,13 @@ echo -e "\e[32mBuilding VTNerd Monero-LWS\e[0m"
 sleep 2								
 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
-#Resrating Monero-LWS servcice
+#Restarting Monero-LWS servcice
 	sudo systemctl start monero-lws.service
-
+#Update system reference current LWS version number to New version number
+	chmod 755 /home/pinodexmr/new-ver-lws.sh
+	. /home/pinodexmr/new-ver-lws.sh
+	echo "#!/bin/bash
+CURRENT_VERSION_LWS=$NEW_VERSION_LWS" > /home/pinodexmr/current-ver-lws.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##End debug log
 echo "Update Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
