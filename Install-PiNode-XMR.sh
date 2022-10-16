@@ -5,7 +5,7 @@ sleep 2
 #Check user has whiptail - required to display menu
 sudo apt-get install whiptail -y
 
-CHOICE=$(whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS. Build PiNodeXMR ontop of..." 20 60 5 \
+CHOICE=$(whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS. \nBuild PiNodeXMR on top of..." 20 60 5 \
 	"1)" "Ubunutu Server 22.04/5 LTS (current 32/64bit)" \
 	"2)" "Armbian Debian (Bullseye - Discontinued)" \
 	"3)" "Armbian Debian (Buster - Discontinued)" \
