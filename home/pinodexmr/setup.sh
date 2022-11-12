@@ -324,9 +324,10 @@
 				"1)" "Start/Stop Blockchain Explorer" \
 				"2)" "Prune Node" \
 				"3)" "Pop Blocks" \
-				"4)" "Monero-LWS Install" \
-				"5)" "Monero-LWS Admin" \
-				"6)" "Generate SSL self-signed certificates" 2>&1 >/dev/tty)
+				"4)" "Clear Peer List" \
+				"5)" "Monero-LWS Install" \
+				"6)" "Monero-LWS Admin" \
+				"7)" "Generate SSL self-signed certificates" 2>&1 >/dev/tty)
 				
 				case $CHOICE4 in
 							"1)") . /home/pinodexmr/setupMenuScripts/setup-explorer.sh	#Has functional legacy script, will change this format one day.
@@ -345,7 +346,17 @@
 									sleep 2
 									fi
 								;;
-							"4)") if (whiptail --title "Monero-LWS Install" --yesno "This will install the functional but developing Monero-LWS service\nOnce complete, the generated SSL cert will also need installing on your wallet device\n\nWould you like to continue?" 14 78); then
+							"4)")	if (whiptail --title "PiNode-XMR Clear Peer List" --yesno "There are occassions where the group of nodes you are connected to incorrectly report the top block height or otherwise prevent normal node operation. This option deletes p2pstate.bin and will allow Monero to build a fresh peer list on next node start.\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
+									rm ~/.bitmonero/p2pstate.bin
+									echo -e "\e[32mDeleteing Peer list...\e[0m"
+									sleep 3
+									whiptail --title "PiNode-XMR Clear Peer List" --msgbox "The peer list (p2pstate.bin) has been deleted. When you restart your node a fresh list will be created." 20 78
+									else
+									whiptail --title "PiNode-XMR Clear Peer List" --msgbox "No changes have been made" 20 78
+									sleep 2
+									fi
+								;;								
+							"5)") if (whiptail --title "Monero-LWS Install" --yesno "This will install the functional but developing Monero-LWS service\nOnce complete, the generated SSL cert will also need installing on your wallet device\n\nWould you like to continue?" 14 78); then
 									echo -e "\e[32mChecking dependencies\e[0m"
 									sleep 2
 									#Check dependencies (Should be installed already from Monero install)
@@ -392,7 +403,7 @@
 									sleep 2
 									fi
 								;;
-								"5)") if (whiptail --title "PiNode-XMR Monero-LWS Admin" --yesno "This tool is for adding your wallet address and view key so Monero-LWS can scan for your transactions in the background.\n\nMonero-LWS must be installed first\n\nWould you like to continue?" 14 78); then
+								"6)") if (whiptail --title "PiNode-XMR Monero-LWS Admin" --yesno "This tool is for adding your wallet address and view key so Monero-LWS can scan for your transactions in the background.\n\nMonero-LWS must be installed first\n\nWould you like to continue?" 14 78); then
 								# use temp file 
 								_temp="./dialog.$$"
 								#Wallet Address - set
@@ -415,7 +426,7 @@
 									. /home/pinodexmr/setup.sh
 									fi
 								;;
-								"6)") if (whiptail --title "SSL Certificate generation" --yesno "This will now generate self-signed SSL certifictes for this device.\n\nNote that the certificate is bound to this local device IP $(hostname -I | awk '{print $1}'), a change to this address will render this certificate invalid.\n\nYou will also be asked to create an 'export password', this will be used by you to add the generated certificates to your other devices\n\nWould you like to continue?" 18 78); then
+								"7)") if (whiptail --title "SSL Certificate generation" --yesno "This will now generate self-signed SSL certifictes for this device.\n\nNote that the certificate is bound to this local device IP $(hostname -I | awk '{print $1}'), a change to this address will render this certificate invalid.\n\nYou will also be asked to create an 'export password', this will be used by you to add the generated certificates to your other devices\n\nWould you like to continue?" 18 78); then
 								cd
 								echo -e "\e[32mCreating SSL Certificates for wallet device bound to this local IP\e[0m"
 								sleep 2	
