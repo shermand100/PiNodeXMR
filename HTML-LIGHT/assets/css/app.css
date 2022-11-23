@@ -56,4 +56,11 @@ h3 {
 		.nav-link, .navbar-brand {
 			color: #e0e0e0 !important;	
 		}
+		#xmr-banner-container {
+			background: url('../images/pinode-xmr-banner-dark@2x.png') no-repeat top left;
+			background-size: 100%;
+		}
+		#xmr-banner {
+			opacity: 0;
+		}
 	}
