@@ -1,1 +1,0 @@
-No has been set to receive to block reward on successful client mining.
