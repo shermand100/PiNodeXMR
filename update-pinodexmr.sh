@@ -182,7 +182,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Overwrite /var/www/html with updated contents
-					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.html /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					#Restore User variables
