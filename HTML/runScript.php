@@ -103,6 +103,10 @@ switch($function) {
     exec("sudo systemctl start shutdown.service");
     echo "Your PiNode-XMR has begun shutdown process.\n\nPower off in 60seconds";
     break;
+  case 'reboot':
+    exec("sudo systemctl start reboot.service");
+    echo "Your PiNode-XMR has begun reboot process.\n\nDevice restart in 10 seconds";
+    break;    
   case 'monerod-kill':
     exec("sudo systemctl start kill.service");
     echo "The command 'sudo killall -9 monerod' has been sent\n\nTo avoid corruption of the blockchain this command should be avoided where possible\n\nSorry something went wrong though...";
