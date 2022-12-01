@@ -17,7 +17,7 @@ echo "Light-Mode value is: $LIGHTMODE" >>/home/pinodexmr/debug.log
 . /home/pinodexmr/variables/htmlPasswordRequired.sh
 echo "HMTL Password Required set to: $HTMLPASSWORDREQUIRED" >>/home/pinodexmr/debug.log
 
-##Update and Upgrade system
+##Update and Upgrade systemhtac
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
 sudo apt-get update 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -33,7 +33,7 @@ sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep 3
 
-if [ $LIGHTMODE = FALSE ]
+if [ "$LIGHTMODE" = FALSE ]
 then
   echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
@@ -54,12 +54,12 @@ fi
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
 sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo apt-get install exfat-fuse exfat-utils -y 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install exfat-fuse -y 2>&1 | tee -a /home/pinodexmr/debug.log
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 sleep 3
 		#Download update files
 
-##Replace file /etc/sudoers to set global sudo permissions/rules (required to add new permissions to www-data user for interface buttons)
+##Replace file /etc/sudoers to set global sudo permissions/rules (required to add  new permissions to www-data user for interface buttons)
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 3
 wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/sudoers -O /home/pinodexmr/sudoers
@@ -68,7 +68,7 @@ sudo chown root /home/pinodexmr/sudoers
 sudo mv /home/pinodexmr/sudoers /etc/sudoers
 
 #ubuntu /dev/null odd requirment to set permissions
-sudo chmod 666 /dev/null
+sudo chmod 777 /dev/null
 echo -e "\e[32mGlobal permissions changed\e[0m"
 sleep 3
 
@@ -112,6 +112,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/variables/pruneStatus.sh /home/pinodexmr/variables/pruneStatus_status.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCp.sh /home/pinodexmr/variables/RPCp_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCu.sh /home/pinodexmr/variables/RPCu_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/variables/light-mode.sh /home/pinodexmr/variables/light-mode_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)					
 					echo -e "\e[32mUser-set configuration saved\e[0m"
 								
 		#Install Update
@@ -160,10 +161,10 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update html template" >>/home/pinodexmr/debug.log	
 					echo -e "\e[32mConfiguring Web-UI template with PiNode-XMR pages\e[0m"
 					sleep 3
-					if [[ $LIGHTMODE = TRUE ]]
+					if [ "$LIGHTMODE" = TRUE ]
 					then
 					#First move hidden file specifically .htaccess file then entire directory
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML-LIGHT/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log					
 					#Remove .php file clutter, see PiNodeXMR PR66 for context.
 					rm -R /var/www/html/*.php
 					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
@@ -245,7 +246,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 
 					#Set correct config for if HTML (Web UI) Password is required.
 
-					if [[ $HTMLPASSWORDREQUIRED = TRUE ]]
+					if [ $HTMLPASSWORDREQUIRED = TRUE ]
 					then
 					sudo cp /home/pinodexmr/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf
@@ -254,9 +255,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					fi
 
 					echo -e "\e[32mSuccess\e[0m"
-
-					if [[ $LIGHTMODE = FALSE ]]
-					then
 										
 				#Restore User Values
 						echo "Restore user variables" >>/home/pinodexmr/debug.log	
@@ -290,6 +288,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/variables/RPCu_retain.sh /home/pinodexmr/variables/RPCu.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-rpcpay-port_retain.sh /home/pinodexmr/variables/monero-rpcpay-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-stats-port_retain.sh /home/pinodexmr/variables/monero-stats-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/variables/light-mode_retain.sh /home/pinodexmr/variables/light-mode.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)					
 
 					echo -e "\e[32mUser configuration restored\e[0m"
 				
@@ -355,7 +354,7 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh 2> >(tee
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 				#ubuntu /dev/null odd requiremnt to set permissions
-				sudo chmod 666 /dev/null
+				sudo chmod 777 /dev/null
 
 				#Clean up files
 				echo "Cleanup leftover files" >>/home/pinodexmr/debug.log
@@ -378,11 +377,7 @@ echo "
 					
 			whiptail --title "PiNode-XMR Updater" --msgbox "\n\nYour PiNode-XMR has been updated to version ${NEW_VERSION_PI}" 12 78
 					
-			sleep 5
-	else
-		#Don't update (return to menu)
-    		. /home/pinodexmr/setup.sh
-	fi
+			sleep 2
 
 #Update complete - Return to menu
 ./setup.sh
