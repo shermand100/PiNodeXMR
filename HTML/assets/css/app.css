@@ -53,7 +53,14 @@ h3 {
 		.navbar.navbar-expand-md.navbar-light.bg-light.fixed-top {
 			background-color: #616161 !important;
 		}
-		.nav-link {
+		.nav-link, .navbar-brand {
 			color: #e0e0e0 !important;	
+		}
+		#xmr-banner-container {
+			background: url('../images/pinode-xmr-banner-dark@2x.png') no-repeat top left;
+			background-size: 100%;
+		}
+		#xmr-banner {
+			opacity: 0;
 		}
 	}
