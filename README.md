@@ -1,5 +1,5 @@
 ![PiNode-XMR logo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
-# Quick Start Guide v5.22.08-Open-Build		
+# Quick Start Guide v5.22.11-Open-Build		
 ### This page is a quick overview to get you started. A complete and comprehensive manual showing all features can be found here at the Wiki: [Full Manual](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Manual)
 
 # Project Overview
