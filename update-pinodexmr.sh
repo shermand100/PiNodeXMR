@@ -112,8 +112,10 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/variables/pruneStatus.sh /home/pinodexmr/variables/pruneStatus_status.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCp.sh /home/pinodexmr/variables/RPCp_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCu.sh /home/pinodexmr/variables/RPCu_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/variables/light-mode.sh /home/pinodexmr/variables/light-mode_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)					
+					mv /home/pinodexmr/variables/light-mode.sh /home/pinodexmr/variables/light-mode_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/variables/htmlPasswordRequired.sh /home/pinodexmr/variables/htmlPasswordRequired_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mUser-set configuration saved\e[0m"
+
 								
 		#Install Update
 			echo -e "\e[32mInstalling update\e[0m"
@@ -246,7 +248,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 
 					#Set correct config for if HTML (Web UI) Password is required.
 
-					if [ $HTMLPASSWORDREQUIRED = TRUE ]
+					if [ "$HTMLPASSWORDREQUIRED" = TRUE ]
 					then
 					sudo cp /home/pinodexmr/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf
@@ -288,7 +290,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/pinodexmr/variables/RPCu_retain.sh /home/pinodexmr/variables/RPCu.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-rpcpay-port_retain.sh /home/pinodexmr/variables/monero-rpcpay-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-stats-port_retain.sh /home/pinodexmr/variables/monero-stats-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/variables/light-mode_retain.sh /home/pinodexmr/variables/light-mode.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)					
+					mv /home/pinodexmr/variables/light-mode_retain.sh /home/pinodexmr/variables/light-mode.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/variables/htmlPasswordRequired_retain.sh /home/pinodexmr/variables/htmlPasswordRequired.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 
 					echo -e "\e[32mUser configuration restored\e[0m"
 				
