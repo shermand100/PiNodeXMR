@@ -1,9 +1,9 @@
 #!/bin/bash
 #Configure PiNode-XMR to run "Pruned"
 #Load prune status - Has system already been pruned? 0 or 1
-. /home/pinodexmr/variables/prunestatus.sh
+. /home/pinodexmr/variables/pruneStatus.sh
 
-if [ $PRUNE_STATUS -lt 1 ]
+if [ "$PRUNE_STATUS" -lt 1 ]
 then
 #Stop node if running
 sudo systemctl stop monerodPrivate.service
@@ -22,7 +22,7 @@ cd /home/pinodexmr/monero/build/release/bin/
 	
 #Update prune status to show binary run
 	echo "#!/bin/bash
-PRUNE_STATUS=1" > /home/pinodexmr/variables/prunestatus.sh
+PRUNE_STATUS=1" > /home/pinodexmr/variables/pruneStatus.sh
 
 #Append pruning to all start flags
 echo " --prune-blockchain" >> /home/pinodexmr/execScripts/moneroTorPublic.sh
