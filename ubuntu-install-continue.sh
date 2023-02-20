@@ -35,15 +35,6 @@ if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compil
 			sleep 3
 fi
 
-##Hardware configure: Many features and builds only work with 64bit OS/Hardware, but we dont want to exclude older 32bit devices. Configure vaiable $LIGHTMODE for core node functions.
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 64bit OS. This means you can run PiNodeXMR with all features. If however you would prefer to run PiNodeXMR in 'light mode' with only core node functions you may select that option here" --no-button "PiNodeXMR Light" --yes-button "PiNodeXMR Full" 18 60); then
-	LIGHTMODE=FALSE
-		else
-			LIGHTMODE=TRUE
-fi
-sleep 3
-
-
 ###Continue as 'pinodexmr'
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
@@ -73,8 +64,6 @@ sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | t
 sudo usermod -a -G pinodexmr www-data
 sleep 3
 
-if [[ $LIGHTMODE = FALSE ]]
-then
   echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -94,7 +83,6 @@ cd
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
-fi
 
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
@@ -164,26 +152,9 @@ sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a /home/pinodexmr/debug.log
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a /home/pinodexmr/debug.log
 sleep 3
-if [[ $LIGHTMODE = TRUE ]]
-then
-#First move hidden file specifically .htaccess file then entire directory
-sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.html /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-else
-#First move hidden file specifically .htaccess file then entire directory
-sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-fi
 
 echo -e "\e[32mSuccess\e[0m"
 
-if [[ $LIGHTMODE = FALSE ]]
-then
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
 # ********************************************
@@ -233,59 +204,21 @@ rm ~/release.sh
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
 # ********************************************
-fi
 
-if [[ $LIGHTMODE = TRUE ]]
-then
-# #********************************************
-# #**********START OF Monero BINARY USE********
-# #********************************************
+echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+cd p2pool
+git checkout tags/v2.2.1
+mkdir build && cd build
+cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
+make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
+echo -e "\e[32mSuccess\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+sleep 3
 
-#Define Install Monero function to reduce repeat script
-function f_installMonero {
-echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a /home/pinodexmr/debug.log
-#Make standard location for Monero
-mkdir -p ~/monero/build/release/bin
-#Download 64-bit Monero
-wget https://downloads.getmonero.org/cli/linuxarm8
-#Make temp folder to extract binaries
-mkdir temp && tar -xvf linuxarm8 -C ~/temp
-#Move Monerod files to standard location
-mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
-rm linuxarm8
-rm -R /home/pinodexmr/temp/
-#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
-#Clean-up used downloaded files
-rm -R ~/temp
-}
-
-
-f_installMonero
-
-# #********************************************
-# #*******END OF Monero BINARY USE*******
-# #********************************************
-fi
-
-if [ $LIGHTMODE = FALSE ]
-then
-	##Install P2Pool (Not available on 32 bit systems)
-	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-	cd p2pool
-	git checkout tags/v2.2.1
-	mkdir build && cd build
-	cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
-	make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[32mSuccess\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	sleep 3
-
-	#Manage P2pool log file ia log rotate
-	sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-	sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-	sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-fi
+#Manage P2pool log file ia log rotate
+sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
@@ -328,7 +261,7 @@ wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR
 
 #Write value of LIGHTMODE variable
 	echo "#!/bin/sh
-LIGHTMODE=${LIGHTMODE}" > /home/pinodexmr/variables/light-mode.sh
+LIGHTMODE=${FALSE}" > /home/pinodexmr/variables/light-mode.sh
 
 ##End debug log
 echo "
