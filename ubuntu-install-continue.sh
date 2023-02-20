@@ -18,20 +18,6 @@ echo "
 ####################
 " 2>&1 | tee -a /home/pinodexmr/debug.log
 
-#Establish OS 32 or 64 bit
-CPU_ARCH=`getconf LONG_BIT`
-echo "OS getconf LONG_BIT $CPU_ARCH" >> /home/pinodexmr/debug.log
-if [[ $CPU_ARCH -eq 64 ]]
-then
-  echo "ARCH: 64-bit"
-elif [[ $CPU_ARCH -eq 32 ]]
-then
-  echo "ARCH: 32-bit"
-else
-  echo "OS Unknown"
-fi
-sleep 3
-
 whiptail --title "PiNode-XMR Continue Ubuntu LTS Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take ~80 minutes installing Monero and PiNodeXMR \n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
 
@@ -50,26 +36,10 @@ if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compil
 fi
 
 ##Hardware configure: Many features and builds only work with 64bit OS/Hardware, but we dont want to exclude older 32bit devices. Configure vaiable $LIGHTMODE for core node functions.
-if [[ $CPU_ARCH -eq 64 ]]
-then
 if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 64bit OS. This means you can run PiNodeXMR with all features. If however you would prefer to run PiNodeXMR in 'light mode' with only core node functions you may select that option here" --no-button "PiNodeXMR Light" --yes-button "PiNodeXMR Full" 18 60); then
 	LIGHTMODE=FALSE
 		else
 			LIGHTMODE=TRUE
-fi
-elif [[ $CPU_ARCH -eq 32 ]]
-then
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer has detected you are running a 32bit OS. This means you can run PiNodeXMR in 'light mode' with only core node functions. If you believe this is incorrect you can select the Full installer below but it is not recommended. Note: P2Pool is not available for 32bit devices" --no-button "PiNodeXMR Full" --yes-button "PiNodeXMR Light" 18 60); then
-	LIGHTMODE=TRUE
-		else
-			LIGHTMODE=FALSE
-fi
-else
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "This installer cannot detect if you are using 32/64bit Hardware/OS. You may select below to either use PiNodeXMR Full with all features for 64bit devices or PiNodeXMR Light with only core node functions" --no-button "PiNodeXMR Light" --yes-button "PiNodeXMR Full" 18 60); then
-	LIGHTMODE=FALSE
-		else
-			LIGHTMODE=TRUE
-fi
 fi
 sleep 3
 
@@ -276,9 +246,7 @@ function f_installMonero {
 echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a /home/pinodexmr/debug.log
 #Make standard location for Monero
 mkdir -p ~/monero/build/release/bin
-if [[ $CPU_ARCH -eq 64 ]]
-then
-  #Download 64-bit Monero
+#Download 64-bit Monero
 wget https://downloads.getmonero.org/cli/linuxarm8
 #Make temp folder to extract binaries
 mkdir temp && tar -xvf linuxarm8 -C ~/temp
@@ -286,16 +254,6 @@ mkdir temp && tar -xvf linuxarm8 -C ~/temp
 mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
 rm linuxarm8
 rm -R /home/pinodexmr/temp/
-else
-  #Download 32-bit Monero
-wget https://downloads.getmonero.org/cli/linuxarm7
-#Make temp folder to extract binaries
-mkdir temp && tar -xvf linuxarm7 -C ~/temp
-#Move Monerod files to standard location
-mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
-rm linuxarm7
-rm -R /home/pinodexmr/temp/
-fi
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
 mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
 #Clean-up used downloaded files
@@ -303,18 +261,7 @@ rm -R ~/temp
 }
 
 
-if [[ $CPU_ARCH -ne 64 ]] && [[ $CPU_ARCH -ne 32 ]]
-then
-  if (whiptail --title "OS version" --yesno "I've tried to auto-detect what version of Monero you need based on your OS but I've not been successful.\n\nPlease select your OS architecture..." 8 78 --no-button "32-bit" --yes-button "64-bit"); then
-    CPU_ARCH=64
-	f_installMonero
-	else
-    CPU_ARCH=32
-	f_installMonero
-  fi
-else
- f_installMonero
-fi
+f_installMonero
 
 # #********************************************
 # #*******END OF Monero BINARY USE*******
@@ -324,21 +271,6 @@ fi
 if [ $LIGHTMODE = FALSE ]
 then
 	##Install P2Pool (Not available on 32 bit systems)
-	if [ $CPU_ARCH -eq 32 ]
-	then
-	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m*********** ARCH: 32-bit detected ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m********** P2Pool Cannot be built ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m*********** ARCH: 64-bit required ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m*********** SKIPPING P2Pool build ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo "Install resuming in 20 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
-	sleep "10"
-	echo "Install resuming in 10 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
-	sleep "5"
-	echo "Install resuming in 5 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
-	sleep "5"
-	else
 	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 	git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	cd p2pool
@@ -353,7 +285,6 @@ then
 	sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
-	fi
 fi
 
 ##Install log.io (Real-time service monitoring)
