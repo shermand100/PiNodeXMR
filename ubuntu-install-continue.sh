@@ -21,20 +21,6 @@ echo "
 whiptail --title "PiNode-XMR Continue Ubuntu LTS Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take ~80 minutes installing Monero and PiNodeXMR \n\nSelect ok to continue setup" 16 60
 ###Continue as 'pinodexmr'
 
-##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
-if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
-	echo -e "\e[32mSwap file unchanged\e[0m"
-	sleep 3
-		else
-			sudo fallocate -l 2G /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
-			sudo chmod 600 /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
-			sudo mkswap /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
-			sudo swapon /swapfile 2>&1 | tee -a /home/pinodexmr/debug.log
-			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
-			free -h
-			sleep 3
-fi
-
 ###Continue as 'pinodexmr'
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
@@ -245,10 +231,6 @@ sleep 3
 crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
-
-##Set Swappiness lower
-		echo "Set RAM Swappiness lower" 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo sysctl vm.swappiness=10 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ## Remove left over files from git clone actions
 	echo "Remove left over files from git clone actions" 2>&1 | tee -a /home/pinodexmr/debug.log
