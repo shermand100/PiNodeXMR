@@ -113,7 +113,8 @@ switch($function) {
     break;
   case 'restart-logio-file':
     exec("sudo systemctl restart log-io-file");
-    echo "PiNodeXMR has restarted the Log-io File service";
+    exec("sudo systemctl restart log-io-server");
+    echo "PiNodeXMR has restarted the Log-io services";
     break;
   case 'p2pool-start':
     exec("sudo systemctl start p2pool.service");
