@@ -241,10 +241,6 @@ sudo rm -r /home/nanode/Nanode/ 2>&1 | tee -a /home/nanode/debug.log
 ##Change log in menu to 'main'
 wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/home/nanode/.profile 2>&1 | tee -a /home/nanode/debug.log
 
-#Write value of LIGHTMODE variable
-	echo "#!/bin/sh
-LIGHTMODE=${FALSE}" > /home/nanode/variables/light-mode.sh
-
 ##End debug log
 echo "
 ####################

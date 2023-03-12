@@ -10,9 +10,6 @@ echo "
 " >>/home/nanode/debug.log
 sleep 1
 
-#Import Variable: Light-mode true/false
-. /home/nanode/variables/light-mode.sh
-echo "Light-Mode value is: $LIGHTMODE" >>/home/nanode/debug.log
 #Import Variable: htmlPasswordRequired
 . /home/nanode/variables/htmlPasswordRequired.sh
 echo "HMTL Password Required set to: $HTMLPASSWORDREQUIRED" >>/home/nanode/debug.log
@@ -27,15 +24,12 @@ sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee 
 sudo apt-get autoremove -y 2>&1 | tee -a /home/nanode/debug.log
 
 ##Installing dependencies for --- Web Interface
-	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/nanode/debug.log
+echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a /home/nanode/debug.log
 sleep 3
 
-if [ "$LIGHTMODE" = FALSE ]
-then
-  echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
@@ -47,7 +41,6 @@ sleep 2
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 sleep 2
-fi
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a /home/nanode/debug.log
@@ -112,7 +105,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/nanode/variables/pruneStatus.sh /home/nanode/variables/pruneStatus_status.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/variables/RPCp.sh /home/nanode/variables/RPCp_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/variables/RPCu.sh /home/nanode/variables/RPCu_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/light-mode.sh /home/nanode/variables/light-mode_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/variables/htmlPasswordRequired.sh /home/nanode/variables/htmlPasswordRequired_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mUser-set configuration saved\e[0m"
 
@@ -163,49 +155,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update html template" >>/home/nanode/debug.log
 					echo -e "\e[32mConfiguring Web-UI template with Nanode pages\e[0m"
 					sleep 3
-					if [ "$LIGHTMODE" = TRUE ]
-					then
-					#First move hidden file specifically .htaccess file then entire directory
-					sudo mv /home/nanode/Nanode/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					#Remove .php file clutter, see Nanode PR66 for context.
-					rm -R /var/www/html/*.php
-					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
-					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					#Overwrite /var/www/html with updated contents
-					sudo rsync -a /home/nanode/Nanode/HTML/* /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					sudo rsync -a /home/nanode/Nanode/HTML-LIGHT/*.html /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					#Restore User variables
-					mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					#Lightmode html update complete
-					else
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/nanode/Nanode/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
 					rm -R /var/www/html/*.php
@@ -290,7 +239,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /home/nanode/variables/RPCu_retain.sh /home/nanode/variables/RPCu.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/variables/monero-rpcpay-port_retain.sh /home/nanode/variables/monero-rpcpay-port.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/variables/monero-stats-port_retain.sh /home/nanode/variables/monero-stats-port.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/light-mode_retain.sh /home/nanode/variables/light-mode.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/variables/htmlPasswordRequired_retain.sh /home/nanode/variables/htmlPasswordRequired.sh 2> >(tee -a /home/nanode/debug.log >&2)
 
 					echo -e "\e[32mUser configuration restored\e[0m"

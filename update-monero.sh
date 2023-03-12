@@ -11,30 +11,15 @@ echo "
 " 2>&1 | tee -a /home/nanode/debug.log
 
 #Download variable for current monero release version
-wget -q https://raw.githubusercontent.com/monero-ecosystem/Nanode/master/release.sh -O /home/nanode/release.sh
+wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
 #Permission Setting
 chmod 755 /home/nanode/release.sh
 #Load boot status - condition the node was last run
 . /home/nanode/bootstatus.sh
-#Import Variable: Light-mode true/false
-. /home/nanode/variables/light-mode.sh
-echo "Light-Mode value is: $LIGHTMODE" >>/home/nanode/debug.log
 #Load Variables
 . /home/nanode/release.sh
 
-#Establish OS 32 or 64 bit
-CPU_ARCH=`getconf LONG_BIT`
-echo "OS getconf LONG_BIT $CPU_ARCH" >> /home/nanode/debug.log
-if [[ $CPU_ARCH -eq 64 ]]
-then
-  echo "ARCH: 64-bit"
-elif [[ $CPU_ARCH -eq 32 ]]
-then
-  echo "ARCH: 32-bit"
-else
-  echo "OS Unknown"
-fi
-sleep 3
+echo "Assuming 64-bit"
 
 	##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
 if (whiptail --title "Nanode Monero Updater" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
@@ -71,9 +56,6 @@ fi
 		rm -rf /home/nanode/monero/
 		sleep "2"
 
-
-if [[ $LIGHTMODE = FALSE ]]
-then
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
 # ********************************************
@@ -109,46 +91,8 @@ cd
 mkdir .bitmonero 2>&1 | tee -a /home/nanode/debug.log
 
 # ********************************************
-# ********END OF MONERO SOURCE BULD **********
+# ********END OF MONERO SOURCE BUILD **********
 # ********************************************
-
-fi
-
-if [[ $LIGHTMODE = TRUE ]]
-then
-	#********************************************
-	#**********START OF Monero BINARY USE********
-	#********************************************
-
-	echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a /home/nanode/debug.log
-	#Make standard location for Monero
-	mkdir -p ~/monero/build/release/bin
-		if [[ $CPU_ARCH -eq 64 ]]
-		then
-			  #Download 64-bit Monero
-			wget https://downloads.getmonero.org/cli/linuxarm8
-			#Make temp folder to extract binaries
-			mkdir temp && tar -xvf linuxarm8 -C ~/temp
-			#Move Monerod files to standard location
-			mv /home/nanode/temp/monero-aarch64-linux-gnu-v0.18*/monero* /home/nanode/monero/build/release/bin/
-			rm linuxarm8
-			rm -R /home/nanode/temp/
-		else
-			  #Download 32-bit Monero
-			wget https://downloads.getmonero.org/cli/linuxarm7
-			#Make temp folder to extract binaries
-			mkdir temp && tar -xvf linuxarm7 -C ~/temp
-			#Move Monerod files to standard location
-			mv /home/nanode/temp/monero-arm-linux-gnueabihf-v0.18*/monero* /home/nanode/monero/build/release/bin/
-			rm linuxarm7
-			rm -R ~/temp/
-		fi
-
-	#********************************************
-	#*******END OF Monero BINARY USE*******
-	#********************************************
-
-fi
 
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
 mkdir .bitmonero 2>&1 | tee -a /home/nanode/debug.log
