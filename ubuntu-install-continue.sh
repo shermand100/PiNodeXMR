@@ -8,16 +8,8 @@
 
 ###Begin2
 
-DEBUG_LOG=/home/nanode/debug.log
-
-function showtext() {
-	log "$*"
-	echo -e "\e[32m$*\e[0m"
-}
-
-function log() {
-	echo "$*" | tee -a "$DEBUG_LOG"
-}
+#shellcheck source=./common.sh
+. ./common.sh
 
 #Create debug file for handling install errors:
 touch "$DEBUG_LOG"
@@ -145,6 +137,7 @@ sudo /etc/init.d/avahi-daemon restart
 #Download latest Monero release number
 #ubuntu /dev/null odd requiremnt to set permissions
 sudo chmod 666 /dev/null
+#FIXME: change url
 wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
 chmod 755 /home/nanode/release.sh
 # shellcheck source=home/nanode/release.sh
@@ -238,6 +231,7 @@ showtext "Cleanup leftover directories"
 sudo rm -r /home/nanode/Nanode/ 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Change log in menu to 'main'
+#FIXME: change url
 wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/home/nanode/.profile 2>&1 | tee -a "$DEBUG_LOG"
 
 ##End debug log
