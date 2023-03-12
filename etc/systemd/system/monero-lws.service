@@ -3,13 +3,13 @@ Description=Monero LWS
 After=network.target
 
 [Service]
-User=pinodexmr
-Group=pinodexmr
-EnvironmentFile=/home/pinodexmr/IPforLWS.txt
-ExecStart=/home/pinodexmr/monero-lws/build/src/monero-lws-daemon --rest-server=https://${IP}:8443 --confirm-external-bind --rest-ssl-key=/home/pinodexmr/lwsSslCert/key.pem --rest-ssl-certificate=/home/pinodexmr/lwsSslCert/cert.pem
+User=nanode
+Group=nanode
+EnvironmentFile=/home/nanode/IPforLWS.txt
+ExecStart=/home/nanode/monero-lws/build/src/monero-lws-daemon --rest-server=https://${IP}:8443 --confirm-external-bind --rest-ssl-key=/home/nanode/lwsSslCert/key.pem --rest-ssl-certificate=/home/nanode/lwsSslCert/cert.pem
 Restart=always
-StandardOutput=file:/home/pinodexmr/monero-lws/monero-lws.log
-StandardError=file:/home/pinodexmr/monero-lws/monero-lws.log
+StandardOutput=file:/home/nanode/monero-lws/monero-lws.log
+StandardError=file:/home/nanode/monero-lws/monero-lws.log
 
 [Install]
 WantedBy=multi-user.target

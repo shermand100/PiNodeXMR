@@ -2,26 +2,26 @@
 
 echo "
 ####################
-" 2>&1 | tee -a /home/pinodexmr/debug.log
-echo "Start setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
+" 2>&1 | tee -a /home/nanode/debug.log
+echo "Start setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/nanode/debug.log
 echo "
 ####################
-" 2>&1 | tee -a /home/pinodexmr/debug.log
+" 2>&1 | tee -a /home/nanode/debug.log
 
 #Establish OS 32 or 64 bit
 CPU_ARCH=`getconf LONG_BIT`
 
 if [[ $CPU_ARCH -eq 32 ]]
 	then
-	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m*********** ARCH: 32-bit detected ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m********** P2Pool Cannot be built ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m*********** ARCH: 64-bit required ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m********** SKIPPING P2Pool update ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	echo "Returning to Menu in 10 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/nanode/debug.log
+	echo -e "\e[33m*********** ARCH: 32-bit detected ***********\e[0m" 2>&1 | tee -a /home/nanode/debug.log
+	echo -e "\e[33m********** P2Pool Cannot be built ***********\e[0m" 2>&1 | tee -a /home/nanode/debug.log
+	echo -e "\e[33m*********** ARCH: 64-bit required ***********\e[0m" 2>&1 | tee -a /home/nanode/debug.log
+	echo -e "\e[33m********** SKIPPING P2Pool update ***********\e[0m" 2>&1 | tee -a /home/nanode/debug.log
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/nanode/debug.log
+	echo "Returning to Menu in 10 seconds" 2>&1 | tee -a /home/nanode/debug.log
 	sleep "5"
-	echo "Returning to Menu in 5 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo "Returning to Menu in 5 seconds" 2>&1 | tee -a /home/nanode/debug.log
 	sleep "5"
 	else
 
@@ -44,26 +44,26 @@ if [[ $CPU_ARCH -eq 32 ]]
 		sleep "5"
 		echo "Update starts in 5 seconds"
 		sleep "5"
-		echo -e "\e[32mDelete old version\e[0m"		
-		rm -rf /home/pinodexmr/p2pool/
+		echo -e "\e[32mDelete old version\e[0m"
+		rm -rf /home/nanode/p2pool/
 		echo -e "\e[32mSuccess\e[0m"
 		sleep "2"
 		echo -e "\e[32mBuilding new P2Pool\e[0m"
 		##Install P2Pool
-		git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+		git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/nanode/debug.log
 		cd p2pool
 		git checkout tags/v3.0
 		mkdir build && cd build
-		cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
-		make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
+		cmake .. 2>&1 | tee -a /home/nanode/debug.log
+		make -j2 2>&1 | tee -a /home/nanode/debug.log
 		echo -e "\e[32mSuccess\e[0m"
 		sleep 3
 		cd
 		#Update system reference Explorer version number version number
-		chmod 755 /home/pinodexmr/p2pool-new-ver.sh
-		. /home/pinodexmr/p2pool-new-ver.sh
+		chmod 755 /home/nanode/p2pool-new-ver.sh
+		. /home/nanode/p2pool-new-ver.sh
 		echo "#!/bin/bash
-CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool.sh 2>&1 | tee -a /home/pinodexmr/debug.log
+CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/nanode/current-ver-p2pool.sh 2>&1 | tee -a /home/nanode/debug.log
 
 #Define Restart Monero Node
 		# Key - BOOT_STATUS
@@ -89,7 +89,7 @@ then
 then
 		sudo systemctl start moneroTorPrivate.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
-	fi		
+	fi
 
 	if [[ $BOOT_STATUS -eq 5 ]]
 then
@@ -123,8 +123,8 @@ then
 fi
 
 	##End debug log
-echo "Update Script Complete" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "Update Script Complete" 2>&1 | tee -a /home/nanode/debug.log
 sleep 5
-echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
-echo "End setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
-echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "####################" 2>&1 | tee -a /home/nanode/debug.log
+echo "End setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/nanode/debug.log
+echo "####################" 2>&1 | tee -a /home/nanode/debug.log

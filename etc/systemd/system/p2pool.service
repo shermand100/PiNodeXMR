@@ -4,14 +4,14 @@ After=network.target
 
 [Service]
 ExecStart=/bin/bash p2pool.sh
-WorkingDirectory=/home/pinodexmr/execScripts/
+WorkingDirectory=/home/nanode/execScripts/
 Type=simple
 Restart=always
 RestartSec=30
-User=pinodexmr
-StandardOutput=file:/home/pinodexmr/p2pool/build/p2pool.log
-StandardError=file:/home/pinodexmr/p2pool/build/p2pool.log
-PIDFile=/home/pinodexmr/p2pool/p2pool.pid
+User=nanode
+StandardOutput=file:/home/nanode/p2pool/build/p2pool.log
+StandardError=file:/home/nanode/p2pool/build/p2pool.log
+PIDFile=/home/nanode/p2pool/p2pool.pid
 
 [Install]
 WantedBy=multi-user.target

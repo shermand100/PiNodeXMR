@@ -4,13 +4,13 @@ After=network.target
 
 [Service]
 ExecStart=/bin/bash disable-swap.sh
-WorkingDirectory=/home/pinodexmr/
+WorkingDirectory=/home/nanode/
 StandardOutput=inherit
 StandardError=inherit
 Type=oneshot
 RemainAfterExit=true
 Restart=no
-User=pinodexmr
+User=nanode
 
 [Install]
 WantedBy=multi-user.target

@@ -33,7 +33,7 @@ PermitRootLogin no
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
-AllowUsers pinodexmr
+AllowUsers nanode
 PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.

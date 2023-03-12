@@ -3,14 +3,14 @@ Description=Monero Tor Public
 After=network.target
 
 [Service]
-User=pinodexmr
-Group=pinodexmr
+User=nanode
+Group=nanode
 WorkingDirectory=~
 RuntimeDirectory=monero
 SuccessExitStatus=143
 Type=simple
-PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
-ExecStart=/bin/bash /home/pinodexmr/execScripts/moneroTorPublic.sh
+PIDFile=/home/nanode/monero/build/release/bin/monerod.pid
+ExecStart=/bin/bash /home/nanode/execScripts/moneroTorPublic.sh
 RestartSec=30
 Restart=on-failure
 

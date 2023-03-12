@@ -3,8 +3,8 @@ Description=Log-io-file
 After=network.target
 
 [Service]
-User=pinodexmr
-Group=pinodexmr
+User=nanode
+Group=nanode
 ExecStart=/usr/local/bin/log.io-file-input
 Restart=always
 
