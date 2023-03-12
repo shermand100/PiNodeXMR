@@ -32,15 +32,12 @@ chmod 755 /home/nanode/exp-new-ver.sh 2> >(tee -a /home/nanode/debug.log >&2)
 		sudo systemctl stop moneroCustomNode.service 2> >(tee -a /home/nanode/debug.log >&2)
 		sudo systemctl stop moneroPublicRPCPay.service 2> >(tee -a /home/nanode/debug.log >&2)
 		echo "Monero node stop command sent to make system resources available for update, allowing 30 seconds for safe shutdown"
-		sleep "30"
 		echo "Deleting Old Version"
 		rm -rf /home/nanode/onion-monero-blockchain-explorer/ 2> >(tee -a /home/nanode/debug.log >&2)
-		sleep "2"
 		echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 		echo -e "\e[32m*******************************************************\e[0m"
 		echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 		echo -e "\e[32m*******************************************************\e[0m"
-		sleep 10
 		git clone -b master https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a /home/nanode/debug.log >&2)
 		cd onion-monero-blockchain-explorer
 		mkdir build && cd build

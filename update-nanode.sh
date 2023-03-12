@@ -8,7 +8,6 @@ echo "Start update-nanode.sh script $(date)" >>/home/nanode/debug.log
 echo "
 ####################
 " >>/home/nanode/debug.log
-sleep 1
 
 #Import Variable: htmlPasswordRequired
 . /home/nanode/variables/htmlPasswordRequired.sh
@@ -26,35 +25,27 @@ sudo apt-get autoremove -y 2>&1 | tee -a /home/nanode/debug.log
 ##Installing dependencies for --- Web Interface
 echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
-sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a /home/nanode/debug.log
-sleep 3
 
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
-sleep 3
 sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a /home/nanode/debug.log
-sleep 2
 
 ##Installing dependencies for --- P2Pool
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
-sleep 2
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
-sleep 3
 sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get install exfat-fuse -y 2>&1 | tee -a /home/nanode/debug.log
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
-sleep 3
 		#Download update files
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add  new permissions to www-data user for interface buttons)
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
-sleep 3
 wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/sudoers -O /home/nanode/sudoers
 sudo chmod 0440 /home/nanode/sudoers
 sudo chown root /home/nanode/sudoers
@@ -63,12 +54,10 @@ sudo mv /home/nanode/sudoers /etc/sudoers
 #ubuntu /dev/null odd requirment to set permissions
 sudo chmod 777 /dev/null
 echo -e "\e[32mGlobal permissions changed\e[0m"
-sleep 3
 
 ##Clone Nanode to device from git
 	echo "Clone Nanode to device from git" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mDownloading Nanode files\e[0m"
-sleep 3
 git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a /home/nanode/debug.log
 
 				#Backup User values
@@ -77,7 +66,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					echo -e "\e[32m*****\e[0m"
 					echo -e "\e[32mIf a setting did not exist on your previous version you may see some errors here for missing files, these can safely be ignored\e[0m"
 					echo -e "\e[32m*****\e[0m"
-					sleep 8
 					#home dir
 					mv /home/nanode/bootstatus.sh /home/nanode/bootstatus_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/current-ver.sh /home/nanode/current-ver_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
@@ -111,11 +99,9 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 
 		#Install Update
 			echo -e "\e[32mInstalling update\e[0m"
-			sleep 2
 				##Add Nanode systemd services
 						echo "Update services" >>/home/nanode/debug.log
 					echo -e "\e[32mAdd Nanode systemd services\e[0m"
-					sleep 3
 					sudo mv /home/nanode/Nanode/etc/systemd/system/*.service /etc/systemd/system/ 2> >(tee -a /home/nanode/debug.log >&2)
 					sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a /home/nanode/debug.log >&2)
 					sudo chown root /etc/systemd/system/*.service 2> >(tee -a /home/nanode/debug.log >&2)
@@ -123,17 +109,14 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sudo systemctl start moneroStatus.service 2> >(tee -a /home/nanode/debug.log >&2)
 					sudo systemctl enable moneroStatus.service 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 3
 
 				##Updating Nanode scripts in home directory
 						echo "Update Nanode scripts" >>/home/nanode/debug.log
 					echo -e "\e[32mUpdating Nanode scripts in home directory\e[0m"
-					sleep 2
 					cp -afr /home/nanode/Nanode/home/nanode/* /home/nanode/ 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/Nanode/home/nanode/.profile /home/nanode/ 2> >(tee -a /home/nanode/debug.log >&2)
 					sudo chmod -R 777 /home/nanode/* 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 2
 
 				#Configure apache server for access to monero log file
 					echo -e "\e[32mConfigure apache server for access to monero log file\e[0m"
@@ -142,11 +125,9 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/nanode/debug.log >&2)
 					sudo /etc/init.d/apache2 restart 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 3
 				##Setup local hostname
 						echo "Update hostname (avahi)" >>/home/nanode/debug.log
 					echo -e "\e[32mEnable local hostname nanode.local\e[0m"
-					sleep 3
 					sudo mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2> >(tee -a /home/nanode/debug.log >&2)
 					sudo /etc/init.d/avahi-daemon restart 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
@@ -154,7 +135,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 				##Update html template
 						echo "Update html template" >>/home/nanode/debug.log
 					echo -e "\e[32mConfiguring Web-UI template with Nanode pages\e[0m"
-					sleep 3
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/nanode/Nanode/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
 					rm -R /var/www/html/*.php
@@ -210,7 +190,6 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 				#Restore User Values
 						echo "Restore user variables" >>/home/nanode/debug.log
 					echo -e "\e[32mRestoring your personal settings\e[0m"
-					sleep 2
 					#home dir
 					mv /home/nanode/bootstatus_retain.sh /home/nanode/bootstatus.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					mv /home/nanode/current-ver_retain.sh /home/nanode/current-ver.sh 2> >(tee -a /home/nanode/debug.log >&2)
@@ -246,32 +225,25 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 				##Set Swappiness lower
 						echo "Set swappiness" >>/home/nanode/debug.log
 					echo -e "\e[32mDecreasing swappiness\e[0m"
-					sleep 3
 					sudo sysctl vm.swappiness=10 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 3
 				##Update crontab
 						echo "Update crontabs" >>/home/nanode/debug.log
 					echo -e "\e[32mUpdating crontab tasks\e[0m"
-					sleep 3
 					crontab /home/nanode/Nanode/var/spool/cron/crontabs/nanode 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 3
 
 				#Attempt update of tor hidden service settings
 						echo "Update torrc settings - if installed" >>/home/nanode/debug.log
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
-					sleep 6
 					sudo wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/tor/torrc -O /etc/tor/torrc 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mApplying Settings...\e[0m"
-					sleep 3
 					sudo chmod 644 /etc/tor/torrc 2> >(tee -a /home/nanode/debug.log >&2)
 					sudo chown root /etc/tor/torrc 2> >(tee -a /home/nanode/debug.log >&2)
 				#Insert user specific local IP for correct hiddenservice redirect (line 73 overwrite)
 					sudo sed -i "73s/.*/HiddenServicePort 18081 $(hostname -I | awk '{print $1}'):18081/" /etc/tor/torrc
 					echo -e "\e[32mRestarting tor service...\e[0m"
 					sudo service tor restart 2> >(tee -a /home/nanode/debug.log >&2)
-					sleep 3
 
 				#Restart statusOutputs script service for changes to take effect
 				sudo systemctl restart moneroStatus.service
@@ -303,19 +275,16 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					echo "#!/bin/bash
 CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/nanode/current-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 2
 				#ubuntu /dev/null odd requiremnt to set permissions
 				sudo chmod 777 /dev/null
 
 				#Clean up files
 				echo "Cleanup leftover files" >>/home/nanode/debug.log
 					echo -e "\e[32mCleanup leftover directories\e[0m"
-					sleep 2
 
 					sudo rm -r /home/nanode/Nanode/ 2> >(tee -a /home/nanode/debug.log >&2)
 					rm /home/nanode/new-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
-					sleep 2
 
 				##End debug log
 echo "
@@ -328,7 +297,6 @@ echo "
 
 			whiptail --title "Nanode Updater" --msgbox "\n\nYour Nanode has been updated to version ${NEW_VERSION_PI}" 12 78
 
-			sleep 2
 
 #Update complete - Return to menu
 ./setup.sh

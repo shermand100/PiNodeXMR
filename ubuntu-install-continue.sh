@@ -24,19 +24,14 @@ whiptail --title "Nanode Continue Ubuntu LTS Installer" --msgbox "Your Nanode is
 ###Continue as 'nanode'
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
-sleep 2
 sudo passwd --lock pi
 echo -e "\e[32mUser 'pi' Locked\e[0m"
-sleep 3
 echo -e "\e[32mLock old user 'ubuntu'\e[0m"
-sleep 2
 sudo passwd --lock ubuntu
 echo -e "\e[32mUser 'ubuntu' Locked\e[0m"
-sleep 3
 
 ##Update and Upgrade system (This step repeated due to importance and maybe someone using this installer sript out-of-sequence)
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
-sleep 3
 sudo apt-get update 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a /home/nanode/debug.log
@@ -45,19 +40,13 @@ sudo apt-get upgrade -y 2>&1 | tee -a /home/nanode/debug.log
 ##Installing dependencies for --- Web Interface
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
-sleep 3
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a /home/nanode/debug.log
 sudo usermod -a -G nanode www-data
-sleep 3
-
-  echo "ARCH: 64-bit"
 ##Installing dependencies for --- Monero
 	echo "Installing dependencies for --- Monero" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
-sleep 3
 sudo apt-get update
 sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a /home/nanode/debug.log
-sleep 2
 	echo "manual build of gtest for --- Monero" 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get install libgtest-dev -y 2>&1 | tee -a /home/nanode/debug.log
 cd /usr/src/gtest
@@ -68,50 +57,41 @@ cd
 ##Installing dependencies for --- P2Pool
 	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
-sleep 2
 
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
-sleep 3
 sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev cron -y 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get install exfat-fuse exfat-utils -y 2>&1 | tee -a /home/nanode/debug.log
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
-sleep 3
 
 ##Clone Nanode to device from git
 	echo "Clone Nanode to device from git" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mDownloading Nanode files\e[0m"
-sleep 3
 git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a /home/nanode/debug.log
 
 
 ##Configure ssh security. Allows only user 'nanode'. Also 'root' login disabled via ssh, restarts config to make changes
 	echo "Configure ssh security" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mConfiguring SSH security\e[0m"
-sleep 3
 sudo mv /home/nanode/Nanode/etc/ssh/sshd_config /etc/ssh/sshd_config 2>&1 | tee -a /home/nanode/debug.log
 sudo chmod 644 /etc/ssh/sshd_config 2>&1 | tee -a /home/nanode/debug.log
 sudo chown root /etc/ssh/sshd_config 2>&1 | tee -a /home/nanode/debug.log
 sudo /etc/init.d/ssh restart 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mSSH security config complete\e[0m"
-sleep 3
 
 
 ##Copy Nanode scripts to home folder
 echo -e "\e[32mMoving Nanode scripts into position\e[0m"
-sleep 3
 mv /home/nanode/Nanode/home/nanode/* /home/nanode/ 2>&1 | tee -a /home/nanode/debug.log
 mv /home/nanode/Nanode/home/nanode/.profile /home/nanode/ 2>&1 | tee -a /home/nanode/debug.log
 sudo chmod 777 -R /home/nanode/* 2>&1 | tee -a /home/nanode/debug.log #Read/write access needed by www-data to action php port, address customisation
 echo -e "\e[32mSuccess\e[0m"
-sleep 3
 
 ##Add Nanode systemd services
 	echo "Add Nanode systemd services" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mAdd Nanode systemd services\e[0m"
-sleep 3
 sudo mv /home/nanode/Nanode/etc/systemd/system/*.service /etc/systemd/system/ 2>&1 | tee -a /home/nanode/debug.log
 sudo chmod 644 /etc/systemd/system/*.service 2>&1 | tee -a /home/nanode/debug.log
 sudo chown root /etc/systemd/system/*.service 2>&1 | tee -a /home/nanode/debug.log
@@ -119,7 +99,6 @@ sudo systemctl daemon-reload 2>&1 | tee -a /home/nanode/debug.log
 sudo systemctl start moneroStatus.service 2>&1 | tee -a /home/nanode/debug.log
 sudo systemctl enable moneroStatus.service 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mSuccess\e[0m"
-sleep 3
 
 #Configure apache server for access to monero log file
 sudo mv /home/nanode/Nanode/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/nanode/debug.log
@@ -128,7 +107,6 @@ sudo chown root /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/
 sudo /etc/init.d/apache2 restart 2>&1 | tee -a /home/nanode/debug.log
 
 echo -e "\e[32mSuccess\e[0m"
-sleep 3
 
 ##Setup local hostname
 	echo "Setup local hostname" 2>&1 | tee -a /home/nanode/debug.log
@@ -137,7 +115,6 @@ sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a /home/nanode/debug.log
 
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a /home/nanode/debug.log
-sleep 3
 
 echo -e "\e[32mSuccess\e[0m"
 
@@ -148,13 +125,11 @@ echo -e "\e[32mSuccess\e[0m"
 	#Download latest Monero release number
 #ubuntu /dev/null odd requiremnt to set permissions
 sudo chmod 666 /dev/null
-sleep 3
 wget -q https://raw.githubusercontent.com/monero-ecosystem/Nanode/master/release.sh -O /home/nanode/release.sh
 chmod 755 /home/nanode/release.sh
 . /home/nanode/release.sh
 
 echo -e "\e[32mDownloading Monero \e[0m"
-sleep 3
 
 git clone --recursive https://github.com/monero-project/monero
 echo -e "\e[32mBuilding Monero \e[0m"
@@ -163,7 +138,6 @@ echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m***This will take a while - Hardware Dependent***\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
-sleep 10
 cd monero && git submodule init && git submodule update
 git checkout $RELEASE
 git submodule sync && git submodule update
@@ -176,7 +150,6 @@ echo -e "\e[32mBuilding Monero Blockchain Explorer[0m"
 echo -e "\e[32m*******************************************************\e[0m"
 echo -e "\e[32m***This will take a few minutes - Hardware Dependent***\e[0m"
 echo -e "\e[32m*******************************************************\e[0m"
-sleep 10
 		echo "Build Monero Onion Block Explorer" 2>&1 | tee -a /home/nanode/debug.log
 git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2>&1 | tee -a /home/nanode/debug.log
 cd onion-monero-blockchain-explorer
@@ -199,7 +172,6 @@ mkdir build && cd build
 cmake .. 2>&1 | tee -a /home/nanode/debug.log
 make -j2 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mSuccess\e[0m" 2>&1 | tee -a /home/nanode/debug.log
-sleep 3
 
 #Manage P2pool log file ia log rotate
 sudo mv /home/nanode/Nanode/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/nanode/debug.log
@@ -227,15 +199,12 @@ sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/nanode/debug.log
 ##Install crontab
 		echo "Install crontab" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mSetup crontab\e[0m"
-sleep 3
 crontab /home/nanode/Nanode/var/spool/cron/crontabs/nanode 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mSuccess\e[0m"
-sleep 3
 
 ## Remove left over files from git clone actions
 	echo "Remove left over files from git clone actions" 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mCleanup leftover directories\e[0m"
-sleep 3
 sudo rm -r /home/nanode/Nanode/ 2>&1 | tee -a /home/nanode/debug.log
 
 ##Change log in menu to 'main'
@@ -258,8 +227,7 @@ echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m**********Nanode rebooting**********\e[0m"
 echo -e "\e[32m**********Reminder:*********************\e[0m"
 echo -e "\e[32m**********User: 'nanode'*************\e[0m"
-echo -e "\e[32m**********Password: 'Nanode**********\e[0m"
+echo -e "\e[32m**********Password: 'Nanode'**********\e[0m"
 echo -e "\e[32m****************************************\e[0m"
 echo -e "\e[32m****************************************\e[0m"
-sleep 10
 sudo reboot

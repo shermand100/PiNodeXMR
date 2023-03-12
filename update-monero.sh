@@ -24,7 +24,6 @@ echo "Assuming 64-bit"
 	##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
 if (whiptail --title "Nanode Monero Updater" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
 	echo -e "\e[32mSwap file unchanged\e[0m"
-	sleep 3
 		else
 			sudo fallocate -l 2G /swapfile 2>&1 | tee -a /home/nanode/debug.log
 			sudo chmod 600 /swapfile 2>&1 | tee -a /home/nanode/debug.log
@@ -32,13 +31,11 @@ if (whiptail --title "Nanode Monero Updater" --yesno "For Monero to compile succ
 			sudo swapon /swapfile 2>&1 | tee -a /home/nanode/debug.log
 			echo -e "\e[32mSwap file of 2GB Configured and enabled\e[0m"
 			free -h
-			sleep 3
 fi
 
 
 		#ubuntu /dev/null odd requiremnt to set permissions
 		sudo chmod 666 /dev/null
-		sleep 2
 
 		#Stop Node to make system resources available.
 		sudo systemctl stop blockExplorer.service
@@ -51,10 +48,8 @@ fi
 		sudo systemctl stop moneroCustomNode.service
 		sudo systemctl stop moneroPublicRPCPay.service
 		echo "Monero node stop command sent, allowing 30 seconds for safe shutdown"
-		sleep "30"
 		echo "Deleting Old Version"
 		rm -rf /home/nanode/monero/
-		sleep "2"
 
 # ********************************************
 # ******START OF MONERO SOURCE BULD******
@@ -72,7 +67,6 @@ sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev lib
 
 
 echo -e "\e[32mDownloading Monero \e[0m"
-sleep 2
 
 git clone --recursive https://github.com/monero-project/monero
 echo -e "\e[32mBuilding Monero \e[0m"
@@ -81,7 +75,6 @@ echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m***This will take a while - Hardware Dependent***\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
-sleep 10
 cd monero && git submodule init && git submodule update
 git checkout $RELEASE
 git submodule sync && git submodule update
@@ -165,7 +158,6 @@ then
 
 ##End debug log
 echo "Update Complete" 2>&1 | tee -a /home/nanode/debug.log
-sleep 5
 echo "####################" 2>&1 | tee -a /home/nanode/debug.log
 echo "End setup-update-monero.sh script $(date)" 2>&1 | tee -a /home/nanode/debug.log
 echo "####################" 2>&1 | tee -a /home/nanode/debug.log

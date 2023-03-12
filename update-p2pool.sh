@@ -21,17 +21,12 @@ sudo systemctl stop moneroCustomNode.service
 sudo systemctl stop moneroPublicRPCPay.service
 sudo systemctl stop p2pool.service
 echo "Monero node stop command sent to make system resources available for update, allowing 30 seconds for safe shutdown"
-sleep "10"
 echo "Update starts in 20 seconds"
-sleep "10"
 echo "Update starts in 10 seconds"
-sleep "5"
 echo "Update starts in 5 seconds"
-sleep "5"
 echo -e "\e[32mDelete old version\e[0m"
 rm -rf /home/nanode/p2pool/
 echo -e "\e[32mSuccess\e[0m"
-sleep "2"
 echo -e "\e[32mBuilding new P2Pool\e[0m"
 ##Install P2Pool
 git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/nanode/debug.log
@@ -41,7 +36,6 @@ mkdir build && cd build
 cmake .. 2>&1 | tee -a /home/nanode/debug.log
 make -j2 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mSuccess\e[0m"
-sleep 3
 cd
 #Update system reference Explorer version number version number
 chmod 755 /home/nanode/p2pool-new-ver.sh
@@ -107,7 +101,6 @@ fi
 
 	##End debug log
 	echo "Update Script Complete" 2>&1 | tee -a /home/nanode/debug.log
-	sleep 5
 	echo "####################" 2>&1 | tee -a /home/nanode/debug.log
 	echo "End setup-update-p2pool.sh script $(date)" 2>&1 | tee -a /home/nanode/debug.log
 	echo "####################" 2>&1 | tee -a /home/nanode/debug.log

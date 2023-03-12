@@ -19,21 +19,17 @@ sudo adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabl
 #Set nanode password 'Nanode'
 echo "nanode:Nanode" | sudo chpasswd
 echo -e "\e[32mnanode password changed to 'Nanode'\e[0m"
-sleep 3
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
-sleep 3
 wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/sudoers
 sudo chmod 0440 ~/sudoers
 sudo chown root ~/sudoers
 sudo mv ~/sudoers /etc/sudoers
 echo -e "\e[32mGlobal permissions changed\e[0m"
-sleep 3
 
 ##Change system hostname to Nanode
 echo -e "\e[32mChanging system hostname to 'Nanode'\e[0m"
-sleep 3
 echo 'Nanode' | sudo tee /etc/hostname
 #sudo sed -i '6d' /etc/hosts
 echo '127.0.0.1       Nanode' | sudo tee -a /etc/hosts
@@ -41,7 +37,6 @@ sudo hostname Nanode
 
 ##Disable IPv6 (confuses Monero start script if IPv6 is present)
 echo -e "\e[32mDisable IPv6\e[0m"
-sleep 3
 echo 'net.ipv6.conf.all.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.default.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
@@ -52,11 +47,9 @@ echo -e "\e[32mCreate Debug log\e[0m"
 sudo touch /home/nanode/debug.log
 sudo chown nanode /home/nanode/debug.log
 sudo chmod 777 /home/nanode/debug.log
-sleep 1
 
 ##Update and Upgrade system
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
-sleep 3
 sudo apt-get update 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /home/nanode/debug.log
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a /home/nanode/debug.log
@@ -67,7 +60,6 @@ sudo apt-get autoremove -y 2>&1 | tee -a /home/nanode/debug.log
 
 #Download stage 2 Install script
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
-sleep 3
 wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/ubuntu-install-continue.sh
 sudo mv ~/ubuntu-install-continue.sh /home/nanode/
 sudo chown nanode /home/nanode/ubuntu-install-continue.sh
