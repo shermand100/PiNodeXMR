@@ -15,7 +15,6 @@ if (whiptail --title "Nanode Ubuntu Installer" --yesno "To install Nanode using 
 
 whiptail --title "Nanode Ubuntu Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds.\n\nOnce complete your Username will be 'nanode' with Password 'Nanode'" 12 78
 
-
 ##Create new user 'nanode'
 sudo adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 
@@ -53,7 +52,7 @@ sudo chown nanode "$DEBUG_LOG"
 sudo chmod 777 "$DEBUG_LOG"
 
 ##Update and Upgrade system
-showtext "Receiving and applying Ubuntu updates to latest versions"
+showtext "Receiving and applying Ubuntu updates to latest version"
 {
 sudo apt-get update
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
