@@ -55,7 +55,8 @@ showtext "Global permissions changed"
 
 ##Clone Nanode to device from git
 showtext "Clone Nanode to device from git"
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
+# Update Link
+#git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
 
 #Backup User values
 showtext "Creating backups of any settings you have customised
