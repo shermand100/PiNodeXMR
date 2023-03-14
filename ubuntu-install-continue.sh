@@ -20,12 +20,12 @@ touch "$DEBUG_LOG"
 	####################"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
-whiptail --title "Nanode Continue Ubuntu LTS Installer" --msgbox "Your Nanode is taking shape...\n\nThis next part will take ~80 minutes installing Monero and Nanode \n\nSelect ok to continue setup" 16 60
+whiptail --title "Nanode continues Ubuntu LTS Installer" --msgbox "Your Nanode is taking shape...\n\nThis next part will take ~80 minutes installing Monero and Nanode \n\nSelect ok to continue setup" 16 60
 ###Continue as 'nanode'
 
 ###Continue as 'nanode'
 cd || exit 1
-showtext "Lock old user 'pi'"
+#showtext "Lock old user 'pi'"
 sudo passwd --lock pi
 showtext "User 'pi' Locked"
 showtext "Lock old user 'ubuntu'"
@@ -33,7 +33,7 @@ sudo passwd --lock ubuntu
 showtext "User 'ubuntu' Locked"
 
 ##Update and Upgrade system (This step repeated due to importance and maybe someone using this installer sript out-of-sequence)
-showtext "Receiving and applying Ubuntu updates to latest versions"
+showtext "Receiving and applying Ubuntu updates to the latest version"
 {
 	sudo apt-get update
 	sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
@@ -73,7 +73,8 @@ sudo apt-get install exfat-fuse exfat-utils -y
 
 ##Clone Nanode to device from git
 showtext "Downloading Nanode files"
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
+# Update Link
+#git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
 
 
 ##Configure ssh security. Allows only user 'nanode'. Also 'root' login disabled via ssh, restarts config to make changes
