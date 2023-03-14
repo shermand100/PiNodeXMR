@@ -22,20 +22,7 @@ chmod 755 /home/nanode/release.sh
 #shellcheck source=home/nanode/release.sh
 . /home/nanode/release.sh
 
-	##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
-if (whiptail --title "Nanode Monero Updater" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
-	showtext "Swap file unchanged"
-		else
-			{
-				sudo fallocate -l 2G /swapfile
-				sudo chmod 600 /swapfile
-				sudo mkswap /swapfile
-				sudo swapon /swapfile
-			} 2>&1 | tee -a "$DEBUG_LOG"
-			showtext "Swap file of 2GB Configured and enabled"
-			free -h
 fi
-
 
 		#ubuntu /dev/null odd requiremnt to set permissions
 		sudo chmod 666 /dev/null
@@ -54,9 +41,9 @@ fi
 		rm -rf /home/nanode/monero/
 
 # ********************************************
-# ******START OF MONERO SOURCE BULD******
+# ******START OF MONERO SOURCE BUILD******
 # ********************************************
-log "manual build of gtest for --- Monero"
+log "manual build of gtest for Monero"
 {
 sudo apt-get install libgtest-dev -y
 cd /usr/src/gtest || exit 1
@@ -64,13 +51,13 @@ sudo cmake .
 sudo make
 sudo mv lib/libg* /usr/lib/
 cd || exit 1
-log "Check dependencies installed for --- Monero"
+log "Check dependencies installed for Monero"
 sudo apt-get update
 sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 
-showtext "Downloading Monero "
+showtext "Downloading Monero"
 
 git clone --recursive https://github.com/monero-project/monero
 showtext "Building Monero
@@ -100,17 +87,15 @@ rm -R ~/temp
 		#cleanup old version number file
 		rm /home/nanode/xmr-new-ver.sh
 
-
-
 #Define Restart Monero Node
 		# Key - BOOT_STATUS
 		# 2 = idle
-		# 3 || 5 = private node || mining node
+		# 3 = private node
 		# 4 = tor
-		# 6 = Public RPC pay
-		# 7 = Public free
-		# 8 = I2P
-		# 9 tor public
+		# 5 = Public RPC pay
+		# 6 = Public free
+		# 7 = I2P
+		# 8 = tor public
 	if [ $BOOT_STATUS -eq 2 ]
 then
 		whiptail --title "Monero Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60
@@ -122,19 +107,16 @@ else
 		4)
 			sudo systemctl start moneroTorPrivate.service
 			;;
-		# 5) TODO apparently not needed
-		# 	sudo systemctl start moneroMiningNode.service
-		# 	;;
-		6)
+		5)
 			sudo systemctl start moneroPublicRPCPay.service
 			;;
-		7)
+		6)
 			sudo systemctl start moneroPublicFree.service
 			;;
-		8)
+		7)
 			sudo systemctl start moneroI2PPrivate.service
 			;;
-		9)
+		8)
 			sudo systemctl start moneroTorPublic.service
 			;;
 		*)
