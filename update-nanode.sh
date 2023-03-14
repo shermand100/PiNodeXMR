@@ -1,51 +1,49 @@
 #!/bin/bash
 #Create/ammend debug file for handling update errors:
-touch /home/nanode/debug.log
+. ./common.sh
+touch "$DEBUG_LOG"
 echo "
 ####################
-" >>/home/nanode/debug.log
-echo "Start update-nanode.sh script $(date)" >>/home/nanode/debug.log
-echo "
+Start update-nanode.sh script $(date)
 ####################
-" >>/home/nanode/debug.log
+" | tee -a "$DEBUG_LOG"
 
 #Import Variable: htmlPasswordRequired
+#shellcheck source=home/nanode/variables/htmlPasswordRequired.sh
 . /home/nanode/variables/htmlPasswordRequired.sh
-echo "HMTL Password Required set to: $HTMLPASSWORDREQUIRED" >>/home/nanode/debug.log
+log "HMTL Password Required set to: $HTMLPASSWORDREQUIRED"
 
 ##Update and Upgrade systemhtac
-echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
-sudo apt-get update 2>&1 | tee -a /home/nanode/debug.log
-sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /home/nanode/debug.log
-sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a /home/nanode/debug.log
+showtext "Receiving and applying Ubuntu updates to latest versions"
+{
+sudo apt-get update
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
+sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade
+sudo apt-get autoremove -y
+} 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Auto remove any obsolete packages
-sudo apt-get autoremove -y 2>&1 | tee -a /home/nanode/debug.log
 
 ##Installing dependencies for --- Web Interface
-echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
-sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a /home/nanode/debug.log
+showtext "Installing dependencies for --- Web Interface"
+sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Installing dependencies for --- Monero
-	echo "Installing dependencies for --- Monero" 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mInstalling dependencies for --- Monero\e[0m"
-sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a /home/nanode/debug.log
+showtext "Installing dependencies for --- Monero"
+sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Installing dependencies for --- P2Pool
-	echo "Installing dependencies for --- P2Pool" 2>&1 | tee -a /home/nanode/debug.log
+showtext "Installing dependencies for --- P2Pool"
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
-	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
-sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev -y 2>&1 | tee -a /home/nanode/debug.log
-sudo apt-get install exfat-fuse -y 2>&1 | tee -a /home/nanode/debug.log
+showtext "Checking all dependencies are installed for --- Miscellaneous"
+sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev exfat-fuse -y 2>&1 | tee -a "$DEBUG_LOG"
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
-		#Download update files
+#Download update files
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add  new permissions to www-data user for interface buttons)
-echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
+showtext "Download and replace /etc/sudoers file"
 wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/sudoers -O /home/nanode/sudoers
 sudo chmod 0440 /home/nanode/sudoers
 sudo chown root /home/nanode/sudoers
@@ -53,249 +51,249 @@ sudo mv /home/nanode/sudoers /etc/sudoers
 
 #ubuntu /dev/null odd requirment to set permissions
 sudo chmod 777 /dev/null
-echo -e "\e[32mGlobal permissions changed\e[0m"
+showtext "Global permissions changed"
 
 ##Clone Nanode to device from git
-	echo "Clone Nanode to device from git" 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mDownloading Nanode files\e[0m"
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a /home/nanode/debug.log
+showtext "Clone Nanode to device from git"
+git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
 
-				#Backup User values
-						echo "Backup variables" >>/home/nanode/debug.log
-					echo -e "\e[32mCreating backups of any settings you have customised\e[0m"
-					echo -e "\e[32m*****\e[0m"
-					echo -e "\e[32mIf a setting did not exist on your previous version you may see some errors here for missing files, these can safely be ignored\e[0m"
-					echo -e "\e[32m*****\e[0m"
-					#home dir
-					mv /home/nanode/bootstatus.sh /home/nanode/bootstatus_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver.sh /home/nanode/current-ver_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-exp.sh /home/nanode/current-ver-exp_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-pi.sh /home/nanode/current-ver-pi_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-p2pool.sh /home/nanode/current-ver-p2pool_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-lws.sh /home/nanode/current-ver-lws_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					#variables dir
-					mv /home/nanode/variables/credits.sh /home/nanode/variables/credits_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/difficulty.sh /home/nanode/variables/difficulty_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/i2p-address.sh /home/nanode/variables/i2p-address_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/i2p-port.sh /home/nanode/variables/i2p-port_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/i2p-tx-proxy-port.sh /home/nanode/variables/i2p-tx-proxy-port_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/in-peers.sh /home/nanode/variables/in-peers_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/limit-rate-down.sh /home/nanode/variables/limit-rate-down_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/limit-rate-up.sh /home/nanode/variables/limit-rate-up_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/mining-address.sh /home/nanode/variables/mining-address_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/mining-intensity.sh /home/nanode/variables/mining-intensity_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-port.sh /home/nanode/variables/monero-port_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-port-public-free.sh /home/nanode/variables/monero-port-public-free_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-rpcpay-port.sh /home/nanode/variables/monero-rpcpay-port_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-stats-port.sh /home/nanode/variables/monero-stats-port_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/out-peers.sh /home/nanode/variables/out-peers_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/payment-address.sh /home/nanode/variables/payment-address_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/pruneStatus.sh /home/nanode/variables/pruneStatus_status.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/RPCp.sh /home/nanode/variables/RPCp_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/RPCu.sh /home/nanode/variables/RPCu_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/htmlPasswordRequired.sh /home/nanode/variables/htmlPasswordRequired_retain.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mUser-set configuration saved\e[0m"
+#Backup User values
+showtext "Creating backups of any settings you have customised
+*****
+If a setting did not exist on your previous version you may see some errors here for missing files, these can safely be ignored
+*****"
+#home dir
+mv /home/nanode/bootstatus.sh /home/nanode/bootstatus_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver.sh /home/nanode/current-ver_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-exp.sh /home/nanode/current-ver-exp_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-pi.sh /home/nanode/current-ver-pi_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-p2pool.sh /home/nanode/current-ver-p2pool_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-lws.sh /home/nanode/current-ver-lws_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+#variables dir
+mv /home/nanode/variables/credits.sh /home/nanode/variables/credits_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/difficulty.sh /home/nanode/variables/difficulty_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/i2p-address.sh /home/nanode/variables/i2p-address_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/i2p-port.sh /home/nanode/variables/i2p-port_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/i2p-tx-proxy-port.sh /home/nanode/variables/i2p-tx-proxy-port_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/in-peers.sh /home/nanode/variables/in-peers_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/limit-rate-down.sh /home/nanode/variables/limit-rate-down_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/limit-rate-up.sh /home/nanode/variables/limit-rate-up_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/mining-address.sh /home/nanode/variables/mining-address_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/mining-intensity.sh /home/nanode/variables/mining-intensity_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-port.sh /home/nanode/variables/monero-port_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-port-public-free.sh /home/nanode/variables/monero-port-public-free_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-rpcpay-port.sh /home/nanode/variables/monero-rpcpay-port_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-stats-port.sh /home/nanode/variables/monero-stats-port_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/out-peers.sh /home/nanode/variables/out-peers_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/payment-address.sh /home/nanode/variables/payment-address_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/pruneStatus.sh /home/nanode/variables/pruneStatus_status.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/RPCp.sh /home/nanode/variables/RPCp_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/RPCu.sh /home/nanode/variables/RPCu_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/htmlPasswordRequired.sh /home/nanode/variables/htmlPasswordRequired_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+showtext "User-set configuration saved"
 
 
-		#Install Update
-			echo -e "\e[32mInstalling update\e[0m"
-				##Add Nanode systemd services
-						echo "Update services" >>/home/nanode/debug.log
-					echo -e "\e[32mAdd Nanode systemd services\e[0m"
-					sudo mv /home/nanode/Nanode/etc/systemd/system/*.service /etc/systemd/system/ 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo chown root /etc/systemd/system/*.service 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo systemctl daemon-reload 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo systemctl start moneroStatus.service 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo systemctl enable moneroStatus.service 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
+#Install Update
+showtext "Installing update"
+##Add Nanode systemd services
+showtext "Add Nanode systemd services"
+{
+	sudo mv /home/nanode/Nanode/etc/systemd/system/*.service /etc/systemd/system/
+	sudo chmod 644 /etc/systemd/system/*.service
+	sudo chown root /etc/systemd/system/*.service
+	sudo systemctl daemon-reload
+	sudo systemctl start moneroStatus.service
+	sudo systemctl enable moneroStatus.service
+} 2>&1 | tee -a "$DEBUG_LOG"
+showtext "Success"
 
-				##Updating Nanode scripts in home directory
-						echo "Update Nanode scripts" >>/home/nanode/debug.log
-					echo -e "\e[32mUpdating Nanode scripts in home directory\e[0m"
-					cp -afr /home/nanode/Nanode/home/nanode/* /home/nanode/ 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/Nanode/home/nanode/.profile /home/nanode/ 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo chmod -R 777 /home/nanode/* 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
+##Updating Nanode scripts in home directory
+showtext "Updating Nanode scripts in home directory"
+{
+cp -afr /home/nanode/Nanode/home/nanode/* /home/nanode/
+mv /home/nanode/Nanode/home/nanode/.profile /home/nanode/
+sudo chmod -R 777 /home/nanode/*
+} 2>&1 | tee -a "$DEBUG_LOG"
+showtext "Success"
 
-				#Configure apache server for access to monero log file
-					echo -e "\e[32mConfigure apache server for access to monero log file\e[0m"
-					sudo mv /home/nanode/Nanode/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo /etc/init.d/apache2 restart 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
-				##Setup local hostname
-						echo "Update hostname (avahi)" >>/home/nanode/debug.log
-					echo -e "\e[32mEnable local hostname nanode.local\e[0m"
-					sudo mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo /etc/init.d/avahi-daemon restart 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
+#Configure apache server for access to monero log file
+showtext "Configure apache server for access to monero log file"
+{
+sudo mv /home/nanode/Nanode/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+sudo chown root /etc/apache2/sites-enabled/000-default.conf
+sudo /etc/init.d/apache2 restart
+} 2>&1 | tee -a "$DEBUG_LOG"
 
-				##Update html template
-						echo "Update html template" >>/home/nanode/debug.log
-					echo -e "\e[32mConfiguring Web-UI template with Nanode pages\e[0m"
-					#First move hidden file specifically .htaccess file then entire directory
-					sudo mv /home/nanode/Nanode/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					rm -R /var/www/html/*.php
-					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
-					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					#Overwrite /var/www/html with updated contents
-					sudo rsync -a /home/nanode/Nanode/HTML/* /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/nanode/debug.log
-					#Restore User variables
-					mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a /home/nanode/debug.log >&2)
-					#Full-mode html update complete
-					fi
+showtext "Success"
+##Setup local hostname
+showtext "Enable local hostname nanode.local"
+sudo mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a "$DEBUG_LOG"
+sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a "$DEBUG_LOG"
+showtext "Success"
 
-					#Set correct config for if HTML (Web UI) Password is required.
+##Update html template
+showtext "Configuring Web-UI template with Nanode pages"
+#First move hidden file specifically .htaccess file then entire directory
+sudo mv /home/nanode/Nanode/HTML/.htaccess /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+rm -R /var/www/html/*.php
+#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
+mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#Overwrite /var/www/html with updated contents
+sudo rsync -a /home/nanode/Nanode/HTML/* /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+sudo chown www-data -R /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+#Restore User variables
+mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#Full-mode html update complete
 
-					if [ "$HTMLPASSWORDREQUIRED" = TRUE ]
-					then
-					sudo cp /home/nanode/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
-					sudo chown root /etc/apache2/sites-enabled/000-default.conf
-					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
-					sudo systemctl restart apache2
-					fi
+#Set correct config for if HTML (Web UI) Password is required.
 
-					echo -e "\e[32mSuccess\e[0m"
+if [ "$HTMLPASSWORDREQUIRED" = TRUE ]
+then
+sudo cp /home/nanode/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
+sudo chown root /etc/apache2/sites-enabled/000-default.conf
+sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+sudo systemctl restart apache2
+fi
 
-				#Restore User Values
-						echo "Restore user variables" >>/home/nanode/debug.log
-					echo -e "\e[32mRestoring your personal settings\e[0m"
-					#home dir
-					mv /home/nanode/bootstatus_retain.sh /home/nanode/bootstatus.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver_retain.sh /home/nanode/current-ver.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-exp_retain.sh /home/nanode/current-ver-exp.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-pi_retain.sh /home/nanode/current-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-p2pool_retain.sh /home/nanode/current-ver-p2pool.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/current-ver-lws_retain.sh /home/nanode/current-ver-lws.sh 2> >(tee -a /home/nanode/debug.log >&2)
+showtext "Success"
 
-					#variables dir
-					mv /home/nanode/variables/difficulty_retain.sh /home/nanode/variables/difficulty.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/credits_retain.sh /home/nanode/variables/credits.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/i2p-address_retain.sh /home/nanode/variables/i2p-address.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/i2p-port_retain.sh /home/nanode/variables/i2p-port.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/i2p-tx-proxy-port_retain.sh /home/nanode/variables/i2p-tx-proxy-port.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/in-peers_retain.sh /home/nanode/variables/in-peers.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/limit-rate-down_retain.sh /home/nanode/variables/limit-rate-down.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/limit-rate-up_retain.sh /home/nanode/variables/limit-rate-up.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/mining-address_retain.sh /home/nanode/variables/mining-address.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/mining-intensity_retain.sh /home/nanode/variables/mining-intensity.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-port_retain.sh /home/nanode/variables/monero-port.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-port-public-free_retain.sh /home/nanode/variables/monero-port-public-free.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/out-peers_retain.sh /home/nanode/variables/out-peers.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/payment-address_retain.sh /home/nanode/variables/payment-address.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/pruneStatus_status.sh /home/nanode/variables/pruneStatus.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/RPCp_retain.sh /home/nanode/variables/RPCp.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/RPCu_retain.sh /home/nanode/variables/RPCu.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-rpcpay-port_retain.sh /home/nanode/variables/monero-rpcpay-port.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/monero-stats-port_retain.sh /home/nanode/variables/monero-stats-port.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					mv /home/nanode/variables/htmlPasswordRequired_retain.sh /home/nanode/variables/htmlPasswordRequired.sh 2> >(tee -a /home/nanode/debug.log >&2)
+#Restore User Values
+showtext "Restoring your personal settings"
+#home dir
+mv /home/nanode/bootstatus_retain.sh /home/nanode/bootstatus.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver_retain.sh /home/nanode/current-ver.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-exp_retain.sh /home/nanode/current-ver-exp.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-pi_retain.sh /home/nanode/current-ver-pi.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-p2pool_retain.sh /home/nanode/current-ver-p2pool.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/current-ver-lws_retain.sh /home/nanode/current-ver-lws.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 
-					echo -e "\e[32mUser configuration restored\e[0m"
+#variables dir
+mv /home/nanode/variables/difficulty_retain.sh /home/nanode/variables/difficulty.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/credits_retain.sh /home/nanode/variables/credits.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/i2p-address_retain.sh /home/nanode/variables/i2p-address.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/i2p-port_retain.sh /home/nanode/variables/i2p-port.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/i2p-tx-proxy-port_retain.sh /home/nanode/variables/i2p-tx-proxy-port.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/in-peers_retain.sh /home/nanode/variables/in-peers.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/limit-rate-down_retain.sh /home/nanode/variables/limit-rate-down.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/limit-rate-up_retain.sh /home/nanode/variables/limit-rate-up.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/mining-address_retain.sh /home/nanode/variables/mining-address.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/mining-intensity_retain.sh /home/nanode/variables/mining-intensity.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-port_retain.sh /home/nanode/variables/monero-port.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-port-public-free_retain.sh /home/nanode/variables/monero-port-public-free.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/out-peers_retain.sh /home/nanode/variables/out-peers.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/payment-address_retain.sh /home/nanode/variables/payment-address.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/pruneStatus_status.sh /home/nanode/variables/pruneStatus.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/RPCp_retain.sh /home/nanode/variables/RPCp.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/RPCu_retain.sh /home/nanode/variables/RPCu.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-rpcpay-port_retain.sh /home/nanode/variables/monero-rpcpay-port.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/monero-stats-port_retain.sh /home/nanode/variables/monero-stats-port.sh 2> >(tee -a "$DEBUG_LOG" >&2)
+mv /home/nanode/variables/htmlPasswordRequired_retain.sh /home/nanode/variables/htmlPasswordRequired.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 
-				##Set Swappiness lower
-						echo "Set swappiness" >>/home/nanode/debug.log
-					echo -e "\e[32mDecreasing swappiness\e[0m"
-					sudo sysctl vm.swappiness=10 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
-				##Update crontab
-						echo "Update crontabs" >>/home/nanode/debug.log
-					echo -e "\e[32mUpdating crontab tasks\e[0m"
-					crontab /home/nanode/Nanode/var/spool/cron/crontabs/nanode 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
+showtext "User configuration restored"
 
-				#Attempt update of tor hidden service settings
-						echo "Update torrc settings - if installed" >>/home/nanode/debug.log
-					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
-					sudo wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/tor/torrc -O /etc/tor/torrc 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mApplying Settings...\e[0m"
-					sudo chmod 644 /etc/tor/torrc 2> >(tee -a /home/nanode/debug.log >&2)
-					sudo chown root /etc/tor/torrc 2> >(tee -a /home/nanode/debug.log >&2)
-				#Insert user specific local IP for correct hiddenservice redirect (line 73 overwrite)
-					sudo sed -i "73s/.*/HiddenServicePort 18081 $(hostname -I | awk '{print $1}'):18081/" /etc/tor/torrc
-					echo -e "\e[32mRestarting tor service...\e[0m"
-					sudo service tor restart 2> >(tee -a /home/nanode/debug.log >&2)
+##Set Swappiness lower
+showtext "Decreasing swappiness"
+sudo sysctl vm.swappiness=10 2> >(tee -a "$DEBUG_LOG" >&2)
+showtext "Success"
+##Update crontab
+showtext "Updating crontab tasks"
+crontab /home/nanode/Nanode/var/spool/cron/crontabs/nanode 2> >(tee -a "$DEBUG_LOG" >&2)
+showtext "Success"
 
-				#Restart statusOutputs script service for changes to take effect
-				sudo systemctl restart moneroStatus.service
+#Attempt update of tor hidden service settings
+{
+	if [ -f /usr/bin/tor ]; then #Crude way of detecting tor installed
+		showtext "Update of tor hidden service settings"
+		sudo wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/tor/torrc -O /etc/tor/torrc
+		showtext "Applying Settings..."
+		sudo chmod 644 /etc/tor/torrc
+		sudo chown root /etc/tor/torrc
+		#Insert user specific local IP for correct hiddenservice redirect (line 73 overwrite)
+		sudo sed -i "73s/.*/HiddenServicePort 18081 $(hostname -I | awk '{print $1}'):18081/" /etc/tor/torrc
+		showtext "Restarting tor service..."
+		sudo service tor restart
+	fi
+} 2>&1 | tee -a "$DEBUG_LOG"
+
+#Restart statusOutputs script service for changes to take effect
+sudo systemctl restart moneroStatus.service
 
 
-				##Check-Install log.io (Real-time service monitoring)
-				#Establish Device IP
-				. ~/variables/deviceIp.sh
-				echo -e "\e[32mInstalling log.io\e[0m" 2>&1 | tee -a /home/nanode/debug.log
-				sudo apt-get install nodejs npm -y 2>&1 | tee -a /home/nanode/debug.log
-				sudo npm install -g log.io 2>&1 | tee -a /home/nanode/debug.log
-				sudo npm install -g log.io-file-input 2>&1 | tee -a /home/nanode/debug.log
-				mkdir -p ~/.log.io/inputs/ 2>&1 | tee -a /home/nanode/debug.log
-				mv /home/nanode/Nanode/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/nanode/debug.log
-				mv /home/nanode/Nanode/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/nanode/debug.log
-				sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json 2>&1 | tee -a /home/nanode/debug.log
-				sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json 2>&1 | tee -a /home/nanode/debug.log
-				sudo systemctl start log-io-server.service 2>&1 | tee -a /home/nanode/debug.log
-				sudo systemctl start log-io-file.service 2>&1 | tee -a /home/nanode/debug.log
-				sudo systemctl enable log-io-server.service 2>&1 | tee -a /home/nanode/debug.log
-				sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/nanode/debug.log
+##Check-Install log.io (Real-time service monitoring)
+#Establish Device IP
+#shellcheck source=home/nanode/variables/deviceIp.sh
+. ~/variables/deviceIp.sh
+showtext "Installing log.io"
+{
+	sudo apt-get install nodejs npm -y
+	sudo npm install -g log.io
+	sudo npm install -g log.io-file-input
+	mkdir -p ~/.log.io/inputs/
+	mv /home/nanode/Nanode/.log.io/inputs/file.json ~/.log.io/inputs/file.json
+	mv /home/nanode/Nanode/.log.io/server.json ~/.log.io/server.json
+	sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json
+	sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json
+	sudo systemctl enable --now log-io-server.service
+	sudo systemctl enable --now log-io-file.service
+} 2>&1 | tee -a "$DEBUG_LOG"
 
-				#Update system version number to new one installed
-				echo "Update Nanode version number" >>/home/nanode/debug.log
-					wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/new-ver-pi.sh -O /home/nanode/new-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					chmod 755 /home/nanode/new-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					. /home/nanode/new-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mUpdate system version number\e[0m"
-					echo "#!/bin/bash
-CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/nanode/current-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
-				#ubuntu /dev/null odd requiremnt to set permissions
-				sudo chmod 777 /dev/null
+#Update system version number to new one installed
+{
+	#FIXME: change url
+	wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/new-ver-pi.sh -O /home/nanode/new-ver-pi.sh
+	chmod 755 /home/nanode/new-ver-pi.sh
+	. /home/nanode/new-ver-pi.sh
+	showtext "Update system version number"
+	echo "#!/bin/bash
+	CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/nanode/current-ver-pi.sh
+	showtext "Success"
+	#ubuntu /dev/null odd requiremnt to set permissions
+	sudo chmod 777 /dev/null
+} 2>&1 | tee -a "$DEBUG_LOG"
 
-				#Clean up files
-				echo "Cleanup leftover files" >>/home/nanode/debug.log
-					echo -e "\e[32mCleanup leftover directories\e[0m"
+#Clean up files
+showtext "Cleanup leftover directories"
 
-					sudo rm -r /home/nanode/Nanode/ 2> >(tee -a /home/nanode/debug.log >&2)
-					rm /home/nanode/new-ver-pi.sh 2> >(tee -a /home/nanode/debug.log >&2)
-					echo -e "\e[32mSuccess\e[0m"
+sudo rm -r "/home/nanode/Nanode/"
+rm "/home/nanode/new-ver-pi.sh"
+showtext "Success"
 
-				##End debug log
-echo "
+##End debug log
+showtext "
 ####################
-" >>/home/nanode/debug.log
-echo "End update-nanode.sh script $(date)" >>/home/nanode/debug.log
-echo "
+End update-nanode.sh script $(date)
 ####################
-" >>/home/nanode/debug.log
+"
 
-			whiptail --title "Nanode Updater" --msgbox "\n\nYour Nanode has been updated to version ${NEW_VERSION_PI}" 12 78
+whiptail --title "Nanode Updater" --msgbox "\n\nYour Nanode has been updated to version ${NEW_VERSION_PI}" 12 78
 
 
 #Update complete - Return to menu
