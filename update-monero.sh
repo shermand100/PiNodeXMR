@@ -12,30 +12,31 @@ Start setup-update-monero.sh script $(date)
 
 #Download variable for current monero release version
 #FIXME: change url
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
+# wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
+RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+
 #Permission Setting
-chmod 755 /home/nanode/release.sh
+# chmod 755 /home/nanode/release.sh
 #Load boot status - condition the node was last run
-#shellcheck source=home/nanode/bootstatus.sh
-. /home/nanode/bootstatus.sh
+# . /home/nanode/bootstatus.sh
+BOOT_STATUS="$(getvar boot_status)"
 #Load Variables
 #shellcheck source=home/nanode/release.sh
-. /home/nanode/release.sh
+# . /home/nanode/release.sh
 
-fi
 
 		#ubuntu /dev/null odd requiremnt to set permissions
 		sudo chmod 666 /dev/null
 
 		#Stop Node to make system resources available.
-		sudo systemctl stop blockExplorer.service \
-			moneroPrivate.service \
-			moneroTorPrivate.service \
-			moneroTorPublic.service \
-			moneroPublicFree.service \
-			moneroI2PPrivate.service \
-			moneroCustomNode.service \
-			moneroPublicRPCPay.service
+		sudo systemctl stop blockExplorer.service
+		sudo systemctl stop moneroPrivate.service
+		sudo systemctl stop moneroTorPrivate.service
+		sudo systemctl stop moneroTorPublic.service
+		sudo systemctl stop moneroPublicFree.service
+		sudo systemctl stop moneroI2PPrivate.service
+		sudo systemctl stop moneroCustomNode.service
+		sudo systemctl stop moneroPublicRPCPay.service
 		echo "Monero node stop command sent, allowing 30 seconds for safe shutdown"
 		echo "Deleting Old Version"
 		rm -rf /home/nanode/monero/
@@ -45,15 +46,15 @@ fi
 # ********************************************
 log "manual build of gtest for Monero"
 {
-sudo apt-get install libgtest-dev -y
-cd /usr/src/gtest || exit 1
-sudo cmake .
-sudo make
-sudo mv lib/libg* /usr/lib/
-cd || exit 1
-log "Check dependencies installed for Monero"
-sudo apt-get update
-sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y
+	sudo apt-get install libgtest-dev -y
+	cd /usr/src/gtest || exit 1
+	sudo cmake .
+	sudo make
+	sudo mv lib/libg* /usr/lib/
+	cd || exit 1
+	log "Check dependencies installed for --- Monero"
+	sudo apt-get update
+	sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 
@@ -67,7 +68,7 @@ showtext "Building Monero
 ****************************************************
 ****************************************************"
 cd monero && git submodule init && git submodule update
-git checkout $RELEASE
+git checkout "$RELEASE"
 git submodule sync && git submodule update
 USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
 cd || exit 1
@@ -98,7 +99,7 @@ rm -R ~/temp
 		# 8 = tor public
 	if [ $BOOT_STATUS -eq 2 ]
 then
-		whiptail --title "Monero Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60
+	whiptail --title "Monero Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60
 else
 	case $BOOT_STATUS in
 		3)
