@@ -55,7 +55,7 @@ i2prouter restart
 
 sleep 5
 	
-whiptail --title "PiNode-XMR I2P" --msgbox "I2P server has been installed and started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78
+whiptail --title "Nanode I2P" --msgbox "I2P server has been installed and started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78
 
 
 
