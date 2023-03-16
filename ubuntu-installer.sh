@@ -63,7 +63,7 @@ sudo apt-get autoremove -y 2>&1 | tee -a "$DEBUG_LOG"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 #Download stage 2 Install script
-showtext "Downloading stage 2 Installer script"
+showtext "Downloading Stage 2 Installer script"
 #FIXME: change url
 wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-install-continue.sh
 sudo mv ~/ubuntu-install-continue.sh /home/nanode/
