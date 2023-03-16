@@ -17,7 +17,7 @@ LINE9=$(lsblk --nodeps | sed -n 10p)
 LINE10=$(lsblk --nodeps | sed -n 11p)
 #whiptail --title "PiNode-XMR Storage" --msgbox "$LSBLK" 10 78
 
-	CHOICE=$(whiptail --backtitle "Storage Setup" --title "PiNode-XMR Storage" --menu "\nSelect device for blockchain storage\n" 20 80 10 \
+	CHOICE=$(whiptail --backtitle "Storage Setup" --title "Nanode Storage" --menu "\nSelect device for blockchain storage\n" 20 80 10 \
 	"__" "$TITLE" \
 	"1)" "$LINE1" \
     "2)" "$LINE2" \
