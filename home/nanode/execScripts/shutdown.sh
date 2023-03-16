@@ -5,7 +5,6 @@
 		sudo systemctl stop monero-lws.service
 		sudo systemctl stop moneroCustomNode.service
 		sudo systemctl stop moneroI2PPrivate.service
-		sudo systemctl stop moneroMiningNode.service
 		sudo systemctl stop moneroPrivate.service
 		sudo systemctl stop moneroPublicFree.service
 		sudo systemctl stop moneroPublicRPCPay.service		
