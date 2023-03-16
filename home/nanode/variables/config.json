@@ -1,0 +1,27 @@
+{
+  "config": {
+    "add_i2p_peer": "dsc7fyzzultm7y6pmx2avu6tze3usc7d27nkbzs5qwuujplxcmzq.b32.i2p",
+    "add_tor_peer": "nitbdip72kdg5z6g.onion:28083",
+    "credits": "250",
+    "difficulty": "1000",
+    "htmlpasswordrequired": "FALSE",
+    "i2p_address": "",
+    "i2p_port": "",
+    "i2p_tx_proxy_port": "",
+    "in_peers": "-1",
+    "limit_rate_down": "-1",
+    "limit_rate_up": "200",
+    "mining_address": "",
+    "mining_intensity": "50",
+    "monero_block_sync_size": "10",
+    "monero_public_port": "18089",
+    "monero_port": "18081",
+    "monero_rpcpay_port": "18083",
+    "monero_stats_port": "18083",
+    "out_peers": "-1",
+    "payment_address": "",
+    "prune_status": "0",
+    "rpcp": "password",
+    "rpcu": "PiNodeXMR"
+  }
+}
