@@ -11,10 +11,10 @@ Start update-nanode.sh script $(date)
 #Import Variable: htmlPasswordRequired
 #shellcheck source=home/nanode/variables/htmlPasswordRequired.sh
 . /home/nanode/variables/htmlPasswordRequired.sh
-log "HMTL Password Required set to: $HTMLPASSWORDREQUIRED"
+log "HTML Password Required set to: $HTMLPASSWORDREQUIRED"
 
 ##Update and Upgrade systemhtac
-showtext "Receiving and applying Ubuntu updates to latest versions"
+showtext "Receiving and applying Ubuntu updates to the latest version..."
 {
 sudo apt-get update
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
@@ -24,20 +24,20 @@ sudo apt-get autoremove -y
 
 ##Auto remove any obsolete packages
 
-##Installing dependencies for --- Web Interface
-showtext "Installing dependencies for --- Web Interface"
+##Installing dependencies for Web Interface
+showtext "Installing dependencies for Web Interface..."
 sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a "$DEBUG_LOG"
 
-##Installing dependencies for --- Monero
-showtext "Installing dependencies for --- Monero"
+##Installing dependencies for Monero
+showtext "Installing dependencies for Monero..."
 sudo apt-get update && sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a "$DEBUG_LOG"
 
-##Installing dependencies for --- P2Pool
-showtext "Installing dependencies for --- P2Pool"
+##Installing dependencies for P2Pool
+showtext "Installing dependencies for P2Pool..."
 sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
 
-##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
-showtext "Checking all dependencies are installed for --- Miscellaneous"
+##Checking all dependencies are installed for miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+showtext "Checking all other dependencies are installed..."
 sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev exfat-fuse -y 2>&1 | tee -a "$DEBUG_LOG"
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 #Download update files
@@ -55,7 +55,8 @@ showtext "Global permissions changed"
 
 ##Clone Nanode to device from git
 showtext "Clone Nanode to device from git"
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
+# Update Link
+#git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
 
 #Backup User values
 showtext "Creating backups of any settings you have customised

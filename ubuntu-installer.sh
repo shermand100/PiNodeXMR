@@ -15,7 +15,6 @@ if (whiptail --title "Nanode Ubuntu Installer" --yesno "To install Nanode using 
 
 whiptail --title "Nanode Ubuntu Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds.\n\nOnce complete your Username will be 'nanode' with Password 'Nanode'" 12 78
 
-
 ##Create new user 'nanode'
 sudo adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 
@@ -53,7 +52,7 @@ sudo chown nanode "$DEBUG_LOG"
 sudo chmod 777 "$DEBUG_LOG"
 
 ##Update and Upgrade system
-showtext "Receiving and applying Ubuntu updates to latest versions"
+showtext "Receiving and applying Ubuntu updates to latest version"
 {
 sudo apt-get update
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
@@ -64,7 +63,7 @@ sudo apt-get autoremove -y 2>&1 | tee -a "$DEBUG_LOG"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 #Download stage 2 Install script
-showtext "Downloading stage 2 Installer script"
+showtext "Downloading Stage 2 Installer script"
 #FIXME: change url
 wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-install-continue.sh
 sudo mv ~/ubuntu-install-continue.sh /home/nanode/
