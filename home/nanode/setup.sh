@@ -103,7 +103,7 @@
 				
 		"3)")CHOICE3=$(whiptail --backtitle "Welcome" --title "Nanode Settings" --menu "\n\nUpdate Tools" 20 60 10 \
 				"1)" "Update Monero" \
-				"2)" "Update PiNode-XMR" \
+				"2)" "Update Nanode" \
 				"3)" "Update Blockchain Explorer" \
 				"4)" "Update P2Pool" \
 				"5)" "Update Monero-LWS" \
@@ -322,41 +322,32 @@
 
 		"4)")CHOICE4=$(whiptail --backtitle "Welcome" --title "Nanode Settings" --menu "\n\nNode Tools" 20 60 10 \
 				"1)" "Start/Stop Blockchain Explorer" \
-				"2)" "Prune Node" \
-				"3)" "Pop Blocks" \
-				"4)" "Clear Peer List" \
-				"5)" "Monero-LWS Install" \
-				"6)" "Monero-LWS Admin" \
-				"7)" "Generate SSL self-signed certificates" 2>&1 >/dev/tty)
+				"2)" "Pop Blocks" \
+				"3)" "Clear Peer List" \
+				"4)" "Monero-LWS Install" \
+				"5)" "Monero-LWS Admin" \
+				"6)" "Generate SSL self-signed certificates" 2>&1 >/dev/tty)
 				
 				case $CHOICE4 in
 							"1)") . /home/nanode/setupMenuScripts/setup-explorer.sh	#Has functional legacy script, will change this format one day.
 								;;
-								
-							"2)")	if (whiptail --title "Nanode Prune Monero Node" --yesno "This will configure your node to run 'pruned' to reduce storage space required for the blockchain\n\n***This command only be run once and cannot be undone***\n\nAre you sure you want to continue?" 12 78); then
-									. /home/nanode/setupMenuScripts/setup-prune-node.sh
-									else
-									sleep 2
-									fi
-								;;
-				
-							"3)")	if (whiptail --title "Nanode Pop Blocks" --yesno "If you have errors for duplicate transactions in your log file, you may be able to 'pop' off the last blocks from the chain to un-freeze the sync process without syncing from scratch\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
+																
+							"2)")	if (whiptail --title "Nanode Pop Blocks" --yesno "If you have errors for duplicate transactions in your log file, you may be able to 'pop' off the last blocks from the chain to un-freeze the sync process without syncing from scratch\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
 									. /home/nanode/setupMenuScripts/pop-blocks.sh
 									else
-									sleep 2
 									fi
 								;;
-							"4)")	if (whiptail --title "Nanode Clear Peer List" --yesno "There are occassions where the group of nodes you are connected to incorrectly report the top block height or otherwise prevent normal node operation. This option deletes p2pstate.bin and will allow Monero to build a fresh peer list on next node start.\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
+							"3)")	if (whiptail --title "Nanode Clear Peer List" --yesno "There are occassions where the group of nodes you are connected to incorrectly report the top block height or otherwise prevent normal node operation. This option deletes p2pstate.bin and will allow Monero to build a fresh peer list on next node start.\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
 									rm ~/.bitmonero/p2pstate.bin
-									echo -e "\e[32mDeleteing Peer list...\e[0m"
+									echo -e "\e[32mDeleting Peer list...\e[0m"
 									sleep 3
-									whiptail --title "Nanode Clear Peer List" --msgbox "The peer list (p2pstate.bin) has been deleted. When you restart your node a fresh list will be created." 20 78
+									whiptail --title "Nanode Clear Peer List" --msgbox "The peer list (p2pstate.bin) has been deleted. When you restart your node, a fresh list will be created." 20 78
 									else
 									whiptail --title "Nanode Clear Peer List" --msgbox "No changes have been made" 20 78
 									sleep 2
 									fi
 								;;								
-							"5)") if (whiptail --title "Monero-LWS Install" --yesno "This will install the functional but developing Monero-LWS service\nOnce complete, the generated SSL certificate will also need installing on your wallet device\n\nWould you like to continue?" 14 78); then
+							"4)") if (whiptail --title "Monero-LWS Install" --yesno "This will install the functional but developing Monero-LWS service\nOnce complete, the generated SSL certificate will also need installing on your wallet device\n\nWould you like to continue?" 14 78); then
 									echo -e "\e[32mChecking dependencies\e[0m"
 									sleep 2
 									#Check dependencies (Should be installed already from Monero install)
@@ -403,7 +394,7 @@
 									sleep 2
 									fi
 								;;
-								"6)") if (whiptail --title "Nanode Monero-LWS Admin" --yesno "This tool is for adding your wallet address and view key so Monero-LWS can scan for your transactions in the background.\n\nMonero-LWS must be installed first\n\nWould you like to continue?" 14 78); then
+								"5)") if (whiptail --title "Nanode Monero-LWS Admin" --yesno "This tool is for adding your wallet address and view key so Monero-LWS can scan for your transactions in the background.\n\nMonero-LWS must be installed first\n\nWould you like to continue?" 14 78); then
 								# use temp file 
 								_temp="./dialog.$$"
 								#Wallet Address - set
