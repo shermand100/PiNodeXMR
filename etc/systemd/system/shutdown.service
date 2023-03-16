@@ -1,5 +1,5 @@
 [Unit]
-Description=PiNodeXMR Shutdown
+Description=Nanode Shutdown
 After=network.target
 
 [Service]
