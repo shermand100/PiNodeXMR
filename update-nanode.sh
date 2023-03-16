@@ -87,7 +87,6 @@ mv /home/nanode/variables/monero-rpcpay-port.sh /home/nanode/variables/monero-rp
 mv /home/nanode/variables/monero-stats-port.sh /home/nanode/variables/monero-stats-port_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/out-peers.sh /home/nanode/variables/out-peers_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/payment-address.sh /home/nanode/variables/payment-address_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /home/nanode/variables/pruneStatus.sh /home/nanode/variables/pruneStatus_status.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/RPCp.sh /home/nanode/variables/RPCp_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/RPCu.sh /home/nanode/variables/RPCu_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/htmlPasswordRequired.sh /home/nanode/variables/htmlPasswordRequired_retain.sh 2> >(tee -a "$DEBUG_LOG" >&2)
@@ -151,7 +150,6 @@ mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retai
 mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 #Overwrite /var/www/html with updated contents
 sudo rsync -a /home/nanode/Nanode/HTML/* /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
@@ -170,7 +168,6 @@ mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pa
 mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a "$DEBUG_LOG" >&2)
 #Full-mode html update complete
 
@@ -211,7 +208,6 @@ mv /home/nanode/variables/monero-port_retain.sh /home/nanode/variables/monero-po
 mv /home/nanode/variables/monero-port-public-free_retain.sh /home/nanode/variables/monero-port-public-free.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/out-peers_retain.sh /home/nanode/variables/out-peers.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/payment-address_retain.sh /home/nanode/variables/payment-address.sh 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /home/nanode/variables/pruneStatus_status.sh /home/nanode/variables/pruneStatus.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/RPCp_retain.sh /home/nanode/variables/RPCp.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/RPCu_retain.sh /home/nanode/variables/RPCu.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 mv /home/nanode/variables/monero-rpcpay-port_retain.sh /home/nanode/variables/monero-rpcpay-port.sh 2> >(tee -a "$DEBUG_LOG" >&2)
