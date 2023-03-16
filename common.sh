@@ -2,6 +2,16 @@
 #Common variables and functions
 
 DEBUG_LOG=/home/nanode/debug.log
+CONFIG_FILE=/home/nanode/config.json
+
+getvar() {
+	jq ".config.$1" "$CONFIG_FILE"
+}
+
+putvar() {
+	contents=$(jq ".config.$1 = \"$2\"" "$CONFIG_FILE")
+	echo -E "$contents" > "$CONFIG_FILE"
+}
 
 showtext() {
 	log "$*"
@@ -73,3 +83,4 @@ services-start() {
 export -f log
 export -f showtext
 export DEBUG_LOG
+export CONFIG_FILE
