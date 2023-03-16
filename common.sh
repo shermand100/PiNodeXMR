@@ -15,7 +15,6 @@ log() {
 services-stop() {
 	sudo systemctl stop blockExplorer.service
 	sudo systemctl stop moneroPrivate.service
-	sudo systemctl stop moneroMiningNode.service
 	sudo systemctl stop moneroTorPrivate.service
 	sudo systemctl stop moneroTorPublic.service
 	sudo systemctl stop moneroPublicFree.service
@@ -28,12 +27,12 @@ services-stop() {
 #Define Restart Monero Node
 # Key - bs
 # 2 = idle
-# 3 || 5 = private node || mining node
+# 3 = Private node
 # 4 = tor
-# 6 = Public RPC pay
-# 7 = Public free
-# 8 = I2P
-# 9 tor public
+# 5 = Public RPC pay
+# 6 = Public free
+# 7 = I2P
+# 8 = tor public
 services-start() {
 	bs="$1"
 	if [ "$bs" -eq 2 ]
@@ -47,19 +46,16 @@ services-start() {
 			4)
 				sudo systemctl start moneroTorPrivate.service
 				;;
-			# 5) TODO apparently not needed
-				# 	sudo systemctl start moneroMiningNode.service
-				# 	;;
-			6)
+			5)
 				sudo systemctl start moneroPublicRPCPay.service
 				;;
-			7)
+			6)
 				sudo systemctl start moneroPublicFree.service
 				;;
-			8)
+			7)
 				sudo systemctl start moneroI2PPrivate.service
 				;;
-			9)
+			8)
 				sudo systemctl start moneroTorPublic.service
 				;;
 			*)
