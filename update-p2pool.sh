@@ -1,7 +1,7 @@
 #!/bin/bash
 
-. ./common.sh
-
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 
 NEW_VERSION_P2POOL="${1:-$(getvar "versions.p2pool")}"
 showtext "

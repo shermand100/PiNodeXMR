@@ -7,8 +7,8 @@
 # Nanode scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
 
-#shellcheck source=./common.sh
-. ./common.sh
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 
 #Welcome
 if (whiptail --title "Nanode Ubuntu Installer" --yesno "To install Nanode using this installer the following condition is required\n\n* You are logged in as user 'pi' or 'ubuntu'\n* Would you like to continue?" 12 60); then

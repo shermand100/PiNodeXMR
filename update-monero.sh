@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. ./common.sh
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 
 NEW_VERSION="${1:-$(getvar "versions.monero")}"
 #Error Log:
@@ -16,31 +17,21 @@ Start setup-update-monero.sh script $(date)
 # wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
 RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
 
-#Permission Setting
-# chmod 755 /home/nanode/release.sh
-#Load boot status - condition the node was last run
-# . /home/nanode/bootstatus.sh
-BOOT_STATUS="$(getvar boot_status)"
-#Load Variables
-#shellcheck source=home/nanode/release.sh
-# . /home/nanode/release.sh
+#ubuntu /dev/null odd requiremnt to set permissions
+sudo chmod 666 /dev/null
 
-
-		#ubuntu /dev/null odd requiremnt to set permissions
-		sudo chmod 666 /dev/null
-
-		#Stop Node to make system resources available.
-		sudo systemctl stop blockExplorer.service
-		sudo systemctl stop moneroPrivate.service
-		sudo systemctl stop moneroTorPrivate.service
-		sudo systemctl stop moneroTorPublic.service
-		sudo systemctl stop moneroPublicFree.service
-		sudo systemctl stop moneroI2PPrivate.service
-		sudo systemctl stop moneroCustomNode.service
-		sudo systemctl stop moneroPublicRPCPay.service
-		echo "Monero node stop command sent, allowing 30 seconds for safe shutdown"
-		echo "Deleting Old Version"
-		rm -rf /home/nanode/monero/
+#Stop Node to make system resources available.
+sudo systemctl stop blockExplorer.service
+sudo systemctl stop moneroPrivate.service
+sudo systemctl stop moneroTorPrivate.service
+sudo systemctl stop moneroTorPublic.service
+sudo systemctl stop moneroPublicFree.service
+sudo systemctl stop moneroI2PPrivate.service
+sudo systemctl stop moneroCustomNode.service
+sudo systemctl stop moneroPublicRPCPay.service
+echo "Monero node stop command sent, allowing 30 seconds for safe shutdown"
+echo "Deleting Old Version"
+rm -rf /home/nanode/monero/
 
 # ********************************************
 # ******START OF MONERO SOURCE BUILD******

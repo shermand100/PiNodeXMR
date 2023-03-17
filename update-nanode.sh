@@ -1,7 +1,8 @@
 #!/bin/bash
 #Create/ammend debug file for handling update errors:
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 NEW_VERSION_PI="${1:-$(getvar "versions.pi")}"
-. ./common.sh
 touch "$DEBUG_LOG"
 echo "
 ####################
@@ -9,9 +10,7 @@ Start update-nanode.sh script $(date)
 ####################
 " | tee -a "$DEBUG_LOG"
 
-#Import Variable: htmlPasswordRequired
-#shellcheck source=home/nanode/variables/htmlPasswordRequired.sh
-. /home/nanode/variables/htmlPasswordRequired.sh
+HTMLPASSWORDREQUIRED=$(getvar "htmlpasswordrequired")
 log "HTML Password Required set to: $HTMLPASSWORDREQUIRED"
 
 ##Update and Upgrade systemhtac

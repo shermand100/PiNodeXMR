@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. ./common.sh
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 
 		#HEIGHT=20
 		#WIDTH=60
@@ -153,7 +154,7 @@ case $CHOICE in
 							sleep "3"
 								if [ $CURRENT_VERSION_PI -lt $NEW_VERSION_PI ]; then
 									if (whiptail --title "Nanode Update" --yesno "An update has been found for your Nanode. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
-					
+
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-nanode.sh | bash -s "$NEW_VERSION_PI"
 
 									else
@@ -215,7 +216,7 @@ case $CHOICE in
 							sleep "3"
 								if [ $CURRENT_VERSION_P2POOL -lt $NEW_VERSION_P2POOL ]; then
 									if (whiptail --title "P2Pool Updater" --yesno "An update has been found for P2Pool. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
-					
+
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash -s "$NEW_VERSION_P2POOL"
 
 									else
@@ -268,10 +269,10 @@ case $CHOICE in
 							else
 							whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
-						;;											
-						
+						;;
+
 					"6)")	if (whiptail --title "Update System" --yesno "Nanode will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
-							clear; 
+							clear;
 							##Update and Upgrade system
 							showtext "Receiving and applying Ubuntu updates to latest versions"
 							sudo apt-get update 2>&1 | tee -a debug.log
@@ -295,11 +296,11 @@ case $CHOICE in
 				"4)" "Monero-LWS Install" \
 				"5)" "Monero-LWS Admin" \
 				"6)" "Generate SSL self-signed certificates" 2>&1 >/dev/tty)
-				
+
 				case $CHOICE4 in
 							"1)") . /home/nanode/setupMenuScripts/setup-explorer.sh	#Has functional legacy script, will change this format one day.
 								;;
-																
+
 							"2)")	if (whiptail --title "Nanode Pop Blocks" --yesno "If you have errors for duplicate transactions in your log file, you may be able to 'pop' off the last blocks from the chain to un-freeze the sync process without syncing from scratch\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
 									. /home/nanode/setupMenuScripts/pop-blocks.sh
 									else
@@ -314,7 +315,7 @@ case $CHOICE in
 									whiptail --title "Nanode Clear Peer List" --msgbox "No changes have been made" 20 78
 									sleep 2
 									fi
-								;;								
+								;;
 							"4)") if (whiptail --title "Monero-LWS Install" --yesno "This will install the functional but developing Monero-LWS service\nOnce complete, the generated SSL certificate will also need installing on your wallet device\n\nWould you like to continue?" 14 78); then
 									echo -e "\e[32mChecking dependencies\e[0m"
 									sleep 2
@@ -363,7 +364,7 @@ case $CHOICE in
 									fi
 								;;
 								"5)") if (whiptail --title "Nanode Monero-LWS Admin" --yesno "This tool is for adding your wallet address and view key so Monero-LWS can scan for your transactions in the background.\n\nMonero-LWS must be installed first\n\nWould you like to continue?" 14 78); then
-								# use temp file 
+								# use temp file
 								_temp="./dialog.$$"
 								#Wallet Address - set
 								whiptail --title "Monero-LWS Wallet Address" --inputbox "Enter the Wallet address you would like to monitor:" 10 60 2>$_temp
@@ -418,7 +419,7 @@ case $CHOICE in
 				"8)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
 
 				case $CHOICE5 in
-		
+
 							"1)")	if (whiptail --title "Nanode Install tor" --yesno "Some countries, for censorship, political or legal reasons do not look favorably on tor and other anonymity services, so tor is not installed on this device by default. However this option can install it now for you.\n\nWould you like to continue?" 14 78); then
 									. /home/nanode/setupMenuScripts/setup-tor.sh
 									else
@@ -432,7 +433,7 @@ case $CHOICE in
 									sleep 2
 									fi
 								;;
-								
+
 							"3)")	if (whiptail --title "Nanode Start/Stop tor" --yesno "Manually Start or Stop the service." --yes-button "Start tor" --no-button "Stop tor"  14 78); then
 									sudo systemctl start tor
 									sudo systemctl enable tor
@@ -445,14 +446,14 @@ case $CHOICE in
 									sleep 2
 									fi
 								;;
-								
+
 							"4)")	if (whiptail --title "Nanode Install I2P" --yesno "This will install the I2P server/router onto your Nanode\n\nWould you like to continue?" 14 78); then
 									. /home/nanode/setupMenuScripts/setup-i2p.sh
 									else
 									sleep 2
 									fi
 								;;
-							
+
 							"5)")	if (whiptail --title "Nanode Start/Stop I2P" --yesno "Manually Start or Stop the service." --yes-button "Start I2P" --no-button "Stop I2P"  14 78); then
 									i2prouter start;
 									sudo systemctl start i2p;
@@ -467,7 +468,7 @@ case $CHOICE in
 									sleep 2
 									fi
 								;;
-								
+
 							"6)")	if (whiptail --title "Nanode PiVPN Install" --yesno "This feature will install PiVPN on your Nanode\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
 									. /home/nanode/setupMenuScripts/setup-PiVPN.sh
 									else
@@ -497,8 +498,7 @@ case $CHOICE in
 									sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
 									sudo systemctl restart apache2
 									#Update htmlPasswordRequired flag for use with PiNodeXMR updater script
-	echo "#!/bin/sh
-HTMLPASSWORDREQUIRED=TRUE" > /home/nanode/variables/htmlPasswordRequired.sh
+									putvar HTMLPASSWORDREQUIRED TRUE
 									sleep 2
 									whiptail --title "Web Interface Password Enable" --msgbox "The Nanode Web Interface Password has been enabled" 12 78;
 									else
@@ -512,8 +512,7 @@ HTMLPASSWORDREQUIRED=TRUE" > /home/nanode/variables/htmlPasswordRequired.sh
 									sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
 									sudo systemctl restart apache2
 									#Update htmlPasswordRequired flag for use with Nanode updater script
-	echo "#!/bin/sh
-HTMLPASSWORDREQUIRED=FALSE" > /home/nanode/variables/htmlPasswordRequired.sh
+									putvar "HTMLPASSWORDREQUIRED" "FALSE"
 									sleep 2
 									whiptail --title "Web Interface Password Disable" --msgbox "The Nanode Web Interface Password has been disabled" 12 78;
 									else

@@ -1,5 +1,8 @@
 #!/bin/bash
 #(1) Define variables and updater functions
+#shellcheck source=common.sh
+. /home/nanode/common.sh
+NEW_VERSION_LWS="${1:-$(getvar "versions.lws")}"
 
 #Error Log:
 touch /home/nanode/debug.log
@@ -34,10 +37,7 @@ cd || exit 1
 #Restarting Monero-LWS servcice
 sudo systemctl start monero-lws.service
 #Update system reference current LWS version number to New version number
-chmod 755 /home/nanode/new-ver-lws.sh
-. /home/nanode/new-ver-lws.sh
-echo "#!/bin/bash
-CURRENT_VERSION_LWS=$NEW_VERSION_LWS" > /home/nanode/current-ver-lws.sh 2>&1 | tee -a /home/nanode/debug.log
+putvar "versions.lws" "$NEW_VERSION_LWS"
 
 ##End debug log
 echo "Update Complete" 2>&1 | tee -a /home/nanode/debug.log

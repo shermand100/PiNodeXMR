@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#shellcheck source=common.sh
+. /home/nanode/common.sh
+
 # use temp file
 _temp="./dialog.$$"
 

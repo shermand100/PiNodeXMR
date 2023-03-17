@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. ./common.sh
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 NEW_VERSION_EXP="${1:-$(getvar "versions.pi")}"
 
 touch "$DEBUG_LOG"

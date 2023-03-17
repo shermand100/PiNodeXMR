@@ -8,8 +8,8 @@
 
 ###Begin2
 
-#shellcheck source=./common.sh
-. ./common.sh
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 
 #Create debug file for handling install errors:
 touch "$DEBUG_LOG"

@@ -1,6 +1,7 @@
 #!/bin/sh
 
-. ./common.sh
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 
 # use temp file
 _temp="./dialog.$$"
@@ -254,8 +255,8 @@ txPoolPending () {
 	}
 
 #Call status functions and loop indefinately:
+defineVariables
 while true; do
-	defineVariables
 	syncStatus
 	connectionStatus
 	txPoolStatus
