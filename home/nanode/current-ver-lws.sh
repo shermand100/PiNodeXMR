@@ -1,2 +1,0 @@
-#!/bin/bash
-CURRENT_VERSION_LWS=02018
