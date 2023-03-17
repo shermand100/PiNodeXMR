@@ -1,5 +1,5 @@
 [Unit]
-Description=PiNodeXMR Reboot
+Description=Nanode Reboot
 After=network.target
 
 [Service]

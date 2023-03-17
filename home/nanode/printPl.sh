@@ -5,11 +5,11 @@ _temp="./dialog.$$"
 
 # Key - Boot_STATUS
 # 2 = idle
-# 3 || 5 = private node || mining node
+# 3 = Private node
 # 4 = tor
-# 6 = Public RPC pay
-# 7 = Public free
-# 8 = I2P
+# 5 = Public RPC pay
+# 6 = Public free
+# 7 = I2P
 #Notes on how this works:
 #1)Each status command is set as a variable and then on completion this variable is then returned into the file specified...
 #The variable step is needed to prevent the previous stats file being overwritten to empty at the start of the command before the new stats are generated thus causing blank stats sections in the UI.
@@ -60,27 +60,27 @@ then
 			date >> /var/www/html/print_pl.txt
 fi
 
-	if [ $BOOT_STATUS -eq 6 ]
+	if [ $BOOT_STATUS -eq 5 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
 			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt			
 fi
 
-	if [ $BOOT_STATUS -eq 7 ]
+	if [ $BOOT_STATUS -eq 6 ]
 then
 		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
 			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt
 fi
-	if [ $BOOT_STATUS -eq 8 ]
+	if [ $BOOT_STATUS -eq 7 ]
 then	
 		#Node Status
 			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt			
 fi
 
-	if [ $BOOT_STATUS -eq 9 ]
+	if [ $BOOT_STATUS -eq 8 ]
 then	
 #Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
 			echo "It is not currently possible to retrieve connected peer information when running a public tor node." > /var/www/html/print_pl.txt

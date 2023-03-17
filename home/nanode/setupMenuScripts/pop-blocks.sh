@@ -4,7 +4,7 @@
 _temp="./dialog.$$"
 
 	#Input Box - Pop Blocks
-	whiptail --title "PiNode-XMR Pop Blocks" --inputbox "\nNumber of Blocks to remove" 10 30 2>$_temp
+	whiptail --title "Nanode Pop Blocks" --inputbox "\nNumber of Blocks to remove" 10 30 2>$_temp
 		
 	       # get user input - number of blocks
 			POP=$( cat $_temp )

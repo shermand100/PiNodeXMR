@@ -8,7 +8,6 @@
 	echo -n "Private Node: " && sudo systemctl status moneroPrivate.service | sed -n '3'p | cut -c13-;
 	echo -n "Public  Free: " && sudo systemctl status moneroPublicFree.service | sed -n '3'p | cut -c13-;
 	echo -n "Public RPC Pay: " && sudo systemctl status moneroPublicRPCPay.service | sed -n '3'p | cut -c13-;		
-	echo -n "Mining  Node: " && sudo systemctl status moneroMiningNode.service | sed -n '3'p | cut -c13-;
 	echo -n "Tor     Node: " && sudo systemctl status moneroTorPrivate.service | sed -n '3'p | cut -c13-;
 	echo -n "Tor Public  : " && sudo systemctl status moneroTorPublic.service | sed -n '3'p | cut -c13-;
 	echo -n "I2P     Node: " && sudo systemctl status moneroI2PPrivate.service | sed -n '3'p | cut -c13-;
