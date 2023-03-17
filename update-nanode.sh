@@ -268,14 +268,9 @@ showtext "Installing log.io"
 
 #Update system version number to new one installed
 {
-	#FIXME: change url
-	wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/new-ver-pi.sh -O /home/nanode/new-ver-pi.sh
-	chmod 755 /home/nanode/new-ver-pi.sh
-	. /home/nanode/new-ver-pi.sh
+	NEW_VERSION_PI="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/new-ver-pi.txt)"
 	showtext "Update system version number"
-	echo "#!/bin/bash
-	CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/nanode/current-ver-pi.sh
-	showtext "Success"
+	putvar "versions.pi" "$NEW_VERSION_PI"
 	#ubuntu /dev/null odd requiremnt to set permissions
 	sudo chmod 777 /dev/null
 } 2>&1 | tee -a "$DEBUG_LOG"

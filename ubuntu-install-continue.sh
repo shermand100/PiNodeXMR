@@ -138,11 +138,7 @@ sudo /etc/init.d/avahi-daemon restart
 #Download latest Monero release number
 #ubuntu /dev/null odd requiremnt to set permissions
 sudo chmod 666 /dev/null
-#FIXME: change url
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
-chmod 755 /home/nanode/release.sh
-# shellcheck source=home/nanode/release.sh
-. /home/nanode/release.sh
+RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
 
 showtext "Downloading Monero"
 
@@ -154,7 +150,7 @@ showtext "****This will take a while - Hardware Dependent*****"
 showtext "****************************************************"
 showtext "****************************************************"
 cd monero && git submodule init && git submodule update
-git checkout $RELEASE
+git checkout "$RELEASE"
 git submodule sync && git submodule update
 USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
 cd || exit 1
