@@ -96,35 +96,7 @@ rm -R ~/temp
 		# 6 = Public free
 		# 7 = I2P
 		# 8 = tor public
-	if [ $BOOT_STATUS -eq 2 ]
-then
-	whiptail --title "Monero Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60
-else
-	case $BOOT_STATUS in
-		3)
-			sudo systemctl start moneroPrivate.service
-			;;
-		4)
-			sudo systemctl start moneroTorPrivate.service
-			;;
-		5)
-			sudo systemctl start moneroPublicRPCPay.service
-			;;
-		6)
-			sudo systemctl start moneroPublicFree.service
-			;;
-		7)
-			sudo systemctl start moneroI2PPrivate.service
-			;;
-		8)
-			sudo systemctl start moneroTorPublic.service
-			;;
-		*)
-			log "Very strange"
-			;;
-	esac
-	whiptail --title "Monero Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
-fi
+services-start
 
 ##End debug log
 log "Update Complete

@@ -196,8 +196,7 @@ sudo chown root /etc/logrotate.d/p2pool
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
-#shellcheck source=home/nanode/variables/deviceIp.sh
-. /home/nanode/variables/deviceIp.sh
+DEVICE_IP=$(getip)
 showtext "Installing log.io"
 
 {

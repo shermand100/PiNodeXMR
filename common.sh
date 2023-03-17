@@ -4,6 +4,10 @@
 DEBUG_LOG=/home/nanode/debug.log
 CONFIG_FILE=/home/nanode/config.json
 
+getip() {
+	return "$(hostname -I | awk '{print $1}')"
+}
+
 getvar() {
 	showtext "var $1 queried"
 	return "$(jq ".config.$1" "$CONFIG_FILE")"
@@ -46,7 +50,7 @@ services-stop() {
 # 7 = I2P
 # 8 = tor public
 services-start() {
-	bs="$1"
+bs="$(getvar "boot_status")"
 	if [ "$bs" -eq 2 ]
 	then
 		whiptail --title "Monero Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60

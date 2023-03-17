@@ -31,7 +31,7 @@ showtext "Building new P2Pool"
 	putvar "versions.p2pool" "$NEW_VERSION_P2POOL"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
-services-start "$BOOT_STATUS"
+services-start
 ##End debug log
 log "Update Script Complete
 ####################

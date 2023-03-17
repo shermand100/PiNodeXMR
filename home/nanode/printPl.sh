@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# use temp file 
+# use temp file
 _temp="./dialog.$$"
 
 # Key - Boot_STATUS
@@ -17,71 +17,66 @@ _temp="./dialog.$$"
 #So next I used 'Current_Sync_Progress:((.result.height/.result.target_height)*100)|floor' to readout a percentage of sync'd rounded down to a whole number. This meant that when the current height was above target sync status read as 100%...
 #However in tor mode target height sometimes outputs to 0 and the math fails killing the whole command. In the end the boolean 'Busy_Syncing:.result.busy_syncing' is used but not as pretty.
 
-#Import Start Flag Values:
-	#Establish Local IP
-	. /home/nanode/variables/deviceIp.sh
-	#Load boot status - what condition was node last run
-	. /home/nanode/bootstatus.sh
-	#Import unrestriced port number when running public node for internal use only
-	. /home/nanode/variables/monero-port-public-free.sh
-	#Import Restricted Port Number (external use)	
-	. /home/nanode/variables/monero-port.sh
-	#Import RPC username
-	. /home/nanode/variables/RPCu.sh
-	#Import RPC password
-	. /home/nanode/variables/RPCp.sh
+DEVICE_IP=$(getip)
+#Load boot status - what condition was node last run
+BOOT_STATUS=$(getvar "boot_status")
+#Import Restricted Port Number (external use)
+MONERO_PORT=$(getvar "monero_port")
+#Import unrestriced port number when running public node for internal use only
+MONERO_PUBLIC_PORT=$(getvar "monero_public_port")
+#Import RPC username
+RPCu=$(getvar "rpcu")
+#Import RPC password
+RPCp=$(getvar "rpcp")
 
 
 #Define status functions
 
 	#printFullPeers
+BOOT_STATUS=$(getvar "boot_status")
 
-
-	#Load boot status - what condition was node last run
-	. /home/nanode/bootstatus.sh
-
-	if [ $BOOT_STATUS -eq 2 ]
-then	
+	if [ "$BOOT_STATUS" -eq 2 ]
+then
 		#System Idle
 		echo "-- System Idle --" > /var/www/html/print_pl.txt
-fi	
-	
-	if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 5 ]
-then	
+fi
+
+	if [ "$BOOT_STATUS" -eq 3 ] || [ "$BOOT_STATUS" -eq 5 ]
+then
 		#Node Status
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=${MONERO_PORT} --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip="${DEVICE_IP}" --rpc-bind-port="${MONERO_PORT}" --rpc-login="${RPCu}:${RPCp}" --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt
 fi
 
-	if [ $BOOT_STATUS -eq 4 ]
-then	
+	if [ "$BOOT_STATUS" -eq 4 ]
+then
 #Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=${DEVICE_IP} --rpc-bind-port=18081 --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip="${DEVICE_IP}" --rpc-bind-port=18081 --rpc-login="${RPCu}:${RPCp}" --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt
 fi
 
-	if [ $BOOT_STATUS -eq 5 ]
+	if [ "$BOOT_STATUS" -eq 5 ]
 then
 		#Adapted command for restricted public rpc calls (payments)
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
-			date >> /var/www/html/print_pl.txt			
-fi
-
-	if [ $BOOT_STATUS -eq 6 ]
-then
-		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip="$DEVICE_IP" --rpc-bind-port="$MONERO_PORT" --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt
 fi
-	if [ $BOOT_STATUS -eq 7 ]
-then	
+
+	if [ "$BOOT_STATUS" -eq 6 ]
+then
+		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip="$DEVICE_IP" --rpc-bind-port="$MONERO_PUBLIC_PORT" --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
+			date >> /var/www/html/print_pl.txt
+fi
+	if [ "$BOOT_STATUS" -eq 7 ]
+then
 		#Node Status
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
-			date >> /var/www/html/print_pl.txt			
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip="$DEVICE_IP" --rpc-bind-port="$MONERO_PORT" --rpc-login="${RPCu}:${RPCp}" --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
+			date >> /var/www/html/print_pl.txt
 fi
 
-	if [ $BOOT_STATUS -eq 8 ]
-then	
+	if [ "$BOOT_STATUS" -eq 8 ]
+then
 #Adapted command for tor rpc calls (payments) - RPC port and IP fixed due to tor hidden service settings linked in /etc/tor/torrc
 			echo "It is not currently possible to retrieve connected peer information when running a public tor node." > /var/www/html/print_pl.txt
 fi

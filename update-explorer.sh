@@ -38,8 +38,7 @@ mkdir build && cd build || exit
 cmake .. 2> >(tee -a "$DEBUG_LOG" >&2)
 make 2> >(tee -a "$DEBUG_LOG" >&2)
 putvar "versions.exp" "$NEW_VERSION_EXP"
-BOOT_STATUS=$(getvar "boot_status")
-services-start "$BOOT_STATUS"
+services-start
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 rm /home/nanode/new-ver-exp.sh 2> >(tee -a "$DEBUG_LOG" >&2)

@@ -195,8 +195,7 @@ sudo systemctl restart moneroStatus.service
 
 ##Check-Install log.io (Real-time service monitoring)
 #Establish Device IP
-#shellcheck source=home/nanode/variables/deviceIp.sh
-. ~/variables/deviceIp.sh
+DEVICE_IP=$(getip)
 showtext "Installing log.io"
 {
 	sudo apt-get install nodejs npm -y
