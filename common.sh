@@ -5,12 +5,14 @@ DEBUG_LOG=/home/nanode/debug.log
 CONFIG_FILE=/home/nanode/config.json
 
 getvar() {
-	jq ".config.$1" "$CONFIG_FILE"
+	showtext "var $1 queried"
+	return "$(jq ".config.$1" "$CONFIG_FILE")"
 }
 
 putvar() {
 	contents=$(jq ".config.$1 = \"$2\"" "$CONFIG_FILE")
 	echo -E "$contents" > "$CONFIG_FILE"
+	showtext "var $1 updated to $2"
 }
 
 showtext() {

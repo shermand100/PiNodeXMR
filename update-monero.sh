@@ -2,6 +2,7 @@
 
 . ./common.sh
 
+NEW_VERSION="${1:-$(getvar "versions.monero")}"
 #Error Log:
 touch "$DEBUG_LOG"
 echo "
@@ -83,10 +84,8 @@ mkdir .bitmonero 2>&1 | tee -a "$DEBUG_LOG"
 rm -R ~/temp
 
 		#Update system version number
-		echo "#!/bin/bash
-		CURRENT_VERSION=$NEW_VERSION" > /home/nanode/current-ver.sh
+		putvar "current_version" "$NEW_VERSION"
 		#cleanup old version number file
-		rm /home/nanode/xmr-new-ver.sh
 
 #Define Restart Monero Node
 		# Key - BOOT_STATUS
@@ -133,6 +132,5 @@ log "Update Complete
 End setup-update-monero.sh script $(date)
 ####################"
 
-rm ~/release.sh
 
 ./setup.sh

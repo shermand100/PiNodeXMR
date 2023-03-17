@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ./common.sh
+
 		#HEIGHT=20
 		#WIDTH=60
 		#CHOICE_HEIGHT=8
@@ -112,9 +114,8 @@ case $CHOICE in
 				case $CHOICE3 in
 
 					"1)")	if (whiptail --title "Nanode Update Monero" --yesno "This will run a check to see if a Monero update is available\n\nIf an update is found Nanode will perform the update.\n\n***This will take several hours***\n\nWould you like to continue?" 12 78); then
-							wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/xmr-new-ver.sh -O /home/nanode/xmr-new-ver.sh
 							NEW_VERSION="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/xmr-new-ver.txt)"
-							CURRENT_VERSION="$(<current-ver.txt)"
+							CURRENT_VERSION="$(getvar "versions.monero")"
 
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION \e[0m"
@@ -139,7 +140,6 @@ case $CHOICE in
 								fi
 
 							#clean up
-							rm /home/nanode/xmr-new-ver.sh
 							else
 							whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
@@ -147,14 +147,14 @@ case $CHOICE in
 
 					"2)")	if (whiptail --title "Update Nanode" --yesno "This will check for updates to PiNode-XMR Including performance, features and web interface\n\nWould you like to continue?" 12 78); then
 							NEW_VERSION_PI="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/new-ver-pi.txt)"
-							CURRENT_VERSION_PI=$(<current-ver-pi.txt)
+							CURRENT_VERSION_PI=$(getvar "versions.pi")
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_PI \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION_PI \e[0m"
 							sleep "3"
 								if [ $CURRENT_VERSION_PI -lt $NEW_VERSION_PI ]; then
 									if (whiptail --title "Nanode Update" --yesno "An update has been found for your Nanode. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-nanode.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-nanode.sh | bash -s "$NEW_VERSION_PI"
 
 									else
 									whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -163,7 +163,7 @@ case $CHOICE in
 								else
 									if (whiptail --title "Nanode Update" --yesno "This device thinks it's running the latest version of Nanode.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-nanode.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-nanode.sh | bash -s "$NEW_VERSION_PI"
 
 									else
 									whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -171,7 +171,6 @@ case $CHOICE in
 								fi
 
 							#clean up
-							rm /home/nanode/new-ver-pi.sh
 							else
 							whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
@@ -179,14 +178,14 @@ case $CHOICE in
 
 					"3)")	if (whiptail --title "Update Onion-Blockchain-Explorer" --yesno "This will check for and install updates to your Blockchain Explorer\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
 						NEW_VERSION_EXP=$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/exp-new-ver.txt)
-						CURRENT_VERSION_EXP=$(<current-ver-exp.txt)
+						CURRENT_VERSION_EXP=$(getvar "versions.exp")
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_EXP \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION_EXP \e[0m"
 							sleep 3
 								if [ $CURRENT_VERSION_EXP -lt $NEW_VERSION_EXP ]; then
 									if (whiptail --title "Monero Onion Block Explorer Update" --yesno "An update to the Monero Block Explorer is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash -s "$NEW_VERSION_EXP"
 
 									else
 									whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -195,7 +194,7 @@ case $CHOICE in
 								else
 									if (whiptail --title "Monero Onion Block Explorer Update" --yesno "This device thinks it's running the latest version of the Block Explorer.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Explorer Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash -s "$NEW_VERSION_EXP"
 
 									else
 									whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -203,28 +202,21 @@ case $CHOICE in
 								fi
 
 							#clean up
-							rm /home/nanode/exp-new-ver.sh
 							else
 							whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;
 
 					"4)")	if (whiptail --title "Update P2Pool" --yesno "This will check for and install updates to P2Pool\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2pool-new-ver.sh -O /home/nanode/p2pool-new-ver.sh
-							#Permission Setting
-							chmod 755 /home/nanode/current-ver-p2pool.sh
-							chmod 755 /home/nanode/p2pool-new-ver.sh
-							#Load Variables
-							. /home/nanode/current-ver-p2pool.sh
-							. /home/nanode/p2pool-new-ver.sh
-							echo "\e[36mVersion Info file received: \e[0m"
+						NEW_VERSION_P2POOL=$(curl -s https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2pool-new-ver.sh)
+						CURRENT_VERSION_P2POOL=$(getvar "versions.p2pool")
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_P2POOL \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION_P2POOL \e[0m"
 							sleep "3"
 								if [ $CURRENT_VERSION_P2POOL -lt $NEW_VERSION_P2POOL ]; then
 									if (whiptail --title "P2Pool Updater" --yesno "An update has been found for P2Pool. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash -s "$NEW_VERSION_P2POOL"
 
 									else
 									whiptail --title "P2Pool Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -233,7 +225,7 @@ case $CHOICE in
 								else
 									if (whiptail --title "P2Pool Updater" --yesno "This device thinks it's running the latest version of P2Pool.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash -s "$NEW_VERSION_P2POOL"
 
 									else
 									whiptail --title "P2Pool Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -241,20 +233,14 @@ case $CHOICE in
 								fi
 
 							#clean up
-							rm /home/nanode/p2pool-new-ver.sh
 							else
 							whiptail --title "P2Pool Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;
 
 					"5)")	if (whiptail --title "Update Monero-LWS" --yesno "Monero-LWS is still in development and as such has no version number. I can delete the version on this device and install the latest from source?\nSSL Certificates will be preserved\n\n**Note: To install Monero-LWS for the first time please use the installer found in the 'Node Tools' Menu\n\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/new-ver-lws.sh -O /home/nanode/new-ver-lws.sh
-							#Permission Setting
-							chmod 755 /home/nanode/current-ver-lws.sh
-							chmod 755 /home/nanode/new-ver-lws.sh
-							#Load Variables
-							. /home/nanode/current-ver-lws.sh
-							. /home/nanode/new-ver-lws.sh
+							NEW_VERSION_LWS=$(curl -s https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/new-ver-lws.sh)
+							CURRENT_VERSION_LWS=$(getvar "versions.lws")
 							echo "\e[36mVersion Info file received: \e[0m"
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_LWS \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION_LWS \e[0m"
@@ -262,7 +248,7 @@ case $CHOICE in
 								if [ $CURRENT_VERSION_LWS -lt $NEW_VERSION_LWS ]; then
 									if (whiptail --title "Update Monero-LWS" --yesno "An update has been found for Monero-LWS. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash -s "$NEW_VERSION_LWS"
 
 									else
 									whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -271,7 +257,7 @@ case $CHOICE in
 								else
 									if (whiptail --title "Update Monero-LWS" --yesno "This device thinks it's running the latest version of Monero-LWS.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash -s "$NEW_VERSION_LWS"
 
 									else
 									whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -279,7 +265,6 @@ case $CHOICE in
 								fi
 
 							#clean up
-							rm /home/nanode/new-ver-lws.sh
 							else
 							whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi

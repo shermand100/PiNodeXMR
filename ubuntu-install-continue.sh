@@ -170,7 +170,6 @@ cd build || exit 1
 cmake ..
 make
 cd || exit 1
-rm ~/release.sh
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 # ********************************************

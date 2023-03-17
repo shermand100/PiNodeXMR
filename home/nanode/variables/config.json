@@ -22,6 +22,12 @@
     "payment_address": "",
     "prune_status": "0",
     "rpcp": "password",
-    "rpcu": "PiNodeXMR"
+    "rpcu": "PiNodeXMR",
+    "versions": {
+      "monero": "01812",
+      "p2pool": "300",
+      "exp": "20220506",
+      "lws": "02018"
+    }
   }
 }

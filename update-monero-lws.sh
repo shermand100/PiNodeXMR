@@ -22,21 +22,21 @@ echo -e "\e[32mDownloading and Building new Monero-LWS\e[0m"
 #Check dependencies (Should be installed already from Monero install)
 sudo apt update && sudo apt install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mDownloading VTNerd Monero-LWS\e[0m"
-git clone --recursive https://github.com/vtnerd/monero-lws.git; 2>&1 | tee -a /home/nanode/debug.log
+git clone --recursive https://github.com/vtnerd/monero-lws.git 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mConfiguring install\e[0m"
-cd monero-lws
+cd monero-lws || exit 1
 git checkout release-v0.2_0.18 2>&1 | tee -a /home/nanode/debug.log
-mkdir build && cd build
+mkdir build && cd build || exit 1
 cmake -DMONERO_SOURCE_DIR=/home/nanode/monero -DMONERO_BUILD_DIR=/home/nanode/monero/build/release .. 2>&1 | tee -a /home/nanode/debug.log
 echo -e "\e[32mBuilding VTNerd Monero-LWS\e[0m"
 make 2>&1 | tee -a /home/nanode/debug.log
-cd
+cd || exit 1
 #Restarting Monero-LWS servcice
-	sudo systemctl start monero-lws.service
+sudo systemctl start monero-lws.service
 #Update system reference current LWS version number to New version number
-	chmod 755 /home/nanode/new-ver-lws.sh
-	. /home/nanode/new-ver-lws.sh
-	echo "#!/bin/bash
+chmod 755 /home/nanode/new-ver-lws.sh
+. /home/nanode/new-ver-lws.sh
+echo "#!/bin/bash
 CURRENT_VERSION_LWS=$NEW_VERSION_LWS" > /home/nanode/current-ver-lws.sh 2>&1 | tee -a /home/nanode/debug.log
 
 ##End debug log

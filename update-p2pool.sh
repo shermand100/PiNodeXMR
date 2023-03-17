@@ -2,6 +2,8 @@
 
 . ./common.sh
 
+
+NEW_VERSION_P2POOL="${1:-$(getvar "versions.p2pool")}"
 showtext "
 ####################
 Start setup-update-p2pool.sh script $(date)
@@ -26,13 +28,7 @@ showtext "Building new P2Pool"
 	cmake ..
 	make -j2
 	showtext "Success"
-	cd || exit 1
-	#Update system reference Explorer version number version number
-	chmod 755 /home/nanode/p2pool-new-ver.sh
-	#shellcheck disable=SC1091
-	. /home/nanode/p2pool-new-ver.sh
-	echo "#!/bin/bash
-	CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/nanode/current-ver-p2pool.sh
+	putvar "versions.p2pool" "$NEW_VERSION_P2POOL"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 services-start "$BOOT_STATUS"

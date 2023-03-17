@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . ./common.sh
+NEW_VERSION_EXP="${1:-$(getvar "versions.pi")}"
 
 touch "$DEBUG_LOG"
 
@@ -17,11 +18,6 @@ Start setup-update-explorer.sh script $(date)
 	#Permission Setting
 	chmod 755 /home/nanode/current-ver-exp.sh
 	chmod 755 /home/nanode/exp-new-ver.sh
-	#Load Variables
-	. /home/nanode/current-ver-exp.sh
-	. /home/nanode/exp-new-ver.sh
-	#Load boot status - what condition was node last run
-	. /home/nanode/bootstatus.sh
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 
@@ -41,11 +37,8 @@ cd onion-monero-blockchain-explorer || exit
 mkdir build && cd build || exit
 cmake .. 2> >(tee -a "$DEBUG_LOG" >&2)
 make 2> >(tee -a "$DEBUG_LOG" >&2)
-cd || exit
-#Update system reference Explorer version number version number
-echo "#!/bin/bash
-CURRENT_VERSION_EXP=$NEW_VERSION_EXP" > /home/nanode/current-ver-exp.sh
-
+putvar "versions.exp" "$NEW_VERSION_EXP"
+BOOT_STATUS=$(getvar "boot_status")
 services-start "$BOOT_STATUS"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
