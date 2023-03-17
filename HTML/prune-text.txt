@@ -1,1 +1,0 @@
-This button can only be clicked once, and begins an irreversible process to convert your node from a full node to a pruned node. If you are sure after consulting the manual, and have stopped all Monero processes you may click the button below to do so.
