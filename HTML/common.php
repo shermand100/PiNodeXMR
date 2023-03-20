@@ -4,7 +4,7 @@ $config = '/home/nanode/variables/config.json';
 
 function getvar($key)
 {
-		global $config;
+    global $config;
     $fp = fopen($config, 'rw');
     $jn = fread($fp, filesize($fp));
     $dec = json_decode($jn);
@@ -17,7 +17,7 @@ function getvar($key)
 
 function putvar($key, $value)
 {
-		global $config;
+    global $config;
     $fp = fopen($config, 'rw');
     $jn = fread($fp, filesize($fp));
     $dec = json_decode($jn);

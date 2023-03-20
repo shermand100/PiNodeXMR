@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. /home/nanode/common.sh
+
 #Dependencies
 sudo apt-get update
 sudo apt-get install udftools coreutils vim-common -y 

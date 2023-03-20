@@ -8,6 +8,7 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+. common.sh
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -29,14 +30,13 @@ fi
 export PATH=$PATH:/home/nanode/
 
 #Reset SDCard filesystem size
-. /home/nanode/bootstatus.sh
+BOOT_STATUS=$(getvar "boot_status")
 
-if [ $BOOT_STATUS -eq -1 ] ; then
+if [ "$BOOT_STATUS" -eq -1 ] ; then
 echo -e "\e[32mPiNodeXMR detects this is first boot - attempting to expand filesystem\e[0m"
 sudo systemctl start armbian-resize-filesystem
 echo -e "\e[32mComplete\e[0m"
-echo "#!/bin/bash
-BOOT_STATUS=0" > /home/nanode/bootstatus.sh
+putvar "boot_status" "0"
 fi
 
 

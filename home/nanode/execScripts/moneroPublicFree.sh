@@ -1,29 +1,16 @@
 #!/bin/bash
 
+#shellcheck source=common.sh
+. /home/nanode/common.sh
 #Import Start Flag Values:
-	#Establish Device IP
-	. /home/nanode/variables/deviceIp.sh
-	#Import Port Number
-	. /home/nanode/variables/monero-port.sh
-	#Import Public (free) Port Number
-	. /home/nanode/variables/monero-port-public-free.sh
-	#Import IN-PEERS (connections) Limit
-	. /home/nanode/variables/in-peers.sh
-	#Import OUT-PEERS (connections) Limit
-	. /home/nanode/variables/out-peers.sh
-	#Import Data Limit Up
-	. /home/nanode/variables/limit-rate-up.sh
-	#Import Data Limit Down
-	. /home/nanode/variables/limit-rate-down.sh
-	#Import RPC username
-	. /home/nanode/variables/RPCu.sh
-	#Import RPC password
-	. /home/nanode/variables/RPCp.sh
+DEVICE_IP=$(getip)
+IN_PEERS=$(getvar "in_peers")
+OUT_PEERS=$(getvar "out_peers")
+LIMIT_RATE_UP=$(getvar "limit_rate_up")
+LIMIT_RATE_DOWN=$(getvar "limit_rate_down")
+MONERO_PUBLIC_PORT=$(getvar "monero_public_port")
 
-#Update power cycle reboot state
-	echo "#!/bin/sh
-BOOT_STATUS=7" > /home/nanode/bootstatus.sh
-#Start Monerod
+putvar "boot_status" "7"
 
-cd /home/nanode/monero/build/release/bin/
+cd /home/nanode/monero/build/release/bin/ || exit 1
 ./monerod --rpc-bind-ip=0.0.0.0 --rpc-bind-port=$MONERO_PUBLIC_PORT --zmq-pub tcp://$DEVICE_IP:18083 --rpc-restricted-bind-ip=$DEVICE_IP --rpc-restricted-bind-port=$MONERO_PORT --confirm-external-bind --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/nanode/monero/build/release/bin/monerod.pid --public-node --enable-dns-blocklist --detach

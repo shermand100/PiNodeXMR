@@ -1,6 +1,9 @@
 #!/bin/bash
 ##Start password config
 
+#shellcheck source=common.sh
+. /home/nanode/common.sh
+
 # use temp file 
 _temp="./dialog.$$"
 
@@ -61,8 +64,7 @@ whiptail --clear
 # New verified password
 	NEWRPCp="${NEWRPCp1}"
 #Set new RPC Password
-	echo "#!/bin/sh
-RPCp=${NEWRPCp}" > /home/nanode/variables/RPCp.sh
+	putvar "rpcp" "$NEWRPCp"
 
 	whiptail \
 	--title "Nanode RPC config" --msgbox "New RPC Password set.\n\nNext select a new RPC username" 10 30
@@ -79,8 +81,7 @@ RPCp=${NEWRPCp}" > /home/nanode/variables/RPCp.sh
  
 	exitstatus=$?
 	if [ $exitstatus = 0 ]; then
-	echo "#!/bin/sh
-RPCu=${NEWRPCu}" > /home/nanode/variables/RPCu.sh
+	putvar "rpcu" "$NEWRPCu"
 
 	whiptail --title "Nanode RPC config" --msgbox "New RPC Username set:\n\n ${NEWRPCu}" 10 30
 	else
