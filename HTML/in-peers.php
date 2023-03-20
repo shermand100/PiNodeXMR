@@ -1,7 +1,6 @@
 <?php
+include_once('./common.php');
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/in-peers.sh', 'w');
-fwrite($fp, "#!/bin/bash\nIN_PEERS=$VALUE");
-fclose($fp);
+putvar("in_peers", $VALUE);
 echo "Number of inbound connections limited to $VALUE";
 ?>

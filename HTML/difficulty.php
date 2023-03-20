@@ -1,8 +1,7 @@
 <?php
+include_once('./common.php');
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/difficulty.sh', 'w');
-fwrite($fp, "#!/bin/bash\nDIFFICULTY=$VALUE");
-fclose($fp);
+putvar("difficulty", $VALUE);
 
 $fpa = fopen('/var/www/html/difficulty.txt', 'w');
 fwrite($fpa, "Difficulty set to: $VALUE");

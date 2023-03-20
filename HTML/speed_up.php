@@ -1,8 +1,7 @@
 <?php
+include_once('./common.php');
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/limit-rate-up.sh', 'w');
-fwrite($fp, "#!/bin/bash\nLIMIT_RATE_UP=$VALUE");
-fclose($fp);
+putvar("limit_rate_up", $VALUE);
 
 echo "Upload Speed limit set to $VALUE kB/s";
 ?>

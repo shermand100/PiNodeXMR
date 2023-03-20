@@ -1,8 +1,7 @@
 <?php
+include_once('./common.php');
 $VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/i2p-address.sh', 'w');
-fwrite($fp, "#!/bin/bash\nI2P_ADDRESS=$VALUE");
-fclose($fp);
+putvar("i2p_address", $VALUE);
 
 $fpa = fopen('/var/www/html/i2p-address.txt', 'w');
 fwrite($fpa, "Your I2P address is set to: $VALUE");
