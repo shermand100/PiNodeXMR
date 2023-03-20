@@ -10,11 +10,6 @@
 #shellcheck source=common.sh
 . /home/nanode/common.sh
 
-#Welcome
-if (whiptail --title "Nanode Ubuntu Installer" --yesno "To install Nanode using this installer the following condition is required\n\n* You are logged in as user 'pi' or 'ubuntu'\n* Would you like to continue?" 12 60); then
-
-whiptail --title "Nanode Ubuntu Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds.\n\nOnce complete your Username will be 'nanode' with Password 'Nanode'" 12 78
-
 ##Create new user 'nanode'
 sudo adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 
@@ -73,8 +68,6 @@ sudo chmod 755 /home/nanode/ubuntu-install-continue.sh
 ##make script run when user logs in
 echo '. /home/nanode/ubuntu-install-continue.sh' | sudo tee -a /home/nanode/.profile
 
-whiptail --title "Nanode Continue Install" --msgbox "I've installed everything I can as the default user\n\nThe system now requires a reboot for changes to be made, allow 5 minutes then login as 'nanode'\n\nSelect ok to continue with reboot" 16 60
-
 showtext \
 	"****************************************
 	****************************************
@@ -87,10 +80,3 @@ showtext \
 
 sleep 3
 sudo reboot
-
-else
-exit 0
-fi
-
-
-

@@ -20,9 +20,6 @@ touch "$DEBUG_LOG"
 	####################"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
-whiptail --title "Nanode continues Ubuntu LTS Installer" --msgbox "Your Nanode is taking shape...\n\nThis next part will take ~80 minutes installing Monero and Nanode \n\nSelect ok to continue setup" 16 60
-###Continue as 'nanode'
-
 ###Continue as 'nanode'
 cd || exit 1
 #showtext "Lock old user 'pi'"
@@ -239,7 +236,6 @@ wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR
 
 ## Install complete
 showtext "All Installs complete"
-whiptail --title "Nanode Continue Install" --msgbox "Your Nanode is ready\n\nInstall complete. When you log in after the reboot use the menu to change your passwords and other features.\n\nEnjoy your Private Node\n\nSelect ok to reboot" 16 60
 showtext "****************************************"
 showtext "****************************************"
 showtext "**********Nanode rebooting**************"
