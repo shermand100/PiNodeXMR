@@ -97,7 +97,6 @@ case $CHOICE in
 				"1)" "Update Monero" \
 				"2)" "Update Nanode" \
 				"3)" "Update Blockchain Explorer" \
-				"4)" "Update P2Pool" \
 				"5)" "Update Monero-LWS" \
 				"6)" "Update system packages and dependencies" 2>&1 >/dev/tty)
 
@@ -177,34 +176,6 @@ case $CHOICE in
 									if (whiptail --title "Monero Onion Block Explorer Update" --yesno "This device thinks it's running the latest version of the Block Explorer.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Explorer Update" --no-button "Return to Main Menu"  14 78); then
 
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash -s "$NEW_VERSION_EXP"
-
-									else
-									fi
-								fi
-
-							#clean up
-							else
-							fi
-						;;
-
-					"4)")	if (whiptail --title "Update P2Pool" --yesno "This will check for and install updates to P2Pool\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
-						NEW_VERSION_P2POOL=$(curl -s https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2pool-new-ver.sh)
-						CURRENT_VERSION_P2POOL=$(getvar "versions.p2pool")
-							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_P2POOL \e[0m"
-							echo -e "\e[36mAvailable Version: $NEW_VERSION_P2POOL \e[0m"
-							sleep "3"
-								if [ $CURRENT_VERSION_P2POOL -lt $NEW_VERSION_P2POOL ]; then
-									if (whiptail --title "P2Pool Updater" --yesno "An update has been found for P2Pool. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
-
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash -s "$NEW_VERSION_P2POOL"
-
-									else
-									fi
-
-								else
-									if (whiptail --title "P2Pool Updater" --yesno "This device thinks it's running the latest version of P2Pool.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
-
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash -s "$NEW_VERSION_P2POOL"
 
 									else
 									fi

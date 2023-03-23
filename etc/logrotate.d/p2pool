@@ -1,7 +1,0 @@
-/home/nanode/p2pool/build/p2pool.log {
-        su nanode nanode
-        rotate 0
-        size 2M
-        nocompress
-        missingok
-}

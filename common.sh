@@ -37,7 +37,6 @@ services-stop() {
 	sudo systemctl stop moneroI2PPrivate.service
 	sudo systemctl stop moneroCustomNode.service
 	sudo systemctl stop moneroPublicRPCPay.service
-	sudo systemctl stop p2pool.service
 }
 
 #Define Restart Monero Node

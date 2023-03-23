@@ -13,6 +13,5 @@
 	echo -n "I2P     Node: " && sudo systemctl status moneroI2PPrivate.service | sed -n '3'p | cut -c13-;
 	echo -n "Custom  Node: " && sudo systemctl status moneroCustomNode.service | sed -n '3'p | cut -c13-;		
 	echo -n "Explorer    : " && sudo systemctl status blockExplorer.service | sed -n '3'p | cut -c13-;
-	echo -n "P2Pool Server: " && sudo systemctl status p2pool.service | sed -n '3'p | cut -c13-;
-	echo -n "Monero-LWS  : " && sudo systemctl status monero-lws.service | sed -n '3'p | cut -c13-;	
+	echo -n "Monero-LWS  : " && sudo systemctl status monero-lws.service | sed -n '3'p | cut -c13-;
 	) > /var/www/html/iamrunning_version.txt

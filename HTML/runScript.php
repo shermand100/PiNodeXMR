@@ -115,16 +115,6 @@ switch($function) {
     exec("sudo systemctl restart log-io-file");
     echo "PiNodeXMR has restarted the Log-io File service";
     break;
-  case 'p2pool-start':
-    exec("sudo systemctl start p2pool.service");
-    exec("sudo systemctl enable p2pool.service");
-    echo "Start Command Sent for P2Pool";
-    break;
-  case 'p2pool-stop':
-    exec("sudo systemctl stop p2pool.service");
-    exec("sudo systemctl disable p2pool.service");
-    echo "Stop Command Sent for P2Pool";
-    break;
   case 'explorer-start':
     exec("sudo systemctl start blockExplorer.service");
     exec("sudo systemctl enable blockExplorer.service");

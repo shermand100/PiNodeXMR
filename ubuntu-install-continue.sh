@@ -55,10 +55,6 @@ sudo make
 sudo mv lib/libg* /usr/lib/
 cd || exit 1
 } 2>&1 | tee -a "$DEBUG_LOG"
-##Installing dependencies for --- P2Pool
-showtext "Installing dependencies for --- P2Pool"
-sudo apt-get install git build-essential cmake libuv1-dev libzmq3-dev libsodium-dev libpgm-dev libnorm-dev libgss-dev -y
-
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 showtext "Checking all dependencies are installed for --- Miscellaneous"
@@ -172,24 +168,6 @@ cd || exit 1
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
 # ********************************************
-
-showtext "Installing P2Pool"
-{
-git clone --recursive https://github.com/SChernykh/p2pool
-cd p2pool || exit 1
-git checkout tags/v2.2.1
-mkdir build && cd build || exit 1
-cmake ..
-make -j2
-} 2>&1 | tee -a "$DEBUG_LOG"
-showtext "Success"
-
-#Manage P2pool log file ia log rotate
-{
-sudo mv /home/nanode/Nanode/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool
-sudo chmod 644 /etc/logrotate.d/p2pool
-sudo chown root /etc/logrotate.d/p2pool
-} 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
