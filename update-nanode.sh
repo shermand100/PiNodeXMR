@@ -230,9 +230,3 @@ showtext "
 End update-nanode.sh script $(date)
 ####################
 "
-
-whiptail --title "Nanode Updater" --msgbox "\n\nYour Nanode has been updated to version ${NEW_VERSION_PI}" 12 78
-
-
-#Update complete - Return to menu
-./setup.sh

@@ -28,28 +28,24 @@ case $CHOICE in
 
 				case $CHOICE2 in
 
-					"1)")	whiptail --title "Nanode Settings" --msgbox "You will now be taken to the Ubuntu menu to configure your hardware" 8 78;
 							sudo armbian-config
 					;;
 
 					"2)") 	if (whiptail --title "Nanode Set Password" --yesno "This will change your SSH/Web terminal log in password\n\nWould you like to continue?" 12 78); then
 					. /home/nanode/setupMenuScripts/setup-password-master.sh
 							else
-					sleep 2
 							fi
 					;;
 
 					"3)") 	if (whiptail --title "Nanode Set Password" --yesno "This will set your credentials needed to connect your wallet to your node\n\nWould you like to continue?" 12 78); then
 					. /home/nanode/setupMenuScripts/setup-password-monerorpc.sh
 							else
-					sleep 2
 							fi
 					;;
 
 					"4)")	if (whiptail --title "Nanode configure storage" --yesno "This will allow you to add USB storage for the Monero blockchain.\n\nConnect your device now.\n\nWould you like to continue?" 16 78); then
 					. /home/nanode/setupMenuScripts/setup-usb-select-device.sh
 							else
-					sleep 2
 							fi
 					;;
 					#Section 5 "Nanode Support Scripts" created to give ability of giving support to a user that requires complex or unique commands that they may not be able to action themselves. 3 scripts will be available, with default script action of no changes. User will be directed to activate the relevent script to assist them.
@@ -64,26 +60,22 @@ case $CHOICE in
 					"1)")	if (whiptail --title "Nanode Support Scripts" --yesno "This will download and run the Nanode support script #1 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh\n\nWould you like to continue?" 12 78); then
 					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh | bash
 							else
-					sleep 2
 							fi
 					;;
 
 					"2)") 	if (whiptail --title "Nanode Support Scripts" --yesno "This will download and run the Nanode support script #2 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh\n\nWould you like to continue?" 12 78); then
 					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh | bash
 							else
-					sleep 2
 							fi
 					;;
 
 					"3)") 	if (whiptail --title "Nanode Support Scripts" --yesno "This will download and run the Nanode support script #3 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh\n\nWould you like to continue?" 12 78); then
 					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh | bash
 							else
-					sleep 2
 							fi
 					;;
 					esac
 							else
-					sleep 2
 							fi
 					;;
 
@@ -94,10 +86,7 @@ case $CHOICE in
 					cd ats
 					make
 					sudo make install
-					sleep 10
-					whiptail --title "ATS : by tuxd3v" --msgbox "The ATS (Active Thermal Service) tool has been installed on your device\nCheck the service is functioning with 'sudo systemctl status ats'" 8 78;
 							else
-					sleep 2
 							fi
 					;;
 				esac
@@ -127,7 +116,6 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero.sh | bash
 
 									else
-									whiptail --title "Nanode Update Monero" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 
 								else
@@ -136,13 +124,11 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero.sh | bash
 
 									else
-									whiptail --title "Nanode Update Monero" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 								fi
 
 							#clean up
 							else
-							whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;
 
@@ -158,7 +144,6 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-nanode.sh | bash -s "$NEW_VERSION_PI"
 
 									else
-									whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 
 								else
@@ -167,13 +152,11 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-nanode.sh | bash -s "$NEW_VERSION_PI"
 
 									else
-									whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 								fi
 
 							#clean up
 							else
-							whiptail --title "Nanode Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;
 
@@ -182,14 +165,12 @@ case $CHOICE in
 						CURRENT_VERSION_EXP=$(getvar "versions.exp")
 							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_EXP \e[0m"
 							echo -e "\e[36mAvailable Version: $NEW_VERSION_EXP \e[0m"
-							sleep 3
 								if [ $CURRENT_VERSION_EXP -lt $NEW_VERSION_EXP ]; then
 									if (whiptail --title "Monero Onion Block Explorer Update" --yesno "An update to the Monero Block Explorer is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78); then
 
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash -s "$NEW_VERSION_EXP"
 
 									else
-									whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 
 								else
@@ -198,13 +179,11 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash -s "$NEW_VERSION_EXP"
 
 									else
-									whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 								fi
 
 							#clean up
 							else
-							whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;
 
@@ -220,7 +199,6 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash -s "$NEW_VERSION_P2POOL"
 
 									else
-									whiptail --title "P2Pool Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 
 								else
@@ -229,13 +207,11 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash -s "$NEW_VERSION_P2POOL"
 
 									else
-									whiptail --title "P2Pool Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 								fi
 
 							#clean up
 							else
-							whiptail --title "P2Pool Updater" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;
 
@@ -252,7 +228,6 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash -s "$NEW_VERSION_LWS"
 
 									else
-									whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 
 								else
@@ -261,13 +236,11 @@ case $CHOICE in
 									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash -s "$NEW_VERSION_LWS"
 
 									else
-									whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 									fi
 								fi
 
 							#clean up
 							else
-							whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;
 
@@ -280,9 +253,7 @@ case $CHOICE in
 							sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a debug.log
 							##Auto remove any obsolete packages
 							sudo apt-get autoremove -y 2>&1 | tee -a debug.log
-							sleep 2
 							else
-							sleep 2
 							fi
 						;;
 				esac
@@ -309,58 +280,41 @@ case $CHOICE in
 							"3)")	if (whiptail --title "Nanode Clear Peer List" --yesno "There are occassions where the group of nodes you are connected to incorrectly report the top block height or otherwise prevent normal node operation. This option deletes p2pstate.bin and will allow Monero to build a fresh peer list on next node start.\n\nStop your Monero node before performing this action\n\nWould you like to continue?" 14 78); then
 									rm ~/.bitmonero/p2pstate.bin
 									echo -e "\e[32mDeleting Peer list...\e[0m"
-									sleep 3
-									whiptail --title "Nanode Clear Peer List" --msgbox "The peer list (p2pstate.bin) has been deleted. When you restart your node, a fresh list will be created." 20 78
 									else
-									whiptail --title "Nanode Clear Peer List" --msgbox "No changes have been made" 20 78
-									sleep 2
 									fi
 								;;
 							"4)") if (whiptail --title "Monero-LWS Install" --yesno "This will install the functional but developing Monero-LWS service\nOnce complete, the generated SSL certificate will also need installing on your wallet device\n\nWould you like to continue?" 14 78); then
 									echo -e "\e[32mChecking dependencies\e[0m"
-									sleep 2
 									#Check dependencies (Should be installed already from Monero install)
 									sudo apt update && sudo apt install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y
 									showtext "Downloading VTNerd Monero-LWS"
-									sleep 2
 									git clone --recursive https://github.com/vtnerd/monero-lws.git;
 									showtext "Configuring install"
-									sleep 2
 									cd monero-lws
 									git checkout release-v0.2_0.18
 									mkdir build && cd build
 									cmake -DMONERO_SOURCE_DIR=/home/nanode/monero -DMONERO_BUILD_DIR=/home/nanode/monero/build/release ..
 									showtext "Building VTNerd Monero-LWS"
-									sleep 2
 									make
 									cd
 									showtext "Creating SSL Certificates for wallet device bound to this local IP"
-									sleep 2
 									mkdir ~/lwsSslCert && cd lwsSslCert
 									#Generate cert and key
 									. /home/nanode/setupMenuScripts/antelleGenrateIpCert.sh $(hostname -I)
-									sleep 2
 									#Generate Android Cert and Key pair
 									openssl pkcs12 -export -in cert.pem -inkey key.pem -out androidCert.p12
-									sleep 2
 									#Set IP for systemd monero-lws
 									. /home/nanode/variables/IPforLWS.sh
 									#Install complete
-									whiptail --title "Monero-LWS installer" --msgbox "\nThe Monero-LWS installation is complete and SSL certificates have been generated.\n\nA copy of the generated /home/nanode/lwsSslCert/cert.pem should be added to (windows) 'LocalComputer\Trusted Root Certification Authorities\Certificates' for use with MyMonero desktop... " 20 78
-									whiptail --title "Monero-LWS installer" --msgbox "\nFor Android Lightweight Wallets the\n/home/nanode/lwsSslCert/androidCert.p12 should be installed via\n'Settings>Security>Encryption&Credentials>Install certificates from storage'..." 20 78
 											if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS on PiNodeXMR boot?" 14 78); then
 											sudo systemctl enable monero-lws.service
 											else
-											sleep 1
 											fi
 											if (whiptail --title "Monero-LWS Install" --yesno "\nWould you like to start Monero-LWS now?" 14 78); then
 											sudo systemctl start monero-lws.service
 											else
-											sleep 1
 											fi
-									whiptail --title "Monero-LWS install complete" --msgbox "\nInstallation and configuration is now complete\n\nUSe the 'Monero-LWS Admin' tool to add your address and view key pair" 12 78
 									else
-									sleep 2
 									fi
 								;;
 								"5)") if (whiptail --title "Nanode Monero-LWS Admin" --yesno "This tool is for adding your wallet address and view key so Monero-LWS can scan for your transactions in the background.\n\nMonero-LWS must be installed first\n\nWould you like to continue?" 14 78); then
@@ -371,17 +325,14 @@ case $CHOICE in
 								# set wallet addres var
 								walletadd=$( cat $_temp )
 								shred $_temp
-								whiptail --title "Monero-LWS Wallet View Key" --msgbox "\nYou will next be asked for the view key for the address you have just provided. Take care to ensure you provide the VIEW KEY, NOT THE PRIVATE KEY" 12 78
 								whiptail --title "Monero-LWS Wallet View Key" --inputbox "VIEW KEY:" 10 60 2>$_temp
 								# set wallet addres var
 								viewkey=$( cat $_temp )
 								shred $_temp
 								showtext "Configuring Monero_LWS with the provided Wallet address and View Key..."
-								sleep 2
 								/home/nanode/monero-lws/build/src/monero-lws-admin add_account $walletadd $viewkey
 								##Rescan address: (Tell lws-admin to rescan from block <0> (change as required) for tx belonging to address and continue to monitor)
 								/home/nanode/monero-lws/build/src/monero-lws-admin rescan 0 $walletadd
-								whiptail --title "Monero-LWS Wallet added" --msgbox "\nThe credentials you supplied have been passed to Monero-LWS for monitoring. The service is scanning for historic outputs that belong to that wallet which will take some time on this first run." 12 78
 								else
 									. /home/nanode/setup.sh
 									fi
@@ -389,19 +340,13 @@ case $CHOICE in
 								"7)") if (whiptail --title "SSL Certificate generation" --yesno "This will now generate self-signed SSL certifictes for this device.\n\nNote that the certificate is bound to this local device IP $(hostname -I | awk '{print $1}'), a change to this address will render this certificate invalid.\n\nYou will also be asked to create an 'export password', this will be used by you to add the generated certificates to your other devices\n\nWould you like to continue?" 18 78); then
 								cd
 								showtext "Creating SSL Certificates for wallet device bound to this local IP"
-								sleep 2
 								mkdir ~/lwsSslCert && cd lwsSslCert
 								#Generate cert and key
 								. /home/nanode/setupMenuScripts/antelleGenrateIpCert.sh $(hostname -I)
-								sleep 2
 								#Generate Android Cert and Key pair
 								openssl pkcs12 -export -in cert.pem -inkey key.pem -out androidCert.p12
-								sleep 2
 								#Generation complete
-								whiptail --title "SSL Certificate generation" --msgbox "\nSSL certificates have been generated.\n\nA copy of the generated\n/home/nanode/lwsSslCert/cert.pem\nshould be added to (windows)\n'LocalComputer\Trusted Root Certification Authorities\Certificates'\nfor use with desktop devices... " 20 78
-								whiptail --title "SSL Certificate generation" --msgbox "\nFor Android devices the\n/home/nanode/lwsSslCert/androidCert.p12\nshould be installed via\n'Settings>Security>Encryption&Credentials>Install certificates from storage'...\n\nReturning to setup menu" 20 78
 								else
-									sleep 2
 									fi
 							;;
 				esac
@@ -423,34 +368,27 @@ case $CHOICE in
 							"1)")	if (whiptail --title "Nanode Install tor" --yesno "Some countries, for censorship, political or legal reasons do not look favorably on tor and other anonymity services, so tor is not installed on this device by default. However this option can install it now for you.\n\nWould you like to continue?" 14 78); then
 									. /home/nanode/setupMenuScripts/setup-tor.sh
 									else
-									sleep 2
 									fi
 								;;
 
 							"2)")	if (whiptail --title "Nanode tor NYX" --yesno "This tool will allow you to monitor tor bandwidth usage\n\nWhen prompted for a password, enter 'Nanode'\nAnd to exit the utility press 'CTRL+C' \n\nWould you like to continue?" 12 78); then
 									nyx
 									else
-									sleep 2
 									fi
 								;;
 
 							"3)")	if (whiptail --title "Nanode Start/Stop tor" --yesno "Manually Start or Stop the service." --yes-button "Start tor" --no-button "Stop tor"  14 78); then
 									sudo systemctl start tor
 									sudo systemctl enable tor
-									whiptail --title "Nanode tor" --msgbox "The tor service has been started" 12 78;
-									sleep 2
 									else
 									sudo systemctl stop tor
 									sudo systemctl disable tor
-									whiptail --title "Nanode tor" --msgbox "The tor service has been stopped" 12 78;
-									sleep 2
 									fi
 								;;
 
 							"4)")	if (whiptail --title "Nanode Install I2P" --yesno "This will install the I2P server/router onto your Nanode\n\nWould you like to continue?" 14 78); then
 									. /home/nanode/setupMenuScripts/setup-i2p.sh
 									else
-									sleep 2
 									fi
 								;;
 
@@ -458,21 +396,16 @@ case $CHOICE in
 									i2prouter start;
 									sudo systemctl start i2p;
 									sudo systemctl enable i2p;
-									whiptail --title "Nanode I2P" --msgbox "I2P server has been started\n\nYou now have access to the I2P config menu found at $(hostname -I | awk '{print $1}'):7657" 12 78;
-									sleep 2
 									else
 									i2prouter stop;
 									sudo systemctl stop i2p;
 									sudo systemctl disable i2p;
-									whiptail --title "Nanode I2P" --msgbox "I2P server has been stopped" 12 78;
-									sleep 2
 									fi
 								;;
 
 							"6)")	if (whiptail --title "Nanode PiVPN Install" --yesno "This feature will install PiVPN on your Nanode\n\nPiVPN is a simple to configure openVPN server.\n\nFor more info see https://pivpn.dev/\n\nWould you like to continue?" 12 78); then
 									. /home/nanode/setupMenuScripts/setup-PiVPN.sh
 									else
-									sleep 2
 									fi
 								;;
 
@@ -485,10 +418,7 @@ case $CHOICE in
 
 								"1)")	if (whiptail --title "Web Interface Password Set" --yesno "Set the password used to access the Web Interface" --yes-button "Set Password" --no-button "Cancel" 14 78); then
 									sudo htpasswd -c /etc/apache2/.htpasswd nanode
-									sleep 3
-									whiptail --title "Web Interface Password Set" --msgbox "The Nanode Web Interface Password has been configured" 12 78;
 									else
-									sleep 2
 									fi
 								;;
 
@@ -499,10 +429,7 @@ case $CHOICE in
 									sudo systemctl restart apache2
 									#Update htmlPasswordRequired flag for use with PiNodeXMR updater script
 									putvar HTMLPASSWORDREQUIRED TRUE
-									sleep 2
-									whiptail --title "Web Interface Password Enable" --msgbox "The Nanode Web Interface Password has been enabled" 12 78;
 									else
-									sleep 2
 									fi
 								;;
 
@@ -513,10 +440,7 @@ case $CHOICE in
 									sudo systemctl restart apache2
 									#Update htmlPasswordRequired flag for use with Nanode updater script
 									putvar "HTMLPASSWORDREQUIRED" "FALSE"
-									sleep 2
-									whiptail --title "Web Interface Password Disable" --msgbox "The Nanode Web Interface Password has been disabled" 12 78;
 									else
-									sleep 2
 									fi
 								;;
 
@@ -526,7 +450,6 @@ case $CHOICE in
 							"8)")	if (whiptail --title "Nanode Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
 									. /home/nanode/setupMenuScripts/setup-noip.sh
 									else
-									sleep 2
 									fi
 								;;
 

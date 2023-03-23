@@ -51,10 +51,6 @@ services-stop() {
 # 8 = tor public
 services-start() {
 bs="$(getvar "boot_status")"
-	if [ "$bs" -eq 2 ]
-	then
-		whiptail --title "Monero Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60
-	else
 		case $bs in
 			3)
 				sudo systemctl start moneroPrivate.service
@@ -78,8 +74,6 @@ bs="$(getvar "boot_status")"
 				log "Very strange"
 				;;
 		esac
-		whiptail --title "Monero Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
-	fi
 }
 
 export -f log

@@ -44,5 +44,3 @@ echo "Update Complete" 2>&1 | tee -a /home/nanode/debug.log
 echo "####################" 2>&1 | tee -a /home/nanode/debug.log
 echo "End setup-update-monero-lws.sh script $(date)" 2>&1 | tee -a /home/nanode/debug.log
 echo "####################" 2>&1 | tee -a /home/nanode/debug.log
-
-whiptail --title "Monero-LWS Updater" --msgbox "\nThe Monero-LWS installation is complete and SSL certificates have been preserved.\n\nReturning to Menu..." 20 78

@@ -94,6 +94,3 @@ log "Update Complete
 ####################
 End setup-update-monero.sh script $(date)
 ####################"
-
-
-./setup.sh
