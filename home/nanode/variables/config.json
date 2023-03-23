@@ -23,6 +23,7 @@
     "prune_status": "0",
     "rpcp": "password",
     "rpcu": "PiNodeXMR",
+    "data_dir": "/run/media/nanode/ssd/bitmonero",
     "versions": {
       "monero": "01812",
       "exp": "20220506",

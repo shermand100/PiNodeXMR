@@ -18,10 +18,9 @@ LIMIT_RATE_DOWN=$(getvar "limit_rate_down")
 I2P_ADDRESS=$(getvar "i2p_address")
 I2P_PORT=$(getvar "i2p_port")
 I2P_TX_PROXY_PORT=$(getvar "i2p_tx_proxy_port")
+DATA_DIR=$(getvar "data_dir")
 
 #Update power cycle reboot state
 putvar "boot_status" "8"
 #Start Monerod
-cd /home/nanode/monero/build/release/bin/ || exit 1
-
-DNS_PUBLIC=tcp ./monerod --p2p-bind-ip 127.0.0.1 --rpc-bind-ip="$DEVICE_IP" --rpc-bind-port="$MONERO_PORT" --rpc-login="$RPCu:$RPCp" --confirm-external-bind --anonymous-inbound "$I2P_ADDRESS,127.0.0.1:$I2P_PORT" --tx-proxy "i2p,127.0.0.1:$I2P_TX_PROXY_PORT" --rpc-ssl disabled --in-peers="$IN_PEERS" --out-peers="$OUT_PEERS" --limit-rate-up="$LIMIT_RATE_UP" --limit-rate-down="$LIMIT_RATE_DOWN" --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/nanode/monero/build/release/bin/monerod.pid --enable-dns-blocklist --non-interactive
+DNS_PUBLIC=tcp /home/nanode/monero/build/release/bin/monerod --data-dir="$DATA_DIR" --p2p-bind-ip 127.0.0.1 --rpc-bind-ip="$DEVICE_IP" --rpc-bind-port="$MONERO_PORT" --rpc-login="$RPCu:$RPCp" --confirm-external-bind --anonymous-inbound "$I2P_ADDRESS,127.0.0.1:$I2P_PORT" --tx-proxy "i2p,127.0.0.1:$I2P_TX_PROXY_PORT" --rpc-ssl disabled --in-peers="$IN_PEERS" --out-peers="$OUT_PEERS" --limit-rate-up="$LIMIT_RATE_UP" --limit-rate-down="$LIMIT_RATE_DOWN" --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/nanode/monero/build/release/bin/monerod.pid --enable-dns-blocklist --non-interactive
