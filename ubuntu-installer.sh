@@ -8,75 +8,201 @@
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
 
 #shellcheck source=common.sh
-. /home/nanode/common.sh
+. home/nanode/common.sh
 
 ##Create new user 'nanode'
-sudo adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+showtext "Create user nanode"
+adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+
+showtext "Move home contents"
+cp -r home/nanode/* /home/nanode/
+cp -r etc/* /etc/
 
 #Set nanode password 'Nanode'
-echo "nanode:Nanode" | sudo chpasswd
+echo "nanode:Nanode" | chpasswd
 showtext "nanode password changed to 'Nanode'"
-
-##Replace file /etc/sudoers to set global sudo permissions/rules
-showtext "Download and replace /etc/sudoers file"
-#FIXME: change url
-wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/sudoers
-sudo chmod 0440 ~/sudoers
-sudo chown root ~/sudoers
-sudo mv ~/sudoers /etc/sudoers
-showtext "Global permissions changed"
 
 ##Change system hostname to Nanode
 showtext "Changing system hostname to 'Nanode'"
-echo 'Nanode' | sudo tee /etc/hostname
-#sudo sed -i '6d' /etc/hosts
-echo '127.0.0.1       Nanode' | sudo tee -a /etc/hosts
-sudo hostname Nanode
+echo 'Nanode' | tee /etc/hostname
+#sed -i '6d' /etc/hosts
+echo '127.0.0.1       Nanode' | tee -a /etc/hosts
+hostname Nanode
 
 ##Disable IPv6 (confuses Monero start script if IPv6 is present)
 showtext "Disable IPv6"
-echo 'net.ipv6.conf.all.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
-echo 'net.ipv6.conf.default.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
-echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
+echo 'net.ipv6.conf.all.disable_ipv6 = 1' | tee -a /etc/sysctl.conf
+echo 'net.ipv6.conf.default.disable_ipv6 = 1' | tee -a /etc/sysctl.conf
+echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | tee -a /etc/sysctl.conf
 
 ##Perform system update and upgrade now. This then allows for reboot before next install step, preventing warnings about kernal upgrades when installing the new packages (dependencies).
 #setup debug file to track errors
 showtext "Create Debug log"
-sudo touch "$DEBUG_LOG"
-sudo chown nanode "$DEBUG_LOG"
-sudo chmod 777 "$DEBUG_LOG"
+touch "$DEBUG_LOG"
+chown nanode "$DEBUG_LOG"
+chmod 777 "$DEBUG_LOG"
 
 ##Update and Upgrade system
 showtext "Receiving and applying Ubuntu updates to latest version"
 {
-sudo apt-get update
-sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
-sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade
-sudo apt-get upgrade -y
+apt-get update
+apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
+apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade
+apt-get upgrade -y
 ##Auto remove any obsolete packages
-sudo apt-get autoremove -y 2>&1 | tee -a "$DEBUG_LOG"
+apt-get autoremove -y 2>&1 | tee -a "$DEBUG_LOG"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
-#Download stage 2 Install script
-showtext "Downloading Stage 2 Installer script"
-#FIXME: change url
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-install-continue.sh
-sudo mv ~/ubuntu-install-continue.sh /home/nanode/
-sudo chown nanode /home/nanode/ubuntu-install-continue.sh
-sudo chmod 755 /home/nanode/ubuntu-install-continue.sh
+###Begin2
 
-##make script run when user logs in
-echo '. /home/nanode/ubuntu-install-continue.sh' | sudo tee -a /home/nanode/.profile
+#showtext "Lock old user 'pi'"
+passwd --lock pi
+showtext "User 'pi' Locked"
 
-showtext \
-	"****************************************
-	****************************************
-	**********Nanode rebooting**************
-	**********Reminder:*********************
-	**********User: 'nanode'****************
-	**********Password: 'Nanode'************
-	****************************************
-	****************************************"
+##Update and Upgrade system (This step repeated due to importance and maybe someone using this installer sript out-of-sequence)
+showtext "Receiving and applying Ubuntu updates to the latest version"
+{
+	apt-get update
+	apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
+	apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade
+	apt-get upgrade -y
+} 2>&1 | tee -a "$DEBUG_LOG"
 
-sleep 3
-sudo reboot
+##Installing dependencies for --- Web Interface
+showtext "Installing dependencies for --- Web Interface"
+apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a "$DEBUG_LOG"
+usermod -a -G nanode www-data
+##Installing dependencies for --- Monero
+# showtext "Installing dependencies for --- Monero"
+# apt-get update
+# apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a "$DEBUG_LOG"
+log "manual build of gtest for --- Monero"
+{
+cd /usr/src/gtest || exit 1
+apt-get install libgtest-dev -y
+cmake .
+make
+mv lib/libg* /usr/lib/
+cd || exit 1
+} 2>&1 | tee -a "$DEBUG_LOG"
+
+##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
+showtext "Checking all dependencies are installed for --- Miscellaneous"
+{
+apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev cron -y
+apt-get install exfat-fuse exfat-utils -y
+} 2>&1 | tee -a "$DEBUG_LOG"
+#libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
+
+##Clone Nanode to device from git
+showtext "Downloading Nanode files"
+# Update Link
+#git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
+
+
+##Configure ssh security. Allows only user 'nanode'. Also 'root' login disabled via ssh, restarts config to make changes
+showtext "Configuring SSH security"
+{
+chmod 644 /etc/ssh/sshd_config
+chown root /etc/ssh/sshd_config
+systemctl restart sshd.service
+} 2>&1 | tee -a "$DEBUG_LOG"
+showtext "SSH security config complete"
+
+
+##Copy Nanode scripts to home folder
+showtext "Moving Nanode scripts into position"
+{
+mv /home/nanode/Nanode/home/nanode/* /home/nanode/
+mv /home/nanode/Nanode/home/nanode/.profile /home/nanode/
+chmod 777 -R /home/nanode/* #Read/write access needed by www-data to action php port, address customisation
+} 2>&1 | tee -a "$DEBUG_LOG"
+showtext "Success"
+
+##Add Nanode systemd services
+showtext "Add Nanode systemd services"
+{
+mv /home/nanode/Nanode/etc/systemd/system/*.service /etc/systemd/system/
+chmod 644 /etc/systemd/system/*.service
+chown root /etc/systemd/system/*.service
+systemctl daemon-reload
+systemctl start moneroStatus.service
+systemctl enable moneroStatus.service
+} 2>&1 | tee -a "$DEBUG_LOG"
+showtext "Success"
+
+showtext "Configure apache server for access to monero log file"
+{
+mv /home/nanode/Nanode/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+chmod 777 /etc/apache2/sites-enabled/000-default.conf
+chown root /etc/apache2/sites-enabled/000-default.conf
+/etc/init.d/apache2 restart
+} 2>&1 | tee -a "$DEBUG_LOG"
+
+showtext "Success"
+
+##Setup local hostname
+showtext "Setup local hostname"
+{
+mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
+/etc/init.d/avahi-daemon restart
+} 2>&1 | tee -a "$DEBUG_LOG"
+
+showtext "Downloading Monero"
+
+apt-get install -y monero | tee -a "$DEBUG_LOG"
+
+# ********************************************
+# ********END OF MONERO SOURCE BULD **********
+# ********************************************
+
+##Install log.io (Real-time service monitoring)
+#Establish Device IP
+DEVICE_IP=$(getip)
+showtext "Installing log.io"
+
+{
+apt-get install nodejs npm -y
+npm install -g log.io
+npm install -g log.io-file-input
+mkdir -p ~/.log.io/inputs/
+mv /home/nanode/Nanode/.log.io/inputs/file.json ~/.log.io/inputs/file.json
+mv /home/nanode/Nanode/.log.io/server.json ~/.log.io/server.json
+sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json
+sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json
+systemctl start log-io-server.service
+systemctl start log-io-file.service
+systemctl enable log-io-server.service
+systemctl enable log-io-file.service
+} 2>&1 | tee -a "$DEBUG_LOG"
+
+##Install crontab
+log "Install crontab"
+showtext "Setup crontab"
+crontab /home/nanode/Nanode/var/spool/cron/crontabs/nanode 2>&1 | tee -a "$DEBUG_LOG"
+showtext "Success"
+
+## Remove left over files from git clone actions
+log "Remove left over files from git clone actions"
+showtext "Cleanup leftover directories"
+rm -r /home/nanode/Nanode/ 2>&1 | tee -a "$DEBUG_LOG"
+
+##End debug log
+{
+	showtext "
+	####################
+	End ubuntu-install-continue.sh script $(date)
+	####################"
+} 2>&1 | tee -a "$DEBUG_LOG"
+
+## Install complete
+showtext "All Installs complete"
+showtext "****************************************"
+showtext "****************************************"
+showtext "**********Nanode rebooting**************"
+showtext "**********Reminder:*********************"
+showtext "**********User: 'nanode'****************"
+showtext "**********Password: 'Nanode'************"
+showtext "****************************************"
+showtext "****************************************"
+reboot

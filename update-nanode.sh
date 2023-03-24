@@ -35,7 +35,6 @@ sudo apt-get update && sudo apt-get install build-essential cmake pkg-config lib
 ##Checking all dependencies are installed for miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
 showtext "Checking all other dependencies are installed..."
 sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev exfat-fuse -y 2>&1 | tee -a "$DEBUG_LOG"
-#libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 #Download update files
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add  new permissions to www-data user for interface buttons)
