@@ -52,18 +52,20 @@ log "manual build of gtest for Monero"
 
 showtext "Downloading Monero"
 
-git clone --recursive https://github.com/monero-project/monero
-showtext "Building Monero
-****************************************************
-****************************************************
-***This will take a while - Hardware Dependent***
-****************************************************
-****************************************************"
-cd monero && git submodule init && git submodule update
-git checkout "$RELEASE"
-git submodule sync && git submodule update
-USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
-cd || exit 1
+# git clone --recursive https://github.com/monero-project/monero
+# showtext "Building Monero
+# ****************************************************
+# ****************************************************
+# ***This will take a while - Hardware Dependent***
+# ****************************************************
+# ****************************************************"
+# cd monero && git submodule init && git submodule update
+# git checkout "$RELEASE"
+# git submodule sync && git submodule update
+# USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
+# cd || exit 1
+
+sudo apt-get install -y monero | tee -a "$DEBUG_LOG"
 
 # ********************************************
 # ********END OF MONERO SOURCE BUILD **********
