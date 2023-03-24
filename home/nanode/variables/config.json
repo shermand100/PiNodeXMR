@@ -20,7 +20,6 @@
     "monero_stats_port": "18083",
     "out_peers": "-1",
     "payment_address": "",
-    "prune_status": "0",
     "rpcp": "password",
     "rpcu": "PiNodeXMR",
     "data_dir": "/run/media/nanode/ssd/bitmonero",
