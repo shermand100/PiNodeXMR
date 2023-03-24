@@ -152,9 +152,21 @@ showtext "Downloading Monero"
 
 apt-get install -y monero | tee -a "$DEBUG_LOG"
 
-# ********************************************
-# ********END OF MONERO SOURCE BULD **********
-# ********************************************
+# FIXME make block explorer work
+# showtext "Building Monero Blockchain Explore"
+# showtext "*******************************************************"
+# showtext "***This will take a few minutes - Hardware Dependent***"
+# showtext "*******************************************************"
+# log "Build Monero Onion Block Explorer"
+# {
+# git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+# cd onion-monero-blockchain-explorer || exit 1
+# mkdir build
+# cd build || exit 1
+# cmake ..
+# make
+# cd || exit 1
+# } 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
