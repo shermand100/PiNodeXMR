@@ -135,20 +135,22 @@ RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNano
 
 showtext "Downloading Monero"
 
-git clone --recursive https://github.com/monero-project/monero
-showtext "Building Monero"
-showtext "****************************************************"
-showtext "****************************************************"
-showtext "****This will take a while - Hardware Dependent*****"
-showtext "****************************************************"
-showtext "****************************************************"
-cd monero && git submodule init && git submodule update
-git checkout "$RELEASE"
-git submodule sync && git submodule update
-USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
-cd || exit 1
-#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2>&1 | tee -a "$DEBUG_LOG"
+#git clone --recursive https://github.com/monero-project/monero
+#showtext "Building Monero"
+#showtext "****************************************************"
+#showtext "****************************************************"
+#showtext "****This will take a while - Hardware Dependent*****"
+#showtext "****************************************************"
+#showtext "****************************************************"
+#cd monero && git submodule init && git submodule update
+#git checkout "$RELEASE"
+#git submodule sync && git submodule update
+#USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
+#cd || exit 1
+##Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
+#mkdir .bitmonero 2>&1 | tee -a "$DEBUG_LOG"
+
+sudo apt-get install -y monero | tee -a "$DEBUG_LOG"
 
 showtext "Building Monero Blockchain Explore"
 showtext "*******************************************************"
