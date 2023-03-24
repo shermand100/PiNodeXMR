@@ -21,7 +21,7 @@
     "out_peers": "-1",
     "payment_address": "",
     "rpcp": "password",
-    "rpcu": "PiNodeXMR",
+    "rpcu": "nanode",
     "data_dir": "/run/media/nanode/ssd/bitmonero",
     "versions": {
       "monero": "01812",
