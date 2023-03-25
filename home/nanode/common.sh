@@ -29,14 +29,14 @@ log() {
 }
 
 services-stop() {
-	sudo systemctl stop blockExplorer.service
-	sudo systemctl stop moneroPrivate.service
-	sudo systemctl stop moneroTorPrivate.service
-	sudo systemctl stop moneroTorPublic.service
-	sudo systemctl stop moneroPublicFree.service
-	sudo systemctl stop moneroI2PPrivate.service
-	sudo systemctl stop moneroCustomNode.service
-	sudo systemctl stop moneroPublicRPCPay.service
+	systemctl stop blockExplorer.service
+	systemctl stop moneroPrivate.service
+	systemctl stop moneroTorPrivate.service
+	systemctl stop moneroTorPublic.service
+	systemctl stop moneroPublicFree.service
+	systemctl stop moneroI2PPrivate.service
+	systemctl stop moneroCustomNode.service
+	systemctl stop moneroPublicRPCPay.service
 }
 
 #Define Restart Monero Node
@@ -52,22 +52,22 @@ services-start() {
 bs="$(getvar "boot_status")"
 		case $bs in
 			3)
-				sudo systemctl start moneroPrivate.service
+				systemctl start moneroPrivate.service
 				;;
 			4)
-				sudo systemctl start moneroTorPrivate.service
+				systemctl start moneroTorPrivate.service
 				;;
 			5)
-				sudo systemctl start moneroPublicRPCPay.service
+				systemctl start moneroPublicRPCPay.service
 				;;
 			6)
-				sudo systemctl start moneroPublicFree.service
+				systemctl start moneroPublicFree.service
 				;;
 			7)
-				sudo systemctl start moneroI2PPrivate.service
+				systemctl start moneroI2PPrivate.service
 				;;
 			8)
-				sudo systemctl start moneroTorPublic.service
+				systemctl start moneroTorPublic.service
 				;;
 			*)
 				log "Very strange"
