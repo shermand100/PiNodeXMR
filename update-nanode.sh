@@ -1,6 +1,6 @@
 #!/bin/bash
 #Create/ammend debug file for handling update errors:
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 NEW_VERSION_PI="${1:-$(getvar "versions.pi")}"
 touch "$DEBUG_LOG"

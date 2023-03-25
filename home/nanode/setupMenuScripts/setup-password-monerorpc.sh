@@ -1,7 +1,7 @@
 #!/bin/bash
 ##Start password config
 
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 
 # use temp file 

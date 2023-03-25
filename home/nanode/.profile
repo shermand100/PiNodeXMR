@@ -38,7 +38,3 @@ sudo systemctl start armbian-resize-filesystem
 echo -e "\e[32mComplete\e[0m"
 putvar "boot_status" "0"
 fi
-
-
-
-. /home/nanode/setup.sh

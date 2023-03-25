@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 #Extra display hidden service address incase of error on tor install
 sudo cat /var/lib/tor/hidden_service/hostname | tee /var/www/html/onion-address.txt

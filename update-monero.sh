@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 
 NEW_VERSION="${1:-$(getvar "versions.monero")}"

@@ -1,6 +1,6 @@
 #!/bin/bash
 #(1) Define variables and updater functions
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 NEW_VERSION_LWS="${1:-$(getvar "versions.lws")}"
 

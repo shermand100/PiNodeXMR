@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 NEW_VERSION_EXP="${1:-$(getvar "versions.pi")}"
 

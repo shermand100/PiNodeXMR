@@ -7,7 +7,7 @@
 # Nanode scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
 
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . home/nanode/common.sh
 
 ##Create new user 'nanode'

@@ -1,5 +1,5 @@
 #!/bin/bash
-#shellcheck source=common.sh
+#shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 #Import Start Flag Values:
 #Establish Device IP
