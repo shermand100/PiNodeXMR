@@ -1,5 +1,8 @@
 #!/bin/bash
 # Try to get system to a working state again
+# options:
+# RETAIN_BLOCKCHAIN: remove the lmdb folder, forcing a complete resync
+# REPAIR_FILESYSTEM: run XFS repair on the SSD
 
 #shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
@@ -19,8 +22,17 @@ apt update
 
 services-stop
 
-# if $PURGE_BLOCKCHAIN is set (to anything), purge the blockchain
-if [ -z ${PURGE_BLOCKCHAIN+x} ]; then
+if [ -n "$REPAIR_FILESYSTEM" ]; then
+	# awfully crude way to find SSD
+	uuid=$(lsblk -o UUID,MOUNTPOINT | grep nanode | awk '{print $1}')
+	device="/dev/disk/by-uuid/$uuid"
+	umount "$uuid"
+	xfs_repair "$device"
+	mount "$uuid"
+fi
+
+# if $RETAIN_BLOCKCHAIN is set (to anything), purge the blockchain
+if [ -z ${RETAIN_BLOCKCHAIN+x} ]; then
 	rm -rf "/run/media/nanode/bitmonero/lmdb"
 fi
 
