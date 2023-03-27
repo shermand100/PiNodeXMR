@@ -20,4 +20,4 @@ SYNC_MODE=$(getvar "sync_mode")
 
 putvar "boot_status" "3"
 #Start Monerod
-/home/nanode/monero/build/release/bin/monerod --sync-mode="$SYNC_MODE" --data-dir="$DATA_DIR" --rpc-bind-ip="$DEVICE_IP" --zmq-pub "tcp://$DEVICE_IP:18083" --rpc-bind-port="$MONERO_PORT" --confirm-external-bind --rpc-login="$RPCu:$RPCp" --rpc-ssl disabled --in-peers="$IN_PEERS" --out-peers="$OUT_PEERS" --limit-rate-up="$LIMIT_RATE_UP" --limit-rate-down="$LIMIT_RATE_DOWN" --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/nanode/monero/build/release/bin/monerod.pid --enable-dns-blocklist --detach
+/usr/bin/monerod --sync-mode="$SYNC_MODE" --data-dir="$DATA_DIR" --rpc-bind-ip="$DEVICE_IP" --zmq-pub "tcp://$DEVICE_IP:18083" --rpc-bind-port="$MONERO_PORT" --confirm-external-bind --rpc-login="$RPCu:$RPCp" --rpc-ssl disabled --in-peers="$IN_PEERS" --out-peers="$OUT_PEERS" --limit-rate-up="$LIMIT_RATE_UP" --limit-rate-down="$LIMIT_RATE_DOWN" --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /run/monerod.pid --enable-dns-blocklist --detach
