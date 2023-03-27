@@ -15,7 +15,7 @@ Start setup-update-monero.sh script $(date)
 #Download variable for current monero release version
 #FIXME: change url
 # wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
-RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+# RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
 
 #ubuntu /dev/null odd requiremnt to set permissions
 sudo chmod 666 /dev/null
@@ -65,7 +65,13 @@ showtext "Downloading Monero"
 # USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
 # cd || exit 1
 
-sudo apt-get install -y monero | tee -a "$DEBUG_LOG"
+{
+wget https://downloads.getmonero.org/arm64
+mkdir dl
+tar -xjvf arm64 -C dl
+mv dl/*/monero* /usr/bin/
+chmod a+x /usr/bin/monero*
+} 2>&1 | tee -a "$DEBUG_LOG"
 
 # ********************************************
 # ********END OF MONERO SOURCE BUILD **********
