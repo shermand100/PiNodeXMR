@@ -8,46 +8,36 @@ NEW_VERSION="${1:-$(getvar "versions.monero")}"
 touch "$DEBUG_LOG"
 echo "
 ####################
-Start setup-update-monero.sh script $(date)
+Start update-monero.sh script $(date)
 ####################
 " 2>&1 | tee -a "$DEBUG_LOG"
 
 #Download variable for current monero release version
 #FIXME: change url
 # wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
-RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+# RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
 
 #ubuntu /dev/null odd requiremnt to set permissions
 sudo chmod 666 /dev/null
 
 #Stop Node to make system resources available.
-sudo systemctl stop blockExplorer.service
-sudo systemctl stop moneroPrivate.service
-sudo systemctl stop moneroTorPrivate.service
-sudo systemctl stop moneroTorPublic.service
-sudo systemctl stop moneroPublicFree.service
-sudo systemctl stop moneroI2PPrivate.service
-sudo systemctl stop moneroCustomNode.service
-sudo systemctl stop moneroPublicRPCPay.service
-echo "Monero node stop command sent, allowing 30 seconds for safe shutdown"
-echo "Deleting Old Version"
-rm -rf /home/nanode/monero/
+services-stop
 
 # ********************************************
 # ******START OF MONERO SOURCE BUILD******
 # ********************************************
-log "manual build of gtest for Monero"
-{
-	sudo apt-get install libgtest-dev -y
-	cd /usr/src/gtest || exit 1
-	sudo cmake .
-	sudo make
-	sudo mv lib/libg* /usr/lib/
-	cd || exit 1
-	log "Check dependencies installed for --- Monero"
-	sudo apt-get update
-	sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y
-} 2>&1 | tee -a "$DEBUG_LOG"
+# log "manual build of gtest for Monero"
+# {
+# 	sudo apt-get install libgtest-dev -y
+# 	cd /usr/src/gtest || exit 1
+# 	sudo cmake .
+# 	sudo make
+# 	sudo mv lib/libg* /usr/lib/
+# 	cd || exit 1
+# 	log "Check dependencies installed for --- Monero"
+# 	sudo apt-get update
+# 	sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y
+# } 2>&1 | tee -a "$DEBUG_LOG"
 
 
 showtext "Downloading Monero"
@@ -65,7 +55,13 @@ showtext "Downloading Monero"
 # USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
 # cd || exit 1
 
-sudo apt-get install -y monero | tee -a "$DEBUG_LOG"
+{
+wget https://downloads.getmonero.org/arm64
+mkdir dl
+tar -xjvf arm64 -C dl
+mv dl/*/monero* /usr/bin/
+chmod a+x /usr/bin/monero*
+} 2>&1 | tee -a "$DEBUG_LOG"
 
 # ********************************************
 # ********END OF MONERO SOURCE BUILD **********

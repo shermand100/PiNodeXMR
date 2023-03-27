@@ -25,7 +25,7 @@ showtext() {
 }
 
 log() {
-	echo "$*" | tee -a "$DEBUG_LOG"
+	echo "$*" >> "$DEBUG_LOG"
 }
 
 services-stop() {
