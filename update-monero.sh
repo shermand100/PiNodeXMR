@@ -23,37 +23,7 @@ sudo chmod 666 /dev/null
 #Stop Node to make system resources available.
 services-stop
 
-# ********************************************
-# ******START OF MONERO SOURCE BUILD******
-# ********************************************
-# log "manual build of gtest for Monero"
-# {
-# 	sudo apt-get install libgtest-dev -y
-# 	cd /usr/src/gtest || exit 1
-# 	sudo cmake .
-# 	sudo make
-# 	sudo mv lib/libg* /usr/lib/
-# 	cd || exit 1
-# 	log "Check dependencies installed for --- Monero"
-# 	sudo apt-get update
-# 	sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y
-# } 2>&1 | tee -a "$DEBUG_LOG"
-
-
 showtext "Downloading Monero"
-
-# git clone --recursive https://github.com/monero-project/monero
-# showtext "Building Monero
-# ****************************************************
-# ****************************************************
-# ***This will take a while - Hardware Dependent***
-# ****************************************************
-# ****************************************************"
-# cd monero && git submodule init && git submodule update
-# git checkout "$RELEASE"
-# git submodule sync && git submodule update
-# USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a "$DEBUG_LOG"
-# cd || exit 1
 
 {
 wget https://downloads.getmonero.org/arm64
@@ -62,15 +32,6 @@ tar -xjvf arm64 -C dl
 mv dl/*/monero* /usr/bin/
 chmod a+x /usr/bin/monero*
 } 2>&1 | tee -a "$DEBUG_LOG"
-
-# ********************************************
-# ********END OF MONERO SOURCE BUILD **********
-# ********************************************
-
-#Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
-mkdir .bitmonero 2>&1 | tee -a "$DEBUG_LOG"
-#Clean-up used downloaded files
-rm -R ~/temp
 
 		#Update system version number
 		putvar "current_version" "$NEW_VERSION"

@@ -2,7 +2,7 @@
 #Common variables and functions
 
 DEBUG_LOG=/home/nanode/debug.log
-CONFIG_FILE=/home/nanode/config.json
+CONFIG_FILE=/home/nanode/variables/config.json
 
 getip() {
 	return "$(hostname -I | awk '{print $1}')"
