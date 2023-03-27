@@ -9,14 +9,14 @@ getip() {
 }
 
 getvar() {
-	showtext "var $1 queried"
+	log "var $1 queried"
 	jq ".config.$1" "$CONFIG_FILE"
 }
 
 putvar() {
+	log "var $1 updated to $2"
 	contents=$(jq ".config.$1 = \"$2\"" "$CONFIG_FILE")
 	echo -E "$contents" > "$CONFIG_FILE"
-	showtext "var $1 updated to $2"
 }
 
 showtext() {
