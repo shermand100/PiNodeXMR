@@ -153,14 +153,7 @@ showtext "Downloading Monero"
 # good morning i hate ubuntu
 # apt-get install -y monero | tee -a "$DEBUG_LOG"
 
-{
-wget https://downloads.getmonero.org/arm64
-mkdir dl
-tar -xjvf arm64 -C dl
-mv dl/*/monero* /usr/bin/
-chmod a+x /usr/bin/monero*
-} 2>&1 | tee -a "$DEBUG_LOG"
-
+bash ./update-monero.sh
 
 # FIXME make block explorer work
 # showtext "Building Monero Blockchain Explore"

@@ -26,16 +26,16 @@ services-stop
 showtext "Downloading Monero"
 
 {
-wget https://downloads.getmonero.org/arm64
+wget --no-verbose --show-progress --progress=dot:giga -O arm64 https://downloads.getmonero.org/arm64
 mkdir dl
 tar -xjvf arm64 -C dl
 mv dl/*/monero* /usr/bin/
 chmod a+x /usr/bin/monero*
 } 2>&1 | tee -a "$DEBUG_LOG"
 
-		#Update system version number
-		putvar "current_version" "$NEW_VERSION"
-		#cleanup old version number file
+#Update system version number
+putvar "current_version" "$NEW_VERSION"
+#cleanup old version number file
 
 #Define Restart Monero Node
 		# Key - BOOT_STATUS
