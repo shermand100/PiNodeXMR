@@ -150,7 +150,15 @@ mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 
 showtext "Downloading Monero"
 
-apt-get install -y monero | tee -a "$DEBUG_LOG"
+# good morning i hate ubuntu
+# apt-get install -y monero | tee -a "$DEBUG_LOG"
+
+{
+wget https://downloads.getmonero.org/arm64
+mkdir dl
+tar -xjvf arm64 -C dl
+} 2>&1 | tee -a "$DEBUG_LOG"
+
 
 # FIXME make block explorer work
 # showtext "Building Monero Blockchain Explore"
@@ -217,4 +225,3 @@ showtext "**********User: 'nanode'****************"
 showtext "**********Password: 'Nanode'************"
 showtext "****************************************"
 showtext "****************************************"
-reboot

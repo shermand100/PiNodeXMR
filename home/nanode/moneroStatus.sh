@@ -257,6 +257,7 @@ txPoolPending () {
 #Call status functions and loop indefinately:
 defineVariables
 while true; do
+	sleep 3
 	syncStatus
 	connectionStatus
 	txPoolStatus
