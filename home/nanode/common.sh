@@ -5,12 +5,12 @@ DEBUG_LOG=/home/nanode/debug.log
 CONFIG_FILE=/home/nanode/variables/config.json
 
 getip() {
-	return "$(hostname -I | awk '{print $1}')"
+	hostname -I | awk '{print $1}'
 }
 
 getvar() {
 	showtext "var $1 queried"
-	return "$(jq ".config.$1" "$CONFIG_FILE")"
+	jq ".config.$1" "$CONFIG_FILE"
 }
 
 putvar() {
