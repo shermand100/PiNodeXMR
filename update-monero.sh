@@ -27,18 +27,18 @@ showtext "Downloading Monero"
 
 {
 	# first install monero dependecines
-	sudo apt update
+	sudo apt-get update
 
-	sudo apt install git build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0
+	sudo apt-get install git build-essential ccache cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0
 
 	# go to home folder
 	cd ~ || exit 1
 	git clone --recursive -b "$RELEASE" https://github.com/monero-project/monero.git
 
 	cd monero/ || exit 1
+	USE_SINGLE_BUILDDIR=1 make
 } 2>&1 | tee -a "$DEBUG_LOG"
 
-USE_SINGLE_BUILDDIR=1 make
 # {
 # wget --no-verbose --show-progress --progress=dot:giga -O arm64 https://downloads.getmonero.org/arm64
 # mkdir dl

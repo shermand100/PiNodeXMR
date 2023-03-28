@@ -15,24 +15,25 @@ echo "
 " 2>&1 | tee -a /home/nanode/debug.log
 
 #Stop Monero-lws service (if started)
-echo -e "\e[32mStop Monero-lws service (if started)\e[0m"
+showtext "Stop Monero-lws service (if started"
 sudo systemctl stop monero-lws.service
 ##Delete old version
-echo -e "\e[32mDelete old version\e[0m"
+showtext "Delete old versio"
 rm -rf /home/nanode/monero-lws/ 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mSuccess\e[0m"
-echo -e "\e[32mDownloading and Building new Monero-LWS\e[0m"
+showtext "Downloading and Building new Monero-LW"
 #Check dependencies (Should be installed already from Monero install)
-sudo apt update && sudo apt install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mDownloading VTNerd Monero-LWS\e[0m"
-git clone --recursive https://github.com/vtnerd/monero-lws.git 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mConfiguring install\e[0m"
-cd monero-lws || exit 1
-git checkout release-v0.2_0.18 2>&1 | tee -a /home/nanode/debug.log
-mkdir build && cd build || exit 1
-cmake -DMONERO_SOURCE_DIR=/home/nanode/monero -DMONERO_BUILD_DIR=/home/nanode/monero/build/release .. 2>&1 | tee -a /home/nanode/debug.log
-echo -e "\e[32mBuilding VTNerd Monero-LWS\e[0m"
-make 2>&1 | tee -a /home/nanode/debug.log
+sudo apt-get update
+sudo apt-get install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y 2>&1 | tee -a /home/nanode/debug.log
+showtext "Downloading VTNerd Monero-LW"
+{
+	git clone --recursive https://github.com/vtnerd/monero-lws.git
+	cd monero-lws || exit 1
+	git checkout release-v0.2_0.18
+	mkdir build && cd build || exit 1
+	cmake -DMONERO_SOURCE_DIR=/home/nanode/monero -DMONERO_BUILD_DIR=/home/nanode/monero/build/release ..
+	showtext "Building VTNerd Monero-LW"
+	make
+} 2>&1 | tee -a "$DEBUG_LOG"
 cd || exit 1
 #Restarting Monero-LWS servcice
 sudo systemctl start monero-lws.service

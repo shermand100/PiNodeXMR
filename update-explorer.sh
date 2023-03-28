@@ -26,7 +26,7 @@ Start setup-update-explorer.sh script $(date)
 {
 services-stop
 sudo systemctl stop blockExplorer.service
-rm -rf /home/nanode/onion-monero-blockchain-explorer/ 2> >(tee -a "$DEBUG_LOG" >&2)
+rm -rf /home/nanode/onion-monero-blockchain-explorer/
 showtext "Building Monero Blockchain Explorer
 *******************************************************
 ***This will take a few minutes - Hardware Dependent***
