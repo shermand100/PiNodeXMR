@@ -15,13 +15,13 @@ function get_index() {
 }
 
 
-MODES=('safe:sync' 'fast:sync' 'fast:async' 'fastest:async')
+MODES=('safe:sync' 'fast:sync' 'fast:async')
 
 function cycle() {
 	current=$(getvar "sync_mode")
 	i=$(get_index MODES "$current")
 	i=$((i + $1))
-	i=$((i % 4)) # 4 = array length
+	i=$((i % 3)) # 3 = array length
 	return "${MODES[$i]}"
 }
 

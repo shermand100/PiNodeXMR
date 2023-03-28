@@ -26,23 +26,19 @@ Start setup-update-explorer.sh script $(date)
 {
 services-stop
 sudo systemctl stop blockExplorer.service
-echo "Monero node stop command sent to make system resources available for update, allowing 30 seconds for safe shutdown"
-echo "Deleting Old Version"
 rm -rf /home/nanode/onion-monero-blockchain-explorer/ 2> >(tee -a "$DEBUG_LOG" >&2)
 showtext "Building Monero Blockchain Explorer
 *******************************************************
 ***This will take a few minutes - Hardware Dependent***
 *******************************************************"
-git clone -b master https://github.com/moneroexamples/onion-monero-blockchain-explorer.git 2> >(tee -a "$DEBUG_LOG" >&2)
+git clone -b master https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
 cd onion-monero-blockchain-explorer || exit
 mkdir build && cd build || exit
-cmake .. 2> >(tee -a "$DEBUG_LOG" >&2)
-make 2> >(tee -a "$DEBUG_LOG" >&2)
+cmake ..
+make
 putvar "versions.exp" "$NEW_VERSION_EXP"
 services-start
 } 2>&1 | tee -a "$DEBUG_LOG"
-
-rm /home/nanode/new-ver-exp.sh 2> >(tee -a "$DEBUG_LOG" >&2)
 #
 ##End debug log
 echo "

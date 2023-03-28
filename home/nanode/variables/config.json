@@ -23,7 +23,7 @@
     "rpcp": "password",
     "rpcu": "nanode",
     "data_dir": "/run/media/nanode/ssd/bitmonero",
-    "sync_mode": "safe:sync",
+    "sync_mode": "fast:async",
     "versions": {
       "monero": "01812",
       "exp": "20220506",
