@@ -32,11 +32,11 @@ showtext "Downloading Monero"
 	sudo apt-get install git build-essential ccache cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0
 
 	# go to home folder
-	cd ~ || exit 1
+	cd || exit 1
 	git clone --recursive -b "$RELEASE" https://github.com/monero-project/monero.git
 
 	cd monero/ || exit 1
-	USE_SINGLE_BUILDDIR=1 make
+	USE_SINGLE_BUILDDIR=1 make && cp build/release/bin/monero* /usr/bin/ && chmod a+x /usr/bin/monero*
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 # {
