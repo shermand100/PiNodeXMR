@@ -2,6 +2,7 @@
   "config": {
     "add_i2p_peer": "dsc7fyzzultm7y6pmx2avu6tze3usc7d27nkbzs5qwuujplxcmzq.b32.i2p",
     "add_tor_peer": "nitbdip72kdg5z6g.onion:28083",
+    "boot_status": "0",
     "credits": "250",
     "difficulty": "1000",
     "htmlpasswordrequired": "FALSE",

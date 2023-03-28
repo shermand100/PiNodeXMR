@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
@@ -258,6 +258,10 @@ txPoolPending () {
 defineVariables
 while true; do
 	sleep 3
+	if [ "$BOOT_STATUS" == "null" ]
+	then
+		continue
+	fi
 	syncStatus
 	connectionStatus
 	txPoolStatus
