@@ -1,7 +1,7 @@
 #!/bin/bash
 # Try to get system to a working state again
 # options:
-# RETAIN_BLOCKCHAIN: remove the lmdb folder, forcing a complete resync
+# PRUNE_BLOCKCHAIN: remove the lmdb folder, forcing a complete resync
 # REPAIR_FILESYSTEM: run XFS repair on the SSD
 
 #shellcheck source=home/nanode/common.sh
@@ -32,8 +32,8 @@ if [ -n "$REPAIR_FILESYSTEM" ]; then
 fi
 
 # if $RETAIN_BLOCKCHAIN is set (to anything), purge the blockchain
-if [ -z ${RETAIN_BLOCKCHAIN+x} ]; then
-	rm -rf "/run/media/nanode/bitmonero/lmdb"
+if [ -n "$PRUNE_BLOCKCHAIN" ]; then
+	rm -rf "$(getvar "data_dir")"/lmdb
 fi
 
 services-start

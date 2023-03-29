@@ -4,6 +4,33 @@
 DEBUG_LOG=/home/nanode/debug.log
 CONFIG_FILE=/home/nanode/variables/config.json
 
+setup_drive() {
+	blockdevice="/dev/$1"
+	fstype="$2"
+
+	#unmount just in case
+	for f in $(lsblk -o KNAME | grep -e "$1\\d\?"); do
+		umount -vf "/dev/$f"
+	done
+	#format
+	wipefs --all "/dev/$1"
+	#make sure it's gpt
+	sgdisk -g "/dev/$1"
+	#create fs
+	mkfs."$fstype" -f "$blockdevice"
+	#get uuid from block device
+	uuid=$(blkid | grep "$1" | sed 's/.*UUID="\([a-z0-9\-]\+\)".*/\1/g')
+	#append new partition to fstab
+	sed "/^UUID=$uuid/d" /etc/fstab
+	#add to fstab
+	printf "\nUUID=%s\t/media/monero\t%s\tdefaults,noatime\t0\t0" "$uuid" "$fstype" | tee -a /etc/fstab
+	mkdir -p /media/monero
+	#mount
+	mount -v "UUID=$uuid"
+	#correct owner
+	chown nanode:nanode -R /media/monero
+}
+
 getip() {
 	hostname -I | awk '{print $1}'
 }

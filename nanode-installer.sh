@@ -75,7 +75,7 @@ usermod -a -G nanode www-data
 ##Installing dependencies for --- Monero
 # showtext "Installing dependencies for --- Monero"
 # apt-get update
-# apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a "$DEBUG_LOG"
+apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a "$DEBUG_LOG"
 log "manual build of gtest for --- Monero"
 {
 cd /usr/src/gtest || exit 1
@@ -148,28 +148,15 @@ mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 /etc/init.d/avahi-daemon restart
 } 2>&1 | tee -a "$DEBUG_LOG"
 
+bash ./setup-drive.sh
+
 showtext "Downloading Monero"
-
-# good morning i hate ubuntu
-# apt-get install -y monero | tee -a "$DEBUG_LOG"
-
+# Install monero for the first time
 bash ./update-monero.sh
 
-# FIXME make block explorer work
-# showtext "Building Monero Blockchain Explore"
-# showtext "*******************************************************"
-# showtext "***This will take a few minutes - Hardware Dependent***"
-# showtext "*******************************************************"
-# log "Build Monero Onion Block Explorer"
-# {
-# git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
-# cd onion-monero-blockchain-explorer || exit 1
-# mkdir build
-# cd build || exit 1
-# cmake ..
-# make
-# cd || exit 1
-# } 2>&1 | tee -a "$DEBUG_LOG"
+showtext "Downloading Explorer"
+# Install monero block explorer for the first time
+bash ./update-explorer.sh
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
