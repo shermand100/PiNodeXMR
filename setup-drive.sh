@@ -13,7 +13,7 @@ pre_setup() {
 showtext "Setting up SSD..."
 {
 	#Print all non rotational (SSD) devices
-	devices=$(lsblk -o KNAME,VENDOR,ROTA | grep -e "0$" | awk '{print $1": "$2" ("$3")" }')
+	devices=$(lsblk -o KNAME,VENDOR,SIZE,ROTA | grep -e "0$" | awk '{print $1": "$2" ("$3")" }')
 	tput bel
 	printf '\e[?5h'
 	sleep 0.5
