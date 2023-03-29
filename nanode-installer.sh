@@ -148,6 +148,8 @@ mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 /etc/init.d/avahi-daemon restart
 } 2>&1 | tee -a "$DEBUG_LOG"
 
+showtext "Setting up the SSD"
+
 bash ./setup-drive.sh
 
 showtext "Downloading Monero"
@@ -179,13 +181,11 @@ systemctl enable log-io-file.service
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Install crontab
-log "Install crontab"
 showtext "Setup crontab"
-crontab /home/nanode/Nanode/var/spool/cron/crontabs/nanode 2>&1 | tee -a "$DEBUG_LOG"
+crontab var/spool/cron/crontabs/nanode 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Success"
 
 ## Remove left over files from git clone actions
-log "Remove left over files from git clone actions"
 showtext "Cleanup leftover directories"
 rm -r /home/nanode/Nanode/ 2>&1 | tee -a "$DEBUG_LOG"
 
@@ -199,11 +199,3 @@ rm -r /home/nanode/Nanode/ 2>&1 | tee -a "$DEBUG_LOG"
 
 ## Install complete
 showtext "All Installs complete"
-showtext "****************************************"
-showtext "****************************************"
-showtext "**********Nanode rebooting**************"
-showtext "**********Reminder:*********************"
-showtext "**********User: 'nanode'****************"
-showtext "**********Password: 'Nanode'************"
-showtext "****************************************"
-showtext "****************************************"
