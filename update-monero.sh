@@ -18,7 +18,7 @@ Start update-monero.sh script $(date)
 RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
 
 #ubuntu /dev/null odd requiremnt to set permissions
-sudo chmod 666 /dev/null
+chmod 666 /dev/null
 
 #Stop Node to make system resources available.
 services-stop
@@ -27,9 +27,9 @@ showtext "Downloading Monero"
 
 {
 	# first install monero dependecines
-	sudo apt-get update
+	apt-get update
 
-	sudo apt-get install git build-essential ccache cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0
+	apt-get install git build-essential ccache cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y -o DPkg::Options::="--force-confnew"
 
 	# go to home folder
 	cd || exit 1
