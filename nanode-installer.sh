@@ -198,6 +198,7 @@ rm -r /home/nanode/Nanode/ 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Move home contents"
 cp -r home/nanode/* /home/nanode/
 cp -r etc/* /etc/
+cp -r HTML/* /var/www/html/
 
 ## Install complete
 showtext "All Installs complete"
