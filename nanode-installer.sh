@@ -16,10 +16,6 @@ check_connection || (showtext "NO CONNECTION -- aborting"; exit 1)
 showtext "Create user nanode"
 adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 
-showtext "Move home contents"
-cp -r home/nanode/* /home/nanode/
-cp -r etc/* /etc/
-
 #Set nanode password 'Nanode'
 echo "nanode:Nanode" | chpasswd
 showtext "nanode password changed to 'Nanode'"
@@ -50,7 +46,7 @@ showtext "Receiving and applying Ubuntu updates to latest version"
 apt-get update
 apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
 apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade
-apt-get upgrade -y
+apt-get upgrade -y -o Dpkg::Options::="--force-confnew"
 ##Auto remove any obsolete packages
 apt-get autoremove -y 2>&1 | tee -a "$DEBUG_LOG"
 } 2>&1 | tee -a "$DEBUG_LOG"
@@ -198,6 +194,10 @@ rm -r /home/nanode/Nanode/ 2>&1 | tee -a "$DEBUG_LOG"
 	End ubuntu-install-continue.sh script $(date)
 	####################"
 } 2>&1 | tee -a "$DEBUG_LOG"
+
+showtext "Move home contents"
+cp -r home/nanode/* /home/nanode/
+cp -r etc/* /etc/
 
 ## Install complete
 showtext "All Installs complete"
