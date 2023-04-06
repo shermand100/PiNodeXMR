@@ -15,7 +15,8 @@ Start update-monero.sh script $(date)
 #Download variable for current monero release version
 #FIXME: change url
 # wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
-RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+RELEASE="release-v0.18" # TODO remove when live
 
 #ubuntu /dev/null odd requiremnt to set permissions
 chmod 666 /dev/null
