@@ -10,6 +10,8 @@
 #shellcheck source=home/nanode/common.sh
 . home/nanode/common.sh
 
+check_connection || (showtext "NO CONNECTION -- aborting"; exit 1)
+
 ##Create new user 'nanode'
 showtext "Create user nanode"
 adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password

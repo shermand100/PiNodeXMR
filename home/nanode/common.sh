@@ -4,6 +4,11 @@
 DEBUG_LOG=/home/nanode/debug.log
 CONFIG_FILE=/home/nanode/variables/config.json
 
+check_connection() {
+	ping -q -w 1 -c 1 "$(ip r | grep default | cut -d ' ' -f 3)" > /dev/null
+	return $?
+}
+
 setup_drive() {
 	blockdevice="/dev/$1"
 	fstype="$2"
