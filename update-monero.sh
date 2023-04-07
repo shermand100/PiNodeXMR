@@ -24,10 +24,10 @@ chmod 666 /dev/null
 #Stop Node to make system resources available.
 services-stop
 
-showtext "Downloading Monero"
+showtext "Building Monero..."
 
 {
-	# first install monero dependecines
+	# first install monero dependancies
 	apt-get update
 
 	apt-get install git build-essential ccache cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y -o DPkg::Options::="--force-confnew"
@@ -55,7 +55,7 @@ putvar "current_version" "$NEW_VERSION"
 services-start
 
 ##End debug log
-log "Update Complete
+log "Monero Update Complete
 ####################
 End setup-update-monero.sh script $(date)
 ####################"

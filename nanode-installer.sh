@@ -13,7 +13,7 @@
 check_connection || (showtext "NO CONNECTION -- aborting"; exit 1)
 
 ##Create new user 'nanode'
-showtext "Create user nanode"
+showtext "Creating user 'nanode'..."
 adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 
 #Set nanode password 'Nanode'
@@ -21,27 +21,27 @@ echo "nanode:Nanode" | chpasswd
 showtext "nanode password changed to 'Nanode'"
 
 ##Change system hostname to Nanode
-showtext "Changing system hostname to 'Nanode'"
+showtext "Changing system hostname to 'Nanode'..."
 echo 'Nanode' | tee /etc/hostname
 #sed -i '6d' /etc/hosts
 echo '127.0.0.1       Nanode' | tee -a /etc/hosts
 hostname Nanode
 
 ##Disable IPv6 (confuses Monero start script if IPv6 is present)
-showtext "Disable IPv6"
+showtext "Disabling IPv6..."
 echo 'net.ipv6.conf.all.disable_ipv6 = 1' | tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.default.disable_ipv6 = 1' | tee -a /etc/sysctl.conf
 echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | tee -a /etc/sysctl.conf
 
 ##Perform system update and upgrade now. This then allows for reboot before next install step, preventing warnings about kernal upgrades when installing the new packages (dependencies).
 #setup debug file to track errors
-showtext "Create Debug log"
+showtext "Creating Debug log..."
 touch "$DEBUG_LOG"
 chown nanode "$DEBUG_LOG"
 chmod 777 "$DEBUG_LOG"
 
 ##Update and Upgrade system
-showtext "Receiving and applying Ubuntu updates to latest version"
+showtext "Downloading and installing OS updates..."
 {
 apt-get update
 apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
@@ -58,7 +58,7 @@ passwd --lock pi
 showtext "User 'pi' Locked"
 
 ##Update and Upgrade system (This step repeated due to importance and maybe someone using this installer sript out-of-sequence)
-showtext "Receiving and applying Ubuntu updates to the latest version"
+showtext "Verifying Update..."
 {
 	apt-get update
 	apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
@@ -67,7 +67,7 @@ showtext "Receiving and applying Ubuntu updates to the latest version"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Installing dependencies for --- Web Interface
-showtext "Installing dependencies for --- Web Interface"
+showtext "Installing dependencies for Web Interface..."
 apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a "$DEBUG_LOG"
 usermod -a -G nanode www-data
 ##Installing dependencies for --- Monero
@@ -85,7 +85,7 @@ cd || exit 1
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Checking all dependencies are installed for --- miscellaneous (security tools-fail2ban-ufw, menu tool-dialog, screen, mariadb)
-showtext "Checking all dependencies are installed for --- Miscellaneous"
+showtext "Checking all dependencies are installed..."
 {
 apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev cron -y
 apt-get install exfat-fuse exfat-utils -y
@@ -93,13 +93,13 @@ apt-get install exfat-fuse exfat-utils -y
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 
 ##Clone Nanode to device from git
-showtext "Downloading Nanode files"
+showtext "Downloading Nanode files..."
 # Update Link
 #git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/Nanode.git 2>&1 | tee -a "$DEBUG_LOG"
 
 
 ##Configure ssh security. Allows only user 'nanode'. Also 'root' login disabled via ssh, restarts config to make changes
-showtext "Configuring SSH security"
+showtext "Configuring SSH security..."
 {
 chmod 644 /etc/ssh/sshd_config
 chown root /etc/ssh/sshd_config
@@ -109,7 +109,7 @@ showtext "SSH security config complete"
 
 
 ##Copy Nanode scripts to home folder
-showtext "Moving Nanode scripts into position"
+showtext "Moving Nanode scripts into position..."
 {
 mv /home/nanode/Nanode/home/nanode/* /home/nanode/
 mv /home/nanode/Nanode/home/nanode/.profile /home/nanode/
@@ -118,7 +118,7 @@ chmod 777 -R /home/nanode/* #Read/write access needed by www-data to action php 
 showtext "Success"
 
 ##Add Nanode systemd services
-showtext "Add Nanode systemd services"
+showtext "Addding Nanode systemd services..."
 {
 mv /home/nanode/Nanode/etc/systemd/system/*.service /etc/systemd/system/
 chmod 644 /etc/systemd/system/*.service
@@ -129,7 +129,7 @@ systemctl enable moneroStatus.service
 } 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Success"
 
-showtext "Configure apache server for access to monero log file"
+showtext "Configuring apache server for access to Monero log file..."
 {
 mv /home/nanode/Nanode/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 chmod 777 /etc/apache2/sites-enabled/000-default.conf
@@ -140,28 +140,28 @@ chown root /etc/apache2/sites-enabled/000-default.conf
 showtext "Success"
 
 ##Setup local hostname
-showtext "Setup local hostname"
+showtext "Setting up local hostname..."
 {
 mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 /etc/init.d/avahi-daemon restart
 } 2>&1 | tee -a "$DEBUG_LOG"
 
-showtext "Setting up the SSD"
+showtext "Setting up SSD..."
 
 bash ./setup-drive.sh
 
-showtext "Downloading Monero"
+showtext "Downloading Monero..."
 # Install monero for the first time
 bash ./update-monero.sh
 
-showtext "Downloading Explorer"
+showtext "Downloading Block Explorer..."
 # Install monero block explorer for the first time
 bash ./update-explorer.sh
 
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
 DEVICE_IP=$(getip)
-showtext "Installing log.io"
+showtext "Installing log.io..."
 
 {
 apt-get install nodejs npm -y
@@ -179,12 +179,12 @@ systemctl enable log-io-file.service
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 ##Install crontab
-showtext "Setup crontab"
+showtext "Setting up crontab..."
 crontab var/spool/cron/crontabs/nanode 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Success"
 
 ## Remove left over files from git clone actions
-showtext "Cleanup leftover directories"
+showtext "Deleting leftover directories..."
 rm -r /home/nanode/Nanode/ 2>&1 | tee -a "$DEBUG_LOG"
 
 ##End debug log
@@ -201,4 +201,4 @@ cp -r etc/* /etc/
 cp -r HTML/* /var/www/html/
 
 ## Install complete
-showtext "All Installs complete"
+showtext "Installation Complete"
