@@ -24,7 +24,7 @@ chmod 666 /dev/null
 #Stop Node to make system resources available.
 services-stop
 
-showtext "Downloading Monero..."
+showtext "Building Monero..."
 
 {
 	# first install monero dependancies

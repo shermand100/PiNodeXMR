@@ -19,10 +19,7 @@ Start setup-update-explorer.sh script $(date)
 services-stop
 systemctl stop blockExplorer.service
 rm -rf /home/nanode/onion-monero-blockchain-explorer/
-showtext "Building Monero Blockchain Explorer
-*******************************************************
-***This will take a few minutes - Hardware Dependent***
-*******************************************************"
+showtext "Building Monero Blockchain Explorer..."
 
 {
 	git clone -b master https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
