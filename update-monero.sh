@@ -55,7 +55,7 @@ putvar "current_version" "$NEW_VERSION"
 services-start
 
 ##End debug log
-log "Monero Update Complete"
+log "Monero Update Complete
 ####################
 End setup-update-monero.sh script $(date)
 ####################"

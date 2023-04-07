@@ -39,7 +39,7 @@ sudo systemctl start monero-lws.service
 putvar "versions.lws" "$NEW_VERSION_LWS"
 
 ##End debug log
-showtext "Monero-LWS Updated"
+showtext "Monero-LWS Updated
 ####################
 End setup-update-monero-lws.sh script $(date)
 ####################"
