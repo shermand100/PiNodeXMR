@@ -14,7 +14,7 @@ check_connection || (showtext "NO CONNECTION -- aborting"; exit 1)
 
 ##Create new user 'nanode'
 showtext "Creating user 'nanode'..."
-adduser nanode --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+adduser nanode --disabled-password
 
 #Set nanode password 'Nanode'
 echo "nanode:Nanode" | chpasswd

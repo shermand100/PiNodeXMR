@@ -188,23 +188,6 @@ showtext "Success"
 systemctl restart moneroStatus.service
 
 
-##Check-Install log.io (Real-time service monitoring)
-#Establish Device IP
-DEVICE_IP=$(getip)
-showtext "Installing log.io..."
-{
-	apt-get install nodejs npm -y
-	npm install -g log.io
-	npm install -g log.io-file-input
-	mkdir -p ~/.log.io/inputs/
-	mv /home/nanode/Nanode/.log.io/inputs/file.json ~/.log.io/inputs/file.json
-	mv /home/nanode/Nanode/.log.io/server.json ~/.log.io/server.json
-	sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json
-	sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json
-	systemctl enable --now log-io-server.service
-	systemctl enable --now log-io-file.service
-} 2>&1 | tee -a "$DEBUG_LOG"
-
 #Update system version number to new one installed
 {
 	showtext "Updating system version number..."
