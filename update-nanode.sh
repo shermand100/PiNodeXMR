@@ -38,7 +38,7 @@ apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq 
 #Download update files
 
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add  new permissions to www-data user for interface buttons)
-showtext "Download and replace /etc/sudoers file"
+showtext "Downloading and replacing /etc/sudoers file..."
 wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/sudoers -O /home/nanode/sudoers
 chmod 0440 /home/nanode/sudoers
 chown root /home/nanode/sudoers
@@ -49,7 +49,7 @@ chmod 777 /dev/null
 showtext "Global permissions changed"
 
 ##Clone Nanode to device from git
-showtext "Clone Nanode to device from git"
+showtext "Cloneing Nanode to device from git..."
 # Update Link
 #FIXME change to real git url once done
 git clone -b no-sleep --single-branch https://github.com/abdullahdostkhan/Moneronanode.git
@@ -62,11 +62,11 @@ If a setting did not exist on your previous version you may see some errors here
 #home dir
 mv /home/nanode/config.json /home/nanode/config_retain.json
 #variables dir
-showtext "User-set configuration saved"
+showtext "User configuration saved"
 #Install Update
-showtext "Installing update"
+showtext "Installing update..."
 ##Add Nanode systemd services
-showtext "Add Nanode systemd services"
+showtext "Adding Nanode systemd services..."
 {
 	mv /home/nanode/Nanode/etc/systemd/system/*.service /etc/systemd/system/
 	chmod 644 /etc/systemd/system/*.service
@@ -78,7 +78,7 @@ showtext "Add Nanode systemd services"
 showtext "Success"
 
 ##Updating Nanode scripts in home directory
-showtext "Updating Nanode scripts in home directory"
+showtext "Updating Nanode scripts in home directory..."
 {
 	cp -afr /home/nanode/Nanode/home/nanode/* /home/nanode/
 	mv /home/nanode/Nanode/home/nanode/.profile /home/nanode/
@@ -87,7 +87,7 @@ showtext "Updating Nanode scripts in home directory"
 showtext "Success"
 
 #Configure apache server for access to monero log file
-showtext "Configure apache server for access to monero log file"
+showtext "Configuring apache server for access to Monero log file..."
 {
 	mv /home/nanode/Nanode/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 	chmod 777 /etc/apache2/sites-enabled/000-default.conf
@@ -97,13 +97,13 @@ showtext "Configure apache server for access to monero log file"
 
 showtext "Success"
 ##Setup local hostname
-showtext "Enable local hostname nanode.local"
+showtext "Enabling local hostname nanode.local..."
 mv /home/nanode/Nanode/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a "$DEBUG_LOG"
 /etc/init.d/avahi-daemon restart 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Success"
 
 ##Update html template
-showtext "Configuring Web-UI template with Nanode pages"
+showtext "Configuring Web-UI..."
 #First move hidden file specifically .htaccess file then entire directory
 mv /home/nanode/Nanode/HTML/.htaccess /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
 rm -R /var/www/html/*.php
@@ -154,25 +154,25 @@ fi
 showtext "Success"
 
 #Restore User Values
-showtext "Restoring your personal settings"
+showtext "Restoring your personal settings..."
 #home dir
 mv /home/nanode/variables/config_retain.json /home/nanode/variables/config.json
 
 showtext "User configuration restored"
 
 ##Set Swappiness lower
-showtext "Decreasing swappiness"
+showtext "Decreasing swappiness..."
 sysctl vm.swappiness=10 2> >(tee -a "$DEBUG_LOG" >&2)
 showtext "Success"
 ##Update crontab
-showtext "Updating crontab tasks"
+showtext "Updating crontab tasks..."
 crontab /home/nanode/Nanode/var/spool/cron/crontabs/nanode 2> >(tee -a "$DEBUG_LOG" >&2)
 showtext "Success"
 
 #Attempt update of tor hidden service settings
 {
 	if [ -f /usr/bin/tor ]; then #Crude way of detecting tor installed
-		showtext "Update of tor hidden service settings"
+		showtext "Updating tor hidden service settings..."
 		wget https://raw.githubusercontent.com/monero-ecosystem/Nanode/ubuntuServer-20.04/etc/tor/torrc -O /etc/tor/torrc
 		showtext "Applying Settings..."
 		chmod 644 /etc/tor/torrc
@@ -191,7 +191,7 @@ systemctl restart moneroStatus.service
 ##Check-Install log.io (Real-time service monitoring)
 #Establish Device IP
 DEVICE_IP=$(getip)
-showtext "Installing log.io"
+showtext "Installing log.io..."
 {
 	apt-get install nodejs npm -y
 	npm install -g log.io
@@ -207,14 +207,14 @@ showtext "Installing log.io"
 
 #Update system version number to new one installed
 {
-	showtext "Update system version number"
+	showtext "Updating system version number..."
 	putvar "versions.pi" "$NEW_VERSION_PI"
 	#ubuntu /dev/null odd requiremnt to set permissions
 	chmod 777 /dev/null
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 #Clean up files
-showtext "Cleanup leftover directories"
+showtext "Cleaning leftover directories..."
 
 rm -r "/home/nanode/Nanode/"
 rm "/home/nanode/new-ver-pi.sh"
