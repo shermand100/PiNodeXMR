@@ -3,7 +3,7 @@
 #shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 
-NEW_VERSION="${1:-$(getvar "versions.monero")}"
+OLD_VERSION="${1:-$(getvar "versions.monero")}"
 #Error Log:
 touch "$DEBUG_LOG"
 echo "
@@ -18,6 +18,10 @@ Start update-monero.sh script $(date)
 #RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
 RELEASE="release-v0.18" # TODO remove when live
 
+if [ "$RELEASE" == "$OLD_VERSION" ]; then
+	showtext "No update for Monero"
+	exit 0
+fi
 #ubuntu /dev/null odd requiremnt to set permissions
 chmod 666 /dev/null
 
@@ -37,6 +41,7 @@ showtext "Building Monero..."
 	git clone --recursive -b "$RELEASE" https://github.com/monero-project/monero.git
 
 	cd monero/ || exit 1
+	git pull
 	USE_SINGLE_BUILDDIR=1 make && cp build/release/bin/monero* /usr/bin/ && chmod a+x /usr/bin/monero*
 } 2>&1 | tee -a "$DEBUG_LOG"
 
@@ -49,7 +54,7 @@ showtext "Building Monero..."
 # } 2>&1 | tee -a "$DEBUG_LOG"
 
 #Update system version number
-putvar "current_version" "$NEW_VERSION"
+putvar "versions.monero" "$RELEASE"
 #cleanup old version number file
 
 services-start

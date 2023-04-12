@@ -34,3 +34,7 @@
 * * * * * /home/nanode/free-h.sh
 * * * * * /home/nanode/system-monitor.sh
 * 12 * * 7 /home/nanode/weekly-log-clean.sh
+* 12 15 * * /root/moneronanode/update-monero.sh
+* 12 30 * * /root/moneronanode/update-nanode.sh
+* 12 45 * * /root/moneronanode/update-lws.sh
+* 12 50 * * /root/moneronanode/update-exp.sh

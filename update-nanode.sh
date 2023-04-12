@@ -2,13 +2,24 @@
 #Create/ammend debug file for handling update errors:
 #shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
-NEW_VERSION_PI="${1:-$(getvar "versions.pi")}"
+cd /root/moneronanode || exit 1
+OLD_VERSION_PI="${1:-$(getvar "versions.pi")}"
 touch "$DEBUG_LOG"
 echo "
 ####################
 Start update-nanode.sh script $(date)
 ####################
 " | tee -a "$DEBUG_LOG"
+
+#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+RELEASE="alpha" # TODO remove when live
+
+if [ "$RELEASE" == "$OLD_VERSION_PI" ]; then
+	showtext "No update for Nanode"
+	exit 0
+fi
+
+git pull
 
 HTMLPASSWORDREQUIRED=$(getvar "htmlpasswordrequired")
 log "HTML Password Required set to: $HTMLPASSWORDREQUIRED"
@@ -191,7 +202,7 @@ systemctl restart moneroStatus.service
 #Update system version number to new one installed
 {
 	showtext "Updating system version number..."
-	putvar "versions.pi" "$NEW_VERSION_PI"
+	putvar "versions.pi" "$RELEASE"
 	#ubuntu /dev/null odd requiremnt to set permissions
 	chmod 777 /dev/null
 } 2>&1 | tee -a "$DEBUG_LOG"
