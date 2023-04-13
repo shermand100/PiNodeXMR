@@ -3,6 +3,8 @@
 #shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
 
+cd /home/nanode || exit 1
+
 OLD_VERSION="${1:-$(getvar "versions.monero")}"
 #Error Log:
 touch "$DEBUG_LOG"

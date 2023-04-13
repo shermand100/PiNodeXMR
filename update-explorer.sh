@@ -2,6 +2,8 @@
 
 #shellcheck source=home/nanode/common.sh
 . /home/nanode/common.sh
+cd /home/nanode || exit 1
+
 OLD_VERSION_EXP="${1:-$(getvar "versions.exp")}"
 
 #RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"

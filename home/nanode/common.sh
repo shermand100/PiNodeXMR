@@ -33,7 +33,7 @@ setup_drive() {
 	#mount
 	mount -v "UUID=$uuid"
 	#correct owner
-	chown nanode:nanode -R /media/monero
+	chown monero:monero -R /media/monero
 }
 
 getip() {

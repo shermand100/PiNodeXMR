@@ -23,17 +23,17 @@
     "monero_public_port": "18089",
     "monero_port": "18081",
     "monero_rpcpay_port": "18083",
-    "monero_stats_port": "18083",
     "out_peers": "-1",
     "payment_address": "",
+    "rpc_enabled": "TRUE",
     "rpcp": "password",
     "rpcu": "nanode",
     "data_dir": "/media/monero/bitmonero",
     "sync_mode": "fast:async",
     "versions": {
-      "monero": "01812",
-      "exp": "20220506",
-      "lws": "02018"
+      "monero": "unset",
+      "exp": "unset",
+      "lws": "unset"
     }
   }
 }

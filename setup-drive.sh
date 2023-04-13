@@ -9,7 +9,7 @@ showtext "Formatting SSD..."
 	device=$(lsblk -o KNAME,VENDOR,ROTA | grep -e "0$" | grep -e "nvme\dn\d" | awk '{print $1}' | head -n1)
 	showtext "Using device $device."
 	if [ -n "$device" ]; then
-		pre_setup "$device" xfs
+		setup_drive "$device" xfs
 	fi
 
 } 2>&1 | tee -a "$DEBUG_LOG"

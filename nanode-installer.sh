@@ -15,6 +15,7 @@ check_connection || (showtext "NO CONNECTION -- aborting"; exit 1)
 ##Create new user 'nanode'
 showtext "Creating user 'nanode'..."
 adduser nanode --disabled-password
+adduser -r -s /bin/false -U monero
 
 #Set nanode password 'Nanode'
 echo "nanode:Nanode" | chpasswd
@@ -150,14 +151,6 @@ showtext "Setting up SSD..."
 
 bash ./setup-drive.sh
 
-showtext "Downloading Monero..."
-# Install monero for the first time
-bash ./update-monero.sh
-
-showtext "Downloading Block Explorer..."
-# Install monero block explorer for the first time
-bash ./update-explorer.sh
-
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
 DEVICE_IP=$(getip)
@@ -199,6 +192,25 @@ showtext "Move home contents"
 cp -r home/nanode/* /home/nanode/
 cp -r etc/* /etc/
 cp -r HTML/* /var/www/html/
+chown httpd:httpd -R /var/www/html
+cp update-*sh /home/nanode/
+chown nanode:nanode -R /home/nanode
+
+showtext "Downloading Monero..."
+# Install monero for the first time
+sudo -u nanode bash ./update-monero.sh
+
+showtext "Downloading Block Explorer..."
+# Install monero block explorer for the first time
+sudo -u nanode bash ./update-explorer.sh
+
+showtext "Downloading Monero LWS"
+# Install monero block explorer for the first time
+sudo -u nanode bash ./update-lws.sh
+
+showtext "Start services"
+systemctl daemon-reload
+systemctl enable --now monerod.service
 
 ## Install complete
 showtext "Installation Complete"
