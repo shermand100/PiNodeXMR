@@ -3,14 +3,14 @@ Description=Monero Tor Private
 After=network.target
 
 [Service]
-User=nanode
-Group=nanode
+User=nodo
+Group=nodo
 WorkingDirectory=~
 RuntimeDirectory=monero
 SuccessExitStatus=143
 Type=simple
-PIDFile=/home/nanode/monero/build/release/bin/monerod.pid
-ExecStart=/bin/bash /home/nanode/execScripts/moneroTorPrivate.sh
+PIDFile=/home/nodo/monero/build/release/bin/monerod.pid
+ExecStart=/bin/bash /home/nodo/execScripts/moneroTorPrivate.sh
 RestartSec=30
 Restart=on-failure
 

@@ -1,16 +1,16 @@
 [Unit]
-Description=Nanode Reboot
+Description=Nodo Reboot
 After=network.target
 
 [Service]
 ExecStart=/bin/bash reboot.sh
-WorkingDirectory=/home/nanode/execScripts/
+WorkingDirectory=/home/nodo/execScripts/
 StandardOutput=inherit
 StandardError=inherit
 Type=oneshot
 RemainAfterExit=true
 Restart=no
-User=nanode
+User=nodo
 
 [Install]
 WantedBy=multi-user.target

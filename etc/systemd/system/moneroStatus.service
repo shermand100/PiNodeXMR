@@ -4,12 +4,12 @@ After=network.target
 
 [Service]
 ExecStart=/bin/bash moneroStatus.sh
-WorkingDirectory=/home/nanode/
+WorkingDirectory=/home/nodo/
 PIDFile=/tmp/statusGeneration.pid
 Type=simple
 Restart=always
 RestartSec=30
-User=nanode
+User=nodo
 
 [Install]
 WantedBy=multi-user.target

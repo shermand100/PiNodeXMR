@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#shellcheck source=home/nanode/common.sh
-. /home/nanode/common.sh
+#shellcheck source=home/nodo/common.sh
+. /home/nodo/common.sh
 
 showtext "Formatting SSD..."
 {

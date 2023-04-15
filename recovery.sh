@@ -4,8 +4,8 @@
 # PURGE_BLOCKCHAIN: remove the lmdb folder, forcing a complete resync
 # REPAIR_FILESYSTEM: run XFS repair on the SSD
 
-#shellcheck source=home/nanode/common.sh
-. /home/nanode/common.sh
+#shellcheck source=home/nodo/common.sh
+. /home/nodo/common.sh
 
 # Run an update just to be sure
 apt-get update --fix-missing -y
@@ -24,7 +24,7 @@ services-stop
 
 if [ -n "$REPAIR_FILESYSTEM" ]; then
 	# awfully crude way to find SSD
-	uuid=$(lsblk -o UUID,MOUNTPOINT | grep nanode | awk '{print $1}')
+	uuid=$(lsblk -o UUID,MOUNTPOINT | grep nodo | awk '{print $1}')
 	device="/dev/disk/by-uuid/$uuid"
 	umount "$uuid"
 	xfs_repair "$device"

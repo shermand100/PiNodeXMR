@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#shellcheck source=home/nanode/common.sh
-. /home/nanode/common.sh
+#shellcheck source=home/nodo/common.sh
+. /home/nodo/common.sh
 
-cd /home/nanode || exit 1
+cd /home/nodo || exit 1
 
 OLD_VERSION="${1:-$(getvar "versions.monero")}"
 #Error Log:
@@ -16,8 +16,8 @@ Start update-monero.sh script $(date)
 
 #Download variable for current monero release version
 #FIXME: change url
-# wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nanode/release.sh
-#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+# wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nodo/release.sh
+#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNodo/master/release.txt)"
 RELEASE="release-v0.18" # TODO remove when live
 
 if [ "$RELEASE" == "$OLD_VERSION" ]; then

@@ -4,14 +4,14 @@ After=network.target
 
 [Service]
 ExecStart=/bin/bash moneroI2PPrivate.sh
-WorkingDirectory=/home/nanode/execScripts/
+WorkingDirectory=/home/nodo/execScripts/
 Type=simple
 Restart=always
 RestartSec=30
-User=nanode
+User=nodo
 StandardOutput=null
 StandardError=null
-PIDFile=/home/nanode/monero/build/release/bin/monerod.pid
+PIDFile=/home/nodo/monero/build/release/bin/monerod.pid
 
 [Install]
 WantedBy=multi-user.target

@@ -4,14 +4,14 @@ After=network.target
 
 [Service]
 ExecStart=/bin/bash moneroPublicFree.sh
-WorkingDirectory=/home/nanode/execScripts/
+WorkingDirectory=/home/nodo/execScripts/
 Type=forking
 Restart=always
 RestartSec=30
-User=nanode
+User=nodo
 StandardOutput=inherit
 StandardError=inherit
-PIDFile=/home/nanode/monero/build/release/bin/monerod.pid
+PIDFile=/home/nodo/monero/build/release/bin/monerod.pid
 
 [Install]
 WantedBy=multi-user.target

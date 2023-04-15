@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#shellcheck source=home/nanode/common.sh
-. /home/nanode/common.sh
-cd /home/nanode || exit 1
+#shellcheck source=home/nodo/common.sh
+. /home/nodo/common.sh
+cd /home/nodo || exit 1
 
 OLD_VERSION_EXP="${1:-$(getvar "versions.exp")}"
 
-#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNanode/master/release.txt)"
+#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNodo/master/release.txt)"
 RELEASE="release-v0.18" # TODO remove when live
 
 if [ "$RELEASE" == "$OLD_VERSION_EXP" ]; then
@@ -28,7 +28,7 @@ Start setup-update-explorer.sh script $(date)
 #Stop Node to make system resources available.
 services-stop
 systemctl stop blockExplorer.service
-rm -rf /home/nanode/onion-monero-blockchain-explorer/
+rm -rf /home/nodo/onion-monero-blockchain-explorer/
 showtext "Building Monero Blockchain Explorer..."
 
 {

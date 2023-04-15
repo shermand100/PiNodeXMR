@@ -3,13 +3,13 @@ Description=Monero LWS
 After=network.target
 
 [Service]
-User=nanode
-Group=nanode
-EnvironmentFile=/home/nanode/IPforLWS.txt
-ExecStart=/home/nanode/monero-lws/build/src/monero-lws-daemon --rest-server=https://${IP}:8443 --confirm-external-bind --rest-ssl-key=/home/nanode/lwsSslCert/key.pem --rest-ssl-certificate=/home/nanode/lwsSslCert/cert.pem
+User=nodo
+Group=nodo
+EnvironmentFile=/home/nodo/IPforLWS.txt
+ExecStart=/home/nodo/monero-lws/build/src/monero-lws-daemon --rest-server=https://${IP}:8443 --confirm-external-bind --rest-ssl-key=/home/nodo/lwsSslCert/key.pem --rest-ssl-certificate=/home/nodo/lwsSslCert/cert.pem
 Restart=always
-StandardOutput=file:/home/nanode/monero-lws/monero-lws.log
-StandardError=file:/home/nanode/monero-lws/monero-lws.log
+StandardOutput=file:/home/nodo/monero-lws/monero-lws.log
+StandardError=file:/home/nodo/monero-lws/monero-lws.log
 
 [Install]
 WantedBy=multi-user.target

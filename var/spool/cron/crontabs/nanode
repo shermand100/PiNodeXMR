@@ -28,13 +28,13 @@
 #
 # m h  dom mon dow   command
 
-* * * * * /home/nanode/cpuTemp.sh
-0 */4 * * * /home/nanode/df-h.sh
-0 */4 * * * /home/nanode/printPl.sh
-* * * * * /home/nanode/free-h.sh
-* * * * * /home/nanode/system-monitor.sh
-* 12 * * 7 /home/nanode/weekly-log-clean.sh
-* 12 15 * * /home/nanode/update-monero.sh
-* 12 30 * * /home/nanode/update-nanode.sh
-* 12 45 * * /home/nanode/update-lws.sh
-* 12 50 * * /home/nanode/update-exp.sh
+* * * * * /home/nodo/cpuTemp.sh
+0 */4 * * * /home/nodo/df-h.sh
+0 */4 * * * /home/nodo/printPl.sh
+* * * * * /home/nodo/free-h.sh
+* * * * * /home/nodo/system-monitor.sh
+* 12 * * 7 /home/nodo/weekly-log-clean.sh
+* 12 15 * * /home/nodo/update-monero.sh
+* 12 30 * * /home/nodo/update-nodo.sh
+* 12 45 * * /home/nodo/update-lws.sh
+* 12 50 * * /home/nodo/update-exp.sh

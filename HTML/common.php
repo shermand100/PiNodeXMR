@@ -1,6 +1,6 @@
 <?php
 
-$config = '/home/nanode/variables/config.json';
+$config = '/home/nodo/variables/config.json';
 
 function getvar($key)
 {

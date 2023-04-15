@@ -4,14 +4,14 @@ After=network.target
 
 [Service]
 ExecStart=/bin/bash blockExplorer.sh
-WorkingDirectory=/home/nanode/execScripts/
-StandardOutput=file:/home/nanode/onion-monero-blockchain-explorer/explorer.log
-StandardError=file:/home/nanode/onion-monero-blockchain-explorer/explorer.log
+WorkingDirectory=/home/nodo/execScripts/
+StandardOutput=file:/home/nodo/onion-monero-blockchain-explorer/explorer.log
+StandardError=file:/home/nodo/onion-monero-blockchain-explorer/explorer.log
 Type=exec
-PIDFile=/home/nanode/onion-monero-blockchain-explorer/explorer.pid
+PIDFile=/home/nodo/onion-monero-blockchain-explorer/explorer.pid
 Restart=on-failure
 RestartSec=300
-User=nanode
+User=nodo
 
 [Install]
 WantedBy=multi-user.target
