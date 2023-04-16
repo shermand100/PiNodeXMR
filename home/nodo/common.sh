@@ -27,8 +27,10 @@ setup_drive() {
 	wipefs --all "/dev/$1"
 	#make sure it's gpt
 	sgdisk -g "/dev/$1"
+	#create table & part
+	parted --script "$blockdevice" mklabel gpt mkpart 1MiB 100%
 	#create fs
-	mkfs."$fstype" -f "$blockdevice"
+	mkfs."$fstype" -f "${blockdevice}p1"
 	#get uuid from block device
 	uuid=$(blkid | grep "$1" | sed 's/.*UUID="\([a-z0-9\-]\+\)".*/\1/g')
 	#append new partition to fstab
