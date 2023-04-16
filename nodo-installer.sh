@@ -205,6 +205,9 @@ rm -r /home/nodo/MoneroNodo/ 2>&1 | tee -a "$DEBUG_LOG"
 	####################"
 } 2>&1 | tee -a "$DEBUG_LOG"
 
+#Stop Node to make system resources available.
+services-stop
+
 showtext "Downloading Monero..."
 # Install monero for the first time
 sudo -u nodo bash ./update-monero.sh
@@ -216,6 +219,8 @@ sudo -u nodo bash ./update-explorer.sh
 showtext "Downloading Monero LWS"
 # Install monero block explorer for the first time
 sudo -u nodo bash ./update-lws.sh
+
+services-start
 
 showtext "Start services"
 systemctl daemon-reload

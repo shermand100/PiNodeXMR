@@ -25,9 +25,6 @@ if [ "$RELEASE" == "$OLD_VERSION" ]; then
 	exit 0
 fi
 
-#Stop Node to make system resources available.
-services-stop
-
 showtext "Building Monero..."
 
 {
@@ -56,8 +53,6 @@ showtext "Building Monero..."
 #Update system version number
 putvar "versions.monero" "$RELEASE"
 #cleanup old version number file
-
-services-start
 
 ##End debug log
 log "Monero Update Complete

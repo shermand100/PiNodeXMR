@@ -12,12 +12,9 @@ Start setup-update-monero-lws.sh script $(date)
 ####################
 "
 
-#Stop Monero-lws service (if started)
-showtext "Stopping Monero-LWS service (if started)..."
-sudo systemctl stop monero-lws.service
 ##Delete old version
 showtext "Delete old version"
-rm -rf /root/monero-lws/ 2>&1 | tee -a "$DEBUG_LOG"
+rm -rf /home/nodo/monero-lws/ 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Downloading and Building new Monero-LWS"
 #Check dependencies (Should be installed already from Monero install)
 sudo apt-get update
@@ -35,8 +32,6 @@ showtext "Downloading VTNerd Monero-LWS"
 	make
 } 2>&1 | tee -a "$DEBUG_LOG"
 cd || exit 1
-#Restarting Monero-LWS servcice
-sudo systemctl start monero-lws.service
 #Update system reference current LWS version number to New version number
 putvar "versions.lws" "$NEW_VERSION_LWS"
 

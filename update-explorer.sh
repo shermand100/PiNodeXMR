@@ -25,8 +25,6 @@ Start setup-update-explorer.sh script $(date)
 
 #(1) Define variables and updater functions
 
-#Stop Node to make system resources available.
-services-stop
 systemctl stop blockExplorer.service
 rm -rf /home/nodo/onion-monero-blockchain-explorer/
 showtext "Building Monero Blockchain Explorer..."
@@ -42,7 +40,6 @@ showtext "Building Monero Blockchain Explorer..."
 } 2>&1 | tee -a "$DEBUG_LOG"
 
 putvar "versions.exp" "$RELEASE"
-services-start
 #
 ##End debug log
 echo "
