@@ -25,18 +25,19 @@ setup_drive() {
 	done
 	#format
 	wipefs --all "/dev/$1"
-	#make sure it's gpt
-	sgdisk -g "/dev/$1"
 	#create table & part
-	parted --script "$blockdevice" mklabel gpt mkpart 1MiB 100%
+	parted --script "$blockdevice" mklabel gpt mkpart primary 1MiB 100%;
+	sleep 1
 	#create fs
 	mkfs."$fstype" -f "${blockdevice}p1"
+	sleep 1
 	#get uuid from block device
-	uuid=$(blkid | grep "$1" | sed 's/.*UUID="\([a-z0-9\-]\+\)".*/\1/g')
+	uuid=$(blkid | grep "$1" | sed 's/.*\sUUID="\([a-z0-9\-]\+\)".*/\1/g')
 	#append new partition to fstab
 	sed "/^UUID=$uuid/d" /etc/fstab
 	#add to fstab
 	printf "\nUUID=%s\t/media/monero\t%s\tdefaults,noatime\t0\t0" "$uuid" "$fstype" | tee -a /etc/fstab
+	#create mountpoint
 	mkdir -p /media/monero
 	#mount
 	mount -v "UUID=$uuid"
