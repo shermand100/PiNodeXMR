@@ -5,9 +5,15 @@ DEBUG_LOG=/home/nodo/debug.log
 CONFIG_FILE=/home/nodo/variables/config.json
 
 check_connection() {
-	ping -q -w 1 -c 1 "$(ip r | grep default | cut -d ' ' -f 3)" > /dev/null
-	return $?
+        touse="$(ip r | grep default | cut -d ' ' -f 3)"
+        for f in $touse; do
+                if ping -q -w 1 -c 1 "$f"> /dev/null; then
+                        return 0
+                fi
+        done
+        return 1
 }
+
 
 setup_drive() {
 	blockdevice="/dev/$1"
