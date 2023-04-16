@@ -20,7 +20,7 @@ fi
 ##Create new user 'nodo'
 showtext "Creating user 'nodo'..."
 adduser nodo --disabled-password
-adduser -r -s /bin/false -U monero
+adduser --system --no-create-home --shell /bin/false monero
 
 #Set nodo password 'MoneroNodo'
 echo "nodo:MoneroNodo" | chpasswd
@@ -148,6 +148,15 @@ chown root /etc/apache2/sites-enabled/000-default.conf
 
 showtext "Success"
 
+showtext "Move home contents"
+cp -r home/nodo/* /home/nodo/
+cp -r etc/* /etc/
+cp -r HTML/* /var/www/html/
+chown httpd:httpd -R /var/www/html
+cp update-*sh /home/nodo/
+chown nodo:nodo -R /home/nodo
+
+
 ##Setup local hostname
 showtext "Setting up local hostname..."
 {
@@ -195,14 +204,6 @@ rm -r /home/nodo/MoneroNodo/ 2>&1 | tee -a "$DEBUG_LOG"
 	End ubuntu-install-continue.sh script $(date)
 	####################"
 } 2>&1 | tee -a "$DEBUG_LOG"
-
-showtext "Move home contents"
-cp -r home/nodo/* /home/nodo/
-cp -r etc/* /etc/
-cp -r HTML/* /var/www/html/
-chown httpd:httpd -R /var/www/html
-cp update-*sh /home/nodo/
-chown nodo:nodo -R /home/nodo
 
 showtext "Downloading Monero..."
 # Install monero for the first time
