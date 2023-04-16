@@ -24,8 +24,6 @@ if [ "$RELEASE" == "$OLD_VERSION" ]; then
 	showtext "No update for Monero"
 	exit 0
 fi
-#ubuntu /dev/null odd requiremnt to set permissions
-chmod 666 /dev/null
 
 #Stop Node to make system resources available.
 services-stop
