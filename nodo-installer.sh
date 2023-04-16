@@ -10,7 +10,12 @@
 #shellcheck source=home/nodo/common.sh
 . home/nodo/common.sh
 
-check_connection || (showtext "NO CONNECTION -- aborting"; exit 1)
+if check_connection; then
+	showtext "Internet working fine -- starting installer"
+else
+	showtext "NO CONNECTION -- aborting!"
+	exit 1
+fi
 
 ##Create new user 'nodo'
 showtext "Creating user 'nodo'..."
