@@ -21,7 +21,7 @@ rm -rf /root/monero-lws/ 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Downloading and Building new Monero-LWS"
 #Check dependencies (Should be installed already from Monero install)
 sudo apt-get update
-sudo apt-get install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y -o DPkg::Options::="--force-confnew" 2>&1 | tee -a "$DEBUG_LOG"
+sudo apt-get install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Downloading VTNerd Monero-LWS"
 {
 	git clone --recursive https://github.com/vtnerd/monero-lws.git

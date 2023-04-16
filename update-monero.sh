@@ -36,7 +36,7 @@ showtext "Building Monero..."
 	# first install monero dependancies
 	apt-get update
 
-	apt-get install git build-essential ccache cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y -o DPkg::Options::="--force-confnew"
+	apt-get install git build-essential ccache cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libcurl4-openssl-dev libgtest-dev libreadline-dev libzmq3-dev libsodium-dev libhidapi-dev libhidapi-libusb0 -y
 
 	# go to home folder
 	cd || exit 1

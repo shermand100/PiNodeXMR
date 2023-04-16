@@ -41,13 +41,16 @@ touch "$DEBUG_LOG"
 chown nodo "$DEBUG_LOG"
 chmod 777 "$DEBUG_LOG"
 
+#force confnew by default everywhere
+echo "force-confnew" > /etc/dpkg/dpkg.cfg.d/force-confnew
+
 ##Update and Upgrade system
 showtext "Downloading and installing OS updates..."
 {
 apt-get update
-apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
-apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade
-apt-get upgrade -y -o Dpkg::Options::="--force-confnew"
+apt-get --yes upgrade
+apt-get --yes dist-upgrade
+apt-get upgrade -y
 ##Auto remove any obsolete packages
 apt-get autoremove -y 2>&1 | tee -a "$DEBUG_LOG"
 } 2>&1 | tee -a "$DEBUG_LOG"
@@ -62,8 +65,8 @@ showtext "User 'pi' Locked"
 showtext "Verifying Update..."
 {
 	apt-get update
-	apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade
-	apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade
+	apt-get --yes upgrade
+	apt-get --yes dist-upgrade
 	apt-get upgrade -y
 } 2>&1 | tee -a "$DEBUG_LOG"
 

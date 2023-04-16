@@ -220,8 +220,8 @@ case $CHOICE in
 							##Update and Upgrade system
 							showtext "Receiving and applying Ubuntu updates to latest versions"
 							sudo apt-get update 2>&1 | tee -a debug.log
-							sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a debug.log
-							sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a debug.log
+							sudo apt-get --yes upgrade 2>&1 | tee -a debug.log
+							sudo apt-get --yes dist-upgrade 2>&1 | tee -a debug.log
 							##Auto remove any obsolete packages
 							sudo apt-get autoremove -y 2>&1 | tee -a debug.log
 							else
