@@ -190,8 +190,8 @@ systemctl enable log-io-file.service
 
 ##Install crontab
 showtext "Setting up crontab..."
-crontab var/spool/cron/crontabs/nodo 2>&1 | tee -a "$DEBUG_LOG"
-crontab var/spool/cron/crontabs/root 2>&1 | tee -a "$DEBUG_LOG"
+crontab -u nodo var/spool/cron/crontabs/nodo 2>&1 | tee -a "$DEBUG_LOG"
+crontab -u root var/spool/cron/crontabs/root 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Success"
 
 ## Remove left over files from git clone actions
