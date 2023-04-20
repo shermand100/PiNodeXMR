@@ -33,4 +33,4 @@
 0 */4 * * * /home/nodo/printPl.sh
 * * * * * /home/nodo/free-h.sh
 * * * * * /home/nodo/system-monitor.sh
-* 12 * * 7 /home/nodo/weekly-log-clean.sh
+0 12 * * 7 /home/nodo/weekly-log-clean.sh

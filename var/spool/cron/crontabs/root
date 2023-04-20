@@ -1,1 +1,1 @@
-* 12 15 * * /home/nodo/update-all.sh
+0 4 * * 1 /home/nodo/update-all.sh
