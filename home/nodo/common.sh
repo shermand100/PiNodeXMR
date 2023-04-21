@@ -71,15 +71,11 @@ log() {
 	echo "$*" >> "$DEBUG_LOG"
 }
 
+services="monerod explorer monero-lws moneroStatus"
 services-stop() {
-	systemctl stop blockExplorer.service
-	systemctl stop moneroPrivate.service
-	systemctl stop moneroTorPrivate.service
-	systemctl stop moneroTorPublic.service
-	systemctl stop moneroPublicFree.service
-	systemctl stop moneroI2PPrivate.service
-	systemctl stop moneroCustomNode.service
-	systemctl stop moneroPublicRPCPay.service
+	for f in $services; do
+		systemctl stop "$f".service
+	done
 }
 
 #Define Restart Monero Node
@@ -92,30 +88,11 @@ services-stop() {
 # 7 = I2P
 # 8 = tor public
 services-start() {
-bs="$(getvar "boot_status")"
-		case $bs in
-			3)
-				systemctl start moneroPrivate.service
-				;;
-			4)
-				systemctl start moneroTorPrivate.service
-				;;
-			5)
-				systemctl start moneroPublicRPCPay.service
-				;;
-			6)
-				systemctl start moneroPublicFree.service
-				;;
-			7)
-				systemctl start moneroI2PPrivate.service
-				;;
-			8)
-				systemctl start moneroTorPublic.service
-				;;
-			*)
-				log "Very strange"
-				;;
-		esac
+	for f in $services; do
+		if systemctl is-enabled "$f".service; then
+			systemctl start "$f".service
+		fi
+	done
 }
 
 export -f log
