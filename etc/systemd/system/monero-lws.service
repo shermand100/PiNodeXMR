@@ -1,15 +1,15 @@
 [Unit]
-Description=Monero LWS
+Description=Monero Light Wallet Server
 After=network.target
 
 [Service]
-User=nodo
-Group=nodo
-EnvironmentFile=/home/nodo/IPforLWS.txt
-ExecStart=/home/nodo/monero-lws/build/src/monero-lws-daemon --rest-server=https://${IP}:8443 --confirm-external-bind --rest-ssl-key=/home/nodo/lwsSslCert/key.pem --rest-ssl-certificate=/home/nodo/lwsSslCert/cert.pem
+ExecStart=/bin/bash /home/nodo/execScripts/monero-lws.sh
+Type=simple
 Restart=always
-StandardOutput=file:/home/nodo/monero-lws/monero-lws.log
-StandardError=file:/home/nodo/monero-lws/monero-lws.log
+RestartSec=5
+User=monero
+StandardOutput=inherit
+StandardError=inherit
 
 [Install]
 WantedBy=multi-user.target
