@@ -14,11 +14,7 @@ Start setup-update-monero-lws.sh script $(date)
 
 ##Delete old version
 showtext "Delete old version"
-rm -rf /home/nodo/monero-lws/ 2>&1 | tee -a "$DEBUG_LOG"
-showtext "Downloading and Building new Monero-LWS"
-#Check dependencies (Should be installed already from Monero install)
-sudo apt-get update
-sudo apt-get install build-essential cmake libboost-all-dev libssl-dev libzmq3-dev doxygen graphviz -y 2>&1 | tee -a "$DEBUG_LOG"
+rm -rf /home/nodo/monero-lws 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Downloading VTNerd Monero-LWS"
 {
 	git clone --recursive https://github.com/vtnerd/monero-lws.git
@@ -27,7 +23,7 @@ showtext "Downloading VTNerd Monero-LWS"
 	git pull
 	mkdir build
 	cd build || exit 1
-	cmake -DMONERO_SOURCE_DIR=/root/monero -DMONERO_BUILD_DIR=/root/monero/build/release ..
+	cmake -DMONERO_SOURCE_DIR=/home/nodo/monero -DMONERO_BUILD_DIR=/home/nodo/monero/build/release ..
 	showtext "Building VTNerd Monero-LW"
 	make
 } 2>&1 | tee -a "$DEBUG_LOG"
