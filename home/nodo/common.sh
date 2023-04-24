@@ -56,7 +56,13 @@ getvar() {
 
 putvar() {
 	log "var $1 updated to $2"
-	contents=$(jq --argjson var "$2" ".config.$1 = \$var" "$CONFIG_FILE")
+	# Very cringe, I know
+	re='^[+-]?[0-9]+([.][0-9]+)?$'
+	if [[ $2 =~ $re ]]; then
+		contents=$(jq --argjson var "$2" ".config.$1 = \$var" "$CONFIG_FILE")
+	else
+		contents=$(jq --argjson var "\"$2\"" ".config.$1 = \$var" "$CONFIG_FILE")
+	fi
 	if [ -n "$contents" ]; then
 		echo -E "$contents" > "$CONFIG_FILE"
 	fi
