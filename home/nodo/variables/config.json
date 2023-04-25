@@ -17,8 +17,6 @@
     "in_peers": 64,
     "limit_rate_down": -1,
     "limit_rate_up": -1,
-    "mining_address": "",
-    "mining_intensity": 50,
     "monero_block_sync_size": 10,
     "monero_public_port": 18080,
     "monero_port": 18081,
