@@ -1,0 +1,14 @@
+[Unit]
+Description=No-ip.com DDNS
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+Alias=noip.service
+
+[Service]
+# Start main service
+ExecStart=/usr/local/bin/noip2
+Restart=always
+Type=forking

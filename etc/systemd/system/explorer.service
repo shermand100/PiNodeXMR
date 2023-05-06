@@ -1,0 +1,14 @@
+[Unit]
+Description=Monero Block Explorer
+After=network.target
+
+[Service]
+ExecStart=/bin/bash explorer.sh
+WorkingDirectory=/home/nodo/execScripts/
+Type=simple
+Restart=always
+RestartSec=5
+User=monero
+
+[Install]
+WantedBy=multi-user.target

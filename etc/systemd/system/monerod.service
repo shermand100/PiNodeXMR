@@ -1,0 +1,17 @@
+[Unit]
+Description=Monero Node
+After=network.target
+
+[Service]
+ExecStart=/bin/bash monerod.sh
+WorkingDirectory=/home/nodo/execScripts/
+Type=forking
+Restart=always
+RestartSec=30
+User=monero
+StandardOutput=inherit
+StandardError=inherit
+PIDFile=/run/monerod.pid
+
+[Install]
+WantedBy=multi-user.target
