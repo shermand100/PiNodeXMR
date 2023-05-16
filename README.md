@@ -31,7 +31,6 @@ cryptocurrency game to the next level.
 
 # Nodo specs
 
-|                |                                                                                                       |
 |----------------|-------------------------------------------------------------------------------------------------------|
 | CPU            | RK3588, octa-core, 4 high power, 4 low power cores, 64-bit with AES 256-bit hardware-based encryption |
 | RAM            | 16 GB LPDDR4 RAM in dual channel                                                                      |
@@ -54,3 +53,6 @@ cryptocurrency game to the next level.
 - 2.8″ touchscreen, control your node on your device or from the web
 - USB-C power, can operate over Wi-Fi and ethernet
 - Designed to run 24/7 with zero-interaction automatic updates
+
+
+*The codebase is largely based off of [PiNode-XMR](https://github.com/monero-ecosystem/PiNode-XMR). All credits to the original developers.*
