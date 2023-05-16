@@ -31,6 +31,7 @@ cryptocurrency game to the next level.
 
 # Nodo specs
 
+| Hardware Item  | Hardware Description                                                                                  |
 |----------------|-------------------------------------------------------------------------------------------------------|
 | CPU            | RK3588, octa-core, 4 high power, 4 low power cores, 64-bit with AES 256-bit hardware-based encryption |
 | RAM            | 16 GB LPDDR4 RAM in dual channel                                                                      |
