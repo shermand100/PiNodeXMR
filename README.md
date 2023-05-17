@@ -2,13 +2,14 @@
 
 Monero Node.
 
-Full, unpruned, optimized, dedicated.
-
+- Full, unpruned, optimized, dedicated;
 - Use Monero in the most secure and private way;
 - Full featured including convenience with multiple Light Wallets;
 - Improve your personal security while contributing to the network;
 - Designed for 24/7 operation and 5+ years of blockchain growth;
 - 1 year warranty on manufacturing defects.
+
+[MoneroNodo.com](https://moneronodo.com/)
 
 Nodo is currently a prototype and due for production and fabrication. Design,
 specifications and appearance are subject to change by the time we reach
@@ -29,9 +30,9 @@ custom settings, and keep the blockchain synronized at all times. Experience the
 power and privacy of our cutting-edge plug-and-play Monero node and take your
 cryptocurrency game to the next level.
 
-# Nodo specs
+## Nodo specs
 
-| Hardware Item  | Hardware Description                                                                                  |
+| Hardware       | Description                                                                                           |
 |----------------|-------------------------------------------------------------------------------------------------------|
 | CPU            | RK3588, octa-core, 4 high power, 4 low power cores, 64-bit with AES 256-bit hardware-based encryption |
 | RAM            | 16 GB LPDDR4 RAM in dual channel                                                                      |
@@ -44,8 +45,7 @@ cryptocurrency game to the next level.
 | Display        | 2.8″ Color Touchscreen                                                                                |
 | OS             | Ubuntu LTS 22.04 with support for long term updates                                                   |
 
-
-# Features
+## Features
 
 - Monero Node (full, unpruned, optimised, dedicated)
 - Tor and I2P support
@@ -54,6 +54,5 @@ cryptocurrency game to the next level.
 - 2.8″ touchscreen, control your node on your device or from the web
 - USB-C power, can operate over Wi-Fi and ethernet
 - Designed to run 24/7 with zero-interaction automatic updates
-
 
 *The codebase is largely based off of [PiNode-XMR](https://github.com/monero-ecosystem/PiNode-XMR). All credits to the original developers.*
