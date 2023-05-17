@@ -32,18 +32,22 @@ cryptocurrency game to the next level.
 
 ## Nodo specs
 
-| Hardware       | Description                                                                                           |
-|----------------|-------------------------------------------------------------------------------------------------------|
-| CPU            | RK3588, octa-core, 4 high power, 4 low power cores, 64-bit with AES 256-bit hardware-based encryption |
-| RAM            | 16 GB LPDDR4 RAM in dual channel                                                                      |
-| Storage        | 1TB PCIE x4.0 M.2 with full size SSD and heatsink                                                     |
-| Backup Storage | 32GB eMMC storage, MicroSD slot                                                                       |
-| GPU            | Mali-G610, quad-core                                                                                  |
-| Power          | USB-C in                                                                                              |
-| Connectivity   | 2.5 GBPS Ethernet, Wifi 6E, Bluetooth 5.3                                                             |
-| I/O            | x2 USB-C 3.0, x2 USB-A 3.0, HDMI 2.1, 3.5mm combo audio jack                                          |
-| Display        | 2.8″ Color Touchscreen                                                                                |
-| OS             | Ubuntu LTS 22.04 with support for long term updates                                                   |
+| Hardware       | Description                                                                           |
+|----------------|---------------------------------------------------------------------------------------|
+| Chipset        | NanoPC-T6N                                                                            |
+| CPU            | Rockchip RK3588, octa-core, 4 high power, 4 low power cores, 64-bit, hardware AES-256 |
+| RAM            | 16 GB LPDDR4 RAM in dual channel                                                      |
+| Storage        | PCIE gen 4 M.2 with full size 1TB SSD and heatsink                                    |
+| Backup Storage | 32GB eMMC storage, MicroSD slot                                                       |
+| GPU            | Mali-G610, quad-core                                                                  |
+| Power          | USB-C in                                                                              |
+| Connectivity   | 2.5 GBPS Ethernet, Wifi 6E, Bluetooth 5.3                                             |
+| I/O            | x2 USB-C 3.0, x2 USB-A 3.0, HDMI 2.1, 3.5mm combo audio jack                          |
+| Wi-Fi          | Intel AX210 on M.2 2230 slot                                                          |
+| Ethernet       | 2.5 Gbit                                                                              |
+| Display        | 2.8″ full color touchscreen LCD with new PCB                                          |
+| OS             | Ubuntu LTS 22.04 with support for long term updates                                   |
+| Case           | Custom CNC machined aluminum                                                          |
 
 ## Features
 
