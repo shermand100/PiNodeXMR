@@ -1,0 +1,6 @@
+This report generated: DATE & TIME
+Private Node:  -- Data Will be generated on next crontab run --
+Mining  Node:  -- Data Will be generated on next crontab run --
+Public  Node:  -- Data Will be generated on next crontab run --
+Tor     Node:  -- Data Will be generated on next crontab run --
+Explorer    :  -- Data Will be generated on next crontab run --

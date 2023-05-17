@@ -1,0 +1,15 @@
+[Unit]
+Description=Monero Light Wallet Server
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /home/nodo/execScripts/monero-lws.sh
+Type=simple
+Restart=always
+RestartSec=5
+User=monero
+StandardOutput=inherit
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target

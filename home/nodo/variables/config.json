@@ -1,0 +1,37 @@
+{
+  "config": {
+    "add_i2p_peer": "dsc7fyzzultm7y6pmx2avu6tze3usc7d27nkbzs5qwuujplxcmzq.b32.i2p",
+    "add_tor_peer": "nitbdip72kdg5z6g.onion:28083",
+    "boot_status": 0,
+    "credits": 250,
+    "difficulty": 1000,
+    "htmlpasswordrequired": "FALSE",
+    "tor_enabled": "TRUE",
+    "tor_address": "",
+    "tor_port": 18083,
+    "tor_tx_proxy_port": "",
+    "i2p_enabled": "TRUE",
+    "i2p_address": "",
+    "i2p_port": 18089,
+    "i2p_tx_proxy_port": "",
+    "in_peers": 64,
+    "limit_rate_down": -1,
+    "limit_rate_up": -1,
+    "monero_block_sync_size": 10,
+    "monero_public_port": 18080,
+    "monero_port": 18081,
+    "monero_rpcpay_port": 18084,
+    "out_peers": 64,
+    "payment_address": "",
+    "rpc_enabled": "TRUE",
+    "rpcp": "password",
+    "rpcu": "nodo",
+    "data_dir": "/media/monero/bitmonero",
+    "sync_mode": "fast:async",
+    "versions": {
+      "monero": "unset",
+      "exp": "unset",
+      "lws": "unset"
+    }
+  }
+}

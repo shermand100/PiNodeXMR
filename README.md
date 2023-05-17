@@ -1,73 +1,58 @@
-![PiNode-XMR logo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
-# Quick Start Guide v5.22.11-Open-Build		
-### This page is a quick overview to get you started. A complete and comprehensive manual showing all features can be found here at the Wiki: [Full Manual](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Manual)
+# Nodo
 
-# Project Overview
+Monero Node.
 
-PiNode-XMR is a completely free and open source suite of tools to help a user run their own Monero node with ease. PiNode-XMR is designed for use with single board computers (SBC) such as the Raspberry Pi, Pine64 or Odroid hardware to allow for very cheap node setup and minimal 24/7 running costs due to low power usage.
+- Full, unpruned, optimized, dedicated;
+- Use Monero in the most secure and private way;
+- Full featured including convenience with multiple Light Wallets;
+- Improve your personal security while contributing to the network;
+- Designed for 24/7 operation and 5+ years of blockchain growth;
+- 1 year warranty on manufacturing defects.
 
-PiNode-XMR can provide a Full or Pruned Monero Node and optional integration with tor/I2P along with many other tools such as your own block explorer, transaction pool viewer and connected peer lists. After setup, normal interaction is available through a built in web interface accessible from any device on your local network:
+[MoneroNodo.com](https://moneronodo.com/)
 
-![Demo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNodeXMR_demo.gif)
+Nodo is currently a prototype and due for production and fabrication. Design,
+specifications and appearance are subject to change by the time we reach
+production in mid July. We expect production models to ship in September. All
+images are 3D renders of actual prototype. If minimum sales numbers are not met,
+your funds will be returned to you in full Monero amount.
 
-## Quick Start
+Introducing our state-of-the-art Monero Node, designed for seamless integration
+and optimal performance. This full, unpruned, and dedicated node comes equipped
+with tor and i2p support, ensuring maximum privacy and security for your
+transactions. Manage your wallets effortlessly through the LWS Admin panel and
+enjoy the convenience of our built-in block explorer. The 2.8″ touchscreen
+allows you to control your node directly from the device, or you can access
+it from the web for added flexibility and full block explorer functionality.
+Contribute to your privacy but running your own personal node while contributing
+to the Monero network. Configure the node via the embedded display with your
+custom settings, and keep the blockchain synronized at all times. Experience the
+power and privacy of our cutting-edge plug-and-play Monero node and take your
+cryptocurrency game to the next level.
 
-### Hardware
-PiNode-XMR was originaly designed and built on Raspberry Pi OS, and has now expanded to support Armbain Buster. This allows for installation on many different devices.
+## Nodo specs
 
-A list of tested and supported hardware can be found here [PiNodeXMR Wiki: Hardware](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Hardware)
-However any similar device should work that has a Armbian Buster OS available, USB3 preferred, minimum overall specification should not be lower than a Pi3B.
+| Hardware       | Description                                                                                           |
+|----------------|-------------------------------------------------------------------------------------------------------|
+| CPU            | RK3588, octa-core, 4 high power, 4 low power cores, 64-bit with AES 256-bit hardware-based encryption |
+| RAM            | 16 GB LPDDR4 RAM in dual channel                                                                      |
+| Storage        | 1TB PCIE x4.0 M.2 with full size SSD and heatsink                                                     |
+| Backup Storage | 32GB eMMC storage, MicroSD slot                                                                       |
+| GPU            | Mali-G610, quad-core                                                                                  |
+| Power          | USB-C in                                                                                              |
+| Connectivity   | 2.5 GBPS Ethernet, Wifi 6E, Bluetooth 5.3                                                             |
+| I/O            | x2 USB-C 3.0, x2 USB-A 3.0, HDMI 2.1, 3.5mm combo audio jack                                          |
+| Display        | 2.8″ Color Touchscreen                                                                                |
+| OS             | Ubuntu LTS 22.04 with support for long term updates                                                   |
 
-Best value/performance as of Q2 2021 seems to be the Rock64.
+## Features
 
-Choose your device and storage, then download and write the official Buster OS image. If available use the 'lite' version of the OS, there is no need for the GUI as PiNodeXMR will produce it's own interface later. Many devices also support USB boot as an alternative to MicroSD cards, performance and longevity is greatly increased if you can take the extra step.
+- Monero Node (full, unpruned, optimised, dedicated)
+- Tor and I2P support
+- [LWS](https://github.com/vtnerd/monero-lws) for Light Wallets
+- [Block Explorer](https://github.com/moneroexamples/onion-monero-blockchain-explorer/)
+- 2.8″ touchscreen, control your node on your device or from the web
+- USB-C power, can operate over Wi-Fi and ethernet
+- Designed to run 24/7 with zero-interaction automatic updates
 
-Once you have your basic OS:
-
-**Raspberry Pi** users can log in as usual with user 'pi' and password 'raspberry'
-
-**Armbian users** should login with the default (usually it's username 'root' with password '1234') and create a new user called 'pinodexmr'. Once Armbian users have created 'pinodexmr' they should remain logged in as user 'root'.
-
-Finally to install the PiNode-XMR project simply run the single line:
-
-`wget -O – install.pinodexmr.co.uk | bash`
-
-And follow the menu prompts.
-
-
-
-## Downloads
-#### Download PiNode-XMR disk images 
-
-Pre-configured disk images are available for the following devices:
-* Raspberry Pi 3 (32-bit)
-* Raspberry Pi 4 (64-bit)
-* RockPro64 (64-bit)
-* Rock64 (64-bit)
-* Odroid XU4 / HC1 / HC2 (32-bit)
-
-Note that 32-bit devices cannot run P2Pool
-
-____
-#### Direct Download links
-
-To assist in managing disk images they are all held on our website PiNodeXMR.co.uk
-
-[(Link) All pre-configured disk images @ PiNodeXMR.co.uk](https://www.pinode.co.uk/downloads)
-
-____
-
-See the full manual in the wiki for other links to pre-sync'd pruned node images.
-
-## Contact and Support
-
-* [Redit.com/r/PiNode](https://www.reddit.com/r/pinode/)
-* Telegram group PiNode-XMR [t.me/PiNodeXMR](https://t.me/PiNodeXMR)
-
-During install a debug file is generated at the path /home/pinodexmr/debug.log  Any errors from a failed install are passed to this file and may be helpful should you have a problem. Most commonly errors on first build are due to a dependency not being downloaded (server 404), the install command can be run multiple times.
-
-I am slowly building a [FAQ page](https://github.com/monero-ecosystem/PiNode-XMR/wiki/FAQ)
-
-*Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
-
-43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
+*The codebase is largely based off of [PiNode-XMR](https://github.com/monero-ecosystem/PiNode-XMR). All credits to the original developers.*
