@@ -1,2 +1,0 @@
-#!/bin/bash
-NEW_VERSION_PI=52208
