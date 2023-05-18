@@ -29,9 +29,11 @@
     "data_dir": "/media/monero/bitmonero",
     "sync_mode": "fast:async",
     "versions": {
+      "nodo": "unset",
       "monero": "unset",
       "exp": "unset",
-      "lws": "unset"
+      "lws": "unset",
+      "lws-admin": "unset"
     }
   }
 }

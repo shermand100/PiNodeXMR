@@ -17,8 +17,13 @@ Start update-monero.sh script $(date)
 #Download variable for current monero release version
 #FIXME: change url
 # wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/nodo/release.sh
-#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNodo/master/release.txt)"
-RELEASE="release-v0.18" # TODO remove when live
+RELEASE="$(curl -fs https://raw.githubusercontent.com/MoneroNodo/Nodo/master/release-monero.txt)"
+# RELEASE="release-v0.18" # TODO remove when live
+
+if [ -z "$RELEASE" ]; then # Release somehow not set or empty
+	showtext "Failed to check for update for Monero"
+	exit 0
+fi
 
 if [ "$RELEASE" == "$OLD_VERSION" ]; then
 	showtext "No update for Monero"

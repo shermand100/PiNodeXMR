@@ -2,10 +2,23 @@
 #(1) Define variables and updater functions
 #shellcheck source=home/nodo/common.sh
 . /home/nodo/common.sh
-NEW_VERSION_LWS="${1:-$(getvar "versions.lws")}"
+OLD_VERSION_LWS="${1:-$(getvar "versions.lws")}"
 
-#Error Log:
+RELEASE="$(curl -fs https://raw.githubusercontent.com/MoneroNodo/Nodo/master/release-monero-lws.txt)"
+#RELEASE="release-v0.18" # TODO remove when live
+
+if [ -z "$RELEASE" ]; then # Release somehow not set or empty
+	showtext "Failed to check for update for LWS Admin"
+	exit 0
+fi
+
+if [ "$RELEASE" == "$OLD_VERSION_LWS" ]; then
+	showtext "No update for LWS Admin"
+	exit 0
+fi
+
 touch "$DEBUG_LOG"
+
 showtext "
 ####################
 Start setup-update-monero-lws.sh script $(date)
@@ -29,7 +42,7 @@ showtext "Downloading VTNerd Monero-LWS"
 } 2>&1 | tee -a "$DEBUG_LOG"
 cd || exit 1
 #Update system reference current LWS version number to New version number
-putvar "versions.lws" "$NEW_VERSION_LWS"
+putvar "versions.lws" "$RELEASE"
 
 ##End debug log
 showtext "Monero-LWS Updated

@@ -3,7 +3,7 @@
 #shellcheck source=home/nodo/common.sh
 . /home/nodo/common.sh
 cd /root/moneronodo || exit 1
-OLD_VERSION_PI="${1:-$(getvar "versions.pi")}"
+OLD_VERSION_NODO="${1:-$(getvar "versions.nodo")}"
 touch "$DEBUG_LOG"
 echo "
 ####################
@@ -11,10 +11,15 @@ Start update-nodo.sh script $(date)
 ####################
 " | tee -a "$DEBUG_LOG"
 
-#RELEASE="$(curl -s https://raw.githubusercontent.com/monero-ecosystem/MoneroNodo/master/release.txt)"
-RELEASE="alpha" # TODO remove when live
+RELEASE="$(curl -fs https://raw.githubusercontent.com/MoneroNodo/Nodo/master/release.txt)"
+#RELEASE="alpha" # TODO remove when live
 
-if [ "$RELEASE" == "$OLD_VERSION_PI" ]; then
+if [ -z "$RELEASE" ]; then # Release somehow not set or empty
+	showtext "Failed to check for update for Nodo"
+	exit 0
+fi
+
+if [ "$RELEASE" == "$OLD_VERSION_NODO" ]; then
 	showtext "No update for Nodo"
 	exit 0
 fi
@@ -60,10 +65,9 @@ chmod 777 /dev/null
 showtext "Global permissions changed"
 
 ##Clone Nodo to device from git
-showtext "Cloneing Nodo to device from git..."
+showtext "Cloning Nodo to device from git..."
 # Update Link
-#FIXME change to real git url once done
-git clone -b no-sleep --single-branch https://github.com/abdullahdostkhan/Moneronodo.git
+git clone -b no-sleep --single-branch https://github.com/MoneroNodo/Nodo.git
 
 #Backup User values
 showtext "Creating backups of any settings you have customised
@@ -113,44 +117,44 @@ mv /home/nodo/Nodo/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1
 /etc/init.d/avahi-daemon restart 2>&1 | tee -a "$DEBUG_LOG"
 showtext "Success"
 
-##Update html template
-showtext "Configuring Web-UI..."
-#First move hidden file specifically .htaccess file then entire directory
-mv /home/nodo/Nodo/HTML/.htaccess /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
-rm -R /var/www/html/*.php
-#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
-mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-#Overwrite /var/www/html with updated contents
-rsync -a /home/nodo/Nodo/HTML/* /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
-chown www-data -R /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
-chmod 777 -R /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
-#Restore User variables
-mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a "$DEBUG_LOG" >&2)
-#Full-mode html update complete
+###Update html template
+#showtext "Configuring Web-UI..."
+##First move hidden file specifically .htaccess file then entire directory
+#mv /home/nodo/Nodo/HTML/.htaccess /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+#rm -R /var/www/html/*.php
+##Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
+#mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+##Overwrite /var/www/html with updated contents
+#rsync -a /home/nodo/Nodo/HTML/* /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+#chown www-data -R /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+#chmod 777 -R /var/www/html/ 2>&1 | tee -a "$DEBUG_LOG"
+##Restore User variables
+#mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+#mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a "$DEBUG_LOG" >&2)
+##Full-mode html update complete
 
 #Set correct config for if HTML (Web UI) Password is required.
 
@@ -202,7 +206,7 @@ systemctl restart moneroStatus.service
 #Update system version number to new one installed
 {
 	showtext "Updating system version number..."
-	putvar "versions.pi" "$RELEASE"
+	putvar "versions.nodo" "$RELEASE"
 	#ubuntu /dev/null odd requiremnt to set permissions
 	chmod 777 /dev/null
 } 2>&1 | tee -a "$DEBUG_LOG"

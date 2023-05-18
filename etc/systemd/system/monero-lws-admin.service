@@ -1,0 +1,15 @@
+[Unit]
+Description=Monero LWS Admin Panel
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /home/nodo/execScripts/monero-lws-admin.sh
+Type=simple
+Restart=always
+RestartSec=5
+User=monero
+StandardOutput=inherit
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target

@@ -221,6 +221,12 @@ showtext "Downloading Monero LWS"
 # Install monero block explorer for the first time
 sudo -u nodo bash ./update-lws.sh
 
+showtext "Downloading Monero LWS"
+# Install monero block explorer for the first time
+sudo -u nodo bash ./update-lws-admin.sh
+putvar 'lws_admin_key' "$(uuidgen -r)"
+
+
 services-start
 
 showtext "Start services"
