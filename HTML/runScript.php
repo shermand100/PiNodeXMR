@@ -136,6 +136,16 @@ switch($function) {
     exec("sudo systemctl disable blockExplorer.service");
     echo "Stop Command Sent for Block Explorer";
     break;
+  case 'swap-start':
+    exec("sudo systemctl start atomic-swap.service");
+    exec("sudo systemctl enable atomic-swap.service");
+    echo "Start Command Sent for Atomic Swap service";
+    break;
+  case 'swap-stop':
+    exec("sudo systemctl stop atomic-swap.service");
+    exec("sudo systemctl disable atomic-swap.service");
+    echo "Stop Command Sent for Atomic Swap service";
+    break;
   default:
     echo "Error: No function specified";
 }
