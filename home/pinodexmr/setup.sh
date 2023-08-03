@@ -8,7 +8,8 @@
     "2)" "System Settings" \
 	"3)" "Update Tools" \
 	"4)" "Node Tools" \
-	"5)" "Extra Network Tools" 2>&1 >/dev/tty)
+	"5)" "Atomic Swap" \
+	"6)" "Extra Network Tools" 2>&1 >/dev/tty)
 	
 	case $CHOICE in
 		
@@ -448,7 +449,59 @@
 				. /home/pinodexmr/setup.sh
 				;;
 
-		"5)")CHOICE5=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
+			"5)")CHOICE2=$(whiptail --backtitle "Athanor Labs" --title "Atomic Swap" --menu "\n\nSystem Settings" 20 60 10 \
+				"1)" "Install Atomic Swap Utilities" \
+				"2)" "View Balances" \
+				"3)" "View Monero Address + QR" \
+				"4)" "View Etherum Address + QR" \
+				"5)" "View Past Swaps" \
+				"6)" "Clear All Offers" \
+				"7)" "Show My Offers" \
+				"8)" "Show All Offers" 2>&1 >/dev/tty)
+				
+				case $CHOICE2 in
+		
+					"1)")	whiptail --title "Atomic Swap" --msgbox "You will now be taken to the Ubuntu menu to configure your hardware" 8 78;
+							sudo armbian-config
+					;;
+				
+					"2)") 	whiptail --title "Atomic Swap" --msgbox "Shows addresses and balances including blocks until unlock\n\nThe Swap service must be running before using this option." 8 78;
+							~/bin/swapcli balances
+							read -p "Press enter to continue"
+					;;
+					
+					"3)") 	whiptail --title "Atomic Swap" --msgbox "Shows Monero Address and QR code\n\nThe Swap service must be running before using this option.\nQR code may require large resolution display" 8 78;
+							~/bin/swapcli xmr-address
+							read -p "Press enter to continue"
+					;;
+			
+					"4)")	whiptail --title "Atomic Swap" --msgbox "Shows Ethereum Address and QR code\n\nThe Swap service must be running before using this option.\nQR code may require large resolution display" 8 78;
+							~/bin/swapcli eth-address
+							read -p "Press enter to continue"
+					;;
+
+					"5)")	whiptail --title "Atomic Swap" --msgbox "Shows past swaps summary and status." 8 78;
+							~/bin/swapcli past
+							read -p "Press enter to continue"
+					;;
+					
+					"6)")	whiptail --title "Atomic Swap" --msgbox "If you have any offers published, this command will revoke them if not yet taken." 8 78;
+							~/bin/swapcli clear-offers
+							read -p "Press enter to continue"
+					;;
+					"7)")	whiptail --title "Atomic Swap" --msgbox "If you have any offers published, this command will display them." 8 78;
+							~/bin/swapcli get-offers
+							read -p "Press enter to continue"
+					;;
+					"8)")	whiptail --title "Atomic Swap" --msgbox "This will show all available offers your node is aware of" 8 78;
+							~/bin/swapcli query-all
+							read -p "Press enter to continue"
+					;;										
+				esac
+				. /home/pinodexmr/setup.sh
+				;;		
+
+		"6)")CHOICE5=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
 				"1)" "Install tor" \
 				"2)" "View tor NYX interface" \
 				"3)" "Start/Stop tor Service" \
