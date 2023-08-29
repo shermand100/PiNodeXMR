@@ -108,7 +108,7 @@
 				"3)" "Update Blockchain Explorer" \
 				"4)" "Update P2Pool" \
 				"5)" "Update Monero-LWS" \
-				"6)" "Update Atomic Swap" \				
+				"6)" "Update Atomic Swap" \
 				"7)" "Update system packages and dependencies" 2>&1 >/dev/tty)
 				
 				case $CHOICE3 in
