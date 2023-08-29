@@ -8,7 +8,8 @@
     "2)" "System Settings" \
 	"3)" "Update Tools" \
 	"4)" "Node Tools" \
-	"5)" "Extra Network Tools" 2>&1 >/dev/tty)
+	"5)" "Atomic Swap" \
+	"6)" "Extra Network Tools" 2>&1 >/dev/tty)
 	
 	case $CHOICE in
 		
@@ -107,7 +108,8 @@
 				"3)" "Update Blockchain Explorer" \
 				"4)" "Update P2Pool" \
 				"5)" "Update Monero-LWS" \
-				"6)" "Update system packages and dependencies" 2>&1 >/dev/tty)
+				"6)" "Update Atomic Swap" \
+				"7)" "Update system packages and dependencies" 2>&1 >/dev/tty)
 				
 				case $CHOICE3 in
 		
@@ -301,8 +303,46 @@
 							whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
 							fi
 						;;											
-						
-					"6)")	if (whiptail --title "Update System" --yesno "PiNode-XMR will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
+
+					"6)")	if (whiptail --title "Update Atomic Swap Utility" --yesno "This setting will check for and update (re-install) the latest XMR->ETH Atomic utility from AthanorLabs\n\nNote that this tool is currently in Beta, it may be possible to lose funds\nWould you like to continue?" 12 78); then
+							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/new-ver-atomicSwap.sh -O /home/pinodexmr/new-ver-atomicSwap.sh
+							#Permission Setting
+							chmod 755 /home/pinodexmr/current-ver-atomicSwap.sh
+							chmod 755 /home/pinodexmr/new-ver-atomicSwap.sh
+							#Load Variables
+							. /home/pinodexmr/current-ver-atomicSwap.sh
+							. /home/pinodexmr/new-ver-atomicSwap.sh
+							echo "\e[36mVersion Info file received: \e[0m"
+							echo -e "\e[36mCurrent Version: $CURRENT_VERSION_ATOMICSWAP \e[0m"
+							echo -e "\e[36mAvailable Version: $NEW_VERSION_ATOMICSWAP \e[0m"
+							sleep "3"
+								if [ $CURRENT_VERSION_ATOMICSWAP -lt $NEW_VERSION_ATOMICSWAP ]; then
+									if (whiptail --title "Update Atomic Swap Utility" --yesno "An update has been found for the Atomic Swap utility. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
+					
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-atomicSwap.sh | bash
+
+									else
+									whiptail --title "Update Atomic Swap Utility" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
+									fi
+
+								else
+									if (whiptail --title "Update Atomic Swap Utility" --yesno "This device thinks it's running the latest version of the Atomic Swap utility.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a clean install/reset tool if you think your version is not functioning properly" --yes-button "Force Atomic Swap Update" --no-button "Return to Main Menu"  14 78); then
+
+									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-atomicSwap.sh | bash
+		
+									else
+									whiptail --title "Update Atomic Swap Utility" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
+									fi
+								fi
+	
+							#clean up
+							rm /home/pinodexmr/new-ver-atomicSwap.sh
+							else
+							whiptail --title "Update Atomic Swap Utility" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
+							fi
+						;;	
+
+					"7)")	if (whiptail --title "Update System" --yesno "PiNode-XMR will perform a check for background system updates of your OS's packages and dependencies.\n\nWould you like to continue?" 12 78); then
 							clear; 
 							##Update and Upgrade system
 							echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
@@ -443,12 +483,107 @@
 								else
 									sleep 2
 									fi
-							;;									
+								;;									
 				esac
 				. /home/pinodexmr/setup.sh
 				;;
 
-		"5)")CHOICE5=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
+			"5)")CHOICE5=$(whiptail --backtitle "Athanor Labs" --title "Atomic Swap" --menu "\n\nSystem Settings" 20 60 10 \
+				"1)" "View Balances" \
+				"2)" "View Monero Address + QR" \
+				"3)" "View Etherum Address + QR" \
+				"4)" "View Past Swaps" \
+				"5)" "View Status of Ongoing Swaps" \
+				"6)" "Clear All Offers" \
+				"7)" "Show My Offers" \
+				"8)" "Discover available XMR->ETH Offers" \
+				"9)" "Suggested XMR ETH Exchange rate" \
+				"10)" "Create XMR Sell Offer" 2>&1 >/dev/tty)
+				
+				case $CHOICE5 in
+		
+					"1)") 	whiptail --title "Atomic Swap" --msgbox "Shows addresses and balances including blocks until unlock\n\nThe Swap service must be running before using this option." 8 78;
+							~/atomic-swap/bin/swapcli balances
+							read -p "Press enter to continue"
+					;;
+					
+					"2)") 	whiptail --title "Atomic Swap" --msgbox "Shows Monero Address and QR code\n\nThe Swap service must be running before using this option.\nQR code may require large resolution display" 8 78;
+							~/atomic-swap/bin/swapcli xmr-address
+							read -p "Press enter to continue"
+					;;
+			
+					"3)")	whiptail --title "Atomic Swap" --msgbox "Shows Ethereum Address and QR code\n\nThe Swap service must be running before using this option.\nQR code may require large resolution display" 8 78;
+							~/atomic-swap/bin/swapcli eth-address
+							read -p "Press enter to continue"
+					;;
+
+					"4)")	whiptail --title "Atomic Swap" --msgbox "Shows past swaps summary and status." 8 78;
+							~/atomic-swap/bin/swapcli past
+							read -p "Press enter to continue"
+					;;
+
+					"5)")	whiptail --title "Atomic Swap" --msgbox "Shows status of ongoing swaps." 8 78;
+							~/atomic-swap/bin/swapcli ongoing
+							read -p "Press enter to continue"
+					;;					
+					
+					"6)")	whiptail --title "Atomic Swap" --msgbox "If you have any offers published, this command will revoke them if not yet taken." 8 78;
+							~/atomic-swap/bin/swapcli clear-offers
+							read -p "Press enter to continue"
+					;;
+					"7)")	whiptail --title "Atomic Swap" --msgbox "If you have any offers published, this command will display them." 8 78;
+							~/atomic-swap/bin/swapcli get-offers
+							read -p "Press enter to continue"
+					;;
+					"8)")	whiptail --title "Atomic Swap" --msgbox "This will show all available offers your node is aware of" 8 78;
+							~/atomic-swap/bin/swapcli query-all
+							read -p "Press enter to continue"
+					;;
+					"9)")	whiptail --title "Atomic Swap" --msgbox "This will show the current market XMR ETH exchange rate from Chainlink oracle" 8 78;
+							~/atomic-swap/bin/swapcli suggested-exchange-rate
+							read -p "Press enter to continue"							
+					;;
+					"10)")	if (whiptail --title "Atomic Swap" --yesno "This will create an offer to sell your XMR and recieve Ethereum\n\nYou can set the Min/Max Quantity and Exchange rate\n\nWould you like to continue?" 14 78); then
+								# use temp file for setting Quantity and exchange rate storage (value shredded after use)
+								_temp="./dialog.$$"
+								#XMR Quantity Min - set
+								whiptail --title "" --inputbox "Enter the MINIMUM quantity of XMR you would like to offer to sell in this trade:\n*Note must be above 0.01 ETH in value" 10 60 2>$_temp
+								# set XMR Quantity var
+								XMRQMIN=$( cat $_temp )
+								shred $_temp
+								#XMR Quantity Max - set
+								whiptail --title "" --inputbox "Enter the MAXIMUM quantity of XMR you would like to offer to sell in this trade:\n*Note must be above 0.01 ETH in value" 10 60 2>$_temp
+								# set XMR Quantity var
+								XMRQMAX=$( cat $_temp )
+								shred $_temp
+								# set XMR Exchange rate var
+								whiptail --title "Atomic Swap" --msgbox "You will next be asked for the exchange rate you are willing to swap your XMR to ETH at.\nNote that if you hold an ETH balance of less than 0.01 your conversion will be carried out by a relayer on your behalf. In this case a relayer will subtract their fee of 0.01 ETH from your swap.\n\nContinue to see the current exchange rate" 12 78
+								~/atomic-swap/bin/swapcli suggested-exchange-rate
+								echo -e "\e[32mThe above rate is sourced from Chainlink Oracle. Please do your research thoroughly of the correct rate before ofering your XMR trade publicly. Atomic Swaps cannot be reversed!\e[0m"
+								read -p "Press enter to continue"
+								whiptail --title "Atomic Swap" --inputbox "XMR ETH Exchange rate:" 10 60 2>$_temp
+								XMRX=$( cat $_temp )
+								shred $_temp
+										#CONFIRM EXCHANGE
+										if (whiptail --title "Atomic Swap Confirmation" --yesno "You are offering to sell XMR with the following conditions to the buyer:\nMinium XMR buyer can request:${XMRQMIN}\nMaximum XMR buyer can request:${XMRQMAX}\n\nAt Exchange rate of 1XMR to ${XMRX} ETH\n\nSelecting Yes to this box will publish the trade!\nAre you Sure you want to continue?" 14 78); then
+											sleep 2
+											~/atomic-swap/bin/swapcli make --min-amount $XMRQMIN --max-amount $XMRQMAX --exchange-rate $XMRX --detached --swapd-port 5000
+											read -p "Press enter to continue"
+										else
+										whiptail --title "Atomic Swap" --msgbox "*****TRADE ABORTED*****\n\nXMR TO ETH trade has been cancelled" 12 78
+										sleep 2
+										fi
+
+							else
+							sleep 2
+							fi
+					;;
+													
+				esac
+				. /home/pinodexmr/setup.sh
+				;;		
+
+		"6)")CHOICE6=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
 				"1)" "Install tor" \
 				"2)" "View tor NYX interface" \
 				"3)" "Start/Stop tor Service" \
@@ -458,7 +593,7 @@
 				"7)" "Web Interface Password set/enable/disable" \
 				"8)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
 				
-				case $CHOICE5 in
+				case $CHOICE6 in
 		
 							"1)")	if (whiptail --title "PiNode-XMR Install tor" --yesno "Some countries for censorship, political or legal reasons do not look favorably on tor and other anonymity services, so tor is not installed on this device by default. However this option can install it now for you.\n\nWould you like to continue?" 14 78); then
 									. /home/pinodexmr/setupMenuScripts/setup-tor.sh
@@ -517,12 +652,12 @@
 								;;
 								
 
-							"7)")	CHOICE6=$(whiptail --backtitle "PiNode-XMR Settings" --title "Web Interface Password Set/Enable/Disable" --menu "\n\nWeb Interface Password Set/Enable/Disable" 30 60 15 \
+							"7)")	CHOICE7=$(whiptail --backtitle "PiNode-XMR Settings" --title "Web Interface Password Set/Enable/Disable" --menu "\n\nWeb Interface Password Set/Enable/Disable" 30 60 15 \
 										"1)" "Set Web Interface Password" \
 										"2)" "Enable Web Interface Password" \
 										"3)" "Disable Web Interface Password" 2>&1 >/dev/tty)
 				
-									case $CHOICE6 in
+									case $CHOICE7 in
 
 								"1)")	if (whiptail --title "Web Interface Password Set" --yesno "Set the password used to access the Web Interface" --yes-button "Set Password" --no-button "Cancel" 14 78); then
 									sudo htpasswd -c /etc/apache2/.htpasswd pinodexmr
@@ -572,7 +707,6 @@ HTMLPASSWORDREQUIRED=FALSE" > /home/pinodexmr/variables/htmlPasswordRequired.sh
 									sleep 2
 									fi
 								;;								
-
 				esac
 				. /home/pinodexmr/setup.sh
 				;;

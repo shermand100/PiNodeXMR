@@ -1,0 +1,17 @@
+[Unit]
+Description=AtomicSwap
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /home/pinodexmr/execScripts/atomicSwap.sh
+WorkingDirectory=/home/pinodexmr/
+Type=simple
+Restart=always
+RestartSec=30
+User=pinodexmr
+StandardOutput=file:/home/pinodexmr/.atomicswap/mainnet/atomicSwap.log
+StandardError=file:/home/pinodexmr/.atomicswap/mainnet/atomicSwap.log
+PIDFile=/home/pinodexmr/.atomicswap/mainnet/atomicSwap.pid
+
+[Install]
+WantedBy=multi-user.target

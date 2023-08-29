@@ -26,11 +26,18 @@
       }
     },
     {
+      "source": "Atomic_Swap",
+      "stream": "Atomic_Swap_log",
+      "config": {
+        "path": "/home/pinodexmr/.atomicswap/mainnet/atomicSwap.log"
+      }
+    },
+    {
       "source": "Block_Explorer",
       "stream": "Block_Explorer_log",
       "config": {
         "path": "/home/pinodexmr/onion-monero-blockchain-explorer/explorer.log"
       }
-    }     
+    }
   ]
 }

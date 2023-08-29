@@ -356,6 +356,42 @@ then
 	fi
 fi
 
+if [ $LIGHTMODE = FALSE ]
+then
+	##Install Atomic Swap (Not available on 32 bit systems)
+	if [ $CPU_ARCH -eq 32 ]
+	then
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********** ARCH: 32-bit detected ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m******* Atomic Swap Cannot be built *********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********** ARCH: 64-bit required ***********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m******** SKIPPING Atomic Swap build *********\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	echo "Install resuming in 20 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "10"
+	echo "Install resuming in 10 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "5"
+	echo "Install resuming in 5 seconds" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep "5"
+	else
+	echo -e "\e[32mInstalling Atomic Swap\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	#Install Go 1.20 for compatability
+	sudo apt install snapd -y
+	sudo snap install --classic --channel=1.20/stable go
+	#clone Atomic Swap
+	git clone https://github.com/athanorlabs/atomic-swap.git 2>&1 | tee -a /home/pinodexmr/debug.log
+	cd atomic-swap
+	#make Atomic Swap
+	make build-release 2>&1 | tee -a /home/pinodexmr/debug.log
+	cd
+	mkdir .atomicswap
+	sudo chmod 777 -R /home/pinodexmr/.atomicswap/
+	echo -e "\e[32mSuccess\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
+	sleep 3
+
+	fi
+fi
+
 ##Install log.io (Real-time service monitoring)
 #Establish Device IP
 . ~/variables/deviceIp.sh
