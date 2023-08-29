@@ -108,7 +108,7 @@
 				"3)" "Update Blockchain Explorer" \
 				"4)" "Update P2Pool" \
 				"5)" "Update Monero-LWS" \
-				"6)" "Update Atomic Swap" \
+				"6)" "Update Atomic Swap" \				
 				"7)" "Update system packages and dependencies" 2>&1 >/dev/tty)
 				
 				case $CHOICE3 in
@@ -568,7 +568,7 @@
 										if (whiptail --title "Atomic Swap Confirmation" --yesno "You are offering to sell XMR with the following conditions to the buyer:\nMinium XMR buyer can request:${XMRQMIN}\nMaximum XMR buyer can request:${XMRQMAX}\n\nAt Exchange rate of 1XMR to ${XMRX} ETH\n\nSelecting Yes to this box will publish the trade!\nAre you Sure you want to continue?" 14 78); then
 											sleep 2
 											~/atomic-swap/bin/swapcli make --min-amount $XMRQMIN --max-amount $XMRQMAX --exchange-rate $XMRX --detached --swapd-port 5000
-
+											read -p "Press enter to continue"
 										else
 										whiptail --title "Atomic Swap" --msgbox "*****TRADE ABORTED*****\n\nXMR TO ETH trade has been cancelled" 12 78
 										sleep 2
