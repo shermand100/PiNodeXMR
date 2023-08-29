@@ -74,6 +74,11 @@ CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool
 		# 7 = Public free
 		# 8 = I2P
 		# 9 tor public
+
+		#Load bootstatus var
+		sudo chmod 777 /home/pinodexmr/bootstatus.sh
+		. /home/pinodexmr/bootstatus.sh
+
 	if [[ $BOOT_STATUS -eq 2 ]]
 then
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Node ready for start. See web-ui at $(hostname -I) to select mode." 16 60
