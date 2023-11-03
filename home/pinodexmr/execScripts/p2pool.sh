@@ -18,39 +18,64 @@
 
 #Start P2Pool
 
-if [ $BOOT_STATUS -eq 3 ]
-		then
-		#Adapted command for starting onion-block-explorer only for public node due to restricted rpc commands
-		cd /home/pinodexmr/p2pool/build
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+cd /home/pinodexmr/p2pool/build
 
-else if [ $BOOT_STATUS -eq 6 ]
+if [ $BOOT_STATUS -eq 2 ]
 		then
-		#Adapted command for starting onion-block-explorer only for public node due to restricted rpc commands
-		cd /home/pinodexmr/p2pool/build
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
-else if [ $BOOT_STATUS -eq 7 ]
-		then
-		#Adapted command for starting onion-block-explorer only for public node due to restricted rpc commands
-		cd /home/pinodexmr/p2pool/build
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PUBLIC_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
-else 
-		#Start with $MONERO_PUBLIC_PORT set. This port isn't included with tor hidden service rules to prevent inadvertant exposure of unrestricted monero port via tor/I2P
-		cd /home/pinodexmr/p2pool/build
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PUBLIC_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+		#Monerod not running
+		set -e
+		echo "Error: Monerod not running."
 fi
+
+if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 5 ]
+		then
+		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+fi
+
+if [ $BOOT_STATUS -eq 4 ]
+		then
+		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+fi
+
+if [ $BOOT_STATUS -eq 6 ]
+		then
+		#Adapted command for starting P2Pool only for public node due to restricted rpc commands
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+fi
+
+if [ $BOOT_STATUS -eq 7 ]
+		then
+		#Adapted command for starting P2Pool only for clearnet public node, note change in port to request on internal non-restricted port.
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PUBLIC_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+fi
+
+if [ $BOOT_STATUS -eq 8 ]
+		then
+		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+fi
+
+if [ $BOOT_STATUS -eq 9 ]
+		then
+		#Adapted command for starting P2Pool only for tor public node
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+fi
+
+
 
 # Key - BOOT_STATUS
 # 2 = idle
-# 3 || 5 = private node || mining node
-# 4 = tor
+# 3 || 5 = private node || solo mining node
+# 4 = tor private
 # 6 = Public RPC pay
 # 7 = Public free
 # 8 = I2P
 # 9 tor public
-#Notes on how this works:
-#1)Each status command is set as a variable and then on completion this variable is then returned into the file specified...
-#The variable step is needed to prevent the previous stats file being overwritten to empty at the start of the command before the new stats are generated thus causing blank stats sections in the UI.
-#2)I spent far too much time trying to incorporate 'target height' into the main status section, however this would often sit below the current height once sync'd...
-#So next I used 'Current_Sync_Progress:((.result.height/.result.target_height)*100)|floor' to readout a percentage of sync'd rounded down to a whole number. This meant that when the current height was above target sync status read as 100%...
-#However in tor mode target height sometimes outputs to 0 and the math fails killing the whole command. In the end the boolean 'Busy_Syncing:.result.busy_syncing' is used but not as pretty.
+#A note on how this works:
+#BOOT_STATUS is set by the Monerod start script. 
+#Each additional feature, P2Pool, blockexplorer etc interacts with Moneros RPC and it is necessary to know what configuration Monerod is in to know what additional options flags are requires for interaction. 
+#e.g Is RPCusername and RPCpassword set by monerod? 
+#What Monero ports are open and which are RPC-restricted, and tor mode has bound ports to the hiddenservice file prohibiting customisation.
+#For this purpose a numerical integer is assigned to each Monerod "mode".
