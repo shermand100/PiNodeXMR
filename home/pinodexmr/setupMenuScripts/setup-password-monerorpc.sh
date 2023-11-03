@@ -27,14 +27,14 @@ whiptail --clear
     # check if passwords match
     if [ "${NEWRPCp1}" != "${NEWRPCp2}" ]; then
       whiptail --title "PiNode-XMR - RPC Password" --msgbox "FAIL -> Passwords dont Match\nPlease try again ..." 16 45
-	  ./setup-password-monerorpc.sh
+	  ./setupMenuScripts/setup-password-monerorpc.sh
 	  exit 1
     fi
 		  
 	# password zero
     if [ ${#NEWRPCp1} -eq 0 ]; then
       whiptail --title "PiNode-XMR - RPC Password" --msgbox "FAIL -> Password cannot be empty\nPlease try again ..." 16 45
-	  ./setup-password-monerorpc.sh
+	  ./setupMenuScripts/setup-password-monerorpc.sh
       exit 1
     fi
 	
@@ -42,7 +42,7 @@ whiptail --clear
     clearedResult=$(echo "${NEWRPCp1}" | tr -dc '[:alnum:]-.' | tr -d ' ')
     if [ ${#clearedResult} != ${#NEWRPCp1} ] || [ ${#clearedResult} -eq 0 ]; then
       whiptail --title "PiNode-XMR - RPC Password" --msgbox "FAIL -> Contains bad characters (spaces, special chars)\nPlease try again ..." 16 45
-    ./setup-password-monerorpc.sh
+    ./setupMenuScripts/setup-password-monerorpc.sh
       exit 1
     fi
 	
@@ -50,7 +50,7 @@ whiptail --clear
     if [ ${#NEWRPCp1} -lt 8 ]; then
       whiptail \
 	  --title "PiNode-XMR - RPC Password" --msgbox "FAIL -> Password length under 8\nPlease try again ..." 16 45
-      ./setup-password-monerorpc.sh
+      ./setupMenuScripts/setup-password-monerorpc.sh
       exit 1
     fi
 	
