@@ -30,37 +30,37 @@ fi
 if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 5 ]
 		then
 		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --no-color --light-mode --no-cache --loglevel 2 --mini
 fi
 
 if [ $BOOT_STATUS -eq 4 ]
 		then
 		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --no-color --light-mode --no-cache --loglevel 2 --mini
 fi
 
 if [ $BOOT_STATUS -eq 6 ]
 		then
 		#Adapted command for starting P2Pool only for public node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --no-color --light-mode --no-cache --loglevel 2 --mini
 fi
 
 if [ $BOOT_STATUS -eq 7 ]
 		then
 		#Adapted command for starting P2Pool only for clearnet public node, note change in port to request on internal non-restricted port.
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PUBLIC_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PUBLIC_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --no-color --light-mode --no-cache --loglevel 2 --mini
 fi
 
 if [ $BOOT_STATUS -eq 8 ]
 		then
 		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --no-color --light-mode --no-cache --loglevel 2 --mini
 fi
 
 if [ $BOOT_STATUS -eq 9 ]
 		then
 		#Adapted command for starting P2Pool only for tor public node
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --no-color --light-mode --no-cache --loglevel 2 --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --no-color --light-mode --no-cache --loglevel 2 --mini
 fi
 
 
