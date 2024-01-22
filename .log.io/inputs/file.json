@@ -1,0 +1,43 @@
+{
+ "messageServer": {
+    "host": "127.0.0.1",
+    "port": 6689
+  },
+  "inputs": [
+    {
+      "source": "Monero",
+      "stream": "Monero_log",
+      "config": {
+        "path": "/home/pinodexmr/.bitmonero/bitmonero.log"
+      }
+    },
+    {
+      "source": "P2Pool",
+      "stream": "P2Pool_log",
+      "config": {
+        "path": "/home/pinodexmr/p2pool/build/p2pool.log"
+      }
+    },
+    {
+      "source": "Monero_LWS",
+      "stream": "Monero_LWS_log",
+      "config": {
+        "path": "/home/pinodexmr/monero-lws/monero-lws.log"
+      }
+    },
+    {
+      "source": "Atomic_Swap",
+      "stream": "Atomic_Swap_log",
+      "config": {
+        "path": "/home/pinodexmr/.atomicswap/mainnet/atomicSwap.log"
+      }
+    },
+    {
+      "source": "Block_Explorer",
+      "stream": "Block_Explorer_log",
+      "config": {
+        "path": "/home/pinodexmr/onion-monero-blockchain-explorer/explorer.log"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[Unit]
+Description=Log-io-file
+After=network.target
+
+[Service]
+User=pinodexmr
+Group=pinodexmr
+ExecStart=/usr/local/bin/log.io-file-input
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

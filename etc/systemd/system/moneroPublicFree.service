@@ -1,0 +1,18 @@
+[Unit]
+Description=Monero Free Public Node
+After=network.target
+
+[Service]
+ExecStart=/bin/bash moneroPublicFree.sh
+WorkingDirectory=/home/pinodexmr/execScripts/
+Type=forking
+Restart=always
+RestartSec=30
+User=pinodexmr
+StandardOutput=inherit
+StandardError=inherit
+PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
+
+[Install]
+WantedBy=multi-user.target
+

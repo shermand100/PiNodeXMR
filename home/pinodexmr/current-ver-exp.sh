@@ -1,0 +1,2 @@
+#!/bin/bash
+		CURRENT_VERSION_EXP=20220506

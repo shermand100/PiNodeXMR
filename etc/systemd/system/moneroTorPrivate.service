@@ -1,0 +1,18 @@
+[Unit]
+Description=Monero Tor Private
+After=network.target
+
+[Service]
+User=pinodexmr
+Group=pinodexmr
+WorkingDirectory=~
+RuntimeDirectory=monero
+SuccessExitStatus=143
+Type=simple
+PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
+ExecStart=/bin/bash /home/pinodexmr/execScripts/moneroTorPrivate.sh
+RestartSec=30
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

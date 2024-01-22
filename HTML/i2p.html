@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Title  -->
+  <title>PiNode-XMR - Status</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <!-- Load Ajax -->
+  <script src="assets/js/jquery.min.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/XMR.ico" />
+  <!-- Font Awesome cdn -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Custom Style Sheet -->
+  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav justify-content-around w-100">
+        <li class="nav-item">
+          <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
+            <i class="fas fa-terminal"></i> Web Terminal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="explorer.html"><i class="fas fa-search-dollar"></i> Block Explorer</a>
+        </li>        
+        <li class="nav-item">
+          <a class="nav-link" href="p2Pool.html"><i class="fas fa-comment-dollar"></i> P2Pool</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ethAtomicSwap.html"><i class="fas fa-arrows-rotate"></i> Swap</a>
+        </li>         
+        <li class="nav-item">
+          <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="mx-auto" id="xmr-banner-container">
+        <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png" srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h2 class="text-center">
+          <small>Private Dependable Nodes</small>
+        </h2>
+        <hr>
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- container-fluid -->
+
+  <div class="container">
+    <div class="row my-4">
+      <div class="col-md-12">
+
+        <h2 class="font-weight-bold">I2P <small>Server Configuration</small></h2>
+
+        <p><span>Where possible I have linked and pre-configured Monero settings to work with extrnal services such as this. I2P however requires your manual configuration.<br><br>To install I2P first head over to the <a href="/" onclick="javascript:event.target.port=4200;event.target.protocol='https:';" target="_blank">Web Terminal</a> and select "Install I2P Server" from option (4) of the "Extra Network Tools" menu. Installation takes less than 5 minutes.<br><br> Once installed the button bellow will take you to the I2P menu. For how to configure your I2P Server you can refer to my <a href="https://github.com/monero-ecosystem/PiNode-XMR/wiki/i2p-Setup-and-Use" target="_blank">usage demo</a></span></p>
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- /container -->
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3>I2P Interface:</h3>
+
+      <div class="col-lg-4 mb-4">
+        <a href="/" onclick="javascript:event.target.port=7657;event.target.protocol='http:';" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">I2P Server Interface</a>
+      </div>
+
+    </div>
+  </div>
+
+
+    </div> <!-- /container -->
+
+    <!-- JavaScript -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

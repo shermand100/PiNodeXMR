@@ -1,0 +1,16 @@
+[Unit]
+Description=Kill monerod processes
+After=network.target
+
+[Service]
+ExecStart=/bin/bash kill.sh
+WorkingDirectory=/home/pinodexmr/execScripts/
+StandardOutput=inherit
+StandardError=inherit
+Type=oneshot
+RemainAfterExit=true
+Restart=no
+User=pinodexmr
+
+[Install]
+WantedBy=multi-user.target

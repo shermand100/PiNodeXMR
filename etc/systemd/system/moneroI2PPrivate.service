@@ -1,0 +1,18 @@
+[Unit]
+Description=Monero I2P Bridging Node
+After=network.target
+
+[Service]
+ExecStart=/bin/bash moneroI2PPrivate.sh
+WorkingDirectory=/home/pinodexmr/execScripts/
+Type=simple
+Restart=always
+RestartSec=30
+User=pinodexmr
+StandardOutput=null
+StandardError=null
+PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
+
+[Install]
+WantedBy=multi-user.target
+

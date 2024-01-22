@@ -1,0 +1,2 @@
+#!/bin/bash
+MINING_INTENSITY=50

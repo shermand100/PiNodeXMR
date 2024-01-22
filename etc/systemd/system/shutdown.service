@@ -1,0 +1,16 @@
+[Unit]
+Description=PiNodeXMR Shutdown
+After=network.target
+
+[Service]
+ExecStart=/bin/bash shutdown.sh
+WorkingDirectory=/home/pinodexmr/execScripts/
+StandardOutput=inherit
+StandardError=inherit
+Type=oneshot
+RemainAfterExit=true
+Restart=no
+User=pinodexmr
+
+[Install]
+WantedBy=multi-user.target

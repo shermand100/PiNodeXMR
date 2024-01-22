@@ -1,0 +1,17 @@
+[Unit]
+Description=Block-explorer
+After=network.target
+
+[Service]
+ExecStart=/bin/bash blockExplorer.sh
+WorkingDirectory=/home/pinodexmr/execScripts/
+StandardOutput=file:/home/pinodexmr/onion-monero-blockchain-explorer/explorer.log
+StandardError=file:/home/pinodexmr/onion-monero-blockchain-explorer/explorer.log
+Type=exec
+PIDFile=/home/pinodexmr/onion-monero-blockchain-explorer/explorer.pid
+Restart=on-failure
+RestartSec=300
+User=pinodexmr
+
+[Install]
+WantedBy=multi-user.target

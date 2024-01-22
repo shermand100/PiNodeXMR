@@ -1,0 +1,2 @@
+#!/bin/bash
+MONERO_STATS_PORT=18083
