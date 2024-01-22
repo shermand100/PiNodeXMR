@@ -1,17 +1,18 @@
 #!/bin/bash
 
 ##Open Sources:
-# Web-UI by designmodo Flat-UI free project at https://github.com/designmodo/Flat-UI
 # Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
 # Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
 # PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/pinode-xmr
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
+# Atomic Swaps - https://github.com/AthanorLabs/atomic-swap
+# P2Pool - https://github.com/SChernykh/p2pool
+# ATS Fan controller - https://github.com/tuxd3v/ats#credits
 
 #Welcome
 if (whiptail --title "PiNode-XMR Ubuntu Installer" --yesno "To install PiNodeXMR using this installer the following condition is required\n\n* You are logged in as user 'pi' or 'ubuntu'\n* Would you like to continue?" 12 60); then
 
 whiptail --title "PiNode-XMR Ubuntu Installer" --msgbox "Thanks for confirming\n\nPermissions and Hostnames will now be configured, this will only take a few seconds.\n\nOnce complete your Username will be 'pinodexmr' with Password 'PiNodeXMR'" 12 78
-
 
 ##Create new user 'pinodexmr'
 sudo adduser pinodexmr --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
@@ -24,7 +25,7 @@ sleep 3
 ##Replace file /etc/sudoers to set global sudo permissions/rules
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/sudoers
+wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/etc/sudoers
 sudo chmod 0440 ~/sudoers
 sudo chown root ~/sudoers
 sudo mv ~/sudoers /etc/sudoers
@@ -68,7 +69,7 @@ sudo apt-get autoremove -y 2>&1 | tee -a /home/pinodexmr/debug.log
 #Download stage 2 Install script
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-install-continue.sh
+wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/ubuntu-install-continue.sh
 sudo mv ~/ubuntu-install-continue.sh /home/pinodexmr/
 sudo chown pinodexmr /home/pinodexmr/ubuntu-install-continue.sh
 sudo chmod 755 /home/pinodexmr/ubuntu-install-continue.sh

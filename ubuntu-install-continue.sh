@@ -3,8 +3,11 @@
 ##Open Sources:
 # Monero github https://github.com/moneroexamples/monero-compilation/blob/master/README.md
 # Monero Blockchain Explorer https://github.com/moneroexamples/onion-monero-blockchain-explorer
-# PiNode-XMR scripts and custom files at my repo https://github.com/monero-ecosystem/PiNode-XMR
+# PiNode-XMR scripts and custom files at my repo https://github.com/shermand100/PiNodeXMR
 # PiVPN - OpenVPN server setup https://github.com/pivpn/pivpn
+# Atomic Swaps - https://github.com/AthanorLabs/atomic-swap
+# P2Pool - https://github.com/SChernykh/p2pool
+# ATS Fan controller - https://github.com/tuxd3v/ats#credits
 
 ###Begin2
 
@@ -140,14 +143,14 @@ sleep 3
 	echo "Clone PiNode-XMR to device from git" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
+git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
 
 
 ##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes
 	echo "Configure ssh security" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mConfiguring SSH security\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/ssh/sshd_config /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv /home/pinodexmr/PiNodeXMR/etc/ssh/sshd_config /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chmod 644 /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown root /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo /etc/init.d/ssh restart 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -158,8 +161,8 @@ sleep 3
 ##Copy PiNode-XMR scripts to home folder
 echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
 sleep 3
-mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2>&1 | tee -a /home/pinodexmr/debug.log
-mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2>&1 | tee -a /home/pinodexmr/debug.log
+mv /home/pinodexmr/PiNodeXMR/home/pinodexmr/* /home/pinodexmr/ 2>&1 | tee -a /home/pinodexmr/debug.log
+mv /home/pinodexmr/PiNodeXMR/home/pinodexmr/.profile /home/pinodexmr/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chmod 777 -R /home/pinodexmr/* 2>&1 | tee -a /home/pinodexmr/debug.log #Read/write access needed by www-data to action php port, address customisation
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
@@ -168,7 +171,7 @@ sleep 3
 	echo "Add PiNode-XMR systemd services" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
 sleep 3
-sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv /home/pinodexmr/PiNodeXMR/etc/systemd/system/*.service /etc/systemd/system/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chmod 644 /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown root /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo systemctl daemon-reload 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -178,7 +181,7 @@ echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 #Configure apache server for access to monero log file
-sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv /home/pinodexmr/PiNodeXMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown root /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo /etc/init.d/apache2 restart 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -188,7 +191,7 @@ sleep 3
 
 ##Setup local hostname
 	echo "Setup local hostname" 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv /home/pinodexmr/PiNodeXMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Configure Web-UI
@@ -197,15 +200,15 @@ sleep 3
 if [[ $LIGHTMODE = TRUE ]]
 then
 #First move hidden file specifically .htaccess file then entire directory
-sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.html /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv /home/pinodexmr/PiNodeXMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML-LIGHT/*.html /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 else
 #First move hidden file specifically .htaccess file then entire directory
-sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv /home/pinodexmr/PiNodeXMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 fi
@@ -222,7 +225,7 @@ then
 #ubuntu /dev/null odd requiremnt to set permissions
 sudo chmod 666 /dev/null
 sleep 3
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
+wget -q https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/release.sh -O /home/pinodexmr/release.sh
 chmod 755 /home/pinodexmr/release.sh
 . /home/pinodexmr/release.sh
 
@@ -350,7 +353,7 @@ then
 	sleep 3
 
 	#Manage P2pool log file ia log rotate
-	sudo mv /home/pinodexmr/PiNode-XMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	sudo mv /home/pinodexmr/PiNodeXMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	sudo chmod 644 /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	sudo chown root /etc/logrotate.d/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	fi
@@ -400,8 +403,8 @@ sudo apt-get install nodejs npm -y 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo npm install -g log.io 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo npm install -g log.io-file-input 2>&1 | tee -a /home/pinodexmr/debug.log
 mkdir -p ~/.log.io/inputs/ 2>&1 | tee -a /home/pinodexmr/debug.log
-mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
-mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
+mv /home/pinodexmr/PiNodeXMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
+mv /home/pinodexmr/PiNodeXMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
 sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
 sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo systemctl start log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -414,7 +417,7 @@ sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.lo
 		echo "Install crontab" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
-crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a /home/pinodexmr/debug.log
+crontab /home/pinodexmr/PiNodeXMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
@@ -426,10 +429,10 @@ sudo sysctl vm.swappiness=10 2>&1 | tee -a /home/pinodexmr/debug.log
 	echo "Remove left over files from git clone actions" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mCleanup leftover directories\e[0m"
 sleep 3
-sudo rm -r /home/pinodexmr/PiNode-XMR/ 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo rm -r /home/pinodexmr/PiNodeXMR/ 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Change log in menu to 'main'
-wget -O ~/.profile https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/home/pinodexmr/.profile 2>&1 | tee -a /home/pinodexmr/debug.log
+wget -O ~/.profile https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/home/pinodexmr/.profile 2>&1 | tee -a /home/pinodexmr/debug.log
 
 #Write value of LIGHTMODE variable
 	echo "#!/bin/sh

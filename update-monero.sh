@@ -11,7 +11,7 @@ echo "
 " 2>&1 | tee -a /home/pinodexmr/debug.log
 
 #Download variable for current monero release version
-wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/release.sh -O /home/pinodexmr/release.sh
+wget -q https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/release.sh -O /home/pinodexmr/release.sh
 #Permission Setting
 chmod 755 /home/pinodexmr/release.sh
 #Load boot status - condition the node was last run

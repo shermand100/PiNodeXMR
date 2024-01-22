@@ -1,5 +1,5 @@
 #!/bin/bash
-##To run me on cmd line wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/Install-PiNode-XMR.sh | bash
+##To run me on cmd line wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/Install-PiNode-XMR.sh | bash
 echo -e "\e[32mPreparing Menu...\e[0m"
 sleep 2
 #Check user has whiptail - required to display menu
@@ -15,7 +15,7 @@ case $CHOICE in
 		#Commands for Ubuntu Server LTS (current)
 		echo -e "\e[32mDownloading data for install\e[0m"
 		sleep 3
-		wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/ubuntu-installer.sh
+		wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/ubuntu-installer.sh
 		echo -e "\e[32mPiNode-XMR Ubuntu configuration file received\e[0m"
 		echo -e "\e[32mStarting Installation\e[0m"
 		sudo chmod 755 ~/ubuntu-installer.sh

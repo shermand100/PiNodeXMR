@@ -59,22 +59,22 @@
 
 						case $CHOICE2a in
 		
-					"1)")	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #1 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh\n\nWould you like to continue?" 12 78); then
-					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript1.sh | bash
+					"1)")	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #1 from https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/supportScript1.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/supportScript1.sh | bash
 							else
 					sleep 2
 							fi
 					;;
 				
-					"2)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #2 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh\n\nWould you like to continue?" 12 78); then
-					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript2.sh | bash
+					"2)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #2 from https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/supportScript2.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/supportScript2.sh | bash
 							else
 					sleep 2
 							fi
 					;;
 					
-					"3)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #3 from https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh\n\nWould you like to continue?" 12 78); then
-					wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/supportScript3.sh | bash
+					"3)") 	if (whiptail --title "PiNode-XMR Support Scripts" --yesno "This will download and run the PiNodeXMR support script #3 from https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/supportScript3.sh\n\nWould you like to continue?" 12 78); then
+					wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/supportScript3.sh | bash
 							else
 					sleep 2
 							fi
@@ -114,7 +114,7 @@
 				case $CHOICE3 in
 		
 					"1)")	if (whiptail --title "PiNode-XMR Update Monero" --yesno "This will run a check to see if a Monero update is available\n\nIf an update is found PiNode-XMR will perform the update.\n\n***This will take several hours***\n\nWould you like to continue?" 12 78); then
-							wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/xmr-new-ver.sh -O /home/pinodexmr/xmr-new-ver.sh
+							wget -q https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/xmr-new-ver.sh -O /home/pinodexmr/xmr-new-ver.sh
 							#Permission Setting
 							chmod 755 /home/pinodexmr/current-ver.sh
 							chmod 755 /home/pinodexmr/xmr-new-ver.sh
@@ -128,7 +128,7 @@
 								if [ $CURRENT_VERSION -lt $NEW_VERSION ]; then
 									if (whiptail --title "PiNode-XMR Update Monero" --yesno "A Monero update has been found for your PiNode-XMR. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-monero.sh | bash
 
 									else
 									whiptail --title "PiNode-XMR Update Monero" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -137,7 +137,7 @@
 								else
 									if (whiptail --title "PiNode-XMR Update Monero" --yesno "This device thinks it's running the latest version of Monero.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Monero Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-monero.sh | bash
 		
 									else
 									whiptail --title "PiNode-XMR Update Monero" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -152,7 +152,7 @@
 						;;
 				
 					"2)")	if (whiptail --title "Update PiNode-XMR" --yesno "This will check for updates to PiNode-XMR Including performance, features and web interface\n\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
+							wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh
 							#Permission Setting
 							chmod 755 /home/pinodexmr/current-ver-pi.sh
 							chmod 755 /home/pinodexmr/new-ver-pi.sh
@@ -166,7 +166,7 @@
 								if [ $CURRENT_VERSION_PI -lt $NEW_VERSION_PI ]; then
 									if (whiptail --title "PiNode-XMR Updater" --yesno "An update has been found for your PiNode-XMR. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-pinodexmr.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-pinodexmr.sh | bash
 
 									else
 									whiptail --title "PiNode-XMR Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -175,7 +175,7 @@
 								else
 									if (whiptail --title "PiNode-XMR Update" --yesno "This device thinks it's running the latest version of PiNode-XMR.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-pinodexmr.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-pinodexmr.sh | bash
 		
 									else
 									whiptail --title "PiNode-XMR Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -190,7 +190,7 @@
 						;;
 			
 					"3)")	if (whiptail --title "Update Onion-Blockchain-Explorer" --yesno "This will check for and install updates to your Blockchain Explorer\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
-							wget -q https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+							wget -q https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/exp-new-ver.sh -O /home/pinodexmr/exp-new-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 							#Permission Setting
 							chmod 755 /home/pinodexmr/current-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 							chmod 755 /home/pinodexmr/exp-new-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -205,7 +205,7 @@
 								if [ $CURRENT_VERSION_EXP -lt $NEW_VERSION_EXP ]; then
 									if (whiptail --title "Monero Onion Block Explorer Update" --yesno "An update to the Monero Block Explorer is available, would you like to download and install it now?" --yes-button "Update Now" --no-button "Return to Main Menu"  14 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-explorer.sh | bash
 
 									else
 									whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -214,7 +214,7 @@
 								else
 									if (whiptail --title "Monero Onion Block Explorer Update" --yesno "This device thinks it's running the latest version of the Block Explorer.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force Explorer Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-explorer.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-explorer.sh | bash
 		
 									else
 									whiptail --title "Monero Onion Block Explorer Update" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -229,7 +229,7 @@
 						;;
 
 					"4)")	if (whiptail --title "Update P2Pool" --yesno "This will check for and install updates to P2Pool\n\nIf updates are found they will be installed\n\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/p2pool-new-ver.sh -O /home/pinodexmr/p2pool-new-ver.sh
+							wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/p2pool-new-ver.sh -O /home/pinodexmr/p2pool-new-ver.sh
 							#Permission Setting
 							chmod 755 /home/pinodexmr/current-ver-p2pool.sh
 							chmod 755 /home/pinodexmr/p2pool-new-ver.sh
@@ -243,7 +243,7 @@
 								if [ $CURRENT_VERSION_P2POOL -lt $NEW_VERSION_P2POOL ]; then
 									if (whiptail --title "P2POOL UPDATER" --yesno "An update has been found for P2Pool. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-p2pool.sh | bash
 
 									else
 									whiptail --title "P2POOL UPDATER" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -252,7 +252,7 @@
 								else
 									if (whiptail --title "P2POOL UPDATER" --yesno "This device thinks it's running the latest version of P2Pool.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-p2pool.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-p2pool.sh | bash
 		
 									else
 									whiptail --title "P2POOL UPDATER" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -267,7 +267,7 @@
 						;;
 
 					"5)")	if (whiptail --title "Update Monero-LWS" --yesno "Monero-LWS is still in development and as such has no version number. I can delete the version on this device and install the latest from source?\nSSL Certificates will be preserved\n\n**Note: To install Monero-LWS for the first time please use the installer found in the 'Node Tools' Menu\n\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/new-ver-lws.sh -O /home/pinodexmr/new-ver-lws.sh
+							wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/new-ver-lws.sh -O /home/pinodexmr/new-ver-lws.sh
 							#Permission Setting
 							chmod 755 /home/pinodexmr/current-ver-lws.sh
 							chmod 755 /home/pinodexmr/new-ver-lws.sh
@@ -281,7 +281,7 @@
 								if [ $CURRENT_VERSION_LWS -lt $NEW_VERSION_LWS ]; then
 									if (whiptail --title "Update Monero-LWS" --yesno "An update has been found for Monero-LWS. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-monero-lws.sh | bash
 
 									else
 									whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -290,7 +290,7 @@
 								else
 									if (whiptail --title "Update Monero-LWS" --yesno "This device thinks it's running the latest version of Monero-LWS.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a reset tool if you think your version is not functioning properly" --yes-button "Force PiNode-XMR Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-monero-lws.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-monero-lws.sh | bash
 		
 									else
 									whiptail --title "Update Monero-LWS" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -305,7 +305,7 @@
 						;;											
 
 					"6)")	if (whiptail --title "Update Atomic Swap Utility" --yesno "This setting will check for and update (re-install) the latest XMR->ETH Atomic utility from AthanorLabs\n\nNote that this tool is currently in Beta, it may be possible to lose funds\nWould you like to continue?" 12 78); then
-							wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/master/new-ver-atomicSwap.sh -O /home/pinodexmr/new-ver-atomicSwap.sh
+							wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/new-ver-atomicSwap.sh -O /home/pinodexmr/new-ver-atomicSwap.sh
 							#Permission Setting
 							chmod 755 /home/pinodexmr/current-ver-atomicSwap.sh
 							chmod 755 /home/pinodexmr/new-ver-atomicSwap.sh
@@ -319,7 +319,7 @@
 								if [ $CURRENT_VERSION_ATOMICSWAP -lt $NEW_VERSION_ATOMICSWAP ]; then
 									if (whiptail --title "Update Atomic Swap Utility" --yesno "An update has been found for the Atomic Swap utility. To continue will install it now.\n\nWould you like to Continue?" 12 78); then
 					
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-atomicSwap.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-atomicSwap.sh | bash
 
 									else
 									whiptail --title "Update Atomic Swap Utility" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
@@ -328,7 +328,7 @@
 								else
 									if (whiptail --title "Update Atomic Swap Utility" --yesno "This device thinks it's running the latest version of the Atomic Swap utility.\n\nIf you think this is incorrect you may force an update below.\n\n*Note that a force update can also be used as a clean install/reset tool if you think your version is not functioning properly" --yes-button "Force Atomic Swap Update" --no-button "Return to Main Menu"  14 78); then
 
-									wget -O - https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/update-atomicSwap.sh | bash
+									wget -O - https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/update-atomicSwap.sh | bash
 		
 									else
 									whiptail --title "Update Atomic Swap Utility" --msgbox "Returning to Main Menu. No changes have been made." 12 78;
