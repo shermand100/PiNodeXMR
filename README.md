@@ -1,6 +1,6 @@
-![PiNode-XMR logo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
+![PiNode-XMR logo](https://github.com/shermand100/PiNodeXMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
 # Quick Start Guide v5.22.11-Open-Build		
-### This page is a quick overview to get you started. A complete and comprehensive manual showing all features can be found here at the Wiki: [Full Manual](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Manual)
+### This page is a quick overview to get you started. A complete and comprehensive manual showing all features can be found here at the Wiki: [Full Manual](https://github.com/shermand100/PiNodeXMR/wiki/Manual)
 
 # Project Overview
 
@@ -8,14 +8,14 @@ PiNode-XMR is a completely free and open source suite of tools to help a user ru
 
 PiNode-XMR can provide a Full or Pruned Monero Node and optional integration with tor/I2P along with many other tools such as your own block explorer, transaction pool viewer and connected peer lists. After setup, normal interaction is available through a built in web interface accessible from any device on your local network:
 
-![Demo](https://github.com/monero-ecosystem/PiNode-XMR/blob/master/Screenshots/PiNodeXMR_demo.gif)
+![Demo](https://github.com/shermand100/PiNodeXMR/blob/master/Screenshots/PiNodeXMR_demo.gif)
 
 ## Quick Start
 
 ### Hardware
 PiNode-XMR was originaly designed and built on Raspberry Pi OS, and has now expanded to support Armbain Buster. This allows for installation on many different devices.
 
-A list of tested and supported hardware can be found here [PiNodeXMR Wiki: Hardware](https://github.com/monero-ecosystem/PiNode-XMR/wiki/Hardware)
+A list of tested and supported hardware can be found here [PiNodeXMR Wiki: Hardware](https://github.com/shermand100/PiNodeXMR/wiki/Hardware)
 However any similar device should work that has a Armbian Buster OS available, USB3 preferred, minimum overall specification should not be lower than a Pi3B.
 
 Best value/performance as of Q2 2021 seems to be the Rock64.
@@ -66,7 +66,7 @@ See the full manual in the wiki for other links to pre-sync'd pruned node images
 
 During install a debug file is generated at the path /home/pinodexmr/debug.log  Any errors from a failed install are passed to this file and may be helpful should you have a problem. Most commonly errors on first build are due to a dependency not being downloaded (server 404), the install command can be run multiple times.
 
-I am slowly building a [FAQ page](https://github.com/monero-ecosystem/PiNode-XMR/wiki/FAQ)
+I am slowly building a [FAQ page](https://github.com/shermand100/PiNodeXMR/wiki/FAQ)
 
 *Hosting large image files such as the pre-sync'd version does come with it's costs. If you like the project or found the images helpful any contribution would be gratefully received:*
 
