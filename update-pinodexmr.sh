@@ -62,7 +62,7 @@ sleep 3
 ##Replace file /etc/sudoers to set global sudo permissions/rules (required to add  new permissions to www-data user for interface buttons)
 echo -e "\e[32mDownload and replace /etc/sudoers file\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/sudoers -O /home/pinodexmr/sudoers
+wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/etc/sudoers -O /home/pinodexmr/sudoers
 sudo chmod 0440 /home/pinodexmr/sudoers
 sudo chown root /home/pinodexmr/sudoers
 sudo mv /home/pinodexmr/sudoers /etc/sudoers
@@ -76,7 +76,7 @@ sleep 3
 	echo "Clone PiNode-XMR to device from git" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosystem/PiNode-XMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
+git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
 
 				#Backup User values
 						echo "Backup variables" >>/home/pinodexmr/debug.log
@@ -125,7 +125,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update services" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
 					sleep 3
-					sudo mv /home/pinodexmr/PiNode-XMR/etc/systemd/system/*.service /etc/systemd/system/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo mv /home/pinodexmr/PiNodeXMR/etc/systemd/system/*.service /etc/systemd/system/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chmod 644 /etc/systemd/system/*.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chown root /etc/systemd/system/*.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo systemctl daemon-reload 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -136,17 +136,17 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 
 				##Updating PiNode-XMR scripts in home directory
 						echo "Update PiNodeXMR scripts" >>/home/pinodexmr/debug.log
-					echo -e "\e[32mUpdating PiNode-XMR scripts in home directory\e[0m"
+					echo -e "\e[32mUpdating PiNodeXMR scripts in home directory\e[0m"
 					sleep 2
-					cp -afr /home/pinodexmr/PiNode-XMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/PiNode-XMR/home/pinodexmr/.profile /home/pinodexmr/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					cp -afr /home/pinodexmr/PiNodeXMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/PiNodeXMR/home/pinodexmr/.profile /home/pinodexmr/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chmod -R 777 /home/pinodexmr/* 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
 
 				#Configure apache server for access to monero log file
 					echo -e "\e[32mConfigure apache server for access to monero log file\e[0m"
-					sudo mv /home/pinodexmr/PiNode-XMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo mv /home/pinodexmr/PiNodeXMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)					
 					sudo /etc/init.d/apache2 restart 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -156,18 +156,18 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update hostname (avahi)" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mEnable local hostname pinodexmr.local\e[0m"
 					sleep 3				
-					sudo mv /home/pinodexmr/PiNode-XMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo mv /home/pinodexmr/PiNodeXMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo /etc/init.d/avahi-daemon restart 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 
 				##Update html template
 						echo "Update html template" >>/home/pinodexmr/debug.log	
-					echo -e "\e[32mConfiguring Web-UI template with PiNode-XMR pages\e[0m"
+					echo -e "\e[32mConfiguring Web-UI template with PiNodeXMR pages\e[0m"
 					sleep 3
 					if [ "$LIGHTMODE" = TRUE ]
 					then
 					#First move hidden file specifically .htaccess file then entire directory
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log					
+					sudo mv /home/pinodexmr/PiNodeXMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log					
 					#Remove .php file clutter, see PiNodeXMR PR66 for context.
 					rm -R /var/www/html/*.php
 					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
@@ -186,8 +186,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Overwrite /var/www/html with updated contents
-					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
-					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML-LIGHT/*.html /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML-LIGHT/*.html /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					#Restore User variables
@@ -208,7 +208,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					#Lightmode html update complete
 					else
 					#First move hidden file specifically .htaccess file then entire directory
-					sudo mv /home/pinodexmr/PiNode-XMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo mv /home/pinodexmr/PiNodeXMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					rm -R /var/www/html/*.php
 					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
 					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -226,7 +226,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Overwrite /var/www/html with updated contents										
-					sudo rsync -a /home/pinodexmr/PiNode-XMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					#Restore User variables
@@ -308,7 +308,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update crontabs" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mUpdating crontab tasks\e[0m"
 					sleep 3
-					crontab /home/pinodexmr/PiNode-XMR/var/spool/cron/crontabs/pinodexmr 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					crontab /home/pinodexmr/PiNodeXMR/var/spool/cron/crontabs/pinodexmr 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 		
@@ -316,7 +316,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 						echo "Update torrc settings - if installed" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mUpdate of tor hidden service settings - If you have not installed tor this process will fail - this is expected\e[0m"
 					sleep 6
-					sudo wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/etc/tor/torrc -O /etc/tor/torrc 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/etc/tor/torrc -O /etc/tor/torrc 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mApplying Settings...\e[0m"
 					sleep 3
 					sudo chmod 644 /etc/tor/torrc 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -339,8 +339,8 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 				sudo npm install -g log.io 2>&1 | tee -a /home/pinodexmr/debug.log
 				sudo npm install -g log.io-file-input 2>&1 | tee -a /home/pinodexmr/debug.log
 				mkdir -p ~/.log.io/inputs/ 2>&1 | tee -a /home/pinodexmr/debug.log
-				mv /home/pinodexmr/PiNode-XMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
-				mv /home/pinodexmr/PiNode-XMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
+				mv /home/pinodexmr/PiNodeXMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
+				mv /home/pinodexmr/PiNodeXMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
 				sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
 				sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
 				sudo systemctl start log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -350,7 +350,7 @@ git clone -b ubuntuServer-20.04 --single-branch https://github.com/monero-ecosys
 
 				#Update system version number to new one installed
 				echo "Update PiNodeXMR version number" >>/home/pinodexmr/debug.log
-					wget https://raw.githubusercontent.com/monero-ecosystem/PiNode-XMR/ubuntuServer-20.04/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/new-ver-pi.sh -O /home/pinodexmr/new-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					chmod 755 /home/pinodexmr/new-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					. /home/pinodexmr/new-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mUpdate system version number\e[0m"
@@ -366,7 +366,7 @@ CURRENT_VERSION_PI=$NEW_VERSION_PI" > /home/pinodexmr/current-ver-pi.sh 2> >(tee
 					echo -e "\e[32mCleanup leftover directories\e[0m"
 					sleep 2
 
-					sudo rm -r /home/pinodexmr/PiNode-XMR/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo rm -r /home/pinodexmr/PiNodeXMR/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					rm /home/pinodexmr/new-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 2
