@@ -10,7 +10,7 @@ sudo apt install tor torsocks nyx -y
 echo -e "\e[32mDownloading PiNode-XMR config file\e[0m"
 sleep 3
 
-wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/etc/tor/torrc
+wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/etc/tor/torrc
 
 echo -e "\e[32mApplying Settings...\e[0m"
 sleep 3
