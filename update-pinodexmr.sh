@@ -25,6 +25,8 @@ sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee 
 
 ##Auto remove any obsolete packages
 sudo apt-get autoremove -y 2>&1 | tee -a /home/pinodexmr/debug.log
+#Clear the apt package cache (Cleared 1.3GB of space for me)
+sudo apt-get clean -y 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Installing dependencies for --- Web Interface
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/pinodexmr/debug.log
