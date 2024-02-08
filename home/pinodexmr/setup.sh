@@ -498,7 +498,8 @@
 				"7)" "Show My Offers" \
 				"8)" "Discover available XMR->ETH Offers" \
 				"9)" "Suggested XMR ETH Exchange rate" \
-				"10)" "Create XMR Sell Offer" 2>&1 >/dev/tty)
+				"10)" "Make XMR Swap Offer" \
+				"11)" "Take XMR Swap Offer" 2>&1 >/dev/tty)
 				
 				case $CHOICE5 in
 		
@@ -578,13 +579,42 @@
 							sleep 2
 							fi
 					;;
+					"11)")	if (whiptail --title "Atomic Swap" --yesno "This will allow you to take a publicised offer from the Web-Ui\n\nYou can review your offer in the last step\n\nWould you like to continue?" 14 78); then
+								# use temp file for setting Quantity and exchange rate storage (value shredded after use)
+								_temp="./dialog.$$"
+								# Set ETH Quantity var
+								whiptail --title "" --inputbox "Enter the quantity of ETH you would like to swap for XMR in this trade:\n*Note must be between sellers minimum/maximum" 10 60 2>$_temp
+								ETHAMOUNT=$( cat $_temp )
+								shred $_temp
+								#Peer ID - set
+								whiptail --title "" --inputbox "Enter the 'PEER ID' for this trade:\n*Note this is from the sellers listing in Web-Ui" 10 60 2>$_temp
+								PEERID=$( cat $_temp )
+								shred $_temp
+								#Offer ID - set
+								whiptail --title "" --inputbox "Lastly enter the 'OFFER ID' for this trade:\n*Note this is from the sellers listing in Web-Ui" 10 60 2>$_temp
+								OFFERID=$( cat $_temp )
+								shred $_temp
+										#CONFIRM EXCHANGE
+										if (whiptail --title "Atomic Swap Confirmation" --yesno "You are offering to swap your ETH for a providers XMR with the following conditions:\nYou are supplying:${ETHAMOUNT}ETH\nTo:${PEERID}\n\nFor Offer ID ${OFFERID}\n\nSelecting Yes to this box will action the swap!\nLast change to double check the exchange rate.\nAre you Sure you want to continue?" 14 78); then
+											sleep 2
+											~/atomic-swap/bin/swapcli take --peer-id $PEERID --offer-id $OFFERID --provides-amount $ETHAMOUNT
+											read -p "Press enter to continue"
+										else
+										whiptail --title "Atomic Swap" --msgbox "*****TRADE ABORTED*****\n\nETH TO XMR trade has been cancelled" 12 78
+										sleep 2
+										fi
+
+							else
+							sleep 2
+							fi
+					;;
 													
 				esac
 				. /home/pinodexmr/setup.sh
 				;;		
 
 		"6)")CHOICE6=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
-				"1)" "Install tor" \
+				"1)" "Install/Update tor" \
 				"2)" "View tor NYX interface" \
 				"3)" "Start/Stop tor Service" \
 				"4)" "Install I2P Server/Router" \
@@ -595,7 +625,7 @@
 				
 				case $CHOICE6 in
 		
-							"1)")	if (whiptail --title "PiNode-XMR Install tor" --yesno "Some countries for censorship, political or legal reasons do not look favorably on tor and other anonymity services, so tor is not installed on this device by default. However this option can install it now for you.\n\nWould you like to continue?" 14 78); then
+							"1)")	if (whiptail --title "PiNode-XMR Install tor" --yesno "Some countries for censorship, political or legal reasons do not look favorably on tor and other anonymity services, so tor is not installed on this device by default. However this option can install or update it now for you.\n\nWould you like to continue?" 14 78); then
 									. /home/pinodexmr/setupMenuScripts/setup-tor.sh
 									else
 									sleep 2
