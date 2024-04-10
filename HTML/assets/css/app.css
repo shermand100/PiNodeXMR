@@ -32,9 +32,11 @@ h3 {
 
 h1 i.fas,
 h1 i.fa-brands,
-h3 i.fas{
-    text-decoration: none;
+h3 i.fas {
     margin-right: 12px;
+}
+button i.fas {
+    margin-right: 5px;
 }
 
 @media (prefers-color-scheme: dark) {
