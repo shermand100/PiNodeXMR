@@ -37,9 +37,7 @@
                     <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/" target="_blank"
-                        onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
-                        <i class="fas fa-terminal"></i> Web Terminal</a>
+                    <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"><i class="fas fa-terminal"></i> Web Terminal</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="explorer.html"><i class="fas fa-search-dollar"></i> Block Explorer</a>
@@ -63,8 +61,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="mx-auto" id="xmr-banner-container">
-                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png"
-                    srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
+                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png" srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
             </div>
         </div>
 
@@ -74,41 +71,30 @@
                     <small>Private Dependable Nodes</small>
                 </h2>
                 <hr>
-            </div> <!-- col -->
-        </div> <!-- row -->
-    </div> <!-- container-fluid -->
+            </div><!-- col -->
+        </div><!-- row -->
+    </div><!-- container-fluid -->
 
     <div class="container py-4">
         <h3 class="demo-panel-title">P2Pool: <small> Decentralised Mining</small></h3>
-        <p><small>Whilst this device can run it's own P2Pool server to serve your other mining devices, mining on this
-                low powered single board computer is not recommended. Mining on this device and the overheating that
-                results may damage your device.</small></p>
-        <p><small>Solo mining is 100% independent and the best for the network. P2Pool mining has all the advantages of
-                solo mining, but also makes regular payouts possible.</small></p>
-        <p><small>This feature is the result of the hard work of SChernykh (also known as sech1). This feature is pulled
-                from <a href="https://github.com/SChernykh/p2pool">github.com/SChernykh/p2pool</a> Full useage
-                instructions and documentation can be found there.</small></p>
+        <p><small>Whilst this device can run it's own P2Pool server to serve your other mining devices, mining on this low powered single board computer is not recommended. Mining on this device and the overheating that results may damage your device.</small></p>
+        <p><small>Solo mining is 100% independent and the best for the network. P2Pool mining has all the advantages of solo mining, but also makes regular payouts possible.</small></p>
+        <p><small>This feature is the result of the hard work of SChernykh (also known as sech1). This feature is pulled from <a href="https://github.com/SChernykh/p2pool" target="_blank">github.com/SChernykh/p2pool</a> Full useage instructions and documentation can be found there.</small></p>
 
         <div class="row demo-row">
             <div class="col-lg-4 mb-4">
-                <a onclick="runScript('p2pool-start')" href="#Start p2pool" class="btn btn-block btn-lg btn-dark">Start
-                    P2Pool <span class="fui-power"></span></a>
+                <a onclick="runScript('p2pool-start')" href="#Start p2pool" class="btn btn-block btn-lg btn-dark">Start P2Pool</a>
             </div>
 
             <div class="col-lg-4 mb-4">
-                <a onclick="runScript('p2pool-stop')" href="#Stop p2pool" class="btn btn-block btn-lg btn-dark">Stop
-                    P2Pool
-                    <span class="fui-power"></span></a>
+                <a onclick="runScript('p2pool-stop')" href="#Stop p2pool" class="btn btn-block btn-lg btn-dark">Stop P2Pool</a>
             </div>
 
             <div class="container py-4">
-                <h6 class="demo-panel-title">Set Your Monero Address <small>Payouts will be sent to this address (min
-                        0.0003XMR)</small></h6>
+                <h6 class="demo-panel-title">Set Your Monero Address <small>Payouts will be sent to this address (min 0.0003XMR)</small></h6>
                 <div class="form-group">
                     <form method="post">
-                        <input type="text" placeholder="Enter Monero Address" class="form-control"
-                            onchange='if(this.value != 0) { address(this.value); }'><span
-                            class="fui-check-inverted"></span>
+                        <input type="text" placeholder="Enter Monero Address" class="form-control" onchange='if(this.value != 0) { address(this.value); }' />
                     </form>
                 </div>
 
@@ -127,24 +113,22 @@
 
                 <div class="row">
                     <p><small><embed src="mining_address.txt" width=480px height=80px></small></p>
-                </div> <!-- /row -->
-            </div> <!-- /container -->
+                </div><!-- /row -->
+            </div><!-- /container -->
 
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h3>View P2Pool: <small> Whilst running, view your connected miner stats, P2Pool stats and
-                                Monero Network Mining stats.</small></h3>
+                        <h3>View P2Pool: <small> Whilst running, view your connected miner stats, P2Pool stats and Monero Network Mining stats.</small></h3>
 
                         <div class="col-lg-4 mb-4">
-                            <a href="p2poolStats.html" type="button" value="Open" target="_blank"
-                                class="btn btn-block btn-lg btn-dark">View P2Pool</a>
+                            <a href="p2poolStats.html" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View P2Pool</a>
                         </div>
 
                     </div>
                 </div>
             </div>
-        </div> <!-- /container -->
+        </div><!-- /container -->
 
         <!-- JavaScript -->
         <script>
