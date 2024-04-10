@@ -30,6 +30,13 @@ h3 {
     text-align: center;
 }
 
+h1 i.fas,
+h1 i.fa-brands,
+h3 i.fas{
+    text-decoration: none;
+    margin-right: 12px;
+}
+
 @media (prefers-color-scheme: dark) {
 
     body {
