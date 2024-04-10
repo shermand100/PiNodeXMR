@@ -277,9 +277,7 @@
 
                                     <p><small><embed type="text/plain" src="monero-port-rpc-pay.txt" width=200px height=60px></small></p>
                                 </div><!-- /col -->
-                            </div><!-- /row -->
 
-                            <div class="row">
                                 <div class="col-4">
                                     <h6>Credits Required</h6>
 
@@ -571,7 +569,7 @@
                                 </div>
                             </div><!-- /row -->
 
-                            <div class="row">
+                            <div class="row mt-4">
                                 <h6>I2P Configuration:</h6>
                             </div><!-- /.row -->
 
@@ -734,7 +732,7 @@
                             <form method="post">
                                 <textarea name="custom-setting" id="customSetting" rows="6" cols="100%" style="overflow:auto;resize:none"
                                     placeholder="./monerod --rpc-bind-ip=$DEVICE_IP --zmq-pub tcp://$DEVICE_IP:18083 --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$username:$password --rpc-ssl disabled --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --enable-dns-blocklist --detach"></textarea>
-                                <button onclick="savebutton(customSetting.value)" class="btn btn-dark m-2" type="submit">Save</button>
+                                <br><button onclick="savebutton(customSetting.value)" class="btn btn-dark m-2" type="submit">Save</button>
                             </form>
 
                             <script>
