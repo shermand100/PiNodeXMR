@@ -86,7 +86,7 @@
             <div class="col-5">
                 <h3>Sync <small> Status</small></h3>
 
-                <div class="node_status imported-text"></div>
+                <pre class="node_status imported-text"></pre>
 
                 <script>
                     $.get("Node_Status.txt", function (data) {
@@ -98,7 +98,7 @@
             <div class="col-5">
                 <h3>System <small>Monitor</small></h3>
 
-                <div class="iamrunning imported-text"></div>
+                <pre class="iamrunning imported-text"></pre>
 
                 <script>
                     $.get("iamrunning_version.txt", function (data) {
@@ -132,7 +132,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h3>Storage: <small>Usage</small></h3>
-                                    <div class="df-h imported-text"></div>
+                                    <pre class="df-h imported-text"></pre>
 
                                     <script>
                                         $.get("df-h.txt", function (data) {
@@ -144,7 +144,7 @@
 
                                 <div class="col-md-6">
                                     <h3>Temperature: <small>CPU</small></h3>
-                                    <div class="temp imported-text"></div>
+                                    <pre class="temp imported-text"></pre>
 
                                     <script>
                                         $.get("temp.txt", function (data) {
@@ -162,7 +162,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <h3>Memory: <small>RAM/swap-file* Usage</small></h3>
-                                    <div class="free-h imported-text"></div>
+                                    <pre class="free-h imported-text"></pre>
 
                                     <script>
                                         $.get("free-h.txt", function (data) {
@@ -194,7 +194,7 @@
                                     <h1>Monero Network:</h1>
 
                                     <h3>MemPool <small> Overview</small></h3>
-                                    <div class="txpoolstatus imported-text"></div>
+                                    <pre class="txpoolstatus imported-text"></pre>
 
                                     <script>
                                         $.get("TXPool_Status.txt", function (data) {
@@ -207,8 +207,8 @@
                             <!-- row -->
                             <div class="row">
                                 <div class="col-12">
-                                    <h3 class="demo-panel-title">Transactions Pending <small> Live</small></h3>
-                                    <div class="txpoolshort imported-text"></div>
+                                    <h3 class="demo-panel-title">Transactions Pending <small>Live</small></h3>
+                                    <pre class="txpoolshort imported-text"></pre>
 
                                     <script>
                                         $.get("TXPool-short_Status.txt", function (data) {
@@ -238,10 +238,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h1>Monero Network:</h1>
-                                    <h3>Network Peers: <small> Live Connected</small></h3>
+                                    <h3>Network Peers: <small>Live Connected</small></h3>
                                     <p>Currently connected Monero peers to this device with connection initiative
                                         (incoming/outgoing) and other stats</p>
-                                    <div class="printcn imported-text"></div>
+                                    <pre class="printcn imported-text"></pre>
 
                                     <script>
                                         $.get("print_cn.txt", function (data) {
@@ -249,9 +249,9 @@
                                         });
                                     </script>
 
-                                    <h3 class="demo-panel-title">Network Peers <small> Full</small></h3>
+                                    <h3 class="demo-panel-title">Network Peers <small>Full</small></h3>
 
-                                    <div class="printpl imported-text"></div>
+                                    <pre class="printpl imported-text"></pre>
 
                                     <script>
                                         $.get("print_pl.txt", function (data) {
