@@ -24,8 +24,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -37,9 +36,7 @@
                     <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/" target="_blank"
-                        onclick="javascript:event.target.port=4200;event.target.protocol='https:';"> <i
-                            class="fas fa-terminal"></i> Web Terminal</a>
+                    <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"><i class="fas fa-terminal"></i> Web Terminal</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="explorer.html"><i class="fas fa-search-dollar"></i> Block Explorer</a>
@@ -63,8 +60,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto" id="xmr-banner-container">
-                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png"
-                    srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
+                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png" srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
             </div>
         </div>
 
@@ -74,34 +70,25 @@
                     <small>Private Dependable Nodes</small>
                 </h2>
                 <hr />
-            </div>
-            <!-- col -->
-        </div>
-        <!-- row -->
-    </div>
-    <!-- container -->
+            </div><!-- col -->
+        </div><!-- row -->
+    </div><!-- container -->
 
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <h3>View logs Live: <small> Whilst running, view node services live</small></h3>
-
                 <div class="col-lg-4 mb-4">
-                    <a href="/" onclick="javascript:event.target.port=6688;event.target.protocol='http:';" type="button"
-                        value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View System Streams</a>
+                    <a href="/" onclick="javascript:event.target.port=6688;event.target.protocol='http:';" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View System Streams</a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <h6>Restart live log viewer: <small> log-io live log monitoring is a new feature and we have found that
-                        if you start a new service it doesn't always catch the feed. Click the restart log-io viewer
-                        button below and it'll behave as expected.</small></h6>
-
-                <div class="row demo-row">
+                <h6>Restart live log viewer: <small>log-io live log monitoring is a new feature and we have found that if you start a new service it doesn't always catch the feed. Click the restart log-io viewer button below and it'll behave as expected.</small></h6>
+                <div class="row">
                     <div class="col-lg-4 mb-4">
-                        <a onclick="runScript('restart-logio')" href="#Restart_Log_io" class="btn btn-dark">Restart
-                            log-io <span class="fui-power"></span></a>
+                        <a onclick="runScript('restart-logio')" href="#Restart_Log_io" class="btn btn-dark">Restart log-io</a>
                     </div>
                 </div>
             </div>
@@ -110,7 +97,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3>Log: <small> Download log Files:</small></h3>
+                    <h3>Log: <small>Download log Files:</small></h3>
 
                     <div class="row">
                         <a href="bitmonero.log" download>Download Monero.log</a>
