@@ -159,7 +159,7 @@
                                 <div class="col-md-6">
                                     <h6>External Free Access Port Number:</h6>
                                     <p><small>The following port is set is allow for safe (restricted) access to this node. You will need to allow port-forwarding in your router settings for this port to allow external access. This port number can be changed in the 'Global Settings' section at the bottom of this page.</small></p>
-                                    <p><small><embed type="text/plain" src="monero-rpc-port.txt" width=200px height=60px></small></p>
+                                    <pre class="monero-rpc-port imported-text"></pre>
                                 </div><!-- /col -->
 
                                 <div class="col-md-6">
@@ -171,6 +171,8 @@
                                             <button type="submit" onclick="freeport(freePort.value)" class="btn btn-block btn-dark my-1">Save</button>
                                         </form>
                                     </div><!-- input-group -->
+
+                                    <pre class="monero-free-public-port imported-text"></pre>
 
                                     <script type="text/javascript">
                                         function freeport(value) {
@@ -184,9 +186,11 @@
                                                 }
                                             });
                                         }
+                                        
+                                        $.get("monero-free-public-port.txt", function (data) {
+                                            $(".monero-free-public-port").html(data);
+                                        });
                                     </script>
-
-                                    <p><small><embed type="text/plain" src="monero-free-public-port.txt" width=200px height=60px></small></p>
                                 </div><!-- /col -->
                             </div><!-- /row -->
                         </div><!-- /container -->
@@ -233,6 +237,8 @@
                                         </form>
                                     </div><!-- form group -->
 
+                                    <pre class="payment-address imported-text"></pre>
+
                                     <script type="text/javascript">
                                         function payment(value) {
                                             $.ajax({
@@ -245,9 +251,11 @@
                                                 }
                                             });
                                         };
-                                    </script>
 
-                                    <p><small><embed type="text/plain" src="payment-address.txt" width=100% height=60px></small></p>
+                                        $.get("payment-address.txt", function (data) {
+                                            $(".payment-address").html(data);
+                                        });
+                                    </script>
                                 </div><!-- col -->
                             </div><!-- row -->
 
@@ -261,6 +269,8 @@
                                         </form>
                                     </div><!-- form group -->
 
+                                    <pre class="monero-port-rpc-pay imported-text"></pre>
+
                                     <script type="text/javascript">
                                         function payport(value) {
                                             $.ajax({
@@ -273,9 +283,11 @@
                                                 }
                                             });
                                         };
-                                    </script>
 
-                                    <p><small><embed type="text/plain" src="monero-port-rpc-pay.txt" width=200px height=60px></small></p>
+                                        $.get("monero-port-rpc-pay.txt", function (data) {
+                                            $(".monero-port-rpc-pay").html(data);
+                                        });
+                                    </script>
                                 </div><!-- /col -->
 
                                 <div class="col-4">
@@ -287,6 +299,8 @@
                                             <button type="submit" onclick="credits(RPCpayCredits.value)" class="btn btn-dark my-1">Save</button>
                                         </form>
                                     </div>
+
+                                    <pre class="credits imported-text"></pre>
 
                                     <script type="text/javascript">
                                         function credits(value) {
@@ -300,9 +314,11 @@
                                                 }
                                             });
                                         };
-                                    </script>
 
-                                    <p><small><embed type="text/plain" src="credits.txt" width=120px height=60px></small></p>
+                                        $.get("credits.txt", function (data) {
+                                            $(".credits").html(data);
+                                        });
+                                    </script>
                                 </div><!-- /col -->
 
                                 <div class="col-4">
@@ -313,6 +329,8 @@
                                             <button type="submit" onclick="difficulty(RPCpayDifficulty.value)" class="btn btn-dark my-1">Save</button>
                                         </form>
                                     </div>
+
+                                    <pre class="difficulty imported-text"></pre>
 
                                     <script type="text/javascript">
                                         function difficulty(value) {
@@ -326,9 +344,11 @@
                                                 }
                                             });
                                         };
-                                    </script>
 
-                                    <p><small><embed type="text/plain" src="difficulty.txt" width=120px height=60px></small></p>
+                                        $.get("difficulty.txt", function (data) {
+                                            $(".difficulty").html(data);
+                                        });
+                                    </script>
                                 </div><!-- /col -->
                             </div><!-- row -->
                         </div><!-- container -->
@@ -378,6 +398,10 @@
                                     </div>
                                 </div><!-- /col -->
 
+                                <div class="col-6">
+                                    <pre class="mining_address imported-text"></pre>
+                                </div>
+
                                 <script type="text/javascript">
                                     function address(value) {
                                         $.ajax({
@@ -390,11 +414,11 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-6">
-                                    <p><small><embed type="text/plain" src="mining_address.txt" width=480px height=80px></small></p>
-                                </div><!-- /col -->
+                                    $.get("mining_address.txt", function (data) {
+                                        $(".mining_address").html(data);
+                                    });
+                                </script>
                             </div><!-- /row -->
 
                             <div class="row">
@@ -408,6 +432,9 @@
                                     </div>
                                 </div><!-- /col -->
 
+                                <div class="col-6">
+                                    <pre class="mining_intensity imported-text"></pre>
+                                </div>
 
                                 <script type="text/javascript">
                                     function intensity(value) {
@@ -421,18 +448,18 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-6">
-                                    <p><small><embed type="text/plain" src="mining_intensity.txt" width=3000px height=80px></small></p>
-                                </div> <!-- /col -->
+                                    $.get("mining_intensity.txt", function (data) {
+                                        $(".mining_intensity").html(data);
+                                    });
+                                </script>
                             </div><!-- /row -->
-                        </div>
+                        </div><!-- /container -->
                     </div><!-- /btn-group -->
                 </div><!-- /container -->
-            </div>
-        </div>
-    </div>
+            </div><!-- /card -->
+        </div><!-- /accordion -->
+    </div><!-- /container -->
 
     <div class="container py-4">
         <div class="row my-4">
@@ -473,7 +500,7 @@
                                     <h6>Public Address</h6>
                                 </div><!-- /.col -->
                                 <div class="col">
-                                    <embed type="text/plain" class="float-left" src="onion-address.txt" width=500px height=60px>
+                                    <pre class="onion-address imported-text"></pre>
                                 </div><!-- /.col -->
                             </div><!-- /row -->
                             <div class="row">
@@ -518,7 +545,7 @@
                                     <h6>Public Address</h6>
                                 </div><!-- /.col -->
                                 <div class="col">
-                                    <embed type="text/plain" class="float-left" src="onion-address.txt" width=500px height=60px>
+                                    <pre class="onion-address imported-text"></pre>
                                 </div><!-- /.col -->
                             </div><!-- /row -->
                             <div class="row">
@@ -541,6 +568,11 @@
                         </div><!-- /container -->
                     </div>
                 </div>
+                <script type="text/javascript">
+                    $.get("onion-address.txt", function (data) {
+                        $(".onion-address").html(data);
+                    });
+                </script>
             </div>
 
             <div class="card border-1">
@@ -587,6 +619,10 @@
                                     </div>
                                 </div><!-- /col -->
 
+                                <div class="col-4">
+                                    <pre class="i2p-address imported-text"></pre>
+                                </div><!-- /.col -->
+
                                 <script type="text/javascript">
                                     function i2paddress(value) {
                                         $.ajax({
@@ -599,11 +635,11 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-4">
-                                    <embed type="text/plain" class="float-left" src="i2p-address.txt" width=500px height=60px>
-                                </div><!-- /.col -->
+                                    $.get("i2p-address.txt", function (data) {
+                                        $(".i2p-address").html(data);
+                                    });
+                                </script>
                             </div><!-- /row -->
 
                             <div class="row">
@@ -620,6 +656,10 @@
                                     </div>
                                 </div><!-- /col -->
 
+                                <div class="col-3">
+                                    <pre class="i2p-port imported-text"></pre>
+                                </div><!-- /.col -->
+
                                 <script type="text/javascript">
                                     function i2pport(value) {
                                         $.ajax({
@@ -632,11 +672,11 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-3">
-                                    <embed type="text/plain" class="float-left" src="i2p-port.txt" width=500px height=60px>
-                                </div><!-- /.col -->
+                                    $.get("i2p-port.txt", function (data) {
+                                        $(".i2p-port").html(data);
+                                    });
+                                </script>
                             </div><!-- /row -->
 
                             <div class="row">
@@ -653,6 +693,10 @@
                                     </div>
                                 </div><!-- /col -->
 
+                                <div class="col-3">
+                                    <pre class="i2p-tx-proxy-port imported-text"></pre>
+                                </div><!-- /.col -->
+
                                 <script type="text/javascript">
                                     function i2ptxproxyport(value) {
                                         $.ajax({
@@ -665,11 +709,11 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-3">
-                                    <embed type="text/plain" class="float-left" src="i2p-tx-proxy-port.txt" width=500px height=60px>
-                                </div><!-- /.col -->
+                                    $.get("i2p-tx-proxy-port.txt", function (data) {
+                                        $(".i2p-tx-proxy-port").html(data);
+                                    });
+                                </script>
                             </div><!-- /row -->
                         </div><!-- /container -->
                     </div>
@@ -716,7 +760,7 @@
                                 <br>
                                 current config:
                             </p>
-                            <embed type="text/plain" class="col-12 mb-2 float-left" src="user-set-custom.txt" width=500px height=120px>
+                            <pre class="user-set-custom imported-text"></pre>
 
                             <div class="row">
                                 <div class="col-lg-4 mb-4">
@@ -746,6 +790,10 @@
                                         }
                                     });
                                 }
+
+                                $.get("user-set-custom.txt", function (data) {
+                                    $(".user-set-custom").html(data);
+                                });
                             </script>
 
                             <div class="card border-1">
@@ -827,7 +875,7 @@
                                                 <input type="number" id="moneroRpcPort" placeholder="New Monero RPC Port" class="form-control">
                                                 <button type="submit" onclick="monerorpcport(moneroRpcPort.value)" class="btn btn-dark my-1">Save</button>
                                             </form>
-                                            <p><small><embed type="text/plain" src="monero-rpc-port.txt" width=300px height=60px></small></p>
+                                            <pre class="monero-rpc-port imported-text"></pre>
                                             <span>If needed, enter a new port number for RPC connections here. Used to connect your wallet to this node.</span>
                                         </div>
                                     </div>
@@ -844,6 +892,10 @@
                                                 }
                                             });
                                         };
+
+                                        $.get("monero-rpc-port.txt", function (data) {
+                                            $(".monero-rpc-port").html(data);
+                                        });
                                     </script>
                                 </div><!-- /row -->
 
