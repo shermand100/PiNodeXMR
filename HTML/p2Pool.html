@@ -24,8 +24,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -98,7 +97,11 @@
                     </form>
                 </div>
 
-                <script>
+                <div class="row">
+                    <pre class="mining-address imported-text"></pre>
+                </div><!-- /row -->
+
+                <script type="text/javascript">
                     function address(value) {
                         $.ajax({
                             url: "mining-address.php", //the page containing php script
@@ -109,11 +112,11 @@
                             }
                         });
                     }
-                </script>
 
-                <div class="row">
-                    <p><small><embed src="mining_address.txt" width=480px height=80px></small></p>
-                </div><!-- /row -->
+                    $.get("mining_address.txt", function (data) {
+                        $(".mining-address").html(data);
+                    });
+                </script>
             </div><!-- /container -->
 
             <div class="container">
