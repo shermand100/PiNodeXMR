@@ -119,6 +119,10 @@
                             </form>
                         </div>
 
+                        <div class="row">
+                            <pre class="ethJsonRpc imported-text"></pre>
+                        </div><!-- /row -->
+
                         <script>
                             function ethJsonRpc(value) {
                                 $.ajax({
@@ -130,14 +134,14 @@
                                     }
                                 });
                             }
-                        </script>
 
-                        <div class="row">
-                            <p><small><embed src="ethJsonRpc.txt" width=480px height=80px></small></p>
-                        </div> <!-- /row -->
-                    </div> <!-- /container -->
+                            $.get("ethJsonRpc.txt", function (data) {
+                                $(".ethJsonRpc").html(data);
+                            });
+                        </script>
+                    </div><!-- /container -->
                 </div>
-            </div> <!-- /container -->
+            </div><!-- /container -->
 
             <hr>
 
