@@ -2,170 +2,180 @@
 <html lang="en">
 
 <head>
-  <!-- Title  -->
-  <title>PiNode-XMR - Status</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <!-- Load Ajax -->
-  <script src="assets/js/jquery.min.js"></script>
-  <link rel="shortcut icon" type="image/x-icon" href="assets/images/XMR.ico" />
-  <!-- Font Awesome cdn -->
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <!-- Custom Style Sheet -->
-  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
+    <!-- Title  -->
+    <title>PiNode-XMR - Status</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- Load Ajax -->
+    <script src="assets/js/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/XMR.ico" />
+    <!-- Font Awesome cdn -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/app.css">
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav justify-content-around w-100">
-        <li class="nav-item">
-          <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
-            <i class="fas fa-terminal"></i> Web Terminal</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="explorer.html"><i class="fas fa-search-dollar"></i> Block Explorer</a>
-        </li>        
-        <li class="nav-item">
-          <a class="nav-link" href="p2Pool.html"><i class="fas fa-comment-dollar"></i> P2Pool</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="ethAtomicSwap.html"><i class="fas fa-arrows-rotate"></i> Swap</a>
-        </li>        
-        <li class="nav-item">
-          <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="mx-auto" id="xmr-banner-container">
-        <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png" srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <h2 class="text-center">
-          <small>Private Dependable Nodes</small>
-        </h2>
-        <hr>
-      </div> <!-- col -->
-    </div> <!-- row -->
-  </div> <!-- container-fluid -->
-
-  <div class="container">
-    <div class="row my-4">
-      <div class="col-md-12">
-
-        <h2 class="font-weight-bold">Athanor Labs <small>ETH-XMR Atomic Swaps</small></h2>
-
-        <p><span>This is an implementation of ETH-XMR atomic swaps, <b>currently in BETA!</b> some bugs may exist. This tool is courtesy of AthanorLabs and <a href="https://github.com/AthanorLabs/atomic-swap/blob/master/docs/mainnet.md" target="_blank">their manual for mainnet commands are here</a></span>.</p>
-        <p><span>This utility has been tested by a small group of developers and users and has their trust. This Atomic Swap utility is offered to PiNodeXMR users with their understanding that funds used here are at risk. If you experience a bug, error, loss of funds, or unexpected behaviour of the swap contract, please download both Atomic Swap log files from the logs Web-UI page and submit a report as an issue with description at their GitHub <a href="https://github.com/AthanorLabs/atomic-swap/issues" target="_blank">here</a>. PiNodeXMR is just a compilation project offering you these tools. I have no control over the Atomic Swap code/usage and as such cannot help when things go wrong with the exception of installation issues.</p>
-        <p><span>Through our use and reporting this utility will grow.</span>.</p>
-        <p><span>As further development takes place a Web-UI will become available to take XMR offers, as of Aug '23 this is still in the pipeline.</span>.</p>
-        <p><span>For now, once 'Start' is selected below, trade interaction is done via the terminal 'Setup Menu -> Atomic Swaps' and for simplicity allows XMR sell offers via that menu. Currently to be a XMR 'taker' - spend an ETH balance - you'll need to interact via CLI, instructions are at the AthanorLabs link in the first paragraph. Enjoy and safe trading.</span>.</p>
-
-
-      </div> <!-- col -->
-    </div> <!-- row -->
-  </div> <!-- /container -->
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h3>Swap Interface:</h3>
-
-      <div class="col-lg-4 mb-4">
-        <a href="/" onclick="javascript:event.target.port=5173;event.target.protocol='http:';" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">Atomic Swap Interface</a>
-      </div>
-    </div>
-
-    <div class="container py-4">
-      <h3 class="demo-panel-title">Atomic Swap service: <small> Start/Stop</small></h3>
-      
-      <div class="row demo-row">
-        <div class="col-lg-4 mb-4">
-          <a onclick="runScript('swap-start')" href="#Start AtomicSwap" class="btn btn-block btn-lg btn-dark">Start Swap Service<span class="fui-power"></span></a>
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav justify-content-around w-100">
+                <li class="nav-item">
+                    <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"><i class="fas fa-terminal"></i> Web Terminal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="explorer.html"><i class="fas fa-search-dollar"></i> Block Explorer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="p2Pool.html"><i class="fas fa-comment-dollar"></i> P2Pool</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="ethAtomicSwap.html"><i class="fas fa-arrows-rotate"></i> Swap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
+                </li>
+            </ul>
         </div>
-  
-        <div class="col-lg-4 mb-4">
-          <a onclick="runScript('swap-stop')" href="#Stop AtomicSwap" class="btn btn-block btn-lg btn-dark">Stop Swap Service<span class="fui-power"></span></a>
-        </div>
-  
-    <div class="container py-4">
-      <h6 class="demo-panel-title">Set a public Ethereum JSON RPC node </span><small> Some free ones are available <a href="https://ethereumnodes.com/" target="_blank">here</a></small></h6>
-        <div class="form-group">
-          <form method="post">
-            <input type="text" placeholder="Enter Ethereum JSON RPC node address" class="form-control"
-            onchange='if(this.value != 0) { ethJsonRpc(this.value); }'><span class="fui-check-inverted"></span>
-          </form>
-        </div>
-  
-    <script>
-      function ethJsonRpc(value) {
-        $.ajax({
-          url: "ethJsonRpc.php", //the page containing php script
-          type: "POST", //request type
-          data: ({ value }),
-          success: function (result) {
-            alert(result);
-          }
-        });
-      }
-    </script>
-  
-    <div class="row">
-      <p><small><embed src="ethJsonRpc.txt" width=480px height=80px></small></p>
-    </div> <!-- /row -->
-  </div> <!-- /container -->
-  </div>
-  </div> <!-- /container -->
+    </nav>
 
-  <hr>
 
-  <div><h5>Athanor Labs</h5> <small>GPLv3 Disclaimer:
-    THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
-    
-    IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</small></h2>
-  </div>
-    <!-- JavaScript -->
-    <script>
-      function runScript(functionName) {
-        $.ajax({
-          url: `runScript.php?function=${functionName}`, //the page containing php script
-          type: "POST", //request type
-          success: function (result) {
-            alert(result);
-          },
-        });
-      }
-    </script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="mx-auto" id="xmr-banner-container">
+                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png" srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h2 class="text-center">
+                    <small>Private Dependable Nodes</small>
+                </h2>
+                <hr>
+            </div><!-- col -->
+        </div><!-- row -->
+    </div><!-- container-fluid -->
+
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-12">
+                <h2 class="font-weight-bold">Athanor Labs <small>ETH-XMR Atomic Swaps</small></h2>
+                <p><span>This is an implementation of ETH-XMR atomic swaps, <b>currently in BETA!</b> some bugs may exist. This tool is courtesy of AthanorLabs and <a href="https://github.com/AthanorLabs/atomic-swap/blob/master/docs/mainnet.md" target="_blank">their manual for mainnet commands are here</a>.</span></p>
+                <p><span>This utility has been tested by a small group of developers and users and has their trust. This Atomic Swap utility is offered to PiNodeXMR users with their understanding that funds used here are at risk. If you experience a bug, error, loss of funds, or unexpected behaviour of the swap contract, please download both Atomic Swap log files from the logs Web-UI page and submit a report as an issue with description at their GitHub <a href="https://github.com/AthanorLabs/atomic-swap/issues" target="_blank">here</a>. PiNodeXMR is just a compilation project offering you these tools. I have no control over the Atomic Swap code/usage and as such cannot help when things go wrong with the exception of installation issues.</span></p>
+                <p><span>Through our use and reporting this utility will grow.</span></p>
+                <p><span>As further development takes place a Web-UI will become available to take XMR offers, as of Aug '23 this is still in the pipeline.</span></p>
+                <p><span>For now, once 'Start' is selected below, trade interaction is done via the terminal 'Setup Menu -> Atomic Swaps' and for simplicity allows XMR sell offers via that menu. Currently to be a XMR 'taker' - spend an ETH balance - you'll need to interact via CLI, instructions are at the AthanorLabs link in the first paragraph. Enjoy and safe trading.</span></p>
+            </div><!-- col -->
+        </div><!-- row -->
+    </div><!-- /container -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Swap Interface:</h3>
+                <div class="col-lg-4 mb-4">
+                    <a href="/" onclick="javascript:event.target.port=5173;event.target.protocol='http:';" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">Atomic Swap Interface</a>
+                </div>
+            </div>
+
+            <div class="container py-4">
+                <h3>Atomic Swap service: <small>Start/Stop</small></h3>
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
+                        <a onclick="runScript('swap-start')" href="#Start AtomicSwap"
+                            class="btn btn-block btn-lg btn-dark">Start Swap Service</a>
+                    </div>
+
+                    <div class="col-lg-4 mb-4">
+                        <a onclick="runScript('swap-stop')" href="#Stop AtomicSwap"
+                            class="btn btn-block btn-lg btn-dark">Stop Swap Service</a>
+                    </div>
+
+                    <div class="container py-4">
+                        <h6>Set a public Ethereum JSON RPC node <small>Some free ones are available <a href="https://ethereumnodes.com/" target="_blank">here</a></small></h6>
+                        <div class="form-group">
+                            <form method="post">
+                                <input type="text" placeholder="Enter Ethereum JSON RPC node address" class="form-control" onchange='if(this.value != 0) { ethJsonRpc(this.value); }' />
+                            </form>
+                        </div>
+
+                        <div class="row">
+                            <pre class="ethJsonRpc imported-text"></pre>
+                        </div><!-- /row -->
+
+                        <script>
+                            function ethJsonRpc(value) {
+                                $.ajax({
+                                    url: "ethJsonRpc.php", //the page containing php script
+                                    type: "POST", //request type
+                                    data: ({ value }),
+                                    success: function (result) {
+                                        alert(result);
+                                    }
+                                });
+                            }
+
+                            $.get("ethJsonRpc.txt", function (data) {
+                                $(".ethJsonRpc").html(data);
+                            });
+                        </script>
+                    </div><!-- /container -->
+                </div>
+            </div><!-- /container -->
+
+            <hr>
+
+            <div>
+                <h5>Athanor Labs</h5>
+                <small>GPLv3 Disclaimer:
+                    THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
+                    OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS”
+                    WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+                    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO
+                    THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU
+                    ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+                    IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR
+                    ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR
+                    DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE
+                    OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED
+                    INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH
+                    ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+                    DAMAGES.</small>
+            </div>
+            <!-- JavaScript -->
+            <script>
+                function runScript(functionName) {
+                    $.ajax({
+                        url: `runScript.php?function=${functionName}`, //the page containing php script
+                        type: "POST", //request type
+                        success: function (result) {
+                            alert(result);
+                        },
+                    });
+                }
+            </script>
+            <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
