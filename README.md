@@ -4,7 +4,7 @@
 
 # Project Overview
 
-PiNode-XMR is a completely free and open source suite of tools to help a user run their own Monero node with ease. PiNode-XMR is designed for use with single board computers (SBC) such as the Raspberry Pi, Pine64 or Odroid hardware to allow for very cheap node setup and minimal 24/7 running costs due to low power usage.
+PiNode-XMR is a completely free and open source suite of tools to help a user run their own Monero node with ease. PiNode-XMR was originally designed for use with single board computers (SBC) such as the Raspberry Pi, Pine64 or Odroid hardware to allow for very cheap node setup and minimal 24/7 running costs due to low power usage. We now support just about any ARM64 hardware too, so an old laptop, minipc or desktop!
 
 PiNode-XMR can provide a Full or Pruned Monero Node and optional integration with tor/I2P along with many other tools such as your own block explorer, transaction pool viewer and connected peer lists. After setup, normal interaction is available through a built in web interface accessible from any device on your local network:
 
@@ -13,20 +13,19 @@ PiNode-XMR can provide a Full or Pruned Monero Node and optional integration wit
 ## Quick Start
 
 ### Hardware
-PiNode-XMR was originaly designed and built on Raspberry Pi OS, and has now expanded to support Armbain Buster. This allows for installation on many different devices.
+PiNode-XMR is built ontop of Ubuntu Server LTS, so if it can run that it can run a node (2GB RAM recommended, 32/64bit compatible, 64bit allows for all features) . This allows for installation on many different devices.
 
 A list of tested and supported hardware can be found here [PiNodeXMR Wiki: Hardware](https://github.com/shermand100/PiNodeXMR/wiki/Hardware)
-However any similar device should work that has a Armbian Buster OS available, USB3 preferred, minimum overall specification should not be lower than a Pi3B.
 
-Best value/performance as of Q2 2021 seems to be the Rock64.
+Best value/performance as of Q1 2024 seems to be the Rock Pi 4.
 
-Choose your device and storage, then download and write the official Buster OS image. If available use the 'lite' version of the OS, there is no need for the GUI as PiNodeXMR will produce it's own interface later. Many devices also support USB boot as an alternative to MicroSD cards, performance and longevity is greatly increased if you can take the extra step.
+Choose your device and storage, then download and write the Ubuntu Server LTS OS. There is no need for the GUI as PiNodeXMR will produce it's own interface later. Many devices also support USB boot as an alternative to MicroSD cards, performance and longevity is greatly increased if you can take the extra step.
 
 Once you have your basic OS:
 
 **Raspberry Pi** users can log in as usual with user 'pi' and password 'raspberry'
 
-**Armbian users** should login with the default (usually it's username 'root' with password '1234') and create a new user called 'pinodexmr'. Once Armbian users have created 'pinodexmr' they should remain logged in as user 'root'.
+**Ubuntu users** should login with the default (usually it's username 'root' with password '1234') and create a new user called 'pinodexmr'. Once Ubuntu users have created 'pinodexmr' they should remain logged in as user 'root'.
 
 Finally to install the PiNode-XMR project simply run the single line:
 
