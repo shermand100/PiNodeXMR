@@ -22,63 +22,11 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav justify-content-around w-100">
-                <li class="nav-item">
-                    <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"><i class="fas fa-terminal"></i> Web Terminal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="explorer.html"><i class="fas fa-search-dollar"></i> Block Explorer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="p2Pool.html"><i class="fas fa-comment-dollar"></i> P2Pool</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="ethAtomicSwap.html"><i class="fas fa-arrows-rotate"></i> Swap</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="mx-auto" id="xmr-banner-container">
-                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png" srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center">
-                    <small>Private Dependable Nodes</small>
-                </h2>
-                <hr>
-            </div><!-- col -->
-        </div><!-- row -->
-    </div><!-- container-fluid -->
+    <div id="NavContent"></div>
 
     <div class="container">
         <div class="row my-4">
-            <div class="col-md-12">
+            <div class="col-12">
                 <h2 class="font-weight-bold">Athanor Labs <small>ETH-XMR Atomic Swaps</small></h2>
                 <p><span>This is an implementation of ETH-XMR atomic swaps, <b>currently in BETA!</b> some bugs may exist. This tool is courtesy of AthanorLabs and <a href="https://github.com/AthanorLabs/atomic-swap/blob/master/docs/mainnet.md" target="_blank">their manual for mainnet commands are here</a>.</span></p>
                 <p><span>This utility has been tested by a small group of developers and users and has their trust. This Atomic Swap utility is offered to PiNodeXMR users with their understanding that funds used here are at risk. If you experience a bug, error, loss of funds, or unexpected behaviour of the swap contract, please download both Atomic Swap log files from the logs Web-UI page and submit a report as an issue with description at their GitHub <a href="https://github.com/AthanorLabs/atomic-swap/issues" target="_blank">here</a>. PiNodeXMR is just a compilation project offering you these tools. I have no control over the Atomic Swap code/usage and as such cannot help when things go wrong with the exception of installation issues.</span></p>
@@ -145,7 +93,7 @@
 
             <hr>
 
-            <div>
+            <div class="col-12">
                 <h5>Athanor Labs</h5>
                 <small>GPLv3 Disclaimer:
                     THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
@@ -176,6 +124,11 @@
                 }
             </script>
             <script src="assets/js/bootstrap.bundle.min.js"></script>
+            <script> 
+                $(function(){
+                    $("#NavContent").load("navbar.html"); 
+                });
+            </script>
 </body>
 
 </html>

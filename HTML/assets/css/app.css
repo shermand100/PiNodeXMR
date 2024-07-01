@@ -39,6 +39,10 @@ button i.fas {
     margin-right: 5px;
 }
 
+a {
+    word-wrap: anywhere;
+}
+
 @media (prefers-color-scheme: dark) {
 
     body {
