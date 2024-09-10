@@ -418,6 +418,7 @@ sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.lo
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
 crontab /home/pinodexmr/PiNodeXMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo crontab /home/pinodexmr/PiNodeXMR/var/spool/cron/crontabs/root 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
