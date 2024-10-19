@@ -10,10 +10,11 @@ sudo apt install apt-transport-https -y
 
 #Establish OS Distribution
 DIST="$(lsb_release -c | awk '{print $2}')"
+ARCH="$(dpkg --print-architecture)"
 
 #Set apt sources to retrieve tor official repository (Print to temp file)
-echo "deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main
-deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main" > ~/temp_torSources.list
+echo "deb [arch=$ARCH signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main
+deb-src [arch=$ARCH signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main" > ~/temp_torSources.list
 
 #Overwrite tor.list with new created temp file above.
 sudo mv ~/temp_torSources.list /etc/apt/sources.list.d/tor.list
