@@ -20,7 +20,7 @@ deb-src [arch=$ARCH signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https
 sudo mv ~/temp_torSources.list /etc/apt/sources.list.d/tor.list
 
 #add the gpg key used to sign the packages
-sudo wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
 
 
 #Install tor and tor debian keyring (keeps signing keys current)
