@@ -10,16 +10,17 @@ sudo apt install apt-transport-https -y
 
 #Establish OS Distribution
 DIST="$(lsb_release -c | awk '{print $2}')"
+ARCH="$(dpkg --print-architecture)"
 
 #Set apt sources to retrieve tor official repository (Print to temp file)
-echo "deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main
-deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main" > ~/temp_torSources.list
+echo "deb [arch=$ARCH signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main
+deb-src [arch=$ARCH signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main" > ~/temp_torSources.list
 
 #Overwrite tor.list with new created temp file above.
 sudo mv ~/temp_torSources.list /etc/apt/sources.list.d/tor.list
 
 #add the gpg key used to sign the packages
-sudo wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
 
 
 #Install tor and tor debian keyring (keeps signing keys current)
