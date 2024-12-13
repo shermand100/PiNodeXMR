@@ -613,7 +613,7 @@
 				. /home/pinodexmr/setup.sh
 				;;		
 
-		"6)")CHOICE6=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 30 60 15 \
+		"6)")CHOICE6=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Settings" --menu "\n\nExtra Network Tools" 20 60 10 \
 				"1)" "Install/Update tor" \
 				"2)" "View tor NYX interface" \
 				"3)" "Start/Stop tor Service" \
@@ -621,7 +621,8 @@
 				"5)" "Start/Stop I2P Server/Router" \
 				"6)" "Install PiVPN" \
 				"7)" "Web Interface Password set/enable/disable" \
-				"8)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
+				"8)" "Configure Monero Peer Ban List" \
+				"9)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
 				
 				case $CHOICE6 in
 		
@@ -682,7 +683,7 @@
 								;;
 								
 
-							"7)")	CHOICE7=$(whiptail --backtitle "PiNode-XMR Settings" --title "Web Interface Password Set/Enable/Disable" --menu "\n\nWeb Interface Password Set/Enable/Disable" 30 60 15 \
+							"7)")	CHOICE7=$(whiptail --backtitle "PiNode-XMR Settings" --title "Web Interface Password Set/Enable/Disable" --menu "\n\nWeb Interface Password Set/Enable/Disable" 20 60 10 \
 										"1)" "Set Web Interface Password" \
 										"2)" "Enable Web Interface Password" \
 										"3)" "Disable Web Interface Password" 2>&1 >/dev/tty)
@@ -731,7 +732,74 @@ HTMLPASSWORDREQUIRED=FALSE" > /home/pinodexmr/variables/htmlPasswordRequired.sh
 									esac
 								;;
 
-							"8)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
+							"8)")	NUM_BAN_LIST_ENTRIES="$(wc -l ~/ban_list_InUse.txt | awk '{print $1}')"
+									CHOICE8=$(whiptail --backtitle "PiNode-XMR Settings" --title "Monero Peer Ban List conifg" --menu "\n\nMonero Peer Ban List conifg:\n\nBan List currently holds $NUM_BAN_LIST_ENTRIES ENTRIES" 20 60 10 \
+										"1)" "Add 'Boog900' Ban List" \
+										"2)" "Add gui.xmr.pm Ban List" \
+										"3)" "Add list of banned IPs from local source" \
+										"4)" "Remove all entries from ban list" 2>&1 >/dev/tty)
+				
+									case $CHOICE8 in
+
+								"1)")	if (whiptail --title "Monero Peer Ban List conifg" --yesno "This will merge the 'spy node' ban list from https://github.com/Boog900/monero-ban-list into your local ban list" --yes-button "Merge Ban List" --no-button "Cancel" 14 78); then
+									wget https://raw.githubusercontent.com/Boog900/monero-ban-list/refs/heads/main/ban_list.txt
+									cat ban_list.txt >> ban_list_InUse.txt
+									rm ban_list.txt
+									NUM_BAN_LIST_ENTRIES="$(wc -l ~/ban_list_InUse.txt | awk '{print $1}')"
+									sleep 3
+									whiptail --title "Monero Peer Ban List conifg" --msgbox "The IPs listed in Boog900 Ban List have been added to your local ban list.\nYour list now contains $NUM_BAN_LIST_ENTRIES ENTRIES\nStop&Start your node to take effect." 12 78;
+									else
+									sleep 2
+									fi
+								;;
+
+								"2)")	if (whiptail --title "Monero Peer Ban List conifg" --yesno "This will merge the malicious node IP list from https://gui.xmr.pm/files/block.txt into your local ban list" --yes-button "Merge Ban List" --no-button "Cancel" 14 78); then
+									wget https://gui.xmr.pm/files/block.txt
+									cat block.txt >> ban_list_InUse.txt
+									rm block.txt
+									NUM_BAN_LIST_ENTRIES="$(wc -l ~/ban_list_InUse.txt | awk '{print $1}')"
+									sleep 3
+									whiptail --title "Monero Peer Ban List conifg" --msgbox "The IPs listed gui.xmr.pm have been added to your local ban list.\nYour list now contains $NUM_BAN_LIST_ENTRIES ENTRIES\nStop&Start your node to take effect." 12 78;
+									else
+									sleep 2
+									fi
+								;;
+
+								"3)")	if (whiptail --title "Monero Peer Ban List conifg" --yesno "This option allos you to add a list of Banned IPs from a local file or URL\nSee https://github.com/shermand100/PiNodeXMR/wiki/Use-of-IP-Ban-Lists for instructions" --yes-button "Continue" --no-button "Cancel" 14 78); then
+									BAN_LIST_PATH=$(whiptail --inputbox "Enter URL or file path of Ban List" 8 39 --title "Monero Peer Ban List conifg" 3>&1 1>&2 2>&3);
+									#Detect if path is either URL or local file
+									REGEX='(https?|ftp|file)://[-[:alnum:]\+&@#/%?=~_|!:,.;]*[-[:alnum:]\+&@#/%=~_|]'
+									if [[ $BAN_LIST_PATH =~ $REGEX ]]
+									then
+									wget $BAN_LIST_PATH -O ban_list.txt
+									cat ban_list.txt >> ban_list_InUse.txt
+									rm ban_list.txt
+									 else
+ 									cat $BAN_LIST_PATH >> ban_list_InUse.txt
+									rm $BAN_LIST_PATH
+									fi
+									
+									NUM_BAN_LIST_ENTRIES="$(wc -l ~/ban_list_InUse.txt | awk '{print $1}')"
+									sleep 3
+									whiptail --title "Monero Peer Ban List conifg" --msgbox "Your list now contains $NUM_BAN_LIST_ENTRIES ENTRIES\n\nStop&Start your node to take effect." 12 78;
+									else
+									sleep 2
+									fi
+								;;								
+
+								"4)")	if (whiptail --title "Monero Peer Ban List conifg" --yesno "This will delete the entire contents of your local IP Ban list.\nAfter which you can then re-populate the list from an option in the previous menu." --yes-button "Clear Ban List" --no-button "Cancel" 14 78); then
+									> ban_list_InUse.txt
+									NUM_BAN_LIST_ENTRIES="$(wc -l ~/ban_list_InUse.txt | awk '{print $1}')"
+									sleep 3
+									whiptail --title "Monero Peer Ban List conifg" --msgbox "The localy held list of banned IPs has been cleared.\nYour list now contains $NUM_BAN_LIST_ENTRIES ENTRIES\nStop&Start your node to take effect." 12 78;
+									else
+									sleep 2
+									fi
+
+									esac
+								;;								
+
+							"9)")	if (whiptail --title "PiNode-XMR Configure Dynamic DNS" --yesno "This will configure Dynamic DNS from NoIP.com\n\nFirst create a free account with them and have your username and password before continuing\n\nWould you like to continue?" 12 78); then
 									. /home/pinodexmr/setupMenuScripts/setup-noip.sh
 									else
 									sleep 2
