@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Title  -->
     <title>PiNode-XMR - Interface</title>
     <!-- Required meta tags -->
@@ -19,93 +18,87 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="index.html"><i class="fab fa-monero active"></i> PiNode-XMR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav justify-content-around w-100">
-                <li class="nav-item">
-                    <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/" target="_blank"
-                        onclick="javascript:event.target.port=4200;event.target.protocol='https:';"> <i
-                            class="fas fa-terminal"></i> Web Terminal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
-                </li>
-            </ul>
-        </div>
+      <a class="navbar-brand" href="index.html"><i class="fab fa-monero active"></i> PiNode-XMR</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav justify-content-around w-100">
+          <li class="nav-item">
+            <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/" target="_blank" onclick="javascript:event.target.port=4200;event.target.protocol='https:';"> <i class="fas fa-terminal"></i> Web Terminal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
+          </li>
+        </ul>
+      </div>
     </nav>
 
     <div class="container">
-        <div class="row">
-            <div class="mx-auto" id="xmr-banner-container">
-                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png"
-                    srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
-            </div>
+      <div class="row">
+        <div class="mx-auto" id="xmr-banner-container">
+          <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png" srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
         </div>
+      </div>
 
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center">
-                    <small>Private Dependable Nodes</small>
-                </h2>
-                <hr />
-            </div><!-- col -->
-        </div><!-- row -->
-    </div><!-- container -->
+      <div class="row">
+        <div class="col">
+          <h2 class="text-center">
+            <small>Private Dependable Nodes</small>
+          </h2>
+          <hr />
+        </div>
+        <!-- col -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h3>v6.24.01-Open-Build (Light)</h3>
-                <h3><a class="badge badge-light" href="https://github.com/shermand100/PiNodeXMR/wiki/Manual"
-                        target="_blank">User Manual for PiNode-XMR</a></h3>
-            </div>
+      <div class="row">
+        <div class="col">
+          <h3>v6.24.12-Open-Build (Light)</h3>
+          <h3><a class="badge badge-light" href="https://github.com/shermand100/PiNodeXMR/wiki/Manual" target="_blank">User Manual for PiNode-XMR</a></h3>
         </div>
+      </div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <table>
-                    <tr>
-                        <td>
-                            <img class="QR img-responsive center-block" src="assets/images/QRCode.png" />
-                        </td>
-                        <td>
-                            <h6 class="badge badge-light">Development Donation address:</h6>
-                            <h6 class="text" id="address">
-                                43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9
-                            </h6>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+      <div class="row">
+        <div class="col">
+          <table>
+            <tr>
+              <td>
+                <img class="QR img-responsive center-block" src="assets/images/QRCode.png" />
+              </td>
+              <td>
+                <h6 class="badge badge-light">Development Donation address:</h6>
+                <h6 class="text" id="address">43HoAhqx9q3MR1crAjpQtYVhvzQhZgqPwSWVQMmPvYmr18qVUEjCHcsEasuCxS486rWSSg1gbGqanet67NWRsh1bQL9KkB9</h6>
+              </td>
+            </tr>
+          </table>
         </div>
+      </div>
 
-        <p><a href="https://pinode.co.uk" target="_blank" class="badge badge-light">PiNode.co.uk Copyright (c)
-                2017-2023</a></p>
-        <p><a href="PiNode-XMR-License.txt" target="_blank" class="badge badge-light">LICENSE</a></p>
+      <p><a href="https://pinode.co.uk" target="_blank" class="badge badge-light">PiNode.co.uk Copyright (c) 2017-2023</a></p>
+      <p><a href="PiNode-XMR-License.txt" target="_blank" class="badge badge-light">LICENSE</a></p>
     </div>
     <!-- container -->
 
     <!-- JavaScript -->
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-</body>
-
+  </body>
 </html>
