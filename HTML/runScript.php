@@ -25,17 +25,6 @@ switch($function) {
     echo "Stop Command Sent for Private Node";
     exec (". /home/pinodexmr/bootStatusSetIdle.sh");
     break;
-  case 'start-moneroPublicRPCPay':
-    exec("sudo systemctl start moneroPublicRPCPay.service");
-    exec("sudo systemctl enable moneroPublicRPCPay.service");
-    echo "Monero Public Node started - with RPC pay requiements.";
-    break;
-  case 'stop-moneroPublicRPCPay':
-    exec("sudo systemctl stop moneroPublicRPCPay.service");
-    exec("sudo systemctl disable moneroPublicRPCPay.service");
-    echo "Stop Command Sent for Public RPC Pay Node";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
-    break;
   case 'start-moneroMiningNode':
     exec("sudo systemctl start moneroMiningNode.service");
     exec("sudo systemctl enable moneroMiningNode.service");
