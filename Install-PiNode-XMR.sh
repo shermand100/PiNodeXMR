@@ -5,8 +5,8 @@ sleep 2
 #Check user has whiptail - required to display menu
 sudo apt-get install whiptail -y
 
-CHOICE=$(whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS. \nBuild PiNodeXMR on top of..." 20 60 5 \
-	"1)" "Ubunutu Server 22.04-23.5 LTS (current 32/64bit)" \
+CHOICE=$(whiptail --title "Welcome to the PiNode-XMR Project" --menu "For correct installation select your OS. (Currently Ubuntu Server best supported) \nBuild PiNodeXMR on top of..." 20 60 5 \
+	"1)" "Ubunutu Server LTS (current 32/64bit)" \
 	"2)" "Exit" 3>&2 2>&1 1>&3
 )
 
