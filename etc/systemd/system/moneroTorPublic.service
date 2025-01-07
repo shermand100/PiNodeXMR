@@ -13,6 +13,7 @@ PIDFile=/home/pinodexmr/monero/build/release/bin/monerod.pid
 ExecStart=/bin/bash /home/pinodexmr/execScripts/moneroTorPublic.sh
 RestartSec=30
 Restart=on-failure
+StandardOutput=null
 
 [Install]
 WantedBy=multi-user.target
