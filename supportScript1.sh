@@ -17,7 +17,7 @@
 
 ###
 #Start Assist User
-if (whiptail --title "PiNode-XMR Support Script #1" --yesno "This script will now perform actions on your device configured exclusively for the benefit of user: TheB*** and JJ \n\nThis script will download and install the pre-compiled Monerod to assist RPi4 users\n\nWould you like to continue?" 12 78); then
+if (whiptail --title "PiNode-XMR Support Script #1" --yesno "This script will now perform actions on your device configured exclusively for the benefit of user: EL4955 \n\nThis script will download and install the pre-compiled Monerod for Raspberry Pi 5 hardware.\n\nWould you like to continue?" 12 78); then
 #Remove current monero installation
 rm -r /home/pinodexmr/monero/build/release/bin/*
 #Download Monero Arm

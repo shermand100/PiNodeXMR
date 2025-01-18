@@ -48,11 +48,19 @@ if [[ $CPU_ARCH -eq 32 ]]
 		rm -rf /home/pinodexmr/p2pool/
 		echo -e "\e[32mSuccess\e[0m"
 		sleep "2"
+		#Users repot failed P2Pool update (Oct '24) - Fix was missing dependencies update.
+		#Update System and P2Pool Dependences
+		echo -e "\e[32mUpdating dependencies for P2Pool build\e[0m"
+		sleep "2"
+		sudo apt update
+		sudo apt upgrade -y
+		echo -e "\e[32mSuccess\e[0m"
+		sleep "2"
 		echo -e "\e[32mBuilding new P2Pool\e[0m"
 		##Install P2Pool
 		git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 		cd p2pool
-		git checkout tags/v3.10
+		git checkout tags/v4.3
 		mkdir build && cd build
 		cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
 		make -j2 2>&1 | tee -a /home/pinodexmr/debug.log

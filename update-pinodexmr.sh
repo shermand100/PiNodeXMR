@@ -88,6 +88,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					echo -e "\e[32m*****\e[0m"						
 					sleep 8
 					#home dir
+					mv /home/pinodexmr/ban_list_InUse.txt /home/pinodexmr/ban_list_InUse_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/bootstatus.sh /home/pinodexmr/bootstatus_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver.sh /home/pinodexmr/current-ver_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-exp.sh /home/pinodexmr/current-ver-exp_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -266,6 +267,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					echo -e "\e[32mRestoring your personal settings\e[0m"
 					sleep 2
 					#home dir
+					mv /home/pinodexmr/ban_list_InUse_retain.txt /home/pinodexmr/ban_list_InUse.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/bootstatus_retain.sh /home/pinodexmr/bootstatus.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver_retain.sh /home/pinodexmr/current-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-exp_retain.sh /home/pinodexmr/current-ver-exp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)

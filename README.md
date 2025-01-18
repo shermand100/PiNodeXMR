@@ -52,7 +52,7 @@ ____
 
 To assist in managing disk images they are all held on our website PiNodeXMR.co.uk
 
-[(Link) All pre-configured disk images @ PiNodeXMR.co.uk](https://www.pinode.co.uk/downloads)
+[(Link) All pre-configured disk images @ PiNodeXMR.co.uk](https://pinode.co.uk/#diskImages)
 
 ____
 
