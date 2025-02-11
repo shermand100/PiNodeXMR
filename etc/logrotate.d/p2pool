@@ -1,7 +1,7 @@
 /home/pinodexmr/p2pool/build/p2pool.log {
-rotate 7
-daily
+weekly
 missingok
-delaycompress
-nocreate
+nocompress
+copytruncate
+size 25M
 }
