@@ -22,71 +22,19 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="index.html"><i class="fab fa-monero"></i> PiNode-XMR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav justify-content-around w-100">
-                <li class="nav-item">
-                    <a class="nav-link" href="nodeStatus.html"><i class="fas fa-info"></i> Node Status</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="nodeControl.html"><i class="fas fa-cogs"></i> Node Control</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/" target="_blank"
-                        onclick="javascript:event.target.port=4200;event.target.protocol='https:';">
-                        <i class="fas fa-terminal"></i> Web Terminal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="i2p.html"><i class="fas fa-network-wired"></i> I2P</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="log.html"><i class="fas fa-database"></i> Logs</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-
-    <div class="container">
-        <div class="row">
-            <div class="mx-auto" id="xmr-banner-container">
-                <img class="img-fluid d-block" id="xmr-banner" src="assets/images/pinode-xmr-banner.png"
-                    srcset="assets/images/pinode-xmr-banner@2x.png 2x" />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center">
-                    <small>Private Dependable Nodes</small>
-                </h2>
-                <hr>
-            </div> <!-- col -->
-        </div> <!-- row -->
-    </div> <!-- container -->
-
+    <div id="NavContent"></div>
 
     <div class="container">
         <div class="row my-4">
             <div class="col-md-12">
-
                 <h2 class="font-weight-bold">Node Control <small>& Advanced Settings</small></h2>
-
-                <p><span>Use this page to start and stop your node in one mode that best suits your needs. Changes can
-                        also be
-                        made here to fine tune configurations. <br><br>If configuration changes are made after a Monero
-                        instance has
-                        been selected to run, it will require a restart before the changes take effect. You can use the
-                        "Reboot
-                        Node" buttons for this.</span></p>
-            </div> <!-- col -->
-        </div> <!-- row -->
-    </div> <!-- /container -->
+                <p><span>Use this page to start and stop your node in one mode that best suits your needs. Changes can also be made here to fine tune configurations.<br>
+                        <br>
+                        If configuration changes are made after a Monero instance has been selected to run, it will require a restart before the changes take effect. You can use the "Reboot Node" buttons for this.
+                    </span></p>
+            </div><!-- col -->
+        </div><!-- row -->
+    </div><!-- /container -->
 
     <hr>
 
@@ -94,12 +42,12 @@
         <div class="row my-4">
             <div class="col-md-12">
                 <h3 class="font-weight-bold">Clearnet Networks: <small>Transact via Clearnet</small></h3>
-                <p>These nodes are run using all the standard privacy tools that Monero offers.<br><br> Connections are
-                    made via
-                    IPv4.</p>
-            </div> <!-- col -->
-        </div> <!-- /row -->
-    </div> <!-- /container -->
+                <p>These nodes are run using all the standard privacy tools that Monero offers.<br>
+                    <br>
+                    Connections are made via IPv4.</p>
+            </div><!-- col -->
+        </div><!-- /row -->
+    </div><!-- /container -->
 
 
     <!-- Start Accodian 1-->
@@ -108,9 +56,8 @@
             <div class="card border-1">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-arrows-alt-v"></i> Private Node: <small> Requiring RPC login</small>
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-arrows-alt-v"></i>Private Node: <small>Requiring RPC login</small>
                         </button>
                     </h5>
                 </div>
@@ -118,96 +65,65 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample1">
                     <div class="card-body">
                         <div class="container-fluid">
-                            <h3 class="demo-panel-title">Private Node: <small> Requiring RPC login</small></h3>
-                            <p><small>Use this mode to run your own personal node. When connecting an external wallet
-                                    you will need
-                                    the RPC username and password you have configured in the web terminal menu to use
-                                    this service. [
-                                    clearnet ]</small></p>
+                            <h3>Private Node: <small> Requiring RPC login</small></h3>
+                            <p><small>Use this mode to run your own personal node. When connecting an external wallet you will need the RPC username and password you have configured in the web terminal menu to use this service. [clearnet]</small></p>
 
-
-
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('start-moneroPrivate')" href="#Start Monerod"
-                                        class="btn btn-block btn-lg btn-dark">Start Private
-                                        Node <span class="fui-power"></span></a>
+                                    <a onclick="runScript('start-moneroPrivate')" href="#Start Monerod" class="btn btn-block btn-lg btn-dark">Start Private Node</a>
                                 </div>
 
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('stop-moneroPrivate')" href="#Stop Monerod"
-                                        class="btn btn-block btn-lg btn-dark">Stop Private Node
-                                        <span class="fui-power"></span></a>
+                                    <a onclick="runScript('stop-moneroPrivate')" href="#Stop Monerod" class="btn btn-block btn-lg btn-dark">Stop Private Node</a>
                                 </div>
-
-                            </div> <!-- /row -->
-                        </div> <!-- /container -->
+                            </div><!-- /row -->
+                        </div><!-- /container -->
                     </div>
                 </div>
             </div>
+
             <div class="card border-1">
                 <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <i class="fas fa-arrows-alt-v"></i> Public Node: <small>Free External RPC</small>
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="fas fa-arrows-alt-v"></i>Public Node: <small>Free External RPC</small>
                         </button>
                     </h5>
                 </div>
+
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample1">
                     <div class="card-body">
                         <div class="container py-4">
-                            <h3 class="demo-panel-title">Public Node: <small>Free External RPC</small></h3>
-                            <p><small>This will run a full node and provide a restricted RPC port to allow wallet
-                                    connections to your
-                                    node. This port does not require hash payments or
-                                    username and password. Free to all. [ clearnet ]</small></p>
-                            <div class="row demo-row">
+                            <h3>Public Node: <small>Free External RPC</small></h3>
+                            <p><small>This will run a full node and provide a restricted RPC port to allow wallet connections to your node. This port does not require hash payments or username and password. Free to all. [clearnet]</small></p>
+                            <div class="row">
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('start-moneroPublicFree')" href="#Start Public Free Node"
-                                        class="btn btn-block btn-lg btn-dark">Start Free Public Node <span
-                                            class="fui-power"></span></a>
+                                    <a onclick="runScript('start-moneroPublicFree')" href="#Start Public Free Node" class="btn btn-block btn-lg btn-dark">Start Free Public Node</a>
                                 </div>
 
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('stop-moneroPublicFree')" href="#Stop Monerod"
-                                        class="btn btn-block btn-lg btn-dark">Stop Free
-                                        Public Node <span class="fui-power"></span></a>
+                                    <a onclick="runScript('stop-moneroPublicFree')" href="#Stop Monerod" class="btn btn-block btn-lg btn-dark">Stop Free Public Node</a>
                                 </div>
-                            </div> <!-- /row -->
+                            </div><!-- /row -->
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h6 class="demo-panel-title">External Free Access Port Number: </h6>
-                                    <p><small>The following port is set is allow for safe (restricted) access to this
-                                            node. You will need
-                                            to allow port-forwarding in your router settings for this port to allow
-                                            external access. This port
-                                            number can be changed in the 'Global Settings' section at the bottom of this
-                                            page.</small></p>
-                                    <p><small><embed src="monero-rpc-port.txt" width=200px height=60px></small></p>
-                                </div> <!-- /col -->
-                            </div> <!-- /row -->
+                                    <h6>External Free Access Port Number:</h6>
+                                    <p><small>The following port is set is allow for safe (restricted) access to this node. You will need to allow port-forwarding in your router settings for this port to allow external access. This port number can be changed in the 'Global Settings' section at the bottom of this page.</small></p>
+                                    <pre class="monero-rpc-port imported-text"></pre>
+                                </div><!-- /col -->
 
-
-                            <div class="row">
                                 <div class="col-md-6">
-                                    <h6 class="demo-panel-title">Set Custom Unrestricted RPC Port: </h6>
-                                    <p><small>Because this option is open and free to the public (once you forward the
-                                            RPC port number
-                                            from the Global Settings section) it is run on a restriced port. An
-                                            unrestriced RPC port is made
-                                            available on the number below and is used for local only status outputs. Do
-                                            not expose the port
-                                            below.</small></p>
+                                    <h6>Set Custom Unrestricted RPC Port:</h6>
+                                    <p><small>Because this option is open and free to the public (once you forward the RPC port number from the Global Settings section) it is run on a restriced port. An unrestriced RPC port is made available on the number below and is used for local only status outputs. Do not expose the port below.</small></p>
                                     <div class="input-group">
                                         <form method="post">
-                                            <input type="number" id="freePort" placeholder="New port"
-                                                class="form-control">
-                                            <button type="submit" onclick="freeport(freePort.value)"
-                                                class="btn btn-block btn-dark my-1">Save</button>
+                                            <input type="number" id="freePort" placeholder="New port" class="form-control">
+                                            <button type="submit" onclick="freeport(freePort.value)" class="btn btn-block btn-dark my-1">Save</button>
                                         </form>
-                                    </div> <!-- input-group -->
+                                    </div><!-- input-group -->
+
+                                    <pre class="monero-free-public-port imported-text"></pre>
 
                                     <script type="text/javascript">
                                         function freeport(value) {
@@ -221,196 +137,25 @@
                                                 }
                                             });
                                         }
+                                        
+                                        $.get("monero-free-public-port.txt", function (data) {
+                                            $(".monero-free-public-port").html(data);
+                                        });
                                     </script>
-
-                                    <p><small><embed src="monero-free-public-port.txt" width=200px height=60px></small>
-                                    </p>
-                                </div> <!-- /col -->
-                            </div> <!-- /row -->
-                        </div> <!-- /container -->
+                                </div><!-- /col -->
+                            </div><!-- /row -->
+                        </div><!-- /container -->
                     </div>
                 </div>
             </div>
 
-            <div class="card border-1">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            <i class="fas fa-arrows-alt-v"></i> Public Node: <small> Requires RPC Pay</small>
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                    data-parent="#accordionExample1">
-                    <div class="card-body">
-
-                        <div class="container py-4">
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                    <h3 class="demo-panel-title">Public Node: <small> External RPC requiring RPC
-                                            Pay</small></h3>
-
-                                    <p><small>This mode can be used to make your PiNode-XMR available to the public for
-                                            their wallet sync
-                                            purposes and transaction sending. It will require payment as hashes in
-                                            exchange for the service.
-                                            This enables you to receive payment for your PiNode-XMRs work over a large
-                                            number of calls. This
-                                            system behaves similarly to a solo mining pool. [clearnet]<br><br></small>
-                                    </p>
-
-                                </div> <!-- col -->
-                            </div> <!-- row -->
-
-                            <div class="row">
-                                <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('start-moneroPublicRPCPay')" href="#Start Public Node"
-                                        class="btn btn-block btn-lg btn-dark">Start
-                                        RPC Pay Node <span class="fui-user"></span></a>
-                                </div> <!-- col -->
-
-                                <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('stop-moneroPublicRPCPay')" href="#Stop Public Node"
-                                        class="btn btn-block btn-lg btn-dark">Stop RPC
-                                        Pay Node <span class="fui-user"></span></a>
-                                </div> <!-- col -->
-                            </div> <!-- row -->
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <h6 class="demo-panel-title">Set Payment Address <span class="fui-check"></span>
-                                        </h6>
-                                        <form method="post">
-                                            <input type="text" id="RPCpayAddress" placeholder="Address"
-                                                class="form-control col-8">
-                                            <button type="submit" onclick="payment(RPCpayAddress.value)"
-                                                class="btn btn-dark my-1">Save</button>
-                                            <span class="fui-check-inverted"></span>
-                                        </form>
-                                    </div> <!-- form group -->
-
-                                    <script type="text/javascript">
-                                        function payment(value) {
-                                            $.ajax({
-                                                url: "payment-address.php",
-                                                type: "post",
-                                                data: ({ value }),
-                                                dataType: 'text',
-                                                success: function (result) {
-                                                    alert(result);
-                                                }
-                                            });
-                                        };
-                                    </script>
-
-                                    <p><small><embed src="payment-address.txt" width=100% height=60px></small></p>
-
-                                </div> <!-- col -->
-                            </div> <!-- row -->
-
-                            <div class="row">
-                                <div class="col-4">
-                                    <h6 class="demo-panel-title">Set RPC Pay Port <span class="fui-check"></span></h6>
-                                    <div class="form-group">
-                                        <form method="post">
-                                            <input type="number" id="RPCpayPort" placeholder="New port"
-                                                class="form-control">
-                                            <button type="submit" onclick="payport(RPCpayPort.value)"
-                                                class="btn btn-dark my-1">Save</button>
-                                        </form>
-                                    </div> <!-- form group -->
-                                    <script type="text/javascript">
-                                        function payport(value) {
-                                            $.ajax({
-                                                url: "monero-port-rpc-pay.php",
-                                                type: "post",
-                                                data: ({ value }),
-                                                dataType: 'text',
-                                                success: function (result) {
-                                                    alert(result);
-                                                }
-                                            });
-                                        };
-                                    </script>
-
-                                    <p><small><embed src="monero-port-rpc-pay.txt" width=200px height=60px></small></p>
-                                </div> <!-- /col -->
-                            </div> <!-- /row -->
-
-                            <div class="row">
-                                <div class="col-4">
-                                    <h6 class="demo-panel-title">Credits Required <span class="fui-check"></span></h6>
-
-                                    <div class="form-group">
-                                        <form method="post">
-                                            <input type="number" id="RPCpayCredits" placeholder="Credits"
-                                                class="form-control">
-                                            <button type="submit" onclick="credits(RPCpayCredits.value)"
-                                                class="btn btn-dark my-1">Save</button>
-                                        </form>
-                                    </div>
-
-                                    <script type="text/javascript">
-                                        function credits(value) {
-                                            $.ajax({
-                                                url: "credits.php",
-                                                type: "post",
-                                                data: ({ value }),
-                                                dataType: 'text',
-                                                success: function (result) {
-                                                    alert(result);
-                                                }
-                                            });
-                                        };
-                                    </script>
-
-                                    <p><small><embed src="credits.txt" width=120px height=60px></small></p>
-                                </div> <!-- /col -->
-
-
-                                <div class="col-4">
-                                    <h6 class="demo-panel-title">Difficulty</span></h6>
-                                    <div class="form-group">
-                                        <form method="post">
-                                            <input type="text" id="RPCpayDifficulty" placeholder="Difficulty"
-                                                class="form-control">
-                                            <button type="submit" onclick="difficulty(RPCpayDifficulty.value)"
-                                                class="btn btn-dark my-1">Save</button>
-                                        </form>
-                                    </div>
-
-                                    <script type="text/javascript">
-                                        function difficulty(value) {
-                                            $.ajax({
-                                                url: "difficulty.php",
-                                                type: "post",
-                                                data: ({ value }),
-                                                dataType: 'text',
-                                                success: function (result) {
-                                                    alert(result);
-                                                }
-                                            });
-                                        };
-                                    </script>
-
-                                    <p><small><embed src="difficulty.txt" width=120px height=60px></small></p>
-                                </div> <!-- /col -->
-                            </div> <!-- row -->
-                        </div> <!-- container -->
-                    </div>
-                </div>
-            </div>
-
+<!-- headingThree removed Jan 2025 - Clearnet Public RPC Pay feature obsolete  -->
 
             <div class="card border-1">
                 <div class="card-header" id="headingFour">
                     <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            <i class="fas fa-arrows-alt-v"></i> Mining: <small> Solo Mine On This Device</small>
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="fas fa-arrows-alt-v"></i>Mining: <small> Solo Mine On This Device</small>
                         </button>
                     </h5>
                 </div>
@@ -418,50 +163,39 @@
                     <div class="card-body">
                         <div class="container py-4">
                             <div class="row">
-                                <h3 class="demo-panel-title">Mining</h3>
+                                <h3>Mining</h3>
+                                <p class="text-center"><small>This a full Private Node (Requires RPC login) with the additional function of solo mining on the device PiNode-XMR is running<br>
+                                        Note:<br>
+                                        Mining, by design  is CPU intensive and not suited to single board computers.<br>
+                                        This feature has been added for experimental/educational purposes and thought should be given for your devices CPU cooling before activating to prevent physical damage. This feature may also handicap the speed this device verifies transactions and blocks.<br>
+                                        *Note: Mining currently over clearnet only.
+                                    </small></p>
+                            </div><!-- /row -->
 
-                                <p class="text-center"><small>This a full Private Node (Requires RPC login) with the
-                                        additional function
-                                        of solo mining on the device PiNode-XMR is running<br>Note:<br>Mining, by design
-                                        is CPU intensive
-                                        and
-                                        not suited to single board computers.<br>
-                                        This feature has been added for experimental/educational purposes and thought
-                                        should be given for
-                                        your
-                                        devices CPU cooling before activating to prevent
-                                        physical damage. This feature may also handicap the speed this device verifies
-                                        transactions and
-                                        blocks.<br> *Note: Mining currently over clearnet only.</small></p>
-                            </div> <!-- /row -->
-
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('start-moneroMiningNode')" href="#Start Mining"
-                                        class="btn btn-block btn-lg btn-dark">Start Solo
-                                        Mining <span class="fui-lock"></span></a>
+                                    <a onclick="runScript('start-moneroMiningNode')" href="#Start Mining" class="btn btn-block btn-lg btn-dark">Start Solo Mining</a>
                                 </div>
 
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('stop-moneroMiningNode')" href="#Stop Mining"
-                                        class="btn btn-block btn-lg btn-dark">Stop Solo
-                                        Mining <span class="fui-lock"></span></a>
+                                    <a onclick="runScript('stop-moneroMiningNode')" href="#Stop Mining" class="btn btn-block btn-lg btn-dark">Stop Solo Mining</a>
                                 </div>
-                            </div> <!-- /row -->
+                            </div><!-- /row -->
 
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col-3">
-                                    <h6 class="demo-panel-title">Set Your Mining Address</span></h6>
-
+                                    <h6>Set Your Mining Address</h6>
                                     <div class="form-group">
                                         <form method="post">
-                                            <input type="text" id="MiningAddress" placeholder="Enter Mining Address"
-                                                class="form-control">
-                                            <button type="submit" onclick="address(MiningAddress.value)"
-                                                class="btn btn-block btn-dark my-1">Save</button>
+                                            <input type="text" id="MiningAddress" placeholder="Enter Mining Address" class="form-control">
+                                            <button type="submit" onclick="address(MiningAddress.value)" class="btn btn-block btn-dark my-1">Save</button>
                                         </form>
                                     </div>
-                                </div> <!-- /col -->
+                                </div><!-- /col -->
+
+                                <div class="col-6">
+                                    <pre class="mining_address imported-text"></pre>
+                                </div>
 
                                 <script type="text/javascript">
                                     function address(value) {
@@ -475,27 +209,27 @@
                                             }
                                         });
                                     };
+
+                                    $.get("mining_address.txt", function (data) {
+                                        $(".mining_address").html(data);
+                                    });
                                 </script>
+                            </div><!-- /row -->
 
-                                <div class="col-6">
-                                    <p><small><embed src="mining_address.txt" width=480px height=80px></small></p>
-                                </div> <!-- /col -->
-                            </div> <!-- /row -->
-
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col-3">
-                                    <h6 class="demo-panel-title">Set Mining Intensity</span></h6>
-
+                                    <h6>Set Mining Intensity</h6>
                                     <div class="form-group">
                                         <form method="post">
-                                            <input type="number" id="MiningIntensity"
-                                                placeholder="Enter Mining Intensity" class="form-control">
-                                            <button type="submit" onclick="intensity(MiningIntensity.value)"
-                                                class="btn btn-block btn-dark my-1">Save</button>
+                                            <input type="number" id="MiningIntensity" placeholder="Enter Mining Intensity" class="form-control">
+                                            <button type="submit" onclick="intensity(MiningIntensity.value)" class="btn btn-block btn-dark my-1">Save</button>
                                         </form>
                                     </div>
-                                </div> <!-- /col -->
+                                </div><!-- /col -->
 
+                                <div class="col-6">
+                                    <pre class="mining_intensity imported-text"></pre>
+                                </div>
 
                                 <script type="text/javascript">
                                     function intensity(value) {
@@ -509,38 +243,33 @@
                                             }
                                         });
                                     };
+
+                                    $.get("mining_intensity.txt", function (data) {
+                                        $(".mining_intensity").html(data);
+                                    });
                                 </script>
-
-                                <div class="col-6">
-                                    <p><small><embed src="mining_intensity.txt" width=3000px height=80px></small></p>
-                                </div> <!-- /col -->
-                            </div> <!-- /row -->
-
-                        </div>
+                            </div><!-- /row -->
+                        </div><!-- /container -->
                     </div><!-- /btn-group -->
-                </div> <!-- /container -->
-            </div>
-        </div>
-    </div>
+                </div><!-- /container -->
+            </div><!-- /card -->
+        </div><!-- /accordion -->
+    </div><!-- /container -->
 
     <div class="container py-4">
         <div class="row my-4">
             <div class="col-md-12">
                 <h3 class="font-weight-bold">Anonymity Networks <small>Transact via tor or I2P</small></h3>
-                <p><br>These nodes run as a private node (RPC login required) with the added benefit of broadcasting
-                    your
-                    transactions exclusively over an anonymity network. This can assist in obscuring the origin (node
-                    ID/IP) of a
-                    transaction you broadcast if used correctly in addition to the Dandilion++ protocol used by
-                    default<br><br>The
-                    node will still use IPv4 clearnet for syncronisation<br><br> For more information on how this
-                    'bridging' mode
-                    works see <a href="https://github.com/shermand100/PiNodeXMR/wiki/Manual#tor"
-                        target="https://github.com/shermand100/PiNodeXMR/wiki/Manual#tor">https://github.com/shermand100/PiNodeXMR/wiki/Manual#tor</a>
+                <p>These nodes run as a private node (RPC login required) with the added benefit of broadcasting
+                    your transactions exclusively over an anonymity network. This can assist in obscuring the origin (node ID/IP) of a transaction you broadcast if used correctly in addition to the Dandilion++ protocol used by default<br>
+                    <br>
+                    The node will still use IPv4 clearnet for syncronisation<br>
+                    <br>
+                    For more information on how this 'bridging' mode works see <a href="https://github.com/shermand100/PiNodeXMR/wiki/Manual#tor" target="_blank">https://github.com/shermand100/PiNodeXMR/wiki/Manual#tor</a>
                 </p>
-            </div> <!-- col -->
-        </div> <!-- /row -->
-    </div> <!-- /container -->
+            </div><!-- col -->
+        </div><!-- /row -->
+    </div><!-- /container -->
 
     <!-- Start Accodian 2-->
     <div class="container">
@@ -548,54 +277,44 @@
             <div class="card border-1">
                 <div class="card-header" id="headingFive">
                     <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                            <i class="fas fa-arrows-alt-v"></i> TOR: <small>Private Bridging Node</small>
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <i class="fas fa-arrows-alt-v"></i>TOR: <small>Private Bridging Node</small>
                         </button>
                     </h5>
                 </div>
+
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample2">
                     <div class="card-body">
                         <div class="container py-4">
-                            <div class="row demo-row">
-                                <h3 class="demo-panel-title float-left">TOR: <small>Private Bridging Node</small></h3>
-                            </div> <!-- /row -->
+                            <div class="row">
+                                <h3 class="float-left">TOR: <small>Private Bridging Node</small></h3>
+                            </div><!-- /row -->
 
                             <div class="row">
                                 <div class="col-2">
-                                    <h6 class="demo-panel-title">Public Address</h6>
-                                </div> <!-- /.col -->
+                                    <h6>Public Address</h6>
+                                </div><!-- /.col -->
                                 <div class="col">
-                                    <embed class="float-left" src="onion-address.txt" width=500px height=60px>
-                                </div> <!-- /.col -->
-                            </div> <!-- /row -->
+                                    <pre class="onion-address imported-text"></pre>
+                                </div><!-- /.col -->
+                            </div><!-- /row -->
                             <div class="row">
-                                <p><small>This address is unique to your PiNode-XMR. It was generated when you installed
-                                        tor, and will
-                                        not change.<br>To ensure a robust configuration some settings cannot be
-                                        changed<br>You can make RPC
-                                        connections remotely from a "tor-ified" wallet using your .onion hostname, port
-                                        18081, RPC username
-                                        & password. Non-tor RPC connections should also be possible on your local
-                                        network with PiNodeXMR-IP
-                                        and Port 18081.<br></p>
+                                <p><small>This address is unique to your PiNode-XMR. It was generated when you installed tor, and will not change.<br>
+                                        To ensure a robust configuration some settings cannot be changed<br>
+                                        You can make RPC connections remotely from a "tor-ified" wallet using your .onion hostname, port 18081, RPC username & password. Non-tor RPC connections should also be possible on your local network with PiNodeXMR-IP and Port 18081.
+                                    </small></p>
+                            </div><!-- /row -->
 
-                            </div> <!-- /row -->
-
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col">
-                                    <a onclick="runScript('start-moneroTorPrivate')" href="#start-monero-tor"
-                                        class="btn btn-block btn-lg btn-dark">Start
-                                        Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
-                                </div> <!-- /.col -->
+                                    <a onclick="runScript('start-moneroTorPrivate')" href="#start-monero-tor" class="btn btn-block btn-lg btn-dark">Start Monerod - [tor Bridge]</a>
+                                </div><!-- /.col -->
 
                                 <div class="col">
-                                    <a onclick="runScript('stop-moneroTorPrivate')" href="#stop-monero-tor"
-                                        class="btn btn-block btn-lg btn-dark">Stop
-                                        Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
-                                </div> <!-- /.col -->
-                            </div> <!-- /row -->
-                        </div> <!-- /container -->
+                                    <a onclick="runScript('stop-moneroTorPrivate')" href="#stop-monero-tor" class="btn btn-block btn-lg btn-dark">Stop Monerod - [tor Bridge]</a>
+                                </div><!-- /.col -->
+                            </div><!-- /row -->
+                        </div><!-- /container -->
                     </div>
                 </div>
             </div>
@@ -603,110 +322,101 @@
             <div class="card border-1">
                 <div class="card-header" id="headingFive-A">
                     <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseFive-A" aria-expanded="false" aria-controls="collapseFive-A">
-                            <i class="fas fa-arrows-alt-v"></i> TOR: <small>Public Bridging Node</small>
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseFive-A" aria-expanded="false" aria-controls="collapseFive-A">
+                            <i class="fas fa-arrows-alt-v"></i>TOR: <small>Public Bridging Node</small>
                         </button>
                     </h5>
                 </div>
-                <div id="collapseFive-A" class="collapse" aria-labelledby="headingFive-A"
-                    data-parent="#accordionExample2">
+
+                <div id="collapseFive-A" class="collapse" aria-labelledby="headingFive-A" data-parent="#accordionExample2">
                     <div class="card-body">
                         <div class="container py-4">
-                            <div class="row demo-row">
-                                <h3 class="demo-panel-title float-left">TOR: <small>Public Bridging Node</small></h3>
-                            </div> <!-- /row -->
+                            <div class="row">
+                                <h3 class="float-left">TOR: <small>Public Bridging Node</small></h3>
+                            </div><!-- /row -->
 
                             <div class="row">
                                 <div class="col-2">
-                                    <h6 class="demo-panel-title">Public Address</h6>
-                                </div> <!-- /.col -->
+                                    <h6>Public Address</h6>
+                                </div><!-- /.col -->
                                 <div class="col">
-                                    <embed class="float-left" src="onion-address.txt" width=500px height=60px>
-                                </div> <!-- /.col -->
-                            </div> <!-- /row -->
+                                    <pre class="onion-address imported-text"></pre>
+                                </div><!-- /.col -->
+                            </div><!-- /row -->
                             <div class="row">
-                                <p><small>This address is unique to your PiNode-XMR. It was generated when you installed
-                                        tor, and will
-                                        not change.<br>To ensure a robust configuration some settings cannot be
-                                        changed<br>Anyone can make
-                                        RPC
-                                        connections remotely from a "tor-ified" wallet using your .onion hostname, port
-                                        18081. Non-tor RPC
-                                        connections should also be possible on your local network with PiNodeXMR-IP
-                                        and Port 18081.<br></p>
+                                <p><small>This address is unique to your PiNode-XMR. It was generated when you installed tor, and will not change.<br>
+                                        To ensure a robust configuration some settings cannot be changed<br>
+                                        Anyone can make RPC connections remotely from a "tor-ified" wallet using your .onion hostname, port
+                                        18081. Non-tor RPC  connections should also be possible on your local network with PiNodeXMR-IP and Port 18081.
+                                    </small></p>
+                            </div><!-- /row -->
 
-                            </div> <!-- /row -->
-
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col">
-                                    <a onclick="runScript('start-moneroTorPublic')" href="#start-monero-tor-public"
-                                        class="btn btn-block btn-lg btn-dark">Start
-                                        Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
-                                </div> <!-- /.col -->
+                                    <a onclick="runScript('start-moneroTorPublic')" href="#start-monero-tor-public" class="btn btn-block btn-lg btn-dark">Start Monerod - [tor Bridge]</a>
+                                </div><!-- /.col -->
 
                                 <div class="col">
-                                    <a onclick="runScript('stop-moneroTorPublic')" href="#stop-monero-tor-public"
-                                        class="btn btn-block btn-lg btn-dark">Stop
-                                        Monerod - <span class="fui-eye"> <br />[tor Bridge]</span></a>
-                                </div> <!-- /.col -->
-                            </div> <!-- /row -->
-                        </div> <!-- /container -->
+                                    <a onclick="runScript('stop-moneroTorPublic')" href="#stop-monero-tor-public" class="btn btn-block btn-lg btn-dark">Stop Monerod - [tor Bridge]</a>
+                                </div><!-- /.col -->
+                            </div><!-- /row -->
+                        </div><!-- /container -->
                     </div>
                 </div>
+                <script type="text/javascript">
+                    $.get("onion-address.txt", function (data) {
+                        $(".onion-address").html(data);
+                    });
+                </script>
             </div>
 
             <div class="card border-1">
                 <div class="card-header" id="headingSix">
                     <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                            <i class="fas fa-arrows-alt-v"></i> I2P: <small>Private Bridging Node</small>
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"  data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <i class="fas fa-arrows-alt-v"></i>I2P: <small>Private Bridging Node</small>
                         </button>
                     </h5>
                 </div>
+
                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample2">
                     <div class="card-body">
                         <div class="container py-4">
-                            <div class="row demo-row">
-                                <h3 class="demo-panel-title float-left">I2P: <small>Private Bridging Node</small></h3>
-                            </div> <!-- /row -->
+                            <div class="row">
+                                <h3 class="float-left">I2P: <small>Private Bridging Node</small></h3>
+                            </div><!-- /row -->
 
-
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col">
-                                    <a onclick="runScript('start-moneroI2PPrivate')" href="#start-monero-i2p"
-                                        class="btn btn-block btn-lg btn-dark">Start
-                                        Monerod - <span class="fui-eye"> <br />[I2P Bridge]</span></a>
-                                </div> <!-- /.col -->
+                                    <a onclick="runScript('start-moneroI2PPrivate')" href="#start-monero-i2p" class="btn btn-block btn-lg btn-dark">Start Monerod - [I2P Bridge]</a>
+                                </div><!-- /.col -->
 
                                 <div class="col">
-                                    <a onclick="runScript('stop-moneroI2PPrivate')" href="#stop-monero-i2p"
-                                        class="btn btn-block btn-lg btn-dark">Stop
-                                        Monerod - <span class="fui-eye"> <br />[I2P Bridge]</span></a>
+                                    <a onclick="runScript('stop-moneroI2PPrivate')" href="#stop-monero-i2p" class="btn btn-block btn-lg btn-dark">Stop Monerod - [I2P Bridge]</a>
                                 </div>
-                            </div> <!-- /row -->
+                            </div><!-- /row -->
+
+                            <div class="row mt-4">
+                                <h6>I2P Configuration:</h6>
+                            </div><!-- /.row -->
 
                             <div class="row">
-                                <h6 class="demo-panel-title">I2P Configuration:</h6>
-                            </div> <!-- /.row -->
-
-                            <div class="row">
-
                                 <div class="col-3">
-                                    <h6 class="demo-panel-title">Set your I2P Server address:</h6>
-                                </div> <!-- /col -->
+                                    <h6>Set your I2P Server address:</h6>
+                                </div><!-- /col -->
 
                                 <div class="col-4">
                                     <div class="form-group">
                                         <form method="post">
-                                            <input type="text" id="i2pAddress" placeholder="Enter I2P Address"
-                                                class="form-control">
-                                            <button type="submit" onclick="i2paddress(i2pAddress.value)"
-                                                class="btn btn-dark my-1">Save</button>
+                                            <input type="text" id="i2pAddress" placeholder="Enter I2P Address" class="form-control">
+                                            <button type="submit" onclick="i2paddress(i2pAddress.value)" class="btn btn-dark my-1">Save</button>
                                         </form>
                                     </div>
-                                </div> <!-- /col -->
+                                </div><!-- /col -->
+
+                                <div class="col-4">
+                                    <pre class="i2p-address imported-text"></pre>
+                                </div><!-- /.col -->
 
                                 <script type="text/javascript">
                                     function i2paddress(value) {
@@ -720,30 +430,30 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-4">
-                                    <embed class="float-left" src="i2p-address.txt" width=500px height=60px>
-                                </div> <!-- /.col -->
-                            </div> <!-- /row -->
+                                    $.get("i2p-address.txt", function (data) {
+                                        $(".i2p-address").html(data);
+                                    });
+                                </script>
+                            </div><!-- /row -->
 
                             <div class="row">
-
                                 <div class="col-3">
-                                    <h6 class="demo-panel-title">Set your I2P Server port:</h6>
-                                </div> <!-- /col -->
+                                    <h6>Set your I2P Server port:</h6>
+                                </div><!-- /col -->
 
                                 <div class="col-2">
                                     <div class="form-group">
                                         <form method="post">
-                                            <input type="text" id="i2pPort" placeholder="Enter I2P Port"
-                                                class="form-control">
-                                            <button type="submit" onclick="i2pport(i2pPort.value)"
-                                                class="btn btn-dark my-1">Save</button>
-                                            <span class="fui-check-inverted"></span>
+                                            <input type="text" id="i2pPort" placeholder="Enter I2P Port" class="form-control">
+                                            <button type="submit" onclick="i2pport(i2pPort.value)" class="btn btn-dark my-1">Save</button>
                                         </form>
                                     </div>
-                                </div> <!-- /col -->
+                                </div><!-- /col -->
+
+                                <div class="col-3">
+                                    <pre class="i2p-port imported-text"></pre>
+                                </div><!-- /.col -->
 
                                 <script type="text/javascript">
                                     function i2pport(value) {
@@ -757,29 +467,30 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-3">
-                                    <embed class="float-left" src="i2p-port.txt" width=500px height=60px>
-                                </div> <!-- /.col -->
-                            </div> <!-- /row -->
+                                    $.get("i2p-port.txt", function (data) {
+                                        $(".i2p-port").html(data);
+                                    });
+                                </script>
+                            </div><!-- /row -->
 
                             <div class="row">
-
                                 <div class="col-3">
-                                    <h6 class="demo-panel-title">Set your I2P TX-Proxy port:</h6>
-                                </div> <!-- /col -->
+                                    <h6>Set your I2P TX-Proxy port:</h6>
+                                </div><!-- /col -->
 
                                 <div class="col-2">
                                     <div class="form-group">
                                         <form method="post">
-                                            <input type="text" id="i2pTxProxyPort" placeholder="I2P TX-Proxy Port"
-                                                class="form-control">
-                                            <button type="submit" onclick="i2ptxproxyport(i2pTxProxyPort.value)"
-                                                class="btn btn-dark my-1">Save</button>
+                                            <input type="text" id="i2pTxProxyPort" placeholder="I2P TX-Proxy Port" class="form-control">
+                                            <button type="submit" onclick="i2ptxproxyport(i2pTxProxyPort.value)" class="btn btn-dark my-1">Save</button>
                                         </form>
                                     </div>
-                                </div> <!-- /col -->
+                                </div><!-- /col -->
+
+                                <div class="col-3">
+                                    <pre class="i2p-tx-proxy-port imported-text"></pre>
+                                </div><!-- /.col -->
 
                                 <script type="text/javascript">
                                     function i2ptxproxyport(value) {
@@ -793,28 +504,27 @@
                                             }
                                         });
                                     };
-                                </script>
 
-                                <div class="col-3">
-                                    <embed class="float-left" src="i2p-tx-proxy-port.txt" width=500px height=60px>
-                                </div> <!-- /.col -->
-                            </div> <!-- /row -->
-                        </div> <!-- /container -->
+                                    $.get("i2p-tx-proxy-port.txt", function (data) {
+                                        $(".i2p-tx-proxy-port").html(data);
+                                    });
+                                </script>
+                            </div><!-- /row -->
+                        </div><!-- /container -->
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- container -->
+    </div><!-- container -->
 
     <div class="container py-4">
         <div class="row my-4">
             <div class="col-md-12">
                 <h3 class="font-weight-bold">Custom Node <small>configure personalised run options</small></h3>
-                <p><br>This sections allows a user comfortable with monero settings to customise their own startup
-                    options.<br><br></p>
-            </div> <!-- col -->
-        </div> <!-- /row -->
-    </div> <!-- /container -->
+                <p>This sections allows a user comfortable with monero settings to customise their own startup options.</p>
+            </div><!-- col -->
+        </div><!-- /row -->
+    </div><!-- /container -->
 
     <!-- Start Accodian 3-->
     <div class="container">
@@ -822,10 +532,8 @@
             <div class="card border-1">
                 <div class="card-header" id="headingSeven">
                     <h5 class="mb-0">
-                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                            data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-                            <i class="fas fa-arrows-alt-v"></i> Custom Configuration: <small> view/edit run
-                                conditions</small>
+                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                            <i class="fas fa-arrows-alt-v"></i>Custom Configuration: <small>view/edit run conditions</small>
                         </button>
                     </h5>
                 </div>
@@ -834,41 +542,36 @@
                     data-parent="#accordionExample3">
                     <div class="card-body">
                         <div class="container-fluid">
-                            <h3 class="demo-panel-title mb-2">Custom Node: <small> personalised run options</small></h3>
+                            <h3 class="mb-2">Custom Node: <small> personalised run options</small></h3>
                             <p>Use this mode to run your own personal node with custom settings outside of the scope of
                                 the variables I allow you to change in the "global settings" tab. Be aware this is for
                                 advanced users. *TIP* Be mindful that currently the systemd service that activates this
                                 script has TYPE:forking and so works with the monero --detached flag, specifically the
                                 tor/I2P modes require TYPE=simple. This advanced mode will continue to develop. The
                                 placeholder example in your entry box will not change but can be used as an example.
-                                More examples can be found below.<br><br>This mode has no access to variables. Every
-                                $VALUE must be replaced by a valid string/num<br><br>current config: </p>
+                                More examples can be found below.<br>
+                                <br>
+                                This mode has no access to variables. Every $VALUE must be replaced by a valid string/num<br>
+                                <br>
+                                current config:
+                            </p>
+                            <pre class="user-set-custom imported-text"></pre>
 
-                            <embed class="col-12 mb-2 float-left" src="user-set-custom.txt" width=500px height=120px>
-
-                            <div class="row demo-row">
+                            <div class="row">
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('start-moneroCustomNode')" href="#Start Custom"
-                                        class="btn btn-block btn-lg btn-dark">Start Custom
-                                        Node <span class="fui-power"></span></a>
+                                    <a onclick="runScript('start-moneroCustomNode')" href="#Start Custom" class="btn btn-block btn-lg btn-dark">Start Custom Node&nbsp;<i class="fas fa-circle-play"></i></a>
                                 </div>
 
                                 <div class="col-lg-4 mb-4">
-                                    <a onclick="runScript('stop-moneroCustomNode')" href="#Stop Custom"
-                                        class="btn btn-block btn-lg btn-dark">Stop Custom Node
-                                        <span class="fui-power"></span></a>
+                                    <a onclick="runScript('stop-moneroCustomNode')" href="#Stop Custom" class="btn btn-block btn-lg btn-dark">Stop Custom Node&nbsp;<i class="fas fa-hand"></i></a>
                                 </div>
-
                             </div> <!-- /row -->
 
-                            <p>Set your custom options below and click 'save' to apply changes: </p>
-
+                            <p>Set your custom options below and click 'save' to apply changes:</p>
                             <form method="post">
-                                <textarea name="custom-setting" id="customSetting" rows="6" cols="100%"
-                                    style="overflow:auto;resize:none"
+                                <textarea name="custom-setting" id="customSetting" rows="6" cols="100%" style="overflow:auto;resize:none"
                                     placeholder="./monerod --rpc-bind-ip=$DEVICE_IP --zmq-pub tcp://$DEVICE_IP:18083 --rpc-bind-port=$MONERO_PORT --confirm-external-bind --rpc-login=$username:$password --rpc-ssl disabled --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --enable-dns-blocklist --detach"></textarea>
-                                <button onclick="savebutton(customSetting.value)" class="btn btn-dark m-2"
-                                    type="submit">Save</button>
+                                <br><button onclick="savebutton(customSetting.value)" class="btn btn-dark m-2" type="submit">Save</button>
                             </form>
 
                             <script>
@@ -882,82 +585,47 @@
                                         }
                                     });
                                 }
+
+                                $.get("user-set-custom.txt", function (data) {
+                                    $(".user-set-custom").html(data);
+                                });
                             </script>
 
                             <div class="card border-1">
                                 <div class="card-header" id="headingExamples">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link badge badge-light" type="button"
-                                            data-toggle="collapse" data-target="#collapseExamples" aria-expanded="false"
-                                            aria-controls="collapseExamples">
-                                            <i class="fas fa-info"></i> Example configs
+                                        <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseExamples" aria-expanded="false" aria-controls="collapseExamples">
+                                            <i class="fas fa-info"></i>Example configs
                                         </button>
                                     </h5>
                                 </div>
-                                <div id="collapseExamples" class="collapse" aria-labelledby="headingExamples"
-                                    data-parent="#headingExamples">
+                                <div id="collapseExamples" class="collapse" aria-labelledby="headingExamples" data-parent="#headingExamples">
                                     <div class="card-body">
                                         <div class="container">
                                             <div class="row">
-                                                <h3 class="demo-panel-title">Examples: <small>...</small></h3>
+                                                <h3>Examples: <small>...</small></h3>
                                             </div>
 
                                             <div class="row">
-                                                <div class="demo-type-example">
-                                                    <span class="demo-text-note"></span>
-                                                    <p>*These are a few examples:<br><br> Public Free Node:
-                                                        <br>./monerod --rpc-bind-ip=0.0.0.0
-                                                        --rpc-bind-port=$MONERO_PUBLIC_PORT --zmq-pub
-                                                        tcp://$DEVICE_IP:18083 --rpc-restricted-bind-ip=$DEVICE_IP
-                                                        --rpc-restricted-bind-port=$MONERO_PORT --confirm-external-bind
-                                                        --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS
-                                                        --limit-rate-up=$LIMIT_RATE_UP
-                                                        --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760
-                                                        --log-level=1 --max-log-files=1 --pidfile
-                                                        /home/pinodexmr/monero/build/release/bin/monerod.pid
-                                                        --public-node --enable-dns-blocklist --detach<br><br> RPC Pay
-                                                        Node: <br>./monerod --rpc-bind-ip=$DEVICE_IP
-                                                        --rpc-bind-port=$MONERO_PORT --zmq-pub tcp://$DEVICE_IP:18083
-                                                        --rpc-restricted-bind-port=$MONERO_RPCPAY_PORT
-                                                        --confirm-external-bind --rpc-payment-allow-free-loopback
-                                                        --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS
-                                                        --limit-rate-up=$LIMIT_RATE_UP
-                                                        --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760
-                                                        --log-level=1 --max-log-files=1 --pidfile
-                                                        /home/pinodexmr/monero/build/release/bin/monerod.pid
-                                                        --rpc-payment-address=$PAYMENT_ADDRESS
-                                                        --rpc-payment-credits=$CREDITS
-                                                        --rpc-payment-difficulty=$DIFFICULTY --public-node
-                                                        --enable-dns-blocklist --detach<br><br> I2P Node:
-                                                        <br>DNS_PUBLIC=tcp ./monerod --p2p-bind-ip 127.0.0.1
-                                                        --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT
-                                                        --rpc-login=$RPCu:$RPCp --confirm-external-bind
-                                                        --anonymous-inbound $I2P_ADDRESS,127.0.0.1:$I2P_PORT --tx-proxy
-                                                        i2p,127.0.0.1:$I2P_TX_PROXY_PORT --rpc-ssl disabled
-                                                        --in-peers=$IN_PEERS --out-peers=$OUT_PEERS
-                                                        --limit-rate-up=$LIMIT_RATE_UP
-                                                        --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760
-                                                        --log-level=1 --max-log-files=1 --pidfile
-                                                        /home/pinodexmr/monero/build/release/bin/monerod.pid
-                                                        --enable-dns-blocklist --non-interactive<br><br> Tor Private
-                                                        Node: <br>DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1
-                                                        ./monero/build/release/bin/monerod --zmq-pub
-                                                        tcp://$DEVICE_IP:18083 --p2p-bind-ip 127.0.0.1 --no-igd
-                                                        --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=18081 --tx-proxy
-                                                        tor,127.0.0.1:9050 --anonymous-inbound $ANONYMOUS_INBOUND
-                                                        --confirm-external-bind --rpc-login=$RPCu:$RPCp --rpc-ssl
-                                                        disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS
-                                                        --limit-rate-up=$LIMIT_RATE_UP
-                                                        --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760
-                                                        --log-level=1 --max-log-files=1 --enable-dns-blocklist
-                                                        --non-interactive</p>
-                                                </div>
-                                            </div> <!-- row -->
-                                        </div> <!-- container -->
+                                                <p>*These are a few examples:</p>
+                                            </div>
+
+                                                <h6>Public Free Node</h6>
+                                                <textarea class="form-control" style="width:100%; height:110px;" onclick="this.focus();this.select()" readonly="readonly">./monerod --rpc-bind-ip=0.0.0.0 --rpc-bind-port=$MONERO_PUBLIC_PORT --zmq-pub tcp://$DEVICE_IP:18083 --rpc-restricted-bind-ip=$DEVICE_IP --rpc-restricted-bind-port=$MONERO_PORT --confirm-external-bind --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --public-node --enable-dns-blocklist --detach</textarea>
+                                                <hr>
+                                                <h6>RPC PayNode</h6>
+                                                <textarea class="form-control" style="width:100%; height:110px;" onclick="this.focus();this.select()" readonly="readonly">./monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --zmq-pub tcp://$DEVICE_IP:18083 --rpc-restricted-bind-port=$MONERO_RPCPAY_PORT --confirm-external-bind --rpc-payment-allow-free-loopback --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --rpc-payment-address=$PAYMENT_ADDRESS --rpc-payment-credits=$CREDITS --rpc-payment-difficulty=$DIFFICULTY --public-node --enable-dns-blocklist --detach</textarea>
+                                                <hr>
+                                                <h6>I2P Node</h6>
+                                                <textarea class="form-control" style="width:100%; height:110px;" onclick="this.focus();this.select()" readonly="readonly">DNS_PUBLIC=tcp ./monerod --p2p-bind-ip 127.0.0.1 --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PORT --rpc-login=$RPCu:$RPCp --confirm-external-bind --anonymous-inbound $I2P_ADDRESS,127.0.0.1:$I2P_PORT --tx-proxy i2p,127.0.0.1:$I2P_TX_PROXY_PORT --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --pidfile /home/pinodexmr/monero/build/release/bin/monerod.pid --enable-dns-blocklist --non-interactive</textarea>
+                                                <hr>
+                                                <h6>Tor Private Node</h6>
+                                                <textarea class="form-control" style="width:100%; height:110px;" onclick="this.focus();this.select()" readonly="readonly">DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1 ./monero/build/release/bin/monerod --zmq-pub tcp://$DEVICE_IP:18083 --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=18081 --tx-proxy tor,127.0.0.1:9050 --anonymous-inbound $ANONYMOUS_INBOUND --confirm-external-bind --rpc-login=$RPCu:$RPCp --rpc-ssl disabled --in-peers=$IN_PEERS --out-peers=$OUT_PEERS --limit-rate-up=$LIMIT_RATE_UP --limit-rate-down=$LIMIT_RATE_DOWN --max-log-file-size=10485760 --log-level=1 --max-log-files=1 --enable-dns-blocklist --non-interactive</textarea>
+                                            </div><!-- row -->
+                                        </div><!-- container -->
                                     </div>
                                 </div>
-
-                            </div> <!-- /container -->
+                            </div><!-- /container -->
                         </div>
                     </div>
                 </div>
@@ -968,12 +636,10 @@
             <div class="row my-4">
                 <div class="col-md-12">
                     <h3 class="font-weight-bold">Global Settings: <small>System-wide Customisation</small></h3>
-                    <p><br>Specify a custom RPC Port for wallet connections if required<br><br>Control bandwidth use by
-                        specifying
-                        the number of in/out peer connections, or directly limit data rate (kb/s)</p>
-                </div> <!-- col -->
-            </div> <!-- /row -->
-        </div> <!-- /container -->
+                    <p>Specify a custom RPC Port for wallet connections if required<br>Control bandwidth use by specifying the number of in/out peer connections, or directly limit data rate (kb/s)</p>
+                </div><!-- col -->
+            </div><!-- /row -->
+        </div><!-- /container -->
 
         <!-- Start Accodian 4-->
         <div class="container">
@@ -981,33 +647,31 @@
                 <div class="card border-1">
                     <div class="card-header" id="headingEight">
                         <h5 class="mb-0">
-                            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                                data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-                                <i class="fas fa-arrows-alt-v"></i> Network: <small>Global Settings</small>
+                            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                <i class="fas fa-arrows-alt-v"></i>Network: <small>Global Settings</small>
                             </button>
                         </h5>
                     </div>
 
-                    <div id="collapseEight" class="collapse" aria-labelledby="headingEight"
-                        data-parent="#accordionExample4">
+                    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample4">
                         <div class="card-body">
                             <div class="container py-4">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h2 class="demo-panel-title">Global settings:</h2>
-                                    </div> <!-- col -->
-                                </div> <!-- /row -->
+                                        <h2>Global settings:</h2>
+                                    </div><!-- col -->
+                                </div><!-- /row -->
 
                                 <div class="row">
                                     <div class="col-4">
-                                        <h6 class="demo-panel-title pt-3">RPC Port:</h6>
+                                        <h6 class="pt-3">RPC Port:</h6>
                                         <div class="form-group">
                                             <form method="post">
-                                                <input type="number" id="moneroRpcPort"
-                                                    placeholder="New Monero RPC Port" class="form-control">
-                                                <button type="submit" onclick="monerorpcport(moneroRpcPort.value)"
-                                                    class="btn btn-dark my-1">Save</button>
+                                                <input type="number" id="moneroRpcPort" placeholder="New Monero RPC Port" class="form-control">
+                                                <button type="submit" onclick="monerorpcport(moneroRpcPort.value)" class="btn btn-dark my-1">Save</button>
                                             </form>
+                                            <pre class="monero-rpc-port imported-text"></pre>
+                                            <span>If needed, enter a new port number for RPC connections here. Used to connect your wallet to this node.</span>
                                         </div>
                                     </div>
 
@@ -1023,32 +687,20 @@
                                                 }
                                             });
                                         };
+
+                                        $.get("monero-rpc-port.txt", function (data) {
+                                            $(".monero-rpc-port").html(data);
+                                        });
                                     </script>
+                                </div><!-- /row -->
 
-                                    <div class="col-6">
-                                        <p><small><embed src="monero-rpc-port.txt" width=300px height=60px></small></p>
-                                    </div> <!-- /col -->
-                                </div> <!-- /row -->
-
-
-
-                                <span class="demo-text-note">If needed, enter a new port number for RPC connections
-                                    here. Used to connect
-                                    your wallet to this node.</span>
-
-                                <h3 class="demo-panel-title pt-3">Bandwidth:</h3>
-
-                                <div class="demo-type-example">
-                                    <h6 class="demo-panel-title pt-3">Optimization:</h6>
-                                    <p>By default the node can be bandwidth intensive in both upload and download.
-                                        Limits on this node can
-                                        be imposed below. <br>[Note: value -1 restores parameter to default]</p>
-                                </div>
+                                <h3 class="pt-4">Bandwidth:</h3>
+                                <h6>Optimization:</h6>
+                                <p>By default the node can be bandwidth intensive in both upload and download. Limits on this node can be imposed below.<br>[Note: value -1 restores parameter to default]</p>
 
                                 <div class="row">
                                     <div class="col">
-                                        <h3 class="demo-panel-title">Upload <small> Mbps</small><span
-                                                class="fui-triangle-up"></span></h3>
+                                        <h3>Upload <small>Mbps</small></h3>
                                         <div class="btn-group">
                                             <form method="post">
                                                 <select name='Speed Up' class="btn btn-dark dropdown-toggle"
@@ -1068,6 +720,7 @@
                                                     <option value='10240'>10 Mbps</option>
                                                 </select>
                                             </form>
+
                                             <script type="text/javascript">
                                                 function speedup(value) {
                                                     $.ajax({
@@ -1080,13 +733,11 @@
                                                     });
                                                 }
                                             </script>
-
                                         </div><!-- /btn-group -->
-                                    </div> <!-- /.col -->
+                                    </div><!-- /.col -->
 
                                     <div class="col">
-                                        <h3 class="demo-panel-title">Download <small> Mbps</small><span
-                                                class="fui-triangle-down-small"></span></h3>
+                                        <h3>Download <small>Mbps</small></h3>
                                         <div class="btn-group">
                                             <form method="post">
                                                 <select name='Speed Down' class="btn btn-dark dropdown-toggle"
@@ -1106,6 +757,7 @@
                                                     <option value='30720'>30 Mbps</option>
                                                 </select>
                                             </form>
+
                                             <script type="text/javascript">
                                                 function speeddown(value) {
                                                     $.ajax({
@@ -1119,11 +771,10 @@
                                                 }
                                             </script>
                                         </div><!-- /btn-group -->
-                                    </div> <!-- /.col -->
-                                    <div class="col">
-                                        <h3 class="demo-panel-title">Out Peers<span
-                                                class="fui-triangle-right-large"></span></h3>
+                                    </div><!-- /.col -->
 
+                                    <div class="col">
+                                        <h3>Out Peers</h3>
                                         <div class="btn-group">
                                             <form method="post">
                                                 <select name='Out Peers' class="btn btn-dark dropdown-toggle"
@@ -1141,6 +792,7 @@
                                                     <option value='32'>32</option>
                                                 </select>
                                             </form>
+
                                             <script type="text/javascript">
                                                 function outpeers(value) {
                                                     $.ajax({
@@ -1154,11 +806,10 @@
                                                 }
                                             </script>
                                         </div><!-- /btn-group -->
-                                    </div> <!-- /.col -->
-                                    <div class="col">
-                                        <h3 class="demo-panel-title">In Peers<span
-                                                class="fui-triangle-left-large"></span></h3>
+                                    </div><!-- /.col -->
 
+                                    <div class="col">
+                                        <h3>In Peers</h3>
                                         <div class="btn-group">
                                             <form method="post">
                                                 <select name='In Peers' class="btn btn-dark dropdown-toggle"
@@ -1175,6 +826,7 @@
                                                     <option value='16'>16</option>
                                                 </select>
                                             </form>
+
                                             <script type="text/javascript">
                                                 function inpeers(value) {
                                                     $.ajax({
@@ -1188,91 +840,71 @@
                                                 }
                                             </script>
                                         </div><!-- /btn-group -->
-                                    </div> <!-- /.col -->
-                                </div> <!-- /container -->
+                                    </div><!-- /.col -->
+                                </div><!-- /container -->
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card border-1">
                     <div class="card-header" id="headingNine">
                         <h5 class="mb-0">
-                            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse"
-                                data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                                <i class="fas fa-arrows-alt-v"></i> 2GB Swap File Enble/Disable
+                            <button class="btn btn-link badge badge-light" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                <i class="fas fa-arrows-alt-v"></i>2GB Swap File Enble/Disable
                             </button>
                         </h5>
                     </div>
-                    <div id="collapseNine" class="collapse" aria-labelledby="headingNine"
-                        data-parent="#accordionExample4">
+                    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample4">
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
-                                    <h3 class="demo-panel-title">Swap File: <small>Enable/Disable</small></h3>
+                                    <h3>Swap File: <small>Enable/Disable</small></h3>
                                 </div>
 
                                 <div class="row">
-                                    <div class="demo-type-example">
-                                        <span class="demo-text-note"></span>
-                                        <p>*If your device has less than 2GB RAM this swap file should be used for large
-                                            blockchain syncs
-                                            and Monero updates. It can artificially augment system performance. Then to
-                                            preserve SD card
-                                            read/write life this should be disabled when not required.</p>
-                                    </div>
+                                    <p>*If your device has less than 2GB RAM this swap file should be used for large blockchain syncs and Monero updates. It can artificially augment system performance. Then to preserve SD card read/write life this should be disabled when not required.</p>
                                 </div> <!-- row -->
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a onclick="runScript('enable-swap')" href="#swap-enable"
-                                            class="btn btn-block btn-lg btn-dark">Enable 2GB
-                                            swap-file <i class="fas fa-hdd"></i></span></a>
-                                    </div> <!-- /.col -->
+                                        <a onclick="runScript('enable-swap')" href="#swap-enable" class="btn btn-block btn-lg btn-dark">Enable 2GB swap-file&nbsp;<i class="fas fa-hdd"></i></a>
+                                    </div><!-- /.col -->
                                     <div class="col">
-
-                                        <a onclick="runScript('disable-swap')" href="#swap-disable"
-                                            class="btn btn-block btn-lg btn-dark">Disable 2GB
-                                            swap-file <i class="far fa-hdd"></i></span></a>
+                                        <a onclick="runScript('disable-swap')" href="#swap-disable" class="btn btn-block btn-lg btn-dark">Disable 2GB swap-file&nbsp;<i class="far fa-hdd"></i></a>
                                     </div>
-                                </div> <!-- /.col -->
-                            </div> <!-- row -->
-                        </div> <!-- container -->
+                                </div><!-- /.col -->
+                            </div><!-- row -->
+                        </div><!-- container -->
                     </div>
                 </div>
             </div>
-        </div> <!-- container -->
+        </div><!-- container -->
 
-    </div>
     <div class="container py-4">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="demo-panel-title"> Power Off: <small>Safe shutdown of PiNode-XMR </small></h3>
-                <a onclick="runScript('shutdown')" href="#Shutdown" class="btn btn-block btn-lg btn-warning">Shutdown
-                    PiNode-XMR<span class="fui-power"></span></a>
+                <h3>Power Off: <small>Safe shutdown of PiNode-XMR</small></h3>
+                <a onclick="runScript('shutdown')" href="#Shutdown" class="btn btn-block btn-lg btn-warning">Shutdown PiNode-XMR&nbsp;<i class="fas fa-power-off"></i></a>
             </div>
 
             <div class="col-md-6">
-                <h3 class="demo-panel-title"> Device Restart: <small>Reboot of PiNode-XMR </small></h3>
-                <a onclick="runScript('reboot')" href="#Reboot" class="btn btn-block btn-lg btn-warning">Reboot
-                    PiNode-XMR<span class="fui-power"></span></a>
+                <h3>Device Restart: <small>Reboot of PiNode-XMR</small></h3>
+                <a onclick="runScript('reboot')" href="#Reboot" class="btn btn-block btn-lg btn-warning">Reboot PiNode-XMR&nbsp;<i class="fas fa-rotate-right"></i></a>
             </div>
 
             <div class="col-md-6">
-                <h3 class="demo-panel-title"> Kill Switch: <small>unsafe shutdown of PiNode-XMR </small></h3>
+                <h3>Kill Switch: <small>unsafe shutdown of PiNode-XMR</small></h3>
 
-                <a onclick="runScript('monerod-kill')" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill
-                    Process - monerod<span class="fui-trash"></span></a>
-                </script>
+                <a onclick="runScript('monerod-kill')" href="#Shutdown" class="btn btn-block btn-lg btn-danger">Kill Process - monerod&nbsp;&nbsp;<i class="fas fa-skull-crossbones"></i></a><br>
 
-                <p class="text-center">If you suspect monerod is stuck and cannot recover itself or be recovered this
-                    button
-                    will send command 'sudo killall -9 monerod'. <br>Corruption of stored blockchain could occur, not to
-                    be used
-                    lightly.</p>
-            </div> <!-- col -->
-        </div> <!-- row -->
+                <p class="text-center">If you suspect monerod is stuck and cannot recover itself or be recovered this button will send command<br>
+                    <code>sudo killall -9 monerod</code><br>
+                    Corruption of stored blockchain could occur, not to be used lightly.</p>
+            </div><!-- col -->
+        </div><!-- row -->
 
-    </div> <!-- /container -->
+    </div><!-- /container -->
 
     <!-- JavaScript -->
     <script>
@@ -1287,6 +919,11 @@
         }
     </script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script> 
+        $(function(){
+            $("#NavContent").load("navbar.html"); 
+        });
+    </script>
 </body>
 
 </html>

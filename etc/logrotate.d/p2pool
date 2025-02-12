@@ -1,7 +1,7 @@
 /home/pinodexmr/p2pool/build/p2pool.log {
-        su pinodexmr pinodexmr
-        rotate 0
-        size 2M
-        nocompress
-        missingok
+weekly
+missingok
+nocompress
+copytruncate
+size 25M
 }
