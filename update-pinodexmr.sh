@@ -124,7 +124,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 			echo -e "\e[32mInstalling update\e[0m"
 			sleep 2
 				##Add PiNode-XMR systemd services
-						echo "Update services" >>/home/pinodexmr/debug.log
+					echo "Update systemd services" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/PiNodeXMR/etc/systemd/system/*.service /etc/systemd/system/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -136,8 +136,18 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 
+				##Add PiNode-XMR logrotate services
+					echo "Update logrotate services" >>/home/pinodexmr/debug.log
+					echo -e "\e[32mAdd PiNode-XMR logrotate services\e[0m"
+					sleep 3
+					sudo mv /home/pinodexmr/PiNodeXMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo chmod 644 /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo chown root /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3					
+
 				##Updating PiNode-XMR scripts in home directory
-						echo "Update PiNodeXMR scripts" >>/home/pinodexmr/debug.log
+					echo "Update PiNodeXMR scripts" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mUpdating PiNodeXMR scripts in home directory\e[0m"
 					sleep 2
 					cp -afr /home/pinodexmr/PiNodeXMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a /home/pinodexmr/debug.log >&2)

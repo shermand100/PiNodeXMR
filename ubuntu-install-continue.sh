@@ -168,7 +168,7 @@ echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
 ##Add PiNode-XMR systemd services
-	echo "Add PiNode-XMR systemd services" 2>&1 | tee -a /home/pinodexmr/debug.log
+echo "Add PiNode-XMR systemd services" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
 sleep 3
 sudo mv /home/pinodexmr/PiNodeXMR/etc/systemd/system/*.service /etc/systemd/system/ 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -179,6 +179,16 @@ sudo systemctl start moneroStatus.service 2>&1 | tee -a /home/pinodexmr/debug.lo
 sudo systemctl enable moneroStatus.service 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
+
+##Add PiNode-XMR logrotate services
+echo "Update logrotate services" >>/home/pinodexmr/debug.log
+echo -e "\e[32mAdd PiNode-XMR logrotate services\e[0m"
+sleep 3
+sudo mv /home/pinodexmr/PiNodeXMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+sudo chmod 644 /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+sudo chown root /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+echo -e "\e[32mSuccess\e[0m"
+sleep 3	
 
 #Configure apache server for access to monero log file
 sudo mv /home/pinodexmr/PiNodeXMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
