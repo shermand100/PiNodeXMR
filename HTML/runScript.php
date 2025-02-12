@@ -135,6 +135,16 @@ switch($function) {
     exec("sudo systemctl disable atomic-swap.service");
     echo "Stop Command Sent for Atomic Swap service";
     break;
+  case 'p2poolMining-start':
+    exec("sudo systemctl start p2poolMining.service");
+    exec("sudo systemctl enable p2poolMining.service");
+    echo "Start Command Sent for P2Pool Mining service";
+    break;  
+  case 'p2poolMining-stop':
+    exec("sudo systemctl stop p2poolMining.service");
+    exec("sudo systemctl disable p2poolMining.service");
+    echo "Stop Command Sent for P2Pool Mining service";
+    break;      
   default:
     echo "Error: No function specified";
 }
