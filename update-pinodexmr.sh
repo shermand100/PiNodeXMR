@@ -106,13 +106,12 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /home/pinodexmr/variables/limit-rate-down.sh /home/pinodexmr/variables/limit-rate-down_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/limit-rate-up.sh /home/pinodexmr/variables/limit-rate-up_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/mining-address.sh /home/pinodexmr/variables/mining-address_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/variables/mining-threads.sh /home/pinodexmr/variables/mining-threads_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/mining-intensity.sh /home/pinodexmr/variables/mining-intensity_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-port.sh /home/pinodexmr/variables/monero-port_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-port-public-free.sh /home/pinodexmr/variables/monero-port-public-free_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/variables/monero-rpcpay-port.sh /home/pinodexmr/variables/monero-rpcpay-port_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-stats-port.sh /home/pinodexmr/variables/monero-stats-port_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/out-peers.sh /home/pinodexmr/variables/out-peers_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/variables/payment-address.sh /home/pinodexmr/variables/payment-address_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/pruneStatus.sh /home/pinodexmr/variables/pruneStatus_status.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCp.sh /home/pinodexmr/variables/RPCp_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCu.sh /home/pinodexmr/variables/RPCu_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -125,7 +124,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 			echo -e "\e[32mInstalling update\e[0m"
 			sleep 2
 				##Add PiNode-XMR systemd services
-						echo "Update services" >>/home/pinodexmr/debug.log
+					echo "Update systemd services" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mAdd PiNode-XMR systemd services\e[0m"
 					sleep 3
 					sudo mv /home/pinodexmr/PiNodeXMR/etc/systemd/system/*.service /etc/systemd/system/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -137,8 +136,18 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 
+				##Add PiNode-XMR logrotate services
+					echo "Update logrotate services" >>/home/pinodexmr/debug.log
+					echo -e "\e[32mAdd PiNode-XMR logrotate services\e[0m"
+					sleep 3
+					sudo mv /home/pinodexmr/PiNodeXMR/etc/logrotate.d/p2pool /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo chmod 644 /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo chown root /etc/logrotate.d/p2pool 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					echo -e "\e[32mSuccess\e[0m"
+					sleep 3					
+
 				##Updating PiNode-XMR scripts in home directory
-						echo "Update PiNodeXMR scripts" >>/home/pinodexmr/debug.log
+					echo "Update PiNodeXMR scripts" >>/home/pinodexmr/debug.log
 					echo -e "\e[32mUpdating PiNodeXMR scripts in home directory\e[0m"
 					sleep 2
 					cp -afr /home/pinodexmr/PiNodeXMR/home/pinodexmr/* /home/pinodexmr/ 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -173,7 +182,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					sudo mv /home/pinodexmr/PiNodeXMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log					
 					#Remove .php file clutter, see PiNodeXMR PR66 for context.
 					rm -R /var/www/html/*.php
-					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
+					#Preserve user variables (custom ports, hidden service onion address, Mining address and settings etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
 					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -182,10 +191,8 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Overwrite /var/www/html with updated contents
@@ -200,12 +207,11 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /var/www/html/mining_threads_retain.txt /var/www/html/mining_threads.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Lightmode html update complete
@@ -213,7 +219,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					#First move hidden file specifically .htaccess file then entire directory
 					sudo mv /home/pinodexmr/PiNodeXMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					rm -R /var/www/html/*.php
-					#Preserve user variables (custom ports, hidden service onion address, miningrpc pay address etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
+					#Preserve user variables (custom ports, hidden service onion address, Mining address and settings etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
 					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -222,10 +228,8 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/mining_address.txt /var/www/html/mining_address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/mining_intensity.txt /var/www/html/mining_intensity_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay.txt /var/www/html/monero-port-rpc-pay_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/payment-address.txt /var/www/html/payment-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Overwrite /var/www/html with updated contents										
@@ -241,10 +245,8 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/mining_address_retain.txt /var/www/html/mining_address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/mining_intensity_retain.txt /var/www/html/mining_intensity.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/monero-port-rpc-pay_retain.txt /var/www/html/monero-port-rpc-pay.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/payment-address_retain.txt /var/www/html/payment-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Full-mode html update complete					
@@ -290,11 +292,9 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /home/pinodexmr/variables/monero-port_retain.sh /home/pinodexmr/variables/monero-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-port-public-free_retain.sh /home/pinodexmr/variables/monero-port-public-free.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/out-peers_retain.sh /home/pinodexmr/variables/out-peers.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/variables/payment-address_retain.sh /home/pinodexmr/variables/payment-address.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/pruneStatus_status.sh /home/pinodexmr/variables/pruneStatus.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCp_retain.sh /home/pinodexmr/variables/RPCp.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/RPCu_retain.sh /home/pinodexmr/variables/RPCu.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/variables/monero-rpcpay-port_retain.sh /home/pinodexmr/variables/monero-rpcpay-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/monero-stats-port_retain.sh /home/pinodexmr/variables/monero-stats-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/light-mode_retain.sh /home/pinodexmr/variables/light-mode.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/htmlPasswordRequired_retain.sh /home/pinodexmr/variables/htmlPasswordRequired.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)

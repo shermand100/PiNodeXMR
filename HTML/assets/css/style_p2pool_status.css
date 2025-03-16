@@ -1,0 +1,254 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1e1e1e;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #f39c12;
+}
+
+header p {
+    font-size: 16px;
+    color: #b3b3b3;
+}
+
+/* Main Content Area */
+main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Card Styles */
+.card {
+    background-color: #262626;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #f1c40f;
+    border-bottom: 2px solid #f1c40f;
+    padding-bottom: 5px;
+}
+
+.card p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #d1d1d1;
+}
+
+/* Table Styles */
+.card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.card table th,
+.card table td {
+    padding: 8px;
+    border: 1px solid #444;
+}
+
+.card table th {
+    background-color: #333;
+    color: #f1c40f;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.card table tbody tr:nth-child(even) {
+    background-color: #2e2e2e;
+}
+
+.card table tbody tr:nth-child(odd) {
+    background-color: #262626;
+}
+
+.card table tbody td {
+    color: #e0e0e0;
+}
+
+/* Highlight Links in Tables */
+.card table td a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card table td a:hover {
+    text-decoration: underline;
+}
+
+/* Button Styles */
+.toggle-button {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-top: 10px;
+    background-color: #f1c40f;
+    color: #121212;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.toggle-button:hover {
+    background-color: #d4ac0d;
+    transform: translateY(-2px);
+}
+
+.toggle-button:active {
+    background-color: #b58507;
+    transform: translateY(1px);
+}
+
+/* Hidden Class for Tables */
+.hidden {
+    display: none;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+/* Footer Styles */
+a {
+    color: #b58507;   
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    .card h2 {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 13px;
+    }
+
+    .card table th,
+    .card table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .toggle-button {
+        width: 100%;
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+.connections-row p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.shares-row p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.effort-row p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.pay-window p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.pool-hashrate p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.workers-hashrate p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.sidechain-height p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.last-block p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.pplns-window p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.network-hashrate p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+
+.block-height p {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing as needed */
+}

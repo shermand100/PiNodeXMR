@@ -25,17 +25,6 @@ switch($function) {
     echo "Stop Command Sent for Private Node";
     exec (". /home/pinodexmr/bootStatusSetIdle.sh");
     break;
-  case 'start-moneroPublicRPCPay':
-    exec("sudo systemctl start moneroPublicRPCPay.service");
-    exec("sudo systemctl enable moneroPublicRPCPay.service");
-    echo "Monero Public Node started - with RPC pay requiements.";
-    break;
-  case 'stop-moneroPublicRPCPay':
-    exec("sudo systemctl stop moneroPublicRPCPay.service");
-    exec("sudo systemctl disable moneroPublicRPCPay.service");
-    echo "Stop Command Sent for Public RPC Pay Node";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
-    break;
   case 'start-moneroMiningNode':
     exec("sudo systemctl start moneroMiningNode.service");
     exec("sudo systemctl enable moneroMiningNode.service");
@@ -146,6 +135,16 @@ switch($function) {
     exec("sudo systemctl disable atomic-swap.service");
     echo "Stop Command Sent for Atomic Swap service";
     break;
+  case 'p2poolMining-start':
+    exec("sudo systemctl start p2poolMining.service");
+    exec("sudo systemctl enable p2poolMining.service");
+    echo "Start Command Sent for P2Pool Mining service";
+    break;  
+  case 'p2poolMining-stop':
+    exec("sudo systemctl stop p2poolMining.service");
+    exec("sudo systemctl disable p2poolMining.service");
+    echo "Stop Command Sent for P2Pool Mining service";
+    break;      
   default:
     echo "Error: No function specified";
 }

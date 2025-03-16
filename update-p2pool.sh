@@ -60,7 +60,7 @@ if [[ $CPU_ARCH -eq 32 ]]
 		##Install P2Pool
 		git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 		cd p2pool
-		git checkout tags/v4.3
+		git checkout tags/v4.4
 		mkdir build && cd build
 		cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
 		make -j2 2>&1 | tee -a /home/pinodexmr/debug.log

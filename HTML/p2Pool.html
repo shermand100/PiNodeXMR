@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Title  -->
     <title>PiNode-XMR - Status</title>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -14,93 +13,150 @@
     <script src="assets/js/jquery.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/XMR.ico" />
     <!-- Font Awesome cdn -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <!-- Custom Style Sheet -->
-    <link rel="stylesheet" type="text/css" href="assets/css/app.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
+  </head>
 
-<body>
+  <body>
     <div id="NavContent"></div>
 
     <div class="container py-4">
-        <h3 class="demo-panel-title">P2Pool: <small> Decentralised Mining</small></h3>
-        <p><small>Whilst this device can run it's own P2Pool server to serve your other mining devices, mining on this low powered single board computer is not recommended. Mining on this device and the overheating that results may damage your device.</small></p>
-        <p><small>Solo mining is 100% independent and the best for the network. P2Pool mining has all the advantages of solo mining, but also makes regular payouts possible.</small></p>
-        <p><small>This feature is the result of the hard work of SChernykh (also known as sech1). This feature is pulled from <a href="https://github.com/SChernykh/p2pool" target="_blank">github.com/SChernykh/p2pool</a> Full useage instructions and documentation can be found there.</small></p>
+      <h3 class="demo-panel-title">P2Pool Server: <small> Decentralised Mining Pool</small></h3>
+      <p><small>This device can run it's own P2Pool server to administer work, shares and payments to your mining devices. </small></p>
+      <p><small>Solo mining is 100% independent and the best for the network. P2Pool mining has all the advantages of solo mining, but also makes regular payouts possible.</small></p>
+      <p>
+        <small>This feature is the result of the hard work of SChernykh (also known as sech1). This feature is pulled from <a href="https://github.com/SChernykh/p2pool" target="_blank">github.com/SChernykh/p2pool</a> Full useage instructions and documentation can be found there.</small>
+      </p>
 
-        <div class="row demo-row">
-            <div class="col-lg-4 mb-4">
-                <a onclick="runScript('p2pool-start')" href="#Start p2pool" class="btn btn-block btn-lg btn-dark">Start P2Pool</a>
-            </div>
+      <div class="row demo-row">
+        <div class="col-lg-4 mb-4">
+          <a onclick="runScript('p2pool-start')" href="#Start p2pool" class="btn btn-block btn-lg btn-dark">Start P2Pool</a>
+        </div>
 
-            <div class="col-lg-4 mb-4">
-                <a onclick="runScript('p2pool-stop')" href="#Stop p2pool" class="btn btn-block btn-lg btn-dark">Stop P2Pool</a>
-            </div>
+        <div class="col-lg-4 mb-4">
+          <a onclick="runScript('p2pool-stop')" href="#Stop p2pool" class="btn btn-block btn-lg btn-dark">Stop P2Pool</a>
+        </div>
 
-            <div class="container py-4">
-                <h6 class="demo-panel-title">Set Your Monero Address <small>Payouts will be sent to this address (min 0.0003XMR)</small></h6>
-                <div class="form-group">
-                    <form method="post">
-                        <input type="text" placeholder="Enter Monero Address" class="form-control" onchange='if(this.value != 0) { address(this.value); }' />
-                    </form>
-                </div>
+        <div class="container py-4">
+          <h6 class="demo-panel-title">Set Your Monero Address <small>Payouts will be sent to this address (min 0.0003XMR)</small></h6>
+          <div class="form-group">
+            <form method="post">
+              <input type="text" placeholder="Enter Monero Address" class="form-control" onchange="if(this.value != 0) { address(this.value); }" />
+            </form>
+          </div>
 
-                <div class="row">
-                    <pre class="mining-address imported-text"></pre>
-                </div><!-- /row -->
+          <div class="row">
+            <pre class="mining-address imported-text"></pre>
+          </div>
+          <!-- /row -->
 
-                <script type="text/javascript">
-                    function address(value) {
-                        $.ajax({
-                            url: "mining-address.php", //the page containing php script
-                            type: "POST", //request type
-                            data: ({ value }),
-                            success: function (result) {
-                                alert(result);
-                            }
-                        });
-                    }
-
-                    $.get("mining_address.txt", function (data) {
-                        $(".mining-address").html(data);
-                    });
-                </script>
-            </div><!-- /container -->
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>View P2Pool: <small> Whilst running, view your connected miner stats, P2Pool stats and Monero Network Mining stats.</small></h3>
-
-                        <div class="col-lg-4 mb-4">
-                            <a href="p2poolStats.html" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View P2Pool</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div><!-- /container -->
-
-        <!-- JavaScript -->
-        <script>
-            function runScript(functionName) {
-                $.ajax({
-                    url: `runScript.php?function=${functionName}`, //the page containing php script
-                    type: "POST", //request type
-                    success: function (result) {
-                        alert(result);
-                    }
-                });
+          <script type="text/javascript">
+            function address(value) {
+              $.ajax({
+                url: "mining-address.php", //the page containing php script
+                type: "POST", //request type
+                data: { value },
+                success: function (result) {
+                  alert(result);
+                },
+              });
             }
-        </script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script> 
-            $(function(){
-                $("#NavContent").load("navbar.html"); 
-            });
-        </script>
-</body>
 
+            $.get("mining_address.txt", function (data) {
+              $(".mining-address").html(data);
+            });
+          </script>
+        </div>
+
+
+
+        <h3 class="demo-panel-title">P2Pool Miner: <small> Mining/Hashing on this device</small></h3>
+        <p><small>This feature is suitable for those running the PiNodeXMR project on more 'substantial' hardware than a SBC. Mining on an impropely cooled device will cause overheating that will likely damage your device if thermal limits are exceeded.</small></p>
+        <p><small>Mining 'intensity' can be controlled my setting the number of CPU threads you wish to mine with.</small></p>
+        <p>
+          <small>This feature is the result of the hard work of SChernykh (also known as sech1) and is pulled from <a href="https://github.com/SChernykh/p2pool/blob/master/docs/COMMAND_LINE.MD" target="_blank">github.com/SChernykh/p2pool DOCS</a> Full useage instructions and documentation can be found there.</small>
+        </p>
+  
+        <div class="row demo-row">
+          <div class="col-lg-4 mb-4">
+            <a onclick="runScript('p2poolMining-start')" href="#Start Mining" class="btn btn-block btn-lg btn-dark">Start Mining</a>
+          </div>
+  
+          <div class="col-lg-4 mb-4">
+            <a onclick="runScript('p2poolMining-stop')" href="#Stop Mining" class="btn btn-block btn-lg btn-dark">Stop Mining</a>
+          </div>
+  
+          <div class="container py-4">
+            <h6 class="demo-panel-title">Set mining intensity <small>Select number of CPU threads</small></h6>
+            <div class="form-group">
+              <form method="post">
+                <input type="number" min="1" step="1" value="1" size="1" class="form-control" onchange="if(this.value != 0) { threads(this.value); }" />
+              </form>
+            </div>
+  
+            <div class="row">
+              <pre class="mining-threads imported-text"></pre>
+            </div>
+            <!-- /row -->
+  
+            <script type="text/javascript">
+              function threads(value) {
+                $.ajax({
+                  url: "mining-threads.php", //the page containing php script
+                  type: "POST", //request type
+                  data: { value },
+                  success: function (result) {
+                    alert(result);
+                  },
+                });
+              }
+  
+              $.get("mining_threads.txt", function (data) {
+                $(".mining-threads").html(data);
+              });
+            </script>
+          </div>
+
+
+
+
+        <!-- /container -->
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h3>View P2Pool: <small> Whilst running, view your connected miner stats, P2Pool stats and Monero Network Mining stats.</small></h3>
+
+              <div class="col-lg-4 mb-4">
+                <a href="p2poolStats.html" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View P2Pool</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /container -->
+
+      <!-- JavaScript -->
+      <script>
+        function runScript(functionName) {
+          $.ajax({
+            url: `runScript.php?function=${functionName}`, //the page containing php script
+            type: "POST", //request type
+            success: function (result) {
+              alert(result);
+            },
+          });
+        }
+      </script>
+      <script src="assets/js/bootstrap.bundle.min.js"></script>
+      <script>
+        $(function () {
+          $("#NavContent").load("navbar.html");
+        });
+      </script>
+    </div>
+  </body>
 </html>

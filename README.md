@@ -1,5 +1,5 @@
 ![PiNode-XMR logo](https://github.com/shermand100/PiNodeXMR/blob/master/Screenshots/PiNode-XMR%20logo.jpg)
-# Quick Start Guide v6.24.01-Open-Build		
+# Quick Start Guide v6.25.01-Open-Build		
 ### This page is a quick overview to get you started. A complete and comprehensive manual showing all features can be found here at the Wiki: [Full Manual](https://github.com/shermand100/PiNodeXMR/wiki/Manual)
 
 # Project Overview

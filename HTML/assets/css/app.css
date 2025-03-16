@@ -43,6 +43,12 @@ a {
     word-wrap: anywhere;
 }
 
+input[type='number'] {
+    margin: 7px;
+    padding: 2px;
+    width: 90px;
+}
+
 @media (prefers-color-scheme: dark) {
 
     body {

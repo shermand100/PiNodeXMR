@@ -1,0 +1,17 @@
+[Unit]
+Description=P2Pool
+After=network.target
+
+[Service]
+ExecStart=/bin/bash p2poolMining.sh
+WorkingDirectory=/home/pinodexmr/execScripts/
+Type=simple
+Restart=always
+RestartSec=30
+User=pinodexmr
+StandardOutput=file:/home/pinodexmr/p2pool/build/p2pool.log
+StandardError=file:/home/pinodexmr/p2pool/build/p2pool.log
+PIDFile=/home/pinodexmr/p2pool/p2pool.pid
+
+[Install]
+WantedBy=multi-user.target
