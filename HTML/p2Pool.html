@@ -71,7 +71,7 @@
           </script>
         </div>
 
-
+          <hr>
 
         <h3 class="demo-panel-title">P2Pool Miner: <small> Mining/Hashing on this device</small></h3>
         <p><small>This feature is suitable for those running the PiNodeXMR project on more 'substantial' hardware than a SBC. Mining on an impropely cooled device will cause overheating that will likely damage your device if thermal limits are exceeded.</small></p>
@@ -118,12 +118,12 @@
                 $(".mining-threads").html(data);
               });
             </script>
-          </div>
+      </div><!-- /container -->
 
 
+            <hr>
 
-
-        <!-- /container -->
+        
 
         <div class="container">
           <div class="row">
@@ -131,14 +131,93 @@
               <h3>View P2Pool: <small> Whilst running, view your connected miner stats, P2Pool stats and Monero Network Mining stats.</small></h3>
 
               <div class="col-lg-4 mb-4">
-                <a href="p2poolStats.html" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View P2Pool</a>
+                <a href="p2poolStats.html" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View P2Pool Dashboard</a>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- /container -->
+      </div> <!-- /container -->
 
+        <hr>
+
+    <div class="container">
+        <h3 class="pt-4">Bandwidth:</h3>
+        <h6>Optimization:</h6>
+      <p>By default the node can be bandwidth intensive in both upload and download due to numbers of peers. Limits on this node can be imposed below.<br>[Note: value -1 restores parameter to default, unlimited]</p>
+      <p>*After making a peers change, stop and start p2pool for changes to take effect.</p>
+      <div class="row">
+
+          <div class="col">
+              <h3>Out Peers</h3>
+              <div class="btn-group">
+                  <form method="post">
+                      <select name='Out Peers' class="btn btn-dark dropdown-toggle"
+                          onchange='if(this.value != 0) { outpeers(this.value); }'>
+                          <option value='0'>Out Peers</option>
+                          <option value='-1'>DEFAULT [UNLIMITED]</option>                          
+                          <option value='2'>2</option>
+                          <option value='4'>4</option>
+                          <option value='6'>6</option>
+                          <option value='10'>10</option>
+                          <option value='12'>12</option>
+                          <option value='14'>14</option>
+                          <option value='16'>16</option>
+                          <option value='24'>24</option>
+                          <option value='32'>32</option>
+                      </select>
+                  </form>
+
+                  <script type="text/javascript">
+                      function outpeers(value) {
+                          $.ajax({
+                              url: "out-peers-p2pool.php", //the page containing php script
+                              type: "POST", //request type
+                              data: ({ value }),
+                              success: function (result) {
+                                  alert(result);
+                              }
+                          });
+                      }
+                  </script>
+              </div><!-- /btn-group -->
+          </div><!-- /.col -->
+
+          <div class="col">
+              <h3>In Peers</h3>
+              <div class="btn-group">
+                  <form method="post">
+                      <select name='In Peers' class="btn btn-dark dropdown-toggle"
+                          onchange='if(this.value != 0) { inpeers(this.value); }'>
+                          <option value='0'>In Peers</option>
+                          <option value='-1'>DEFAULT [UNLIMITED]</option>
+                          <option value='2'>2</option>
+                          <option value='4'>4</option>
+                          <option value='6'>6</option>
+                          <option value='8'>8</option>
+                          <option value='10'>10</option>
+                          <option value='12'>12</option>
+                          <option value='14'>14</option>
+                          <option value='16'>16</option>
+                          <option value='32'>32</option>
+                          <option value='64'>64</option>
+                      </select>
+                  </form>
+
+                  <script type="text/javascript">
+                      function inpeers(value) {
+                          $.ajax({
+                              url: "in-peers-p2pool.php", //the page containing php script
+                              type: "POST", //request type
+                              data: ({ value }),
+                              success: function (result) {
+                                  alert(result);
+                              }
+                          });
+                      }
+                  </script>
+              </div><!-- /btn-group -->
+          </div><!-- /.col -->
+        </div>
+      </div><!-- /container -->
       <!-- JavaScript -->
       <script>
         function runScript(functionName) {
