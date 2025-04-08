@@ -10,17 +10,11 @@ echo "
 ####################
 " 2>&1 | tee -a /home/pinodexmr/debug.log
 
-#Download variable for current monero release version
-wget -q https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/release.sh -O /home/pinodexmr/release.sh
-#Permission Setting
-chmod 755 /home/pinodexmr/release.sh
 #Load boot status - condition the node was last run
 . /home/pinodexmr/bootstatus.sh
 #Import Variable: Light-mode true/false
 . /home/pinodexmr/variables/light-mode.sh
 echo "Light-Mode value is: $LIGHTMODE" >>/home/pinodexmr/debug.log
-#Load Variables
-. /home/pinodexmr/release.sh
 
 #Establish OS 32 or 64 bit
 CPU_ARCH=`getconf LONG_BIT`
@@ -101,7 +95,10 @@ echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
 cd monero && git submodule init && git submodule update
-git checkout $RELEASE
+#fetch all Monero tagged releases, then list in reverse order and count=1 to only define the latest tag. 
+git fetch --tags
+RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`)
+git checkout $RELEASE -b latest
 git submodule sync && git submodule update
 USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
@@ -225,7 +222,5 @@ sleep 5
 echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo "End setup-update-monero.sh script $(date)" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo "####################" 2>&1 | tee -a /home/pinodexmr/debug.log
-
-rm ~/release.sh
 
 ./setup.sh
