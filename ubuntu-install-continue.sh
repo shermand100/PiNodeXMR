@@ -231,13 +231,20 @@ then
 # ******START OF MONERO SOURCE BULD******
 # ********************************************
 ##Build Monero and Onion Blockchain Explorer (the simple but time comsuming bit)
-	#Download latest Monero release number
 #ubuntu /dev/null odd requiremnt to set permissions
 sudo chmod 666 /dev/null
 sleep 3
-wget -q https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/release.sh -O /home/pinodexmr/release.sh
-chmod 755 /home/pinodexmr/release.sh
-. /home/pinodexmr/release.sh
+echo "manual build of gtest for --- Monero" 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install libgtest-dev -y 2>&1 | tee -a /home/pinodexmr/debug.log
+cd /usr/src/gtest
+sudo cmake .  2>&1 | tee -a /home/pinodexmr/debug.log
+sudo make 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo mv lib/libg* /usr/lib/
+cd
+echo "Check dependencies installed for --- Monero" 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get update
+sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-all-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev ccache doxygen graphviz -y 2>&1 | tee -a /home/pinodexmr/debug.log
+
 
 echo -e "\e[32mDownloading Monero \e[0m"
 sleep 3
@@ -251,7 +258,10 @@ echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
 cd monero && git submodule init && git submodule update
-git checkout $RELEASE
+#fetch all Monero tagged releases, then list in reverse order and count=1 to only define the latest tag. 
+git fetch --tags
+RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`)
+git checkout $RELEASE -b latest
 git submodule sync && git submodule update
 USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
@@ -271,8 +281,6 @@ cd build
 cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
-rm ~/release.sh
-
 # ********************************************
 # ********END OF MONERO SOURCE BULD **********
 # ********************************************
