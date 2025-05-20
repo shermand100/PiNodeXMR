@@ -77,6 +77,16 @@ fi
 sleep 3
 
 
+##P2Pool v4.6 and newer option: Merge mining donation option with 'Tari'. User can choose to disable.
+if [[ $CPU_ARCH -eq 64 ]]
+then
+	if (whiptail --title "P2Pool Merge Mining donations" --yesno "P2Pool has a 0% fee. To support the p2pool developer from v4.6 your node can process Tari merge mining donation messages at 0 cost/work to you. We think this is fair and transparent and encourage you to have it enabled.\n\nFor more info see https://github.com/shermand100/PiNodeXMR/wiki/Tari-Merge-Mining-FAQ " --no-button "DISABLE MERGE MINE DONATIONS" --yes-button "ENABLE MERGE MINE DONATIONS" 18 60); then
+	MERGE_MINE=TRUE
+		else
+			MERGE_MINE=FALSE
+	fi
+fi
+
 ###Continue as 'pinodexmr'
 cd
 echo -e "\e[32mLock old user 'pi'\e[0m"
@@ -365,7 +375,15 @@ then
 	cd p2pool
 	git checkout tags/v4.6
 	mkdir build && cd build
-	cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
+
+#Implement merge minign donation choice
+if [ $MERGE_MINE = TRUE ]
+then
+cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
+else
+cmake -DWITH_MERGE_MINING_DONATION=OFF .. 2>&1 | tee -a /home/pinodexmr/debug.log
+fi
+
 	make -j2 2>&1 | tee -a /home/pinodexmr/debug.log
 	echo -e "\e[32mSuccess\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 	sleep 3
