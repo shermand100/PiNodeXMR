@@ -26,7 +26,7 @@ if [[ $CPU_ARCH -eq 32 ]]
 	else
 
 ##P2Pool v4.6 and newer option: Merge mining donation option with 'Tari'. User can choose to disable.
-if (whiptail --title "P2Pool Merge Mining donations" --yesno "P2Pool has a 0% fee. To support the p2pool developer from v4.6 your node can process Tari merge mining donation messages at 0 cost/work to you. We think this is fair and transparent and encourage you to have it enabled.\n\nFor more info see https://github.com/shermand100/PiNodeXMR/wiki/Tari-Merge-Mining-FAQ " --no-button "DISABLE MERGE MINE DONATIONS" --yes-button "ENABLE MERGE MINE DONATIONS" 18 60); then
+if (whiptail --title "P2Pool Merge Mining donations" --yesno "P2Pool has a 0% fee. To support the p2pool developer from v4.6 your node can process Tari merge mining donation messages at 0 cost/work to you. We think this is fair and transparent and encourage you to have it enabled.\n\nFor more info see https://github.com/shermand100/PiNodeXMR/wiki/Tari-Merge-Mining-FAQ " --no-button "DISABLE MERGE MINE DONATIONS" --yes-button "ENABLE MERGE MINE DONATIONS" 18 90); then
 	MERGE_MINE=TRUE
 		else
 			MERGE_MINE=FALSE
