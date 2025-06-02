@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Title  -->
-    <title>PiNode-XMR - Status</title>
+    <title>PiNode-XMR - P2Pool Status</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -136,6 +136,48 @@
             </div>
           </div>
       </div> <!-- /container -->
+
+            <hr>
+
+        
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h3>Main/Mini/Nano selection: <small> Choose between P2Pool versions depending on your hashrate.</small></h3>
+
+<div class="row">
+
+          <div class="col">
+              <h3>Out Peers</h3>
+              <div class="btn-group">
+                  <form method="post">
+                      <select name='Main/Mini/Nano' class="btn btn-dark dropdown-toggle"
+                          onchange='if(this.value != 0) { p2poolChain(this.value); }'>
+                          <option value='0'>Main/Mini/Nano</option>
+                          <option value='&'>Main</option>
+                          <option value='--mini'>Mini [Default]</option>                          
+                          <option value='--nano'>Nano</option>
+                      </select>
+                  </form>
+
+                  <script type="text/javascript">
+                      function p2poolChain(value) {
+                          $.ajax({
+                              url: "p2poolChain.php", //the page containing php script
+                              type: "POST", //request type
+                              data: ({ value }),
+                              success: function (result) {
+                                  alert(result);
+                              }
+                          });
+                      }
+                  </script>
+              </div><!-- /btn-group -->
+          </div><!-- /.col -->
+            </div>
+          </div>
+      </div> <!-- /container -->      
 
         <hr>
 

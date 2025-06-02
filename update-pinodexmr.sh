@@ -117,6 +117,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /home/pinodexmr/variables/RPCu.sh /home/pinodexmr/variables/RPCu_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/light-mode.sh /home/pinodexmr/variables/light-mode_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/htmlPasswordRequired.sh /home/pinodexmr/variables/htmlPasswordRequired_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/variables/p2poolChain.sh /home/pinodexmr/variables/p2poolChain_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mUser-set configuration saved\e[0m"
 
 								
@@ -298,6 +299,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /home/pinodexmr/variables/monero-stats-port_retain.sh /home/pinodexmr/variables/monero-stats-port.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/light-mode_retain.sh /home/pinodexmr/variables/light-mode.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/htmlPasswordRequired_retain.sh /home/pinodexmr/variables/htmlPasswordRequired.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					mv /home/pinodexmr/variables/p2poolChain_retain.sh /home/pinodexmr/variables/p2poolChain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 
 					echo -e "\e[32mUser configuration restored\e[0m"
 				

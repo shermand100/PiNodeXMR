@@ -19,6 +19,8 @@
 	. /home/pinodexmr/variables/in-peers-p2pool.sh
 	#Import OUT-PEERS (connections) Limit
 	. /home/pinodexmr/variables/out-peers-p2pool.sh
+	#Import P2POOLCHAIN (mining chain)
+	. /home/pinodexmr/variables/p2poolChain.sh
 
 #Start P2Pool
 
@@ -34,38 +36,38 @@ fi
 if [ $BOOT_STATUS -eq 3 ] || [ $BOOT_STATUS -eq 5 ]
 		then
 		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
 fi
 
 if [ $BOOT_STATUS -eq 4 ]
 		then
 		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
 fi
 
 if [ $BOOT_STATUS -eq 6 ]
 		then
 		#Adapted command for starting P2Pool only for public node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
 fi
 
 if [ $BOOT_STATUS -eq 7 ]
 		then
 		#Adapted command for starting P2Pool only for clearnet public node, note change in port to request on internal non-restricted port.
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PUBLIC_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PUBLIC_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
 
 fi
 
 if [ $BOOT_STATUS -eq 8 ]
 		then
 		#Adapted command for starting P2Pool only for private node due to restricted rpc commands
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
 fi
 
 if [ $BOOT_STATUS -eq 9 ]
 		then
 		#Adapted command for starting P2Pool only for tor public node
-		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ --mini
+		./p2pool --host $DEVICE_IP --rpc-port $MONERO_PORT --wallet $MINING_ADDRESS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
 fi
 
 
