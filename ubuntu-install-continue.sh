@@ -373,7 +373,7 @@ then
 	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 	git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	cd p2pool
-	git checkout tags/v4.8.1
+	git checkout tags/v4.9
 	mkdir build && cd build
 
 #Implement merge minign donation choice
