@@ -66,7 +66,7 @@ fi
 		sleep "2"
 		echo -e "\e[32mBuilding new P2Pool\e[0m"
 		##Install P2Pool
-		git clone --recursive --branch v4.9 https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+		git clone --recursive --branch v4.9.1 https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 		cd p2pool
 		mkdir build && cd build
 
