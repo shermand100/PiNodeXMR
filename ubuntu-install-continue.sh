@@ -372,7 +372,7 @@ then
 	else
 	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 	##Install P2Pool
-	git clone --recursive --branch v4.10.1 https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	git clone --recursive --branch v4.11 https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 	cd p2pool
 	mkdir build && cd build
 
