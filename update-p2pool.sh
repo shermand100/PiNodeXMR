@@ -31,6 +31,13 @@ if (whiptail --title "P2Pool Merge Mining donations" --yesno "P2Pool has a 0% fe
 		else
 			MERGE_MINE=FALSE
 fi
+#
+if (z --title "Master Branch" --yesno "Do you want to use the master branch? (Not Recommended) " --no-button "NO" --yes-button "YES" 8 78); then
+	MASTER=TRUE
+	  else
+   		MASTER=FALSE
+fi
+
 
 
 		#Stop Node to make system resources available.
@@ -56,7 +63,7 @@ fi
 		rm -rf /home/pinodexmr/p2pool/
 		echo -e "\e[32mSuccess\e[0m"
 		sleep "2"
-		#Users repot failed P2Pool update (Oct '24) - Fix was missing dependencies update.
+		#Users report failed P2Pool update (Oct '24) - Fix was missing dependencies update.
 		#Update System and P2Pool Dependences
 		echo -e "\e[32mUpdating dependencies for P2Pool build\e[0m"
 		sleep "2"
@@ -66,11 +73,19 @@ fi
 		sleep "2"
 		echo -e "\e[32mBuilding new P2Pool\e[0m"
 		##Install P2Pool
+		if [ $MASTER = TRUE ]
+		then
+		git clone --recursive https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+		cd p2pool
+		mkdir build && cd build
+		else
 		git clone --recursive --branch v4.12 https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
 		cd p2pool
 		mkdir build && cd build
+		fi
+		
 
-#Implement merge minign donation choice
+#Implement merge mining donation choice
 if [ $MERGE_MINE = TRUE ]
 then
 cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
