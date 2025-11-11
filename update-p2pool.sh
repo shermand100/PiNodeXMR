@@ -11,6 +11,10 @@ echo "
 #Establish OS 32 or 64 bit
 CPU_ARCH=`getconf LONG_BIT`
 
+#Ensure github tag getting script available
+wget -O ~/git-clone-latest-tag https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/home/pinodexmr/git-clone-latest-tag
+chmod 777 ~/git-clone-latest-tag
+
 if [[ $CPU_ARCH -eq 32 ]]
 	then
 	echo -e "\e[33m*********************************************\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -66,7 +70,7 @@ fi
 		sleep "2"
 		echo -e "\e[32mBuilding new P2Pool\e[0m"
 		##Install P2Pool
-		git clone --recursive --branch v4.12 https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+		./git-clone-latest-tag https://github.com/SChernykh/p2pool.git 2>&1 | tee -a /home/pinodexmr/debug.log
 		cd p2pool
 		mkdir build && cd build
 

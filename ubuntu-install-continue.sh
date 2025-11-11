@@ -259,7 +259,8 @@ sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev lib
 echo -e "\e[32mDownloading Monero \e[0m"
 sleep 3
 
-git clone --recursive https://github.com/monero-project/monero
+./git-clone-latest-tag https://github.com/monero-project/monero.git
+
 echo -e "\e[32mBuilding Monero \e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
@@ -268,10 +269,6 @@ echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
 cd monero && git submodule init && git submodule update
-#fetch all Monero tagged releases, then list in reverse order and count=1 to only define the latest tag. 
-git fetch --tags
-RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`)
-git checkout $RELEASE -b latest
 git submodule sync && git submodule update
 USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
@@ -372,7 +369,7 @@ then
 	else
 	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
 	##Install P2Pool
-	git clone --recursive --branch v4.12 https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+	./git-clone-latest-tag https://github.com/SChernykh/p2pool.git 2>&1 | tee -a /home/pinodexmr/debug.log
 	cd p2pool
 	mkdir build && cd build
 

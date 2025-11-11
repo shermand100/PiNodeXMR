@@ -30,6 +30,10 @@ else
 fi
 sleep 3
 
+#Ensure github tag getting script available
+wget -O ~/git-clone-latest-tag https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/home/pinodexmr/git-clone-latest-tag
+chmod 777 ~/git-clone-latest-tag
+
 	##Configure temporary Swap file if needed (swap created is not persistant and only for compiling monero. It will unmount on reboot)
 if (whiptail --title "PiNode-XMR Monero Updater" --yesno "For Monero to compile successfully 2GB of RAM is required.\n\nIf your device does not have 2GB RAM it can be artificially created with a swap file\n\nDo you have 2GB RAM on this device?\n\n* YES\n* NO - I do not have 2GB RAM (create a swap file)" 18 60); then
 	echo -e "\e[32mSwap file unchanged\e[0m"
@@ -86,7 +90,8 @@ sudo apt-get install build-essential cmake pkg-config libssl-dev libzmq3-dev lib
 echo -e "\e[32mDownloading Monero \e[0m"
 sleep 2
 
-git clone --recursive https://github.com/monero-project/monero
+./git-clone-latest-tag https://github.com/monero-project/monero.git
+
 echo -e "\e[32mBuilding Monero \e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
@@ -95,12 +100,7 @@ echo -e "\e[32m****************************************************\e[0m"
 echo -e "\e[32m****************************************************\e[0m"
 sleep 10
 cd monero && git submodule init && git submodule update
-#fetch all Monero tagged releases, then list in reverse order and count=1 to only define the latest tag. 
-git fetch --tags
-RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`)
-echo $RELEASE 2>&1 | tee -a /home/pinodexmr/debug.log
-git checkout $RELEASE -b latest 2>&1 | tee -a /home/pinodexmr/debug.log
-git submodule sync && git submodule update
+#git submodule sync && git submodule update
 USE_SINGLE_BUILDDIR=1 make 2>&1 | tee -a /home/pinodexmr/debug.log
 cd
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
