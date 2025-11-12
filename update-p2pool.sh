@@ -60,7 +60,7 @@ fi
 		rm -rf /home/pinodexmr/p2pool/
 		echo -e "\e[32mSuccess\e[0m"
 		sleep "2"
-		#Users repot failed P2Pool update (Oct '24) - Fix was missing dependencies update.
+		#Users report failed P2Pool update (Oct '24) - Fix was missing dependencies update.
 		#Update System and P2Pool Dependences
 		echo -e "\e[32mUpdating dependencies for P2Pool build\e[0m"
 		sleep "2"
@@ -74,7 +74,7 @@ fi
 		cd p2pool
 		mkdir build && cd build
 
-#Implement merge minign donation choice
+#Implement merge mining donation choice
 if [ $MERGE_MINE = TRUE ]
 then
 cmake .. 2>&1 | tee -a /home/pinodexmr/debug.log
