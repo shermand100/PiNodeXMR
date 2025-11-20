@@ -45,6 +45,8 @@ sudo service tor restart
 sleep 3
 #Output onion address
 sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
+#User set custom hashed control password
+./home/pinodexmr/setupMenuScripts/setup-password-tor-hashedcontrol.sh
 echo -e "\e[32mSuccess! Returning to menu\e[0m"
 sleep 3
 

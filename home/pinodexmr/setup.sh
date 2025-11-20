@@ -622,7 +622,8 @@
 				"6)" "Install PiVPN" \
 				"7)" "Web Interface Password set/enable/disable" \
 				"8)" "Configure Monero Peer Ban List" \
-				"9)" "Install NoIP.com Dynamic DNS" 2>&1 >/dev/tty)
+				"9)" "Install NoIP.com Dynamic DNS" \
+				"10)" "Set new torrc password" 2>&1 >/dev/tty)
 				
 				case $CHOICE6 in
 		
@@ -804,7 +805,14 @@ HTMLPASSWORDREQUIRED=FALSE" > /home/pinodexmr/variables/htmlPasswordRequired.sh
 									else
 									sleep 2
 									fi
-								;;								
+								;;
+
+							"10)")	if (whiptail --title "Set new torrc password" --yesno "This will configure a new tor control password\n\nWould you like to continue?" 12 78); then
+									. /home/pinodexmr/setupMenuScripts/setup-password-tor-hashedcontrol.sh
+									else
+									sleep 2
+									fi
+								;;							
 				esac
 				. /home/pinodexmr/setup.sh
 				;;

@@ -18,47 +18,115 @@
 ###
 #Start Assist User
 if (whiptail --title "PiNode-XMR Support Script #1" --yesno "This script will now perform an update of your tor service. \n\n Would you like to continue?" 12 78); then
-echo -e "\e[32mFetch repository updates\e[0m"
+##Setup tor + hidden service + monitor file
+echo -e "\e[32mSetup tor hidden service and monitor file\e[0m"
 sleep 3
 sudo apt update
-
-echo -e "\e[32mInstall apt-transport-https\e[0m"
-sleep 2
 sudo apt install apt-transport-https -y
-
-echo -e "\e[32mSet tor sources list\e[0m"
-sleep 2
 
 #Establish OS Distribution
 DIST="$(lsb_release -c | awk '{print $2}')"
+ARCH="$(dpkg --print-architecture)"
 
 #Set apt sources to retrieve tor official repository (Print to temp file)
-echo "deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main
-deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main" > ~/temp_torSources.list
+echo "deb [arch=$ARCH signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main
+deb-src [arch=$ARCH signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $DIST main" > ~/temp_torSources.list
 
 #Overwrite tor.list with new created temp file above.
 sudo mv ~/temp_torSources.list /etc/apt/sources.list.d/tor.list
 
-echo -e "\e[32mSet tor pgp keys\e[0m"
-sleep 2
-# #add the gpg key used to sign the packages
-sudo wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+#add the gpg key used to sign the packages
+wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
 
-echo -e "\e[32mCheck for new tor version\e[0m"
-sleep 2
-# #Install tor and tor debian keyring (keeps signing keys current)
+
+#Install tor and tor debian keyring (keeps signing keys current)
 sudo apt update
-echo -e "\e[32mInstall tor debian keyring (keeps signing keys current)\e[0m"
-sleep 2
-sudo apt install deb.torproject.org-keyring
-# #upgrade below will get latest tor if already installed.
-echo -e "\e[32mUpdate tor\e[0m"
-sleep 2
+sudo apt install tor deb.torproject.org-keyring
+#upgrade below will get latest tor if already installed.
 sudo apt upgrade -y
-whiptail --title "tor update complete" --msgbox "Latest tor update has been completed \n\nSelect ok to return to menu" 16 60
+echo -e "\e[32mDownloading PiNode-XMR config file\e[0m"
+sleep 3
 
-else
-    sleep 2
+wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/etc/tor/torrc
+
+echo -e "\e[32mApplying Settings...\e[0m"
+sleep 3
+sudo mv /home/pinodexmr/torrc /etc/tor/torrc
+sudo chmod 644 /etc/tor/torrc
+sudo chown root /etc/tor/torrc
+#Insert user specific local IP for correct hiddenservice redirect (line 73 overwrite)
+sudo sed -i "73s/.*/HiddenServicePort 18081 $(hostname -I | awk '{print $1}'):18081/" /etc/tor/torrc
+
+#Output onion address
+sudo cat /var/lib/tor/hidden_service/hostname > /var/www/html/onion-address.txt
+
+##Start torrc hashed control password config
+
+# use temp file 
+_temp="./dialog.$$"
+
+#tor Password - set
+
+
+	whiptail --title "PiNode-XMR tor password config" --passwordbox "\nPassword must be at least 8 standard characters" 12 45 2>$_temp
+	#convert plain text to tor hash 1
+	NEWTORHASHp1=$(cat $_temp)
+    shred $_temp 
+	
+
+
+    # ask user for new tor control password (second time)
+	whiptail --title "PiNode-XMR tor password config" --passwordbox "Re-Enter Password" 16 45 2>$_temp
+	#convert plain text to tor hash 2
+	NEWTORHASHp2=$(cat $_temp)
+    shred $_temp 
+
+    # check if passwords match
+    if [ "${NEWTORHASHp1}" != "${NEWTORHASHp2}" ]; then
+      whiptail --title "PiNode-XMR tor password config" --msgbox "FAIL -> Passwords dont Match\nPlease try again ..." 16 45
+	  ./setupMenuScripts/setup-password-tor-hashedcontrol.sh
+	  exit 1
+    fi
+		  
+	# password zero
+    if [ ${#NEWTORHASHp1} -eq 0 ]; then
+      whiptail --title "PiNode-XMR tor password config" --msgbox "FAIL -> Password cannot be empty\nPlease try again ..." 16 45
+	  ./setupMenuScripts/setup-password-tor-hashedcontrol.sh
+      exit 1
+    fi
+	
+	# check that password does not contain bad characters
+    clearedResult=$(echo "${NEWTORHASHp1}" | tr -dc '[:alnum:]-.' | tr -d ' ')
+    if [ ${#clearedResult} != ${#NEWTORHASHp1} ] || [ ${#clearedResult} -eq 0 ]; then
+      whiptail --title "PiNode-XMR tor password config" --msgbox "FAIL -> Contains bad characters (spaces, special chars)\nPlease try again ..." 16 45
+      ./setupMenuScripts/setup-password-tor-hashedcontrol.sh
+      exit 1
+    fi
+	
+	# password longer than 8
+    if [ ${#NEWTORHASHp1} -lt 8 ]; then
+      whiptail --title "PiNode-XMR tor password config" --msgbox "FAIL -> Password length under 8\nPlease try again ..." 16 45
+      ./setupMenuScripts/setup-password-tor-hashedcontrol.sh
+      exit 1
+    fi
+	
+    exitstatus=$?
+
+	if [ $exitstatus = 0 ]; then
+# New verified password
+TORHASH="$(tor --hash-password $NEWTORHASHp1)"
+#Set new tor hahsedcontrol Password to /etc/tor/torrc
+
+sudo sed -i "59s/.*/HashedControlPassword $TORHASH/" /etc/tor/torrc
+sudo systemctl restart tor
+
+	whiptail \
+	--title "PiNode-XMR tor password config" --msgbox "New tor Password set." 10 30
+	else
+	./setup.sh
+	fi
 fi
+./setup.sh
+
 #End Assist User
 ###
