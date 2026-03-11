@@ -153,9 +153,14 @@ mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
 #Clean-up used downloaded files
 rm -R ~/temp
 
-#Update system version number
-echo "#!/bin/bash
-CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh
+wget -q https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/xmr-new-ver.sh -O /home/pinodexmr/xmr-new-ver.sh
+chmod 755 /home/pinodexmr/xmr-new-ver.sh
+. /home/pinodexmr/xmr-new-ver.sh
+#Update Monero version number
+
+		echo "#!/bin/bash
+CURRENT_VERSION=$NEW_VERSION" > /home/pinodexmr/current-ver.sh 2>&1 | tee -a /home/pinodexmr/debug.log
+
 #cleanup old version number file
 rm /home/pinodexmr/xmr-new-ver.sh
 
