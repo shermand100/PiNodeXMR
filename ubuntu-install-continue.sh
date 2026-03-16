@@ -144,7 +144,7 @@ fi
 	echo "Installing dependencies for --- miscellaneous" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mChecking all dependencies are installed for --- Miscellaneous\e[0m"
 sleep 3
-sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev cron -y 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install git mariadb-client mariadb-server screen fail2ban ufw dialog jq libcurl4-openssl-dev libpthread-stubs0-dev cron lshw -y 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get install exfat-fuse exfat-utils -y 2>&1 | tee -a /home/pinodexmr/debug.log
 #libcurl4-openssl-dev & libpthread-stubs0-dev for block-explorer
 sleep 3
@@ -451,6 +451,7 @@ sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.lo
 echo -e "\e[32mSetup crontab\e[0m"
 sleep 3
 crontab /home/pinodexmr/PiNodeXMR/var/spool/cron/crontabs/pinodexmr 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo crontab /home/pinodexmr/PiNodeXMR/var/spool/cron/crontabs/root 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
 
