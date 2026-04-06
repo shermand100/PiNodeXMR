@@ -1,4 +1,5 @@
 /home/pinodexmr/p2pool/build/p2pool.log {
+su root adm
 weekly
 size 25M
 missingok
