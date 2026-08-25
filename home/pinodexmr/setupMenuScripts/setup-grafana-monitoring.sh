@@ -13,27 +13,31 @@
 # Project: https://github.com/ChiefGyk3D/PiNodeXMR_Grafana_Dashboard
 
 MONITORING_REPO="https://github.com/ChiefGyk3D/PiNodeXMR_Grafana_Dashboard"
-MONITORING_DIR="/home/pinodexmr/PiNodeXMR_Grafana_Dashboard"
+# Cloned into a root-owned location, NOT /home/pinodexmr: the add-on is run
+# with sudo, so its code must not sit in a directory the unprivileged
+# pinodexmr account could modify between download and root execution.
+MONITORING_DIR="/opt/pinodexmr-monitoring-src"
 MONITORING_BRANCH="main"
 
-# Fetch the add-on, or update an existing checkout.
+# Fetch the add-on, or update an existing checkout. All repo operations run as
+# root (sudo) so the checkout stays root-owned.
 get_monitoring_repo() {
-	if [ -d "${MONITORING_DIR}/.git" ]; then
+	if sudo test -d "${MONITORING_DIR}/.git"; then
 		TERM=vt220 whiptail --infobox "Please Wait...\n\nUpdating the monitoring add-on from GitHub" 12 78
-		git -C "${MONITORING_DIR}" fetch --depth 1 origin "${MONITORING_BRANCH}" >/dev/null 2>&1
-		git -C "${MONITORING_DIR}" reset --hard "origin/${MONITORING_BRANCH}" >/dev/null 2>&1
+		sudo git -C "${MONITORING_DIR}" fetch --depth 1 origin "${MONITORING_BRANCH}" >/dev/null 2>&1
+		sudo git -C "${MONITORING_DIR}" reset --hard "origin/${MONITORING_BRANCH}" >/dev/null 2>&1
 	else
 		TERM=vt220 whiptail --infobox "Please Wait...\n\nDownloading the monitoring add-on from GitHub" 12 78
-		rm -rf "${MONITORING_DIR}"
-		git clone --depth 1 -b "${MONITORING_BRANCH}" "${MONITORING_REPO}" "${MONITORING_DIR}" >/dev/null 2>&1
+		sudo rm -rf "${MONITORING_DIR}"
+		sudo git clone --depth 1 -b "${MONITORING_BRANCH}" "${MONITORING_REPO}" "${MONITORING_DIR}" >/dev/null 2>&1
 	fi
 
-	if [ ! -f "${MONITORING_DIR}/install.sh" ]; then
+	if ! sudo test -f "${MONITORING_DIR}/install.sh"; then
 		whiptail --title "PiNode-XMR Monitoring" --msgbox "Could not download the monitoring add-on.\n\nCheck this device's internet connection and try again.\n\nRepository: ${MONITORING_REPO}" 14 78
 		return 1
 	fi
 
-	chmod +x "${MONITORING_DIR}/install.sh" "${MONITORING_DIR}/uninstall.sh" 2>/dev/null
+	sudo chmod +x "${MONITORING_DIR}/install.sh" "${MONITORING_DIR}/uninstall.sh" 2>/dev/null
 	return 0
 }
 
