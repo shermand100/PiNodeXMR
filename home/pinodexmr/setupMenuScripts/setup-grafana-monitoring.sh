@@ -47,7 +47,7 @@ CHOICE=$(whiptail --backtitle "Welcome" --title "PiNode-XMR Grafana Monitoring" 
 
 case $CHOICE in
 
-	"1)")	if (whiptail --title "PiNode-XMR Grafana Monitoring" --yesno "This installs Grafana monitoring for your Monero node.\n\nYou will be asked to choose:\n\n  * Run Grafana on THIS device, or report to a Grafana\n    stack elsewhere on your network or in the cloud\n  * Which port Grafana should use (default 3000)\n  * Who may reach it, and an admin password\n\nYour node, blockchain and existing settings are not modified.\n\nWould you like to continue?" 20 78); then
+	"1)")	if (whiptail --title "PiNode-XMR Grafana Monitoring" --yesno "This installs Grafana monitoring for your Monero node.\n\nGrafana (the dashboard) and Prometheus (the database) are\nchosen separately, so it fits whatever you already run:\n\n  * Everything on THIS device (browse to port 3000)\n  * Database here - you already have Grafana elsewhere\n  * Grafana here - you already have a database elsewhere\n  * Neither - just report metrics to a stack elsewhere\n\nYour node, blockchain and existing settings are not modified.\n\nWould you like to continue?" 22 78); then
 			if get_monitoring_repo; then
 				clear
 				sudo bash "${MONITORING_DIR}/install.sh"
@@ -103,7 +103,7 @@ case $CHOICE in
 			. /home/pinodexmr/setup.sh
 			;;
 
-	"5)")	whiptail --title "PiNode-XMR Grafana Monitoring" --msgbox "Grafana Monitoring for PiNode-XMR\n\nCollects 35+ metrics from your node's RPC — sync status,\npeers, mempool, difficulty, block details, disk and SoC\ntemperature — and charts them on a prepared dashboard.\n\nTwo deployment options:\n\n LOCAL: Grafana and Prometheus run on this device. Browse\n   to http://<this-device>:3000 and the dashboard is\n   already there, no import needed.\n\n AGENT: This device only reports. Metrics are pushed to,\n   or scraped by, a Grafana stack on another network.\n   Push mode works from behind NAT with no ports opened.\n\nFull documentation:\n${MONITORING_REPO}" 24 78
+	"5)")	whiptail --title "PiNode-XMR Grafana Monitoring" --msgbox "Grafana Monitoring for PiNode-XMR\n\nCollects 39 metrics from your node's RPC — sync status,\npeers, mempool, difficulty, block details, disk and SoC\ntemperature — and charts them on a prepared dashboard.\n\nFour deployment options (dashboard and database are\nchosen separately):\n\n FULL:    Grafana + Prometheus on this device. Browse to\n          http://<this-device>:3000, no import needed.\n BACKEND: Database here; add it to your existing Grafana.\n VIEWER:  Grafana here; reads your existing database\n          (Prometheus, VictoriaMetrics, Mimir...).\n AGENT:   This device only reports. Push works from\n          behind NAT with no ports opened.\n\nFull documentation:\n${MONITORING_REPO}" 26 78
 			clear
 			. /home/pinodexmr/setupMenuScripts/setup-grafana-monitoring.sh
 			;;
