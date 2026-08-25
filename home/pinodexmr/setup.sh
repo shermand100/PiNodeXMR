@@ -9,7 +9,8 @@
 	"3)" "Update Tools" \
 	"4)" "Node Tools" \
 	"5)" "Atomic Swap" \
-	"6)" "Extra Network Tools" 2>&1 >/dev/tty)
+	"6)" "Extra Network Tools" \
+	"7)" "Grafana Monitoring" 2>&1 >/dev/tty)
 	
 	case $CHOICE in
 		
@@ -815,6 +816,13 @@ HTMLPASSWORDREQUIRED=FALSE" > /home/pinodexmr/variables/htmlPasswordRequired.sh
 								;;							
 				esac
 				. /home/pinodexmr/setup.sh
+				;;
+
+		"7)")	if (whiptail --title "PiNode-XMR Grafana Monitoring" --yesno "Grafana Monitoring is an optional add-on that charts your node's sync status, peers, mempool, difficulty, block details, disk usage and SoC temperature.\n\nIt can run entirely on this device on its own port, or report to a Grafana stack elsewhere on your network.\n\nYour node, blockchain and existing settings are not modified.\n\nWould you like to continue?" 18 78); then
+				. /home/pinodexmr/setupMenuScripts/setup-grafana-monitoring.sh
+				else
+				sleep 2
+				fi
 				;;
 esac
 clear
