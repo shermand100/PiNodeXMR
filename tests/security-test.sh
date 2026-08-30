@@ -60,6 +60,14 @@ INJ_AMP='1 && touch /tmp/pinode_pwned'
 
 rm -f /tmp/pinode_pwned
 
+# Preflight: fail loudly if the console is not reachable, rather than
+# reporting every check as a failure.
+if ! curl -fsS -o /dev/null --max-time 10 "$BASE/runScript.php?function=preflight" 2>/dev/null; then
+  printf '\033[31mCannot reach the PiNode web console at %s\033[0m\n' "$BASE" >&2
+  printf 'Start it (or point this script at the node) before running the suite.\n' >&2
+  exit 2
+fi
+
 head "Numeric endpoints (ports, peers, rates, threads, intensity)"
 accept monero-rpc-port.php          18081 "$VARS/monero-port.sh"             MONERO_PORT
 accept monero-port-public-free.php  18089 "$VARS/monero-port-public-free.sh" MONERO_PUBLIC_PORT
