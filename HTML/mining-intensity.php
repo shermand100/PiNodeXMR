@@ -1,12 +1,9 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/mining-intensity.sh', 'w');
-fwrite($fp, "#!/bin/bash\nMINING_INTENSITY=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-$fpa = fopen('/var/www/html/mining_intensity.txt', 'w');
-fwrite($fpa, "Currently set to $VALUE percent");
-fclose($fpa);
+$VALUE = pn_int_range(pn_read_value(), 0, 100, 'Mining intensity');
 
-echo "Mining intensity set to $VALUE percent ";
-?>
+pn_write_shell_var('/home/pinodexmr/variables/mining-intensity.sh', 'MINING_INTENSITY', $VALUE);
+pn_write_file('/var/www/html/mining_intensity.txt', "Currently set to $VALUE percent");
+
+echo 'Mining intensity set to ' . pn_h($VALUE) . ' percent ';
