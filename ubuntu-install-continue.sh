@@ -202,7 +202,7 @@ sleep 3
 
 #Configure apache server for access to monero log file
 sudo mv /home/pinodexmr/PiNodeXMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 644 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown root /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo /etc/init.d/apache2 restart 2>&1 | tee -a /home/pinodexmr/debug.log
 

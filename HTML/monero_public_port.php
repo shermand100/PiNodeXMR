@@ -1,8 +1,8 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/monero-public-port.sh', 'w');
-fwrite($fp, "#!/bin/bash\nMONERO_PUBLIC_PORT=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-echo "Monero Restricted Public RPC port set to $VALUE ";
-?>
+$VALUE = pn_port(pn_read_value(), 'Monero Restricted Public RPC port');
+
+pn_write_shell_var('/home/pinodexmr/variables/monero-public-port.sh', 'MONERO_PUBLIC_PORT', $VALUE);
+
+echo 'Monero Restricted Public RPC port set to ' . pn_h($VALUE) . ' ';
