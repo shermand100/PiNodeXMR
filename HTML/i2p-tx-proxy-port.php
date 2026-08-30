@@ -1,12 +1,9 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/i2p-tx-proxy-port.sh', 'w');
-fwrite($fp, "#!/bin/bash\nI2P_TX_PROXY_PORT=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-$fpa = fopen('/var/www/html/i2p-tx-proxy-port.txt', 'w');
-fwrite($fpa, "Your I2P TX-Proxy port is set to: $VALUE");
-fclose($fpa);
+$VALUE = pn_port(pn_read_value(), 'I2P TX-Proxy port');
 
-echo "Your I2P TX-Proxy port has been set to: $VALUE ";
-?>
+pn_write_shell_var('/home/pinodexmr/variables/i2p-tx-proxy-port.sh', 'I2P_TX_PROXY_PORT', $VALUE);
+pn_write_file('/var/www/html/i2p-tx-proxy-port.txt', "Your I2P TX-Proxy port is set to: $VALUE");
+
+echo 'Your I2P TX-Proxy port is set to: ' . pn_h($VALUE) . ' ';
