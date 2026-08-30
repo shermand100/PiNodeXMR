@@ -25,15 +25,67 @@
  */
 
 /**
+ * Reject cross-site requests.
+ *
+ * The console is driven entirely by same-origin jQuery AJAX from its own
+ * pages, which lets us use two defences that need no session state - important
+ * here, because the pages are static .html served by Apache with no PHP
+ * session to hang a token on:
+ *
+ *  1. A custom request header. A cross-site <form>, <img> or <script> cannot
+ *     set one, and an XHR/fetch that tries triggers a CORS preflight, which
+ *     this server answers without any Access-Control-Allow-* header, so the
+ *     browser blocks the real request. assets/js/pinode-csrf.js attaches the
+ *     header to every request the console makes.
+ *
+ *  2. Origin/Referer checking. When the browser supplies either, its host must
+ *     match the host being addressed. Absence is tolerated (some browsers omit
+ *     both on same-origin requests) because defence 1 already stands alone.
+ *
+ * Called by every endpoint that changes state.
+ */
+function pn_require_csrf()
+{
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+        pn_fail('This endpoint only accepts POST requests.');
+    }
+
+    if (!isset($_SERVER['HTTP_X_PINODE_CSRF'])) {
+        pn_fail('Missing X-PiNode-CSRF header. Reload the console page and try again.');
+    }
+
+    $host = $_SERVER['HTTP_HOST'] ?? '';
+    foreach (array('HTTP_ORIGIN', 'HTTP_REFERER') as $key) {
+        if (empty($_SERVER[$key])) {
+            continue;
+        }
+        $sent = parse_url($_SERVER[$key], PHP_URL_HOST);
+        $port = parse_url($_SERVER[$key], PHP_URL_PORT);
+        if ($sent === null || $sent === false) {
+            pn_fail('Malformed ' . $key . ' header.');
+        }
+        if ($port) {
+            $sent .= ':' . $port;
+        }
+        // Compare against the requested host, with and without its port, so a
+        // console reached on a non-default port still matches.
+        $bare = strpos($host, ':') === false ? $host : substr($host, 0, strpos($host, ':'));
+        if (strcasecmp($sent, $host) !== 0 && strcasecmp($sent, $bare) !== 0) {
+            pn_fail('Cross-site request refused.');
+        }
+        // One matching header is enough.
+        return;
+    }
+}
+
+/**
  * Read the posted "value" field. Requires a POST request.
  *
  * @return string The raw posted value (not yet validated).
  */
 function pn_read_value()
 {
-    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
-        pn_fail('This endpoint only accepts POST requests.');
-    }
+    pn_require_csrf();
     if (!isset($_POST['value'])) {
         pn_fail('Missing required "value" field.');
     }
