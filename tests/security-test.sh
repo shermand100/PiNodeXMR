@@ -23,7 +23,8 @@ ok()   { PASS=$((PASS+1)); printf '  \033[32mPASS\033[0m %s\n' "$1"; }
 bad()  { FAIL=$((FAIL+1)); printf '  \033[31mFAIL\033[0m %s\n' "$1"; }
 head() { printf '\n\033[1m== %s ==\033[0m\n' "$1"; }
 
-post() { curl -s -o /tmp/_body -w '%{http_code}' -X POST "$BASE/$1" --data-urlencode "value=$2"; }
+CSRF=(-H "X-PiNode-CSRF: 1")
+post() { curl -s -o /tmp/_body -w '%{http_code}' "${CSRF[@]}" -X POST "$BASE/$1" --data-urlencode "value=$2"; }
 
 # accept <endpoint> <value> <file> <var> -- a valid value is stored correctly
 accept() {
@@ -62,7 +63,7 @@ rm -f /tmp/pinode_pwned
 
 # Preflight: fail loudly if the console is not reachable, rather than
 # reporting every check as a failure.
-if ! curl -fsS -o /dev/null --max-time 10 "$BASE/runScript.php?function=preflight" 2>/dev/null; then
+if [ "$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "$BASE/runScript.php" 2>/dev/null)" = "000" ]; then
   printf '\033[31mCannot reach the PiNode web console at %s\033[0m\n' "$BASE" >&2
   printf 'Start it (or point this script at the node) before running the suite.\n' >&2
   exit 2
@@ -138,10 +139,34 @@ reject save-custom.php './monerod > /etc/cron.d/backdoor'           "output redi
 reject save-custom.php $'./monerod\ntouch /tmp/pinode_pwned'        "newline-injection"     "$CUSTOM"
 
 head "Request-method enforcement (state change requires POST)"
-for ep in mining-address.php monero-rpc-port.php save-custom.php in-peers.php; do
-  code=$(curl -s -o /dev/null -w '%{http_code}' "$BASE/$ep?value=1")
+for ep in mining-address.php monero-rpc-port.php save-custom.php in-peers.php runScript.php; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' "${CSRF[@]}" "$BASE/$ep?value=1")
   [ "$code" = "400" ] && ok "$ep refuses GET" || bad "$ep answered GET with HTTP $code"
 done
+
+head "CSRF protection"
+# A cross-site attacker can submit a form POST, but cannot set a custom header.
+for ep in mining-address.php monero-rpc-port.php save-custom.php runScript.php monerod-prune.php; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$BASE/$ep" --data-urlencode 'value=18081' --data-urlencode 'function=reboot')
+  [ "$code" = "400" ] && ok "$ep refuses POST without the CSRF header" \
+    || bad "$ep accepted a header-less POST (HTTP $code) - forgeable cross-site"
+done
+# A foreign Origin must be refused even if the header is somehow present.
+for ep in mining-address.php runScript.php; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' "${CSRF[@]}" -H "Origin: http://evil.example" \
+    -X POST "$BASE/$ep" --data-urlencode 'value=18081' --data-urlencode 'function=reboot')
+  [ "$code" = "400" ] && ok "$ep refuses a foreign Origin" || bad "$ep accepted Origin http://evil.example (HTTP $code)"
+done
+# The console's own Origin must still work.
+HOSTHDR=$(printf '%s' "$BASE" | sed 's#^https\?://##')
+code=$(curl -s -o /dev/null -w '%{http_code}' "${CSRF[@]}" -H "Origin: $BASE" \
+  -X POST "$BASE/monero-rpc-port.php" --data-urlencode 'value=18081')
+[ "$code" = "200" ] && ok "same-origin request with header still succeeds" \
+  || bad "same-origin request was refused (HTTP $code) - console would be broken"
+# The service-control endpoint must still work for the console itself.
+code=$(curl -s -o /dev/null -w '%{http_code}' "${CSRF[@]}" -X POST "$BASE/runScript.php" --data-urlencode 'function=nosuchfunction')
+[ "$code" = "400" ] && ok "runScript.php reachable with header (unknown selector -> 400)" \
+  || bad "runScript.php with header returned HTTP $code"
 
 head "Reflected-XSS escaping"
 code=$(post save-custom.php './monerod --data-dir=/tmp/<script>alert(1)</script>')
