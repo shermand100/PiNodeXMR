@@ -704,7 +704,7 @@
 								"2)")	if (whiptail --title "Web Interface Password Enable" --yesno "This will enable the requirement for password authentication to access the Web Interface\n\nWould you like to continue?" 12 78); then
 									sudo cp /home/pinodexmr/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
 									sudo chown root /etc/apache2/sites-enabled/000-default.conf
-									sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+									sudo chmod 644 /etc/apache2/sites-enabled/000-default.conf
 									sudo systemctl restart apache2
 									#Update htmlPasswordRequired flag for use with PiNodeXMR updater script
 	echo "#!/bin/sh
@@ -719,7 +719,7 @@ HTMLPASSWORDREQUIRED=TRUE" > /home/pinodexmr/variables/htmlPasswordRequired.sh
 								"3)")	if (whiptail --title "Web Interface Password Disable" --yesno "This will disable the requirement for password authentication to access the Web Interface\n\nWould you like to continue?" 12 78); then
 									sudo cp /home/pinodexmr/variables/000-default-passwordAuthDisabled.conf /etc/apache2/sites-enabled/000-default.conf
 									sudo chown root /etc/apache2/sites-enabled/000-default.conf
-									sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+									sudo chmod 644 /etc/apache2/sites-enabled/000-default.conf
 									sudo systemctl restart apache2
 									#Update htmlPasswordRequired flag for use with PiNodeXMR updater script
 	echo "#!/bin/sh
