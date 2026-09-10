@@ -1,12 +1,9 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/monero-port-public-free.sh', 'w');
-fwrite($fp, "#!/bin/bash\nMONERO_PUBLIC_PORT=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-$fpa = fopen('/var/www/html/monero-free-public-port.txt', 'w');
-fwrite($fpa, "Currently set to $VALUE");
-fclose($fpa);
+$VALUE = pn_port(pn_read_value(), 'Monero Free Public RPC port');
 
-echo "Monero Free Public RPC port set to $VALUE ";
-?>
+pn_write_shell_var('/home/pinodexmr/variables/monero-port-public-free.sh', 'MONERO_PUBLIC_PORT', $VALUE);
+pn_write_file('/var/www/html/monero-free-public-port.txt', "Currently set to $VALUE");
+
+echo 'Monero Free Public RPC port set to ' . pn_h($VALUE) . ' ';
