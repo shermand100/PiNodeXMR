@@ -7,7 +7,6 @@
 	echo -n "     Log-io File:" && sudo systemctl status log-io-file.service | sed -n '3'p | cut -c13-;
 	echo -n "    Private Node:" && sudo systemctl status moneroPrivate.service | sed -n '3'p | cut -c13-;
 	echo -n "     Public Free:" && sudo systemctl status moneroPublicFree.service | sed -n '3'p | cut -c13-;
-	echo -n "  Public RPC Pay:" && sudo systemctl status moneroPublicRPCPay.service | sed -n '3'p | cut -c13-;
 	echo -n "Solo Mining Node:" && sudo systemctl status moneroMiningNode.service | sed -n '3'p | cut -c13-;
 	echo -n "        Tor Node:" && sudo systemctl status moneroTorPrivate.service | sed -n '3'p | cut -c13-;
 	echo -n "      Tor Public:" && sudo systemctl status moneroTorPublic.service | sed -n '3'p | cut -c13-;
