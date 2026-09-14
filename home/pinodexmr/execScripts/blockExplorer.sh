@@ -20,9 +20,9 @@ cd /home/pinodexmr/onion-monero-blockchain-explorer/build/
 ./xmrblocks --port 8081 --enable-pusher --enable-emission-monitor --enable-json-api --daemon-url=HTTP://${DEVICE_IP// }:$MONERO_PORT --mempool-info-timeout 60000 --mempool-refresh-time 30 --concurrency 1
 	else if [ $BOOT_STATUS -eq 7 ]
 		then
-		#Public free node: the unrestricted RPC is loopback-only and needs the RPC login
+		#Public free node: the unrestricted RPC is loopback-only (no login)
 cd /home/pinodexmr/onion-monero-blockchain-explorer/build/
-./xmrblocks --port 8081 --enable-pusher=1 --enable-emission-monitor=1 --enable-json-api --daemon-url=HTTP://127.0.0.1:$MONERO_PUBLIC_PORT --daemon-login $RPCu:$RPCp --concurrency=1
+./xmrblocks --port 8081 --enable-pusher=1 --enable-emission-monitor=1 --enable-json-api --daemon-url=HTTP://127.0.0.1:$MONERO_PUBLIC_PORT --concurrency=1
 	else	
 		#Start onion-block-explorer
 cd /home/pinodexmr/onion-monero-blockchain-explorer/build/

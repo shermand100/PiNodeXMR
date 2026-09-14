@@ -234,9 +234,15 @@ if [ "$BOOT_STATUS" = "7" ] && command -v ss >/dev/null 2>&1; then
   else bad "unrestricted RPC :$PUBPORT is not bound to loopback: $(ss -ltn | awk -v p=":$PUBPORT\$" '$4 ~ p {print $4}' | tr '\n' ' ')"; fi
   if ss -ltn | awk '{print $4}' | grep -qE "^(0\.0\.0\.0|\*|$DEVIP):$PUBPORT\$"; then bad "unrestricted RPC :$PUBPORT reachable on a LAN address"
   else ok "unrestricted RPC :$PUBPORT not on any LAN address"; fi
-  # An unrestricted-only method must be refused without the RPC login even on loopback.
-  c=$(curl -s -o /dev/null -w '%{http_code}' -m 5 -X POST "http://127.0.0.1:$PUBPORT/json_rpc" -d '{"jsonrpc":"2.0","id":"0","method":"get_bans"}' -H 'Content-Type: application/json')
-  [ "$c" = "401" ] && ok "unrestricted RPC requires the RPC login (HTTP $c)" || bad "get_bans without credentials returned HTTP $c"
+  # The unrestricted API is reachable locally (that is what the status scripts and P2Pool use) ...
+  c=$(curl -s -m 5 -X POST "http://127.0.0.1:$PUBPORT/json_rpc" -d '{"jsonrpc":"2.0","id":"0","method":"get_bans"}' -H 'Content-Type: application/json' | grep -c '"status": *"OK"')
+  [ "$c" = "1" ] && ok "unrestricted API answers on loopback (get_bans OK)" || bad "get_bans on loopback did not return status OK"
+  # ... and the restricted wallet endpoint on the LAN address still needs no login (monerod's
+  # --rpc-login would apply to both endpoints, which is why the fix is the bind, not a login).
+  WPORT=$(sed -n "s/^MONERO_PORT=['\"]*\([0-9]*\).*/\1/p" "$VARS/monero-port.sh" 2>/dev/null); WPORT="${WPORT:-18081}"
+  c=$(curl -s -o /tmp/_body -w '%{http_code}' -m 5 -X POST "http://$DEVIP:$WPORT/json_rpc" -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json')
+  if [ "$c" = "200" ] && grep -q '"restricted": *true' /tmp/_body; then ok "wallet endpoint $DEVIP:$WPORT open without login and restricted"
+  else bad "wallet endpoint $DEVIP:$WPORT returned HTTP $c (restricted flag: $(grep -o '"restricted": *[a-z]*' /tmp/_body))"; fi
 else
   printf '  \033[33mSKIP\033[0m not a live node in Public Free mode\n'
 fi

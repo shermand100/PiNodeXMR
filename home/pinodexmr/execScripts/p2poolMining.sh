@@ -55,8 +55,8 @@ fi
 
 if [ $BOOT_STATUS -eq 7 ]
 		then
-		#Adapted command for starting P2Pool only for clearnet public node: the internal non-restricted port is loopback-only and needs the RPC login.
-		./p2pool --host 127.0.0.1 --rpc-port $MONERO_PUBLIC_PORT --rpc-login $RPCu:$RPCp --wallet $MINING_ADDRESS --start-mining $MINING_THREADS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
+		#Adapted command for starting P2Pool only for clearnet public node: the internal non-restricted port is loopback-only (no login).
+		./p2pool --host 127.0.0.1 --rpc-port $MONERO_PUBLIC_PORT --wallet $MINING_ADDRESS --start-mining $MINING_THREADS --data-api /var/www/html/api/ --local-api --out-peers $OUT_PEERS_P2POOL --in-peers $IN_PEERS_P2POOL --no-color --light-mode --no-cache --loglevel 1 --data-dir /home/pinodexmr/p2pool/build/ $P2POOLCHAIN
 fi
 
 if [ $BOOT_STATUS -eq 8 ]
