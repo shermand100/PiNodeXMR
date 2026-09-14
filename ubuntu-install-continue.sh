@@ -202,9 +202,16 @@ sleep 3
 
 #Configure apache server for access to monero log file
 sudo mv /home/pinodexmr/PiNodeXMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo chmod 644 /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown root /etc/apache2/sites-enabled/000-default.conf 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo /etc/init.d/apache2 restart 2>&1 | tee -a /home/pinodexmr/debug.log
+
+#Enable web console authentication by default. The console can start and stop
+#services, shut down and reboot the device, and set the mining payout address,
+#so it should not be reachable unauthenticated. No default password ships with
+#the project - a random one is generated here and printed below, and can be
+#changed from the settings menu or with enable-web-auth.sh --set-password
+sudo bash /home/pinodexmr/enable-web-auth.sh 2>&1 | tee -a /home/pinodexmr/debug.log
 
 echo -e "\e[32mSuccess\e[0m"
 sleep 3
