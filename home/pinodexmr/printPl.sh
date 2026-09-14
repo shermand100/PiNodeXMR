@@ -69,8 +69,8 @@ fi
 
 	if [ $BOOT_STATUS -eq 7 ]
 then
-		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
+		#Public free node: unrestricted RPC is loopback-only and needs the RPC login.
+			PRINT_PL="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-login=${RPCu}:${RPCp} --rpc-ssl disabled print_pl | sed '1d' | sed 's/\x1b\[[0-9;]*m//g')" && echo "$PRINT_PL" > /var/www/html/print_pl.txt;
 			date >> /var/www/html/print_pl.txt
 fi
 	if [ $BOOT_STATUS -eq 8 ]

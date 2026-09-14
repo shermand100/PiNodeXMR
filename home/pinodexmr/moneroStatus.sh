@@ -80,8 +80,8 @@ fi
 
 	if [ $BOOT_STATUS -eq 7 ]
 then
-		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-			STATUS="$(curl -s --digest -X POST http://${DEVICE_IP}:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json' | cat -s | jq -Mr {"Monero_Version:.result.version,Node_Status:.result.status,Busy_Syncing:.result.busy_syncing,Current_Sync_Height:.result.height,P2P_Outgoing_Connections:.result.outgoing_connections_count,P2P_Incoming_Connections:.result.incoming_connections_count,RPC_Connections_Count:.result.rpc_connections_count,Network_Type:.result.nettype,TX_Pool_Size:.result.tx_pool_size,White_Peerlist_Size:.result.white_peerlist_size,Grey_Peerlist_Size:.result.grey_peerlist_size,Update_Available:.result.update_available"} | sed 's/"//g;s/{//g;s/}//g;s/,//g;s/_/ /g;s/^$/ /g;')" && echo "$STATUS" > /var/www/html/Node_Status.txt
+		#Public free node: unrestricted RPC is loopback-only and needs the RPC login.
+			STATUS="$(curl -su ${RPCu}:${RPCp} --digest -X POST http://127.0.0.1:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json' | cat -s | jq -Mr {"Monero_Version:.result.version,Node_Status:.result.status,Busy_Syncing:.result.busy_syncing,Current_Sync_Height:.result.height,P2P_Outgoing_Connections:.result.outgoing_connections_count,P2P_Incoming_Connections:.result.incoming_connections_count,RPC_Connections_Count:.result.rpc_connections_count,Network_Type:.result.nettype,TX_Pool_Size:.result.tx_pool_size,White_Peerlist_Size:.result.white_peerlist_size,Grey_Peerlist_Size:.result.grey_peerlist_size,Update_Available:.result.update_available"} | sed 's/"//g;s/{//g;s/}//g;s/,//g;s/_/ /g;s/^$/ /g;')" && echo "$STATUS" > /var/www/html/Node_Status.txt
 			date >> /var/www/html/Node_Status.txt
 fi
 
@@ -140,8 +140,8 @@ fi
 
 	if [ $BOOT_STATUS -eq 7 ]
 then
-		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-	PRINT_CN="$(curl -s --digest -X POST http://${DEVICE_IP}:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json' | jq -Mr '.result.connections[] | "Connected to:","Node ID: "+.peer_id,"Connection ID: "+.connection_id,"Node IP: "+.address,"State: "+.state,"Node height: "+(.height|tostring),"Incoming connection: "+(.incoming|tostring),"Sent count: "+(.send_count|tostring),"Receive count: "+(.recv_count|tostring)," "')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
+		#Public free node: unrestricted RPC is loopback-only and needs the RPC login.
+	PRINT_CN="$(curl -su ${RPCu}:${RPCp} --digest -X POST http://127.0.0.1:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json' | jq -Mr '.result.connections[] | "Connected to:","Node ID: "+.peer_id,"Connection ID: "+.connection_id,"Node IP: "+.address,"State: "+.state,"Node height: "+(.height|tostring),"Incoming connection: "+(.incoming|tostring),"Sent count: "+(.send_count|tostring),"Receive count: "+(.recv_count|tostring)," "')" && echo "$PRINT_CN" > /var/www/html/print_cn.txt
 	date >> /var/www/html/print_cn.txt
 fi
 

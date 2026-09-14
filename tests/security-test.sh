@@ -222,6 +222,25 @@ for n in $WEB_WRITTEN; do
 done
 [ "$BADF" = 0 ] && ok "all console-written fragments are single-quoted and parse as bash"
 
+head "Public Free node: unrestricted RPC stays on this device"
+# Only meaningful on a live node running in Public Free mode (BOOT_STATUS=7).
+# The unrestricted monerod RPC (MONERO_PUBLIC_PORT) must be bound to loopback
+# and require the RPC login; the LAN address only carries the restricted RPC.
+BOOT_STATUS=""; [ -r /home/pinodexmr/bootstatus.sh ] && BOOT_STATUS=$(sed -n 's/^BOOT_STATUS=//p' /home/pinodexmr/bootstatus.sh)
+if [ "$BOOT_STATUS" = "7" ] && command -v ss >/dev/null 2>&1; then
+  PUBPORT=$(sed -n "s/^MONERO_PUBLIC_PORT=['\"]*\([0-9]*\).*/\1/p" "$VARS/monero-port-public-free.sh" 2>/dev/null); PUBPORT="${PUBPORT:-18089}"
+  DEVIP=$(hostname -I | awk '{print $1}')
+  if ss -ltn | awk '{print $4}' | grep -q "^127\.0\.0\.1:$PUBPORT\$"; then ok "unrestricted RPC :$PUBPORT bound to loopback"
+  else bad "unrestricted RPC :$PUBPORT is not bound to loopback: $(ss -ltn | awk -v p=":$PUBPORT\$" '$4 ~ p {print $4}' | tr '\n' ' ')"; fi
+  if ss -ltn | awk '{print $4}' | grep -qE "^(0\.0\.0\.0|\*|$DEVIP):$PUBPORT\$"; then bad "unrestricted RPC :$PUBPORT reachable on a LAN address"
+  else ok "unrestricted RPC :$PUBPORT not on any LAN address"; fi
+  # An unrestricted-only method must be refused without the RPC login even on loopback.
+  c=$(curl -s -o /dev/null -w '%{http_code}' -m 5 -X POST "http://127.0.0.1:$PUBPORT/json_rpc" -d '{"jsonrpc":"2.0","id":"0","method":"get_bans"}' -H 'Content-Type: application/json')
+  [ "$c" = "401" ] && ok "unrestricted RPC requires the RPC login (HTTP $c)" || bad "get_bans without credentials returned HTTP $c"
+else
+  printf '  \033[33mSKIP\033[0m not a live node in Public Free mode\n'
+fi
+
 head "No payload achieved execution"
 if [ -f /tmp/pinode_pwned ]; then bad "/tmp/pinode_pwned EXISTS - an injection succeeded"
 else ok "/tmp/pinode_pwned absent - no injection executed"; fi
