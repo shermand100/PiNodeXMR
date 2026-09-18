@@ -3,8 +3,6 @@
 (
 	echo -n "This report generated " & date;
 	echo -n "  Status Scripts:" && sudo systemctl status moneroStatus.service | sed -n '3'p | cut -c13-;
-	echo -n "   Log-io Server:" && sudo systemctl status log-io-server.service | sed -n '3'p | cut -c13-;
-	echo -n "     Log-io File:" && sudo systemctl status log-io-file.service | sed -n '3'p | cut -c13-;
 	echo -n "    Private Node:" && sudo systemctl status moneroPrivate.service | sed -n '3'p | cut -c13-;
 	echo -n "     Public Free:" && sudo systemctl status moneroPublicFree.service | sed -n '3'p | cut -c13-;
 	echo -n "Solo Mining Node:" && sudo systemctl status moneroMiningNode.service | sed -n '3'p | cut -c13-;

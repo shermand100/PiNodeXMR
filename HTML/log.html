@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Title  -->
     <title>PiNode-XMR - Interface</title>
     <!-- Required meta tags -->
@@ -20,86 +19,66 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="NavContent"></div>
 
     <div class="container">
+      <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h3>View logs Live: <small> Whilst running, view node services live</small></h3>
-                <div class="col-lg-4 mb-4">
-                    <a href="/" onclick="javascript:event.target.port=6688;event.target.protocol='http:';" type="button" value="Open" target="_blank" class="btn btn-block btn-lg btn-dark">View System Streams</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h6>Restart live log viewer: <small>log-io live log monitoring is a new feature and we have found that if you start a new service it doesn't always catch the feed. Click the restart log-io viewer button below and it'll behave as expected.</small></h6>
-                <div class="row">
-                    <div class="col-lg-4 mb-4">
-                        <a onclick="runScript('restart-logio')" href="#Restart_Log_io" class="btn btn-dark">Restart log-io</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <div class="col-12">
+            <h3>Log: <small>Download log Files:</small></h3>
 
-        <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <h3>Log: <small>Download log Files:</small></h3>
-
-                    <div class="row">
-                        <a href="bitmonero.log" download>Download Monero.log</a>
-                    </div>
-
-                    <div class="row">
-                        <a href="debug.log" download>Download PiNodeXMR debug.log</a>
-                    </div>
-
-                    <div class="row">
-                        <a href="p2pool.log" download>Download P2Pool.log</a>
-                    </div>
-
-                    <div class="row">
-                        <a href="monero-lws.log" download>Download Monero-LWS.log</a>
-                    </div>
-
-                    <div class="row">
-                        <a href="explorer.log" download>Download blockExplorer.log</a>
-                    </div>
-
-                    <div class="row">
-                        <a href="AtomicSwap.log" download>Download AtomicSwap.log</a>
-                    </div>
-
-                    <div class="row">
-                        <a href="Monero-Wallet-RPC.log" download>Download (Atomic Swap) Monero-Wallet-RPC.log</a>
-                    </div>
-                </div>
+              <a href="bitmonero.log" download>Download Monero.log</a>
             </div>
-        </div>
 
-        <!-- JavaScript -->
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
+            <div class="row">
+              <a href="debug.log" download>Download PiNodeXMR debug.log</a>
+            </div>
+
+            <div class="row">
+              <a href="p2pool.log" download>Download P2Pool.log</a>
+            </div>
+
+            <div class="row">
+              <a href="monero-lws.log" download>Download Monero-LWS.log</a>
+            </div>
+
+            <div class="row">
+              <a href="explorer.log" download>Download blockExplorer.log</a>
+            </div>
+
+            <div class="row">
+              <a href="AtomicSwap.log" download>Download AtomicSwap.log</a>
+            </div>
+
+            <div class="row">
+              <a href="Monero-Wallet-RPC.log" download>Download (Atomic Swap) Monero-Wallet-RPC.log</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JavaScript -->
+      <script src="assets/js/bootstrap.bundle.min.js"></script>
     </div>
     <script>
-        function runScript(functionName) {
-            $.ajax({
-                url: `runScript.php?function=${functionName}`, //the page containing php script
-                type: "POST", //request type
-                success: function (result) {
-                    alert(result);
-                },
-            });
-        }
-    </script>
-    <script> 
-        $(function(){
-            $("#NavContent").load("navbar.html"); 
+      function runScript(functionName) {
+        $.ajax({
+          url: `runScript.php?function=${functionName}`, //the page containing php script
+          type: "POST", //request type
+          success: function (result) {
+            alert(result);
+          },
         });
+      }
     </script>
-</body>
-
+    <script>
+      $(function () {
+        $("#NavContent").load("navbar.html");
+      });
+    </script>
+  </body>
 </html>

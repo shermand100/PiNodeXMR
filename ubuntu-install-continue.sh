@@ -435,23 +435,6 @@ then
 	fi
 fi
 
-##Install log.io (Real-time service monitoring)
-#Establish Device IP
-. ~/variables/deviceIp.sh
-echo -e "\e[32mInstalling log.io\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo apt-get install nodejs npm -y 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo npm install -g log.io 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo npm install -g log.io-file-input 2>&1 | tee -a /home/pinodexmr/debug.log
-mkdir -p ~/.log.io/inputs/ 2>&1 | tee -a /home/pinodexmr/debug.log
-mv /home/pinodexmr/PiNodeXMR/.log.io/inputs/file.json ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
-mv /home/pinodexmr/PiNodeXMR/.log.io/server.json ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
-sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/server.json 2>&1 | tee -a /home/pinodexmr/debug.log
-sed -i "s/127.0.0.1/$DEVICE_IP/g" ~/.log.io/inputs/file.json 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo systemctl start log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo systemctl start log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo systemctl enable log-io-server.service 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo systemctl enable log-io-file.service 2>&1 | tee -a /home/pinodexmr/debug.log
-
 
 ##Install crontab
 		echo "Install crontab" 2>&1 | tee -a /home/pinodexmr/debug.log
