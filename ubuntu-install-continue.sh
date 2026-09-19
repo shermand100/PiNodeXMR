@@ -153,7 +153,8 @@ sleep 3
 	echo "Clone PiNode-XMR to device from git" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mDownloading PiNode-XMR files\e[0m"
 sleep 3
-git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
+## TEST MODE - REVERT TO MASTER BRANCH PRE-RELEASE
+git clone -b v7.xx.xx-testing --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
 
 
 ##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes

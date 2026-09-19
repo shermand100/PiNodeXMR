@@ -66,10 +66,11 @@ sudo apt-get upgrade -y 2>&1 | tee -a /home/pinodexmr/debug.log
 ##Auto remove any obsolete packages
 sudo apt-get autoremove -y 2>&1 | tee -a /home/pinodexmr/debug.log
 
+## TEST MODE - REVERT TO MASTER BRANCH PRE-RELEASE
 #Download stage 2 Install script
 echo -e "\e[32mDownloading stage 2 Installer script\e[0m"
 sleep 3
-wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/master/ubuntu-install-continue.sh
+wget https://raw.githubusercontent.com/shermand100/PiNodeXMR/refs/heads/v7.xx.xx-testing/ubuntu-install-continue.sh
 sudo mv ~/ubuntu-install-continue.sh /home/pinodexmr/
 sudo chown pinodexmr /home/pinodexmr/ubuntu-install-continue.sh
 sudo chmod 755 /home/pinodexmr/ubuntu-install-continue.sh
