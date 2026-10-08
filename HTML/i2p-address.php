@@ -1,12 +1,9 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/i2p-address.sh', 'w');
-fwrite($fp, "#!/bin/bash\nI2P_ADDRESS=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-$fpa = fopen('/var/www/html/i2p-address.txt', 'w');
-fwrite($fpa, "Your I2P address is set to: $VALUE");
-fclose($fpa);
+$VALUE = pn_i2p_address(pn_read_value(), 'I2P address');
 
-echo "Your I2P address has been set to: $VALUE ";
-?>
+pn_write_shell_var('/home/pinodexmr/variables/i2p-address.sh', 'I2P_ADDRESS', $VALUE);
+pn_write_file('/var/www/html/i2p-address.txt', "Your I2P address is set to: $VALUE");
+
+echo 'Your I2P address has been set to: ' . pn_h($VALUE) . ' ';
