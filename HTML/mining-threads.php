@@ -1,12 +1,9 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/mining-threads.sh', 'w');
-fwrite($fp, "#!/bin/bash\nMINING_THREADS=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-$fpa = fopen('/var/www/html/mining_threads.txt', 'w');
-fwrite($fpa, "Currently set to $VALUE CPU threads");
-fclose($fpa);
+$VALUE = pn_int_range(pn_read_value(), 1, 256, 'Mining threads');
 
-echo "CPU threads for mining set to $VALUE ";
-?>
+pn_write_shell_var('/home/pinodexmr/variables/mining-threads.sh', 'MINING_THREADS', $VALUE);
+pn_write_file('/var/www/html/mining_threads.txt', "Currently set to $VALUE CPU threads");
+
+echo 'CPU threads for mining set to ' . pn_h($VALUE) . ' ';
