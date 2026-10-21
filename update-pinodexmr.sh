@@ -160,7 +160,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 				#Configure apache server for access to monero log file
 					echo -e "\e[32mConfigure apache server for access to monero log file\e[0m"
 					sudo mv /home/pinodexmr/PiNodeXMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo chmod 644 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)					
 					sudo /etc/init.d/apache2 restart 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
@@ -259,7 +259,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					then
 					sudo cp /home/pinodexmr/variables/000-default-passwordAuthEnabled.conf /etc/apache2/sites-enabled/000-default.conf
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf
-					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
+					sudo chmod 644 /etc/apache2/sites-enabled/000-default.conf
 					sudo systemctl restart apache2
 					fi
 
