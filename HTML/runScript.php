@@ -1,6 +1,16 @@
 <?php
+require_once __DIR__ . '/pinode_security.php';
 
-$function = $_GET['function'];
+// Service control, shutdown and reboot all live behind this switch, so it is
+// the most valuable endpoint to protect against cross-site invocation.
+pn_require_csrf();
+
+// The console posts with the selector in the query string; accept it from the
+// request body too so callers can send everything in one place.
+$function = isset($_POST['function']) ? $_POST['function'] : (isset($_GET['function']) ? $_GET['function'] : '');
+if (!is_string($function)) {
+    pn_fail('Invalid function selector.');
+}
 
 switch($function) {
   case 'start-moneroPrivate':
@@ -146,5 +156,6 @@ switch($function) {
     echo "Stop Command Sent for P2Pool Mining service";
     break;      
   default:
+    http_response_code(400);
     echo "Error: No function specified";
 }

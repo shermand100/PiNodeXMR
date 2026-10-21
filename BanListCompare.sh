@@ -71,10 +71,10 @@ fi
 
 	if [ $BOOT_STATUS -eq 7 ]
 then
-		#Adapted command for public free (restricted) rpc calls. No auth needed for local.
-			PRINT_WPL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | awk '$1=="white" {print $3}')" && echo "$PRINT_WPL" > /home/pinodexmr/WPeerList.txt;
-			PRINT_GPL="$(./monero/build/release/bin/monerod --rpc-bind-ip=$DEVICE_IP --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | awk '$1=="gray" {print $3}')" && echo "$PRINT_GPL" > /home/pinodexmr/GPeerList.txt;
-			PRINT_CP="$(curl -s --digest -X POST http://${DEVICE_IP}:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json' | jq -Mr '.result.connections[] | .address," "')" && echo "$PRINT_CP" > /home/pinodexmr/CPeerList.txt
+		#Public free node: unrestricted RPC is loopback-only, no login (monerod would apply --rpc-login to the wallet endpoint too).
+			PRINT_WPL="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | awk '$1=="white" {print $3}')" && echo "$PRINT_WPL" > /home/pinodexmr/WPeerList.txt;
+			PRINT_GPL="$(./monero/build/release/bin/monerod --rpc-bind-ip=127.0.0.1 --rpc-bind-port=$MONERO_PUBLIC_PORT --rpc-ssl disabled print_pl | awk '$1=="gray" {print $3}')" && echo "$PRINT_GPL" > /home/pinodexmr/GPeerList.txt;
+			PRINT_CP="$(curl -s -X POST http://127.0.0.1:${MONERO_PUBLIC_PORT}/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json' | jq -Mr '.result.connections[] | .address," "')" && echo "$PRINT_CP" > /home/pinodexmr/CPeerList.txt
 
 fi
 	if [ $BOOT_STATUS -eq 8 ]
