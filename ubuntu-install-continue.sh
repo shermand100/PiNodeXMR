@@ -108,6 +108,9 @@ sudo apt-get --yes -o Dpkg::Options::="--force-confnew" upgrade 2>&1 | tee -a /h
 sudo apt-get --yes -o Dpkg::Options::="--force-confnew" dist-upgrade 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo apt-get upgrade -y 2>&1 | tee -a /home/pinodexmr/debug.log
 
+## Nov 2026 - sudo has moved to new rust based sudo-rs. Below is temporary fix to permissions to revert to older less strict C based sudo.ws (May fail on old system not aware of this option)
+sudo update-alternatives --set sudo /usr/bin/sudo.ws && (yes "" 2>/dev/null; echo) | sudo update-alternatives --force --all
+
 ##Installing dependencies for --- Web Interface
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"

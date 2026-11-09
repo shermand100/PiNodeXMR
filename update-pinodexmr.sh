@@ -17,6 +17,9 @@ echo "Light-Mode value is: $LIGHTMODE" >>/home/pinodexmr/debug.log
 . /home/pinodexmr/variables/htmlPasswordRequired.sh
 echo "HMTL Password Required set to: $HTMLPASSWORDREQUIRED" >>/home/pinodexmr/debug.log
 
+## Nov 2026 - sudo has moved to new rust based sudo-rs. Below is temporary fix to permissions to revert to older less strict C based sudo.ws (May fail on old system not aware of this option)
+sudo update-alternatives --set sudo /usr/bin/sudo.ws && (yes "" 2>/dev/null; echo) | sudo update-alternatives --force --all
+
 ##Update and Upgrade systemhtac
 echo -e "\e[32mReceiving and applying Ubuntu updates to latest versions\e[0m"
 sudo apt-get update 2>&1 | tee -a /home/pinodexmr/debug.log
