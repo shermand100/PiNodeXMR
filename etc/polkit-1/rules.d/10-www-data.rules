@@ -1,0 +1,230 @@
+//Rule #1
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "moneroPrivate.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #2
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "moneroPublicFree.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #3
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "moneroMiningNode.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #4
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "moneroTorPrivate.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #5
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "moneroTorPublic.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #6
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "moneroI2PPrivate.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #7
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "moneroCustomNode.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #8
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.systemd1.manage-units" &&
+        subject.user == "www-data") {
+        var unit = action.lookup("unit");
+        if (unit == "shutdown.service") {
+            return polkit.Result.YES;
+        }
+    }
+});
+
+
+//Rule #9
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.systemd1.manage-units" &&
+        subject.user == "www-data") {
+        var unit = action.lookup("unit");
+        if (unit == "reboot.service") {
+            return polkit.Result.YES;
+        }
+    }
+});
+
+//Rule #10
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.systemd1.manage-units" &&
+        subject.user == "www-data") {
+        var unit = action.lookup("unit");
+        if (unit == "kill.service") {
+            return polkit.Result.YES;
+        }
+    }
+});
+
+//Rule #11
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "p2pool.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #12
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "blockExplorer.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #13
+polkit.addRule(function(action, subject) {
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "p2poolMining.service") {
+                return polkit.Result.YES;
+            }
+        }
+        
+        if (action.id == "org.freedesktop.systemd1.manage-unit-files") {
+            return polkit.Result.YES; 
+        }
+    }
+});
+
+//Rule #14
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.policykit.exec" &&
+        action.lookup("program") == "/home/pinodexmr/enable-swap.sh" &&
+        subject.user == "www-data") {
+        return polkit.Result.YES;
+    }
+});
+
+//Rule #15
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.policykit.exec" &&
+        action.lookup("program") == "/home/pinodexmr/disable-swap.sh" &&
+        subject.user == "www-data") {
+        return polkit.Result.YES;
+    }
+});
+
+//Rule #15
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.policykit.exec" &&
+        action.lookup("program") == "/home/pinodexmr/bootStatusSetIdle.sh" &&
+        subject.user == "www-data") {
+        return polkit.Result.YES;
+    }
+});

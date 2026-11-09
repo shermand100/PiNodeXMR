@@ -115,7 +115,7 @@ sudo update-alternatives --set sudo /usr/bin/sudo.ws && (yes "" 2>/dev/null; ech
 	echo "Installing dependencies for --- Web Interface" 2>&1 | tee -a /home/pinodexmr/debug.log
 echo -e "\e[32mInstalling dependencies for --- Web Interface\e[0m"
 sleep 3
-sudo apt-get install apache2 shellinabox php php-common avahi-daemon -y 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo apt-get install apache2 shellinabox pkexec php php-common avahi-daemon -y 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo usermod -a -G pinodexmr www-data
 sleep 3
 
@@ -187,6 +187,8 @@ sleep 3
 sudo mv /home/pinodexmr/PiNodeXMR/etc/systemd/system/*.service /etc/systemd/system/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chmod 644 /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown root /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
+## Set Policy kit rules for www-data allowing Web UI access to PiNodeXMR/Monero systemd services
+sudo mv /home/pinodexmr/PiNode-XMR/etc/polkit-1/rules.d/*.rules /etc/polkit-1/rules.d/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo systemctl daemon-reload 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo systemctl start moneroStatus.service 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo systemctl enable moneroStatus.service 2>&1 | tee -a /home/pinodexmr/debug.log
