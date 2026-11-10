@@ -159,17 +159,6 @@ sleep 3
 git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | tee -a /home/pinodexmr/debug.log
 
 
-##Configure ssh security. Allows only user 'pinodexmr'. Also 'root' login disabled via ssh, restarts config to make changes
-	echo "Configure ssh security" 2>&1 | tee -a /home/pinodexmr/debug.log
-echo -e "\e[32mConfiguring SSH security\e[0m"
-sleep 3
-sudo mv /home/pinodexmr/PiNodeXMR/etc/ssh/sshd_config /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chmod 644 /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo chown root /etc/ssh/sshd_config 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo /etc/init.d/ssh restart 2>&1 | tee -a /home/pinodexmr/debug.log
-echo -e "\e[32mSSH security config complete\e[0m"
-sleep 3
-
 
 ##Copy PiNode-XMR scripts to home folder
 echo -e "\e[32mMoving PiNode-XMR scripts into position\e[0m"
