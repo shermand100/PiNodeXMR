@@ -136,7 +136,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					sudo chown root /etc/systemd/system/*.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					## Set Policy kit rules for www-data allowing Web UI access to PiNodeXMR/Monero systemd services
 					sudo mkdir -p /etc/polkit-1/rules.d/ 2>&1 | tee -a /home/pinodexmr/debug.log
-					sudo mv /home/pinodexmr/PiNode-XMR/etc/polkit-1/rules.d/*.rules /etc/polkit-1/rules.d/ 2>&1 | tee -a /home/pinodexmr/debug.log
+					sudo mv /home/pinodexmr/PiNodeXMR/etc/polkit-1/rules.d/*.rules /etc/polkit-1/rules.d/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo systemctl daemon-reload 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo systemctl start moneroStatus.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo systemctl enable moneroStatus.service 2> >(tee -a /home/pinodexmr/debug.log >&2)
