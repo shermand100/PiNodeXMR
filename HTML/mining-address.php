@@ -1,12 +1,9 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/mining-address.sh', 'w');
-fwrite($fp, "#!/bin/bash\nMINING_ADDRESS=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-$fpa = fopen('/var/www/html/mining_address.txt', 'w');
-fwrite($fpa, "Currently set to $VALUE");
-fclose($fpa);
+$VALUE = pn_monero_address(pn_read_value(), 'Mining address');
 
-echo "Mining address set to $VALUE ";
-?>
+pn_write_shell_var('/home/pinodexmr/variables/mining-address.sh', 'MINING_ADDRESS', $VALUE);
+pn_write_file('/var/www/html/mining_address.txt', "Currently set to $VALUE");
+
+echo 'Mining address set to ' . pn_h($VALUE) . ' ';
