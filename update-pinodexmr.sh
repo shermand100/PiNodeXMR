@@ -100,8 +100,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /home/pinodexmr/current-ver-lws.sh /home/pinodexmr/current-ver-lws_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-atomicSwap.sh /home/pinodexmr/current-ver-atomicSwap_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#variables dir
-					mv /home/pinodexmr/variables/credits.sh /home/pinodexmr/variables/credits_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/variables/difficulty.sh /home/pinodexmr/variables/difficulty_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-address.sh /home/pinodexmr/variables/i2p-address_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-port.sh /home/pinodexmr/variables/i2p-port_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-tx-proxy-port.sh /home/pinodexmr/variables/i2p-tx-proxy-port_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -168,7 +166,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					sudo mv /home/pinodexmr/PiNodeXMR/etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					sudo chown root /etc/apache2/sites-enabled/000-default.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)					
-					sudo /etc/init.d/apache2 restart 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo systemctl restart apache2 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					echo -e "\e[32mSuccess\e[0m"
 					sleep 3
 				##Setup local hostname
@@ -190,8 +188,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					#Remove .php file clutter, see PiNodeXMR PR66 for context.
 					rm -R /var/www/html/*.php
 					#Preserve user variables (custom ports, hidden service onion address, Mining address and settings etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
-					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -200,7 +196,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Overwrite /var/www/html with updated contents
 					sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
@@ -208,8 +203,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					#Restore User variables
-					mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -219,7 +212,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Lightmode html update complete
 					else
@@ -227,8 +219,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					sudo mv /home/pinodexmr/PiNodeXMR/HTML/.htaccess /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					rm -R /var/www/html/*.php
 					#Preserve user variables (custom ports, hidden service onion address, Mining address and settings etc). Updater script overwrites/merges all files, this renames them temporarily to avoid merge.
-					mv /var/www/html/credits.txt /var/www/html/credits_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/difficulty.txt /var/www/html/difficulty_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-address.txt /var/www/html/i2p-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-port.txt /var/www/html/i2p-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-tx-proxy-port.txt /var/www/html/i2p-tx-proxy-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -237,15 +227,12 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/monero-free-public-port.txt /var/www/html/monero-free-public-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port.txt /var/www/html/monero-rpc-port_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address.txt /var/www/html/onion-address_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/prune-text.txt /var/www/html/prune-text_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom.txt /var/www/html/user-set-custom_retain.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Overwrite /var/www/html with updated contents										
 					sudo rsync -a /home/pinodexmr/PiNodeXMR/HTML/* /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chown www-data -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					sudo chmod 777 -R /var/www/html/ 2>&1 | tee -a /home/pinodexmr/debug.log
 					#Restore User variables
-					mv /var/www/html/credits_retain.txt /var/www/html/credits.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/difficulty_retain.txt /var/www/html/difficulty.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-address_retain.txt /var/www/html/i2p-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-port_retain.txt /var/www/html/i2p-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/i2p-tx-proxy-port_retain.txt /var/www/html/i2p-tx-proxy-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -254,7 +241,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /var/www/html/monero-free-public-port_retain.txt /var/www/html/monero-free-public-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/monero-rpc-port_retain.txt /var/www/html/monero-rpc-port.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/onion-address_retain.txt /var/www/html/onion-address.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /var/www/html/prune-text_retain.txt /var/www/html/prune-text.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /var/www/html/user-set-custom_retain.txt /var/www/html/user-set-custom.txt 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#Full-mode html update complete					
 					fi
