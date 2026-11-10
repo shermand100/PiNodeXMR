@@ -188,6 +188,7 @@ sudo mv /home/pinodexmr/PiNodeXMR/etc/systemd/system/*.service /etc/systemd/syst
 sudo chmod 644 /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo chown root /etc/systemd/system/*.service 2>&1 | tee -a /home/pinodexmr/debug.log
 ## Set Policy kit rules for www-data allowing Web UI access to PiNodeXMR/Monero systemd services
+sudo mkdir -p /etc/polkit-1/rules.d/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo mv /home/pinodexmr/PiNode-XMR/etc/polkit-1/rules.d/*.rules /etc/polkit-1/rules.d/ 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo systemctl daemon-reload 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo systemctl start moneroStatus.service 2>&1 | tee -a /home/pinodexmr/debug.log
