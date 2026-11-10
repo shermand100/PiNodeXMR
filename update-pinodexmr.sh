@@ -176,7 +176,7 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					echo -e "\e[32mEnable local hostname pinodexmr.local\e[0m"
 					sleep 3				
 					sudo mv /home/pinodexmr/PiNodeXMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					sudo /etc/init.d/avahi-daemon restart 2> >(tee -a /home/pinodexmr/debug.log >&2)
+					sudo avahi-daemon --reload 2>&1 | tee -a /home/pinodexmr/debug.log
 					echo -e "\e[32mSuccess\e[0m"
 
 				##Update html template

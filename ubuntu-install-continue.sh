@@ -207,7 +207,7 @@ sleep 3
 ##Setup local hostname
 	echo "Setup local hostname" 2>&1 | tee -a /home/pinodexmr/debug.log
 sudo mv /home/pinodexmr/PiNodeXMR/etc/avahi/avahi-daemon.conf /etc/avahi/avahi-daemon.conf 2>&1 | tee -a /home/pinodexmr/debug.log
-sudo /etc/init.d/avahi-daemon restart 2>&1 | tee -a /home/pinodexmr/debug.log
+sudo avahi-daemon --reload 2>&1 | tee -a /home/pinodexmr/debug.log
 
 ##Configure Web-UI
 	echo "Configure Web-UI" 2>&1 | tee -a /home/pinodexmr/debug.log
