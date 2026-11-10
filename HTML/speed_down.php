@@ -1,8 +1,8 @@
 <?php
-$VALUE = $_POST["value"];
-$fp = fopen('/home/pinodexmr/variables/limit-rate-down.sh', 'w');
-fwrite($fp, "#!/bin/bash\nLIMIT_RATE_DOWN=$VALUE");
-fclose($fp);
+require_once __DIR__ . '/pinode_security.php';
 
-echo "Download Speed limit set to $VALUE kB/s";
-?>
+$VALUE = pn_int_range(pn_read_value(), -1, 1000000, 'Download speed limit');
+
+pn_write_shell_var('/home/pinodexmr/variables/limit-rate-down.sh', 'LIMIT_RATE_DOWN', $VALUE);
+
+echo 'Download Speed limit set to ' . pn_h($VALUE) . ' kB/s';
