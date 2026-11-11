@@ -17,18 +17,55 @@
 
 ###
 #Start Assist User
-if (whiptail --title "PiNode-XMR Support Script #1" --yesno "This script will now perform actions on your device configured exclusively for the benefit of user: EL4955 \n\nThis script will download and install the pre-compiled Monerod for Raspberry Pi 5 hardware.\n\nWould you like to continue?" 12 78); then
+if (whiptail --title "PiNode-XMR Support Script #1" --yesno "This script will download and install the pre-compiled Monerod for your detected hardware.\n\nWould you like to continue?" 12 78); then
 #Remove current monero installation
-rm -r /home/pinodexmr/monero/build/release/bin/*
-#Download Monero Arm
-wget https://downloads.getmonero.org/cli/linuxarm8
+#rm -r /home/pinodexmr/monero/build/release/bin/*
+
+#Establish OS 32 or 64 bit
+ARCH=`dpkg --print-architecture`
+echo "dpkg --print-architecture is $ARCH" >> /home/pinodexmr/debug.log
+# Translate dpkg output to URL extension with error catch
+case "$ARCH" in
+    "amd64")
+        TYPE="64"
+        ;;
+    "arm64")
+        TYPE="arm8"
+        ;;
+    "armhf")
+        TYPE="arm7"
+        ;;
+    "riscv64")
+        TYPE="riscv64"
+        ;;
+    "i386")
+        TYPE="32"
+        ;;
+    *)
+        echo "Error: Unsupported architecture '$ARCH'"
+        echo "Error: Unsupported architecture '$ARCH'" >> /home/pinodexmr/debug.log
+        exit 1
+        ;;
+esac
+
+echo -e "\e[32mDownloading for architecture: $ARCH ...\e[0m"
+sleep 2
+URL="https://downloads.getmonero.org/cli/linux${TYPE}"
+wget "$URL"
+
 #Make temp folder to extract binaries
-mkdir temp && tar -xvf linuxarm8 -C ~/temp
+mkdir temp
+tar -xvf linux${TYPE} -C ~/temp
 #Move Monerod files to standard location
-mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
-rm linuxarm8
+    #Create location
+    mkdir -p /home/pinodexmr/monero/build/release/bin/
+    #Move to Location
+    mv /home/pinodexmr/temp/monero*/monero* /home/pinodexmr/monero/build/release/bin/
+#Cleanup source package
+rm linux${TYPE}
 rm -R /home/pinodexmr/temp/
-whiptail --title "Install complete" --msgbox "Monero pre-compiled Arm8 binaries have been downloaded and installed \n\nSelect ok to return to menu" 16 60
+#Done
+whiptail --title "Install complete" --msgbox "Monero pre-compiled '$ARCH' binaries have been downloaded and installed \n\nSelect ok to return to menu" 16 60
 
 else
     sleep 2
