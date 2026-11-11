@@ -24,4 +24,4 @@ tag=$(git ls-remote --tags --exit-code --refs "$remote" \
 echo "Selected tag: $tag"
 
 # Clone as shallowly as possible. Remote is the last argument.
-git clone --branch "$tag" --depth 1 --shallow-submodules --recurse-submodules "$@"
+git clone --branch "$tag" --recursive "$@"
