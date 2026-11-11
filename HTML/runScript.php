@@ -12,7 +12,7 @@ switch($function) {
     exec("systemctl stop moneroPrivate.service");
     exec("systemctl disable moneroPrivate.service");
     echo "Stop Command Sent for Private Node";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
+    exec ("systemctl start bootStatusSetIdle.service");
     break;
   case 'start-moneroPublicFree':
     exec("systemctl start moneroPublicFree.service");
@@ -23,7 +23,7 @@ switch($function) {
     exec("systemctl stop moneroPublicFree.service");
     exec("systemctl disable moneroPublicFree.service");
     echo "Stop Command Sent for Monero Free Public Node";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
+    exec ("systemctl start bootStatusSetIdle.service");
     break;
   case 'start-moneroMiningNode':
     exec("systemctl start moneroMiningNode.service");
@@ -34,7 +34,7 @@ switch($function) {
     exec("systemctl stop moneroMiningNode.service");
     exec("systemctl disable moneroMiningNode.service");
     echo "Stop Command Sent for Monero Mining Node";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
+    exec ("systemctl start bootStatusSetIdle.service");
     break;
   case 'start-moneroTorPrivate':
     exec("systemctl start moneroTorPrivate.service");
@@ -45,7 +45,7 @@ switch($function) {
     exec("systemctl stop moneroTorPrivate.service");
     exec("systemctl disable moneroTorPrivate.service");
     echo "Command Sent to stop sending Monerod traffic via tor SOCKS";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
+    exec ("systemctl start bootStatusSetIdle.service");
     break;
   case 'start-moneroTorPublic':
     exec("systemctl start moneroTorPublic.service");
@@ -56,7 +56,7 @@ switch($function) {
     exec("systemctl stop moneroTorPublic.service");
     exec("systemctl disable moneroTorPublic.service");
     echo "Command Sent to stop sending Monerod traffic via tor SOCKS";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
+    exec ("systemctl start bootStatusSetIdle.service");
     break;
   case 'start-moneroI2PPrivate':
     exec("systemctl start moneroI2PPrivate.service");
@@ -67,7 +67,7 @@ switch($function) {
     exec("systemctl stop moneroI2PPrivate.service");
     exec("systemctl disable moneroI2PPrivate.service");
     echo "Stop Command Sent for I2P Bridging Node";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
+    exec ("systemctl start bootStatusSetIdle.service");
     break;
   case 'start-moneroCustomNode':
     exec("systemctl start moneroCustomNode.service");
@@ -78,7 +78,7 @@ switch($function) {
     exec("systemctl stop moneroCustomNode.service");
     exec("systemctl disable moneroCustomNode.service");
     echo "Stop Command Sent for Custom Node";
-    exec (". /home/pinodexmr/bootStatusSetIdle.sh");
+    exec ("systemctl start bootStatusSetIdle.service");
     break;
   case 'enable-swap':
     exec("pkexec /home/pinodexmr/enable-swap.sh");

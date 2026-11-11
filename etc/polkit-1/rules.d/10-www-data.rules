@@ -222,9 +222,13 @@ polkit.addRule(function(action, subject) {
 
 //Rule #15
 polkit.addRule(function(action, subject) {
-    if (action.id == "org.freedesktop.policykit.exec" &&
-        action.lookup("program") == "/home/pinodexmr/bootStatusSetIdle.sh" &&
-        subject.user == "www-data") {
-        return polkit.Result.YES;
+    if (subject.user == "www-data") {
+        
+        if (action.id == "org.freedesktop.systemd1.manage-units") {
+            var unitName = action.lookup("unit");
+            if (unitName == "bootStatusSetIdle.service") {
+                return polkit.Result.YES;
+            }
+        }
     }
 });
