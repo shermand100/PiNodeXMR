@@ -98,7 +98,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /home/pinodexmr/current-ver-pi.sh /home/pinodexmr/current-ver-pi_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-p2pool.sh /home/pinodexmr/current-ver-p2pool_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-lws.sh /home/pinodexmr/current-ver-lws_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/current-ver-atomicSwap.sh /home/pinodexmr/current-ver-atomicSwap_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					#variables dir
 					mv /home/pinodexmr/variables/i2p-address.sh /home/pinodexmr/variables/i2p-address_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/variables/i2p-port.sh /home/pinodexmr/variables/i2p-port_retain.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
@@ -269,7 +268,6 @@ git clone --single-branch https://github.com/shermand100/PiNodeXMR.git 2>&1 | te
 					mv /home/pinodexmr/current-ver-pi_retain.sh /home/pinodexmr/current-ver-pi.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-p2pool_retain.sh /home/pinodexmr/current-ver-p2pool.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 					mv /home/pinodexmr/current-ver-lws_retain.sh /home/pinodexmr/current-ver-lws.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
-					mv /home/pinodexmr/current-ver-atomicSwap_retain.sh /home/pinodexmr/current-ver-atomicSwap.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)
 
 					#variables dir
 					mv /home/pinodexmr/variables/difficulty_retain.sh /home/pinodexmr/variables/difficulty.sh 2> >(tee -a /home/pinodexmr/debug.log >&2)

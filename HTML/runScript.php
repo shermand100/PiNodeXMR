@@ -125,16 +125,6 @@ switch($function) {
     exec("systemctl disable blockExplorer.service");
     echo "Stop Command Sent for Block Explorer";
     break;
-  case 'swap-start':
-    exec("systemctl start atomic-swap.service");
-    exec("systemctl enable atomic-swap.service");
-    echo "Start Command Sent for Atomic Swap service";
-    break;
-  case 'swap-stop':
-    exec("systemctl stop atomic-swap.service");
-    exec("systemctl disable atomic-swap.service");
-    echo "Stop Command Sent for Atomic Swap service";
-    break;
   case 'p2poolMining-start':
     exec("systemctl start p2poolMining.service");
     exec("systemctl enable p2poolMining.service");
