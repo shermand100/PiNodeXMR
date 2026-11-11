@@ -33,6 +33,32 @@ then
 else
   echo "OS Unknown"
 fi
+#Establish full architecture for correct binaries if PiNodeXMR Light Mode selected.
+ARCH=`dpkg --print-architecture`
+echo "dpkg --print-architecture is $ARCH" >> /home/pinodexmr/debug.log
+# Translate dpkg output to URL extension with error catch
+case "$ARCH" in
+    "amd64")
+        TYPE="64"
+        ;;
+    "arm64")
+        TYPE="arm8"
+        ;;
+    "armhf")
+        TYPE="arm7"
+        ;;
+    "riscv64")
+        TYPE="riscv64"
+        ;;
+    "i386")
+        TYPE="32"
+        ;;
+    *)
+        echo "Error: Unsupported architecture '$ARCH'"
+        echo "Error: Unsupported architecture '$ARCH'" >> /home/pinodexmr/debug.log
+        exit 1
+        ;;
+esac
 sleep 3
 
 whiptail --title "PiNode-XMR Continue Ubuntu LTS Installer" --msgbox "Your PiNode-XMR is taking shape...\n\nThis next part will take ~80 minutes installing Monero and PiNodeXMR \n\nSelect ok to continue setup" 16 60
@@ -294,50 +320,29 @@ then
 # #**********START OF Monero BINARY USE********
 # #********************************************
 
-#Define Install Monero function to reduce repeat script
-function f_installMonero {
-echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a /home/pinodexmr/debug.log
-#Make standard location for Monero
-mkdir -p ~/monero/build/release/bin
-if [[ $CPU_ARCH -eq 64 ]]
-then
-  #Download 64-bit Monero
-wget https://downloads.getmonero.org/cli/linuxarm8
+
+echo -e "\e[32mDownloading for architecture: $ARCH ...\e[0m"
+sleep 2
+URL="https://downloads.getmonero.org/cli/linux${TYPE}"
+wget "$URL"
+
 #Make temp folder to extract binaries
-mkdir temp && tar -xvf linuxarm8 -C ~/temp
+mkdir temp
+tar -xvf linux${TYPE} -C ~/temp
 #Move Monerod files to standard location
-mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
-rm linuxarm8
+    #Create location
+    mkdir -p /home/pinodexmr/monero/build/release/bin/
+    #Move to Location
+    mv /home/pinodexmr/temp/monero*/monero* /home/pinodexmr/monero/build/release/bin/
+#Cleanup source package
+rm linux${TYPE}
 rm -R /home/pinodexmr/temp/
-else
-  #Download 32-bit Monero
-wget https://downloads.getmonero.org/cli/linuxarm7
-#Make temp folder to extract binaries
-mkdir temp && tar -xvf linuxarm7 -C ~/temp
-#Move Monerod files to standard location
-mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
-rm linuxarm7
-rm -R /home/pinodexmr/temp/
+#Done
 fi
 #Make dir .bitmonero to hold lmdb. Needs to be added before drive mounted to give mount point. Waiting for monerod to start fails mount.
 mkdir .bitmonero 2>&1 | tee -a /home/pinodexmr/debug.log
 #Clean-up used downloaded files
 rm -R ~/temp
-}
-
-
-if [[ $CPU_ARCH -ne 64 ]] && [[ $CPU_ARCH -ne 32 ]]
-then
-  if (whiptail --title "OS version" --yesno "I've tried to auto-detect what version of Monero you need based on your OS but I've not been successful.\n\nPlease select your OS architecture..." 8 78 --no-button "32-bit" --yes-button "64-bit"); then
-    CPU_ARCH=64
-	f_installMonero
-	else
-    CPU_ARCH=32
-	f_installMonero
-  fi
-else
- f_installMonero
-fi
 
 # #********************************************
 # #*******END OF Monero BINARY USE*******
