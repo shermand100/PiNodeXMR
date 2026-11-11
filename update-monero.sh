@@ -62,7 +62,6 @@ fi
 		sudo systemctl stop moneroPublicFree.service
 		sudo systemctl stop moneroI2PPrivate.service
 		sudo systemctl stop moneroCustomNode.service
-		sudo systemctl stop moneroPublicRPCPay.service
 		echo "Monero node stop command sent, allowing 30 seconds for safe shutdown"
 		sleep "30"
 		echo "Deleting Old Version"

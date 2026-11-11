@@ -36,7 +36,6 @@ if [[ $CPU_ARCH -eq 32 ]]
 		sudo systemctl stop moneroPublicFree.service
 		sudo systemctl stop moneroI2PPrivate.service
 		sudo systemctl stop moneroCustomNode.service
-		sudo systemctl stop moneroPublicRPCPay.service
 		sudo systemctl stop p2pool.service
 		echo "Monero node stop command sent to make system resources available for update, allowing 30 seconds for safe shutdown"
 		sleep "10"

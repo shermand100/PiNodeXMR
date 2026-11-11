@@ -46,7 +46,6 @@ fi
 		sudo systemctl stop moneroPublicFree.service
 		sudo systemctl stop moneroI2PPrivate.service
 		sudo systemctl stop moneroCustomNode.service
-		sudo systemctl stop moneroPublicRPCPay.service
 		sudo systemctl stop p2pool.service
 		echo "Monero node stop command sent to make system resources available for update, allowing 30 seconds for safe shutdown"
 		sleep "10"
@@ -97,7 +96,7 @@ CURRENT_VERSION_P2POOL=$NEW_VERSION_P2POOL" > /home/pinodexmr/current-ver-p2pool
 		# 2 = idle
 		# 3 || 5 = private node || mining node
 		# 4 = tor
-		# 6 = Public RPC pay
+		# 6 = Public RPC pay - REMOVED
 		# 7 = Public free
 		# 8 = I2P
 		# 9 tor public
@@ -126,12 +125,6 @@ then
 	if [[ $BOOT_STATUS -eq 5 ]]
 then
 		sudo systemctl start moneroMiningNode.service
-		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
-	fi
-
-	if [[ $BOOT_STATUS -eq 6 ]]
-then
-		sudo systemctl start moneroPublicRPCPay.service
 		whiptail --title "P2Pool Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
