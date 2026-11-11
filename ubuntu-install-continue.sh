@@ -363,10 +363,14 @@ then
 	sleep "5"
 	else
 	echo -e "\e[32mInstalling P2Pool\e[0m" 2>&1 | tee -a /home/pinodexmr/debug.log
-	##Install P2Pool
-	./git-clone-latest-tag https://github.com/SChernykh/p2pool.git 2>&1 | tee -a /home/pinodexmr/debug.log
-	cd p2pool
-	mkdir build && cd build
+		##Auto-Branch: Install P2Pool - TEMP DISABLED NOV '26 DUE TO LATEST TAG 'V5-Beta' BEING PULLED FOR FUTURE  FCMP++
+		#./git-clone-latest-tag https://github.com/SChernykh/p2pool.git 2>&1 | tee -a /home/pinodexmr/debug.log
+		#cd p2pool
+		#mkdir build && cd build
+		##Manual-Branch: Install P2Pool
+		git clone --branch v4.18.1 --depth 1 --shallow-submodules --recurse-submodules https://github.com/SChernykh/p2pool 2>&1 | tee -a /home/pinodexmr/debug.log
+		cd p2pool
+		mkdir build && cd build
 
 #Implement merge minign donation choice
 if [ $MERGE_MINE = TRUE ]
