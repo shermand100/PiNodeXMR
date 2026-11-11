@@ -100,11 +100,6 @@ switch($function) {
     exec("systemctl start kill.service");
     echo "The command 'sudo killall -9 monerod' has been sent\n\nTo avoid corruption of the blockchain this command should be avoided where possible\n\nSorry something went wrong though...";
     break;
-  case 'restart-logio':
-    exec("systemctl restart log-io-file");
-    exec("systemctl restart log-io-server");
-    echo "PiNodeXMR has restarted the Log-io services";
-    break;
   case 'p2pool-start':
     exec("systemctl start p2pool.service");
     exec("systemctl enable p2pool.service");
