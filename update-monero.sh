@@ -117,29 +117,50 @@ then
 	#**********START OF Monero BINARY USE********
 	#********************************************
 
-	echo "Downloading pre-built Monero from get.monero" 2>&1 | tee -a /home/pinodexmr/debug.log
-	#Make standard location for Monero
-	mkdir -p ~/monero/build/release/bin
-		if [[ $CPU_ARCH -eq 64 ]]
-		then
-			  #Download 64-bit Monero
-			wget https://downloads.getmonero.org/cli/linuxarm8
-			#Make temp folder to extract binaries
-			mkdir temp && tar -xvf linuxarm8 -C ~/temp
-			#Move Monerod files to standard location
-			mv /home/pinodexmr/temp/monero-aarch64-linux-gnu-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
-			rm linuxarm8
-			rm -R /home/pinodexmr/temp/
-		else
-			  #Download 32-bit Monero
-			wget https://downloads.getmonero.org/cli/linuxarm7
-			#Make temp folder to extract binaries
-			mkdir temp && tar -xvf linuxarm7 -C ~/temp
-			#Move Monerod files to standard location
-			mv /home/pinodexmr/temp/monero-arm-linux-gnueabihf-v0.18*/monero* /home/pinodexmr/monero/build/release/bin/
-			rm linuxarm7
-			rm -R ~/temp/
-		fi
+#Establish OS 32 or 64 bit
+ARCH=`dpkg --print-architecture`
+echo "dpkg --print-architecture is $ARCH" >> /home/pinodexmr/debug.log
+# Translate dpkg output to URL extension with error catch
+case "$ARCH" in
+    "amd64")
+        TYPE="64"
+        ;;
+    "arm64")
+        TYPE="arm8"
+        ;;
+    "armhf")
+        TYPE="arm7"
+        ;;
+    "riscv64")
+        TYPE="riscv64"
+        ;;
+    "i386")
+        TYPE="32"
+        ;;
+    *)
+        echo "Error: Unsupported architecture '$ARCH'"
+        echo "Error: Unsupported architecture '$ARCH'" >> /home/pinodexmr/debug.log
+        exit 1
+        ;;
+esac
+
+echo -e "\e[32mDownloading for architecture: $ARCH ...\e[0m"
+sleep 2
+URL="https://downloads.getmonero.org/cli/linux${TYPE}"
+wget "$URL"
+
+#Make temp folder to extract binaries
+mkdir temp
+tar -xvf linux${TYPE} -C ~/temp
+#Move Monerod files to standard location
+    #Create location
+    mkdir -p /home/pinodexmr/monero/build/release/bin/
+    #Move to Location
+    mv /home/pinodexmr/temp/monero*/monero* /home/pinodexmr/monero/build/release/bin/
+#Cleanup source package
+rm linux${TYPE}
+rm -R /home/pinodexmr/temp/
+#Done
 
 	#********************************************
 	#*******END OF Monero BINARY USE*******
@@ -170,7 +191,7 @@ rm /home/pinodexmr/xmr-new-ver.sh
 		# 2 = idle
 		# 3 || 5 = private node || mining node
 		# 4 = tor
-		# 6 = Public RPC pay
+		# 6 = Public RPC pay - OBSOLETE
 		# 7 = Public free
 		# 8 = I2P
 		# 9 tor public
@@ -194,12 +215,6 @@ then
 	if [ $BOOT_STATUS -eq 5 ]
 then
 		sudo systemctl start moneroMiningNode.service
-		whiptail --title "Monero Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
-	fi
-
-	if [ $BOOT_STATUS -eq 6 ]
-then
-		sudo systemctl start moneroPublicRPCPay.service
 		whiptail --title "Monero Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
