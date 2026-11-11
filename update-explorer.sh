@@ -60,7 +60,7 @@ chmod 755 /home/pinodexmr/exp-new-ver.sh 2> >(tee -a /home/pinodexmr/debug.log >
 		# 2 = idle
 		# 3 || 5 = private node || mining node
 		# 4 = tor
-		# 6 = Public RPC pay
+		# 6 = Public RPC pay -OBSOLETE
 		# 7 = Public free
 		# 8 = I2P
 		# 9 tor public
@@ -84,12 +84,6 @@ then
 	if [ $BOOT_STATUS -eq 5 ]
 then
 		sudo systemctl start moneroMiningNode.service
-		whiptail --title "Block Explorer Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
-	fi
-
-	if [ $BOOT_STATUS -eq 6 ]
-then
-		sudo systemctl start moneroPublicRPCPay.service
 		whiptail --title "Block Explorer Update Complete" --msgbox "Update complete, Your Monero Node has resumed." 16 60
 	fi
 
